@@ -1,1 +1,143 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Laporan Data Anime</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      background: #0f172a;
+      color: white;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: linear-gradient(180deg, #1e293b, #020617);
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      color: #f472b6;
+      text-align: center;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 10px;
+      margin: 10px 0;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .sidebar a:hover {
+      background: #f472b6;
+    }
+
+    /* Content */
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #334155;
+    }
+
+    th {
+      background: #f472b6;
+      color: black;
+    }
+
+    canvas {
+      margin-top: 30px;
+      background: white;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>Anime Report</h2>
+  <a href="#">Dashboard</a>
+  <a href="#">Data</a>
+  <a href="#">Grafik</a>
+</div>
+
+<div class="content">
+  <h1>Laporan Data Google Sheet</h1>
+  <table id="data-table">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+
+  <canvas id="chart" height="100"></canvas>
+</div>
+
+<script>
+// GANTI link ini ke versi CSV
+const sheetURL = "https://docs.google.com/spreadsheets/d/1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y/export?format=csv";
+
+fetch(sheetURL)
+  .then(res => res.text())
+  .then(csv => {
+    const rows = csv.split("\n").map(r => r.split(","));
+
+    const tableHead = document.querySelector("#data-table thead");
+    const tableBody = document.querySelector("#data-table tbody");
+
+    // Header
+    const headerRow = document.createElement("tr");
+    rows[0].forEach(col => {
+      const th = document.createElement("th");
+      th.innerText = col;
+      headerRow.appendChild(th);
+    });
+    tableHead.appendChild(headerRow);
+
+    // Data
+    for (let i = 1; i < rows.length; i++) {
+      const tr = document.createElement("tr");
+      rows[i].forEach(col => {
+        const td = document.createElement("td");
+        td.innerText = col;
+        tr.appendChild(td);
+      });
+      tableBody.appendChild(tr);
+    }
+
+    // Grafik (kolom ke-2 sebagai angka)
+    const labels = rows.slice(1).map(r => r[0]);
+    const data = rows.slice(1).map(r => parseFloat(r[1]) || 0);
+
+    new Chart(document.getElementById("chart"), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Data Anime',
+          data: data
+        }]
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
