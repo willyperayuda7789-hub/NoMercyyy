@@ -33,10 +33,8 @@ overflow-x: hidden;
 position: relative;
 }
 
-/* Import Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
 
-/* Animated Background - Enhanced */
 .bg-animation {
 position: fixed;
 top: 0;
@@ -111,7 +109,6 @@ transform: translate(40px, 40px);
 }
 }
 
-/* Enhanced Glitch Effect */
 @keyframes glitch {
 0%, 100% {
 text-shadow:
@@ -133,7 +130,6 @@ text-shadow:
 }
 }
 
-/* Enhanced Neon Flicker */
 @keyframes neon-flicker {
 0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
 opacity: 1;
@@ -145,7 +141,6 @@ text-shadow: 0 0 2px currentColor;
 }
 }
 
-/* Enhanced Scanline Effect */
 @keyframes scanline {
 0% {
 transform: translateY(-100%);
@@ -155,7 +150,6 @@ transform: translateY(100%);
 }
 }
 
-/* Pulse Animation */
 @keyframes pulse {
 0%, 100% {
 opacity: 1;
@@ -167,7 +161,6 @@ transform: scale(0.95);
 }
 }
 
-/* Enhanced Glow Animation */
 @keyframes glow {
 0%, 100% {
 box-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
@@ -177,7 +170,6 @@ box-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
 }
 }
 
-/* Main Container */
 .container {
 position: relative;
 z-index: 10;
@@ -187,10 +179,9 @@ align-items: center;
 justify-content: flex-start;
 min-height: 100vh;
 padding: 20px;
-padding-top: 60px; /* Added padding for status bar */
+padding-top: 60px;
 }
 
-/* Enhanced Header */
 .header {
 text-align: center;
 margin-bottom: 48px;
@@ -291,7 +282,6 @@ letter-spacing: 2px;
 text-transform: uppercase;
 }
 
-/* Menu Filter */
 .menu-filter {
 width: 100%;
 max-width: 720px;
@@ -303,12 +293,13 @@ position: relative;
 position: relative;
 display: flex;
 gap: 12px;
-background: rgba(10, 10, 30, 0.7);
-border-radius: 12px;
+background: linear-gradient(135deg, rgba(10, 10, 30, 0.7), rgba(15, 15, 30, 0.7));
+border-radius: 16px;
 padding: 4px;
 backdrop-filter: blur(10px);
 border: 1px solid rgba(0, 255, 255, 0.2);
 transition: all 0.3s ease;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .filter-container:focus-within {
@@ -337,7 +328,6 @@ outline: none;
 box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
 }
 
-/* Menu Container */
 .menu-container {
 width: 100%;
 max-width: 960px;
@@ -348,9 +338,9 @@ margin-bottom: 40px;
 }
 
 .menu-card {
-background: var(--card-bg);
+background: linear-gradient(135deg, rgba(15, 15, 30, 0.8), rgba(10, 10, 20, 0.8));
 border: 1px solid rgba(0, 255, 255, 0.2);
-border-radius: 12px;
+border-radius: 16px;
 padding: 24px;
 backdrop-filter: blur(10px);
 transition: all 0.3s ease;
@@ -360,9 +350,26 @@ cursor: pointer;
 height: 100%;
 display: flex;
 flex-direction: column;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .menu-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05));
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+.menu-card:hover::before {
+opacity: 1;
+}
+
+.menu-card::after {
 content: '';
 position: absolute;
 top: 0;
@@ -427,7 +434,6 @@ text-transform: uppercase;
 letter-spacing: 1px;
 }
 
-/* Detail Modal */
 .detail-modal {
 position: fixed;
 top: 0;
@@ -448,14 +454,15 @@ display: flex;
 }
 
 .detail-content {
-background: var(--card-bg);
+background: linear-gradient(135deg, rgba(15, 15, 30, 0.9), rgba(10, 10, 20, 0.9));
 border: 1px solid rgba(0, 255, 255, 0.3);
-border-radius: 12px;
+border-radius: 16px;
 max-width: 800px;
 width: 100%;
 max-height: 80vh;
 overflow-y: auto;
 position: relative;
+box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
 .detail-header {
@@ -527,6 +534,7 @@ text-transform: uppercase;
 letter-spacing: 1px;
 position: relative;
 overflow: hidden;
+box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
 }
 
 .copy-button::before {
@@ -564,7 +572,6 @@ letter-spacing: 1px;
 opacity: 1;
 }
 
-/* No Menu Items */
 .no-menu {
 text-align: center;
 padding: 60px 0;
@@ -588,7 +595,6 @@ font-family: 'Orbitron', monospace;
 opacity: 0.7;
 }
 
-/* Enhanced Footer */
 .footer {
 position: absolute;
 bottom: 20px;
@@ -606,7 +612,6 @@ letter-spacing: 1px;
 opacity: 0.7;
 }
 
-/* Enhanced Responsive */
 @media (max-width: 768px) {
 .title {
 font-size: 3rem;
@@ -617,13 +622,12 @@ grid-template-columns: 1fr;
 }
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
 width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-background: rgba(10, 10, 30, 0.5);
+background: linear-gradient(180deg, rgba(10, 10, 30, 0.5), rgba(15, 15, 30, 0.5));
 }
 
 ::-webkit-scrollbar-thumb {
@@ -633,11 +637,6 @@ border-radius: 5px;
 
 ::-webkit-scrollbar-thumb:hover {
 background: linear-gradient(180deg, var(--secondary-color), var(--primary-color));
-}
-
-/* Enhanced Scanline Effect */
-.scanline {
-position: relative;
 }
 
 .scanline::before {
@@ -652,23 +651,20 @@ animation: scanline 8s linear infinite;
 pointer-events: none;
 }
 
-/* Enhanced Glitch Text */
 .glitch {
 animation: glitch 2.5s infinite;
 }
 
-/* Enhanced Neon Flicker */
 .neon-flicker {
 animation: neon-flicker 1.5s infinite;
 }
 
-/* Status Bar */
 .status-bar {
 position: fixed;
 top: 0;
 left: 0;
 right: 0;
-background: rgba(10, 10, 30, 0.8);
+background: linear-gradient(90deg, rgba(10, 10, 30, 0.8), rgba(15, 15, 30, 0.8));
 padding: 8px 20px;
 display: flex;
 justify-content: space-between;
@@ -678,6 +674,7 @@ letter-spacing: 1px;
 z-index: 100;
 backdrop-filter: blur(10px);
 border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .system-time {
@@ -688,9 +685,8 @@ color: var(--primary-color);
 color: var(--accent-color);
 }
 
-/* Terminal Output */
 .terminal-output {
-background: rgba(10, 10, 30, 0.5);
+background: linear-gradient(135deg, rgba(10, 10, 30, 0.5), rgba(15, 15, 30, 0.5));
 border: 1px solid rgba(0, 255, 255, 0.2);
 border-radius: 8px;
 padding: 16px;
@@ -700,6 +696,7 @@ font-size: 0.875rem;
 max-height: 200px;
 overflow-y: auto;
 display: none;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .terminal-line {
@@ -723,12 +720,11 @@ color: var(--accent-color);
 color: #ffaa00;
 }
 
-/* Debug Panel */
 .debug-panel {
 position: fixed;
 bottom: 60px;
 right: 20px;
-background: rgba(10, 10, 30, 0.9);
+background: linear-gradient(135deg, rgba(10, 10, 30, 0.9), rgba(15, 15, 30, 0.9));
 border: 1px solid rgba(0, 255, 255, 0.3);
 border-radius: 8px;
 padding: 12px;
@@ -737,6 +733,7 @@ font-size: 0.75rem;
 max-width: 300px;
 z-index: 100;
 display: none;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .debug-panel.show {
@@ -757,8 +754,8 @@ margin-bottom: 4px;
 .debug-toggle {
 position: fixed;
 bottom: 20px;
-right: 20px;
-background: rgba(0, 255, 255, 0.2);
+right: 90px;
+background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
 border: 1px solid var(--primary-color);
 color: var(--primary-color);
 padding: 8px 12px;
@@ -768,13 +765,16 @@ font-family: 'Orbitron', monospace;
 font-size: 0.75rem;
 text-transform: uppercase;
 z-index: 100;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+transition: all 0.3s ease;
 }
 
 .debug-toggle:hover {
-background: rgba(0, 255, 255, 0.3);
+background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3));
+transform: translateY(-2px);
+box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
 }
 
-/* Loading Spinner */
 .loading-container {
 display: flex;
 flex-direction: column;
@@ -791,6 +791,7 @@ border-top: 3px solid var(--primary-color);
 border-radius: 50%;
 animation: spin 1s linear infinite;
 margin-bottom: 16px;
+box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
 @keyframes spin {
@@ -805,7 +806,6 @@ text-transform: uppercase;
 letter-spacing: 1px;
 }
 
-/* Filter hint */
 .filter-hint {
 position: absolute;
 bottom: -24px;
@@ -815,7 +815,6 @@ color: var(--text-secondary);
 opacity: 0.7;
 }
 
-/* Match indicator */
 .match-indicator {
 position: absolute;
 top: 8px;
@@ -835,7 +834,6 @@ transition: opacity 0.3s ease;
 opacity: 1;
 }
 
-/* Enhanced Theme Additions */
 .floating-shapes {
 position: fixed;
 top: 0;
@@ -894,395 +892,6 @@ transform: translateY(0) rotate(360deg);
 }
 }
 
-/* Enhanced Card Design */
-.menu-card {
-background: linear-gradient(135deg, rgba(15, 15, 30, 0.8), rgba(10, 10, 20, 0.8));
-border: 1px solid rgba(0, 255, 255, 0.2);
-border-radius: 16px;
-padding: 24px;
-backdrop-filter: blur(10px);
-transition: all 0.3s ease;
-position: relative;
-overflow: hidden;
-cursor: pointer;
-height: 100%;
-display: flex;
-flex-direction: column;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.menu-card::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05));
-opacity: 0;
-transition: opacity 0.3s ease;
-}
-
-.menu-card:hover::before {
-opacity: 1;
-}
-
-.menu-card::after {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 4px;
-height: 100%;
-background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
-}
-
-.menu-card:hover {
-transform: translateY(-5px);
-box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
-border-color: rgba(0, 255, 255, 0.4);
-}
-
-/* Enhanced Button Design */
-.copy-button {
-background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-color: var(--dark-bg);
-font-weight: 700;
-padding: 10px 20px;
-border: none;
-border-radius: 6px;
-cursor: pointer;
-transition: all 0.3s ease;
-font-family: 'Orbitron', monospace;
-font-size: 0.875rem;
-text-transform: uppercase;
-letter-spacing: 1px;
-position: relative;
-overflow: hidden;
-box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
-}
-
-.copy-button::before {
-content: '';
-position: absolute;
-top: 0;
-left: -100%;
-width: 100%;
-height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-transition: left 0.5s;
-}
-
-.copy-button:hover::before {
-left: 100%;
-}
-
-.copy-button:hover {
-transform: translateY(-2px);
-box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
-}
-
-/* Enhanced Modal Design */
-.detail-content {
-background: linear-gradient(135deg, rgba(15, 15, 30, 0.9), rgba(10, 10, 20, 0.9));
-border: 1px solid rgba(0, 255, 255, 0.3);
-border-radius: 16px;
-max-width: 800px;
-width: 100%;
-max-height: 80vh;
-overflow-y: auto;
-position: relative;
-box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-}
-
-/* Enhanced Filter Input */
-.filter-container {
-position: relative;
-display: flex;
-gap: 12px;
-background: linear-gradient(135deg, rgba(10, 10, 30, 0.7), rgba(15, 15, 30, 0.7));
-border-radius: 16px;
-padding: 4px;
-backdrop-filter: blur(10px);
-border: 1px solid rgba(0, 255, 255, 0.2);
-transition: all 0.3s ease;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.filter-container:focus-within {
-border-color: rgba(0, 255, 255, 0.5);
-box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-}
-
-/* Enhanced Status Bar */
-.status-bar {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-background: linear-gradient(90deg, rgba(10, 10, 30, 0.8), rgba(15, 15, 30, 0.8));
-padding: 8px 20px;
-display: flex;
-justify-content: space-between;
-font-size: 0.75rem;
-text-transform: uppercase;
-letter-spacing: 1px;
-z-index: 100;
-backdrop-filter: blur(10px);
-border-bottom: 1px solid rgba(0, 255, 255, 0.2);
-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Enhanced Header */
-.header {
-text-align: center;
-margin-bottom: 48px;
-position: relative;
-}
-
-.logo-container {
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 16px;
-margin-bottom: 24px;
-position: relative;
-}
-
-.hexagon-bg {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-width: 200px;
-height: 200px;
-background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, rgba(0, 255, 255, 0) 70%);
-z-index: -1;
-animation: pulse 4s infinite;
-}
-
-/* Enhanced Title */
-.title {
-font-size: 4.5rem;
-font-weight: 900;
-background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-margin: 0;
-letter-spacing: 4px;
-text-transform: uppercase;
-position: relative;
-text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-}
-
-.title::after {
-content: 'CYBERSEARCH';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: linear-gradient(90deg, var(--secondary-color), var(--primary-color), var(--accent-color));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-z-index: -1;
-opacity: 0.5;
-filter: blur(3px);
-}
-
-/* Enhanced Subtitle */
-.subtitle {
-color: var(--text-secondary);
-font-size: 1.125rem;
-margin-top: 16px;
-letter-spacing: 2px;
-text-transform: uppercase;
-text-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
-}
-
-/* Enhanced Loading Spinner */
-.loading-spinner {
-width: 40px;
-height: 40px;
-border: 3px solid rgba(0, 255, 255, 0.3);
-border-top: 3px solid var(--primary-color);
-border-radius: 50%;
-animation: spin 1s linear infinite;
-margin-bottom: 16px;
-box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-}
-
-/* Enhanced No Menu */
-.no-menu {
-text-align: center;
-padding: 60px 0;
-width: 100%;
-max-width: 960px;
-}
-
-.no-menu-title {
-color: var(--text-secondary);
-font-size: 1.5rem;
-font-family: 'Orbitron', monospace;
-margin-bottom: 16px;
-text-transform: uppercase;
-letter-spacing: 2px;
-text-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
-}
-
-.no-menu-subtitle {
-color: var(--text-secondary);
-font-size: 1rem;
-font-family: 'Orbitron', monospace;
-opacity: 0.7;
-text-shadow: 0 0 5px rgba(0, 255, 255, 0.1);
-}
-
-/* Enhanced Footer */
-.footer {
-position: absolute;
-bottom: 20px;
-left: 0;
-right: 0;
-text-align: center;
-}
-
-.footer-text {
-color: var(--text-secondary);
-font-size: 0.875rem;
-font-family: 'Orbitron', monospace;
-text-transform: uppercase;
-letter-spacing: 1px;
-opacity: 0.7;
-text-shadow: 0 0 5px rgba(0, 255, 255, 0.1);
-}
-
-/* Enhanced Debug Panel */
-.debug-panel {
-position: fixed;
-bottom: 60px;
-right: 20px;
-background: linear-gradient(135deg, rgba(10, 10, 30, 0.9), rgba(15, 15, 30, 0.9));
-border: 1px solid rgba(0, 255, 255, 0.3);
-border-radius: 8px;
-padding: 12px;
-font-family: 'Courier New', monospace;
-font-size: 0.75rem;
-max-width: 300px;
-z-index: 100;
-display: none;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.debug-panel.show {
-display: block;
-}
-
-.debug-title {
-color: var(--primary-color);
-margin-bottom: 8px;
-font-weight: bold;
-text-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
-}
-
-.debug-info {
-color: var(--text-secondary);
-margin-bottom: 4px;
-}
-
-/* Enhanced Debug Toggle */
-.debug-toggle {
-position: fixed;
-bottom: 20px;
-right: 20px;
-background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
-border: 1px solid var(--primary-color);
-color: var(--primary-color);
-padding: 8px 12px;
-border-radius: 6px;
-cursor: pointer;
-font-family: 'Orbitron', monospace;
-font-size: 0.75rem;
-text-transform: uppercase;
-z-index: 100;
-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-transition: all 0.3s ease;
-}
-
-.debug-toggle:hover {
-background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3));
-transform: translateY(-2px);
-box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
-}
-
-/* Enhanced Terminal Output */
-.terminal-output {
-background: linear-gradient(135deg, rgba(10, 10, 30, 0.5), rgba(15, 15, 30, 0.5));
-border: 1px solid rgba(0, 255, 255, 0.2);
-border-radius: 8px;
-padding: 16px;
-margin-top: 20px;
-font-family: 'Courier New', monospace;
-font-size: 0.875rem;
-max-height: 200px;
-overflow-y: auto;
-display: none;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.terminal-line {
-margin-bottom: 8px;
-color: var(--accent-color);
-}
-
-.terminal-prompt {
-color: var(--primary-color);
-}
-
-.terminal-error {
-color: #ff4444;
-}
-
-.terminal-success {
-color: var(--accent-color);
-}
-
-.terminal-warning {
-color: #ffaa00;
-}
-
-/* Enhanced Responsive */
-@media (max-width: 768px) {
-.title {
-font-size: 3rem;
-}
-
-.menu-container {
-grid-template-columns: 1fr;
-}
-}
-
-/* Enhanced Custom Scrollbar */
-::-webkit-scrollbar {
-width: 10px;
-}
-
-::-webkit-scrollbar-track {
-background: linear-gradient(180deg, rgba(10, 10, 30, 0.5), rgba(15, 15, 30, 0.5));
-}
-
-::-webkit-scrollbar-thumb {
-background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
-border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-background: linear-gradient(180deg, var(--secondary-color), var(--primary-color));
-}
-
-/* Calculator Styles */
 .calculator-toggle {
 position: fixed;
 bottom: 80px;
@@ -1352,7 +961,6 @@ margin-bottom: 8px;
 color: var(--primary-color);
 font-size: 2rem;
 font-weight: 700;
-text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
 .calculator-buttons {
@@ -1412,12 +1020,6 @@ background: rgba(255, 68, 68, 0.3);
 .calculator-btn.zero {
 grid-column: span 2;
 }
-
-/* Adjust debug toggle position */
-.debug-toggle {
-bottom: 20px;
-right: 90px;
-}
 </style>
 </head>
 <body>
@@ -1431,14 +1033,12 @@ right: 90px;
 </div>
 </div>
 
-<!-- Status Bar -->
 <div class="status-bar">
 <div class="system-time" id="systemTime">--:--:--</div>
 <div class="system-status" id="systemStatus">SISTEM INISIALISASI</div>
 </div>
 
 <div class="container scanline">
-<!-- Header -->
 <header class="header">
 <div class="logo-container">
 <div class="hexagon-bg"></div>
@@ -1459,49 +1059,36 @@ right: 90px;
 <p class="subtitle neon-flicker">// SISTEM MENU DIGITAL //</p>
 </header>
 
-<!-- Menu Filter -->
 <div class="menu-filter">
 <div class="filter-container">
-<input
-type="text"
-class="filter-input"
-id="filterInput"
-placeholder="FILTER MENU (FLEXIBLE)..."
-autocomplete="off"
->
+<input type="text" class="filter-input" id="filterInput" placeholder="FILTER MENU (FLEXIBLE)..." autocomplete="off">
 <span class="filter-hint">Filter cerdas dengan toleransi kesalahan ketik</span>
 </div>
 </div>
 
-<!-- Loading Container -->
 <div class="loading-container" id="loadingContainer">
 <div class="loading-spinner"></div>
 <div class="loading-text">MENGAMBIL DATA...</div>
 </div>
 
-<!-- Menu Container -->
 <div class="menu-container" id="menuContainer" style="display: none;"></div>
 
-<!-- No Menu Items -->
 <div class="no-menu" id="noMenu" style="display: none;">
 <div class="no-menu-title">TIDAK ADA MENU YANG TERSEDIA</div>
 <div class="no-menu-subtitle">PERIKSA KONEKSI ANDA ATAU COBA LAGI NANTI</div>
 </div>
 
-<!-- Terminal Output -->
 <div class="terminal-output" id="terminalOutput">
 <div class="terminal-line"><span class="terminal-prompt">SYSTEM></span> Initializing CYBERSEARCH Engine v2.0.77</div>
 <div class="terminal-line"><span class="terminal-prompt">SYSTEM></span> Neural network connection established</div>
 <div class="terminal-line"><span class="terminal-prompt">SYSTEM></span> Ready for menu access...</div>
 </div>
 
-<!-- Footer -->
 <footer class="footer">
 <p class="footer-text">&lt; CYBERSEARCH ENGINE v2.0.77 &gt;</p>
 </footer>
 </div>
 
-<!-- Detail Modal -->
 <div class="detail-modal" id="detailModal">
 <div class="detail-content">
 <div class="detail-header">
@@ -1527,14 +1114,12 @@ SALIN
 </div>
 </div>
 
-<!-- Calculator Toggle -->
 <div class="calculator-toggle" id="calculatorToggle">
 <svg viewBox="0 0 24 24">
 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/>
 </svg>
 </div>
 
-<!-- Calculator Container -->
 <div class="calculator-container" id="calculatorContainer">
 <div class="calculator-display">
 <div class="calculator-expression" id="calculatorExpression"></div>
@@ -1563,10 +1148,8 @@ SALIN
 </div>
 </div>
 
-<!-- Debug Toggle -->
 <button class="debug-toggle" id="debugToggle">DEBUG</button>
 
-<!-- Debug Panel -->
 <div class="debug-panel" id="debugPanel">
 <div class="debug-title">DEBUG INFO</div>
 <div class="debug-info" id="debugInfo">Loading...</div>
@@ -1578,7 +1161,6 @@ let filteredData = [];
 let currentDetail = null;
 let debugMode = false;
 
-// Calculator state
 let calculatorState = {
 displayValue: '0',
 expression: '',
@@ -1587,717 +1169,469 @@ operation: null,
 waitingForOperand: false
 };
 
-// Create particle effect
 function createParticles() {
-const particlesContainer = document.getElementById('particles');
-const particleCount = 80;
-
-for (let i = 0; i < particleCount; i++) {
-const particle = document.createElement('div');
-particle.classList.add('particle');
-
-// Random size
-const size = Math.random() * 8 + 1;
-particle.style.width = `${size}px`;
-particle.style.height = `${size}px`;
-
-// Random position
-particle.style.left = `${Math.random() * 100}%`;
-
-// Random animation delay
-particle.style.animationDelay = `${Math.random() * 20}s`;
-
-// Random animation duration
-particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
-
-particlesContainer.appendChild(particle);
-}
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 80;
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        const size = Math.random() * 8 + 1;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+        particlesContainer.appendChild(particle);
+    }
 }
 
-// Update system time
 function updateSystemTime() {
-const now = new Date();
-const timeString = now.toLocaleTimeString('id-ID', { hour12: false });
-document.getElementById('systemTime').textContent = timeString;
+    const now = new Date();
+    document.getElementById('systemTime').textContent = now.toLocaleTimeString('id-ID', { hour12: false });
 }
 
-// Update system status
-function updateSystemStatus(status, type = 'normal') {
-const statusElement = document.getElementById('systemStatus');
-statusElement.textContent = status;
-
-// Add color based on type
-statusElement.style.color = type === 'error' ? '#ff4444' :
-type === 'success' ? 'var(--accent-color)' :
-type === 'warning' ? '#ffaa00' :
-var(--primary-color)';
+function updateSystemStatus(status, type) {
+    const statusElement = document.getElementById('systemStatus');
+    statusElement.textContent = status;
+    statusElement.style.color = type === 'error' ? '#ff4444' : type === 'success' ? '#00ff88' : type === 'warning' ? '#ffaa00' : '#00d4ff';
 }
 
-// Show terminal output
 function showTerminalOutput() {
-const terminal = document.getElementById('terminalOutput');
-terminal.style.display = 'block';
+    document.getElementById('terminalOutput').style.display = 'block';
 }
 
-// Add line to terminal
-function addTerminalLine(text, type = 'normal') {
-const terminal = document.getElementById('terminalOutput');
-const line = document.createElement('div');
-line.classList.add('terminal-line');
-
-let className = 'terminal-prompt';
-if (type === 'error') className = 'terminal-error';
-else if (type === 'success') className = 'terminal-success';
-else if (type === 'warning') className = 'terminal-warning';
-
-line.innerHTML = `<span class="${className}">SYSTEM></span> ${text}`;
-terminal.appendChild(line);
-terminal.scrollTop = terminal.scrollHeight;
+function addTerminalLine(text, type) {
+    const terminal = document.getElementById('terminalOutput');
+    const line = document.createElement('div');
+    line.classList.add('terminal-line');
+    let className = 'terminal-prompt';
+    if (type === 'error') className = 'terminal-error';
+    else if (type === 'success') className = 'terminal-success';
+    else if (type === 'warning') className = 'terminal-warning';
+    line.innerHTML = '<span class="' + className + '">SYSTEM></span> ' + text;
+    terminal.appendChild(line);
+    terminal.scrollTop = terminal.scrollHeight;
 }
 
-// Update debug info
 function updateDebugInfo() {
-if (!debugMode) return;
-
-const debugInfo = document.getElementById('debugInfo');
-debugInfo.innerHTML = `
-<div>Total Data: ${sheetData.length}</div>
-<div>Filtered Data: ${filteredData.length}</div>
-<div>Current Detail: ${currentDetail ? currentDetail.title : 'None'}</div>
-<div>Cache: ${localStorage.getItem('cybersearch_data') ? 'Available' : 'Empty'}</div>
-`;
+    if (!debugMode) return;
+    document.getElementById('debugInfo').innerHTML =
+        '<div>Total Data: ' + sheetData.length + '</div>' +
+        '<div>Filtered Data: ' + filteredData.length + '</div>' +
+        '<div>Current Detail: ' + (currentDetail ? currentDetail.title : 'None') + '</div>' +
+        '<div>Cache: ' + (localStorage.getItem('cybersearch_data') ? 'Available' : 'Empty') + '</div>';
 }
 
-// Levenshtein distance algorithm for fuzzy matching
 function levenshteinDistance(str1, str2) {
-const matrix = [];
-
-for (let i = 0; i <= str2.length; i++) {
-matrix[i] = [i];
+    const matrix = [];
+    for (let i = 0; i <= str2.length; i++) matrix[i] = [i];
+    for (let j = 0; j <= str1.length; j++) matrix[0][j] = j;
+    for (let i = 1; i <= str2.length; i++) {
+        for (let j = 1; j <= str1.length; j++) {
+            if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+            }
+        }
+    }
+    return matrix[str2.length][str1.length];
 }
 
-for (let j = 0; j <= str1.length; j++) {
-matrix[0][j] = j;
-}
-
-for (let i = 1; i <= str2.length; i++) {
-for (let j = 1; j <= str1.length; j++) {
-if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
-matrix[i][j] = matrix[i - 1][j - 1];
-} else {
-matrix[i][j] = Math.min(
-matrix[i - 1][j - 1] + 1,
-matrix[i][j - 1] + 1,
-matrix[i - 1][j] + 1
-);
-}
-}
-}
-
-return matrix[str2.length][str1.length];
-}
-
-// Calculate similarity percentage
 function calculateSimilarity(str1, str2) {
-const distance = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase());
-const longer = str1.length > str2.length ? str1 : str2;
-const shorter = str1.length > str2.length ? str2 : str1;
-
-if (longer.length === 0) return 100;
-
-return Math.round(((longer.length - distance) / longer.length) * 100);
+    const distance = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase());
+    const longer = str1.length > str2.length ? str1 : str2;
+    if (longer.length === 0) return 100;
+    return Math.round(((longer.length - distance) / longer.length) * 100);
 }
 
-// Enhanced fuzzy matching function
 function fuzzyMatch(query, text) {
-const queryLower = query.toLowerCase();
-const textLower = text.toLowerCase();
-
-// Direct match (highest priority)
-if (textLower.includes(queryLower)) {
-return { match: true, score: 100, type: 'exact' };
+    const queryLower = query.toLowerCase();
+    const textLower = text.toLowerCase();
+    if (textLower.includes(queryLower)) return { match: true, score: 100, type: 'exact' };
+    const words = textLower.split(/\s+/);
+    let bestMatch = { match: false, score: 0, type: 'none' };
+    for (const word of words) {
+        if (word.startsWith(queryLower)) {
+            const score = Math.round((queryLower.length / word.length) * 100);
+            if (score > bestMatch.score) bestMatch = { match: true, score: score, type: 'prefix' };
+        }
+        const similarity = calculateSimilarity(queryLower, word);
+        if (similarity >= 60 && similarity > bestMatch.score) bestMatch = { match: true, score: similarity, type: 'fuzzy' };
+        if (word.includes(queryLower)) {
+            const score = Math.round((queryLower.length / word.length) * 90);
+            if (score > bestMatch.score) bestMatch = { match: true, score: score, type: 'contains' };
+        }
+    }
+    return bestMatch;
 }
 
-// Split text into words
-const words = textLower.split(/\s+/);
-
-// Check each word for fuzzy match
-let bestMatch = { match: false, score: 0, type: 'none' };
-
-for (const word of words) {
-// Check if word starts with query
-if (word.startsWith(queryLower)) {
-const score = Math.round((queryLower.length / word.length) * 100);
-if (score > bestMatch.score) {
-bestMatch = { match: true, score, type: 'prefix' };
-}
-}
-
-// Check fuzzy similarity
-const similarity = calculateSimilarity(queryLower, word);
-if (similarity >= 60 && similarity > bestMatch.score) { // 60% similarity threshold
-bestMatch = { match: true, score: similarity, type: 'fuzzy' };
-}
-
-// Check if query is contained in word
-if (word.includes(queryLower)) {
-const score = Math.round((queryLower.length / word.length) * 90);
-if (score > bestMatch.score) {
-bestMatch = { match: true, score, type: 'contains' };
-}
-}
-}
-
-return bestMatch;
-}
-
-// Fetch data from Google Sheets with multiple fallback methods
 async function fetchSheetData() {
-const sheetId = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
+    // === URL DOCK BARU ===
+    const sheetId = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
 
-updateSystemStatus('MENGAMBIL DATA...', 'warning');
-addTerminalLine('Attempting to connect to database...', 'warning');
+    updateSystemStatus('MENGAMBIL DATA...', 'warning');
+    addTerminalLine('Attempting to connect to database...', 'warning');
 
-// Method 1: Try to access the first sheet by gid=0
-try {
-addTerminalLine('Method 1: Accessing sheet by gid=0...', 'normal');
-const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=0`;
+    // Method 1: Akses sheet pertama dengan gid=0
+    try {
+        addTerminalLine('Method 1: Accessing sheet by gid=0...', 'normal');
+        const url = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:json&gid=0';
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
+        const text = await response.text();
+        if (text.includes('google.visualization.Query.setResponse')) {
+            const json = JSON.parse(text.substring(47).slice(0, -2));
+            const rows = json.table.rows;
+            sheetData = [];
+            for (let i = 0; i < rows.length; i++) {
+                const titleCell = rows[i].c[0];
+                const infoCell = rows[i].c[1];
+                const title = titleCell && titleCell.v ? String(titleCell.v) : '';
+                const info = infoCell && infoCell.v ? String(infoCell.v) : '';
+                if (title) sheetData.push({ title: title.trim(), info: info.trim() });
+            }
+            if (sheetData.length > 0) {
+                addTerminalLine('SUCCESS: Loaded ' + sheetData.length + ' menu items from database', 'success');
+                updateSystemStatus('SISTEM ONLINE', 'success');
+                localStorage.setItem('cybersearch_data', JSON.stringify(sheetData));
+                localStorage.setItem('cybersearch_timestamp', new Date().toISOString());
+                filteredData = [...sheetData];
+                displayMenuItems();
+                updateDebugInfo();
+                return;
+            }
+        }
+    } catch (error) {
+        addTerminalLine('Method 1 failed: ' + error.message, 'error');
+    }
 
-const response = await fetch(url);
-if (!response.ok) {
-throw new Error(`HTTP error! status: ${response.status}`);
+    // Method 2: Coba akses dengan nama sheet "REPORTAN"
+    try {
+        addTerminalLine('Method 2: Accessing sheet by name "REPORTAN"...', 'normal');
+        const url = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:json&sheet=REPORTAN';
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
+        const text = await response.text();
+        if (text.includes('google.visualization.Query.setResponse')) {
+            const json = JSON.parse(text.substring(47).slice(0, -2));
+            const rows = json.table.rows;
+            sheetData = [];
+            for (let i = 0; i < rows.length; i++) {
+                const titleCell = rows[i].c[0];
+                const infoCell = rows[i].c[1];
+                const title = titleCell && titleCell.v ? String(titleCell.v) : '';
+                const info = infoCell && infoCell.v ? String(infoCell.v) : '';
+                if (title) sheetData.push({ title: title.trim(), info: info.trim() });
+            }
+            if (sheetData.length > 0) {
+                addTerminalLine('SUCCESS: Loaded ' + sheetData.length + ' menu items from REPORTAN sheet', 'success');
+                updateSystemStatus('SISTEM ONLINE', 'success');
+                localStorage.setItem('cybersearch_data', JSON.stringify(sheetData));
+                localStorage.setItem('cybersearch_timestamp', new Date().toISOString());
+                filteredData = [...sheetData];
+                displayMenuItems();
+                updateDebugInfo();
+                return;
+            }
+        }
+    } catch (error) {
+        addTerminalLine('Method 2 failed: ' + error.message, 'error');
+    }
+
+    // Method 3: Ambil semua sheet dan akses yang pertama
+    try {
+        addTerminalLine('Method 3: Getting all sheets...', 'normal');
+        const feedUrl = 'https://spreadsheets.google.com/feeds/worksheets/' + sheetId + '/public/basic?alt=json';
+        const response = await fetch(feedUrl);
+        if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
+        const feedJson = await response.json();
+        if (feedJson.feed && feedJson.feed.entry && feedJson.feed.entry.length > 0) {
+            const firstSheet = feedJson.feed.entry[0];
+            const sheetName = firstSheet.title.$t;
+            addTerminalLine('Found sheet: ' + sheetName, 'normal');
+            const url = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:json&sheet=' + encodeURIComponent(sheetName);
+            const sheetResponse = await fetch(url);
+            if (!sheetResponse.ok) throw new Error('HTTP error! status: ' + sheetResponse.status);
+            const sheetText = await sheetResponse.text();
+            if (sheetText.includes('google.visualization.Query.setResponse')) {
+                const json = JSON.parse(sheetText.substring(47).slice(0, -2));
+                const rows = json.table.rows;
+                sheetData = [];
+                for (let i = 0; i < rows.length; i++) {
+                    const titleCell = rows[i].c[0];
+                    const infoCell = rows[i].c[1];
+                    const title = titleCell && titleCell.v ? String(titleCell.v) : '';
+                    const info = infoCell && infoCell.v ? String(infoCell.v) : '';
+                    if (title) sheetData.push({ title: title.trim(), info: info.trim() });
+                }
+                if (sheetData.length > 0) {
+                    addTerminalLine('SUCCESS: Loaded ' + sheetData.length + ' menu items from ' + sheetName + ' sheet', 'success');
+                    updateSystemStatus('SISTEM ONLINE', 'success');
+                    localStorage.setItem('cybersearch_data', JSON.stringify(sheetData));
+                    localStorage.setItem('cybersearch_timestamp', new Date().toISOString());
+                    filteredData = [...sheetData];
+                    displayMenuItems();
+                    updateDebugInfo();
+                    return;
+                }
+            }
+        }
+    } catch (error) {
+        addTerminalLine('Method 3 failed: ' + error.message, 'error');
+    }
+
+    // Method 4: Muat dari cache lokal
+    try {
+        addTerminalLine('Method 4: Loading from cache...', 'normal');
+        const cachedData = localStorage.getItem('cybersearch_data');
+        if (cachedData) {
+            sheetData = JSON.parse(cachedData);
+            const timestamp = localStorage.getItem('cybersearch_timestamp');
+            addTerminalLine('SUCCESS: Loaded ' + sheetData.length + ' menu items from cache (' + new Date(timestamp).toLocaleString() + ')', 'success');
+            updateSystemStatus('SISTEM ONLINE (OFFLINE)', 'warning');
+            filteredData = [...sheetData];
+            displayMenuItems();
+            updateDebugInfo();
+            return;
+        }
+    } catch (error) {
+        addTerminalLine('Method 4 failed: ' + error.message, 'error');
+    }
+
+    // Method 5: Data sample sebagai jalan terakhir
+    addTerminalLine('Method 5: Using sample data...', 'warning');
+    sheetData = [
+        { title: "MENU SAMPLE 1", info: "Ini adalah contoh menu karena database tidak dapat dijangkau. Silakan periksa koneksi internet Anda atau URL spreadsheet." },
+        { title: "MENU SAMPLE 2", info: "Sistem saat ini berjalan dalam mode offline dengan fungsionalitas terbatas." },
+        { title: "KESALAHAN KONEKSI", info: "Tidak dapat terhubung ke database Google Sheets. Silakan verifikasi ID spreadsheet dan pastikan dapat diakses publik." }
+    ];
+    addTerminalLine('WARNING: Using ' + sheetData.length + ' sample menu items', 'warning');
+    updateSystemStatus('SISTEM OFFLINE', 'error');
+    filteredData = [...sheetData];
+    displayMenuItems();
+    updateDebugInfo();
 }
 
-const text = await response.text();
-
-// Check if we got valid data
-if (text.includes('google.visualization.Query.setResponse')) {
-const json = JSON.parse(text.substring(47).slice(0, -2));
-const rows = json.table.rows;
-
-sheetData = [];
-for (let i = 0; i < rows.length; i++) {
-const titleCell = rows[i].c[0];
-const infoCell = rows[i].c[1];
-
-const title = titleCell && titleCell.v ? String(titleCell.v) : '';
-const info = infoCell && infoCell.v ? String(infoCell.v) : '';
-
-if (title) {
-sheetData.push({ title: title.trim(), info: info.trim() });
-}
-}
-
-if (sheetData.length > 0) {
-addTerminalLine(`SUCCESS: Loaded ${sheetData.length} menu items from database`, 'success');
-updateSystemStatus('SISTEM ONLINE', 'success');
-localStorage.setItem('cybersearch_data', JSON.stringify(sheetData));
-localStorage.setItem('cybersearch_timestamp', new Date().toISOString());
-filteredData = [...sheetData];
-displayMenuItems();
-updateDebugInfo();
-return;
-}
-}
-} catch (error) {
-addTerminalLine(`Method 1 failed: ${error.message}`, 'error');
-console.error('Method 1 error:', error);
-}
-
-// Method 2: Try to access by sheet name "REPORTAN"
-try {
-addTerminalLine('Method 2: Accessing sheet by name "REPORTAN"...', 'normal');
-const url = `https://docs.google.com/spreadsheets/d/${sheetId}/1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y/edit?gid=0#gid=0=REPORTAN`;
-
-const response = await fetch(url);
-if (!response.ok) {
-throw new Error(`HTTP error! status: ${response.status}`);
-}
-
-const text = await response.text();
-
-// Check if we got valid data
-if (text.includes('google.visualization.Query.setResponse')) {
-const json = JSON.parse(text.substring(47).slice(0, -2));
-const rows = json.table.rows;
-
-sheetData = [];
-for (let i = 0; i < rows.length; i++) {
-const titleCell = rows[i].c[0];
-const infoCell = rows[i].c[1];
-
-const title = titleCell && titleCell.v ? String(titleCell.v) : '';
-const info = infoCell && infoCell.v ? String(infoCell.v) : '';
-
-if (title) {
-sheetData.push({ title: title.trim(), info: info.trim() });
-}
-}
-
-if (sheetData.length > 0) {
-addTerminalLine(`SUCCESS: Loaded ${sheetData.length} menu items from REPORTAN sheet`, 'success');
-updateSystemStatus('SISTEM ONLINE', 'success');
-localStorage.setItem('cybersearch_data', JSON.stringify(sheetData));
-localStorage.setItem('cybersearch_timestamp', new Date().toISOString());
-filteredData = [...sheetData];
-displayMenuItems();
-updateDebugInfo();
-return;
-}
-}
-} catch (error) {
-addTerminalLine(`Method 2 failed: ${error.message}`, 'error');
-console.error('Method 2 error:', error);
-}
-
-// Method 3: Try to get all sheets and access the first one
-try {
-addTerminalLine('Method 3: Getting all sheets...', 'normal');
-const feedUrl = `https://spreadsheets.google.com/feeds/worksheets/${sheetId}/public/basic?alt=json`;
-
-const response = await fetch(feedUrl);
-if (!response.ok) {
-throw new Error(`HTTP error! status: ${response.status}`);
-}
-
-const feedJson = await response.json();
-if (feedJson.feed && feedJson.feed.entry && feedJson.feed.entry.length > 0) {
-// Get the first sheet
-const firstSheet = feedJson.feed.entry[0];
-const sheetName = firstSheet.title.$t;
-
-addTerminalLine(`Found sheet: ${sheetName}`, 'normal');
-
-// Now try to access this sheet
-const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
-
-const sheetResponse = await fetch(url);
-if (!sheetResponse.ok) {
-throw new Error(`HTTP error! status: ${sheetResponse.status}`);
-}
-
-const sheetText = await sheetResponse.text();
-
-// Check if we got valid data
-if (sheetText.includes('google.visualization.Query.setResponse')) {
-const json = JSON.parse(sheetText.substring(47).slice(0, -2));
-const rows = json.table.rows;
-
-sheetData = [];
-for (let i = 0; i < rows.length; i++) {
-const titleCell = rows[i].c[0];
-const infoCell = rows[i].c[1];
-
-const title = titleCell && titleCell.v ? String(titleCell.v) : '';
-const info = infoCell && infoCell.v ? String(infoCell.v) : '';
-
-if (title) {
-sheetData.push({ title: title.trim(), info: info.trim() });
-}
-}
-
-if (sheetData.length > 0) {
-addTerminalLine(`SUCCESS: Loaded ${sheetData.length} menu items from ${sheetName} sheet`, 'success');
-updateSystemStatus('SISTEM ONLINE', 'success');
-localStorage.setItem('cybersearch_data', JSON.stringify(sheetData));
-localStorage.setItem('cybersearch_timestamp', new Date().toISOString());
-filteredData = [...sheetData];
-displayMenuItems();
-updateDebugInfo();
-return;
-}
-}
-}
-} catch (error) {
-addTerminalLine(`Method 3 failed: ${error.message}`, 'error');
-console.error('Method 3 error:', error);
-}
-
-// Method 4: Try to load from cache
-try {
-addTerminalLine('Method 4: Loading from cache...', 'normal');
-const cachedData = localStorage.getItem('cybersearch_data');
-if (cachedData) {
-sheetData = JSON.parse(cachedData);
-const timestamp = localStorage.getItem('cybersearch_timestamp');
-addTerminalLine(`SUCCESS: Loaded ${sheetData.length} menu items from cache (${new Date(timestamp).toLocaleString()})`, 'success');
-updateSystemStatus('SISTEM ONLINE (OFFLINE)', 'warning');
-filteredData = [...sheetData];
-displayMenuItems();
-updateDebugInfo();
-return;
-}
-} catch (error) {
-addTerminalLine(`Method 4 failed: ${error.message}`, 'error');
-console.error('Method 4 error:', error);
-}
-
-// Method 5: Use sample data as last resort
-addTerminalLine('Method 5: Using sample data...', 'warning');
-sheetData = [
-{ title: "MENU SAMPLE 1", info: "Ini adalah contoh menu karena database tidak dapat dijangkau. Silakan periksa koneksi internet Anda atau URL spreadsheet." },
-{ title: "MENU SAMPLE 2", info: "Sistem saat ini berjalan dalam mode offline dengan fungsionalitas terbatas." },
-{ title: "KESALAHAN KONEKSI", info: "Tidak dapat terhubung ke database Google Sheets. Silakan verifikasi ID spreadsheet dan pastikan dapat diakses publik." }
-];
-
-addTerminalLine(`WARNING: Using ${sheetData.length} sample menu items`, 'warning');
-updateSystemStatus('SISTEM OFFLINE', 'error');
-filteredData = [...sheetData];
-displayMenuItems();
-updateDebugInfo();
-}
-
-// Display menu items
 function displayMenuItems() {
-const container = document.getElementById('menuContainer');
-const loadingContainer = document.getElementById('loadingContainer');
-const noMenu = document.getElementById('noMenu');
-
-loadingContainer.style.display = 'none';
-
-if (filteredData.length === 0) {
-container.style.display = 'none';
-noMenu.style.display = 'block';
-return;
+    const container = document.getElementById('menuContainer');
+    const loadingContainer = document.getElementById('loadingContainer');
+    const noMenu = document.getElementById('noMenu');
+    loadingContainer.style.display = 'none';
+    if (filteredData.length === 0) {
+        container.style.display = 'none';
+        noMenu.style.display = 'block';
+        return;
+    }
+    container.style.display = 'grid';
+    noMenu.style.display = 'none';
+    container.innerHTML = filteredData.map(function(item, index) {
+        return '<div class="menu-card" data-index="' + index + '">' +
+            '<div class="match-indicator">' + (item.matchType || 'MATCH') + '</div>' +
+            '<div class="menu-icon"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg></div>' +
+            '<h3 class="menu-title">' + item.title + '</h3>' +
+            '<div class="menu-preview">' + item.info + '</div>' +
+            '<div class="menu-badge">MENU #' + (index + 1) + '</div>' +
+            '</div>';
+    }).join('');
+    container.querySelectorAll('.menu-card').forEach(function(card) {
+        card.addEventListener('click', function() {
+            showDetail(filteredData[parseInt(this.dataset.index)]);
+        });
+    });
 }
 
-container.style.display = 'grid';
-noMenu.style.display = 'none';
-
-container.innerHTML = filteredData.map((item, index) => `
-<div class="menu-card" data-index="${index}">
-<div class="match-indicator">${item.matchType || 'MATCH'}</div>
-<div class="menu-icon">
-<svg fill="currentColor" viewBox="0 0 24 24">
-<path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
-</svg>
-</div>
-<h3 class="menu-title">${item.title}</h3>
-<div class="menu-preview">${item.info}</div>
-<div class="menu-badge">MENU #${index + 1}</div>
-</div>
-`).join('');
-
-// Add click event listeners to menu cards
-container.querySelectorAll('.menu-card').forEach(card => {
-card.addEventListener('click', function() {
-const index = parseInt(this.dataset.index);
-showDetail(filteredData[index]);
-});
-});
-}
-
-// Show detail modal
 function showDetail(item) {
-currentDetail = item;
-const modal = document.getElementById('detailModal');
-const title = document.getElementById('detailTitle');
-const text = document.getElementById('detailText');
-
-title.textContent = item.title;
-text.textContent = item.info;
-
-modal.classList.add('show');
-updateDebugInfo();
-
-addTerminalLine(`Opening menu: ${item.title}`, 'normal');
+    currentDetail = item;
+    document.getElementById('detailTitle').textContent = item.title;
+    document.getElementById('detailText').textContent = item.info;
+    document.getElementById('detailModal').classList.add('show');
+    updateDebugInfo();
+    addTerminalLine('Opening menu: ' + item.title, 'normal');
 }
 
-// Hide detail modal
 function hideDetail() {
-const modal = document.getElementById('detailModal');
-modal.classList.remove('show');
-currentDetail = null;
-updateDebugInfo();
+    document.getElementById('detailModal').classList.remove('show');
+    currentDetail = null;
+    updateDebugInfo();
 }
 
-// Copy to clipboard
 function copyToClipboard() {
-if (!currentDetail) return;
-
-navigator.clipboard.writeText(currentDetail.info).then(() => {
-// Show success message
-const successElement = document.getElementById('copySuccess');
-successElement.classList.add('show');
-
-// Add to terminal
-addTerminalLine(`Data copied to clipboard: ${currentDetail.info.substring(0, 50)}${currentDetail.info.length > 50 ? '...' : ''}`, 'success');
-
-// Hide success message after 2 seconds
-setTimeout(() => {
-successElement.classList.remove('show');
-}, 2000);
-}).catch(err => {
-console.error('Failed to copy: ', err);
-addTerminalLine(`ERROR: Failed to copy text - ${err.message}`, 'error');
-});
+    if (!currentDetail) return;
+    navigator.clipboard.writeText(currentDetail.info).then(function() {
+        document.getElementById('copySuccess').classList.add('show');
+        addTerminalLine('Data copied to clipboard: ' + currentDetail.info.substring(0, 50) + (currentDetail.info.length > 50 ? '...' : ''), 'success');
+        setTimeout(function() { document.getElementById('copySuccess').classList.remove('show'); }, 2000);
+    }).catch(function(err) {
+        addTerminalLine('ERROR: Failed to copy text - ' + err.message, 'error');
+    });
 }
 
-// Enhanced filter menu items with fuzzy matching
 function filterMenuItems() {
-const query = document.getElementById('filterInput').value.trim();
-
-if (query === '') {
-filteredData = sheetData.map(item => ({ ...item }));
-} else {
-const results = [];
-
-for (const item of sheetData) {
-// Check title match
-const titleMatch = fuzzyMatch(query, item.title);
-
-// Check info match
-const infoMatch = fuzzyMatch(query, item.info);
-
-// Use the best match
-const bestMatch = titleMatch.score > infoMatch.score ? titleMatch : infoMatch;
-
-if (bestMatch.match) {
-// Add match type and score to item
-const enhancedItem = {
-...item,
-matchScore: bestMatch.score,
-matchType: bestMatch.type.toUpperCase()
-};
-results.push(enhancedItem);
-}
+    const query = document.getElementById('filterInput').value.trim();
+    if (query === '') {
+        filteredData = sheetData.map(function(item) { return Object.assign({}, item); });
+    } else {
+        const results = [];
+        for (const item of sheetData) {
+            const titleMatch = fuzzyMatch(query, item.title);
+            const infoMatch = fuzzyMatch(query, item.info);
+            const bestMatch = titleMatch.score > infoMatch.score ? titleMatch : infoMatch;
+            if (bestMatch.match) {
+                results.push(Object.assign({}, item, { matchScore: bestMatch.score, matchType: bestMatch.type.toUpperCase() }));
+            }
+        }
+        results.sort(function(a, b) { return b.matchScore - a.matchScore; });
+        filteredData = results;
+    }
+    displayMenuItems();
+    updateDebugInfo();
+    addTerminalLine('Fuzzy filter applied: "' + query + '" (' + filteredData.length + ' results)', 'normal');
 }
 
-// Sort by score (highest first)
-results.sort((a, b) => b.matchScore - a.matchScore);
-
-filteredData = results;
-}
-
-displayMenuItems();
-updateDebugInfo();
-
-addTerminalLine(`Fuzzy filter applied: "${query}" (${filteredData.length} results)`, 'normal');
-}
-
-// Calculator functions
 function updateCalculatorDisplay() {
-const displayValue = document.getElementById('calculatorValue');
-const expression = document.getElementById('calculatorExpression');
-
-displayValue.textContent = calculatorState.displayValue;
-expression.textContent = calculatorState.expression;
+    document.getElementById('calculatorValue').textContent = calculatorState.displayValue;
+    document.getElementById('calculatorExpression').textContent = calculatorState.expression;
 }
 
 function inputDigit(digit) {
-const { displayValue, waitingForOperand } = calculatorState;
-
-if (waitingForOperand) {
-calculatorState.displayValue = String(digit);
-calculatorState.waitingForOperand = false;
-} else {
-calculatorState.displayValue = displayValue === '0' ? String(digit) : displayValue + digit;
-}
-
-updateCalculatorDisplay();
+    if (calculatorState.waitingForOperand) {
+        calculatorState.displayValue = String(digit);
+        calculatorState.waitingForOperand = false;
+    } else {
+        calculatorState.displayValue = calculatorState.displayValue === '0' ? String(digit) : calculatorState.displayValue + digit;
+    }
+    updateCalculatorDisplay();
 }
 
 function inputDecimal() {
-const { displayValue, waitingForOperand } = calculatorState;
-
-if (waitingForOperand) {
-calculatorState.displayValue = '0.';
-calculatorState.waitingForOperand = false;
-} else if (displayValue.indexOf('.') === -1) {
-calculatorState.displayValue = displayValue + '.';
-}
-
-updateCalculatorDisplay();
+    if (calculatorState.waitingForOperand) {
+        calculatorState.displayValue = '0.';
+        calculatorState.waitingForOperand = false;
+    } else if (calculatorState.displayValue.indexOf('.') === -1) {
+        calculatorState.displayValue = calculatorState.displayValue + '.';
+    }
+    updateCalculatorDisplay();
 }
 
 function clearCalculator() {
-calculatorState = {
-displayValue: '0',
-expression: '',
-previousValue: null,
-operation: null,
-waitingForOperand: false
-};
-
-updateCalculatorDisplay();
+    calculatorState = { displayValue: '0', expression: '', previousValue: null, operation: null, waitingForOperand: false };
+    updateCalculatorDisplay();
 }
 
 function performOperation(nextOperation) {
-const { displayValue, previousValue, operation, expression } = calculatorState;
-const inputValue = parseFloat(displayValue);
-
-if (previousValue === null) {
-calculatorState.previousValue = inputValue;
-} else if (operation) {
-const currentValue = previousValue || 0;
-const newValue = calculate(currentValue, inputValue, operation);
-
-calculatorState.displayValue = String(newValue);
-calculatorState.previousValue = newValue;
-calculatorState.expression = `${currentValue} ${getOperatorSymbol(operation)} ${inputValue} =`;
-}
-
-calculatorState.waitingForOperand = true;
-calculatorState.operation = nextOperation;
-
-if (nextOperation) {
-calculatorState.expression = `${displayValue} ${getOperatorSymbol(nextOperation)}`;
-}
-
-updateCalculatorDisplay();
+    const inputValue = parseFloat(calculatorState.displayValue);
+    if (calculatorState.previousValue === null) {
+        calculatorState.previousValue = inputValue;
+    } else if (calculatorState.operation) {
+        const newValue = calculate(calculatorState.previousValue, inputValue, calculatorState.operation);
+        calculatorState.displayValue = String(newValue);
+        calculatorState.previousValue = newValue;
+        calculatorState.expression = calculatorState.previousValue + ' ' + getOperatorSymbol(calculatorState.operation) + ' ' + inputValue + ' =';
+    }
+    calculatorState.waitingForOperand = true;
+    calculatorState.operation = nextOperation;
+    if (nextOperation) calculatorState.expression = calculatorState.displayValue + ' ' + getOperatorSymbol(nextOperation);
+    updateCalculatorDisplay();
 }
 
 function calculate(firstValue, secondValue, operation) {
-switch (operation) {
-case '+':
-return firstValue + secondValue;
-case '-':
-return firstValue - secondValue;
-case '*':
-return firstValue * secondValue;
-case '/':
-return secondValue !== 0 ? firstValue / secondValue : 0;
-case '%':
-return firstValue % secondValue;
-default:
-return secondValue;
-}
+    switch (operation) {
+        case '+': return firstValue + secondValue;
+        case '-': return firstValue - secondValue;
+        case '*': return firstValue * secondValue;
+        case '/': return secondValue !== 0 ? firstValue / secondValue : 0;
+        case '%': return firstValue % secondValue;
+        default: return secondValue;
+    }
 }
 
 function getOperatorSymbol(operation) {
-switch (operation) {
-case '+':
-return '+';
-case '-':
-return '-';
-case '*':
-return '×';
-case '/':
-return '÷';
-case '%':
-return '%';
-default:
-return '';
-}
+    switch (operation) {
+        case '+': return '+';
+        case '-': return '-';
+        case '*': return '\u00d7';
+        case '/': return '\u00f7';
+        case '%': return '%';
+        default: return '';
+    }
 }
 
 function handleEquals() {
-const { displayValue, previousValue, operation, expression } = calculatorState;
-const inputValue = parseFloat(displayValue);
-
-if (previousValue !== null && operation) {
-const newValue = calculate(previousValue, inputValue, operation);
-
-calculatorState.displayValue = String(newValue);
-calculatorState.expression = `${previousValue} ${getOperatorSymbol(operation)} ${inputValue} =`;
-calculatorState.previousValue = null;
-calculatorState.operation = null;
-calculatorState.waitingForOperand = true;
-}
-
-updateCalculatorDisplay();
+    const inputValue = parseFloat(calculatorState.displayValue);
+    if (calculatorState.previousValue !== null && calculatorState.operation) {
+        const newValue = calculate(calculatorState.previousValue, inputValue, calculatorState.operation);
+        calculatorState.expression = calculatorState.previousValue + ' ' + getOperatorSymbol(calculatorState.operation) + ' ' + inputValue + ' =';
+        calculatorState.displayValue = String(newValue);
+        calculatorState.previousValue = null;
+        calculatorState.operation = null;
+        calculatorState.waitingForOperand = true;
+    }
+    updateCalculatorDisplay();
 }
 
 function handleBackspace() {
-const { displayValue } = calculatorState;
-
-if (displayValue.length > 1) {
-calculatorState.displayValue = displayValue.slice(0, -1);
-} else {
-calculatorState.displayValue = '0';
-}
-
-updateCalculatorDisplay();
+    if (calculatorState.displayValue.length > 1) {
+        calculatorState.displayValue = calculatorState.displayValue.slice(0, -1);
+    } else {
+        calculatorState.displayValue = '0';
+    }
+    updateCalculatorDisplay();
 }
 
 function handlePercent() {
-const { displayValue } = calculatorState;
-const inputValue = parseFloat(displayValue);
-
-calculatorState.displayValue = String(inputValue / 100);
-updateCalculatorDisplay();
+    calculatorState.displayValue = String(parseFloat(calculatorState.displayValue) / 100);
+    updateCalculatorDisplay();
 }
 
-// Toggle calculator
 function toggleCalculator() {
-const calculatorContainer = document.getElementById('calculatorContainer');
-calculatorContainer.classList.toggle('show');
+    document.getElementById('calculatorContainer').classList.toggle('show');
 }
 
-// Fetch data when page loads
 window.onload = function() {
-createParticles();
-updateSystemTime();
-setInterval(updateSystemTime, 1000);
-showTerminalOutput();
+    createParticles();
+    updateSystemTime();
+    setInterval(updateSystemTime, 1000);
+    showTerminalOutput();
 
-// Debug toggle
-document.getElementById('debugToggle').addEventListener('click', function() {
-debugMode = !debugMode;
-const debugPanel = document.getElementById('debugPanel');
-debugPanel.classList.toggle('show', debugMode);
-updateDebugInfo();
-});
+    document.getElementById('debugToggle').addEventListener('click', function() {
+        debugMode = !debugMode;
+        document.getElementById('debugPanel').classList.toggle('show', debugMode);
+        updateDebugInfo();
+    });
 
-// Update debug info periodically
-setInterval(updateDebugInfo, 1000);
+    setInterval(updateDebugInfo, 1000);
 
-// Filter input with debouncing
-let debounceTimer;
-document.getElementById('filterInput').addEventListener('input', function() {
-clearTimeout(debounceTimer);
-debounceTimer = setTimeout(filterMenuItems, 300);
-});
+    let debounceTimer;
+    document.getElementById('filterInput').addEventListener('input', function() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(filterMenuItems, 300);
+    });
 
-// Detail modal close button
-document.getElementById('detailClose').addEventListener('click', hideDetail);
+    document.getElementById('detailClose').addEventListener('click', hideDetail);
+    document.getElementById('copyButton').addEventListener('click', copyToClipboard);
 
-// Copy button
-document.getElementById('copyButton').addEventListener('click', copyToClipboard);
+    document.getElementById('detailModal').addEventListener('click', function(e) {
+        if (e.target === this) hideDetail();
+    });
 
-// Close modal when clicking outside
-document.getElementById('detailModal').addEventListener('click', function(e) {
-if (e.target === this) {
-hideDetail();
-}
-});
+    document.getElementById('calculatorToggle').addEventListener('click', toggleCalculator);
 
-// Calculator toggle
-document.getElementById('calculatorToggle').addEventListener('click', toggleCalculator);
+    document.querySelectorAll('.calculator-btn').forEach(function(button) {
+        button.addEventListener('click', function() {
+            switch (this.dataset.action) {
+                case 'number': inputDigit(this.dataset.value); break;
+                case 'decimal': inputDecimal(); break;
+                case 'clear': clearCalculator(); break;
+                case 'operator': performOperation(this.dataset.value); break;
+                case 'equals': handleEquals(); break;
+                case 'backspace': handleBackspace(); break;
+                case 'percent': handlePercent(); break;
+            }
+        });
+    });
 
-// Calculator buttons
-document.querySelectorAll('.calculator-btn').forEach(button => {
-button.addEventListener('click', function() {
-const action = this.dataset.action;
-
-switch (action) {
-case 'number':
-inputDigit(this.dataset.value);
-break;
-case 'decimal':
-inputDecimal();
-break;
-case 'clear':
-clearCalculator();
-break;
-case 'operator':
-performOperation(this.dataset.value);
-break;
-case 'equals':
-handleEquals();
-break;
-case 'backspace':
-handleBackspace();
-break;
-case 'percent':
-handlePercent();
-break;
-}
-});
-});
-
-// Fetch data
-fetchSheetData();
+    fetchSheetData();
 };
 </script>
 </body>
