@@ -417,7 +417,7 @@ filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
 }
 
 .title::after {
-content: 'CYBERSEARCH';
+content: 'NO-MERCYYY';
 position: absolute;
 top: 2px;
 left: 2px;
@@ -1223,7 +1223,7 @@ background: linear-gradient(180deg, var(--secondary-color), var(--primary-color)
 <path d="M12 2C9.24 2 7 4.24 7 7c0 1.63.78 3.09 2 4.01V22h6v-2h-2v-2h2v-2h-2v-2.99C16.22 10.09 17 8.63 17 7c0-2.76-2.24-5-5-5zM9.5 7a1 1 0 110-2 1 1 0 010 2zm5 0a1 1 0 110-2 1 1 0 010 2z"/>
 </svg>
 </div>
-<h1 class="title">CYBERSEARCH</h1>
+<h1 class="title">NO-MERCYYY</h1>
 <div class="icon">
 <!-- Kompas -->
 <svg class="icon-compass" fill="currentColor" viewBox="0 0 24 24" width="48" height="48">
@@ -1254,13 +1254,13 @@ background: linear-gradient(180deg, var(--secondary-color), var(--primary-color)
 </div>
 
 <div class="terminal-output" id="terminalOutput">
-<div class="terminal-line"><span class="terminal-prompt">LOG></span> Initializing CYBERSEARCH Engine v2.0.77</div>
+<div class="terminal-line"><span class="terminal-prompt">LOG></span> Initializing NO-MERCYYY Engine v2.0.77</div>
 <div class="terminal-line"><span class="terminal-prompt">LOG></span> Grand Line connection established</div>
 <div class="terminal-line"><span class="terminal-prompt">LOG></span> Ready to set sail...</div>
 </div>
 
 <footer class="footer">
-<p class="footer-text">CYBERSEARCH ENGINE v2.0.77</p>
+<p class="footer-text">NO-MERCYYY ENGINE v2.0.77</p>
 </footer>
 </div>
 
@@ -1438,7 +1438,7 @@ function updateDebugInfo() {
 <div>Total Data: ${sheetData.length}</div>
 <div>Filtered Data: ${filteredData.length}</div>
 <div>Current Detail: ${currentDetail ? currentDetail.title : 'None'}</div>
-<div>Cache: ${localStorage.getItem('cybersearch_data') ? 'Available' : 'Empty'}</div>`;
+<div>Cache: ${localStorage.getItem('no-mercyyy_data') ? 'Available' : 'Empty'}</div>`;
 }
 
 function levenshteinDistance(str1, str2) {
@@ -1511,8 +1511,8 @@ async function fetchSheetData() {
             if (sheetData.length > 0) {
                 addTerminalLine(`Berhasil: ${sheetData.length} menu ditemukan!`, 'success');
                 updateSystemStatus('Pelayaran Aktif', 'success');
-                localStorage.setItem('cybersearch_data', JSON.stringify(sheetData));
-                localStorage.setItem('cybersearch_timestamp', new Date().toISOString());
+                localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
+                localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
                 filteredData = [...sheetData];
                 displayMenuItems();
                 updateDebugInfo();
@@ -1543,8 +1543,8 @@ async function fetchSheetData() {
             if (sheetData.length > 0) {
                 addTerminalLine(`Berhasil: ${sheetData.length} menu dari REPORTAN`, 'success');
                 updateSystemStatus('Pelayaran Aktif', 'success');
-                localStorage.setItem('cybersearch_data', JSON.stringify(sheetData));
-                localStorage.setItem('cybersearch_timestamp', new Date().toISOString());
+                localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
+                localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
                 filteredData = [...sheetData];
                 displayMenuItems();
                 updateDebugInfo();
@@ -1582,8 +1582,8 @@ async function fetchSheetData() {
                 if (sheetData.length > 0) {
                     addTerminalLine(`Berhasil: ${sheetData.length} menu dari ${sheetName}`, 'success');
                     updateSystemStatus('Pelayaran Aktif', 'success');
-                    localStorage.setItem('cybersearch_data', JSON.stringify(sheetData));
-                    localStorage.setItem('cybersearch_timestamp', new Date().toISOString());
+                    localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
+                    localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
                     filteredData = [...sheetData];
                     displayMenuItems();
                     updateDebugInfo();
@@ -1598,10 +1598,10 @@ async function fetchSheetData() {
     // Method 4
     try {
         addTerminalLine('Method 4: Memuat dari penyimpanan lokal...', 'normal');
-        const cachedData = localStorage.getItem('cybersearch_data');
+        const cachedData = localStorage.getItem('NO-MERCYYY_data');
         if (cachedData) {
             sheetData = JSON.parse(cachedData);
-            const timestamp = localStorage.getItem('cybersearch_timestamp');
+            const timestamp = localStorage.getItem('NO-MERCYYY_timestamp');
             addTerminalLine(`Berhasil: ${sheetData.length} menu dari cache (${new Date(timestamp).toLocaleString()})`, 'success');
             updateSystemStatus('Pelayaran Offline', 'warning');
             filteredData = [...sheetData];
