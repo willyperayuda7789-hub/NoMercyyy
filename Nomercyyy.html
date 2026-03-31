@@ -1753,7 +1753,7 @@ return bestMatch;
 
 // Fetch data from Google Sheets with multiple fallback methods
 async function fetchSheetData() {
-const sheetId = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
+const sheetId = '1k5U_YwloyQsad7PT_DmXobkNycJ6bsV0zhE00TLmSIg';
 
 updateSystemStatus('MENGAMBIL DATA...', 'warning');
 addTerminalLine('Attempting to connect to database...', 'warning');
@@ -1807,7 +1807,7 @@ console.error('Method 1 error:', error);
 // Method 2: Try to access by sheet name "REPORTAN"
 try {
 addTerminalLine('Method 2: Accessing sheet by name "REPORTAN"...', 'normal');
-const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=Sheet1`;
+const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=REPORTAN`;
 
 const response = await fetch(url);
 if (!response.ok) {
@@ -1869,7 +1869,7 @@ const sheetName = firstSheet.title.$t;
 addTerminalLine(`Found sheet: ${sheetName}`, 'normal');
 
 // Now try to access this sheet
-const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=Sheet1`;
+const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
 
 const sheetResponse = await fetch(url);
 if (!sheetResponse.ok) {
