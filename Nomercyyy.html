@@ -537,25 +537,6 @@ transition: opacity 0.4s ease;
 opacity: 0.08;
 }
 
-.menu-icon {
-width: 42px;
-height: 42px;
-background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-border-radius: 10px;
-display: flex;
-align-items: center;
-justify-content: center;
-margin-bottom: 16px;
-box-shadow: 0 2px 10px var(--gold-glow);
-flex-shrink: 0;
-}
-
-.menu-icon svg {
-width: 24px;
-height: 24px;
-fill: var(--dark-bg);
-}
-
 .menu-title {
 font-family: 'Cinzel', serif;
 color: var(--primary-color);
@@ -582,28 +563,14 @@ font-size: 0.9rem;
 opacity: 0.85;
 }
 
-/* === BARIS BAWAH CARD: BADGE + COPY === */
+/* === BARIS BAWAH CARD: TOMBOL SALIN === */
 .card-bottom-row {
 display: flex;
 align-items: center;
-justify-content: space-between;
+justify-content: flex-end;
 margin-top: 14px;
 gap: 8px;
 flex-shrink: 0;
-}
-
-.menu-badge {
-display: inline-block;
-background: rgba(255, 215, 0, 0.1);
-color: var(--primary-color);
-padding: 4px 10px;
-border-radius: 4px;
-font-size: 0.7rem;
-text-transform: uppercase;
-letter-spacing: 1.5px;
-font-family: 'Cinzel', serif;
-border: 1px solid rgba(255, 215, 0, 0.15);
-white-space: nowrap;
 }
 
 /* === TOMBOL SALIN DI CARD === */
@@ -1617,15 +1584,9 @@ function displayMenuItems() {
     container.innerHTML = filteredData.map((item, index) => `
 <div class="menu-card" data-index="${index}">
 <div class="match-indicator">${item.matchType || 'MATCH'}</div>
-<div class="menu-icon">
-<svg fill="currentColor" viewBox="0 0 24 24">
-<path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM6 20V4h5v7h7v9H6z"/>
-</svg>
-</div>
 <h3 class="menu-title">${item.title}</h3>
 <div class="menu-preview">${item.info}</div>
 <div class="card-bottom-row">
-<div class="menu-badge">Peta #${index + 1}</div>
 <button class="card-copy-btn" data-copy-index="${index}">
 <svg fill="currentColor" viewBox="0 0 24 24">
 <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
