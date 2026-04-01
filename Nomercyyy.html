@@ -966,27 +966,6 @@ letter-spacing: 2px;
 font-size: 0.9rem;
 }
 
-/* === TERMINAL === */
-.terminal-output {
-background: linear-gradient(135deg, rgba(10, 18, 40, 0.6), rgba(7, 14, 30, 0.6));
-border: 1px solid rgba(255, 215, 0, 0.15);
-border-radius: 8px;
-padding: 16px;
-margin-top: 20px;
-font-family: 'Courier New', monospace;
-font-size: 0.85rem;
-max-height: 200px;
-overflow-y: auto;
-display: none;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.terminal-line { margin-bottom: 8px; }
-.terminal-prompt { color: var(--primary-color); }
-.terminal-error { color: #ff4444; }
-.terminal-success { color: var(--accent-color); }
-.terminal-warning { color: var(--primary-color); }
-
 /* === FOOTER === */
 .footer {
 position: absolute;
@@ -1279,12 +1258,6 @@ transform: translateY(-2px);
 <div class="no-menu-subtitle">Periksa kompas dan coba lagi nanti, Nakama</div>
 </div>
 
-<div class="terminal-output" id="terminalOutput">
-<div class="terminal-line"><span class="terminal-prompt">LOG></span> Initializing NO-MERCYYY Engine v2.0.77</div>
-<div class="terminal-line"><span class="terminal-prompt">LOG></span> Grand Line connection established</div>
-<div class="terminal-line"><span class="terminal-prompt">LOG></span> Ready to set sail...</div>
-</div>
-
 <footer class="footer">
 <p class="footer-text">NO-MERCYYY ENGINE v2.0.77</p>
 </footer>
@@ -1447,23 +1420,6 @@ function updateSystemStatus(status, type) {
     el.style.color = type === 'error' ? '#ff4444' : type === 'success' ? '#FF8F00' : '#FFD700';
 }
 
-function showTerminalOutput() {
-    document.getElementById('terminalOutput').style.display = 'block';
-}
-
-function addTerminalLine(text, type) {
-    const terminal = document.getElementById('terminalOutput');
-    const line = document.createElement('div');
-    line.classList.add('terminal-line');
-    let cn = 'terminal-prompt';
-    if (type === 'error') cn = 'terminal-error';
-    else if (type === 'success') cn = 'terminal-success';
-    else if (type === 'warning') cn = 'terminal-warning';
-    line.innerHTML = `<span class="${cn}">LOG></span> ${text}`;
-    terminal.appendChild(line);
-    terminal.scrollTop = terminal.scrollHeight;
-}
-
 function updateDebugInfo() {
     if (!debugMode) return;
     document.getElementById('debugInfo').innerHTML = `
@@ -1522,10 +1478,8 @@ function fuzzyMatch(query, text) {
 async function fetchSheetData() {
     const sheetId = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
     updateSystemStatus('Mengambil Data...', 'warning');
-    addTerminalLine('Menjelajah lautan data...', 'warning');
 
     try {
-        addTerminalLine('Method 1: Mengakses sheet gid=0...', 'normal');
         const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=0`;
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -1541,7 +1495,6 @@ async function fetchSheetData() {
                 if (title) sheetData.push({ title: title.trim(), info: info.trim() });
             }
             if (sheetData.length > 0) {
-                addTerminalLine(`Berhasil: ${sheetData.length} menu ditemukan!`, 'success');
                 updateSystemStatus('Pelayaran Aktif', 'success');
                 localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
                 localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
@@ -1552,11 +1505,10 @@ async function fetchSheetData() {
             }
         }
     } catch (error) {
-        addTerminalLine(`Method 1 gagal: ${error.message}`, 'error');
+        /* gagal, lanjut method berikutnya */
     }
 
     try {
-        addTerminalLine('Method 2: Mencari sheet "REPORTAN"...', 'normal');
         const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=REPORTAN`;
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -1572,7 +1524,6 @@ async function fetchSheetData() {
                 if (title) sheetData.push({ title: title.trim(), info: info.trim() });
             }
             if (sheetData.length > 0) {
-                addTerminalLine(`Berhasil: ${sheetData.length} menu dari REPORTAN`, 'success');
                 updateSystemStatus('Pelayaran Aktif', 'success');
                 localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
                 localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
@@ -1583,18 +1534,16 @@ async function fetchSheetData() {
             }
         }
     } catch (error) {
-        addTerminalLine(`Method 2 gagal: ${error.message}`, 'error');
+        /* gagal, lanjut method berikutnya */
     }
 
     try {
-        addTerminalLine('Method 3: Menjelajah semua sheet...', 'normal');
         const feedUrl = `https://spreadsheets.google.com/feeds/worksheets/${sheetId}/public/basic?alt=json`;
         const response = await fetch(feedUrl);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const feedJson = await response.json();
         if (feedJson.feed && feedJson.feed.entry && feedJson.feed.entry.length > 0) {
             const sheetName = feedJson.feed.entry[0].title.$t;
-            addTerminalLine(`Ditemukan sheet: ${sheetName}`, 'normal');
             const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
             const sheetResponse = await fetch(url);
             if (!sheetResponse.ok) throw new Error(`HTTP error! status: ${sheetResponse.status}`);
@@ -1610,7 +1559,6 @@ async function fetchSheetData() {
                     if (title) sheetData.push({ title: title.trim(), info: info.trim() });
                 }
                 if (sheetData.length > 0) {
-                    addTerminalLine(`Berhasil: ${sheetData.length} menu dari ${sheetName}`, 'success');
                     updateSystemStatus('Pelayaran Aktif', 'success');
                     localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
                     localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
@@ -1622,16 +1570,13 @@ async function fetchSheetData() {
             }
         }
     } catch (error) {
-        addTerminalLine(`Method 3 gagal: ${error.message}`, 'error');
+        /* gagal, lanjut method berikutnya */
     }
 
     try {
-        addTerminalLine('Method 4: Memuat dari penyimpanan lokal...', 'normal');
         const cachedData = localStorage.getItem('NO-MERCYYY_data');
         if (cachedData) {
             sheetData = JSON.parse(cachedData);
-            const timestamp = localStorage.getItem('NO-MERCYYY_timestamp');
-            addTerminalLine(`Berhasil: ${sheetData.length} menu dari cache`, 'success');
             updateSystemStatus('Pelayaran Offline', 'warning');
             filteredData = [...sheetData];
             displayMenuItems();
@@ -1639,23 +1584,21 @@ async function fetchSheetData() {
             return;
         }
     } catch (error) {
-        addTerminalLine(`Method 4 gagal: ${error.message}`, 'error');
+        /* gagal, lanjut fallback */
     }
 
-    addTerminalLine('Method 5: Data contoh...', 'warning');
     sheetData = [
         { title: "CONTOH MENU 1", info: "Ini adalah contoh menu karena lautan data tidak dapat dijangkau." },
         { title: "CONTOH MENU 2", info: "Sistem berlayar dalam mode offline." },
         { title: "KESALAHAN KONEKSI", info: "Tidak dapat terhubung ke database." }
     ];
-    addTerminalLine(`Peringatan: ${sheetData.length} menu contoh digunakan`, 'warning');
     updateSystemStatus('Lautan Tidak Dapat Dijangkau', 'error');
     filteredData = [...sheetData];
     displayMenuItems();
     updateDebugInfo();
 }
 
-/* === DISPLAY MENU - DENGAN TOMBOL SALIN DI SETIAP CARD === */
+/* === DISPLAY MENU === */
 function displayMenuItems() {
     const container = document.getElementById('menuContainer');
     const loadingContainer = document.getElementById('loadingContainer');
@@ -1697,14 +1640,12 @@ Ok
 <div class="card-skull">☠</div>
 </div>`).join('');
 
-    /* Event: klik card untuk buka detail */
     container.querySelectorAll('.menu-card').forEach(card => {
         card.addEventListener('click', function () {
             showDetail(filteredData[parseInt(this.dataset.index)]);
         });
     });
 
-    /* Event: klik tombol salin di card — stopPropagation agar tidak buka modal */
     container.querySelectorAll('.card-copy-btn').forEach(btn => {
         btn.addEventListener('click', function (e) {
             e.stopPropagation();
@@ -1713,17 +1654,11 @@ Ok
             if (!item) return;
 
             navigator.clipboard.writeText(item.info).then(() => {
-                /* Animasi tombol jadi "Ok" */
                 this.classList.add('copied');
                 setTimeout(() => this.classList.remove('copied'), 1500);
-
-                /* Toast notifikasi */
                 showToast(item.title, 'info berhasil disalin');
-
-                /* Log terminal */
-                addTerminalLine(`Disalin: ${item.info.substring(0, 50)}${item.info.length > 50 ? '...' : ''}`, 'success');
             }).catch(err => {
-                addTerminalLine(`Gagal menyalin: ${err.message}`, 'error');
+                /* gagal menyalin */
             });
         });
     });
@@ -1736,7 +1671,6 @@ function showDetail(item) {
     document.getElementById('detailText').textContent = item.info;
     document.getElementById('detailModal').classList.add('show');
     updateDebugInfo();
-    addTerminalLine(`Membuka: ${item.title}`, 'normal');
 }
 
 function hideDetail() {
@@ -1751,10 +1685,9 @@ function copyToClipboard() {
         const el = document.getElementById('copySuccess');
         el.classList.add('show');
         showToast(currentDetail.title, 'info berhasil disalin');
-        addTerminalLine(`Disalin: ${currentDetail.info.substring(0, 50)}${currentDetail.info.length > 50 ? '...' : ''}`, 'success');
         setTimeout(() => el.classList.remove('show'), 2000);
     }).catch(err => {
-        addTerminalLine(`Gagal menyalin: ${err.message}`, 'error');
+        /* gagal menyalin */
     });
 }
 
@@ -1776,7 +1709,6 @@ function filterMenuItems() {
     }
     displayMenuItems();
     updateDebugInfo();
-    addTerminalLine(`Filter: "${query}" (${filteredData.length} hasil)`, 'normal');
 }
 
 /* === KALKULATOR === */
@@ -1879,7 +1811,6 @@ window.onload = function () {
     createBubbles();
     updateSystemTime();
     setInterval(updateSystemTime, 1000);
-    showTerminalOutput();
 
     document.getElementById('debugToggle').addEventListener('click', function () {
         debugMode = !debugMode;
