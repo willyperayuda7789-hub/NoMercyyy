@@ -407,7 +407,7 @@ box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 /* === FILTER === */
 .menu-filter {
 width: 100%;
-max-width: 720px;
+max-width: 1400px;
 margin-bottom: 30px;
 position: relative;
 }
@@ -462,13 +462,13 @@ opacity: 0.6;
 font-family: 'Cinzel', serif;
 }
 
-/* === MENU CARDS === */
+/* === MENU CARDS — 1 BARIS 4 KOLOM === */
 .menu-container {
 width: 100%;
-max-width: 960px;
+max-width: 1400px;
 display: grid;
-grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-gap: 20px;
+grid-template-columns: repeat(4, 1fr);
+gap: 18px;
 margin-bottom: 40px;
 }
 
@@ -476,7 +476,7 @@ margin-bottom: 40px;
 background: linear-gradient(135deg, rgba(10, 18, 40, 0.85), rgba(7, 14, 30, 0.9));
 border: 1px solid rgba(255, 215, 0, 0.15);
 border-radius: 16px;
-padding: 24px;
+padding: 22px;
 backdrop-filter: blur(12px);
 transition: all 0.4s ease;
 position: relative;
@@ -540,26 +540,26 @@ opacity: 0.08;
 .menu-title {
 font-family: 'Cinzel', serif;
 color: var(--primary-color);
-font-size: 1.15rem;
+font-size: 0.95rem;
 font-weight: 700;
-margin-bottom: 12px;
+margin-bottom: 10px;
 text-transform: uppercase;
-letter-spacing: 1.5px;
+letter-spacing: 1.2px;
 text-shadow: 0 0 8px var(--gold-glow);
-line-height: 1.3;
+line-height: 1.35;
 }
 
 .menu-preview {
 color: var(--text-primary);
-line-height: 1.7;
+line-height: 1.65;
 flex-grow: 1;
 overflow: hidden;
 text-overflow: ellipsis;
 display: -webkit-box;
--webkit-line-clamp: 3;
+-webkit-line-clamp: 4;
 -webkit-box-orient: vertical;
 font-family: 'Cinzel', serif;
-font-size: 0.9rem;
+font-size: 0.82rem;
 opacity: 0.85;
 }
 
@@ -568,7 +568,7 @@ opacity: 0.85;
 display: flex;
 align-items: center;
 justify-content: flex-end;
-margin-top: 14px;
+margin-top: 12px;
 gap: 8px;
 flex-shrink: 0;
 }
@@ -880,7 +880,7 @@ opacity: 1;
 text-align: center;
 padding: 60px 0;
 width: 100%;
-max-width: 960px;
+max-width: 1400px;
 }
 
 .no-menu-title {
@@ -1119,6 +1119,10 @@ transform: translateY(-2px);
 ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--secondary-color), var(--primary-color)); }
 
 /* === RESPONSIVE === */
+@media (max-width: 1024px) {
+.menu-container { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
 .title { font-size: 3.2rem; letter-spacing: 3px; }
 .menu-container { grid-template-columns: 1fr; }
