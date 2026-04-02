@@ -27,7 +27,6 @@ box-sizing: border-box;
 --sky-bottom: #1f4068;
 --gold-glow: rgba(255, 215, 0, 0.3);
 --red-glow: rgba(229, 57, 53, 0.3);
---sharingan-glow: rgba(204, 0, 0, 0.6);
 --wave-1: #0d3b66;
 --wave-2: #0a2e4d;
 --wave-3: #071e33;
@@ -47,6 +46,7 @@ position: relative;
 
 @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;700;900&display=swap');
 
+/* === BACKGROUND LAUT ONE PIECE === */
 .bg-animation {
 position: fixed;
 top: 0;
@@ -167,10 +167,12 @@ width: 100%;
 0%, 100% { transform: translateX(0) translateY(0); }
 50% { transform: translateX(2%) translateY(-8px); }
 }
+
 @keyframes wave-move-2 {
 0%, 100% { transform: translateX(0) translateY(0); }
 50% { transform: translateX(-3%) translateY(-5px); }
 }
+
 @keyframes wave-move-3 {
 0%, 100% { transform: translateX(0) translateY(0); }
 50% { transform: translateX(1.5%) translateY(-3px); }
@@ -250,6 +252,7 @@ pointer-events: none;
 z-index: 0;
 }
 
+/* === ANIMASI TEKS === */
 @keyframes fire-flicker {
 0%, 100% { text-shadow: 0 0 4px rgba(255, 215, 0, 0.8), 0 0 12px rgba(255, 165, 0, 0.5), 0 0 20px rgba(229, 57, 53, 0.3); }
 25% { text-shadow: 0 0 6px rgba(255, 215, 0, 0.9), 0 0 16px rgba(255, 165, 0, 0.6), 0 0 24px rgba(229, 57, 53, 0.4); }
@@ -262,56 +265,24 @@ z-index: 0;
 50% { opacity: 0.8; filter: drop-shadow(0 0 16px var(--gold-glow)); }
 }
 
-/* === SHARINGAN ANIMATIONS === */
-@keyframes mangekyou-spin {
-from { transform: rotate(0deg); }
-to { transform: rotate(360deg); }
-}
-@keyframes mangekyou-spin-reverse {
-from { transform: rotate(0deg); }
-to { transform: rotate(-360deg); }
-}
-@keyframes sharingan-pulse {
-0%, 100% { filter: drop-shadow(0 0 6px rgba(204, 0, 0, 0.4)) drop-shadow(0 0 2px rgba(255, 50, 50, 0.2)); }
-50% { filter: drop-shadow(0 0 16px rgba(204, 0, 0, 0.8)) drop-shadow(0 0 6px rgba(255, 50, 50, 0.5)); }
-}
-@keyframes sharingan-awaken {
-0% { transform: scale(0.2); opacity: 0; filter: blur(10px) brightness(4); }
-50% { transform: scale(1.1); opacity: 1; filter: blur(0px) brightness(2.5); }
-75% { transform: scale(0.95); filter: blur(0px) brightness(1.3); }
-100% { transform: scale(1); opacity: 1; filter: blur(0px) brightness(1); }
-}
-
-.icon-sharingan-left {
-animation: sharingan-pulse 2.5s ease-in-out infinite, sharingan-awaken 1.4s ease-out both;
-}
-.icon-sharingan-right {
-animation: sharingan-pulse 3s ease-in-out infinite 0.4s, sharingan-awaken 1.4s ease-out 0.2s both;
-}
-.mangekyou-pattern-left {
-animation: mangekyou-spin 30s linear infinite;
-transform-origin: 100px 100px;
-}
-.mangekyou-pattern-right {
-animation: mangekyou-spin-reverse 30s linear infinite;
-transform-origin: 100px 100px;
-}
-
 @keyframes copy-pop {
 0% { transform: scale(1); }
 30% { transform: scale(0.92); }
 60% { transform: scale(1.05); }
 100% { transform: scale(1); }
 }
+
 @keyframes toast-in {
 0% { transform: translateY(20px) scale(0.9); opacity: 0; }
 100% { transform: translateY(0) scale(1); opacity: 1; }
 }
+
 @keyframes toast-out {
 0% { transform: translateY(0) scale(1); opacity: 1; }
 100% { transform: translateY(-10px) scale(0.9); opacity: 0; }
 }
 
+/* === CONTAINER === */
 .container {
 position: relative;
 z-index: 10;
@@ -324,6 +295,7 @@ padding: 20px;
 padding-top: 60px;
 }
 
+/* === HEADER === */
 .header {
 text-align: center;
 margin-bottom: 48px;
@@ -344,19 +316,21 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-width: 460px;
-height: 130px;
-background: radial-gradient(ellipse, rgba(204, 0, 0, 0.07) 0%, rgba(255, 215, 0, 0.03) 50%, transparent 70%);
+width: 320px;
+height: 120px;
+background: radial-gradient(ellipse, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
 z-index: -1;
 animation: pulse-glow 3s ease-in-out infinite;
 }
 
 .icon {
-width: 70px;
-height: 70px;
+width: 56px;
+height: 56px;
 position: relative;
-flex-shrink: 0;
 }
+
+.icon-skull { color: var(--primary-color); animation: pulse-glow 2s ease-in-out infinite; }
+.icon-compass { color: var(--secondary-color); animation: pulse-glow 2.5s ease-in-out infinite; }
 
 .title {
 font-family: 'Pirata One', cursive;
@@ -400,8 +374,14 @@ text-transform: uppercase;
 opacity: 0.8;
 text-shadow: 0 0 10px var(--gold-glow);
 }
-.subtitle::before, .subtitle::after { content: '⚓'; margin: 0 12px; }
 
+.subtitle::before,
+.subtitle::after {
+content: '⚓';
+margin: 0 12px;
+}
+
+/* === STATUS BAR === */
 .status-bar {
 position: fixed;
 top: 0;
@@ -420,15 +400,18 @@ backdrop-filter: blur(10px);
 border-bottom: 1px solid rgba(255, 215, 0, 0.2);
 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
+
 .system-time { color: var(--primary-color); }
 .system-status { color: var(--accent-color); }
 
+/* === FILTER === */
 .menu-filter {
 width: 100%;
 max-width: 1400px;
 margin-bottom: 30px;
 position: relative;
 }
+
 .filter-container {
 position: relative;
 display: flex;
@@ -440,10 +423,12 @@ backdrop-filter: blur(10px);
 border: 1px solid rgba(255, 215, 0, 0.25);
 transition: all 0.3s ease;
 }
+
 .filter-container:focus-within {
 border-color: rgba(255, 215, 0, 0.5);
 box-shadow: 0 0 20px var(--gold-glow);
 }
+
 .filter-input {
 flex: 1;
 background: transparent;
@@ -456,8 +441,17 @@ border-radius: 8px;
 transition: all 0.3s ease;
 letter-spacing: 1px;
 }
-.filter-input::placeholder { color: var(--text-secondary); font-style: italic; }
-.filter-input:focus { outline: none; box-shadow: 0 0 15px var(--gold-glow); }
+
+.filter-input::placeholder {
+color: var(--text-secondary);
+font-style: italic;
+}
+
+.filter-input:focus {
+outline: none;
+box-shadow: 0 0 15px var(--gold-glow);
+}
+
 .filter-hint {
 position: absolute;
 bottom: -24px;
@@ -468,6 +462,7 @@ opacity: 0.6;
 font-family: 'Cinzel', serif;
 }
 
+/* === MENU CARDS — 1 BARIS 4 KOLOM === */
 .menu-container {
 width: 100%;
 max-width: 1400px;
@@ -492,6 +487,7 @@ display: flex;
 flex-direction: column;
 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
+
 .menu-card::before {
 content: '';
 position: absolute;
@@ -504,7 +500,11 @@ opacity: 0;
 transition: opacity 0.4s ease;
 pointer-events: none;
 }
-.menu-card:hover::before { opacity: 1; }
+
+.menu-card:hover::before {
+opacity: 1;
+}
+
 .menu-card::after {
 content: '';
 position: absolute;
@@ -516,11 +516,13 @@ background: linear-gradient(to bottom, var(--primary-color), var(--secondary-col
 border-radius: 4px 0 0 4px;
 pointer-events: none;
 }
+
 .menu-card:hover {
 transform: translateY(-6px);
 box-shadow: 0 12px 35px rgba(255, 215, 0, 0.15), 0 4px 15px rgba(0,0,0,0.3);
 border-color: rgba(255, 215, 0, 0.35);
 }
+
 .menu-card .card-skull {
 position: absolute;
 bottom: 8px;
@@ -530,7 +532,11 @@ opacity: 0.04;
 pointer-events: none;
 transition: opacity 0.4s ease;
 }
-.menu-card:hover .card-skull { opacity: 0.08; }
+
+.menu-card:hover .card-skull {
+opacity: 0.08;
+}
+
 .menu-title {
 font-family: 'Cinzel', serif;
 color: var(--primary-color);
@@ -542,6 +548,7 @@ letter-spacing: 1.2px;
 text-shadow: 0 0 8px var(--gold-glow);
 line-height: 1.35;
 }
+
 .menu-preview {
 color: var(--text-primary);
 line-height: 1.65;
@@ -555,6 +562,8 @@ font-family: 'Cinzel', serif;
 font-size: 0.82rem;
 opacity: 0.85;
 }
+
+/* === BARIS BAWAH CARD: TOMBOL SALIN === */
 .card-bottom-row {
 display: flex;
 align-items: center;
@@ -563,6 +572,8 @@ margin-top: 12px;
 gap: 8px;
 flex-shrink: 0;
 }
+
+/* === TOMBOL SALIN DI CARD === */
 .card-copy-btn {
 display: inline-flex;
 align-items: center;
@@ -583,6 +594,7 @@ flex-shrink: 0;
 position: relative;
 overflow: hidden;
 }
+
 .card-copy-btn::before {
 content: '';
 position: absolute;
@@ -593,23 +605,44 @@ height: 100%;
 background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
 transition: left 0.4s ease;
 }
-.card-copy-btn:hover::before { left: 100%; }
+
+.card-copy-btn:hover::before {
+left: 100%;
+}
+
 .card-copy-btn:hover {
 background: rgba(255, 215, 0, 0.2);
 border-color: rgba(255, 215, 0, 0.5);
 box-shadow: 0 2px 10px var(--gold-glow);
 transform: translateY(-1px);
 }
-.card-copy-btn:active { animation: copy-pop 0.3s ease; }
-.card-copy-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+.card-copy-btn:active {
+animation: copy-pop 0.3s ease;
+}
+
+.card-copy-btn svg {
+width: 13px;
+height: 13px;
+flex-shrink: 0;
+}
+
 .card-copy-btn.copied {
 background: rgba(255, 143, 0, 0.25);
 border-color: var(--accent-color);
 color: var(--accent-color);
 pointer-events: none;
 }
-.card-copy-btn .btn-label { transition: opacity 0.2s ease; }
-.card-copy-btn.copied .btn-label { opacity: 0; position: absolute; }
+
+.card-copy-btn .btn-label {
+transition: opacity 0.2s ease;
+}
+
+.card-copy-btn.copied .btn-label {
+opacity: 0;
+position: absolute;
+}
+
 .card-copy-btn .btn-check {
 position: absolute;
 left: 50%;
@@ -622,8 +655,12 @@ align-items: center;
 gap: 4px;
 white-space: nowrap;
 }
-.card-copy-btn.copied .btn-check { opacity: 1; }
 
+.card-copy-btn.copied .btn-check {
+opacity: 1;
+}
+
+/* === TOAST NOTIFIKASI === */
 .toast-container {
 position: fixed;
 bottom: 100px;
@@ -636,6 +673,7 @@ align-items: center;
 gap: 8px;
 pointer-events: none;
 }
+
 .toast {
 background: linear-gradient(135deg, rgba(10, 18, 40, 0.95), rgba(7, 14, 30, 0.95));
 border: 1px solid rgba(255, 215, 0, 0.35);
@@ -654,9 +692,25 @@ gap: 8px;
 animation: toast-in 0.3s ease forwards;
 white-space: nowrap;
 }
-.toast.toast-out { animation: toast-out 0.3s ease forwards; }
-.toast svg { width: 16px; height: 16px; flex-shrink: 0; }
-.toast-title { color: var(--accent-color); font-weight: 700; max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+
+.toast.toast-out {
+animation: toast-out 0.3s ease forwards;
+}
+
+.toast svg {
+width: 16px;
+height: 16px;
+flex-shrink: 0;
+}
+
+.toast-title {
+color: var(--accent-color);
+font-weight: 700;
+max-width: 180px;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
 .match-indicator {
 position: absolute;
 top: 8px;
@@ -673,8 +727,12 @@ transition: opacity 0.3s ease;
 font-family: 'Cinzel', serif;
 pointer-events: none;
 }
-.menu-card:hover .match-indicator { opacity: 1; }
 
+.menu-card:hover .match-indicator {
+opacity: 1;
+}
+
+/* === DETAIL MODAL === */
 .detail-modal {
 position: fixed;
 top: 0;
@@ -689,7 +747,11 @@ align-items: center;
 justify-content: center;
 padding: 20px;
 }
-.detail-modal.show { display: flex; }
+
+.detail-modal.show {
+display: flex;
+}
+
 .detail-content {
 background: linear-gradient(135deg, rgba(10, 18, 40, 0.95), rgba(7, 14, 30, 0.95));
 border: 1px solid rgba(255, 215, 0, 0.25);
@@ -701,6 +763,7 @@ overflow-y: auto;
 position: relative;
 box-shadow: 0 10px 50px rgba(0, 0, 0, 0.6), 0 0 30px var(--gold-glow);
 }
+
 .detail-header {
 padding: 24px;
 border-bottom: 1px solid rgba(255, 215, 0, 0.15);
@@ -708,6 +771,7 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 }
+
 .detail-title {
 font-family: 'Pirata One', cursive;
 color: var(--primary-color);
@@ -715,6 +779,7 @@ font-size: 1.8rem;
 letter-spacing: 2px;
 text-shadow: 0 0 10px var(--gold-glow);
 }
+
 .detail-close {
 background: transparent;
 border: 1px solid rgba(255, 215, 0, 0.2);
@@ -728,12 +793,17 @@ justify-content: center;
 border-radius: 50%;
 transition: all 0.3s ease;
 }
+
 .detail-close:hover {
 background: rgba(255, 215, 0, 0.15);
 color: var(--primary-color);
 border-color: rgba(255, 215, 0, 0.4);
 }
-.detail-body { padding: 24px; }
+
+.detail-body {
+padding: 24px;
+}
+
 .detail-text {
 color: var(--text-primary);
 line-height: 1.9;
@@ -742,6 +812,7 @@ word-break: break-word;
 font-family: 'Cinzel', serif;
 font-size: 0.95rem;
 }
+
 .detail-actions {
 padding: 16px 24px;
 border-top: 1px solid rgba(255, 215, 0, 0.15);
@@ -749,6 +820,7 @@ display: flex;
 justify-content: flex-end;
 gap: 12px;
 }
+
 .copy-button {
 background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
 color: var(--dark-bg);
@@ -766,6 +838,7 @@ position: relative;
 overflow: hidden;
 box-shadow: 0 4px 15px var(--gold-glow);
 }
+
 .copy-button::before {
 content: '';
 position: absolute;
@@ -776,11 +849,16 @@ height: 100%;
 background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
 transition: left 0.5s;
 }
-.copy-button:hover::before { left: 100%; }
+
+.copy-button:hover::before {
+left: 100%;
+}
+
 .copy-button:hover {
 transform: translateY(-2px);
 box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
 }
+
 .copy-success {
 color: var(--accent-color);
 font-size: 0.85rem;
@@ -792,9 +870,19 @@ text-transform: uppercase;
 letter-spacing: 1px;
 font-family: 'Cinzel', serif;
 }
-.copy-success.show { opacity: 1; }
 
-.no-menu { text-align: center; padding: 60px 0; width: 100%; max-width: 1400px; }
+.copy-success.show {
+opacity: 1;
+}
+
+/* === NO MENU === */
+.no-menu {
+text-align: center;
+padding: 60px 0;
+width: 100%;
+max-width: 1400px;
+}
+
 .no-menu-title {
 color: var(--primary-color);
 font-family: 'Pirata One', cursive;
@@ -803,9 +891,23 @@ margin-bottom: 16px;
 letter-spacing: 2px;
 text-shadow: 0 0 10px var(--gold-glow);
 }
-.no-menu-subtitle { color: var(--text-secondary); font-family: 'Cinzel', serif; font-size: 0.95rem; opacity: 0.7; }
 
-.loading-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; }
+.no-menu-subtitle {
+color: var(--text-secondary);
+font-family: 'Cinzel', serif;
+font-size: 0.95rem;
+opacity: 0.7;
+}
+
+/* === LOADING === */
+.loading-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 40px;
+}
+
 .loading-spinner {
 width: 44px;
 height: 44px;
@@ -817,12 +919,39 @@ animation: spin 1s linear infinite;
 margin-bottom: 16px;
 box-shadow: 0 0 12px var(--gold-glow);
 }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-.loading-text { color: var(--primary-color); font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
 
-.footer { position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; }
-.footer-text { color: var(--text-secondary); font-family: 'Cinzel', serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.5; }
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
 
+.loading-text {
+color: var(--primary-color);
+font-family: 'Cinzel', serif;
+text-transform: uppercase;
+letter-spacing: 2px;
+font-size: 0.9rem;
+}
+
+/* === FOOTER === */
+.footer {
+position: absolute;
+bottom: 20px;
+left: 0;
+right: 0;
+text-align: center;
+}
+
+.footer-text {
+color: var(--text-secondary);
+font-family: 'Cinzel', serif;
+font-size: 0.8rem;
+text-transform: uppercase;
+letter-spacing: 2px;
+opacity: 0.5;
+}
+
+/* === CALCULATOR === */
 .calculator-toggle {
 position: fixed;
 bottom: 80px;
@@ -840,8 +969,18 @@ z-index: 99;
 transition: all 0.3s ease;
 border: 2px solid rgba(255, 215, 0, 0.3);
 }
-.calculator-toggle:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(229, 57, 53, 0.5); }
-.calculator-toggle svg { width: 28px; height: 28px; fill: var(--dark-bg); }
+
+.calculator-toggle:hover {
+transform: scale(1.1);
+box-shadow: 0 6px 20px rgba(229, 57, 53, 0.5);
+}
+
+.calculator-toggle svg {
+width: 28px;
+height: 28px;
+fill: var(--dark-bg);
+}
+
 .calculator-container {
 position: fixed;
 bottom: 145px;
@@ -858,11 +997,42 @@ transition: all 0.3s ease;
 backdrop-filter: blur(10px);
 overflow: hidden;
 }
-.calculator-container.show { transform: scale(1); opacity: 1; }
-.calculator-display { background: rgba(5, 10, 20, 0.8); padding: 20px; text-align: right; border-bottom: 1px solid rgba(255, 215, 0, 0.15); }
-.calculator-expression { color: var(--text-secondary); font-family: 'Cinzel', serif; font-size: 0.85rem; min-height: 20px; margin-bottom: 8px; }
-.calculator-value { color: var(--primary-color); font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700; text-shadow: 0 0 10px var(--gold-glow); }
-.calculator-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255, 215, 0, 0.08); }
+
+.calculator-container.show {
+transform: scale(1);
+opacity: 1;
+}
+
+.calculator-display {
+background: rgba(5, 10, 20, 0.8);
+padding: 20px;
+text-align: right;
+border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+.calculator-expression {
+color: var(--text-secondary);
+font-family: 'Cinzel', serif;
+font-size: 0.85rem;
+min-height: 20px;
+margin-bottom: 8px;
+}
+
+.calculator-value {
+color: var(--primary-color);
+font-family: 'Cinzel', serif;
+font-size: 2rem;
+font-weight: 700;
+text-shadow: 0 0 10px var(--gold-glow);
+}
+
+.calculator-buttons {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 1px;
+background: rgba(255, 215, 0, 0.08);
+}
+
 .calculator-btn {
 background: rgba(10, 18, 40, 0.8);
 border: none;
@@ -873,16 +1043,32 @@ font-family: 'Cinzel', serif;
 cursor: pointer;
 transition: all 0.2s ease;
 }
+
 .calculator-btn:hover { background: rgba(255, 215, 0, 0.15); }
 .calculator-btn:active { transform: scale(0.95); }
-.calculator-btn.operator { background: rgba(229, 57, 53, 0.12); color: var(--secondary-color); }
+
+.calculator-btn.operator {
+background: rgba(229, 57, 53, 0.12);
+color: var(--secondary-color);
+}
 .calculator-btn.operator:hover { background: rgba(229, 57, 53, 0.22); }
-.calculator-btn.equals { background: rgba(255, 215, 0, 0.15); color: var(--primary-color); grid-column: span 2; }
+
+.calculator-btn.equals {
+background: rgba(255, 215, 0, 0.15);
+color: var(--primary-color);
+grid-column: span 2;
+}
 .calculator-btn.equals:hover { background: rgba(255, 215, 0, 0.25); }
-.calculator-btn.clear { background: rgba(255, 68, 68, 0.15); color: #ff4444; }
+
+.calculator-btn.clear {
+background: rgba(255, 68, 68, 0.15);
+color: #ff4444;
+}
 .calculator-btn.clear:hover { background: rgba(255, 68, 68, 0.25); }
+
 .calculator-btn.zero { grid-column: span 2; }
 
+/* === DEBUG === */
 .debug-panel {
 position: fixed;
 bottom: 60px;
@@ -898,9 +1084,11 @@ z-index: 100;
 display: none;
 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
+
 .debug-panel.show { display: block; }
 .debug-title { color: var(--primary-color); margin-bottom: 8px; font-weight: bold; }
 .debug-info { color: var(--text-secondary); margin-bottom: 4px; }
+
 .debug-toggle {
 position: fixed;
 bottom: 20px;
@@ -918,16 +1106,23 @@ z-index: 100;
 transition: all 0.3s ease;
 letter-spacing: 1px;
 }
-.debug-toggle:hover { background: rgba(255, 215, 0, 0.2); transform: translateY(-2px); }
 
+.debug-toggle:hover {
+background: rgba(255, 215, 0, 0.2);
+transform: translateY(-2px);
+}
+
+/* === SCROLLBAR === */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: rgba(10, 18, 40, 0.5); }
 ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary-color), var(--secondary-color)); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--secondary-color), var(--primary-color)); }
 
+/* === RESPONSIVE === */
 @media (max-width: 1024px) {
 .menu-container { grid-template-columns: repeat(2, 1fr); }
 }
+
 @media (max-width: 768px) {
 .title { font-size: 3.2rem; letter-spacing: 3px; }
 .menu-container { grid-template-columns: 1fr; }
@@ -936,19 +1131,19 @@ letter-spacing: 1px;
 .ship-silhouette { display: none; }
 .toast { font-size: 0.7rem; padding: 8px 14px; }
 .toast-title { max-width: 120px; }
-.icon { width: 56px; height: 56px; }
 }
+
 @media (max-width: 480px) {
 .title { font-size: 2.4rem; }
 .subtitle { font-size: 0.8rem; }
 .card-copy-btn { padding: 4px 8px; font-size: 0.6rem; }
 .card-copy-btn svg { width: 11px; height: 11px; }
-.icon { width: 44px; height: 44px; }
 }
 </style>
 </head>
 <body>
 
+<!-- === BACKGROUND === -->
 <div class="bg-animation">
 <div class="sky-layer"></div>
 <div class="stars-layer" id="starsLayer"></div>
@@ -958,9 +1153,21 @@ letter-spacing: 1px;
 <div class="ocean-layer"></div>
 <div class="moon-reflection"></div>
 <div class="waves-container">
-<div class="wave wave-1"><svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="height:180px;"><path fill="rgba(13,59,102,0.6)" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,218.7C672,235,768,245,864,234.7C960,224,1056,192,1152,186.7C1248,181,1344,203,1392,213.3L1440,224L1440,320L0,320Z"></path></svg></div>
-<div class="wave wave-2"><svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="height:150px;"><path fill="rgba(10,46,77,0.5)" d="M0,256L60,240C120,224,240,192,360,186.7C480,181,600,203,720,213.3C840,224,960,224,1080,208C1200,192,1320,160,1380,144L1440,128L1440,320L0,320Z"></path></svg></div>
-<div class="wave wave-3"><svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="height:120px;"><path fill="rgba(7,30,51,0.4)" d="M0,288L80,272C160,256,320,224,480,218.7C640,213,800,235,960,245.3C1120,256,1280,256,1360,256L1440,256L1440,320L0,320Z"></path></svg></div>
+<div class="wave wave-1">
+<svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="height:180px;">
+<path fill="rgba(13,59,102,0.6)" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,218.7C672,235,768,245,864,234.7C960,224,1056,192,1152,186.7C1248,181,1344,203,1392,213.3L1440,224L1440,320L0,320Z"></path>
+</svg>
+</div>
+<div class="wave wave-2">
+<svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="height:150px;">
+<path fill="rgba(10,46,77,0.5)" d="M0,256L60,240C120,224,240,192,360,186.7C480,181,600,203,720,213.3C840,224,960,224,1080,208C1200,192,1320,160,1380,144L1440,128L1440,320L0,320Z"></path>
+</svg>
+</div>
+<div class="wave wave-3">
+<svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="height:120px;">
+<path fill="rgba(7,30,51,0.4)" d="M0,288L80,272C160,256,320,224,480,218.7C640,213,800,235,960,245.3C1120,256,1280,256,1360,256L1440,256L1440,320L0,320Z"></path>
+</svg>
+</div>
 </div>
 <div class="particles" id="particles"></div>
 <div class="ship-silhouette">
@@ -975,8 +1182,10 @@ letter-spacing: 1px;
 <div class="jolly-watermark">☠</div>
 </div>
 
+<!-- Toast Container -->
 <div class="toast-container" id="toastContainer"></div>
 
+<!-- Status Bar -->
 <div class="status-bar">
 <div class="system-time" id="systemTime">--:--:--</div>
 <div class="system-status" id="systemStatus">Menyiapkan Pelayaran...</div>
@@ -986,241 +1195,17 @@ letter-spacing: 1px;
 <header class="header">
 <div class="logo-container">
 <div class="logo-glow"></div>
-
-<!-- === MANGEKYOU SHARINGAN KIRI === -->
 <div class="icon">
-<svg class="icon-sharingan-left" viewBox="0 0 200 200" width="100%" height="100%">
-<defs>
-<radialGradient id="irisL" cx="50%" cy="50%" r="50%">
-<stop offset="0%" stop-color="#ff2020"/>
-<stop offset="25%" stop-color="#e01010"/>
-<stop offset="50%" stop-color="#c00000"/>
-<stop offset="75%" stop-color="#8b0000"/>
-<stop offset="100%" stop-color="#4a0000"/>
-</radialGradient>
-<radialGradient id="irisShineL" cx="38%" cy="35%" r="55%">
-<stop offset="0%" stop-color="#ff6666" stop-opacity="0.2"/>
-<stop offset="50%" stop-color="#ff0000" stop-opacity="0"/>
-<stop offset="100%" stop-color="#000000" stop-opacity="0"/>
-</radialGradient>
-<radialGradient id="glowL" cx="50%" cy="50%" r="50%">
-<stop offset="60%" stop-color="#ff0000" stop-opacity="0"/>
-<stop offset="85%" stop-color="#cc0000" stop-opacity="0.12"/>
-<stop offset="100%" stop-color="#ff0000" stop-opacity="0.25"/>
-</radialGradient>
-<clipPath id="irisClipL">
-<circle cx="100" cy="100" r="86"/>
-</clipPath>
-</defs>
-
-<!-- Outer ambient glow -->
-<circle cx="100" cy="100" r="98" fill="url(#glowL)"/>
-
-<!-- Dark sclera ring -->
-<circle cx="100" cy="100" r="93" fill="#060000"/>
-<circle cx="100" cy="100" r="90" fill="#0c0000"/>
-
-<!-- Red iris base -->
-<circle cx="100" cy="100" r="86" fill="url(#irisL)"/>
-
-<!-- Iris shine overlay -->
-<circle cx="100" cy="100" r="86" fill="url(#irisShineL)"/>
-
-<!-- Iris edge ring -->
-<circle cx="100" cy="100" r="85" fill="none" stroke="#3a0000" stroke-width="2" opacity="0.7"/>
-<circle cx="100" cy="100" r="83" fill="none" stroke="#5a0000" stroke-width="0.8" opacity="0.35"/>
-<circle cx="100" cy="100" r="70" fill="none" stroke="#4a0000" stroke-width="0.6" opacity="0.2"/>
-<circle cx="100" cy="100" r="56" fill="none" stroke="#3a0000" stroke-width="0.4" opacity="0.12"/>
-
-<!-- Rotating Mangekyou pattern group -->
-<g class="mangekyou-pattern-left">
-<g clip-path="url(#irisClipL)">
-
-<!-- 3 thick curved blades (black comma hooks) -->
-<g fill="#000000">
-<!-- Blade 1: curves upward, hooks to the right -->
-<path d="
-M 100 85
-C 95 70, 88 52, 83 38
-C 78 24, 76 16, 80 10
-C 84 4, 94 2, 103 6
-C 112 10, 116 20, 114 32
-C 112 42, 107 56, 104 68
-C 102 74, 101 80, 100 85
-Z"/>
-<!-- Blade 2: rotated 120 degrees -->
-<path d="
-M 100 85
-C 95 70, 88 52, 83 38
-C 78 24, 76 16, 80 10
-C 84 4, 94 2, 103 6
-C 112 10, 116 20, 114 32
-C 112 42, 107 56, 104 68
-C 102 74, 101 80, 100 85
-Z" transform="rotate(120, 100, 100)"/>
-<!-- Blade 3: rotated 240 degrees -->
-<path d="
-M 100 85
-C 95 70, 88 52, 83 38
-C 78 24, 76 16, 80 10
-C 84 4, 94 2, 103 6
-C 112 10, 116 20, 114 32
-C 112 42, 107 56, 104 68
-C 102 74, 101 80, 100 85
-Z" transform="rotate(240, 100, 100)"/>
-</g>
-
-<!-- 3 thin intersecting trailing curves -->
-<g stroke="#000000" fill="none" stroke-linecap="round">
-<!-- Curve 1: from blade 1's outer edge, sweeps left-down between blades -->
-<path d="
-M 83 38
-C 62 50, 42 72, 36 96
-C 30 120, 40 148, 62 164
-" stroke-width="3.5" opacity="0.85"/>
-<!-- Curve 2: rotated 120 -->
-<path d="
-M 83 38
-C 62 50, 42 72, 36 96
-C 30 120, 40 148, 62 164
-" stroke-width="3.5" opacity="0.85" transform="rotate(120, 100, 100)"/>
-<!-- Curve 3: rotated 240 -->
-<path d="
-M 83 38
-C 62 50, 42 72, 36 96
-C 30 120, 40 148, 62 164
-" stroke-width="3.5" opacity="0.85" transform="rotate(240, 100, 100)"/>
-</g>
-
-<!-- Extra thin inner accent curves for depth -->
-<g stroke="#000000" fill="none" stroke-linecap="round" opacity="0.45">
-<path d="M 114 32 C 130 48, 126 74, 108 86" stroke-width="2"/>
-<path d="M 114 32 C 130 48, 126 74, 108 86" stroke-width="2" transform="rotate(120, 100, 100)"/>
-<path d="M 114 32 C 130 48, 126 74, 108 86" stroke-width="2" transform="rotate(240, 100, 100)"/>
-</g>
-
-</g>
-</g>
-
-<!-- Black pupil (static, does not rotate) -->
-<circle cx="100" cy="100" r="14" fill="#000000"/>
-<!-- Pupil inner depth -->
-<circle cx="100" cy="100" r="12" fill="#050000"/>
-<circle cx="96" cy="96" r="4.5" fill="#120000" opacity="0.35"/>
-
-<!-- Specular highlights -->
-<circle cx="74" cy="54" r="8" fill="#ff4444" opacity="0.07"/>
-<circle cx="72" cy="52" r="3" fill="#ffffff" opacity="0.15"/>
-<circle cx="124" cy="140" r="5" fill="#ff3333" opacity="0.04"/>
+<svg class="icon-skull" fill="currentColor" viewBox="0 0 24 24" width="48" height="48">
+<path d="M12 2C9.24 2 7 4.24 7 7c0 1.63.78 3.09 2 4.01V22h6v-2h-2v-2h2v-2h-2v-2.99C16.22 10.09 17 8.63 17 7c0-2.76-2.24-5-5-5zM9.5 7a1 1 0 110-2 1 1 0 010 2zm5 0a1 1 0 110-2 1 1 0 010 2z"/>
 </svg>
 </div>
-
 <h1 class="title">NO-MERCYYY</h1>
-
-<!-- === MANGEKYOU SHARINGAN KANAN === -->
 <div class="icon">
-<svg class="icon-sharingan-right" viewBox="0 0 200 200" width="100%" height="100%">
-<defs>
-<radialGradient id="irisR" cx="50%" cy="50%" r="50%">
-<stop offset="0%" stop-color="#ff2020"/>
-<stop offset="25%" stop-color="#e01010"/>
-<stop offset="50%" stop-color="#c00000"/>
-<stop offset="75%" stop-color="#8b0000"/>
-<stop offset="100%" stop-color="#4a0000"/>
-</radialGradient>
-<radialGradient id="irisShineR" cx="38%" cy="35%" r="55%">
-<stop offset="0%" stop-color="#ff6666" stop-opacity="0.2"/>
-<stop offset="50%" stop-color="#ff0000" stop-opacity="0"/>
-<stop offset="100%" stop-color="#000000" stop-opacity="0"/>
-</radialGradient>
-<radialGradient id="glowR" cx="50%" cy="50%" r="50%">
-<stop offset="60%" stop-color="#ff0000" stop-opacity="0"/>
-<stop offset="85%" stop-color="#cc0000" stop-opacity="0.12"/>
-<stop offset="100%" stop-color="#ff0000" stop-opacity="0.25"/>
-</radialGradient>
-<clipPath id="irisClipR">
-<circle cx="100" cy="100" r="86"/>
-</clipPath>
-</defs>
-
-<circle cx="100" cy="100" r="98" fill="url(#glowR)"/>
-<circle cx="100" cy="100" r="93" fill="#060000"/>
-<circle cx="100" cy="100" r="90" fill="#0c0000"/>
-<circle cx="100" cy="100" r="86" fill="url(#irisR)"/>
-<circle cx="100" cy="100" r="86" fill="url(#irisShineR)"/>
-<circle cx="100" cy="100" r="85" fill="none" stroke="#3a0000" stroke-width="2" opacity="0.7"/>
-<circle cx="100" cy="100" r="83" fill="none" stroke="#5a0000" stroke-width="0.8" opacity="0.35"/>
-<circle cx="100" cy="100" r="70" fill="none" stroke="#4a0000" stroke-width="0.6" opacity="0.2"/>
-<circle cx="100" cy="100" r="56" fill="none" stroke="#3a0000" stroke-width="0.4" opacity="0.12"/>
-
-<g class="mangekyou-pattern-right">
-<g clip-path="url(#irisClipR)">
-<g fill="#000000">
-<path d="
-M 100 85
-C 95 70, 88 52, 83 38
-C 78 24, 76 16, 80 10
-C 84 4, 94 2, 103 6
-C 112 10, 116 20, 114 32
-C 112 42, 107 56, 104 68
-C 102 74, 101 80, 100 85
-Z"/>
-<path d="
-M 100 85
-C 95 70, 88 52, 83 38
-C 78 24, 76 16, 80 10
-C 84 4, 94 2, 103 6
-C 112 10, 116 20, 114 32
-C 112 42, 107 56, 104 68
-C 102 74, 101 80, 100 85
-Z" transform="rotate(120, 100, 100)"/>
-<path d="
-M 100 85
-C 95 70, 88 52, 83 38
-C 78 24, 76 16, 80 10
-C 84 4, 94 2, 103 6
-C 112 10, 116 20, 114 32
-C 112 42, 107 56, 104 68
-C 102 74, 101 80, 100 85
-Z" transform="rotate(240, 100, 100)"/>
-</g>
-
-<g stroke="#000000" fill="none" stroke-linecap="round">
-<path d="
-M 83 38
-C 62 50, 42 72, 36 96
-C 30 120, 40 148, 62 164
-" stroke-width="3.5" opacity="0.85"/>
-<path d="
-M 83 38
-C 62 50, 42 72, 36 96
-C 30 120, 40 148, 62 164
-" stroke-width="3.5" opacity="0.85" transform="rotate(120, 100, 100)"/>
-<path d="
-M 83 38
-C 62 50, 42 72, 36 96
-C 30 120, 40 148, 62 164
-" stroke-width="3.5" opacity="0.85" transform="rotate(240, 100, 100)"/>
-</g>
-
-<g stroke="#000000" fill="none" stroke-linecap="round" opacity="0.45">
-<path d="M 114 32 C 130 48, 126 74, 108 86" stroke-width="2"/>
-<path d="M 114 32 C 130 48, 126 74, 108 86" stroke-width="2" transform="rotate(120, 100, 100)"/>
-<path d="M 114 32 C 130 48, 126 74, 108 86" stroke-width="2" transform="rotate(240, 100, 100)"/>
-</g>
-
-</g>
-</g>
-
-<circle cx="100" cy="100" r="14" fill="#000000"/>
-<circle cx="100" cy="100" r="12" fill="#050000"/>
-<circle cx="96" cy="96" r="4.5" fill="#120000" opacity="0.35"/>
-<circle cx="74" cy="54" r="8" fill="#ff4444" opacity="0.07"/>
-<circle cx="72" cy="52" r="3" fill="#ffffff" opacity="0.15"/>
-<circle cx="124" cy="140" r="5" fill="#ff3333" opacity="0.04"/>
+<svg class="icon-compass" fill="currentColor" viewBox="0 0 24 24" width="48" height="48">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
 </svg>
 </div>
-
 </div>
 <p class="subtitle">Sistem Menu Digital</p>
 </header>
@@ -1249,12 +1234,15 @@ C 30 120, 40 148, 62 164
 </footer>
 </div>
 
+<!-- Detail Modal -->
 <div class="detail-modal" id="detailModal">
 <div class="detail-content">
 <div class="detail-header">
 <h2 class="detail-title" id="detailTitle">MENU TITLE</h2>
 <button class="detail-close" id="detailClose">
-<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+</svg>
 </button>
 </div>
 <div class="detail-body">
@@ -1262,7 +1250,9 @@ C 30 120, 40 148, 62 164
 </div>
 <div class="detail-actions">
 <button class="copy-button" id="copyButton">
-<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 6px;"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 6px;">
+<path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+</svg>
 SALIN
 </button>
 <span id="copySuccess" class="copy-success">Tersalin!</span>
@@ -1270,8 +1260,11 @@ SALIN
 </div>
 </div>
 
+<!-- Calculator -->
 <div class="calculator-toggle" id="calculatorToggle">
-<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/></svg>
+<svg viewBox="0 0 24 24">
+<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/>
+</svg>
 </div>
 
 <div class="calculator-container" id="calculatorContainer">
@@ -1303,5 +1296,526 @@ SALIN
 </div>
 
 <button class="debug-toggle" id="debugToggle">DEBUG</button>
+
 <div class="debug-panel" id="debugPanel">
-<div class="debug-title">DEBUG INFO</div
+<div class="debug-title">DEBUG INFO</div>
+<div class="debug-info" id="debugInfo">Loading...</div>
+</div>
+
+<script>
+let sheetData = [];
+let filteredData = [];
+let currentDetail = null;
+let debugMode = false;
+
+let calculatorState = {
+    displayValue: '0',
+    expression: '',
+    previousValue: null,
+    operation: null,
+    waitingForOperand: false
+};
+
+/* === BACKGROUND EFFECTS === */
+function createStars() {
+    const container = document.getElementById('starsLayer');
+    for (let i = 0; i < 60; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        const size = Math.random() * 2.5 + 0.5;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's');
+        star.style.animationDelay = Math.random() * 3 + 's';
+        container.appendChild(star);
+    }
+}
+
+function createClouds() {
+    const container = document.getElementById('cloudsLayer');
+    for (let i = 0; i < 5; i++) {
+        const cloud = document.createElement('div');
+        cloud.classList.add('cloud');
+        cloud.style.width = (Math.random() * 300 + 150) + 'px';
+        cloud.style.height = (Math.random() * 60 + 30) + 'px';
+        cloud.style.top = Math.random() * 100 + '%';
+        cloud.style.setProperty('--dur', (Math.random() * 60 + 40) + 's');
+        cloud.style.animationDelay = -(Math.random() * 60) + 's';
+        container.appendChild(cloud);
+    }
+}
+
+function createBubbles() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 35; i++) {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        const size = Math.random() * 12 + 3;
+        bubble.style.width = size + 'px';
+        bubble.style.height = size + 'px';
+        bubble.style.left = Math.random() * 100 + '%';
+        bubble.style.bottom = Math.random() * 10 + '%';
+        bubble.style.setProperty('--dur', (Math.random() * 10 + 6) + 's');
+        bubble.style.animationDelay = (Math.random() * 10) + 's';
+        container.appendChild(bubble);
+    }
+}
+
+/* === TOAST NOTIFIKASI === */
+function showToast(title, message) {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.classList.add('toast');
+    toast.innerHTML = `
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+<span class="toast-title">${title}</span>
+<span>${message}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('toast-out');
+        setTimeout(() => toast.remove(), 300);
+    }, 2000);
+}
+
+/* === UTILITY === */
+function updateSystemTime() {
+    document.getElementById('systemTime').textContent = new Date().toLocaleTimeString('id-ID', { hour12: false });
+}
+
+function updateSystemStatus(status, type) {
+    const el = document.getElementById('systemStatus');
+    el.textContent = status;
+    el.style.color = type === 'error' ? '#ff4444' : type === 'success' ? '#FF8F00' : '#FFD700';
+}
+
+function updateDebugInfo() {
+    if (!debugMode) return;
+    document.getElementById('debugInfo').innerHTML = `
+<div>Total Data: ${sheetData.length}</div>
+<div>Filtered Data: ${filteredData.length}</div>
+<div>Current Detail: ${currentDetail ? currentDetail.title : 'None'}</div>
+<div>Cache: ${localStorage.getItem('NO-MERCYYY_data') ? 'Available' : 'Empty'}</div>`;
+}
+
+/* === FUZZY SEARCH === */
+function levenshteinDistance(str1, str2) {
+    const matrix = [];
+    for (let i = 0; i <= str2.length; i++) matrix[i] = [i];
+    for (let j = 0; j <= str1.length; j++) matrix[0][j] = j;
+    for (let i = 1; i <= str2.length; i++) {
+        for (let j = 1; j <= str1.length; j++) {
+            if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+            }
+        }
+    }
+    return matrix[str2.length][str1.length];
+}
+
+function calculateSimilarity(str1, str2) {
+    const distance = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase());
+    const longer = str1.length > str2.length ? str1 : str2;
+    if (longer.length === 0) return 100;
+    return Math.round(((longer.length - distance) / longer.length) * 100);
+}
+
+function fuzzyMatch(query, text) {
+    const queryLower = query.toLowerCase();
+    const textLower = text.toLowerCase();
+    if (textLower.includes(queryLower)) return { match: true, score: 100, type: 'exact' };
+    const words = textLower.split(/\s+/);
+    let bestMatch = { match: false, score: 0, type: 'none' };
+    for (const word of words) {
+        if (word.startsWith(queryLower)) {
+            const score = Math.round((queryLower.length / word.length) * 100);
+            if (score > bestMatch.score) bestMatch = { match: true, score, type: 'prefix' };
+        }
+        const similarity = calculateSimilarity(queryLower, word);
+        if (similarity >= 60 && similarity > bestMatch.score) bestMatch = { match: true, score: similarity, type: 'fuzzy' };
+        if (word.includes(queryLower)) {
+            const score = Math.round((queryLower.length / word.length) * 90);
+            if (score > bestMatch.score) bestMatch = { match: true, score, type: 'contains' };
+        }
+    }
+    return bestMatch;
+}
+
+/* === FETCH DATA === */
+async function fetchSheetData() {
+    const sheetId = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
+    updateSystemStatus('Mengambil Data...', 'warning');
+
+    try {
+        const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=0`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const text = await response.text();
+        if (text.includes('google.visualization.Query.setResponse')) {
+            const json = JSON.parse(text.substring(47).slice(0, -2));
+            const rows = json.table.rows;
+            sheetData = [];
+            for (let i = 0; i < rows.length; i++) {
+                const t = rows[i].c[0], inf = rows[i].c[1];
+                const title = t && t.v ? String(t.v) : '';
+                const info = inf && inf.v ? String(inf.v) : '';
+                if (title) sheetData.push({ title: title.trim(), info: info.trim() });
+            }
+            if (sheetData.length > 0) {
+                updateSystemStatus('Pelayaran Aktif', 'success');
+                localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
+                localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
+                filteredData = [...sheetData];
+                displayMenuItems();
+                updateDebugInfo();
+                return;
+            }
+        }
+    } catch (error) {
+        /* gagal, lanjut method berikutnya */
+    }
+
+    try {
+        const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=REPORTAN`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const text = await response.text();
+        if (text.includes('google.visualization.Query.setResponse')) {
+            const json = JSON.parse(text.substring(47).slice(0, -2));
+            const rows = json.table.rows;
+            sheetData = [];
+            for (let i = 0; i < rows.length; i++) {
+                const t = rows[i].c[0], inf = rows[i].c[1];
+                const title = t && t.v ? String(t.v) : '';
+                const info = inf && inf.v ? String(inf.v) : '';
+                if (title) sheetData.push({ title: title.trim(), info: info.trim() });
+            }
+            if (sheetData.length > 0) {
+                updateSystemStatus('Pelayaran Aktif', 'success');
+                localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
+                localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
+                filteredData = [...sheetData];
+                displayMenuItems();
+                updateDebugInfo();
+                return;
+            }
+        }
+    } catch (error) {
+        /* gagal, lanjut method berikutnya */
+    }
+
+    try {
+        const feedUrl = `https://spreadsheets.google.com/feeds/worksheets/${sheetId}/public/basic?alt=json`;
+        const response = await fetch(feedUrl);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const feedJson = await response.json();
+        if (feedJson.feed && feedJson.feed.entry && feedJson.feed.entry.length > 0) {
+            const sheetName = feedJson.feed.entry[0].title.$t;
+            const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
+            const sheetResponse = await fetch(url);
+            if (!sheetResponse.ok) throw new Error(`HTTP error! status: ${sheetResponse.status}`);
+            const sheetText = await sheetResponse.text();
+            if (sheetText.includes('google.visualization.Query.setResponse')) {
+                const json = JSON.parse(sheetText.substring(47).slice(0, -2));
+                const rows = json.table.rows;
+                sheetData = [];
+                for (let i = 0; i < rows.length; i++) {
+                    const t = rows[i].c[0], inf = rows[i].c[1];
+                    const title = t && t.v ? String(t.v) : '';
+                    const info = inf && inf.v ? String(inf.v) : '';
+                    if (title) sheetData.push({ title: title.trim(), info: info.trim() });
+                }
+                if (sheetData.length > 0) {
+                    updateSystemStatus('Pelayaran Aktif', 'success');
+                    localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
+                    localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
+                    filteredData = [...sheetData];
+                    displayMenuItems();
+                    updateDebugInfo();
+                    return;
+                }
+            }
+        }
+    } catch (error) {
+        /* gagal, lanjut method berikutnya */
+    }
+
+    try {
+        const cachedData = localStorage.getItem('NO-MERCYYY_data');
+        if (cachedData) {
+            sheetData = JSON.parse(cachedData);
+            updateSystemStatus('Pelayaran Offline', 'warning');
+            filteredData = [...sheetData];
+            displayMenuItems();
+            updateDebugInfo();
+            return;
+        }
+    } catch (error) {
+        /* gagal, lanjut fallback */
+    }
+
+    sheetData = [
+        { title: "CONTOH MENU 1", info: "Ini adalah contoh menu karena lautan data tidak dapat dijangkau." },
+        { title: "CONTOH MENU 2", info: "Sistem berlayar dalam mode offline." },
+        { title: "KESALAHAN KONEKSI", info: "Tidak dapat terhubung ke database." }
+    ];
+    updateSystemStatus('Lautan Tidak Dapat Dijangkau', 'error');
+    filteredData = [...sheetData];
+    displayMenuItems();
+    updateDebugInfo();
+}
+
+/* === DISPLAY MENU === */
+function displayMenuItems() {
+    const container = document.getElementById('menuContainer');
+    const loadingContainer = document.getElementById('loadingContainer');
+    const noMenu = document.getElementById('noMenu');
+    loadingContainer.style.display = 'none';
+
+    if (filteredData.length === 0) {
+        container.style.display = 'none';
+        noMenu.style.display = 'block';
+        return;
+    }
+
+    container.style.display = 'grid';
+    noMenu.style.display = 'none';
+
+    container.innerHTML = filteredData.map((item, index) => `
+<div class="menu-card" data-index="${index}">
+<div class="match-indicator">${item.matchType || 'MATCH'}</div>
+<h3 class="menu-title">${item.title}</h3>
+<div class="menu-preview">${item.info}</div>
+<div class="card-bottom-row">
+<button class="card-copy-btn" data-copy-index="${index}">
+<svg fill="currentColor" viewBox="0 0 24 24">
+<path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+</svg>
+<span class="btn-label">Salin</span>
+<span class="btn-check">
+<svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+Ok
+</span>
+</button>
+</div>
+<div class="card-skull">☠</div>
+</div>`).join('');
+
+    container.querySelectorAll('.menu-card').forEach(card => {
+        card.addEventListener('click', function () {
+            showDetail(filteredData[parseInt(this.dataset.index)]);
+        });
+    });
+
+    container.querySelectorAll('.card-copy-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const idx = parseInt(this.dataset.copyIndex);
+            const item = filteredData[idx];
+            if (!item) return;
+
+            navigator.clipboard.writeText(item.info).then(() => {
+                this.classList.add('copied');
+                setTimeout(() => this.classList.remove('copied'), 1500);
+                showToast(item.title, 'info berhasil disalin');
+            }).catch(err => {
+                /* gagal menyalin */
+            });
+        });
+    });
+}
+
+/* === DETAIL MODAL === */
+function showDetail(item) {
+    currentDetail = item;
+    document.getElementById('detailTitle').textContent = item.title;
+    document.getElementById('detailText').textContent = item.info;
+    document.getElementById('detailModal').classList.add('show');
+    updateDebugInfo();
+}
+
+function hideDetail() {
+    document.getElementById('detailModal').classList.remove('show');
+    currentDetail = null;
+    updateDebugInfo();
+}
+
+function copyToClipboard() {
+    if (!currentDetail) return;
+    navigator.clipboard.writeText(currentDetail.info).then(() => {
+        const el = document.getElementById('copySuccess');
+        el.classList.add('show');
+        showToast(currentDetail.title, 'info berhasil disalin');
+        setTimeout(() => el.classList.remove('show'), 2000);
+    }).catch(err => {
+        /* gagal menyalin */
+    });
+}
+
+/* === FILTER === */
+function filterMenuItems() {
+    const query = document.getElementById('filterInput').value.trim();
+    if (query === '') {
+        filteredData = sheetData.map(item => ({ ...item }));
+    } else {
+        const results = [];
+        for (const item of sheetData) {
+            const tm = fuzzyMatch(query, item.title);
+            const im = fuzzyMatch(query, item.info);
+            const best = tm.score > im.score ? tm : im;
+            if (best.match) results.push({ ...item, matchScore: best.score, matchType: best.type.toUpperCase() });
+        }
+        results.sort((a, b) => b.matchScore - a.matchScore);
+        filteredData = results;
+    }
+    displayMenuItems();
+    updateDebugInfo();
+}
+
+/* === KALKULATOR === */
+function updateCalculatorDisplay() {
+    document.getElementById('calculatorValue').textContent = calculatorState.displayValue;
+    document.getElementById('calculatorExpression').textContent = calculatorState.expression;
+}
+
+function inputDigit(digit) {
+    const { displayValue, waitingForOperand } = calculatorState;
+    if (waitingForOperand) {
+        calculatorState.displayValue = String(digit);
+        calculatorState.waitingForOperand = false;
+    } else {
+        calculatorState.displayValue = displayValue === '0' ? String(digit) : displayValue + digit;
+    }
+    updateCalculatorDisplay();
+}
+
+function inputDecimal() {
+    const { displayValue, waitingForOperand } = calculatorState;
+    if (waitingForOperand) {
+        calculatorState.displayValue = '0.';
+        calculatorState.waitingForOperand = false;
+    } else if (displayValue.indexOf('.') === -1) {
+        calculatorState.displayValue = displayValue + '.';
+    }
+    updateCalculatorDisplay();
+}
+
+function clearCalculator() {
+    calculatorState = { displayValue: '0', expression: '', previousValue: null, operation: null, waitingForOperand: false };
+    updateCalculatorDisplay();
+}
+
+function performOperation(nextOperation) {
+    const { displayValue, previousValue, operation } = calculatorState;
+    const inputValue = parseFloat(displayValue);
+    if (previousValue === null) {
+        calculatorState.previousValue = inputValue;
+    } else if (operation) {
+        const newValue = calc(previousValue || 0, inputValue, operation);
+        calculatorState.displayValue = String(newValue);
+        calculatorState.previousValue = newValue;
+        calculatorState.expression = `${previousValue || 0} ${getOpSym(operation)} ${inputValue} =`;
+    }
+    calculatorState.waitingForOperand = true;
+    calculatorState.operation = nextOperation;
+    if (nextOperation) calculatorState.expression = `${displayValue} ${getOpSym(nextOperation)}`;
+    updateCalculatorDisplay();
+}
+
+function calc(a, b, op) {
+    switch (op) {
+        case '+': return a + b;
+        case '-': return a - b;
+        case '*': return a * b;
+        case '/': return b !== 0 ? a / b : 0;
+        case '%': return a % b;
+        default: return b;
+    }
+}
+
+function getOpSym(op) {
+    return { '+': '+', '-': '-', '*': '×', '/': '÷', '%': '%' }[op] || '';
+}
+
+function handleEquals() {
+    const { displayValue, previousValue, operation } = calculatorState;
+    const inputValue = parseFloat(displayValue);
+    if (previousValue !== null && operation) {
+        const newValue = calc(previousValue, inputValue, operation);
+        calculatorState.displayValue = String(newValue);
+        calculatorState.expression = `${previousValue} ${getOpSym(operation)} ${inputValue} =`;
+        calculatorState.previousValue = null;
+        calculatorState.operation = null;
+        calculatorState.waitingForOperand = true;
+    }
+    updateCalculatorDisplay();
+}
+
+function handleBackspace() {
+    calculatorState.displayValue = calculatorState.displayValue.length > 1 ? calculatorState.displayValue.slice(0, -1) : '0';
+    updateCalculatorDisplay();
+}
+
+function handlePercent() {
+    calculatorState.displayValue = String(parseFloat(calculatorState.displayValue) / 100);
+    updateCalculatorDisplay();
+}
+
+function toggleCalculator() {
+    document.getElementById('calculatorContainer').classList.toggle('show');
+}
+
+/* === INIT === */
+window.onload = function () {
+    createStars();
+    createClouds();
+    createBubbles();
+    updateSystemTime();
+    setInterval(updateSystemTime, 1000);
+
+    document.getElementById('debugToggle').addEventListener('click', function () {
+        debugMode = !debugMode;
+        document.getElementById('debugPanel').classList.toggle('show', debugMode);
+        updateDebugInfo();
+    });
+
+    setInterval(updateDebugInfo, 1000);
+
+    let debounceTimer;
+    document.getElementById('filterInput').addEventListener('input', function () {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(filterMenuItems, 300);
+    });
+
+    document.getElementById('detailClose').addEventListener('click', hideDetail);
+    document.getElementById('copyButton').addEventListener('click', copyToClipboard);
+
+    document.getElementById('detailModal').addEventListener('click', function (e) {
+        if (e.target === this) hideDetail();
+    });
+
+    document.getElementById('calculatorToggle').addEventListener('click', toggleCalculator);
+
+    document.querySelectorAll('.calculator-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            switch (this.dataset.action) {
+                case 'number': inputDigit(this.dataset.value); break;
+                case 'decimal': inputDecimal(); break;
+                case 'clear': clearCalculator(); break;
+                case 'operator': performOperation(this.dataset.value); break;
+                case 'equals': handleEquals(); break;
+                case 'backspace': handleBackspace(); break;
+                case 'percent': handlePercent(); break;
+            }
+        });
+    });
+
+    fetchSheetData();
+};
+</script>
+</body>
+</html>
