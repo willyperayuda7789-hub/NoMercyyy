@@ -1735,6 +1735,28 @@ window.onload = function () {
 
     document.getElementById('calculatorToggle').addEventListener('click', toggleCalculator);
 
+    /* === TOMBOL ESC: tutup modal detail & kalkulator === */
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            /* Prioritas tertinggi: tutup detail modal jika terbuka */
+            if (document.getElementById('detailModal').classList.contains('show')) {
+                hideDetail();
+                return;
+            }
+            /* Prioritas kedua: tutup kalkulator jika terbuka */
+            if (document.getElementById('calculatorContainer').classList.contains('show')) {
+                document.getElementById('calculatorContainer').classList.remove('show');
+                return;
+            }
+            /* Prioritas ketiga: tutup panel debug jika terbuka */
+            if (document.getElementById('debugPanel').classList.contains('show')) {
+                debugMode = false;
+                document.getElementById('debugPanel').classList.remove('show');
+                return;
+            }
+        }
+    });
+
     document.querySelectorAll('.calculator-btn').forEach(button => {
         button.addEventListener('click', function () {
             switch (this.dataset.action) {
