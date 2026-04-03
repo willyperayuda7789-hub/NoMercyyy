@@ -89,7 +89,6 @@ pointer-events: none;
 width: var(--sidebar-collapsed);
 }
 
-/* Header judul */
 .sidebar-header {
 position: relative;
 padding: 22px 20px 18px;
@@ -153,7 +152,6 @@ border-radius: 50%;
 box-shadow: 0 0 6px var(--gold-glow);
 }
 
-/* Toggle */
 .sidebar-toggle {
 position: absolute;
 top: 18px;
@@ -190,7 +188,6 @@ transition: transform 0.35s ease;
 transform: rotate(180deg);
 }
 
-/* ========== MENU LIST (seperti gambar) ========== */
 .sidebar-menu {
 flex: 1;
 overflow-y: auto;
@@ -204,7 +201,6 @@ scrollbar-color: rgba(255, 215, 0, 0.15) transparent;
 .sidebar-menu::-webkit-scrollbar-track { background: transparent; }
 .sidebar-menu::-webkit-scrollbar-thumb { background: rgba(255, 215, 0, 0.15); border-radius: 2px; }
 
-/* Setiap item menu — gaya list seperti screenshot */
 .menu-item {
 display: flex;
 align-items: center;
@@ -226,7 +222,6 @@ background: linear-gradient(90deg, rgba(255, 215, 0, 0.08) 0%, transparent 80%);
 border-left-color: var(--primary-color);
 }
 
-/* Ikon menu — kotak rounded dengan icon di dalam */
 .menu-item-icon {
 width: 42px;
 height: 42px;
@@ -269,7 +264,6 @@ fill: var(--primary-color);
 filter: drop-shadow(0 0 4px var(--gold-glow));
 }
 
-/* Label teks */
 .menu-item-label {
 font-family: 'Cinzel', serif;
 font-size: 0.85rem;
@@ -295,7 +289,6 @@ opacity: 0;
 width: 0;
 }
 
-/* Panah kanan */
 .menu-item-arrow {
 margin-left: auto;
 opacity: 0;
@@ -316,7 +309,6 @@ fill: var(--text-secondary);
 display: none;
 }
 
-/* Tooltip collapsed */
 .menu-item-tooltip {
 position: absolute;
 left: calc(var(--sidebar-collapsed) + 10px);
@@ -355,7 +347,6 @@ border-left: 1px solid rgba(255, 215, 0, 0.3);
 border-bottom: 1px solid rgba(255, 215, 0, 0.3);
 }
 
-/* Item yang di-highlight (seperti Kalkulator Togel di gambar) */
 .menu-item.highlighted {
 background: linear-gradient(90deg, rgba(255, 215, 0, 0.06) 0%, rgba(229, 57, 53, 0.04) 50%, transparent 100%);
 border-left-color: var(--secondary-color);
@@ -413,14 +404,12 @@ animation: dot-pulse-collapsed 2s ease-in-out infinite;
 50% { opacity: 0.4; transform: translateX(-50%) scale(0.7); }
 }
 
-/* Separator tipis antar item */
 .menu-separator {
 height: 1px;
 margin: 0 22px;
 background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.06), transparent);
 }
 
-/* Footer sidebar */
 .sidebar-footer {
 flex-shrink: 0;
 padding: 14px 20px;
@@ -474,7 +463,6 @@ opacity: 0.5;
 white-space: nowrap;
 }
 
-/* ========== SIDEBAR OVERLAY ========== */
 .sidebar-overlay {
 position: fixed;
 top: 0;
@@ -494,7 +482,6 @@ opacity: 1;
 pointer-events: all;
 }
 
-/* ========== MAIN WRAPPER ========== */
 .main-wrapper {
 margin-left: var(--sidebar-width);
 transition: margin-left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -506,7 +493,6 @@ body.sidebar-collapsed .main-wrapper {
 margin-left: var(--sidebar-collapsed);
 }
 
-/* ========== BG ANIMATION ========== */
 .bg-animation {
 position: fixed;
 top: 0;
@@ -1607,14 +1593,14 @@ width: var(--sidebar-width) !important;
 <span class="menu-item-tooltip">Jadwal Pasaran</span>
 </div>
 
-<!-- Shortcut Cs -->
-<div class="menu-item" data-page="shortcut-cs" onclick="setActivePage(this)">
+<!-- PK RANDOM -->
+<div class="menu-item" data-page="pk-random" onclick="setActivePage(this)">
 <div class="menu-item-icon">
 <svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
 </div>
-<span class="menu-item-label">Shortcut Cs</span>
+<span class="menu-item-label">PK RANDOM</span>
 <div class="menu-item-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
-<span class="menu-item-tooltip">Shortcut Cs</span>
+<span class="menu-item-tooltip">PK RANDOM</span>
 </div>
 
 <!-- Kalkulator Togel (highlighted) -->
@@ -1830,7 +1816,6 @@ let calculatorState = {
     displayValue: '0', expression: '', previousValue: null, operation: null, waitingForOperand: false
 };
 
-/* ========== SIDEBAR ========== */
 const sidebar = document.getElementById('sidebar');
 const sidebarToggle = document.getElementById('sidebarToggle');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
@@ -1864,7 +1849,6 @@ function setActivePage(el) {
     }
 }
 
-/* ========== BG ========== */
 function createStars() {
     const c = document.getElementById('starsLayer');
     for (let i = 0; i < 60; i++) {
@@ -1874,7 +1858,7 @@ function createStars() {
         s.style.width = sz + 'px'; s.style.height = sz + 'px';
         s.style.top = Math.random() * 100 + '%'; s.style.left = Math.random() * 100 + '%';
         s.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's');
-        s.style.animationDelay = Math.random() * 3 + 's';
+        s.style.animationDelay = Math.random()  * 3 + 's';
         c.appendChild(s);
     }
 }
@@ -1907,7 +1891,6 @@ function createBubbles() {
     }
 }
 
-/* ========== TOAST ========== */
 function showToast(title, message) {
     const c = document.getElementById('toastContainer');
     const t = document.createElement('div');
@@ -1917,7 +1900,6 @@ function showToast(title, message) {
     setTimeout(() => { t.classList.add('toast-out'); setTimeout(() => t.remove(), 300); }, 2000);
 }
 
-/* ========== SYSTEM ========== */
 function updateSystemTime() {
     document.getElementById('systemTime').textContent = new Date().toLocaleTimeString('id-ID', { hour12: false });
 }
@@ -1933,7 +1915,6 @@ function updateDebugInfo() {
     document.getElementById('debugInfo').innerHTML = `<div>Total Data: ${sheetData.length}</div><div>Filtered: ${filteredData.length}</div><div>Detail: ${currentDetail ? currentDetail.title : 'None'}</div><div>Sidebar: ${sidebarCollapsed ? 'Collapsed' : 'Expanded'}</div>`;
 }
 
-/* ========== SEARCH ========== */
 function levenshteinDistance(s1, s2) {
     const m = []; for (let i = 0; i <= s2.length; i++) m[i] = [i];
     for (let j = 0; j <= s1.length; j++) m[0][j] = j;
@@ -1962,7 +1943,6 @@ function fuzzyMatch(q, t) {
     return best;
 }
 
-/* ========== FETCH ========== */
 async function fetchSheetData() {
     const sid = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
     updateSystemStatus('Mengambil Data...', 'warning');
@@ -2027,7 +2007,6 @@ async function fetchSheetData() {
     updateDebugInfo();
 }
 
-/* ========== DISPLAY ========== */
 function displayMenuItems() {
     const container = document.getElementById('menuContainer');
     const loading = document.getElementById('loadingContainer');
@@ -2108,7 +2087,6 @@ function filterMenuItems() {
     displayMenuItems(); updateDebugInfo();
 }
 
-/* ========== CALCULATOR ========== */
 function updateCalcDisplay() {
     document.getElementById('calculatorValue').textContent = calculatorState.displayValue;
     document.getElementById('calculatorExpression').textContent = calculatorState.expression;
@@ -2149,7 +2127,6 @@ function handleEquals() {
     updateCalcDisplay();
 }
 
-/* ========== INIT ========== */
 window.onload = function () {
     createStars(); createClouds(); createBubbles();
     updateSystemTime(); setInterval(updateSystemTime, 1000);
