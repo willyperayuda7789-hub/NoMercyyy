@@ -33,6 +33,8 @@ box-sizing: border-box;
 --gradient-1: linear-gradient(135deg, #FFD700, #E53935);
 --gradient-2: linear-gradient(135deg, #E53935, #FF8F00);
 --gradient-3: linear-gradient(135deg, #FF8F00, #FFD700);
+--sidebar-width: 280px;
+--sidebar-collapsed: 72px;
 }
 
 body {
@@ -46,6 +48,465 @@ position: relative;
 
 @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;700;900&display=swap');
 
+/* ========== SIDEBAR ========== */
+.sidebar {
+position: fixed;
+top: 0;
+left: 0;
+width: var(--sidebar-width);
+height: 100vh;
+background: linear-gradient(180deg, rgba(6, 10, 22, 0.98) 0%, rgba(8, 14, 30, 0.99) 50%, rgba(5, 9, 18, 0.99) 100%);
+border-right: 1px solid rgba(255, 215, 0, 0.1);
+z-index: 500;
+display: flex;
+flex-direction: column;
+transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+overflow: hidden;
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+}
+
+.sidebar::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 2px;
+background: linear-gradient(90deg, var(--secondary-color), var(--primary-color), var(--accent-color), var(--secondary-color));
+background-size: 300% 100%;
+animation: sidebar-border-flow 4s linear infinite;
+z-index: 10;
+pointer-events: none;
+}
+
+@keyframes sidebar-border-flow {
+0% { background-position: 0% 0%; }
+100% { background-position: 300% 0%; }
+}
+
+.sidebar.collapsed {
+width: var(--sidebar-collapsed);
+}
+
+/* Header judul */
+.sidebar-header {
+position: relative;
+padding: 22px 20px 18px;
+text-align: center;
+flex-shrink: 0;
+border-bottom: 1px solid rgba(255, 215, 0, 0.07);
+}
+
+.sidebar-header-title {
+font-family: 'Cinzel', serif;
+font-size: 0.75rem;
+font-weight: 900;
+letter-spacing: 5px;
+text-transform: uppercase;
+color: var(--primary-color);
+text-shadow: 0 0 12px var(--gold-glow);
+opacity: 0.9;
+white-space: nowrap;
+overflow: hidden;
+transition: opacity 0.25s ease;
+}
+
+.sidebar.collapsed .sidebar-header-title {
+opacity: 0;
+height: 0;
+padding: 0;
+margin: 0;
+overflow: hidden;
+}
+
+.sidebar-header-line {
+display: flex;
+align-items: center;
+gap: 8px;
+margin-top: 8px;
+justify-content: center;
+transition: opacity 0.25s ease;
+}
+
+.sidebar.collapsed .sidebar-header-line {
+opacity: 0;
+height: 0;
+margin: 0;
+overflow: hidden;
+}
+
+.sidebar-header-line::before,
+.sidebar-header-line::after {
+content: '';
+flex: 1;
+max-width: 40px;
+height: 1px;
+background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+}
+
+.sidebar-header-dot {
+width: 5px;
+height: 5px;
+background: var(--primary-color);
+border-radius: 50%;
+box-shadow: 0 0 6px var(--gold-glow);
+}
+
+/* Toggle */
+.sidebar-toggle {
+position: absolute;
+top: 18px;
+right: -14px;
+width: 28px;
+height: 28px;
+background: linear-gradient(135deg, rgba(10, 18, 40, 0.95), rgba(13, 33, 55, 0.95));
+border: 1px solid rgba(255, 215, 0, 0.25);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+z-index: 600;
+transition: all 0.3s ease;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.sidebar-toggle:hover {
+background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(229, 57, 53, 0.15));
+border-color: rgba(255, 215, 0, 0.5);
+box-shadow: 0 2px 15px var(--gold-glow);
+transform: scale(1.1);
+}
+
+.sidebar-toggle svg {
+width: 14px;
+height: 14px;
+fill: var(--primary-color);
+transition: transform 0.35s ease;
+}
+
+.sidebar.collapsed .sidebar-toggle svg {
+transform: rotate(180deg);
+}
+
+/* ========== MENU LIST (seperti gambar) ========== */
+.sidebar-menu {
+flex: 1;
+overflow-y: auto;
+overflow-x: hidden;
+padding: 10px 0;
+scrollbar-width: thin;
+scrollbar-color: rgba(255, 215, 0, 0.15) transparent;
+}
+
+.sidebar-menu::-webkit-scrollbar { width: 3px; }
+.sidebar-menu::-webkit-scrollbar-track { background: transparent; }
+.sidebar-menu::-webkit-scrollbar-thumb { background: rgba(255, 215, 0, 0.15); border-radius: 2px; }
+
+/* Setiap item menu — gaya list seperti screenshot */
+.menu-item {
+display: flex;
+align-items: center;
+gap: 14px;
+padding: 13px 22px;
+cursor: pointer;
+transition: all 0.25s ease;
+position: relative;
+border-left: 3px solid transparent;
+}
+
+.menu-item:hover {
+background: rgba(255, 215, 0, 0.04);
+border-left-color: rgba(255, 215, 0, 0.3);
+}
+
+.menu-item.active {
+background: linear-gradient(90deg, rgba(255, 215, 0, 0.08) 0%, transparent 80%);
+border-left-color: var(--primary-color);
+}
+
+/* Ikon menu — kotak rounded dengan icon di dalam */
+.menu-item-icon {
+width: 42px;
+height: 42px;
+min-width: 42px;
+background: rgba(255, 215, 0, 0.05);
+border: 1px solid rgba(255, 215, 0, 0.1);
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.25s ease;
+}
+
+.menu-item:hover .menu-item-icon {
+background: rgba(255, 215, 0, 0.1);
+border-color: rgba(255, 215, 0, 0.2);
+box-shadow: 0 0 12px rgba(255, 215, 0, 0.08);
+}
+
+.menu-item.active .menu-item-icon {
+background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(229, 57, 53, 0.1));
+border-color: rgba(255, 215, 0, 0.3);
+box-shadow: 0 0 16px rgba(255, 215, 0, 0.12);
+}
+
+.menu-item-icon svg {
+width: 20px;
+height: 20px;
+fill: var(--text-secondary);
+transition: all 0.25s ease;
+}
+
+.menu-item:hover .menu-item-icon svg {
+fill: var(--primary-color);
+filter: drop-shadow(0 0 3px var(--gold-glow));
+}
+
+.menu-item.active .menu-item-icon svg {
+fill: var(--primary-color);
+filter: drop-shadow(0 0 4px var(--gold-glow));
+}
+
+/* Label teks */
+.menu-item-label {
+font-family: 'Cinzel', serif;
+font-size: 0.85rem;
+font-weight: 700;
+letter-spacing: 0.8px;
+color: var(--text-secondary);
+white-space: nowrap;
+overflow: hidden;
+transition: all 0.25s ease;
+}
+
+.menu-item:hover .menu-item-label {
+color: var(--text-primary);
+}
+
+.menu-item.active .menu-item-label {
+color: var(--primary-color);
+text-shadow: 0 0 8px var(--gold-glow);
+}
+
+.sidebar.collapsed .menu-item-label {
+opacity: 0;
+width: 0;
+}
+
+/* Panah kanan */
+.menu-item-arrow {
+margin-left: auto;
+opacity: 0;
+transition: opacity 0.25s ease;
+}
+
+.menu-item:hover .menu-item-arrow {
+opacity: 0.4;
+}
+
+.menu-item-arrow svg {
+width: 14px;
+height: 14px;
+fill: var(--text-secondary);
+}
+
+.sidebar.collapsed .menu-item-arrow {
+display: none;
+}
+
+/* Tooltip collapsed */
+.menu-item-tooltip {
+position: absolute;
+left: calc(var(--sidebar-collapsed) + 10px);
+top: 50%;
+transform: translateY(-50%);
+background: linear-gradient(135deg, rgba(10, 18, 40, 0.98), rgba(7, 14, 30, 0.98));
+border: 1px solid rgba(255, 215, 0, 0.3);
+color: var(--primary-color);
+font-family: 'Cinzel', serif;
+font-size: 0.75rem;
+font-weight: 700;
+padding: 7px 16px;
+border-radius: 8px;
+white-space: nowrap;
+pointer-events: none;
+opacity: 0;
+transition: opacity 0.2s ease;
+z-index: 700;
+box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 10px var(--gold-glow);
+}
+
+.sidebar.collapsed .menu-item:hover .menu-item-tooltip {
+opacity: 1;
+}
+
+.menu-item-tooltip::before {
+content: '';
+position: absolute;
+left: -5px;
+top: 50%;
+transform: translateY(-50%) rotate(45deg);
+width: 8px;
+height: 8px;
+background: rgba(10, 18, 40, 0.98);
+border-left: 1px solid rgba(255, 215, 0, 0.3);
+border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* Item yang di-highlight (seperti Kalkulator Togel di gambar) */
+.menu-item.highlighted {
+background: linear-gradient(90deg, rgba(255, 215, 0, 0.06) 0%, rgba(229, 57, 53, 0.04) 50%, transparent 100%);
+border-left-color: var(--secondary-color);
+}
+
+.menu-item.highlighted .menu-item-icon {
+background: linear-gradient(135deg, rgba(229, 57, 53, 0.15), rgba(255, 143, 0, 0.1));
+border-color: rgba(229, 57, 53, 0.3);
+box-shadow: 0 0 14px rgba(229, 57, 53, 0.1);
+}
+
+.menu-item.highlighted .menu-item-icon svg {
+fill: var(--secondary-color);
+filter: drop-shadow(0 0 4px var(--red-glow));
+}
+
+.menu-item.highlighted .menu-item-label {
+color: var(--secondary-color);
+text-shadow: 0 0 8px var(--red-glow);
+}
+
+.menu-item.highlighted::after {
+content: '';
+position: absolute;
+right: 16px;
+top: 50%;
+transform: translateY(-50%);
+width: 7px;
+height: 7px;
+background: var(--secondary-color);
+border-radius: 50%;
+box-shadow: 0 0 8px var(--red-glow);
+animation: dot-pulse 2s ease-in-out infinite;
+}
+
+.sidebar.collapsed .menu-item.highlighted::after {
+right: auto;
+left: 50%;
+top: auto;
+bottom: 4px;
+transform: translateX(-50%);
+}
+
+@keyframes dot-pulse {
+0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+50% { opacity: 0.4; transform: translateY(-50%) scale(0.7); }
+}
+
+.sidebar.collapsed .menu-item.highlighted::after {
+animation: dot-pulse-collapsed 2s ease-in-out infinite;
+}
+
+@keyframes dot-pulse-collapsed {
+0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+50% { opacity: 0.4; transform: translateX(-50%) scale(0.7); }
+}
+
+/* Separator tipis antar item */
+.menu-separator {
+height: 1px;
+margin: 0 22px;
+background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.06), transparent);
+}
+
+/* Footer sidebar */
+.sidebar-footer {
+flex-shrink: 0;
+padding: 14px 20px;
+border-top: 1px solid rgba(255, 215, 0, 0.06);
+display: flex;
+align-items: center;
+gap: 10px;
+transition: all 0.25s ease;
+}
+
+.sidebar-avatar {
+width: 32px;
+height: 32px;
+min-width: 32px;
+border-radius: 8px;
+background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: 'Pirata One', cursive;
+font-size: 0.9rem;
+color: var(--dark-bg);
+box-shadow: 0 2px 8px var(--red-glow);
+}
+
+.sidebar-user-info {
+overflow: hidden;
+transition: opacity 0.25s ease, width 0.35s ease;
+}
+
+.sidebar.collapsed .sidebar-user-info {
+opacity: 0;
+width: 0;
+}
+
+.sidebar-user-name {
+font-family: 'Cinzel', serif;
+font-size: 0.72rem;
+color: var(--text-primary);
+white-space: nowrap;
+font-weight: 700;
+}
+
+.sidebar-user-role {
+font-family: 'Cinzel', serif;
+font-size: 0.58rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 1px;
+opacity: 0.5;
+white-space: nowrap;
+}
+
+/* ========== SIDEBAR OVERLAY ========== */
+.sidebar-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.6);
+z-index: 499;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.35s ease;
+backdrop-filter: blur(2px);
+}
+
+.sidebar-overlay.active {
+opacity: 1;
+pointer-events: all;
+}
+
+/* ========== MAIN WRAPPER ========== */
+.main-wrapper {
+margin-left: var(--sidebar-width);
+transition: margin-left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+min-height: 100vh;
+position: relative;
+}
+
+body.sidebar-collapsed .main-wrapper {
+margin-left: var(--sidebar-collapsed);
+}
+
+/* ========== BG ANIMATION ========== */
 .bg-animation {
 position: fixed;
 top: 0;
@@ -370,7 +831,7 @@ margin: 0 12px;
 .status-bar {
 position: fixed;
 top: 0;
-left: 0;
+left: var(--sidebar-width);
 right: 0;
 background: linear-gradient(90deg, rgba(10, 14, 26, 0.9), rgba(13, 27, 54, 0.9));
 padding: 8px 20px;
@@ -384,6 +845,11 @@ z-index: 100;
 backdrop-filter: blur(10px);
 border-bottom: 1px solid rgba(255, 215, 0, 0.2);
 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.sidebar-collapsed .status-bar {
+left: var(--sidebar-collapsed);
 }
 
 .system-time { color: var(--primary-color); }
@@ -484,9 +950,7 @@ transition: opacity 0.4s ease;
 pointer-events: none;
 }
 
-.menu-card:hover::before {
-opacity: 1;
-}
+.menu-card:hover::before { opacity: 1; }
 
 .menu-card::after {
 content: '';
@@ -516,9 +980,7 @@ pointer-events: none;
 transition: opacity 0.4s ease;
 }
 
-.menu-card:hover .card-skull {
-opacity: 0.08;
-}
+.menu-card:hover .card-skull { opacity: 0.08; }
 
 .menu-title {
 font-family: 'Cinzel', serif;
@@ -587,9 +1049,7 @@ background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transpar
 transition: left 0.4s ease;
 }
 
-.card-copy-btn:hover::before {
-left: 100%;
-}
+.card-copy-btn:hover::before { left: 100%; }
 
 .card-copy-btn:hover {
 background: rgba(255, 215, 0, 0.2);
@@ -598,15 +1058,9 @@ box-shadow: 0 2px 10px var(--gold-glow);
 transform: translateY(-1px);
 }
 
-.card-copy-btn:active {
-animation: copy-pop 0.3s ease;
-}
+.card-copy-btn:active { animation: copy-pop 0.3s ease; }
 
-.card-copy-btn svg {
-width: 13px;
-height: 13px;
-flex-shrink: 0;
-}
+.card-copy-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
 
 .card-copy-btn.copied {
 background: rgba(255, 143, 0, 0.25);
@@ -615,14 +1069,8 @@ color: var(--accent-color);
 pointer-events: none;
 }
 
-.card-copy-btn .btn-label {
-transition: opacity 0.2s ease;
-}
-
-.card-copy-btn.copied .btn-label {
-opacity: 0;
-position: absolute;
-}
+.card-copy-btn .btn-label { transition: opacity 0.2s ease; }
+.card-copy-btn.copied .btn-label { opacity: 0; position: absolute; }
 
 .card-copy-btn .btn-check {
 position: absolute;
@@ -637,9 +1085,7 @@ gap: 4px;
 white-space: nowrap;
 }
 
-.card-copy-btn.copied .btn-check {
-opacity: 1;
-}
+.card-copy-btn.copied .btn-check { opacity: 1; }
 
 .toast-container {
 position: fixed;
@@ -673,15 +1119,8 @@ animation: toast-in 0.3s ease forwards;
 white-space: nowrap;
 }
 
-.toast.toast-out {
-animation: toast-out 0.3s ease forwards;
-}
-
-.toast svg {
-width: 16px;
-height: 16px;
-flex-shrink: 0;
-}
+.toast.toast-out { animation: toast-out 0.3s ease forwards; }
+.toast svg { width: 16px; height: 16px; flex-shrink: 0; }
 
 .toast-title {
 color: var(--accent-color);
@@ -708,9 +1147,7 @@ font-family: 'Cinzel', serif;
 pointer-events: none;
 }
 
-.menu-card:hover .match-indicator {
-opacity: 1;
-}
+.menu-card:hover .match-indicator { opacity: 1; }
 
 .detail-modal {
 position: fixed;
@@ -727,9 +1164,7 @@ justify-content: center;
 padding: 20px;
 }
 
-.detail-modal.show {
-display: flex;
-}
+.detail-modal.show { display: flex; }
 
 .detail-content {
 background: linear-gradient(135deg, rgba(10, 18, 40, 0.95), rgba(7, 14, 30, 0.95));
@@ -779,9 +1214,7 @@ color: var(--primary-color);
 border-color: rgba(255, 215, 0, 0.4);
 }
 
-.detail-body {
-padding: 24px;
-}
+.detail-body { padding: 24px; }
 
 .detail-text {
 color: var(--text-primary);
@@ -829,9 +1262,7 @@ background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transp
 transition: left 0.5s;
 }
 
-.copy-button:hover::before {
-left: 100%;
-}
+.copy-button:hover::before { left: 100%; }
 
 .copy-button:hover {
 transform: translateY(-2px);
@@ -850,9 +1281,7 @@ letter-spacing: 1px;
 font-family: 'Cinzel', serif;
 }
 
-.copy-success.show {
-opacity: 1;
-}
+.copy-success.show { opacity: 1; }
 
 .no-menu {
 text-align: center;
@@ -950,11 +1379,7 @@ transform: scale(1.1);
 box-shadow: 0 6px 20px rgba(229, 57, 53, 0.5);
 }
 
-.calculator-toggle svg {
-width: 28px;
-height: 28px;
-fill: var(--dark-bg);
-}
+.calculator-toggle svg { width: 28px; height: 28px; fill: var(--dark-bg); }
 
 .calculator-container {
 position: fixed;
@@ -973,10 +1398,7 @@ backdrop-filter: blur(10px);
 overflow: hidden;
 }
 
-.calculator-container.show {
-transform: scale(1);
-opacity: 1;
-}
+.calculator-container.show { transform: scale(1); opacity: 1; }
 
 .calculator-display {
 background: rgba(5, 10, 20, 0.8);
@@ -1086,6 +1508,31 @@ background: rgba(255, 215, 0, 0.2);
 transform: translateY(-2px);
 }
 
+.mobile-menu-btn {
+display: none;
+position: fixed;
+top: 10px;
+left: 12px;
+z-index: 550;
+width: 40px;
+height: 40px;
+background: linear-gradient(135deg, rgba(10, 18, 40, 0.95), rgba(13, 33, 55, 0.95));
+border: 1px solid rgba(255, 215, 0, 0.25);
+border-radius: 8px;
+cursor: pointer;
+align-items: center;
+justify-content: center;
+transition: all 0.3s ease;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-menu-btn:hover {
+border-color: rgba(255, 215, 0, 0.5);
+box-shadow: 0 2px 15px var(--gold-glow);
+}
+
+.mobile-menu-btn svg { width: 20px; height: 20px; fill: var(--primary-color); }
+
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: rgba(10, 18, 40, 0.5); }
 ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary-color), var(--secondary-color)); border-radius: 4px; }
@@ -1096,6 +1543,15 @@ transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
+.sidebar {
+transform: translateX(-100%);
+width: var(--sidebar-width) !important;
+}
+.sidebar.mobile-open { transform: translateX(0); }
+.sidebar-toggle { display: none; }
+.mobile-menu-btn { display: flex; }
+.main-wrapper { margin-left: 0 !important; }
+.status-bar { left: 0 !important; }
 .title { font-size: 3.2rem; letter-spacing: 3px; }
 .menu-container { grid-template-columns: 1fr; }
 .moon { width: 50px; height: 50px; }
@@ -1114,6 +1570,114 @@ transform: translateY(-2px);
 </style>
 </head>
 <body>
+
+<!-- ========== SIDEBAR ========== -->
+<aside class="sidebar" id="sidebar">
+
+<div class="sidebar-header">
+<div class="sidebar-header-title">MAIN MENU</div>
+<div class="sidebar-header-line">
+<span class="sidebar-header-dot"></span>
+</div>
+</div>
+
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
+<svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+</button>
+
+<div class="sidebar-menu">
+
+<!-- Beranda -->
+<div class="menu-item active" data-page="beranda" onclick="setActivePage(this)">
+<div class="menu-item-icon">
+<svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+</div>
+<span class="menu-item-label">Beranda</span>
+<div class="menu-item-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+<span class="menu-item-tooltip">Beranda</span>
+</div>
+
+<!-- Jadwal Pasaran -->
+<div class="menu-item" data-page="jadwal" onclick="setActivePage(this)">
+<div class="menu-item-icon">
+<svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+</div>
+<span class="menu-item-label">Jadwal Pasaran</span>
+<div class="menu-item-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+<span class="menu-item-tooltip">Jadwal Pasaran</span>
+</div>
+
+<!-- Shortcut Cs -->
+<div class="menu-item" data-page="shortcut-cs" onclick="setActivePage(this)">
+<div class="menu-item-icon">
+<svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+</div>
+<span class="menu-item-label">Shortcut Cs</span>
+<div class="menu-item-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+<span class="menu-item-tooltip">Shortcut Cs</span>
+</div>
+
+<!-- Kalkulator Togel (highlighted) -->
+<div class="menu-item highlighted" data-page="kalkulator" onclick="setActivePage(this); document.getElementById('calculatorContainer').classList.toggle('show');">
+<div class="menu-item-icon">
+<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/></svg>
+</div>
+<span class="menu-item-label">Kalkulator Togel</span>
+<div class="menu-item-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+<span class="menu-item-tooltip">Kalkulator Togel</span>
+</div>
+
+<div class="menu-separator"></div>
+
+<!-- Prediksi Togel -->
+<div class="menu-item" data-page="prediksi" onclick="setActivePage(this)">
+<div class="menu-item-icon">
+<svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+</div>
+<span class="menu-item-label">Prediksi Togel</span>
+<div class="menu-item-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+<span class="menu-item-tooltip">Prediksi Togel</span>
+</div>
+
+<!-- Shortcut Scatter -->
+<div class="menu-item" data-page="scatter" onclick="setActivePage(this)">
+<div class="menu-item-icon">
+<svg viewBox="0 0 24 24"><path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3-8c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"/></svg>
+</div>
+<span class="menu-item-label">Shortcut Scatter</span>
+<div class="menu-item-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+<span class="menu-item-tooltip">Shortcut Scatter</span>
+</div>
+
+<!-- Gambar CS -->
+<div class="menu-item" data-page="gambar-cs" onclick="setActivePage(this)">
+<div class="menu-item-icon">
+<svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+</div>
+<span class="menu-item-label">Gambar CS</span>
+<div class="menu-item-arrow"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+<span class="menu-item-tooltip">Gambar CS</span>
+</div>
+
+</div>
+
+<div class="sidebar-footer">
+<div class="sidebar-avatar">N</div>
+<div class="sidebar-user-info">
+<div class="sidebar-user-name">Nakama</div>
+<div class="sidebar-user-role">Kru Kapal</div>
+</div>
+</div>
+</aside>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+<svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+</button>
+
+<!-- ========== MAIN WRAPPER ========== -->
+<div class="main-wrapper" id="mainWrapper">
 
 <div class="bg-animation">
 <div class="sky-layer"></div>
@@ -1193,14 +1757,14 @@ transform: translateY(-2px);
 </footer>
 </div>
 
+</div>
+
 <div class="detail-modal" id="detailModal">
 <div class="detail-content">
 <div class="detail-header">
 <h2 class="detail-title" id="detailTitle">MENU TITLE</h2>
 <button class="detail-close" id="detailClose">
-<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-</svg>
+<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
 </button>
 </div>
 <div class="detail-body">
@@ -1208,9 +1772,7 @@ transform: translateY(-2px);
 </div>
 <div class="detail-actions">
 <button class="copy-button" id="copyButton">
-<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 6px;">
-<path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-</svg>
+<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 6px;"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
 SALIN
 </button>
 <span id="copySuccess" class="copy-success">Tersalin!</span>
@@ -1219,9 +1781,7 @@ SALIN
 </div>
 
 <div class="calculator-toggle" id="calculatorToggle">
-<svg viewBox="0 0 24 24">
-<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/>
-</svg>
+<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/></svg>
 </div>
 
 <div class="calculator-container" id="calculatorContainer">
@@ -1264,77 +1824,100 @@ let sheetData = [];
 let filteredData = [];
 let currentDetail = null;
 let debugMode = false;
+let sidebarCollapsed = false;
 
 let calculatorState = {
-    displayValue: '0',
-    expression: '',
-    previousValue: null,
-    operation: null,
-    waitingForOperand: false
+    displayValue: '0', expression: '', previousValue: null, operation: null, waitingForOperand: false
 };
 
+/* ========== SIDEBAR ========== */
+const sidebar = document.getElementById('sidebar');
+const sidebarToggle = document.getElementById('sidebarToggle');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+function toggleSidebar() {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+        sidebar.classList.toggle('mobile-open');
+        sidebarOverlay.classList.toggle('active', sidebar.classList.contains('mobile-open'));
+    } else {
+        sidebarCollapsed = !sidebarCollapsed;
+        sidebar.classList.toggle('collapsed', sidebarCollapsed);
+        document.body.classList.toggle('sidebar-collapsed', sidebarCollapsed);
+    }
+}
+
+sidebarToggle.addEventListener('click', toggleSidebar);
+mobileMenuBtn.addEventListener('click', toggleSidebar);
+sidebarOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('mobile-open');
+    sidebarOverlay.classList.remove('active');
+});
+
+function setActivePage(el) {
+    document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+    el.classList.add('active');
+    if (window.innerWidth <= 768) {
+        sidebar.classList.remove('mobile-open');
+        sidebarOverlay.classList.remove('active');
+    }
+}
+
+/* ========== BG ========== */
 function createStars() {
-    const container = document.getElementById('starsLayer');
+    const c = document.getElementById('starsLayer');
     for (let i = 0; i < 60; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        const size = Math.random() * 2.5 + 0.5;
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's');
-        star.style.animationDelay = Math.random() * 3 + 's';
-        container.appendChild(star);
+        const s = document.createElement('div');
+        s.classList.add('star');
+        const sz = Math.random() * 2.5 + 0.5;
+        s.style.width = sz + 'px'; s.style.height = sz + 'px';
+        s.style.top = Math.random() * 100 + '%'; s.style.left = Math.random() * 100 + '%';
+        s.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's');
+        s.style.animationDelay = Math.random() * 3 + 's';
+        c.appendChild(s);
     }
 }
 
 function createClouds() {
-    const container = document.getElementById('cloudsLayer');
+    const c = document.getElementById('cloudsLayer');
     for (let i = 0; i < 5; i++) {
-        const cloud = document.createElement('div');
-        cloud.classList.add('cloud');
-        cloud.style.width = (Math.random() * 300 + 150) + 'px';
-        cloud.style.height = (Math.random() * 60 + 30) + 'px';
-        cloud.style.top = Math.random() * 100 + '%';
-        cloud.style.setProperty('--dur', (Math.random() * 60 + 40) + 's');
-        cloud.style.animationDelay = -(Math.random() * 60) + 's';
-        container.appendChild(cloud);
+        const cl = document.createElement('div');
+        cl.classList.add('cloud');
+        cl.style.width = (Math.random() * 300 + 150) + 'px';
+        cl.style.height = (Math.random() * 60 + 30) + 'px';
+        cl.style.top = Math.random() * 100 + '%';
+        cl.style.setProperty('--dur', (Math.random() * 60 + 40) + 's');
+        cl.style.animationDelay = -(Math.random() * 60) + 's';
+        c.appendChild(cl);
     }
 }
 
 function createBubbles() {
-    const container = document.getElementById('particles');
+    const c = document.getElementById('particles');
     for (let i = 0; i < 35; i++) {
-        const bubble = document.createElement('div');
-        bubble.classList.add('bubble');
-        const size = Math.random() * 12 + 3;
-        bubble.style.width = size + 'px';
-        bubble.style.height = size + 'px';
-        bubble.style.left = Math.random() * 100 + '%';
-        bubble.style.bottom = Math.random() * 10 + '%';
-        bubble.style.setProperty('--dur', (Math.random() * 10 + 6) + 's');
-        bubble.style.animationDelay = (Math.random() * 10) + 's';
-        container.appendChild(bubble);
+        const b = document.createElement('div');
+        b.classList.add('bubble');
+        const sz = Math.random() * 12 + 3;
+        b.style.width = sz + 'px'; b.style.height = sz + 'px';
+        b.style.left = Math.random() * 100 + '%'; b.style.bottom = Math.random() * 10 + '%';
+        b.style.setProperty('--dur', (Math.random() * 10 + 6) + 's');
+        b.style.animationDelay = (Math.random() * 10) + 's';
+        c.appendChild(b);
     }
 }
 
+/* ========== TOAST ========== */
 function showToast(title, message) {
-    const container = document.getElementById('toastContainer');
-    const toast = document.createElement('div');
-    toast.classList.add('toast');
-    toast.innerHTML = `
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-<span class="toast-title">${title}</span>
-<span>${message}</span>`;
-    container.appendChild(toast);
-
-    setTimeout(() => {
-        toast.classList.add('toast-out');
-        setTimeout(() => toast.remove(), 300);
-    }, 2000);
+    const c = document.getElementById('toastContainer');
+    const t = document.createElement('div');
+    t.classList.add('toast');
+    t.innerHTML = `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span class="toast-title">${title}</span><span>${message}</span>`;
+    c.appendChild(t);
+    setTimeout(() => { t.classList.add('toast-out'); setTimeout(() => t.remove(), 300); }, 2000);
 }
 
+/* ========== SYSTEM ========== */
 function updateSystemTime() {
     document.getElementById('systemTime').textContent = new Date().toLocaleTimeString('id-ID', { hour12: false });
 }
@@ -1347,225 +1930,141 @@ function updateSystemStatus(status, type) {
 
 function updateDebugInfo() {
     if (!debugMode) return;
-    document.getElementById('debugInfo').innerHTML = `
-<div>Total Data: ${sheetData.length}</div>
-<div>Filtered Data: ${filteredData.length}</div>
-<div>Current Detail: ${currentDetail ? currentDetail.title : 'None'}</div>
-<div>Cache: ${localStorage.getItem('NO-MERCYYY_data') ? 'Available' : 'Empty'}</div>`;
+    document.getElementById('debugInfo').innerHTML = `<div>Total Data: ${sheetData.length}</div><div>Filtered: ${filteredData.length}</div><div>Detail: ${currentDetail ? currentDetail.title : 'None'}</div><div>Sidebar: ${sidebarCollapsed ? 'Collapsed' : 'Expanded'}</div>`;
 }
 
-function levenshteinDistance(str1, str2) {
-    const matrix = [];
-    for (let i = 0; i <= str2.length; i++) matrix[i] = [i];
-    for (let j = 0; j <= str1.length; j++) matrix[0][j] = j;
-    for (let i = 1; i <= str2.length; i++) {
-        for (let j = 1; j <= str1.length; j++) {
-            if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
-                matrix[i][j] = matrix[i - 1][j - 1];
-            } else {
-                matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
-            }
-        }
+/* ========== SEARCH ========== */
+function levenshteinDistance(s1, s2) {
+    const m = []; for (let i = 0; i <= s2.length; i++) m[i] = [i];
+    for (let j = 0; j <= s1.length; j++) m[0][j] = j;
+    for (let i = 1; i <= s2.length; i++) for (let j = 1; j <= s1.length; j++) {
+        m[i][j] = s2.charAt(i-1) === s1.charAt(j-1) ? m[i-1][j-1] : Math.min(m[i-1][j-1]+1, m[i][j-1]+1, m[i-1][j]+1);
     }
-    return matrix[str2.length][str1.length];
+    return m[s2.length][s1.length];
 }
 
-function calculateSimilarity(str1, str2) {
-    const distance = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase());
-    const longer = str1.length > str2.length ? str1 : str2;
-    if (longer.length === 0) return 100;
-    return Math.round(((longer.length - distance) / longer.length) * 100);
+function calculateSimilarity(s1, s2) {
+    const d = levenshteinDistance(s1.toLowerCase(), s2.toLowerCase());
+    const l = s1.length > s2.length ? s1 : s2;
+    return l.length === 0 ? 100 : Math.round(((l.length - d) / l.length) * 100);
 }
 
-function fuzzyMatch(query, text) {
-    const queryLower = query.toLowerCase();
-    const textLower = text.toLowerCase();
-    if (textLower.includes(queryLower)) return { match: true, score: 100, type: 'exact' };
-    const words = textLower.split(/\s+/);
-    let bestMatch = { match: false, score: 0, type: 'none' };
-    for (const word of words) {
-        if (word.startsWith(queryLower)) {
-            const score = Math.round((queryLower.length / word.length) * 100);
-            if (score > bestMatch.score) bestMatch = { match: true, score, type: 'prefix' };
-        }
-        const similarity = calculateSimilarity(queryLower, word);
-        if (similarity >= 60 && similarity > bestMatch.score) bestMatch = { match: true, score: similarity, type: 'fuzzy' };
-        if (word.includes(queryLower)) {
-            const score = Math.round((queryLower.length / word.length) * 90);
-            if (score > bestMatch.score) bestMatch = { match: true, score, type: 'contains' };
-        }
+function fuzzyMatch(q, t) {
+    const ql = q.toLowerCase(), tl = t.toLowerCase();
+    if (tl.includes(ql)) return { match: true, score: 100, type: 'exact' };
+    const words = tl.split(/\s+/); let best = { match: false, score: 0, type: 'none' };
+    for (const w of words) {
+        if (w.startsWith(ql)) { const s = Math.round((ql.length/w.length)*100); if(s>best.score) best={match:true,score:s,type:'prefix'}; }
+        const sim = calculateSimilarity(ql, w);
+        if (sim >= 60 && sim > best.score) best = { match: true, score: sim, type: 'fuzzy' };
+        if (w.includes(ql)) { const s = Math.round((ql.length/w.length)*90); if(s>best.score) best={match:true,score:s,type:'contains'}; }
     }
-    return bestMatch;
+    return best;
 }
 
+/* ========== FETCH ========== */
 async function fetchSheetData() {
-    const sheetId = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
+    const sid = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
     updateSystemStatus('Mengambil Data...', 'warning');
 
-    try {
-        const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=0`;
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const text = await response.text();
-        if (text.includes('google.visualization.Query.setResponse')) {
-            const json = JSON.parse(text.substring(47).slice(0, -2));
-            const rows = json.table.rows;
-            sheetData = [];
-            for (let i = 0; i < rows.length; i++) {
-                const t = rows[i].c[0], inf = rows[i].c[1];
-                const title = t && t.v ? String(t.v) : '';
-                const info = inf && inf.v ? String(inf.v) : '';
-                if (title) sheetData.push({ title: title.trim(), info: info.trim() });
-            }
-            if (sheetData.length > 0) {
-                updateSystemStatus('Pelayaran Aktif', 'success');
-                localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
-                localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
-                filteredData = [...sheetData];
-                displayMenuItems();
-                updateDebugInfo();
-                return;
-            }
+    const tryFetch = async (url) => {
+        const r = await fetch(url); if (!r.ok) throw new Error(r.status);
+        const txt = await r.text();
+        if (!txt.includes('google.visualization.Query.setResponse')) return null;
+        const json = JSON.parse(txt.substring(47).slice(0, -2));
+        const data = [];
+        for (const row of json.table.rows) {
+            const t = row.c[0], inf = row.c[1];
+            const title = t && t.v ? String(t.v).trim() : '';
+            const info = inf && inf.v ? String(inf.v).trim() : '';
+            if (title) data.push({ title, info });
         }
-    } catch (error) {}
+        return data.length > 0 ? data : null;
+    };
 
-    try {
-        const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=REPORTAN`;
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const text = await response.text();
-        if (text.includes('google.visualization.Query.setResponse')) {
-            const json = JSON.parse(text.substring(47).slice(0, -2));
-            const rows = json.table.rows;
-            sheetData = [];
-            for (let i = 0; i < rows.length; i++) {
-                const t = rows[i].c[0], inf = rows[i].c[1];
-                const title = t && t.v ? String(t.v) : '';
-                const info = inf && inf.v ? String(inf.v) : '';
-                if (title) sheetData.push({ title: title.trim(), info: info.trim() });
-            }
-            if (sheetData.length > 0) {
-                updateSystemStatus('Pelayaran Aktif', 'success');
-                localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
-                localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
-                filteredData = [...sheetData];
-                displayMenuItems();
-                updateDebugInfo();
-                return;
-            }
-        }
-    } catch (error) {}
-
-    try {
-        const feedUrl = `https://spreadsheets.google.com/feeds/worksheets/${sheetId}/public/basic?alt=json`;
-        const response = await fetch(feedUrl);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const feedJson = await response.json();
-        if (feedJson.feed && feedJson.feed.entry && feedJson.feed.entry.length > 0) {
-            const sheetName = feedJson.feed.entry[0].title.$t;
-            const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
-            const sheetResponse = await fetch(url);
-            if (!sheetResponse.ok) throw new Error(`HTTP error! status: ${sheetResponse.status}`);
-            const sheetText = await sheetResponse.text();
-            if (sheetText.includes('google.visualization.Query.setResponse')) {
-                const json = JSON.parse(sheetText.substring(47).slice(0, -2));
-                const rows = json.table.rows;
-                sheetData = [];
-                for (let i = 0; i < rows.length; i++) {
-                    const t = rows[i].c[0], inf = rows[i].c[1];
-                    const title = t && t.v ? String(t.v) : '';
-                    const info = inf && inf.v ? String(inf.v) : '';
-                    if (title) sheetData.push({ title: title.trim(), info: info.trim() });
-                }
-                if (sheetData.length > 0) {
-                    updateSystemStatus('Pelayaran Aktif', 'success');
-                    localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
-                    localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
-                    filteredData = [...sheetData];
-                    displayMenuItems();
-                    updateDebugInfo();
-                    return;
-                }
-            }
-        }
-    } catch (error) {}
-
-    try {
-        const cachedData = localStorage.getItem('NO-MERCYYY_data');
-        if (cachedData) {
-            sheetData = JSON.parse(cachedData);
-            updateSystemStatus('Pelayaran Offline', 'warning');
-            filteredData = [...sheetData];
-            displayMenuItems();
-            updateDebugInfo();
-            return;
-        }
-    } catch (error) {}
-
-    sheetData = [
-        { title: "CONTOH MENU 1", info: "Ini adalah contoh menu karena lautan data tidak dapat dijangkau." },
-        { title: "CONTOH MENU 2", info: "Sistem berlayar dalam mode offline." },
-        { title: "KESALAHAN KONEKSI", info: "Tidak dapat terhubung ke database." }
+    const urls = [
+        `https://docs.google.com/spreadsheets/d/${sid}/gviz/tq?tqx=out:json&gid=0`,
+        `https://docs.google.com/spreadsheets/d/${sid}/gviz/tq?tqx=out:json&sheet=REPORTAN`
     ];
-    updateSystemStatus('Lautan Tidak Dapat Dijangkau', 'error');
+
+    for (const url of urls) {
+        try { const d = await tryFetch(url); if (d) { sheetData = d; break; } } catch(e) {}
+    }
+
+    if (sheetData.length === 0) {
+        try {
+            const fr = await fetch(`https://spreadsheets.google.com/feeds/worksheets/${sid}/public/basic?alt=json`);
+            if (fr.ok) {
+                const fj = await fr.json();
+                if (fj.feed?.entry?.length > 0) {
+                    const sn = fj.feed.entry[0].title.$t;
+                    const d = await tryFetch(`https://docs.google.com/spreadsheets/d/${sid}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sn)}`);
+                    if (d) sheetData = d;
+                }
+            }
+        } catch(e) {}
+    }
+
+    if (sheetData.length === 0) {
+        try { const cd = localStorage.getItem('NO-MERCYYY_data'); if (cd) { sheetData = JSON.parse(cd); updateSystemStatus('Pelayaran Offline', 'warning'); } } catch(e) {}
+    }
+
+    if (sheetData.length === 0) {
+        sheetData = [
+            { title: "CONTOH MENU 1", info: "Ini adalah contoh menu karena lautan data tidak dapat dijangkau." },
+            { title: "CONTOH MENU 2", info: "Sistem berlayar dalam mode offline." },
+            { title: "KESALAHAN KONEKSI", info: "Tidak dapat terhubung ke database." }
+        ];
+        updateSystemStatus('Lautan Tidak Dapat Dijangkau', 'error');
+    } else if (!document.getElementById('systemStatus').textContent.includes('Offline')) {
+        updateSystemStatus('Pelayaran Aktif', 'success');
+        localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
+        localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
+    }
+
     filteredData = [...sheetData];
     displayMenuItems();
     updateDebugInfo();
 }
 
+/* ========== DISPLAY ========== */
 function displayMenuItems() {
     const container = document.getElementById('menuContainer');
-    const loadingContainer = document.getElementById('loadingContainer');
+    const loading = document.getElementById('loadingContainer');
     const noMenu = document.getElementById('noMenu');
-    loadingContainer.style.display = 'none';
+    loading.style.display = 'none';
 
-    if (filteredData.length === 0) {
-        container.style.display = 'none';
-        noMenu.style.display = 'block';
-        return;
-    }
+    if (filteredData.length === 0) { container.style.display = 'none'; noMenu.style.display = 'block'; return; }
+    container.style.display = 'grid'; noMenu.style.display = 'none';
 
-    container.style.display = 'grid';
-    noMenu.style.display = 'none';
-
-    container.innerHTML = filteredData.map((item, index) => `
-<div class="menu-card" data-index="${index}">
+    container.innerHTML = filteredData.map((item, i) => `
+<div class="menu-card" data-index="${i}">
 <div class="match-indicator">${item.matchType || 'MATCH'}</div>
 <h3 class="menu-title">${item.title}</h3>
 <div class="menu-preview">${item.info}</div>
 <div class="card-bottom-row">
-<button class="card-copy-btn" data-copy-index="${index}">
-<svg fill="currentColor" viewBox="0 0 24 24">
-<path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-</svg>
+<button class="card-copy-btn" data-copy-index="${i}">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
 <span class="btn-label">Salin</span>
-<span class="btn-check">
-<svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-Ok
-</span>
+<span class="btn-check"><svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ok</span>
 </button>
 </div>
 <div class="card-skull">☠</div>
 </div>`).join('');
 
     container.querySelectorAll('.menu-card').forEach(card => {
-        card.addEventListener('click', function () {
-            showDetail(filteredData[parseInt(this.dataset.index)]);
-        });
+        card.addEventListener('click', () => showDetail(filteredData[parseInt(card.dataset.index)]));
     });
-
     container.querySelectorAll('.card-copy-btn').forEach(btn => {
-        btn.addEventListener('click', function (e) {
+        btn.addEventListener('click', function(e) {
             e.stopPropagation();
-            const idx = parseInt(this.dataset.copyIndex);
-            const item = filteredData[idx];
+            const item = filteredData[parseInt(this.dataset.copyIndex)];
             if (!item) return;
-
             navigator.clipboard.writeText(item.info).then(() => {
                 this.classList.add('copied');
                 setTimeout(() => this.classList.remove('copied'), 1500);
                 showToast(item.title, 'info berhasil disalin');
-            }).catch(err => {});
+            }).catch(() => {});
         });
     });
 }
@@ -1580,8 +2079,7 @@ function showDetail(item) {
 
 function hideDetail() {
     document.getElementById('detailModal').classList.remove('show');
-    currentDetail = null;
-    updateDebugInfo();
+    currentDetail = null; updateDebugInfo();
 }
 
 function copyToClipboard() {
@@ -1591,182 +2089,104 @@ function copyToClipboard() {
         el.classList.add('show');
         showToast(currentDetail.title, 'info berhasil disalin');
         setTimeout(() => el.classList.remove('show'), 2000);
-    }).catch(err => {});
+    }).catch(() => {});
 }
 
 function filterMenuItems() {
-    const query = document.getElementById('filterInput').value.trim();
-    if (query === '') {
-        filteredData = sheetData.map(item => ({ ...item }));
-    } else {
-        const results = [];
+    const q = document.getElementById('filterInput').value.trim();
+    if (q === '') { filteredData = sheetData.map(i => ({...i})); }
+    else {
+        const r = [];
         for (const item of sheetData) {
-            const tm = fuzzyMatch(query, item.title);
-            const im = fuzzyMatch(query, item.info);
+            const tm = fuzzyMatch(q, item.title), im = fuzzyMatch(q, item.info);
             const best = tm.score > im.score ? tm : im;
-            if (best.match) results.push({ ...item, matchScore: best.score, matchType: best.type.toUpperCase() });
+            if (best.match) r.push({...item, matchScore: best.score, matchType: best.type.toUpperCase()});
         }
-        results.sort((a, b) => b.matchScore - a.matchScore);
-        filteredData = results;
+        r.sort((a, b) => b.matchScore - a.matchScore);
+        filteredData = r;
     }
-    displayMenuItems();
-    updateDebugInfo();
+    displayMenuItems(); updateDebugInfo();
 }
 
-function updateCalculatorDisplay() {
+/* ========== CALCULATOR ========== */
+function updateCalcDisplay() {
     document.getElementById('calculatorValue').textContent = calculatorState.displayValue;
     document.getElementById('calculatorExpression').textContent = calculatorState.expression;
 }
-
-function inputDigit(digit) {
+function inputDigit(d) {
     const { displayValue, waitingForOperand } = calculatorState;
-    if (waitingForOperand) {
-        calculatorState.displayValue = String(digit);
-        calculatorState.waitingForOperand = false;
-    } else {
-        calculatorState.displayValue = displayValue === '0' ? String(digit) : displayValue + digit;
-    }
-    updateCalculatorDisplay();
+    if (waitingForOperand) { calculatorState.displayValue = String(d); calculatorState.waitingForOperand = false; }
+    else { calculatorState.displayValue = displayValue === '0' ? String(d) : displayValue + d; }
+    updateCalcDisplay();
 }
-
 function inputDecimal() {
     const { displayValue, waitingForOperand } = calculatorState;
-    if (waitingForOperand) {
-        calculatorState.displayValue = '0.';
-        calculatorState.waitingForOperand = false;
-    } else if (displayValue.indexOf('.') === -1) {
-        calculatorState.displayValue = displayValue + '.';
-    }
-    updateCalculatorDisplay();
+    if (waitingForOperand) { calculatorState.displayValue = '0.'; calculatorState.waitingForOperand = false; }
+    else if (displayValue.indexOf('.') === -1) { calculatorState.displayValue += '.'; }
+    updateCalcDisplay();
 }
-
-function clearCalculator() {
-    calculatorState = { displayValue: '0', expression: '', previousValue: null, operation: null, waitingForOperand: false };
-    updateCalculatorDisplay();
-}
-
-function performOperation(nextOperation) {
+function clearCalc() { calculatorState = { displayValue: '0', expression: '', previousValue: null, operation: null, waitingForOperand: false }; updateCalcDisplay(); }
+function getOpSym(o) { return {'+':'+','-':'-','*':'×','/':'÷','%':'%'}[o]||''; }
+function calc(a,b,o) { return o==='+'?a+b:o==='-'?a-b:o==='*'?a*b:o==='/'?(b!==0?a/b:0):a%b; }
+function performOp(next) {
     const { displayValue, previousValue, operation } = calculatorState;
-    const inputValue = parseFloat(displayValue);
-    if (previousValue === null) {
-        calculatorState.previousValue = inputValue;
-    } else if (operation) {
-        const newValue = calc(previousValue || 0, inputValue, operation);
-        calculatorState.displayValue = String(newValue);
-        calculatorState.previousValue = newValue;
-        calculatorState.expression = `${previousValue || 0} ${getOpSym(operation)} ${inputValue} =`;
-    }
-    calculatorState.waitingForOperand = true;
-    calculatorState.operation = nextOperation;
-    if (nextOperation) calculatorState.expression = `${displayValue} ${getOpSym(nextOperation)}`;
-    updateCalculatorDisplay();
+    const iv = parseFloat(displayValue);
+    if (previousValue === null) { calculatorState.previousValue = iv; }
+    else if (operation) { const nv = calc(previousValue||0, iv, operation); calculatorState.displayValue = String(nv); calculatorState.previousValue = nv; calculatorState.expression = `${previousValue||0} ${getOpSym(operation)} ${iv} =`; }
+    calculatorState.waitingForOperand = true; calculatorState.operation = next;
+    if (next) calculatorState.expression = `${displayValue} ${getOpSym(next)}`;
+    updateCalcDisplay();
 }
-
-function calc(a, b, op) {
-    switch (op) {
-        case '+': return a + b;
-        case '-': return a - b;
-        case '*': return a * b;
-        case '/': return b !== 0 ? a / b : 0;
-        case '%': return a % b;
-        default: return b;
-    }
-}
-
-function getOpSym(op) {
-    return { '+': '+', '-': '-', '*': '×', '/': '÷', '%': '%' }[op] || '';
-}
-
 function handleEquals() {
     const { displayValue, previousValue, operation } = calculatorState;
-    const inputValue = parseFloat(displayValue);
+    const iv = parseFloat(displayValue);
     if (previousValue !== null && operation) {
-        const newValue = calc(previousValue, inputValue, operation);
-        calculatorState.displayValue = String(newValue);
-        calculatorState.expression = `${previousValue} ${getOpSym(operation)} ${inputValue} =`;
-        calculatorState.previousValue = null;
-        calculatorState.operation = null;
-        calculatorState.waitingForOperand = true;
+        const nv = calc(previousValue, iv, operation);
+        calculatorState.displayValue = String(nv);
+        calculatorState.expression = `${previousValue} ${getOpSym(operation)} ${iv} =`;
+        calculatorState.previousValue = null; calculatorState.operation = null; calculatorState.waitingForOperand = true;
     }
-    updateCalculatorDisplay();
+    updateCalcDisplay();
 }
 
-function handleBackspace() {
-    calculatorState.displayValue = calculatorState.displayValue.length > 1 ? calculatorState.displayValue.slice(0, -1) : '0';
-    updateCalculatorDisplay();
-}
-
-function handlePercent() {
-    calculatorState.displayValue = String(parseFloat(calculatorState.displayValue) / 100);
-    updateCalculatorDisplay();
-}
-
-function toggleCalculator() {
-    document.getElementById('calculatorContainer').classList.toggle('show');
-}
-
+/* ========== INIT ========== */
 window.onload = function () {
-    createStars();
-    createClouds();
-    createBubbles();
-    updateSystemTime();
-    setInterval(updateSystemTime, 1000);
+    createStars(); createClouds(); createBubbles();
+    updateSystemTime(); setInterval(updateSystemTime, 1000);
 
-    document.getElementById('debugToggle').addEventListener('click', function () {
+    document.getElementById('debugToggle').addEventListener('click', function() {
         debugMode = !debugMode;
         document.getElementById('debugPanel').classList.toggle('show', debugMode);
         updateDebugInfo();
     });
-
     setInterval(updateDebugInfo, 1000);
 
-    let debounceTimer;
-    document.getElementById('filterInput').addEventListener('input', function () {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(filterMenuItems, 300);
-    });
-
+    let dt;
+    document.getElementById('filterInput').addEventListener('input', function() { clearTimeout(dt); dt = setTimeout(filterMenuItems, 300); });
     document.getElementById('detailClose').addEventListener('click', hideDetail);
     document.getElementById('copyButton').addEventListener('click', copyToClipboard);
+    document.getElementById('detailModal').addEventListener('click', function(e) { if (e.target === this) hideDetail(); });
+    document.getElementById('calculatorToggle').addEventListener('click', () => document.getElementById('calculatorContainer').classList.toggle('show'));
 
-    document.getElementById('detailModal').addEventListener('click', function (e) {
-        if (e.target === this) hideDetail();
-    });
-
-    document.getElementById('calculatorToggle').addEventListener('click', toggleCalculator);
-
-    /* === TOMBOL ESC: tutup modal detail & kalkulator === */
-    document.addEventListener('keydown', function (e) {
+    document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            /* Prioritas tertinggi: tutup detail modal jika terbuka */
-            if (document.getElementById('detailModal').classList.contains('show')) {
-                hideDetail();
-                return;
-            }
-            /* Prioritas kedua: tutup kalkulator jika terbuka */
-            if (document.getElementById('calculatorContainer').classList.contains('show')) {
-                document.getElementById('calculatorContainer').classList.remove('show');
-                return;
-            }
-            /* Prioritas ketiga: tutup panel debug jika terbuka */
-            if (document.getElementById('debugPanel').classList.contains('show')) {
-                debugMode = false;
-                document.getElementById('debugPanel').classList.remove('show');
-                return;
-            }
+            if (document.getElementById('detailModal').classList.contains('show')) { hideDetail(); return; }
+            if (document.getElementById('calculatorContainer').classList.contains('show')) { document.getElementById('calculatorContainer').classList.remove('show'); return; }
+            if (document.getElementById('debugPanel').classList.contains('show')) { debugMode = false; document.getElementById('debugPanel').classList.remove('show'); return; }
+            if (window.innerWidth <= 768 && sidebar.classList.contains('mobile-open')) { sidebar.classList.remove('mobile-open'); sidebarOverlay.classList.remove('active'); return; }
         }
     });
 
-    document.querySelectorAll('.calculator-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            switch (this.dataset.action) {
+    document.querySelectorAll('.calculator-btn').forEach(b => {
+        b.addEventListener('click', function() {
+            switch(this.dataset.action) {
                 case 'number': inputDigit(this.dataset.value); break;
                 case 'decimal': inputDecimal(); break;
-                case 'clear': clearCalculator(); break;
-                case 'operator': performOperation(this.dataset.value); break;
+                case 'clear': clearCalc(); break;
+                case 'operator': performOp(this.dataset.value); break;
                 case 'equals': handleEquals(); break;
-                case 'backspace': handleBackspace(); break;
-                case 'percent': handlePercent(); break;
+                case 'backspace': calculatorState.displayValue = calculatorState.displayValue.length > 1 ? calculatorState.displayValue.slice(0,-1) : '0'; updateCalcDisplay(); break;
+                case 'percent': calculatorState.displayValue = String(parseFloat(calculatorState.displayValue)/100); updateCalcDisplay(); break;
             }
         });
     });
