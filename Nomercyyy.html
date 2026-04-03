@@ -46,7 +46,6 @@ position: relative;
 
 @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;700;900&display=swap');
 
-/* === BACKGROUND LAUT ONE PIECE === */
 .bg-animation {
 position: fixed;
 top: 0;
@@ -252,7 +251,6 @@ pointer-events: none;
 z-index: 0;
 }
 
-/* === ANIMASI TEKS === */
 @keyframes fire-flicker {
 0%, 100% { text-shadow: 0 0 4px rgba(255, 215, 0, 0.8), 0 0 12px rgba(255, 165, 0, 0.5), 0 0 20px rgba(229, 57, 53, 0.3); }
 25% { text-shadow: 0 0 6px rgba(255, 215, 0, 0.9), 0 0 16px rgba(255, 165, 0, 0.6), 0 0 24px rgba(229, 57, 53, 0.4); }
@@ -282,7 +280,6 @@ z-index: 0;
 100% { transform: translateY(-10px) scale(0.9); opacity: 0; }
 }
 
-/* === CONTAINER === */
 .container {
 position: relative;
 z-index: 10;
@@ -295,7 +292,6 @@ padding: 20px;
 padding-top: 60px;
 }
 
-/* === HEADER === */
 .header {
 text-align: center;
 margin-bottom: 48px;
@@ -306,7 +302,6 @@ position: relative;
 display: flex;
 align-items: center;
 justify-content: center;
-gap: 16px;
 margin-bottom: 24px;
 position: relative;
 }
@@ -322,15 +317,6 @@ background: radial-gradient(ellipse, rgba(255, 215, 0, 0.08) 0%, transparent 70%
 z-index: -1;
 animation: pulse-glow 3s ease-in-out infinite;
 }
-
-.icon {
-width: 56px;
-height: 56px;
-position: relative;
-}
-
-.icon-skull { color: var(--primary-color); animation: pulse-glow 2s ease-in-out infinite; }
-.icon-compass { color: var(--secondary-color); animation: pulse-glow 2.5s ease-in-out infinite; }
 
 .title {
 font-family: 'Pirata One', cursive;
@@ -381,7 +367,6 @@ content: '⚓';
 margin: 0 12px;
 }
 
-/* === STATUS BAR === */
 .status-bar {
 position: fixed;
 top: 0;
@@ -404,7 +389,6 @@ box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 .system-time { color: var(--primary-color); }
 .system-status { color: var(--accent-color); }
 
-/* === FILTER === */
 .menu-filter {
 width: 100%;
 max-width: 1400px;
@@ -462,7 +446,6 @@ opacity: 0.6;
 font-family: 'Cinzel', serif;
 }
 
-/* === MENU CARDS — 1 BARIS 4 KOLOM === */
 .menu-container {
 width: 100%;
 max-width: 1400px;
@@ -563,7 +546,6 @@ font-size: 0.82rem;
 opacity: 0.85;
 }
 
-/* === BARIS BAWAH CARD: TOMBOL SALIN === */
 .card-bottom-row {
 display: flex;
 align-items: center;
@@ -573,7 +555,6 @@ gap: 8px;
 flex-shrink: 0;
 }
 
-/* === TOMBOL SALIN DI CARD === */
 .card-copy-btn {
 display: inline-flex;
 align-items: center;
@@ -660,7 +641,6 @@ white-space: nowrap;
 opacity: 1;
 }
 
-/* === TOAST NOTIFIKASI === */
 .toast-container {
 position: fixed;
 bottom: 100px;
@@ -732,7 +712,6 @@ pointer-events: none;
 opacity: 1;
 }
 
-/* === DETAIL MODAL === */
 .detail-modal {
 position: fixed;
 top: 0;
@@ -875,7 +854,6 @@ font-family: 'Cinzel', serif;
 opacity: 1;
 }
 
-/* === NO MENU === */
 .no-menu {
 text-align: center;
 padding: 60px 0;
@@ -899,7 +877,6 @@ font-size: 0.95rem;
 opacity: 0.7;
 }
 
-/* === LOADING === */
 .loading-container {
 display: flex;
 flex-direction: column;
@@ -933,7 +910,6 @@ letter-spacing: 2px;
 font-size: 0.9rem;
 }
 
-/* === FOOTER === */
 .footer {
 position: absolute;
 bottom: 20px;
@@ -951,7 +927,6 @@ letter-spacing: 2px;
 opacity: 0.5;
 }
 
-/* === CALCULATOR === */
 .calculator-toggle {
 position: fixed;
 bottom: 80px;
@@ -1068,7 +1043,6 @@ color: #ff4444;
 
 .calculator-btn.zero { grid-column: span 2; }
 
-/* === DEBUG === */
 .debug-panel {
 position: fixed;
 bottom: 60px;
@@ -1112,13 +1086,11 @@ background: rgba(255, 215, 0, 0.2);
 transform: translateY(-2px);
 }
 
-/* === SCROLLBAR === */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: rgba(10, 18, 40, 0.5); }
 ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary-color), var(--secondary-color)); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--secondary-color), var(--primary-color)); }
 
-/* === RESPONSIVE === */
 @media (max-width: 1024px) {
 .menu-container { grid-template-columns: repeat(2, 1fr); }
 }
@@ -1143,7 +1115,6 @@ transform: translateY(-2px);
 </head>
 <body>
 
-<!-- === BACKGROUND === -->
 <div class="bg-animation">
 <div class="sky-layer"></div>
 <div class="stars-layer" id="starsLayer"></div>
@@ -1182,10 +1153,8 @@ transform: translateY(-2px);
 <div class="jolly-watermark">☠</div>
 </div>
 
-<!-- Toast Container -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- Status Bar -->
 <div class="status-bar">
 <div class="system-time" id="systemTime">--:--:--</div>
 <div class="system-status" id="systemStatus">Menyiapkan Pelayaran...</div>
@@ -1195,17 +1164,7 @@ transform: translateY(-2px);
 <header class="header">
 <div class="logo-container">
 <div class="logo-glow"></div>
-<div class="icon">
-<svg class="icon-skull" fill="currentColor" viewBox="0 0 24 24" width="48" height="48">
-<path d="M12 2C9.24 2 7 4.24 7 7c0 1.63.78 3.09 2 4.01V22h6v-2h-2v-2h2v-2h-2v-2.99C16.22 10.09 17 8.63 17 7c0-2.76-2.24-5-5-5zM9.5 7a1 1 0 110-2 1 1 0 010 2zm5 0a1 1 0 110-2 1 1 0 010 2z"/>
-</svg>
-</div>
 <h1 class="title">NO-MERCYYY</h1>
-<div class="icon">
-<svg class="icon-compass" fill="currentColor" viewBox="0 0 24 24" width="48" height="48">
-<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-</svg>
-</div>
 </div>
 <p class="subtitle">Sistem Menu Digital</p>
 </header>
@@ -1234,7 +1193,6 @@ transform: translateY(-2px);
 </footer>
 </div>
 
-<!-- Detail Modal -->
 <div class="detail-modal" id="detailModal">
 <div class="detail-content">
 <div class="detail-header">
@@ -1260,7 +1218,6 @@ SALIN
 </div>
 </div>
 
-<!-- Calculator -->
 <div class="calculator-toggle" id="calculatorToggle">
 <svg viewBox="0 0 24 24">
 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/>
@@ -1316,7 +1273,6 @@ let calculatorState = {
     waitingForOperand: false
 };
 
-/* === BACKGROUND EFFECTS === */
 function createStars() {
     const container = document.getElementById('starsLayer');
     for (let i = 0; i < 60; i++) {
@@ -1363,7 +1319,6 @@ function createBubbles() {
     }
 }
 
-/* === TOAST NOTIFIKASI === */
 function showToast(title, message) {
     const container = document.getElementById('toastContainer');
     const toast = document.createElement('div');
@@ -1380,7 +1335,6 @@ function showToast(title, message) {
     }, 2000);
 }
 
-/* === UTILITY === */
 function updateSystemTime() {
     document.getElementById('systemTime').textContent = new Date().toLocaleTimeString('id-ID', { hour12: false });
 }
@@ -1400,7 +1354,6 @@ function updateDebugInfo() {
 <div>Cache: ${localStorage.getItem('NO-MERCYYY_data') ? 'Available' : 'Empty'}</div>`;
 }
 
-/* === FUZZY SEARCH === */
 function levenshteinDistance(str1, str2) {
     const matrix = [];
     for (let i = 0; i <= str2.length; i++) matrix[i] = [i];
@@ -1445,7 +1398,6 @@ function fuzzyMatch(query, text) {
     return bestMatch;
 }
 
-/* === FETCH DATA === */
 async function fetchSheetData() {
     const sheetId = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
     updateSystemStatus('Mengambil Data...', 'warning');
@@ -1475,9 +1427,7 @@ async function fetchSheetData() {
                 return;
             }
         }
-    } catch (error) {
-        /* gagal, lanjut method berikutnya */
-    }
+    } catch (error) {}
 
     try {
         const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=REPORTAN`;
@@ -1504,9 +1454,7 @@ async function fetchSheetData() {
                 return;
             }
         }
-    } catch (error) {
-        /* gagal, lanjut method berikutnya */
-    }
+    } catch (error) {}
 
     try {
         const feedUrl = `https://spreadsheets.google.com/feeds/worksheets/${sheetId}/public/basic?alt=json`;
@@ -1540,9 +1488,7 @@ async function fetchSheetData() {
                 }
             }
         }
-    } catch (error) {
-        /* gagal, lanjut method berikutnya */
-    }
+    } catch (error) {}
 
     try {
         const cachedData = localStorage.getItem('NO-MERCYYY_data');
@@ -1554,9 +1500,7 @@ async function fetchSheetData() {
             updateDebugInfo();
             return;
         }
-    } catch (error) {
-        /* gagal, lanjut fallback */
-    }
+    } catch (error) {}
 
     sheetData = [
         { title: "CONTOH MENU 1", info: "Ini adalah contoh menu karena lautan data tidak dapat dijangkau." },
@@ -1569,7 +1513,6 @@ async function fetchSheetData() {
     updateDebugInfo();
 }
 
-/* === DISPLAY MENU === */
 function displayMenuItems() {
     const container = document.getElementById('menuContainer');
     const loadingContainer = document.getElementById('loadingContainer');
@@ -1622,14 +1565,11 @@ Ok
                 this.classList.add('copied');
                 setTimeout(() => this.classList.remove('copied'), 1500);
                 showToast(item.title, 'info berhasil disalin');
-            }).catch(err => {
-                /* gagal menyalin */
-            });
+            }).catch(err => {});
         });
     });
 }
 
-/* === DETAIL MODAL === */
 function showDetail(item) {
     currentDetail = item;
     document.getElementById('detailTitle').textContent = item.title;
@@ -1651,12 +1591,9 @@ function copyToClipboard() {
         el.classList.add('show');
         showToast(currentDetail.title, 'info berhasil disalin');
         setTimeout(() => el.classList.remove('show'), 2000);
-    }).catch(err => {
-        /* gagal menyalin */
-    });
+    }).catch(err => {});
 }
 
-/* === FILTER === */
 function filterMenuItems() {
     const query = document.getElementById('filterInput').value.trim();
     if (query === '') {
@@ -1676,7 +1613,6 @@ function filterMenuItems() {
     updateDebugInfo();
 }
 
-/* === KALKULATOR === */
 function updateCalculatorDisplay() {
     document.getElementById('calculatorValue').textContent = calculatorState.displayValue;
     document.getElementById('calculatorExpression').textContent = calculatorState.expression;
@@ -1769,7 +1705,6 @@ function toggleCalculator() {
     document.getElementById('calculatorContainer').classList.toggle('show');
 }
 
-/* === INIT === */
 window.onload = function () {
     createStars();
     createClouds();
