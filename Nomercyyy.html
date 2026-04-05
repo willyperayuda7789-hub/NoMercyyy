@@ -380,7 +380,6 @@ opacity: 0.2;
 50% { box-shadow: 0 0 14px var(--menu-accent-glow), 0 0 24px rgba(230,81,0,0.15); }
 }
 
-/* ===== APP LAYOUT ===== */
 .app-layout {
 position: relative;
 z-index: 10;
@@ -389,7 +388,6 @@ min-height: 100vh;
 padding-top: 44px;
 }
 
-/* ===== LEFT SIDEBAR ===== */
 .sidebar {
 width: var(--sidebar-width);
 min-width: var(--sidebar-width);
@@ -446,7 +444,6 @@ padding-left: 13px;
 opacity: 0.6;
 }
 
-/* ===== Menu Items ===== */
 .sidebar-nav {
 flex: 1;
 overflow-y: auto;
@@ -483,7 +480,6 @@ flex-shrink: 0;
 .nav-item:nth-child(6) { animation-delay: 0.3s; }
 .nav-item:nth-child(7) { animation-delay: 0.35s; }
 
-/* Accent bar on left of each item */
 .nav-item::before {
 content: '';
 position: absolute;
@@ -497,7 +493,6 @@ opacity: 0;
 transition: all 0.25s ease;
 }
 
-/* Hover shimmer */
 .nav-item::after {
 content: '';
 position: absolute;
@@ -510,9 +505,7 @@ transition: left 0.5s ease;
 pointer-events: none;
 }
 
-.nav-item:hover::after {
-left: 100%;
-}
+.nav-item:hover::after { left: 100%; }
 
 .nav-item:hover {
 background: var(--menu-item-hover);
@@ -534,11 +527,8 @@ opacity: 1;
 box-shadow: 0 0 10px var(--menu-accent-glow);
 }
 
-.nav-item:active {
-transform: scale(0.98);
-}
+.nav-item:active { transform: scale(0.98); }
 
-/* Icon container */
 .nav-icon {
 width: 40px;
 height: 40px;
@@ -568,16 +558,9 @@ box-shadow: 0 0 12px rgba(230,81,0,0.2);
 box-shadow: 0 0 16px rgba(230,81,0,0.3);
 }
 
-.nav-icon svg {
-width: 20px;
-height: 20px;
-}
+.nav-icon svg { width: 20px; height: 20px; }
 
-/* Text */
-.nav-text {
-flex: 1;
-min-width: 0;
-}
+.nav-text { flex: 1; min-width: 0; }
 
 .nav-label {
 font-family: 'Cinzel', serif;
@@ -591,9 +574,7 @@ text-overflow: ellipsis;
 transition: color 0.25s ease;
 }
 
-.nav-item:hover .nav-label {
-color: #fff;
-}
+.nav-item:hover .nav-label { color: #fff; }
 
 .nav-item.active .nav-label {
 color: var(--menu-accent);
@@ -614,7 +595,6 @@ text-overflow: ellipsis;
 
 .nav-item:hover .nav-desc { opacity: 0.8; }
 
-/* Arrow indicator */
 .nav-arrow {
 flex-shrink: 0;
 opacity: 0;
@@ -629,12 +609,8 @@ opacity: 0.6;
 transform: translateX(0);
 }
 
-.nav-arrow svg {
-width: 16px;
-height: 16px;
-}
+.nav-arrow svg { width: 16px; height: 16px; }
 
-/* Sidebar footer */
 .sidebar-footer {
 padding: 16px 20px;
 border-top: 1px solid rgba(230,81,0,0.08);
@@ -651,7 +627,6 @@ opacity: 0.4;
 text-align: center;
 }
 
-/* ===== Mobile sidebar toggle ===== */
 .sidebar-toggle {
 display: none;
 position: fixed;
@@ -675,11 +650,7 @@ transform: scale(1.08);
 box-shadow: 0 6px 28px rgba(230,81,0,0.5);
 }
 
-.sidebar-toggle svg {
-width: 24px;
-height: 24px;
-fill: #fff;
-}
+.sidebar-toggle svg { width: 24px; height: 24px; fill: #fff; }
 
 .sidebar-overlay {
 display: none;
@@ -693,7 +664,6 @@ z-index: 45;
 backdrop-filter: blur(4px);
 }
 
-/* ===== MAIN CONTENT ===== */
 .main-content {
 flex: 1;
 display: flex;
@@ -781,7 +751,6 @@ margin: 0 12px;
 font-size: 0.85rem;
 }
 
-/* ===== Status bar ===== */
 .status-bar {
 position: fixed;
 top: 0;
@@ -804,7 +773,6 @@ box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 .system-time { color: var(--primary-color); }
 .system-status { color: var(--accent-color); }
 
-/* ===== Filter ===== */
 .menu-filter {
 width: 100%;
 max-width: 1100px;
@@ -862,7 +830,6 @@ opacity: 0.6;
 font-family: 'Cinzel', serif;
 }
 
-/* ===== Menu cards ===== */
 .menu-container {
 width: 100%;
 max-width: 1100px;
@@ -1011,11 +978,7 @@ transform: translateY(-1px);
 
 .card-copy-btn:active { animation: copy-pop 0.3s ease; }
 
-.card-copy-btn svg {
-width: 13px;
-height: 13px;
-flex-shrink: 0;
-}
+.card-copy-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
 
 .card-copy-btn.copied {
 background: rgba(255,143,0,0.2);
@@ -1061,7 +1024,6 @@ pointer-events: none;
 
 .menu-card:hover .match-indicator { opacity: 1; }
 
-/* ===== Toast ===== */
 .toast-container {
 position: fixed;
 bottom: 100px;
@@ -1095,7 +1057,6 @@ white-space: nowrap;
 }
 
 .toast.toast-out { animation: toast-out 0.3s ease forwards; }
-
 .toast svg { width: 16px; height: 16px; flex-shrink: 0; }
 
 .toast-title {
@@ -1106,7 +1067,6 @@ overflow: hidden;
 text-overflow: ellipsis;
 }
 
-/* ===== Detail Modal ===== */
 .detail-modal {
 position: fixed;
 top: 0;
@@ -1241,7 +1201,6 @@ font-family: 'Cinzel', serif;
 
 .copy-success.show { opacity: 1; }
 
-/* ===== No menu ===== */
 .no-menu {
 text-align: center;
 padding: 60px 0;
@@ -1265,7 +1224,6 @@ font-size: 0.95rem;
 opacity: 0.7;
 }
 
-/* ===== Loading ===== */
 .loading-container {
 display: flex;
 flex-direction: column;
@@ -1316,7 +1274,6 @@ letter-spacing: 2px;
 opacity: 0.5;
 }
 
-/* ===== Calculator ===== */
 .calculator-toggle {
 position: fixed;
 bottom: 80px;
@@ -1340,11 +1297,7 @@ transform: scale(1.1);
 box-shadow: 0 6px 20px rgba(255,215,0,0.45);
 }
 
-.calculator-toggle svg {
-width: 28px;
-height: 28px;
-fill: var(--dark-bg);
-}
+.calculator-toggle svg { width: 28px; height: 28px; fill: var(--dark-bg); }
 
 .calculator-container {
 position: fixed;
@@ -1409,28 +1362,17 @@ transition: all 0.2s ease;
 .calculator-btn:hover { background: rgba(255,215,0,0.1); }
 .calculator-btn:active { transform: scale(0.95); }
 
-.calculator-btn.operator {
-background: rgba(230,81,0,0.1);
-color: var(--accent-color);
-}
+.calculator-btn.operator { background: rgba(230,81,0,0.1); color: var(--accent-color); }
 .calculator-btn.operator:hover { background: rgba(230,81,0,0.18); }
 
-.calculator-btn.equals {
-background: rgba(255,215,0,0.1);
-color: var(--primary-color);
-grid-column: span 2;
-}
+.calculator-btn.equals { background: rgba(255,215,0,0.1); color: var(--primary-color); grid-column: span 2; }
 .calculator-btn.equals:hover { background: rgba(255,215,0,0.18); }
 
-.calculator-btn.clear {
-background: rgba(255,152,0,0.1);
-color: #ff9800;
-}
+.calculator-btn.clear { background: rgba(255,152,0,0.1); color: #ff9800; }
 .calculator-btn.clear:hover { background: rgba(255,152,0,0.18); }
 
 .calculator-btn.zero { grid-column: span 2; }
 
-/* ===== Debug ===== */
 .debug-panel {
 position: fixed;
 bottom: 60px;
@@ -1474,13 +1416,11 @@ background: rgba(255,215,0,0.15);
 transform: translateY(-2px);
 }
 
-/* ===== Scrollbar ===== */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: rgba(10,16,34,0.5); }
 ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary-color), var(--secondary-color)); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--secondary-color), var(--primary-color)); }
 
-/* ===== Responsive ===== */
 @media (max-width: 1200px) {
 .menu-container { grid-template-columns: repeat(2, 1fr); }
 }
@@ -1495,23 +1435,10 @@ transform: translateX(-100%);
 z-index: 55;
 box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 }
-
-.sidebar.open {
-transform: translateX(0);
-}
-
-.sidebar-toggle {
-display: flex;
-}
-
-.sidebar-overlay.show {
-display: block;
-}
-
-.main-content {
-padding: 16px;
-}
-
+.sidebar.open { transform: translateX(0); }
+.sidebar-toggle { display: flex; }
+.sidebar-overlay.show { display: block; }
+.main-content { padding: 16px; }
 .title { font-size: 3rem; }
 }
 
@@ -1535,7 +1462,6 @@ padding: 16px;
 </head>
 <body>
 
-<!-- Background -->
 <div class="bg-animation">
 <div class="sky-layer"></div>
 <div class="stars-layer" id="starsLayer"></div>
@@ -1591,18 +1517,14 @@ padding: 16px;
 <div class="system-status" id="systemStatus">Membongkar Karung Kopi...</div>
 </div>
 
-<!-- Sidebar Overlay (mobile) -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-<!-- Mobile sidebar toggle button -->
 <button class="sidebar-toggle" id="sidebarToggle">
 <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
 </button>
 
-<!-- ===== APP LAYOUT ===== -->
 <div class="app-layout">
 
-<!-- LEFT SIDEBAR -->
 <aside class="sidebar" id="sidebar">
 <div class="sidebar-header">
 <div class="sidebar-title">Main Menu</div>
@@ -1610,13 +1532,12 @@ padding: 16px;
 </div>
 
 <nav class="sidebar-nav">
-<!-- BERANDA -->
-<div class="nav-item active" data-page="BERANDA">
+<div class="nav-item active" data-page="beranda">
 <div class="nav-icon">
 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
 </div>
 <div class="nav-text">
-<div class="nav-label">BERANDA</div>
+<div class="nav-label">Beranda</div>
 <div class="nav-desc">Halaman utama</div>
 </div>
 <div class="nav-arrow">
@@ -1624,7 +1545,6 @@ padding: 16px;
 </div>
 </div>
 
-<!-- Jadwal Pasaran -->
 <div class="nav-item" data-page="jadwal">
 <div class="nav-icon">
 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
@@ -1638,13 +1558,12 @@ padding: 16px;
 </div>
 </div>
 
-<!-- RANDOM-->
 <div class="nav-item" data-page="shortcut-cs">
 <div class="nav-icon">
 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
 </div>
 <div class="nav-text">
-<div class="nav-label">RANDOM</div>
+<div class="nav-label">Shortcut CS</div>
 <div class="nav-desc">Link customer service</div>
 </div>
 <div class="nav-arrow">
@@ -1652,7 +1571,6 @@ padding: 16px;
 </div>
 </div>
 
-<!-- Kalkulator Togel -->
 <div class="nav-item" data-page="kalkulator">
 <div class="nav-icon">
 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2zm-4 8h2v-2H8v2zm0-4h2v-2H8v2zm0-4h2V7H8v2zm-4 8h2v-2H4v2zm0-4h2v-2H4v2zm0-4h2V7H4v2zm12 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/></svg>
@@ -1666,7 +1584,6 @@ padding: 16px;
 </div>
 </div>
 
-<!-- Prediksi Togel -->
 <div class="nav-item" data-page="prediksi">
 <div class="nav-icon">
 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
@@ -1680,7 +1597,6 @@ padding: 16px;
 </div>
 </div>
 
-<!-- Shortcut Scatter -->
 <div class="nav-item" data-page="scatter">
 <div class="nav-icon">
 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
@@ -1694,7 +1610,6 @@ padding: 16px;
 </div>
 </div>
 
-<!-- Gambar CS -->
 <div class="nav-item" data-page="gambar-cs">
 <div class="nav-icon">
 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
@@ -1714,7 +1629,6 @@ padding: 16px;
 </div>
 </aside>
 
-<!-- MAIN CONTENT AREA -->
 <main class="main-content">
 <header class="header">
 <div class="logo-container">
@@ -1750,7 +1664,6 @@ padding: 16px;
 
 </div>
 
-<!-- Detail Modal -->
 <div class="detail-modal" id="detailModal">
 <div class="detail-content">
 <div class="detail-header">
@@ -1774,7 +1687,6 @@ SALIN
 </div>
 </div>
 
-<!-- Calculator -->
 <div class="calculator-toggle" id="calculatorToggle">
 <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/></svg>
 </div>
@@ -1819,7 +1731,7 @@ let sheetData = [];
 let filteredData = [];
 let currentDetail = null;
 let debugMode = false;
-let activePage = 'BERANDA';
+let activePage = 'beranda';
 
 let calculatorState = {
 displayValue: '0',
@@ -1829,7 +1741,6 @@ operation: null,
 waitingForOperand: false
 };
 
-/* ===== Background Elements ===== */
 function seagullSVG(size) {
 return `<svg width="${size}" height="${size * 0.5}" viewBox="0 0 40 20" fill="none" stroke="rgba(20,25,50,0.9)" stroke-width="1.5" stroke-linecap="round">
 <path d="M0,12 Q8,4 16,10 Q18,11 20,10 Q22,11 24,10 Q32,4 40,12"/>
@@ -1843,10 +1754,8 @@ const s = document.createElement('div');
 s.classList.add('star');
 if (Math.random() < 0.25) s.classList.add('warm');
 const sz = Math.random() * 2.5 + 0.5;
-s.style.width = sz + 'px';
-s.style.height = sz + 'px';
-s.style.top = Math.random() * 100 + '%';
-s.style.left = Math.random() * 100 + '%';
+s.style.width = sz + 'px'; s.style.height = sz + 'px';
+s.style.top = Math.random() * 100 + '%'; s.style.left = Math.random() * 100 + '%';
 s.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's');
 s.style.animationDelay = Math.random() * 3 + 's';
 c.appendChild(s);
@@ -1890,10 +1799,8 @@ for (let i = 0; i < 30; i++) {
 const b = document.createElement('div');
 b.classList.add('bubble');
 const sz = Math.random() * 10 + 3;
-b.style.width = sz + 'px';
-b.style.height = sz + 'px';
-b.style.left = Math.random() * 100 + '%';
-b.style.bottom = Math.random() * 8 + '%';
+b.style.width = sz + 'px'; b.style.height = sz + 'px';
+b.style.left = Math.random() * 100 + '%'; b.style.bottom = Math.random() * 8 + '%';
 b.style.setProperty('--dur', (Math.random() * 10 + 6) + 's');
 b.style.animationDelay = (Math.random() * 10) + 's';
 c.appendChild(b);
@@ -1915,56 +1822,35 @@ c.appendChild(s);
 }
 }
 
-/* ===== Sidebar ===== */
+/* ===== Sidebar — tanpa toast sama sekali ===== */
 function initSidebar() {
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('sidebarOverlay');
 const toggle = document.getElementById('sidebarToggle');
 
-function openSidebar() {
-sidebar.classList.add('open');
-overlay.classList.add('show');
-}
-
-function closeSidebar() {
-sidebar.classList.remove('open');
-overlay.classList.remove('show');
-}
+function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('show'); }
+function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
 
 toggle.addEventListener('click', function () {
-if (sidebar.classList.contains('open')) {
-closeSidebar();
-} else {
-openSidebar();
-}
+sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
 });
 
 overlay.addEventListener('click', closeSidebar);
 
 document.querySelectorAll('.nav-item').forEach(item => {
 item.addEventListener('click', function () {
-const page = this.dataset.page;
-activePage = page;
-
+activePage = this.dataset.page;
 document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
 this.classList.add('active');
-
-/* Close mobile sidebar after selection */
-if (window.innerWidth <= 900) {
-closeSidebar();
-}
-
-/* Handle special pages */
-if (page === 'kalkulator') {
+if (window.innerWidth <= 900) closeSidebar();
+if (activePage === 'kalkulator') {
 document.getElementById('calculatorContainer').classList.toggle('show');
 }
-
-showToast(this.querySelector('.nav-label').textContent, 'halaman dipilih');
+/* Tidak ada showToast di sini */
 });
 });
 }
 
-/* ===== Toast ===== */
 function showToast(title, message) {
 const container = document.getElementById('toastContainer');
 const toast = document.createElement('div');
@@ -1999,18 +1885,14 @@ document.getElementById('debugInfo').innerHTML = `
 <div>Cache: ${localStorage.getItem('NO-MERCYYY_data') ? 'Available' : 'Empty'}</div>`;
 }
 
-/* ===== Fuzzy Search ===== */
 function levenshteinDistance(str1, str2) {
 const m = [];
 for (let i = 0; i <= str2.length; i++) m[i] = [i];
 for (let j = 0; j <= str1.length; j++) m[0][j] = j;
 for (let i = 1; i <= str2.length; i++) {
 for (let j = 1; j <= str1.length; j++) {
-if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
-m[i][j] = m[i - 1][j - 1];
-} else {
-m[i][j] = Math.min(m[i - 1][j - 1] + 1, m[i][j - 1] + 1, m[i - 1][j] + 1);
-}
+if (str2.charAt(i - 1) === str1.charAt(j - 1)) m[i][j] = m[i - 1][j - 1];
+else m[i][j] = Math.min(m[i - 1][j - 1] + 1, m[i][j - 1] + 1, m[i - 1][j] + 1);
 }
 }
 return m[str2.length][str1.length];
@@ -2024,8 +1906,7 @@ return Math.round(((longer.length - d) / longer.length) * 100);
 }
 
 function fuzzyMatch(query, text) {
-const ql = query.toLowerCase();
-const tl = text.toLowerCase();
+const ql = query.toLowerCase(), tl = text.toLowerCase();
 if (tl.includes(ql)) return { match: true, score: 100, type: 'exact' };
 const words = tl.split(/\s+/);
 let best = { match: false, score: 0, type: 'none' };
@@ -2038,14 +1919,12 @@ if (w.includes(ql)) { const s = Math.round((ql.length / w.length) * 90); if (s >
 return best;
 }
 
-/* ===== Data Fetching ===== */
 async function fetchSheetData() {
 const sheetId = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
 updateSystemStatus('Mengambil Data...', 'warning');
 
 try {
-const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=0`;
-const r = await fetch(url);
+const r = await fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=0`);
 if (!r.ok) throw new Error(`HTTP ${r.status}`);
 const t = await r.text();
 if (t.includes('google.visualization.Query.setResponse')) {
@@ -2059,17 +1938,13 @@ if (title) sheetData.push({ title, info });
 if (sheetData.length > 0) {
 updateSystemStatus('Pelayaran Aktif', 'success');
 localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
-filteredData = [...sheetData];
-displayMenuItems();
-updateDebugInfo();
-return;
+filteredData = [...sheetData]; displayMenuItems(); updateDebugInfo(); return;
 }
 }
 } catch (e) {}
 
 try {
-const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=REPORTAN`;
-const r = await fetch(url);
+const r = await fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=REPORTAN`);
 if (!r.ok) throw new Error(`HTTP ${r.status}`);
 const t = await r.text();
 if (t.includes('google.visualization.Query.setResponse')) {
@@ -2083,10 +1958,7 @@ if (title) sheetData.push({ title, info });
 if (sheetData.length > 0) {
 updateSystemStatus('Pelayaran Aktif', 'success');
 localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
-filteredData = [...sheetData];
-displayMenuItems();
-updateDebugInfo();
-return;
+filteredData = [...sheetData]; displayMenuItems(); updateDebugInfo(); return;
 }
 }
 } catch (e) {}
@@ -2096,10 +1968,7 @@ const cached = localStorage.getItem('NO-MERCYYY_data');
 if (cached) {
 sheetData = JSON.parse(cached);
 updateSystemStatus('Pelayaran Offline', 'warning');
-filteredData = [...sheetData];
-displayMenuItems();
-updateDebugInfo();
-return;
+filteredData = [...sheetData]; displayMenuItems(); updateDebugInfo(); return;
 }
 } catch (e) {}
 
@@ -2109,9 +1978,7 @@ sheetData = [
 { title: "KESALAHAN KONEKSI", info: "Tidak dapat terhubung ke database." }
 ];
 updateSystemStatus("Lautan Tidak Dapat Dijangkau", 'error');
-filteredData = [...sheetData];
-displayMenuItems();
-updateDebugInfo();
+filteredData = [...sheetData]; displayMenuItems(); updateDebugInfo();
 }
 
 function displayMenuItems() {
@@ -2120,14 +1987,9 @@ const loading = document.getElementById('loadingContainer');
 const noMenu = document.getElementById('noMenu');
 loading.style.display = 'none';
 
-if (filteredData.length === 0) {
-container.style.display = 'none';
-noMenu.style.display = 'block';
-return;
-}
+if (filteredData.length === 0) { container.style.display = 'none'; noMenu.style.display = 'block'; return; }
 
-container.style.display = 'grid';
-noMenu.style.display = 'none';
+container.style.display = 'grid'; noMenu.style.display = 'none';
 
 container.innerHTML = filteredData.map((item, i) => `
 <div class="menu-card" data-index="${i}">
@@ -2145,9 +2007,7 @@ container.innerHTML = filteredData.map((item, i) => `
 </div>`).join('');
 
 container.querySelectorAll('.menu-card').forEach(card => {
-card.addEventListener('click', function () {
-showDetail(filteredData[parseInt(this.dataset.index)]);
-});
+card.addEventListener('click', function () { showDetail(filteredData[parseInt(this.dataset.index)]); });
 });
 
 container.querySelectorAll('.card-copy-btn').forEach(btn => {
@@ -2174,8 +2034,7 @@ updateDebugInfo();
 
 function hideDetail() {
 document.getElementById('detailModal').classList.remove('show');
-currentDetail = null;
-updateDebugInfo();
+currentDetail = null; updateDebugInfo();
 }
 
 function copyToClipboard() {
@@ -2190,46 +2049,34 @@ setTimeout(() => el.classList.remove('show'), 2000);
 
 function filterMenuItems() {
 const q = document.getElementById('filterInput').value.trim();
-if (q === '') {
-filteredData = sheetData.map(item => ({ ...item }));
-} else {
+if (q === '') { filteredData = sheetData.map(item => ({ ...item })); }
+else {
 const results = [];
 for (const item of sheetData) {
-const tm = fuzzyMatch(q, item.title);
-const im = fuzzyMatch(q, item.info);
+const tm = fuzzyMatch(q, item.title), im = fuzzyMatch(q, item.info);
 const best = tm.score > im.score ? tm : im;
 if (best.match) results.push({ ...item, matchScore: best.score, matchType: best.type.toUpperCase() });
 }
 results.sort((a, b) => b.matchScore - a.matchScore);
 filteredData = results;
 }
-displayMenuItems();
-updateDebugInfo();
+displayMenuItems(); updateDebugInfo();
 }
 
-/* ===== Calculator ===== */
 function updateCalculatorDisplay() {
 document.getElementById('calculatorValue').textContent = calculatorState.displayValue;
 document.getElementById('calculatorExpression').textContent = calculatorState.expression;
 }
 
 function inputDigit(d) {
-if (calculatorState.waitingForOperand) {
-calculatorState.displayValue = String(d);
-calculatorState.waitingForOperand = false;
-} else {
-calculatorState.displayValue = calculatorState.displayValue === '0' ? String(d) : calculatorState.displayValue + d;
-}
+if (calculatorState.waitingForOperand) { calculatorState.displayValue = String(d); calculatorState.waitingForOperand = false; }
+else { calculatorState.displayValue = calculatorState.displayValue === '0' ? String(d) : calculatorState.displayValue + d; }
 updateCalculatorDisplay();
 }
 
 function inputDecimal() {
-if (calculatorState.waitingForOperand) {
-calculatorState.displayValue = '0.';
-calculatorState.waitingForOperand = false;
-} else if (calculatorState.displayValue.indexOf('.') === -1) {
-calculatorState.displayValue += '.';
-}
+if (calculatorState.waitingForOperand) { calculatorState.displayValue = '0.'; calculatorState.waitingForOperand = false; }
+else if (calculatorState.displayValue.indexOf('.') === -1) calculatorState.displayValue += '.';
 updateCalculatorDisplay();
 }
 
@@ -2242,27 +2089,20 @@ function getOpSym(op) { return { '+': '+', '-': '-', '*': '×', '/': '÷', '%': 
 
 function calc(a, b, op) {
 switch (op) {
-case '+': return a + b;
-case '-': return a - b;
-case '*': return a * b;
-case '/': return b !== 0 ? a / b : 0;
-case '%': return a % b;
-default: return b;
+case '+': return a + b; case '-': return a - b; case '*': return a * b;
+case '/': return b !== 0 ? a / b : 0; case '%': return a % b; default: return b;
 }
 }
 
 function performOperation(nextOp) {
 const iv = parseFloat(calculatorState.displayValue);
-if (calculatorState.previousValue === null) {
-calculatorState.previousValue = iv;
-} else if (calculatorState.operation) {
+if (calculatorState.previousValue === null) { calculatorState.previousValue = iv; }
+else if (calculatorState.operation) {
 const nv = calc(calculatorState.previousValue || 0, iv, calculatorState.operation);
-calculatorState.displayValue = String(nv);
-calculatorState.previousValue = nv;
+calculatorState.displayValue = String(nv); calculatorState.previousValue = nv;
 calculatorState.expression = `${calculatorState.previousValue || 0} ${getOpSym(calculatorState.operation)} ${iv} =`;
 }
-calculatorState.waitingForOperand = true;
-calculatorState.operation = nextOp;
+calculatorState.waitingForOperand = true; calculatorState.operation = nextOp;
 if (nextOp) calculatorState.expression = `${calculatorState.displayValue} ${getOpSym(nextOp)}`;
 updateCalculatorDisplay();
 }
@@ -2273,9 +2113,7 @@ if (calculatorState.previousValue !== null && calculatorState.operation) {
 const nv = calc(calculatorState.previousValue, iv, calculatorState.operation);
 calculatorState.displayValue = String(nv);
 calculatorState.expression = `${calculatorState.previousValue} ${getOpSym(calculatorState.operation)} ${iv} =`;
-calculatorState.previousValue = null;
-calculatorState.operation = null;
-calculatorState.waitingForOperand = true;
+calculatorState.previousValue = null; calculatorState.operation = null; calculatorState.waitingForOperand = true;
 }
 updateCalculatorDisplay();
 }
@@ -2290,42 +2128,28 @@ calculatorState.displayValue = String(parseFloat(calculatorState.displayValue) /
 updateCalculatorDisplay();
 }
 
-function toggleCalculator() {
-document.getElementById('calculatorContainer').classList.toggle('show');
-}
+function toggleCalculator() { document.getElementById('calculatorContainer').classList.toggle('show'); }
 
-/* ===== Init ===== */
 window.onload = function () {
-createStars();
-createClouds();
-createSeagulls();
-createBubbles();
-createSparkles();
+createStars(); createClouds(); createSeagulls(); createBubbles(); createSparkles();
 initSidebar();
-updateSystemTime();
-setInterval(updateSystemTime, 1000);
+updateSystemTime(); setInterval(updateSystemTime, 1000);
 
 document.getElementById('debugToggle').addEventListener('click', function () {
 debugMode = !debugMode;
 document.getElementById('debugPanel').classList.toggle('show', debugMode);
 updateDebugInfo();
 });
-
 setInterval(updateDebugInfo, 1000);
 
 let debounce;
 document.getElementById('filterInput').addEventListener('input', function () {
-clearTimeout(debounce);
-debounce = setTimeout(filterMenuItems, 300);
+clearTimeout(debounce); debounce = setTimeout(filterMenuItems, 300);
 });
 
 document.getElementById('detailClose').addEventListener('click', hideDetail);
 document.getElementById('copyButton').addEventListener('click', copyToClipboard);
-
-document.getElementById('detailModal').addEventListener('click', function (e) {
-if (e.target === this) hideDetail();
-});
-
+document.getElementById('detailModal').addEventListener('click', function (e) { if (e.target === this) hideDetail(); });
 document.getElementById('calculatorToggle').addEventListener('click', toggleCalculator);
 
 document.addEventListener('keydown', function (e) {
