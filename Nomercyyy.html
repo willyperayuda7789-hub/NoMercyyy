@@ -36,6 +36,13 @@ box-sizing: border-box;
 --gradient-1: linear-gradient(135deg, #FFD700, #E65100);
 --gradient-2: linear-gradient(135deg, #E65100, #FF8F00);
 --gradient-3: linear-gradient(135deg, #FF8F00, #FFD700);
+--sidebar-width: 280px;
+--sidebar-bg: rgba(5, 8, 16, 0.96);
+--menu-item-bg: rgba(12, 18, 36, 0.85);
+--menu-item-hover: rgba(230, 81, 0, 0.12);
+--menu-item-active: rgba(230, 81, 0, 0.18);
+--menu-accent: #E65100;
+--menu-accent-glow: rgba(230, 81, 0, 0.4);
 }
 
 body {
@@ -59,7 +66,6 @@ z-index: -1;
 overflow: hidden;
 }
 
-/* ===== SKY: Sunset over the Grand Line ===== */
 .sky-layer {
 position: absolute;
 top: 0;
@@ -67,21 +73,11 @@ left: 0;
 width: 100%;
 height: 58%;
 background: linear-gradient(180deg,
-#06091a 0%,
-#0c1530 18%,
-#142040 32%,
-#1e2d58 42%,
-#2e3058 50%,
-#4a2e4e 58%,
-#7a3040 66%,
-#b84525 76%,
-#d4691e 84%,
-#e8941a 92%,
-#f0b030 100%
-);
+#06091a 0%, #0c1530 18%, #142040 32%, #1e2d58 42%,
+#2e3058 50%, #4a2e4e 58%, #7a3040 66%, #b84525 76%,
+#d4691e 84%, #e8941a 92%, #f0b030 100%);
 }
 
-/* ===== Sun at horizon ===== */
 .sun {
 position: absolute;
 bottom: 42%;
@@ -91,7 +87,7 @@ width: 100px;
 height: 100px;
 border-radius: 50%;
 background: radial-gradient(circle at 50% 50%, #fff5cc, #ffd54f 30%, #ff9800 60%, #e65100 85%, transparent 100%);
-box-shadow: 0 0 60px rgba(255, 183, 77, 0.5), 0 0 120px rgba(255, 152, 0, 0.3), 0 0 200px rgba(230, 81, 0, 0.15);
+box-shadow: 0 0 60px rgba(255,183,77,0.5), 0 0 120px rgba(255,152,0,0.3), 0 0 200px rgba(230,81,0,0.15);
 opacity: 0.85;
 }
 
@@ -99,15 +95,13 @@ opacity: 0.85;
 position: absolute;
 bottom: 42%;
 left: 50%;
-transform: translateX(-50%);
 width: 100px;
 height: 100px;
 border-radius: 50%;
-background: radial-gradient(circle, rgba(255, 200, 80, 0.15) 0%, rgba(255, 152, 0, 0.06) 40%, transparent 65%);
+background: radial-gradient(circle, rgba(255,200,80,0.15) 0%, rgba(255,152,0,0.06) 40%, transparent 65%);
 transform: translateX(-50%) scale(6);
 }
 
-/* ===== Sun reflection on water ===== */
 .sun-reflection {
 position: absolute;
 bottom: 15%;
@@ -115,7 +109,7 @@ left: 50%;
 transform: translateX(-50%);
 width: 180px;
 height: 280px;
-background: linear-gradient(180deg, rgba(255, 200, 80, 0.1) 0%, rgba(255, 152, 0, 0.04) 50%, transparent 100%);
+background: linear-gradient(180deg, rgba(255,200,80,0.1) 0%, rgba(255,152,0,0.04) 50%, transparent 100%);
 filter: blur(18px);
 border-radius: 50%;
 animation: reflection-shimmer 5s ease-in-out infinite alternate;
@@ -126,7 +120,6 @@ animation: reflection-shimmer 5s ease-in-out infinite alternate;
 100% { opacity: 0.9; transform: translateX(-50%) scaleX(1.4); }
 }
 
-/* ===== Stars (upper sky only) ===== */
 .stars-layer {
 position: absolute;
 top: 0;
@@ -144,7 +137,7 @@ animation: twinkle var(--dur) ease-in-out infinite alternate;
 
 .star.warm {
 background: #ffe0a0;
-box-shadow: 0 0 2px rgba(255, 224, 160, 0.5);
+box-shadow: 0 0 2px rgba(255,224,160,0.5);
 }
 
 @keyframes twinkle {
@@ -152,7 +145,6 @@ box-shadow: 0 0 2px rgba(255, 224, 160, 0.5);
 100% { opacity: 1; transform: scale(1.2); }
 }
 
-/* ===== Ocean ===== */
 .ocean-layer {
 position: absolute;
 bottom: 0;
@@ -162,7 +154,6 @@ height: 48%;
 background: linear-gradient(180deg, #0d2a50 0%, #0a1f3d 25%, #07162e 50%, #050f22 75%, #030a18 100%);
 }
 
-/* ===== Clouds ===== */
 .clouds-layer {
 position: absolute;
 top: 12%;
@@ -180,19 +171,14 @@ filter: blur(18px);
 animation: cloud-drift var(--dur) linear infinite;
 }
 
-.cloud.sunset {
-background: rgba(200, 120, 60, 0.08);
-}
-.cloud.dark {
-background: rgba(20, 25, 50, 0.12);
-}
+.cloud.sunset { background: rgba(200,120,60,0.08); }
+.cloud.dark { background: rgba(20,25,50,0.12); }
 
 @keyframes cloud-drift {
 0% { transform: translateX(-120%); }
 100% { transform: translateX(calc(100vw + 120%)); }
 }
 
-/* ===== Waves ===== */
 .waves-container {
 position: absolute;
 bottom: 0;
@@ -236,7 +222,6 @@ width: 100%;
 50% { transform: translateX(1.5%) translateY(-4px); }
 }
 
-/* ===== Ship silhouette ===== */
 .ship-silhouette {
 position: absolute;
 bottom: 30%;
@@ -255,7 +240,6 @@ filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
 80% { transform: translateX(-50%) rotate(0.5deg) translateY(-3px); }
 }
 
-/* ===== Bubbles ===== */
 .particles {
 position: absolute;
 top: 0;
@@ -266,8 +250,8 @@ height: 100%;
 
 .bubble {
 position: absolute;
-background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), rgba(180, 220, 255, 0.05));
-border: 1px solid rgba(255, 255, 255, 0.1);
+background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), rgba(180,220,255,0.05));
+border: 1px solid rgba(255,255,255,0.1);
 border-radius: 50%;
 animation: bubble-rise var(--dur) ease-in infinite;
 }
@@ -280,7 +264,6 @@ animation: bubble-rise var(--dur) ease-in infinite;
 100% { transform: translateY(-75vh) translateX(15px) scale(1); opacity: 0; }
 }
 
-/* ===== Gold sparkles ===== */
 .sparkles {
 position: absolute;
 top: 0;
@@ -294,7 +277,7 @@ pointer-events: none;
 position: absolute;
 width: var(--size);
 height: var(--size);
-background: radial-gradient(circle, rgba(255, 215, 0, 0.9), rgba(255, 183, 77, 0.4), transparent);
+background: radial-gradient(circle, rgba(255,215,0,0.9), rgba(255,183,77,0.4), transparent);
 border-radius: 50%;
 animation: sparkle-float var(--dur) ease-in-out infinite;
 }
@@ -306,14 +289,13 @@ animation: sparkle-float var(--dur) ease-in-out infinite;
 100% { transform: translateY(-50vh) scale(0.2); opacity: 0; }
 }
 
-/* ===== Fog at horizon ===== */
 .fog-layer {
 position: absolute;
 bottom: 32%;
 left: 0;
 width: 100%;
 height: 18%;
-background: linear-gradient(180deg, transparent 0%, rgba(180, 120, 60, 0.06) 30%, rgba(200, 140, 70, 0.08) 50%, rgba(15, 30, 60, 0.1) 70%, transparent 100%);
+background: linear-gradient(180deg, transparent 0%, rgba(180,120,60,0.06) 30%, rgba(200,140,70,0.08) 50%, rgba(15,30,60,0.1) 70%, transparent 100%);
 animation: fog-drift 18s ease-in-out infinite alternate;
 pointer-events: none;
 }
@@ -323,7 +305,6 @@ pointer-events: none;
 100% { transform: translateX(2%); opacity: 1; }
 }
 
-/* ===== Jolly Roger watermark ===== */
 .jolly-watermark {
 position: absolute;
 top: 50%;
@@ -336,7 +317,6 @@ pointer-events: none;
 z-index: 0;
 }
 
-/* ===== Seagulls ===== */
 .seagulls-layer {
 position: absolute;
 top: 8%;
@@ -361,12 +341,11 @@ opacity: 0.2;
 100% { transform: translateX(calc(100vw + 80px)) translateY(0) scale(var(--scale)); }
 }
 
-/* ===== Animations ===== */
 @keyframes fire-flicker {
-0%, 100% { text-shadow: 0 0 4px rgba(255, 215, 0, 0.8), 0 0 12px rgba(255, 152, 0, 0.5), 0 0 20px rgba(230, 81, 0, 0.3); }
-25% { text-shadow: 0 0 6px rgba(255, 215, 0, 0.9), 0 0 16px rgba(255, 152, 0, 0.6), 0 0 24px rgba(230, 81, 0, 0.4); }
-50% { text-shadow: 0 0 3px rgba(255, 215, 0, 0.7), 0 0 10px rgba(255, 152, 0, 0.4), 0 0 18px rgba(230, 81, 0, 0.2); }
-75% { text-shadow: 0 0 7px rgba(255, 215, 0, 1), 0 0 18px rgba(255, 152, 0, 0.7), 0 0 28px rgba(230, 81, 0, 0.5); }
+0%, 100% { text-shadow: 0 0 4px rgba(255,215,0,0.8), 0 0 12px rgba(255,152,0,0.5), 0 0 20px rgba(230,81,0,0.3); }
+25% { text-shadow: 0 0 6px rgba(255,215,0,0.9), 0 0 16px rgba(255,152,0,0.6), 0 0 24px rgba(230,81,0,0.4); }
+50% { text-shadow: 0 0 3px rgba(255,215,0,0.7), 0 0 10px rgba(255,152,0,0.4), 0 0 18px rgba(230,81,0,0.2); }
+75% { text-shadow: 0 0 7px rgba(255,215,0,1), 0 0 18px rgba(255,152,0,0.7), 0 0 28px rgba(230,81,0,0.5); }
 }
 
 @keyframes pulse-glow {
@@ -391,22 +370,344 @@ opacity: 0.2;
 100% { transform: translateY(-10px) scale(0.9); opacity: 0; }
 }
 
-/* ===== Container ===== */
-.container {
+@keyframes sidebar-item-enter {
+0% { transform: translateX(-20px); opacity: 0; }
+100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes accent-bar-pulse {
+0%, 100% { box-shadow: 0 0 6px var(--menu-accent-glow); }
+50% { box-shadow: 0 0 14px var(--menu-accent-glow), 0 0 24px rgba(230,81,0,0.15); }
+}
+
+/* ===== APP LAYOUT ===== */
+.app-layout {
 position: relative;
 z-index: 10;
+display: flex;
+min-height: 100vh;
+padding-top: 44px;
+}
+
+/* ===== LEFT SIDEBAR ===== */
+.sidebar {
+width: var(--sidebar-width);
+min-width: var(--sidebar-width);
+height: calc(100vh - 44px);
+position: sticky;
+top: 44px;
+background: var(--sidebar-bg);
+backdrop-filter: blur(20px);
+border-right: 1px solid rgba(230, 81, 0, 0.12);
+display: flex;
+flex-direction: column;
+overflow: hidden;
+z-index: 50;
+transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-header {
+padding: 24px 20px 16px;
+border-bottom: 1px solid rgba(230, 81, 0, 0.1);
+flex-shrink: 0;
+}
+
+.sidebar-title {
+font-family: 'Cinzel', serif;
+font-size: 0.78rem;
+font-weight: 900;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(--menu-accent);
+text-shadow: 0 0 12px var(--menu-accent-glow);
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.sidebar-title::before {
+content: '';
+display: inline-block;
+width: 3px;
+height: 18px;
+background: linear-gradient(180deg, var(--menu-accent), #FF8F00);
+border-radius: 2px;
+box-shadow: 0 0 8px var(--menu-accent-glow);
+}
+
+.sidebar-subtitle {
+font-family: 'Cinzel', serif;
+font-size: 0.62rem;
+color: var(--text-secondary);
+letter-spacing: 1.5px;
+text-transform: uppercase;
+margin-top: 6px;
+padding-left: 13px;
+opacity: 0.6;
+}
+
+/* ===== Menu Items ===== */
+.sidebar-nav {
+flex: 1;
+overflow-y: auto;
+padding: 12px 10px;
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+
+.sidebar-nav::-webkit-scrollbar { width: 4px; }
+.sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+.sidebar-nav::-webkit-scrollbar-thumb { background: rgba(230,81,0,0.3); border-radius: 2px; }
+
+.nav-item {
+display: flex;
+align-items: center;
+gap: 14px;
+padding: 13px 14px;
+border-radius: 10px;
+cursor: pointer;
+transition: all 0.25s ease;
+position: relative;
+overflow: hidden;
+animation: sidebar-item-enter 0.4s ease backwards;
+border: 1px solid transparent;
+flex-shrink: 0;
+}
+
+.nav-item:nth-child(1) { animation-delay: 0.05s; }
+.nav-item:nth-child(2) { animation-delay: 0.1s; }
+.nav-item:nth-child(3) { animation-delay: 0.15s; }
+.nav-item:nth-child(4) { animation-delay: 0.2s; }
+.nav-item:nth-child(5) { animation-delay: 0.25s; }
+.nav-item:nth-child(6) { animation-delay: 0.3s; }
+.nav-item:nth-child(7) { animation-delay: 0.35s; }
+
+/* Accent bar on left of each item */
+.nav-item::before {
+content: '';
+position: absolute;
+left: 0;
+top: 15%;
+width: 3px;
+height: 70%;
+background: linear-gradient(180deg, var(--menu-accent), #FF8F00);
+border-radius: 0 3px 3px 0;
+opacity: 0;
+transition: all 0.25s ease;
+}
+
+/* Hover shimmer */
+.nav-item::after {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(230,81,0,0.06), transparent);
+transition: left 0.5s ease;
+pointer-events: none;
+}
+
+.nav-item:hover::after {
+left: 100%;
+}
+
+.nav-item:hover {
+background: var(--menu-item-hover);
+border-color: rgba(230,81,0,0.08);
+}
+
+.nav-item:hover::before {
+opacity: 1;
+animation: accent-bar-pulse 2s ease-in-out infinite;
+}
+
+.nav-item.active {
+background: var(--menu-item-active);
+border-color: rgba(230,81,0,0.15);
+}
+
+.nav-item.active::before {
+opacity: 1;
+box-shadow: 0 0 10px var(--menu-accent-glow);
+}
+
+.nav-item:active {
+transform: scale(0.98);
+}
+
+/* Icon container */
+.nav-icon {
+width: 40px;
+height: 40px;
+border-radius: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+transition: all 0.25s ease;
+position: relative;
+}
+
+.nav-item:nth-child(1) .nav-icon { background: rgba(230,81,0,0.1); color: #E65100; }
+.nav-item:nth-child(2) .nav-icon { background: rgba(255,143,0,0.1); color: #FF8F00; }
+.nav-item:nth-child(3) .nav-icon { background: rgba(255,215,0,0.08); color: #FFD700; }
+.nav-item:nth-child(4) .nav-icon { background: rgba(230,81,0,0.1); color: #E65100; }
+.nav-item:nth-child(5) .nav-icon { background: rgba(255,143,0,0.1); color: #FF8F00; }
+.nav-item:nth-child(6) .nav-icon { background: rgba(255,215,0,0.08); color: #FFD700; }
+.nav-item:nth-child(7) .nav-icon { background: rgba(230,81,0,0.1); color: #E65100; }
+
+.nav-item:hover .nav-icon {
+transform: scale(1.08);
+box-shadow: 0 0 12px rgba(230,81,0,0.2);
+}
+
+.nav-item.active .nav-icon {
+box-shadow: 0 0 16px rgba(230,81,0,0.3);
+}
+
+.nav-icon svg {
+width: 20px;
+height: 20px;
+}
+
+/* Text */
+.nav-text {
+flex: 1;
+min-width: 0;
+}
+
+.nav-label {
+font-family: 'Cinzel', serif;
+font-size: 0.82rem;
+font-weight: 700;
+color: var(--text-primary);
+letter-spacing: 0.5px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+transition: color 0.25s ease;
+}
+
+.nav-item:hover .nav-label {
+color: #fff;
+}
+
+.nav-item.active .nav-label {
+color: var(--menu-accent);
+text-shadow: 0 0 8px var(--menu-accent-glow);
+}
+
+.nav-desc {
+font-family: 'Cinzel', serif;
+font-size: 0.6rem;
+color: var(--text-secondary);
+letter-spacing: 0.3px;
+margin-top: 2px;
+opacity: 0.6;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.nav-item:hover .nav-desc { opacity: 0.8; }
+
+/* Arrow indicator */
+.nav-arrow {
+flex-shrink: 0;
+opacity: 0;
+transform: translateX(-6px);
+transition: all 0.25s ease;
+color: var(--menu-accent);
+}
+
+.nav-item:hover .nav-arrow,
+.nav-item.active .nav-arrow {
+opacity: 0.6;
+transform: translateX(0);
+}
+
+.nav-arrow svg {
+width: 16px;
+height: 16px;
+}
+
+/* Sidebar footer */
+.sidebar-footer {
+padding: 16px 20px;
+border-top: 1px solid rgba(230,81,0,0.08);
+flex-shrink: 0;
+}
+
+.sidebar-footer-text {
+font-family: 'Cinzel', serif;
+font-size: 0.58rem;
+color: var(--text-secondary);
+letter-spacing: 1px;
+text-transform: uppercase;
+opacity: 0.4;
+text-align: center;
+}
+
+/* ===== Mobile sidebar toggle ===== */
+.sidebar-toggle {
+display: none;
+position: fixed;
+bottom: 24px;
+left: 24px;
+width: 52px;
+height: 52px;
+background: linear-gradient(135deg, var(--menu-accent), #FF8F00);
+border-radius: 14px;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+z-index: 200;
+box-shadow: 0 4px 20px var(--menu-accent-glow);
+border: 1px solid rgba(230,81,0,0.3);
+transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+transform: scale(1.08);
+box-shadow: 0 6px 28px rgba(230,81,0,0.5);
+}
+
+.sidebar-toggle svg {
+width: 24px;
+height: 24px;
+fill: #fff;
+}
+
+.sidebar-overlay {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0,0,0,0.6);
+z-index: 45;
+backdrop-filter: blur(4px);
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+flex: 1;
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: flex-start;
-min-height: 100vh;
-padding: 20px;
-padding-top: 60px;
+min-width: 0;
+padding: 20px 24px;
+padding-top: 20px;
 }
 
 .header {
 text-align: center;
-margin-bottom: 48px;
+margin-bottom: 32px;
 position: relative;
 }
 
@@ -414,7 +715,7 @@ position: relative;
 display: flex;
 align-items: center;
 justify-content: center;
-margin-bottom: 24px;
+margin-bottom: 16px;
 position: relative;
 }
 
@@ -425,14 +726,14 @@ left: 50%;
 transform: translate(-50%, -50%);
 width: 340px;
 height: 130px;
-background: radial-gradient(ellipse, rgba(255, 215, 0, 0.08) 0%, rgba(255, 143, 0, 0.04) 50%, transparent 70%);
+background: radial-gradient(ellipse, rgba(255,215,0,0.08) 0%, rgba(255,143,0,0.04) 50%, transparent 70%);
 z-index: -1;
 animation: pulse-glow 3s ease-in-out infinite;
 }
 
 .title {
 font-family: 'Pirata One', cursive;
-font-size: 5rem;
+font-size: 4rem;
 font-weight: 400;
 background: linear-gradient(180deg, #FFF8E1 0%, #FFD54F 25%, #FFB300 45%, #FF8F00 65%, #E65100 85%, #BF360C 100%);
 -webkit-background-clip: text;
@@ -465,8 +766,8 @@ filter: blur(2px);
 .subtitle {
 font-family: 'Cinzel', serif;
 color: var(--primary-color);
-font-size: 1rem;
-margin-top: 16px;
+font-size: 0.9rem;
+margin-top: 12px;
 letter-spacing: 4px;
 text-transform: uppercase;
 opacity: 0.8;
@@ -486,7 +787,7 @@ position: fixed;
 top: 0;
 left: 0;
 right: 0;
-background: linear-gradient(90deg, rgba(7, 12, 24, 0.95), rgba(11, 20, 45, 0.95));
+background: linear-gradient(90deg, rgba(7,12,24,0.95), rgba(11,20,45,0.95));
 padding: 8px 20px;
 display: flex;
 justify-content: space-between;
@@ -496,8 +797,8 @@ text-transform: uppercase;
 letter-spacing: 1px;
 z-index: 100;
 backdrop-filter: blur(10px);
-border-bottom: 1px solid rgba(255, 215, 0, 0.18);
-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+border-bottom: 1px solid rgba(255,215,0,0.18);
+box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .system-time { color: var(--primary-color); }
@@ -506,8 +807,8 @@ box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 /* ===== Filter ===== */
 .menu-filter {
 width: 100%;
-max-width: 1400px;
-margin-bottom: 30px;
+max-width: 1100px;
+margin-bottom: 24px;
 position: relative;
 }
 
@@ -515,16 +816,16 @@ position: relative;
 position: relative;
 display: flex;
 gap: 12px;
-background: rgba(10, 16, 34, 0.75);
+background: rgba(10,16,34,0.75);
 border-radius: 12px;
 padding: 4px;
 backdrop-filter: blur(10px);
-border: 1px solid rgba(255, 215, 0, 0.18);
+border: 1px solid rgba(255,215,0,0.18);
 transition: all 0.3s ease;
 }
 
 .filter-container:focus-within {
-border-color: rgba(255, 215, 0, 0.45);
+border-color: rgba(255,215,0,0.45);
 box-shadow: 0 0 20px var(--gold-glow);
 }
 
@@ -535,7 +836,7 @@ border: none;
 color: var(--text-primary);
 font-family: 'Cinzel', serif;
 font-size: 1rem;
-padding: 18px 24px;
+padding: 16px 20px;
 border-radius: 8px;
 transition: all 0.3s ease;
 letter-spacing: 1px;
@@ -553,9 +854,9 @@ box-shadow: 0 0 15px var(--gold-glow);
 
 .filter-hint {
 position: absolute;
-bottom: -24px;
-left: 24px;
-font-size: 0.75rem;
+bottom: -22px;
+left: 20px;
+font-size: 0.72rem;
 color: var(--text-secondary);
 opacity: 0.6;
 font-family: 'Cinzel', serif;
@@ -564,18 +865,18 @@ font-family: 'Cinzel', serif;
 /* ===== Menu cards ===== */
 .menu-container {
 width: 100%;
-max-width: 1400px;
+max-width: 1100px;
 display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 18px;
+grid-template-columns: repeat(3, 1fr);
+gap: 16px;
 margin-bottom: 40px;
 }
 
 .menu-card {
-background: linear-gradient(135deg, rgba(10, 16, 34, 0.88), rgba(7, 12, 26, 0.92));
-border: 1px solid rgba(255, 215, 0, 0.1);
+background: linear-gradient(135deg, rgba(10,16,34,0.88), rgba(7,12,26,0.92));
+border: 1px solid rgba(255,215,0,0.1);
 border-radius: 16px;
-padding: 22px;
+padding: 20px;
 backdrop-filter: blur(12px);
 transition: all 0.4s ease;
 position: relative;
@@ -584,7 +885,7 @@ cursor: pointer;
 height: 100%;
 display: flex;
 flex-direction: column;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
 .menu-card::before {
@@ -594,15 +895,13 @@ top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background: linear-gradient(135deg, rgba(255, 215, 0, 0.03), rgba(230, 81, 0, 0.03));
+background: linear-gradient(135deg, rgba(255,215,0,0.03), rgba(230,81,0,0.03));
 opacity: 0;
 transition: opacity 0.4s ease;
 pointer-events: none;
 }
 
-.menu-card:hover::before {
-opacity: 1;
-}
+.menu-card:hover::before { opacity: 1; }
 
 .menu-card::after {
 content: '';
@@ -618,8 +917,8 @@ pointer-events: none;
 
 .menu-card:hover {
 transform: translateY(-6px);
-box-shadow: 0 12px 35px rgba(255, 215, 0, 0.1), 0 4px 15px rgba(0,0,0,0.4);
-border-color: rgba(255, 215, 0, 0.28);
+box-shadow: 0 12px 35px rgba(255,215,0,0.1), 0 4px 15px rgba(0,0,0,0.4);
+border-color: rgba(255,215,0,0.28);
 }
 
 .menu-card .card-skull {
@@ -632,14 +931,12 @@ pointer-events: none;
 transition: opacity 0.4s ease;
 }
 
-.menu-card:hover .card-skull {
-opacity: 0.09;
-}
+.menu-card:hover .card-skull { opacity: 0.09; }
 
 .menu-title {
 font-family: 'Cinzel', serif;
 color: var(--primary-color);
-font-size: 0.95rem;
+font-size: 0.9rem;
 font-weight: 700;
 margin-bottom: 10px;
 text-transform: uppercase;
@@ -658,7 +955,7 @@ display: -webkit-box;
 -webkit-line-clamp: 4;
 -webkit-box-orient: vertical;
 font-family: 'Cinzel', serif;
-font-size: 0.82rem;
+font-size: 0.8rem;
 opacity: 0.85;
 }
 
@@ -675,8 +972,8 @@ flex-shrink: 0;
 display: inline-flex;
 align-items: center;
 gap: 5px;
-background: rgba(255, 215, 0, 0.08);
-border: 1px solid rgba(255, 215, 0, 0.18);
+background: rgba(255,215,0,0.08);
+border: 1px solid rgba(255,215,0,0.18);
 color: var(--primary-color);
 padding: 5px 12px;
 border-radius: 6px;
@@ -699,24 +996,20 @@ top: 0;
 left: -100%;
 width: 100%;
 height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.15), transparent);
+background: linear-gradient(90deg, transparent, rgba(255,215,0,0.15), transparent);
 transition: left 0.4s ease;
 }
 
-.card-copy-btn:hover::before {
-left: 100%;
-}
+.card-copy-btn:hover::before { left: 100%; }
 
 .card-copy-btn:hover {
-background: rgba(255, 215, 0, 0.16);
-border-color: rgba(255, 215, 0, 0.4);
+background: rgba(255,215,0,0.16);
+border-color: rgba(255,215,0,0.4);
 box-shadow: 0 2px 10px var(--gold-glow);
 transform: translateY(-1px);
 }
 
-.card-copy-btn:active {
-animation: copy-pop 0.3s ease;
-}
+.card-copy-btn:active { animation: copy-pop 0.3s ease; }
 
 .card-copy-btn svg {
 width: 13px;
@@ -725,20 +1018,14 @@ flex-shrink: 0;
 }
 
 .card-copy-btn.copied {
-background: rgba(255, 143, 0, 0.2);
+background: rgba(255,143,0,0.2);
 border-color: var(--accent-color);
 color: var(--accent-color);
 pointer-events: none;
 }
 
-.card-copy-btn .btn-label {
-transition: opacity 0.2s ease;
-}
-
-.card-copy-btn.copied .btn-label {
-opacity: 0;
-position: absolute;
-}
+.card-copy-btn .btn-label { transition: opacity 0.2s ease; }
+.card-copy-btn.copied .btn-label { opacity: 0; position: absolute; }
 
 .card-copy-btn .btn-check {
 position: absolute;
@@ -753,9 +1040,26 @@ gap: 4px;
 white-space: nowrap;
 }
 
-.card-copy-btn.copied .btn-check {
-opacity: 1;
+.card-copy-btn.copied .btn-check { opacity: 1; }
+
+.match-indicator {
+position: absolute;
+top: 8px;
+right: 8px;
+background: rgba(255,143,0,0.18);
+color: var(--accent-color);
+padding: 2px 6px;
+border-radius: 4px;
+font-size: 0.6rem;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+opacity: 0;
+transition: opacity 0.3s ease;
+font-family: 'Cinzel', serif;
+pointer-events: none;
 }
+
+.menu-card:hover .match-indicator { opacity: 1; }
 
 /* ===== Toast ===== */
 .toast-container {
@@ -772,8 +1076,8 @@ pointer-events: none;
 }
 
 .toast {
-background: linear-gradient(135deg, rgba(10, 16, 34, 0.96), rgba(7, 12, 26, 0.96));
-border: 1px solid rgba(255, 215, 0, 0.3);
+background: linear-gradient(135deg, rgba(10,16,34,0.96), rgba(7,12,26,0.96));
+border: 1px solid rgba(255,215,0,0.3);
 color: var(--primary-color);
 padding: 10px 20px;
 border-radius: 10px;
@@ -781,7 +1085,7 @@ font-family: 'Cinzel', serif;
 font-size: 0.8rem;
 letter-spacing: 1px;
 text-transform: uppercase;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--gold-glow);
+box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 15px var(--gold-glow);
 backdrop-filter: blur(10px);
 display: flex;
 align-items: center;
@@ -790,15 +1094,9 @@ animation: toast-in 0.3s ease forwards;
 white-space: nowrap;
 }
 
-.toast.toast-out {
-animation: toast-out 0.3s ease forwards;
-}
+.toast.toast-out { animation: toast-out 0.3s ease forwards; }
 
-.toast svg {
-width: 16px;
-height: 16px;
-flex-shrink: 0;
-}
+.toast svg { width: 16px; height: 16px; flex-shrink: 0; }
 
 .toast-title {
 color: var(--accent-color);
@@ -808,27 +1106,6 @@ overflow: hidden;
 text-overflow: ellipsis;
 }
 
-.match-indicator {
-position: absolute;
-top: 8px;
-right: 8px;
-background: rgba(255, 143, 0, 0.18);
-color: var(--accent-color);
-padding: 2px 6px;
-border-radius: 4px;
-font-size: 0.6rem;
-text-transform: uppercase;
-letter-spacing: 0.5px;
-opacity: 0;
-transition: opacity 0.3s ease;
-font-family: 'Cinzel', serif;
-pointer-events: none;
-}
-
-.menu-card:hover .match-indicator {
-opacity: 1;
-}
-
 /* ===== Detail Modal ===== */
 .detail-modal {
 position: fixed;
@@ -836,7 +1113,7 @@ top: 0;
 left: 0;
 right: 0;
 bottom: 0;
-background: rgba(4, 6, 14, 0.94);
+background: rgba(4,6,14,0.94);
 backdrop-filter: blur(14px);
 z-index: 1000;
 display: none;
@@ -845,25 +1122,23 @@ justify-content: center;
 padding: 20px;
 }
 
-.detail-modal.show {
-display: flex;
-}
+.detail-modal.show { display: flex; }
 
 .detail-content {
-background: linear-gradient(135deg, rgba(10, 16, 34, 0.97), rgba(7, 12, 26, 0.97));
-border: 1px solid rgba(255, 215, 0, 0.18);
+background: linear-gradient(135deg, rgba(10,16,34,0.97), rgba(7,12,26,0.97));
+border: 1px solid rgba(255,215,0,0.18);
 border-radius: 16px;
 max-width: 800px;
 width: 100%;
 max-height: 80vh;
 overflow-y: auto;
 position: relative;
-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7), 0 0 30px var(--gold-glow);
+box-shadow: 0 10px 50px rgba(0,0,0,0.7), 0 0 30px var(--gold-glow);
 }
 
 .detail-header {
 padding: 24px;
-border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+border-bottom: 1px solid rgba(255,215,0,0.1);
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -879,7 +1154,7 @@ text-shadow: 0 0 10px var(--gold-glow);
 
 .detail-close {
 background: transparent;
-border: 1px solid rgba(255, 215, 0, 0.15);
+border: 1px solid rgba(255,215,0,0.15);
 color: var(--text-secondary);
 cursor: pointer;
 width: 36px;
@@ -892,14 +1167,12 @@ transition: all 0.3s ease;
 }
 
 .detail-close:hover {
-background: rgba(255, 215, 0, 0.12);
+background: rgba(255,215,0,0.12);
 color: var(--primary-color);
-border-color: rgba(255, 215, 0, 0.35);
+border-color: rgba(255,215,0,0.35);
 }
 
-.detail-body {
-padding: 24px;
-}
+.detail-body { padding: 24px; }
 
 .detail-text {
 color: var(--text-primary);
@@ -912,7 +1185,7 @@ font-size: 0.95rem;
 
 .detail-actions {
 padding: 16px 24px;
-border-top: 1px solid rgba(255, 215, 0, 0.1);
+border-top: 1px solid rgba(255,215,0,0.1);
 display: flex;
 justify-content: flex-end;
 gap: 12px;
@@ -943,17 +1216,15 @@ top: 0;
 left: -100%;
 width: 100%;
 height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
 transition: left 0.5s;
 }
 
-.copy-button:hover::before {
-left: 100%;
-}
+.copy-button:hover::before { left: 100%; }
 
 .copy-button:hover {
 transform: translateY(-2px);
-box-shadow: 0 6px 20px rgba(255, 215, 0, 0.35);
+box-shadow: 0 6px 20px rgba(255,215,0,0.35);
 }
 
 .copy-success {
@@ -968,16 +1239,14 @@ letter-spacing: 1px;
 font-family: 'Cinzel', serif;
 }
 
-.copy-success.show {
-opacity: 1;
-}
+.copy-success.show { opacity: 1; }
 
 /* ===== No menu ===== */
 .no-menu {
 text-align: center;
 padding: 60px 0;
 width: 100%;
-max-width: 1400px;
+max-width: 1100px;
 }
 
 .no-menu-title {
@@ -1008,7 +1277,7 @@ padding: 40px;
 .loading-spinner {
 width: 44px;
 height: 44px;
-border: 3px solid rgba(255, 215, 0, 0.12);
+border: 3px solid rgba(255,215,0,0.12);
 border-top: 3px solid var(--primary-color);
 border-right: 3px solid var(--accent-color);
 border-radius: 50%;
@@ -1063,12 +1332,12 @@ cursor: pointer;
 box-shadow: 0 4px 15px var(--gold-glow);
 z-index: 99;
 transition: all 0.3s ease;
-border: 2px solid rgba(255, 215, 0, 0.25);
+border: 2px solid rgba(255,215,0,0.25);
 }
 
 .calculator-toggle:hover {
 transform: scale(1.1);
-box-shadow: 0 6px 20px rgba(255, 215, 0, 0.45);
+box-shadow: 0 6px 20px rgba(255,215,0,0.45);
 }
 
 .calculator-toggle svg {
@@ -1082,10 +1351,10 @@ position: fixed;
 bottom: 145px;
 right: 20px;
 width: 300px;
-background: linear-gradient(135deg, rgba(10, 16, 34, 0.97), rgba(7, 12, 26, 0.97));
+background: linear-gradient(135deg, rgba(10,16,34,0.97), rgba(7,12,26,0.97));
 border-radius: 16px;
-border: 1px solid rgba(255, 215, 0, 0.18);
-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+border: 1px solid rgba(255,215,0,0.18);
+box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 z-index: 98;
 transform: scale(0);
 opacity: 0;
@@ -1094,16 +1363,13 @@ backdrop-filter: blur(10px);
 overflow: hidden;
 }
 
-.calculator-container.show {
-transform: scale(1);
-opacity: 1;
-}
+.calculator-container.show { transform: scale(1); opacity: 1; }
 
 .calculator-display {
-background: rgba(4, 8, 18, 0.85);
+background: rgba(4,8,18,0.85);
 padding: 20px;
 text-align: right;
-border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+border-bottom: 1px solid rgba(255,215,0,0.1);
 }
 
 .calculator-expression {
@@ -1126,11 +1392,11 @@ text-shadow: 0 0 10px var(--gold-glow);
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 gap: 1px;
-background: rgba(255, 215, 0, 0.05);
+background: rgba(255,215,0,0.05);
 }
 
 .calculator-btn {
-background: rgba(10, 16, 34, 0.85);
+background: rgba(10,16,34,0.85);
 border: none;
 color: var(--text-primary);
 padding: 18px 0;
@@ -1140,27 +1406,27 @@ cursor: pointer;
 transition: all 0.2s ease;
 }
 
-.calculator-btn:hover { background: rgba(255, 215, 0, 0.1); }
+.calculator-btn:hover { background: rgba(255,215,0,0.1); }
 .calculator-btn:active { transform: scale(0.95); }
 
 .calculator-btn.operator {
-background: rgba(230, 81, 0, 0.1);
+background: rgba(230,81,0,0.1);
 color: var(--accent-color);
 }
-.calculator-btn.operator:hover { background: rgba(230, 81, 0, 0.18); }
+.calculator-btn.operator:hover { background: rgba(230,81,0,0.18); }
 
 .calculator-btn.equals {
-background: rgba(255, 215, 0, 0.1);
+background: rgba(255,215,0,0.1);
 color: var(--primary-color);
 grid-column: span 2;
 }
-.calculator-btn.equals:hover { background: rgba(255, 215, 0, 0.18); }
+.calculator-btn.equals:hover { background: rgba(255,215,0,0.18); }
 
 .calculator-btn.clear {
-background: rgba(255, 152, 0, 0.1);
+background: rgba(255,152,0,0.1);
 color: #ff9800;
 }
-.calculator-btn.clear:hover { background: rgba(255, 152, 0, 0.18); }
+.calculator-btn.clear:hover { background: rgba(255,152,0,0.18); }
 
 .calculator-btn.zero { grid-column: span 2; }
 
@@ -1169,8 +1435,8 @@ color: #ff9800;
 position: fixed;
 bottom: 60px;
 right: 20px;
-background: linear-gradient(135deg, rgba(10, 16, 34, 0.97), rgba(7, 12, 26, 0.97));
-border: 1px solid rgba(255, 215, 0, 0.18);
+background: linear-gradient(135deg, rgba(10,16,34,0.97), rgba(7,12,26,0.97));
+border: 1px solid rgba(255,215,0,0.18);
 border-radius: 8px;
 padding: 12px;
 font-family: 'Courier New', monospace;
@@ -1178,7 +1444,7 @@ font-size: 0.75rem;
 max-width: 300px;
 z-index: 100;
 display: none;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
 .debug-panel.show { display: block; }
@@ -1189,8 +1455,8 @@ box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 position: fixed;
 bottom: 20px;
 right: 90px;
-background: rgba(255, 215, 0, 0.08);
-border: 1px solid rgba(255, 215, 0, 0.2);
+background: rgba(255,215,0,0.08);
+border: 1px solid rgba(255,215,0,0.2);
 color: var(--primary-color);
 padding: 8px 12px;
 border-radius: 6px;
@@ -1204,23 +1470,53 @@ letter-spacing: 1px;
 }
 
 .debug-toggle:hover {
-background: rgba(255, 215, 0, 0.15);
+background: rgba(255,215,0,0.15);
 transform: translateY(-2px);
 }
 
 /* ===== Scrollbar ===== */
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: rgba(10, 16, 34, 0.5); }
+::-webkit-scrollbar-track { background: rgba(10,16,34,0.5); }
 ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary-color), var(--secondary-color)); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--secondary-color), var(--primary-color)); }
 
 /* ===== Responsive ===== */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
 .menu-container { grid-template-columns: repeat(2, 1fr); }
 }
 
+@media (max-width: 900px) {
+.sidebar {
+position: fixed;
+top: 44px;
+left: 0;
+height: calc(100vh - 44px);
+transform: translateX(-100%);
+z-index: 55;
+box-shadow: 4px 0 30px rgba(0,0,0,0.5);
+}
+
+.sidebar.open {
+transform: translateX(0);
+}
+
+.sidebar-toggle {
+display: flex;
+}
+
+.sidebar-overlay.show {
+display: block;
+}
+
+.main-content {
+padding: 16px;
+}
+
+.title { font-size: 3rem; }
+}
+
 @media (max-width: 768px) {
-.title { font-size: 3.2rem; letter-spacing: 3px; }
+.title { font-size: 2.6rem; letter-spacing: 3px; }
 .menu-container { grid-template-columns: 1fr; }
 .sun { width: 60px; height: 60px; }
 .ship-silhouette { display: none; }
@@ -1229,38 +1525,27 @@ transform: translateY(-2px);
 }
 
 @media (max-width: 480px) {
-.title { font-size: 2.4rem; }
-.subtitle { font-size: 0.8rem; }
+.title { font-size: 2rem; }
+.subtitle { font-size: 0.75rem; letter-spacing: 2px; }
 .card-copy-btn { padding: 4px 8px; font-size: 0.6rem; }
 .card-copy-btn svg { width: 11px; height: 11px; }
+.sidebar { width: 260px; min-width: 260px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ===== BACKGROUND: Grand Line Sunset Ocean ===== -->
+<!-- Background -->
 <div class="bg-animation">
 <div class="sky-layer"></div>
 <div class="stars-layer" id="starsLayer"></div>
 <div class="sun-glow"></div>
 <div class="sun"></div>
-
-<!-- Clouds -->
 <div class="clouds-layer" id="cloudsLayer"></div>
-
-<!-- Seagulls -->
 <div class="seagulls-layer" id="seagullsLayer"></div>
-
-<!-- Ocean -->
 <div class="ocean-layer"></div>
-
-<!-- Sun reflection on water -->
 <div class="sun-reflection"></div>
-
-<!-- Fog at horizon -->
 <div class="fog-layer"></div>
-
-<!-- Waves -->
 <div class="waves-container">
 <div class="wave wave-1">
 <svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="height:200px;">
@@ -1278,42 +1563,24 @@ transform: translateY(-2px);
 </svg>
 </div>
 </div>
-
-<!-- Ship silhouette -->
 <div class="ship-silhouette">
 <svg width="220" height="120" viewBox="0 0 220 120" fill="rgba(20,15,30,0.95)">
-<!-- Hull -->
 <path d="M15,80 Q25,100 45,105 L175,105 Q195,100 205,80 L190,75 L30,75 Z"/>
-<!-- Deck detail -->
 <rect x="40" y="70" width="140" height="6" rx="2" fill="rgba(20,15,30,0.8)"/>
-<!-- Main mast -->
 <rect x="105" y="12" width="5" height="65" fill="rgba(20,15,30,0.95)"/>
-<!-- Main sail -->
 <path d="M110,16 L110,72 L168,60 Z" fill="rgba(30,22,40,0.7)"/>
-<!-- Jolly Roger on sail -->
 <circle cx="138" cy="42" r="8" fill="none" stroke="rgba(255,215,0,0.15)" stroke-width="1.5"/>
 <path d="M133,42 L143,42 M138,37 L138,47" stroke="rgba(255,215,0,0.12)" stroke-width="1.2"/>
-<!-- Front sail -->
 <path d="M105,20 L105,65 L60,55 Z" fill="rgba(25,18,35,0.6)"/>
-<!-- Crow's nest -->
 <rect x="100" y="8" width="15" height="5" rx="1.5" fill="rgba(25,18,35,0.8)"/>
-<!-- Bowsprit -->
 <path d="M30,75 L8,65" stroke="rgba(20,15,30,0.9)" stroke-width="3"/>
-<!-- Flag at top -->
 <path d="M110,10 L110,4 L125,7 Z" fill="rgba(25,18,35,0.7)"/>
-<!-- Ropes -->
 <line x1="110" y1="8" x2="30" y2="75" stroke="rgba(20,15,30,0.3)" stroke-width="0.8"/>
 <line x1="110" y1="8" x2="190" y2="75" stroke="rgba(20,15,30,0.3)" stroke-width="0.8"/>
 </svg>
 </div>
-
-<!-- Bubbles rising from ocean -->
 <div class="particles" id="particles"></div>
-
-<!-- Gold sparkles -->
 <div class="sparkles" id="sparkles"></div>
-
-<!-- Jolly Roger watermark -->
 <div class="jolly-watermark">☠</div>
 </div>
 
@@ -1324,7 +1591,131 @@ transform: translateY(-2px);
 <div class="system-status" id="systemStatus">Membongkar Karung Kopi...</div>
 </div>
 
-<div class="container">
+<!-- Sidebar Overlay (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- Mobile sidebar toggle button -->
+<button class="sidebar-toggle" id="sidebarToggle">
+<svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+</button>
+
+<!-- ===== APP LAYOUT ===== -->
+<div class="app-layout">
+
+<!-- LEFT SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header">
+<div class="sidebar-title">Main Menu</div>
+<div class="sidebar-subtitle">Navigasi Cepat</div>
+</div>
+
+<nav class="sidebar-nav">
+<!-- Beranda -->
+<div class="nav-item active" data-page="beranda">
+<div class="nav-icon">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+</div>
+<div class="nav-text">
+<div class="nav-label">Beranda</div>
+<div class="nav-desc">Halaman utama</div>
+</div>
+<div class="nav-arrow">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+</div>
+</div>
+
+<!-- Jadwal Pasaran -->
+<div class="nav-item" data-page="jadwal">
+<div class="nav-icon">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+</div>
+<div class="nav-text">
+<div class="nav-label">Jadwal Pasaran</div>
+<div class="nav-desc">Jadwal buka &amp; tutup</div>
+</div>
+<div class="nav-arrow">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+</div>
+</div>
+
+<!-- Shortcut CS -->
+<div class="nav-item" data-page="shortcut-cs">
+<div class="nav-icon">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+</div>
+<div class="nav-text">
+<div class="nav-label">Shortcut CS</div>
+<div class="nav-desc">Link customer service</div>
+</div>
+<div class="nav-arrow">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+</div>
+</div>
+
+<!-- Kalkulator Togel -->
+<div class="nav-item" data-page="kalkulator">
+<div class="nav-icon">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2zm-4 8h2v-2H8v2zm0-4h2v-2H8v2zm0-4h2V7H8v2zm-4 8h2v-2H4v2zm0-4h2v-2H4v2zm0-4h2V7H4v2zm12 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/></svg>
+</div>
+<div class="nav-text">
+<div class="nav-label">Kalkulator Togel</div>
+<div class="nav-desc">Hitung angka taruhan</div>
+</div>
+<div class="nav-arrow">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+</div>
+</div>
+
+<!-- Prediksi Togel -->
+<div class="nav-item" data-page="prediksi">
+<div class="nav-icon">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
+</div>
+<div class="nav-text">
+<div class="nav-label">Prediksi Togel</div>
+<div class="nav-desc">Analisa &amp; prediksi</div>
+</div>
+<div class="nav-arrow">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+</div>
+</div>
+
+<!-- Shortcut Scatter -->
+<div class="nav-item" data-page="scatter">
+<div class="nav-icon">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+</div>
+<div class="nav-text">
+<div class="nav-label">Shortcut Scatter</div>
+<div class="nav-desc">Akses cepat scatter</div>
+</div>
+<div class="nav-arrow">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+</div>
+</div>
+
+<!-- Gambar CS -->
+<div class="nav-item" data-page="gambar-cs">
+<div class="nav-icon">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+</div>
+<div class="nav-text">
+<div class="nav-label">Gambar CS</div>
+<div class="nav-desc">Foto customer service</div>
+</div>
+<div class="nav-arrow">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+</div>
+</div>
+</nav>
+
+<div class="sidebar-footer">
+<div class="sidebar-footer-text">NO-MERCYYY v2.0.77</div>
+</div>
+</aside>
+
+<!-- MAIN CONTENT AREA -->
+<main class="main-content">
 <header class="header">
 <div class="logo-container">
 <div class="logo-glow"></div>
@@ -1355,6 +1746,8 @@ transform: translateY(-2px);
 <footer class="footer">
 <p class="footer-text">NO-MERCYYY ENGINE v2.0.77 — GRAND LINE EDITION</p>
 </footer>
+</main>
+
 </div>
 
 <!-- Detail Modal -->
@@ -1363,9 +1756,7 @@ transform: translateY(-2px);
 <div class="detail-header">
 <h2 class="detail-title" id="detailTitle">MENU TITLE</h2>
 <button class="detail-close" id="detailClose">
-<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-</svg>
+<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
 </button>
 </div>
 <div class="detail-body">
@@ -1373,7 +1764,7 @@ transform: translateY(-2px);
 </div>
 <div class="detail-actions">
 <button class="copy-button" id="copyButton">
-<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 6px;">
+<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle;margin-right:6px;">
 <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
 </svg>
 SALIN
@@ -1385,9 +1776,7 @@ SALIN
 
 <!-- Calculator -->
 <div class="calculator-toggle" id="calculatorToggle">
-<svg viewBox="0 0 24 24">
-<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/>
-</svg>
+<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/></svg>
 </div>
 
 <div class="calculator-container" id="calculatorContainer">
@@ -1411,7 +1800,7 @@ SALIN
 <button class="calculator-btn" data-action="number" data-value="1">1</button>
 <button class="calculator-btn" data-action="number" data-value="2">2</button>
 <button class="calculator-btn" data-action="number" data-value="3">3</button>
-<button class="calculator-btn operator" data-action="percent" style="grid-row: span 2;">%</button>
+<button class="calculator-btn operator" data-action="percent" style="grid-row:span 2;">%</button>
 <button class="calculator-btn zero" data-action="number" data-value="0">0</button>
 <button class="calculator-btn" data-action="decimal">.</button>
 <button class="calculator-btn equals" data-action="equals">=</button>
@@ -1430,6 +1819,7 @@ let sheetData = [];
 let filteredData = [];
 let currentDetail = null;
 let debugMode = false;
+let activePage = 'beranda';
 
 let calculatorState = {
 displayValue: '0',
@@ -1439,7 +1829,7 @@ operation: null,
 waitingForOperand: false
 };
 
-/* ===== Seagull SVG ===== */
+/* ===== Background Elements ===== */
 function seagullSVG(size) {
 return `<svg width="${size}" height="${size * 0.5}" viewBox="0 0 40 20" fill="none" stroke="rgba(20,25,50,0.9)" stroke-width="1.5" stroke-linecap="round">
 <path d="M0,12 Q8,4 16,10 Q18,11 20,10 Q22,11 24,10 Q32,4 40,12"/>
@@ -1447,85 +1837,134 @@ return `<svg width="${size}" height="${size * 0.5}" viewBox="0 0 40 20" fill="no
 }
 
 function createStars() {
-const container = document.getElementById('starsLayer');
+const c = document.getElementById('starsLayer');
 for (let i = 0; i < 55; i++) {
-const star = document.createElement('div');
-star.classList.add('star');
-if (Math.random() < 0.25) star.classList.add('warm');
-const size = Math.random() * 2.5 + 0.5;
-star.style.width = size + 'px';
-star.style.height = size + 'px';
-star.style.top = Math.random() * 100 + '%';
-star.style.left = Math.random() * 100 + '%';
-star.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's');
-star.style.animationDelay = Math.random() * 3 + 's';
-container.appendChild(star);
+const s = document.createElement('div');
+s.classList.add('star');
+if (Math.random() < 0.25) s.classList.add('warm');
+const sz = Math.random() * 2.5 + 0.5;
+s.style.width = sz + 'px';
+s.style.height = sz + 'px';
+s.style.top = Math.random() * 100 + '%';
+s.style.left = Math.random() * 100 + '%';
+s.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's');
+s.style.animationDelay = Math.random() * 3 + 's';
+c.appendChild(s);
 }
 }
 
 function createClouds() {
-const container = document.getElementById('cloudsLayer');
+const c = document.getElementById('cloudsLayer');
 for (let i = 0; i < 7; i++) {
-const cloud = document.createElement('div');
-cloud.classList.add('cloud');
-/* Upper clouds are dark, lower clouds catch sunset color */
-cloud.classList.add(i > 3 ? 'sunset' : 'dark');
-cloud.style.width = (Math.random() * 350 + 120) + 'px';
-cloud.style.height = (Math.random() * 50 + 25) + 'px';
-cloud.style.top = (Math.random() * 80 + 10) + '%';
-cloud.style.setProperty('--dur', (Math.random() * 70 + 40) + 's');
-cloud.style.animationDelay = -(Math.random() * 70) + 's';
-container.appendChild(cloud);
+const cl = document.createElement('div');
+cl.classList.add('cloud');
+cl.classList.add(i > 3 ? 'sunset' : 'dark');
+cl.style.width = (Math.random() * 350 + 120) + 'px';
+cl.style.height = (Math.random() * 50 + 25) + 'px';
+cl.style.top = (Math.random() * 80 + 10) + '%';
+cl.style.setProperty('--dur', (Math.random() * 70 + 40) + 's');
+cl.style.animationDelay = -(Math.random() * 70) + 's';
+c.appendChild(cl);
 }
 }
 
 function createSeagulls() {
-const container = document.getElementById('seagullsLayer');
+const c = document.getElementById('seagullsLayer');
 for (let i = 0; i < 5; i++) {
-const gull = document.createElement('div');
-gull.classList.add('seagull');
-const size = Math.random() * 16 + 14;
-gull.innerHTML = seagullSVG(size);
-gull.style.top = (Math.random() * 60 + 5) + '%';
-gull.style.setProperty('--dur', (Math.random() * 30 + 22) + 's');
-gull.style.setProperty('--scale', (Math.random() * 0.4 + 0.7).toFixed(2));
-gull.style.animationDelay = -(Math.random() * 30) + 's';
-gull.style.opacity = (Math.random() * 0.12 + 0.08).toFixed(2);
-container.appendChild(gull);
+const g = document.createElement('div');
+g.classList.add('seagull');
+const sz = Math.random() * 16 + 14;
+g.innerHTML = seagullSVG(sz);
+g.style.top = (Math.random() * 60 + 5) + '%';
+g.style.setProperty('--dur', (Math.random() * 30 + 22) + 's');
+g.style.setProperty('--scale', (Math.random() * 0.4 + 0.7).toFixed(2));
+g.style.animationDelay = -(Math.random() * 30) + 's';
+g.style.opacity = (Math.random() * 0.12 + 0.08).toFixed(2);
+c.appendChild(g);
 }
 }
 
 function createBubbles() {
-const container = document.getElementById('particles');
+const c = document.getElementById('particles');
 for (let i = 0; i < 30; i++) {
-const bubble = document.createElement('div');
-bubble.classList.add('bubble');
-const size = Math.random() * 10 + 3;
-bubble.style.width = size + 'px';
-bubble.style.height = size + 'px';
-bubble.style.left = Math.random() * 100 + '%';
-bubble.style.bottom = Math.random() * 8 + '%';
-bubble.style.setProperty('--dur', (Math.random() * 10 + 6) + 's');
-bubble.style.animationDelay = (Math.random() * 10) + 's';
-container.appendChild(bubble);
+const b = document.createElement('div');
+b.classList.add('bubble');
+const sz = Math.random() * 10 + 3;
+b.style.width = sz + 'px';
+b.style.height = sz + 'px';
+b.style.left = Math.random() * 100 + '%';
+b.style.bottom = Math.random() * 8 + '%';
+b.style.setProperty('--dur', (Math.random() * 10 + 6) + 's');
+b.style.animationDelay = (Math.random() * 10) + 's';
+c.appendChild(b);
 }
 }
 
 function createSparkles() {
-const container = document.getElementById('sparkles');
+const c = document.getElementById('sparkles');
 for (let i = 0; i < 15; i++) {
-const sparkle = document.createElement('div');
-sparkle.classList.add('sparkle');
-const size = Math.random() * 4 + 1.5;
-sparkle.style.setProperty('--size', size + 'px');
-sparkle.style.left = (Math.random() * 60 + 20) + '%';
-sparkle.style.bottom = (Math.random() * 20 + 28) + '%';
-sparkle.style.setProperty('--dur', (Math.random() * 8 + 5) + 's');
-sparkle.style.animationDelay = (Math.random() * 8) + 's';
-container.appendChild(sparkle);
+const s = document.createElement('div');
+s.classList.add('sparkle');
+const sz = Math.random() * 4 + 1.5;
+s.style.setProperty('--size', sz + 'px');
+s.style.left = (Math.random() * 60 + 20) + '%';
+s.style.bottom = (Math.random() * 20 + 28) + '%';
+s.style.setProperty('--dur', (Math.random() * 8 + 5) + 's');
+s.style.animationDelay = (Math.random() * 8) + 's';
+c.appendChild(s);
 }
 }
 
+/* ===== Sidebar ===== */
+function initSidebar() {
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+const toggle = document.getElementById('sidebarToggle');
+
+function openSidebar() {
+sidebar.classList.add('open');
+overlay.classList.add('show');
+}
+
+function closeSidebar() {
+sidebar.classList.remove('open');
+overlay.classList.remove('show');
+}
+
+toggle.addEventListener('click', function () {
+if (sidebar.classList.contains('open')) {
+closeSidebar();
+} else {
+openSidebar();
+}
+});
+
+overlay.addEventListener('click', closeSidebar);
+
+document.querySelectorAll('.nav-item').forEach(item => {
+item.addEventListener('click', function () {
+const page = this.dataset.page;
+activePage = page;
+
+document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+this.classList.add('active');
+
+/* Close mobile sidebar after selection */
+if (window.innerWidth <= 900) {
+closeSidebar();
+}
+
+/* Handle special pages */
+if (page === 'kalkulator') {
+document.getElementById('calculatorContainer').classList.toggle('show');
+}
+
+showToast(this.querySelector('.nav-label').textContent, 'halaman dipilih');
+});
+});
+}
+
+/* ===== Toast ===== */
 function showToast(title, message) {
 const container = document.getElementById('toastContainer');
 const toast = document.createElement('div');
@@ -1555,158 +1994,114 @@ function updateDebugInfo() {
 if (!debugMode) return;
 document.getElementById('debugInfo').innerHTML = `
 <div>Total Data: ${sheetData.length}</div>
-<div>Filtered Data: ${filteredData.length}</div>
-<div>Current Detail: ${currentDetail ? currentDetail.title : 'None'}</div>
+<div>Filtered: ${filteredData.length}</div>
+<div>Active Page: ${activePage}</div>
 <div>Cache: ${localStorage.getItem('NO-MERCYYY_data') ? 'Available' : 'Empty'}</div>`;
 }
 
+/* ===== Fuzzy Search ===== */
 function levenshteinDistance(str1, str2) {
-const matrix = [];
-for (let i = 0; i <= str2.length; i++) matrix[i] = [i];
-for (let j = 0; j <= str1.length; j++) matrix[0][j] = j;
+const m = [];
+for (let i = 0; i <= str2.length; i++) m[i] = [i];
+for (let j = 0; j <= str1.length; j++) m[0][j] = j;
 for (let i = 1; i <= str2.length; i++) {
 for (let j = 1; j <= str1.length; j++) {
 if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
-matrix[i][j] = matrix[i - 1][j - 1];
+m[i][j] = m[i - 1][j - 1];
 } else {
-matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+m[i][j] = Math.min(m[i - 1][j - 1] + 1, m[i][j - 1] + 1, m[i - 1][j] + 1);
 }
 }
 }
-return matrix[str2.length][str1.length];
+return m[str2.length][str1.length];
 }
 
 function calculateSimilarity(str1, str2) {
-const distance = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase());
+const d = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase());
 const longer = str1.length > str2.length ? str1 : str2;
 if (longer.length === 0) return 100;
-return Math.round(((longer.length - distance) / longer.length) * 100);
+return Math.round(((longer.length - d) / longer.length) * 100);
 }
 
 function fuzzyMatch(query, text) {
-const queryLower = query.toLowerCase();
-const textLower = text.toLowerCase();
-if (textLower.includes(queryLower)) return { match: true, score: 100, type: 'exact' };
-const words = textLower.split(/\s+/);
-let bestMatch = { match: false, score: 0, type: 'none' };
-for (const word of words) {
-if (word.startsWith(queryLower)) {
-const score = Math.round((queryLower.length / word.length) * 100);
-if (score > bestMatch.score) bestMatch = { match: true, score, type: 'prefix' };
+const ql = query.toLowerCase();
+const tl = text.toLowerCase();
+if (tl.includes(ql)) return { match: true, score: 100, type: 'exact' };
+const words = tl.split(/\s+/);
+let best = { match: false, score: 0, type: 'none' };
+for (const w of words) {
+if (w.startsWith(ql)) { const s = Math.round((ql.length / w.length) * 100); if (s > best.score) best = { match: true, score: s, type: 'prefix' }; }
+const sim = calculateSimilarity(ql, w);
+if (sim >= 60 && sim > best.score) best = { match: true, score: sim, type: 'fuzzy' };
+if (w.includes(ql)) { const s = Math.round((ql.length / w.length) * 90); if (s > best.score) best = { match: true, score: s, type: 'contains' }; }
 }
-const similarity = calculateSimilarity(queryLower, word);
-if (similarity >= 60 && similarity > bestMatch.score) bestMatch = { match: true, score: similarity, type: 'fuzzy' };
-if (word.includes(queryLower)) {
-const score = Math.round((queryLower.length / word.length) * 90);
-if (score > bestMatch.score) bestMatch = { match: true, score, type: 'contains' };
-}
-}
-return bestMatch;
+return best;
 }
 
+/* ===== Data Fetching ===== */
 async function fetchSheetData() {
 const sheetId = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
 updateSystemStatus('Mengambil Data...', 'warning');
 
 try {
 const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=0`;
-const response = await fetch(url);
-if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-const text = await response.text();
-if (text.includes('google.visualization.Query.setResponse')) {
-const json = JSON.parse(text.substring(47).slice(0, -2));
-const rows = json.table.rows;
+const r = await fetch(url);
+if (!r.ok) throw new Error(`HTTP ${r.status}`);
+const t = await r.text();
+if (t.includes('google.visualization.Query.setResponse')) {
+const json = JSON.parse(t.substring(47).slice(0, -2));
 sheetData = [];
-for (let i = 0; i < rows.length; i++) {
-const t = rows[i].c[0], inf = rows[i].c[1];
-const title = t && t.v ? String(t.v) : '';
-const info = inf && inf.v ? String(inf.v) : '';
-if (title) sheetData.push({ title: title.trim(), info: info.trim() });
+for (const row of json.table.rows) {
+const title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
+const info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
+if (title) sheetData.push({ title, info });
 }
 if (sheetData.length > 0) {
 updateSystemStatus('Pelayaran Aktif', 'success');
 localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
-localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
 filteredData = [...sheetData];
 displayMenuItems();
 updateDebugInfo();
 return;
 }
 }
-} catch (error) {}
+} catch (e) {}
 
 try {
 const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=REPORTAN`;
-const response = await fetch(url);
-if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-const text = await response.text();
-if (text.includes('google.visualization.Query.setResponse')) {
-const json = JSON.parse(text.substring(47).slice(0, -2));
-const rows = json.table.rows;
+const r = await fetch(url);
+if (!r.ok) throw new Error(`HTTP ${r.status}`);
+const t = await r.text();
+if (t.includes('google.visualization.Query.setResponse')) {
+const json = JSON.parse(t.substring(47).slice(0, -2));
 sheetData = [];
-for (let i = 0; i < rows.length; i++) {
-const t = rows[i].c[0], inf = rows[i].c[1];
-const title = t && t.v ? String(t.v) : '';
-const info = inf && inf.v ? String(inf.v) : '';
-if (title) sheetData.push({ title: title.trim(), info: info.trim() });
+for (const row of json.table.rows) {
+const title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
+const info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
+if (title) sheetData.push({ title, info });
 }
 if (sheetData.length > 0) {
 updateSystemStatus('Pelayaran Aktif', 'success');
 localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
-localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
 filteredData = [...sheetData];
 displayMenuItems();
 updateDebugInfo();
 return;
 }
 }
-} catch (error) {}
+} catch (e) {}
 
 try {
-const feedUrl = `https://spreadsheets.google.com/feeds/worksheets/${sheetId}/public/basic?alt=json`;
-const response = await fetch(feedUrl);
-if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-const feedJson = await response.json();
-if (feedJson.feed && feedJson.feed.entry && feedJson.feed.entry.length > 0) {
-const sheetName = feedJson.feed.entry[0].title.$t;
-const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
-const sheetResponse = await fetch(url);
-if (!sheetResponse.ok) throw new Error(`HTTP error! status: ${sheetResponse.status}`);
-const sheetText = await sheetResponse.text();
-if (sheetText.includes('google.visualization.Query.setResponse')) {
-const json = JSON.parse(sheetText.substring(47).slice(0, -2));
-const rows = json.table.rows;
-sheetData = [];
-for (let i = 0; i < rows.length; i++) {
-const t = rows[i].c[0], inf = rows[i].c[1];
-const title = t && t.v ? String(t.v) : '';
-const info = inf && inf.v ? String(inf.v) : '';
-if (title) sheetData.push({ title: title.trim(), info: info.trim() });
-}
-if (sheetData.length > 0) {
-updateSystemStatus('Pelayaran Aktif', 'success');
-localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
-localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
-filteredData = [...sheetData];
-displayMenuItems();
-updateDebugInfo();
-return;
-}
-}
-}
-} catch (error) {}
-
-try {
-const cachedData = localStorage.getItem('NO-MERCYYY_data');
-if (cachedData) {
-sheetData = JSON.parse(cachedData);
+const cached = localStorage.getItem('NO-MERCYYY_data');
+if (cached) {
+sheetData = JSON.parse(cached);
 updateSystemStatus('Pelayaran Offline', 'warning');
 filteredData = [...sheetData];
 displayMenuItems();
 updateDebugInfo();
 return;
 }
-} catch (error) {}
+} catch (e) {}
 
 sheetData = [
 { title: "CONTOH MENU 1", info: "Ini adalah contoh menu karena lautan data tidak dapat dijangkau." },
@@ -1721,9 +2116,9 @@ updateDebugInfo();
 
 function displayMenuItems() {
 const container = document.getElementById('menuContainer');
-const loadingContainer = document.getElementById('loadingContainer');
+const loading = document.getElementById('loadingContainer');
 const noMenu = document.getElementById('noMenu');
-loadingContainer.style.display = 'none';
+loading.style.display = 'none';
 
 if (filteredData.length === 0) {
 container.style.display = 'none';
@@ -1734,21 +2129,16 @@ return;
 container.style.display = 'grid';
 noMenu.style.display = 'none';
 
-container.innerHTML = filteredData.map((item, index) => `
-<div class="menu-card" data-index="${index}">
+container.innerHTML = filteredData.map((item, i) => `
+<div class="menu-card" data-index="${i}">
 <div class="match-indicator">${item.matchType || 'MATCH'}</div>
 <h3 class="menu-title">${item.title}</h3>
 <div class="menu-preview">${item.info}</div>
 <div class="card-bottom-row">
-<button class="card-copy-btn" data-copy-index="${index}">
-<svg fill="currentColor" viewBox="0 0 24 24">
-<path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-</svg>
+<button class="card-copy-btn" data-copy-index="${i}">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
 <span class="btn-label">Salin</span>
-<span class="btn-check">
-<svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-Ok
-</span>
+<span class="btn-check"><svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ok</span>
 </button>
 </div>
 <div class="card-skull">☠</div>
@@ -1763,14 +2153,13 @@ showDetail(filteredData[parseInt(this.dataset.index)]);
 container.querySelectorAll('.card-copy-btn').forEach(btn => {
 btn.addEventListener('click', function (e) {
 e.stopPropagation();
-const idx = parseInt(this.dataset.copyIndex);
-const item = filteredData[idx];
+const item = filteredData[parseInt(this.dataset.copyIndex)];
 if (!item) return;
 navigator.clipboard.writeText(item.info).then(() => {
 this.classList.add('copied');
 setTimeout(() => this.classList.remove('copied'), 1500);
 showToast(item.title, 'info berhasil disalin');
-}).catch(err => {});
+}).catch(() => {});
 });
 });
 }
@@ -1796,18 +2185,18 @@ const el = document.getElementById('copySuccess');
 el.classList.add('show');
 showToast(currentDetail.title, 'info berhasil disalin');
 setTimeout(() => el.classList.remove('show'), 2000);
-}).catch(err => {});
+}).catch(() => {});
 }
 
 function filterMenuItems() {
-const query = document.getElementById('filterInput').value.trim();
-if (query === '') {
+const q = document.getElementById('filterInput').value.trim();
+if (q === '') {
 filteredData = sheetData.map(item => ({ ...item }));
 } else {
 const results = [];
 for (const item of sheetData) {
-const tm = fuzzyMatch(query, item.title);
-const im = fuzzyMatch(query, item.info);
+const tm = fuzzyMatch(q, item.title);
+const im = fuzzyMatch(q, item.info);
 const best = tm.score > im.score ? tm : im;
 if (best.match) results.push({ ...item, matchScore: best.score, matchType: best.type.toUpperCase() });
 }
@@ -1818,29 +2207,28 @@ displayMenuItems();
 updateDebugInfo();
 }
 
+/* ===== Calculator ===== */
 function updateCalculatorDisplay() {
 document.getElementById('calculatorValue').textContent = calculatorState.displayValue;
 document.getElementById('calculatorExpression').textContent = calculatorState.expression;
 }
 
-function inputDigit(digit) {
-const { displayValue, waitingForOperand } = calculatorState;
-if (waitingForOperand) {
-calculatorState.displayValue = String(digit);
+function inputDigit(d) {
+if (calculatorState.waitingForOperand) {
+calculatorState.displayValue = String(d);
 calculatorState.waitingForOperand = false;
 } else {
-calculatorState.displayValue = displayValue === '0' ? String(digit) : displayValue + digit;
+calculatorState.displayValue = calculatorState.displayValue === '0' ? String(d) : calculatorState.displayValue + d;
 }
 updateCalculatorDisplay();
 }
 
 function inputDecimal() {
-const { displayValue, waitingForOperand } = calculatorState;
-if (waitingForOperand) {
+if (calculatorState.waitingForOperand) {
 calculatorState.displayValue = '0.';
 calculatorState.waitingForOperand = false;
-} else if (displayValue.indexOf('.') === -1) {
-calculatorState.displayValue = displayValue + '.';
+} else if (calculatorState.displayValue.indexOf('.') === -1) {
+calculatorState.displayValue += '.';
 }
 updateCalculatorDisplay();
 }
@@ -1850,22 +2238,7 @@ calculatorState = { displayValue: '0', expression: '', previousValue: null, oper
 updateCalculatorDisplay();
 }
 
-function performOperation(nextOperation) {
-const { displayValue, previousValue, operation } = calculatorState;
-const inputValue = parseFloat(displayValue);
-if (previousValue === null) {
-calculatorState.previousValue = inputValue;
-} else if (operation) {
-const newValue = calc(previousValue || 0, inputValue, operation);
-calculatorState.displayValue = String(newValue);
-calculatorState.previousValue = newValue;
-calculatorState.expression = `${previousValue || 0} ${getOpSym(operation)} ${inputValue} =`;
-}
-calculatorState.waitingForOperand = true;
-calculatorState.operation = nextOperation;
-if (nextOperation) calculatorState.expression = `${displayValue} ${getOpSym(nextOperation)}`;
-updateCalculatorDisplay();
-}
+function getOpSym(op) { return { '+': '+', '-': '-', '*': '×', '/': '÷', '%': '%' }[op] || ''; }
 
 function calc(a, b, op) {
 switch (op) {
@@ -1878,17 +2251,28 @@ default: return b;
 }
 }
 
-function getOpSym(op) {
-return { '+': '+', '-': '-', '*': '×', '/': '÷', '%': '%' }[op] || '';
+function performOperation(nextOp) {
+const iv = parseFloat(calculatorState.displayValue);
+if (calculatorState.previousValue === null) {
+calculatorState.previousValue = iv;
+} else if (calculatorState.operation) {
+const nv = calc(calculatorState.previousValue || 0, iv, calculatorState.operation);
+calculatorState.displayValue = String(nv);
+calculatorState.previousValue = nv;
+calculatorState.expression = `${calculatorState.previousValue || 0} ${getOpSym(calculatorState.operation)} ${iv} =`;
+}
+calculatorState.waitingForOperand = true;
+calculatorState.operation = nextOp;
+if (nextOp) calculatorState.expression = `${calculatorState.displayValue} ${getOpSym(nextOp)}`;
+updateCalculatorDisplay();
 }
 
 function handleEquals() {
-const { displayValue, previousValue, operation } = calculatorState;
-const inputValue = parseFloat(displayValue);
-if (previousValue !== null && operation) {
-const newValue = calc(previousValue, inputValue, operation);
-calculatorState.displayValue = String(newValue);
-calculatorState.expression = `${previousValue} ${getOpSym(operation)} ${inputValue} =`;
+const iv = parseFloat(calculatorState.displayValue);
+if (calculatorState.previousValue !== null && calculatorState.operation) {
+const nv = calc(calculatorState.previousValue, iv, calculatorState.operation);
+calculatorState.displayValue = String(nv);
+calculatorState.expression = `${calculatorState.previousValue} ${getOpSym(calculatorState.operation)} ${iv} =`;
 calculatorState.previousValue = null;
 calculatorState.operation = null;
 calculatorState.waitingForOperand = true;
@@ -1910,12 +2294,14 @@ function toggleCalculator() {
 document.getElementById('calculatorContainer').classList.toggle('show');
 }
 
+/* ===== Init ===== */
 window.onload = function () {
 createStars();
 createClouds();
 createSeagulls();
 createBubbles();
 createSparkles();
+initSidebar();
 updateSystemTime();
 setInterval(updateSystemTime, 1000);
 
@@ -1927,10 +2313,10 @@ updateDebugInfo();
 
 setInterval(updateDebugInfo, 1000);
 
-let debounceTimer;
+let debounce;
 document.getElementById('filterInput').addEventListener('input', function () {
-clearTimeout(debounceTimer);
-debounceTimer = setTimeout(filterMenuItems, 300);
+clearTimeout(debounce);
+debounce = setTimeout(filterMenuItems, 300);
 });
 
 document.getElementById('detailClose').addEventListener('click', hideDetail);
@@ -1944,24 +2330,15 @@ document.getElementById('calculatorToggle').addEventListener('click', toggleCalc
 
 document.addEventListener('keydown', function (e) {
 if (e.key === 'Escape') {
-if (document.getElementById('detailModal').classList.contains('show')) {
-hideDetail();
-return;
-}
-if (document.getElementById('calculatorContainer').classList.contains('show')) {
-document.getElementById('calculatorContainer').classList.remove('show');
-return;
-}
-if (document.getElementById('debugPanel').classList.contains('show')) {
-debugMode = false;
-document.getElementById('debugPanel').classList.remove('show');
-return;
-}
+if (document.getElementById('detailModal').classList.contains('show')) { hideDetail(); return; }
+if (document.getElementById('calculatorContainer').classList.contains('show')) { document.getElementById('calculatorContainer').classList.remove('show'); return; }
+if (document.getElementById('debugPanel').classList.contains('show')) { debugMode = false; document.getElementById('debugPanel').classList.remove('show'); return; }
+if (document.getElementById('sidebar').classList.contains('open')) { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); return; }
 }
 });
 
-document.querySelectorAll('.calculator-btn').forEach(button => {
-button.addEventListener('click', function () {
+document.querySelectorAll('.calculator-btn').forEach(btn => {
+btn.addEventListener('click', function () {
 switch (this.dataset.action) {
 case 'number': inputDigit(this.dataset.value); break;
 case 'decimal': inputDecimal(); break;
