@@ -12,27 +12,23 @@ box-sizing: border-box;
 }
 
 :root {
---primary-color: #FFD700;
---secondary-color: #E53935;
---accent-color: #FF8F00;
---dark-bg: #0a0e1a;
---card-bg: rgba(10, 18, 40, 0.75);
---text-primary: #FFF8E1;
---text-secondary: #B0BEC5;
---ocean-deep: #0a1628;
---ocean-mid: #0d2137;
---ocean-light: #134e6f;
---sky-top: #0a0e1a;
---sky-mid: #162447;
---sky-bottom: #1f4068;
---gold-glow: rgba(255, 215, 0, 0.3);
---red-glow: rgba(229, 57, 53, 0.3);
---wave-1: #0d3b66;
---wave-2: #0a2e4d;
---wave-3: #071e33;
---gradient-1: linear-gradient(135deg, #FFD700, #E53935);
---gradient-2: linear-gradient(135deg, #E53935, #FF8F00);
---gradient-3: linear-gradient(135deg, #FF8F00, #FFD700);
+--primary-color: #C62828;
+--secondary-color: #880E4F;
+--accent-color: #FF1744;
+--dark-bg: #080510;
+--card-bg: rgba(15, 5, 25, 0.8);
+--text-primary: #FFE0E0;
+--text-secondary: #9E8A9E;
+--sharingan-red: #E53935;
+--sharingan-dark: #8B0000;
+--sharingan-glow: rgba(229, 57, 53, 0.4);
+--tsukuyomi-purple: #1a0a2e;
+--crow-black: #0d0d0d;
+--moon-red: rgba(180, 40, 40, 0.15);
+--gradient-1: linear-gradient(135deg, #E53935, #880E4F);
+--gradient-2: linear-gradient(135deg, #880E4F, #4A148C);
+--gradient-3: linear-gradient(135deg, #FF1744, #E53935);
+--feather-color: rgba(30, 15, 20, 0.6);
 }
 
 body {
@@ -56,21 +52,53 @@ z-index: -1;
 overflow: hidden;
 }
 
+/* === SKY: Tsukuyomi dark red-purple sky === */
 .sky-layer {
 position: absolute;
 top: 0;
 left: 0;
 width: 100%;
-height: 55%;
-background: linear-gradient(180deg, #020510 0%, #0a1628 30%, #162447 60%, #1f4068 85%, #2a6fa0 100%);
+height: 60%;
+background: linear-gradient(180deg, #020108 0%, #0a0515 20%, #120820 45%, #1a0a2e 65%, #200e38 85%, #2a1045 100%);
 }
 
+/* === Red moon (Tsukuyomi) === */
+.moon {
+position: absolute;
+top: 7%;
+right: 14%;
+width: 90px;
+height: 90px;
+border-radius: 50%;
+background: radial-gradient(circle at 40% 40%, #5c1a1a, #3d0e0e, #1a0505);
+box-shadow: 0 0 40px rgba(180, 30, 30, 0.25), 0 0 80px rgba(140, 20, 20, 0.15), 0 0 120px rgba(100, 15, 15, 0.08);
+opacity: 0.9;
+}
+
+.moon-glow {
+position: absolute;
+top: 7%;
+right: 14%;
+width: 90px;
+height: 90px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(180, 40, 40, 0.12) 0%, rgba(120, 20, 20, 0.05) 50%, transparent 70%);
+transform: scale(4);
+animation: moon-pulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes moon-pulse {
+0% { opacity: 0.7; transform: scale(4); }
+100% { opacity: 1; transform: scale(4.5); }
+}
+
+/* === Stars with red tint === */
 .stars-layer {
 position: absolute;
 top: 0;
 left: 0;
 width: 100%;
-height: 50%;
+height: 55%;
 }
 
 .star {
@@ -80,103 +108,87 @@ border-radius: 50%;
 animation: twinkle var(--dur) ease-in-out infinite alternate;
 }
 
+.star.red {
+background: #ff6b6b;
+box-shadow: 0 0 3px rgba(255, 80, 80, 0.5);
+}
+
 @keyframes twinkle {
-0% { opacity: 0.2; transform: scale(0.8); }
-100% { opacity: 1; transform: scale(1.2); }
+0% { opacity: 0.15; transform: scale(0.7); }
+100% { opacity: 1; transform: scale(1.3); }
 }
 
-.moon {
+/* === Tree branch silhouettes === */
+.branches-layer {
 position: absolute;
-top: 6%;
-right: 12%;
-width: 80px;
-height: 80px;
-border-radius: 50%;
-background: transparent;
-box-shadow: -12px 8px 0 0 #FFF8DC;
-opacity: 0.85;
-filter: blur(0.5px);
-}
-
-.moon-glow {
-position: absolute;
-top: 6%;
-right: 12%;
-width: 80px;
-height: 80px;
-border-radius: 50%;
-background: radial-gradient(circle, rgba(255, 248, 220, 0.15) 0%, transparent 70%);
-transform: scale(3);
-}
-
-.ocean-layer {
-position: absolute;
-bottom: 0;
+top: 0;
 left: 0;
 width: 100%;
-height: 50%;
-background: linear-gradient(180deg, #134e6f 0%, #0d3b66 30%, #0a2e4d 60%, #071e33 100%);
+height: 100%;
+pointer-events: none;
+z-index: 1;
 }
 
-.moon-reflection {
+.branch-svg {
 position: absolute;
-bottom: 5%;
-right: 10%;
-width: 120px;
-height: 200px;
-background: linear-gradient(180deg, rgba(255, 248, 220, 0.12) 0%, rgba(255, 248, 220, 0.03) 100%);
-filter: blur(15px);
-border-radius: 50%;
-animation: reflection-shimmer 4s ease-in-out infinite alternate;
-}
-
-@keyframes reflection-shimmer {
-0% { opacity: 0.6; transform: scaleX(1); }
-100% { opacity: 1; transform: scaleX(1.3); }
-}
-
-.waves-container {
-position: absolute;
-bottom: 0;
+top: 0;
 left: 0;
 width: 100%;
-height: 50%;
-overflow: hidden;
-}
-
-.wave {
-position: absolute;
-bottom: 0;
-left: -50%;
-width: 200%;
 height: 100%;
 }
 
-.wave svg {
+/* === Crows flying === */
+.crows-layer {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 60%;
+overflow: hidden;
+pointer-events: none;
+}
+
+.crow {
+position: absolute;
+animation: crow-fly var(--dur) linear infinite;
+opacity: 0.25;
+}
+
+@keyframes crow-fly {
+0% { transform: translateX(-120px) translateY(0) scale(var(--scale)); }
+25% { transform: translateX(25vw) translateY(-15px) scale(var(--scale)); }
+50% { transform: translateX(50vw) translateY(5px) scale(var(--scale)); }
+75% { transform: translateX(75vw) translateY(-10px) scale(var(--scale)); }
+100% { transform: translateX(calc(100vw + 120px)) translateY(0) scale(var(--scale)); }
+}
+
+/* === Ground / lower dark area === */
+.ground-layer {
 position: absolute;
 bottom: 0;
+left: 0;
 width: 100%;
+height: 45%;
+background: linear-gradient(180deg, #120820 0%, #0a0515 30%, #060310 60%, #030208 100%);
 }
 
-.wave-1 { animation: wave-move-1 8s ease-in-out infinite; opacity: 0.6; }
-.wave-2 { animation: wave-move-2 10s ease-in-out infinite; opacity: 0.4; }
-.wave-3 { animation: wave-move-3 12s ease-in-out infinite; opacity: 0.3; }
-
-@keyframes wave-move-1 {
-0%, 100% { transform: translateX(0) translateY(0); }
-50% { transform: translateX(2%) translateY(-8px); }
+/* === Fog / mist at horizon === */
+.fog-layer {
+position: absolute;
+bottom: 30%;
+left: 0;
+width: 100%;
+height: 25%;
+background: linear-gradient(180deg, transparent 0%, rgba(20, 10, 30, 0.3) 40%, rgba(30, 15, 40, 0.2) 60%, transparent 100%);
+animation: fog-drift 15s ease-in-out infinite alternate;
 }
 
-@keyframes wave-move-2 {
-0%, 100% { transform: translateX(0) translateY(0); }
-50% { transform: translateX(-3%) translateY(-5px); }
+@keyframes fog-drift {
+0% { transform: translateX(-3%); opacity: 0.5; }
+100% { transform: translateX(3%); opacity: 0.8; }
 }
 
-@keyframes wave-move-3 {
-0%, 100% { transform: translateX(0) translateY(0); }
-50% { transform: translateX(1.5%) translateY(-3px); }
-}
-
+/* === Feathers falling === */
 .particles {
 position: absolute;
 top: 0;
@@ -185,82 +197,88 @@ width: 100%;
 height: 100%;
 }
 
-.bubble {
+.feather {
 position: absolute;
-background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
-border: 1px solid rgba(255, 255, 255, 0.15);
-border-radius: 50%;
-animation: bubble-rise var(--dur) ease-in infinite;
+width: var(--size);
+height: calc(var(--size) * 0.35);
+background: linear-gradient(135deg, rgba(60, 30, 40, 0.7), rgba(40, 20, 30, 0.4), rgba(80, 40, 50, 0.5));
+border-radius: 50% 50% 50% 0;
+animation: feather-fall var(--dur) ease-in-out infinite;
+transform-origin: center center;
 }
 
-@keyframes bubble-rise {
-0% { transform: translateY(0) translateX(0) scale(0.3); opacity: 0; }
-10% { opacity: 0.6; transform: translateY(-10vh) translateX(10px) scale(0.6); }
-50% { opacity: 0.4; transform: translateY(-40vh) translateX(-15px) scale(0.8); }
+@keyframes feather-fall {
+0% { transform: translateY(0) translateX(0) rotate(0deg) scale(0.5); opacity: 0; }
+10% { opacity: 0.7; transform: translateY(-5vh) translateX(10px) rotate(45deg) scale(0.8); }
+30% { transform: translateY(-20vh) translateX(-20px) rotate(120deg) scale(1); }
+50% { opacity: 0.5; transform: translateY(-40vh) translateX(15px) rotate(200deg) scale(1); }
+70% { opacity: 0.3; transform: translateY(-60vh) translateX(-10px) rotate(300deg) scale(0.9); }
 90% { opacity: 0.1; }
-100% { transform: translateY(-80vh) translateX(20px) scale(1); opacity: 0; }
+100% { transform: translateY(-85vh) translateX(25px) rotate(400deg) scale(0.7); opacity: 0; }
 }
 
-.clouds-layer {
-position: absolute;
-top: 5%;
-left: 0;
-width: 100%;
-height: 30%;
-overflow: hidden;
-}
-
-.cloud {
-position: absolute;
-background: rgba(255, 255, 255, 0.04);
-border-radius: 50%;
-filter: blur(20px);
-animation: cloud-drift var(--dur) linear infinite;
-}
-
-@keyframes cloud-drift {
-0% { transform: translateX(-100%); }
-100% { transform: translateX(calc(100vw + 100%)); }
-}
-
-.ship-silhouette {
-position: absolute;
-bottom: 28%;
-left: 50%;
-transform: translateX(-50%);
-animation: ship-rock 6s ease-in-out infinite;
-opacity: 0.12;
-}
-
-@keyframes ship-rock {
-0%, 100% { transform: translateX(-50%) rotate(-1.5deg) translateY(0); }
-25% { transform: translateX(-50%) rotate(0.5deg) translateY(-4px); }
-50% { transform: translateX(-50%) rotate(1.5deg) translateY(0); }
-75% { transform: translateX(-50%) rotate(-0.5deg) translateY(-2px); }
-}
-
-.jolly-watermark {
+/* === Sharingan watermark === */
+.sharingan-watermark {
 position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-opacity: 0.02;
-font-size: 25rem;
-color: #FFD700;
+opacity: 0.018;
 pointer-events: none;
 z-index: 0;
+animation: sharingan-slow-spin 60s linear infinite;
 }
 
+@keyframes sharingan-slow-spin {
+0% { transform: translate(-50%, -50%) rotate(0deg); }
+100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* === Red particles rising (like embers) === */
+.embers {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 60%;
+pointer-events: none;
+}
+
+.ember {
+position: absolute;
+background: radial-gradient(circle, rgba(229, 57, 53, 0.8), rgba(180, 30, 30, 0.3), transparent);
+border-radius: 50%;
+animation: ember-rise var(--dur) ease-out infinite;
+}
+
+@keyframes ember-rise {
+0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+15% { opacity: 0.8; }
+50% { opacity: 0.4; transform: translateY(-30vh) translateX(var(--drift)) scale(0.6); }
+100% { transform: translateY(-60vh) translateX(var(--drift2)) scale(0.2); opacity: 0; }
+}
+
+/* === Uchiha fan symbol bottom === */
+.uchiha-fan-bg {
+position: absolute;
+bottom: 5%;
+left: 50%;
+transform: translateX(-50%);
+opacity: 0.03;
+pointer-events: none;
+}
+
+/* === Animations === */
 @keyframes fire-flicker {
-0%, 100% { text-shadow: 0 0 4px rgba(255, 215, 0, 0.8), 0 0 12px rgba(255, 165, 0, 0.5), 0 0 20px rgba(229, 57, 53, 0.3); }
-25% { text-shadow: 0 0 6px rgba(255, 215, 0, 0.9), 0 0 16px rgba(255, 165, 0, 0.6), 0 0 24px rgba(229, 57, 53, 0.4); }
-50% { text-shadow: 0 0 3px rgba(255, 215, 0, 0.7), 0 0 10px rgba(255, 165, 0, 0.4), 0 0 18px rgba(229, 57, 53, 0.2); }
-75% { text-shadow: 0 0 7px rgba(255, 215, 0, 1), 0 0 18px rgba(255, 165, 0, 0.7), 0 0 28px rgba(229, 57, 53, 0.5); }
+0%, 100% { text-shadow: 0 0 4px rgba(229, 57, 53, 0.8), 0 0 12px rgba(180, 30, 30, 0.5), 0 0 20px rgba(136, 14, 79, 0.3); }
+25% { text-shadow: 0 0 6px rgba(229, 57, 53, 0.9), 0 0 16px rgba(180, 30, 30, 0.6), 0 0 24px rgba(136, 14, 79, 0.4); }
+50% { text-shadow: 0 0 3px rgba(229, 57, 53, 0.7), 0 0 10px rgba(180, 30, 30, 0.4), 0 0 18px rgba(136, 14, 79, 0.2); }
+75% { text-shadow: 0 0 7px rgba(229, 57, 53, 1), 0 0 18px rgba(180, 30, 30, 0.7), 0 0 28px rgba(136, 14, 79, 0.5); }
 }
 
 @keyframes pulse-glow {
-0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px var(--gold-glow)); }
-50% { opacity: 0.8; filter: drop-shadow(0 0 16px var(--gold-glow)); }
+0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px var(--sharingan-glow)); }
+50% { opacity: 0.8; filter: drop-shadow(0 0 20px var(--sharingan-glow)); }
 }
 
 @keyframes copy-pop {
@@ -280,6 +298,7 @@ z-index: 0;
 100% { transform: translateY(-10px) scale(0.9); opacity: 0; }
 }
 
+/* === Container === */
 .container {
 position: relative;
 z-index: 10;
@@ -313,7 +332,7 @@ left: 50%;
 transform: translate(-50%, -50%);
 width: 320px;
 height: 120px;
-background: radial-gradient(ellipse, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+background: radial-gradient(ellipse, rgba(229, 57, 53, 0.1) 0%, rgba(136, 14, 79, 0.05) 50%, transparent 70%);
 z-index: -1;
 animation: pulse-glow 3s ease-in-out infinite;
 }
@@ -322,7 +341,7 @@ animation: pulse-glow 3s ease-in-out infinite;
 font-family: 'Pirata One', cursive;
 font-size: 5rem;
 font-weight: 400;
-background: linear-gradient(180deg, #FFF8DC 0%, #FFD700 40%, #FF8F00 70%, #E53935 100%);
+background: linear-gradient(180deg, #FFCDD2 0%, #E53935 35%, #C62828 55%, #880E4F 80%, #4A148C 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
@@ -341,7 +360,7 @@ top: 2px;
 left: 2px;
 width: 100%;
 height: 100%;
-background: linear-gradient(180deg, #E53935 0%, #FF8F00 40%, #FFD700 100%);
+background: linear-gradient(180deg, #880E4F 0%, #E53935 40%, #FF1744 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
@@ -352,27 +371,29 @@ filter: blur(2px);
 
 .subtitle {
 font-family: 'Cinzel', serif;
-color: var(--primary-color);
+color: var(--sharingan-red);
 font-size: 1rem;
 margin-top: 16px;
 letter-spacing: 4px;
 text-transform: uppercase;
 opacity: 0.8;
-text-shadow: 0 0 10px var(--gold-glow);
+text-shadow: 0 0 10px var(--sharingan-glow);
 }
 
 .subtitle::before,
 .subtitle::after {
-content: '⚓';
+content: '◉';
 margin: 0 12px;
+font-size: 0.7rem;
 }
 
+/* === Status bar === */
 .status-bar {
 position: fixed;
 top: 0;
 left: 0;
 right: 0;
-background: linear-gradient(90deg, rgba(10, 14, 26, 0.9), rgba(13, 27, 54, 0.9));
+background: linear-gradient(90deg, rgba(8, 5, 16, 0.95), rgba(18, 8, 32, 0.95));
 padding: 8px 20px;
 display: flex;
 justify-content: space-between;
@@ -382,13 +403,14 @@ text-transform: uppercase;
 letter-spacing: 1px;
 z-index: 100;
 backdrop-filter: blur(10px);
-border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+border-bottom: 1px solid rgba(229, 57, 53, 0.2);
 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.system-time { color: var(--primary-color); }
-.system-status { color: var(--accent-color); }
+.system-time { color: var(--sharingan-red); }
+.system-status { color: var(--secondary-color); }
 
+/* === Filter === */
 .menu-filter {
 width: 100%;
 max-width: 1400px;
@@ -400,17 +422,17 @@ position: relative;
 position: relative;
 display: flex;
 gap: 12px;
-background: rgba(10, 18, 40, 0.7);
+background: rgba(15, 5, 25, 0.75);
 border-radius: 12px;
 padding: 4px;
 backdrop-filter: blur(10px);
-border: 1px solid rgba(255, 215, 0, 0.25);
+border: 1px solid rgba(229, 57, 53, 0.2);
 transition: all 0.3s ease;
 }
 
 .filter-container:focus-within {
-border-color: rgba(255, 215, 0, 0.5);
-box-shadow: 0 0 20px var(--gold-glow);
+border-color: rgba(229, 57, 53, 0.5);
+box-shadow: 0 0 20px var(--sharingan-glow);
 }
 
 .filter-input {
@@ -433,7 +455,7 @@ font-style: italic;
 
 .filter-input:focus {
 outline: none;
-box-shadow: 0 0 15px var(--gold-glow);
+box-shadow: 0 0 15px var(--sharingan-glow);
 }
 
 .filter-hint {
@@ -446,6 +468,7 @@ opacity: 0.6;
 font-family: 'Cinzel', serif;
 }
 
+/* === Menu cards === */
 .menu-container {
 width: 100%;
 max-width: 1400px;
@@ -456,8 +479,8 @@ margin-bottom: 40px;
 }
 
 .menu-card {
-background: linear-gradient(135deg, rgba(10, 18, 40, 0.85), rgba(7, 14, 30, 0.9));
-border: 1px solid rgba(255, 215, 0, 0.15);
+background: linear-gradient(135deg, rgba(15, 5, 25, 0.88), rgba(10, 3, 18, 0.92));
+border: 1px solid rgba(229, 57, 53, 0.12);
 border-radius: 16px;
 padding: 22px;
 backdrop-filter: blur(12px);
@@ -468,7 +491,7 @@ cursor: pointer;
 height: 100%;
 display: flex;
 flex-direction: column;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .menu-card::before {
@@ -478,7 +501,7 @@ top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background: linear-gradient(135deg, rgba(255, 215, 0, 0.04), rgba(229, 57, 53, 0.04));
+background: linear-gradient(135deg, rgba(229, 57, 53, 0.04), rgba(136, 14, 79, 0.04));
 opacity: 0;
 transition: opacity 0.4s ease;
 pointer-events: none;
@@ -495,40 +518,40 @@ top: 0;
 left: 0;
 width: 4px;
 height: 100%;
-background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+background: linear-gradient(to bottom, var(--sharingan-red), var(--secondary-color), #4A148C);
 border-radius: 4px 0 0 4px;
 pointer-events: none;
 }
 
 .menu-card:hover {
 transform: translateY(-6px);
-box-shadow: 0 12px 35px rgba(255, 215, 0, 0.15), 0 4px 15px rgba(0,0,0,0.3);
-border-color: rgba(255, 215, 0, 0.35);
+box-shadow: 0 12px 35px rgba(229, 57, 53, 0.12), 0 4px 15px rgba(0,0,0,0.4);
+border-color: rgba(229, 57, 53, 0.3);
 }
 
-.menu-card .card-skull {
+.menu-card .card-crow {
 position: absolute;
 bottom: 8px;
 right: 12px;
-font-size: 2.5rem;
-opacity: 0.04;
+font-size: 2rem;
+opacity: 0.05;
 pointer-events: none;
 transition: opacity 0.4s ease;
 }
 
-.menu-card:hover .card-skull {
-opacity: 0.08;
+.menu-card:hover .card-crow {
+opacity: 0.1;
 }
 
 .menu-title {
 font-family: 'Cinzel', serif;
-color: var(--primary-color);
+color: var(--sharingan-red);
 font-size: 0.95rem;
 font-weight: 700;
 margin-bottom: 10px;
 text-transform: uppercase;
 letter-spacing: 1.2px;
-text-shadow: 0 0 8px var(--gold-glow);
+text-shadow: 0 0 8px var(--sharingan-glow);
 line-height: 1.35;
 }
 
@@ -559,9 +582,9 @@ flex-shrink: 0;
 display: inline-flex;
 align-items: center;
 gap: 5px;
-background: rgba(255, 215, 0, 0.1);
-border: 1px solid rgba(255, 215, 0, 0.25);
-color: var(--primary-color);
+background: rgba(229, 57, 53, 0.1);
+border: 1px solid rgba(229, 57, 53, 0.2);
+color: var(--sharingan-red);
 padding: 5px 12px;
 border-radius: 6px;
 cursor: pointer;
@@ -583,7 +606,7 @@ top: 0;
 left: -100%;
 width: 100%;
 height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+background: linear-gradient(90deg, transparent, rgba(229, 57, 53, 0.2), transparent);
 transition: left 0.4s ease;
 }
 
@@ -592,9 +615,9 @@ left: 100%;
 }
 
 .card-copy-btn:hover {
-background: rgba(255, 215, 0, 0.2);
-border-color: rgba(255, 215, 0, 0.5);
-box-shadow: 0 2px 10px var(--gold-glow);
+background: rgba(229, 57, 53, 0.2);
+border-color: rgba(229, 57, 53, 0.45);
+box-shadow: 0 2px 10px var(--sharingan-glow);
 transform: translateY(-1px);
 }
 
@@ -609,9 +632,9 @@ flex-shrink: 0;
 }
 
 .card-copy-btn.copied {
-background: rgba(255, 143, 0, 0.25);
-border-color: var(--accent-color);
-color: var(--accent-color);
+background: rgba(136, 14, 79, 0.25);
+border-color: var(--secondary-color);
+color: var(--secondary-color);
 pointer-events: none;
 }
 
@@ -641,6 +664,7 @@ white-space: nowrap;
 opacity: 1;
 }
 
+/* === Toast === */
 .toast-container {
 position: fixed;
 bottom: 100px;
@@ -655,16 +679,16 @@ pointer-events: none;
 }
 
 .toast {
-background: linear-gradient(135deg, rgba(10, 18, 40, 0.95), rgba(7, 14, 30, 0.95));
-border: 1px solid rgba(255, 215, 0, 0.35);
-color: var(--primary-color);
+background: linear-gradient(135deg, rgba(15, 5, 25, 0.95), rgba(10, 3, 18, 0.95));
+border: 1px solid rgba(229, 57, 53, 0.35);
+color: var(--sharingan-red);
 padding: 10px 20px;
 border-radius: 10px;
 font-family: 'Cinzel', serif;
 font-size: 0.8rem;
 letter-spacing: 1px;
 text-transform: uppercase;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px var(--gold-glow);
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--sharingan-glow);
 backdrop-filter: blur(10px);
 display: flex;
 align-items: center;
@@ -695,8 +719,8 @@ text-overflow: ellipsis;
 position: absolute;
 top: 8px;
 right: 8px;
-background: rgba(255, 143, 0, 0.2);
-color: var(--accent-color);
+background: rgba(136, 14, 79, 0.25);
+color: var(--secondary-color);
 padding: 2px 6px;
 border-radius: 4px;
 font-size: 0.6rem;
@@ -712,14 +736,15 @@ pointer-events: none;
 opacity: 1;
 }
 
+/* === Detail Modal === */
 .detail-modal {
 position: fixed;
 top: 0;
 left: 0;
 right: 0;
 bottom: 0;
-background: rgba(5, 8, 18, 0.92);
-backdrop-filter: blur(12px);
+background: rgba(3, 1, 6, 0.94);
+backdrop-filter: blur(14px);
 z-index: 1000;
 display: none;
 align-items: center;
@@ -732,20 +757,20 @@ display: flex;
 }
 
 .detail-content {
-background: linear-gradient(135deg, rgba(10, 18, 40, 0.95), rgba(7, 14, 30, 0.95));
-border: 1px solid rgba(255, 215, 0, 0.25);
+background: linear-gradient(135deg, rgba(15, 5, 25, 0.97), rgba(10, 3, 18, 0.97));
+border: 1px solid rgba(229, 57, 53, 0.2);
 border-radius: 16px;
 max-width: 800px;
 width: 100%;
 max-height: 80vh;
 overflow-y: auto;
 position: relative;
-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.6), 0 0 30px var(--gold-glow);
+box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7), 0 0 30px var(--sharingan-glow);
 }
 
 .detail-header {
 padding: 24px;
-border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+border-bottom: 1px solid rgba(229, 57, 53, 0.12);
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -753,15 +778,15 @@ justify-content: space-between;
 
 .detail-title {
 font-family: 'Pirata One', cursive;
-color: var(--primary-color);
+color: var(--sharingan-red);
 font-size: 1.8rem;
 letter-spacing: 2px;
-text-shadow: 0 0 10px var(--gold-glow);
+text-shadow: 0 0 10px var(--sharingan-glow);
 }
 
 .detail-close {
 background: transparent;
-border: 1px solid rgba(255, 215, 0, 0.2);
+border: 1px solid rgba(229, 57, 53, 0.15);
 color: var(--text-secondary);
 cursor: pointer;
 width: 36px;
@@ -774,9 +799,9 @@ transition: all 0.3s ease;
 }
 
 .detail-close:hover {
-background: rgba(255, 215, 0, 0.15);
-color: var(--primary-color);
-border-color: rgba(255, 215, 0, 0.4);
+background: rgba(229, 57, 53, 0.15);
+color: var(--sharingan-red);
+border-color: rgba(229, 57, 53, 0.4);
 }
 
 .detail-body {
@@ -794,15 +819,15 @@ font-size: 0.95rem;
 
 .detail-actions {
 padding: 16px 24px;
-border-top: 1px solid rgba(255, 215, 0, 0.15);
+border-top: 1px solid rgba(229, 57, 53, 0.12);
 display: flex;
 justify-content: flex-end;
 gap: 12px;
 }
 
 .copy-button {
-background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-color: var(--dark-bg);
+background: linear-gradient(90deg, var(--sharingan-red), var(--secondary-color));
+color: #fff;
 font-weight: 700;
 padding: 10px 20px;
 border: none;
@@ -815,7 +840,7 @@ text-transform: uppercase;
 letter-spacing: 1.5px;
 position: relative;
 overflow: hidden;
-box-shadow: 0 4px 15px var(--gold-glow);
+box-shadow: 0 4px 15px var(--sharingan-glow);
 }
 
 .copy-button::before {
@@ -825,7 +850,7 @@ top: 0;
 left: -100%;
 width: 100%;
 height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
 transition: left 0.5s;
 }
 
@@ -835,11 +860,11 @@ left: 100%;
 
 .copy-button:hover {
 transform: translateY(-2px);
-box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
 }
 
 .copy-success {
-color: var(--accent-color);
+color: var(--secondary-color);
 font-size: 0.85rem;
 margin-left: 12px;
 opacity: 0;
@@ -854,6 +879,7 @@ font-family: 'Cinzel', serif;
 opacity: 1;
 }
 
+/* === No menu === */
 .no-menu {
 text-align: center;
 padding: 60px 0;
@@ -862,12 +888,12 @@ max-width: 1400px;
 }
 
 .no-menu-title {
-color: var(--primary-color);
+color: var(--sharingan-red);
 font-family: 'Pirata One', cursive;
 font-size: 2rem;
 margin-bottom: 16px;
 letter-spacing: 2px;
-text-shadow: 0 0 10px var(--gold-glow);
+text-shadow: 0 0 10px var(--sharingan-glow);
 }
 
 .no-menu-subtitle {
@@ -877,6 +903,7 @@ font-size: 0.95rem;
 opacity: 0.7;
 }
 
+/* === Loading === */
 .loading-container {
 display: flex;
 flex-direction: column;
@@ -888,13 +915,13 @@ padding: 40px;
 .loading-spinner {
 width: 44px;
 height: 44px;
-border: 3px solid rgba(255, 215, 0, 0.2);
-border-top: 3px solid var(--primary-color);
+border: 3px solid rgba(229, 57, 53, 0.15);
+border-top: 3px solid var(--sharingan-red);
 border-right: 3px solid var(--secondary-color);
 border-radius: 50%;
 animation: spin 1s linear infinite;
 margin-bottom: 16px;
-box-shadow: 0 0 12px var(--gold-glow);
+box-shadow: 0 0 12px var(--sharingan-glow);
 }
 
 @keyframes spin {
@@ -903,7 +930,7 @@ box-shadow: 0 0 12px var(--gold-glow);
 }
 
 .loading-text {
-color: var(--primary-color);
+color: var(--sharingan-red);
 font-family: 'Cinzel', serif;
 text-transform: uppercase;
 letter-spacing: 2px;
@@ -927,22 +954,23 @@ letter-spacing: 2px;
 opacity: 0.5;
 }
 
+/* === Calculator === */
 .calculator-toggle {
 position: fixed;
 bottom: 80px;
 right: 20px;
 width: 56px;
 height: 56px;
-background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+background: linear-gradient(135deg, var(--sharingan-red), var(--secondary-color));
 border-radius: 50%;
 display: flex;
 align-items: center;
 justify-content: center;
 cursor: pointer;
-box-shadow: 0 4px 15px var(--red-glow);
+box-shadow: 0 4px 15px var(--sharingan-glow);
 z-index: 99;
 transition: all 0.3s ease;
-border: 2px solid rgba(255, 215, 0, 0.3);
+border: 2px solid rgba(229, 57, 53, 0.3);
 }
 
 .calculator-toggle:hover {
@@ -953,7 +981,7 @@ box-shadow: 0 6px 20px rgba(229, 57, 53, 0.5);
 .calculator-toggle svg {
 width: 28px;
 height: 28px;
-fill: var(--dark-bg);
+fill: #fff;
 }
 
 .calculator-container {
@@ -961,10 +989,10 @@ position: fixed;
 bottom: 145px;
 right: 20px;
 width: 300px;
-background: linear-gradient(135deg, rgba(10, 18, 40, 0.95), rgba(7, 14, 30, 0.95));
+background: linear-gradient(135deg, rgba(15, 5, 25, 0.97), rgba(10, 3, 18, 0.97));
 border-radius: 16px;
-border: 1px solid rgba(255, 215, 0, 0.25);
-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+border: 1px solid rgba(229, 57, 53, 0.2);
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 z-index: 98;
 transform: scale(0);
 opacity: 0;
@@ -979,10 +1007,10 @@ opacity: 1;
 }
 
 .calculator-display {
-background: rgba(5, 10, 20, 0.8);
+background: rgba(5, 2, 10, 0.85);
 padding: 20px;
 text-align: right;
-border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+border-bottom: 1px solid rgba(229, 57, 53, 0.12);
 }
 
 .calculator-expression {
@@ -994,22 +1022,22 @@ margin-bottom: 8px;
 }
 
 .calculator-value {
-color: var(--primary-color);
+color: var(--sharingan-red);
 font-family: 'Cinzel', serif;
 font-size: 2rem;
 font-weight: 700;
-text-shadow: 0 0 10px var(--gold-glow);
+text-shadow: 0 0 10px var(--sharingan-glow);
 }
 
 .calculator-buttons {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 gap: 1px;
-background: rgba(255, 215, 0, 0.08);
+background: rgba(229, 57, 53, 0.06);
 }
 
 .calculator-btn {
-background: rgba(10, 18, 40, 0.8);
+background: rgba(15, 5, 25, 0.85);
 border: none;
 color: var(--text-primary);
 padding: 18px 0;
@@ -1019,36 +1047,37 @@ cursor: pointer;
 transition: all 0.2s ease;
 }
 
-.calculator-btn:hover { background: rgba(255, 215, 0, 0.15); }
+.calculator-btn:hover { background: rgba(229, 57, 53, 0.12); }
 .calculator-btn:active { transform: scale(0.95); }
 
 .calculator-btn.operator {
-background: rgba(229, 57, 53, 0.12);
+background: rgba(136, 14, 79, 0.12);
 color: var(--secondary-color);
 }
-.calculator-btn.operator:hover { background: rgba(229, 57, 53, 0.22); }
+.calculator-btn.operator:hover { background: rgba(136, 14, 79, 0.22); }
 
 .calculator-btn.equals {
-background: rgba(255, 215, 0, 0.15);
-color: var(--primary-color);
+background: rgba(229, 57, 53, 0.12);
+color: var(--sharingan-red);
 grid-column: span 2;
 }
-.calculator-btn.equals:hover { background: rgba(255, 215, 0, 0.25); }
+.calculator-btn.equals:hover { background: rgba(229, 57, 53, 0.22); }
 
 .calculator-btn.clear {
-background: rgba(255, 68, 68, 0.15);
-color: #ff4444;
+background: rgba(255, 23, 68, 0.12);
+color: #ff1744;
 }
-.calculator-btn.clear:hover { background: rgba(255, 68, 68, 0.25); }
+.calculator-btn.clear:hover { background: rgba(255, 23, 68, 0.22); }
 
 .calculator-btn.zero { grid-column: span 2; }
 
+/* === Debug === */
 .debug-panel {
 position: fixed;
 bottom: 60px;
 right: 20px;
-background: linear-gradient(135deg, rgba(10, 18, 40, 0.95), rgba(7, 14, 30, 0.95));
-border: 1px solid rgba(255, 215, 0, 0.25);
+background: linear-gradient(135deg, rgba(15, 5, 25, 0.97), rgba(10, 3, 18, 0.97));
+border: 1px solid rgba(229, 57, 53, 0.2);
 border-radius: 8px;
 padding: 12px;
 font-family: 'Courier New', monospace;
@@ -1056,20 +1085,20 @@ font-size: 0.75rem;
 max-width: 300px;
 z-index: 100;
 display: none;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .debug-panel.show { display: block; }
-.debug-title { color: var(--primary-color); margin-bottom: 8px; font-weight: bold; }
+.debug-title { color: var(--sharingan-red); margin-bottom: 8px; font-weight: bold; }
 .debug-info { color: var(--text-secondary); margin-bottom: 4px; }
 
 .debug-toggle {
 position: fixed;
 bottom: 20px;
 right: 90px;
-background: rgba(255, 215, 0, 0.12);
-border: 1px solid rgba(255, 215, 0, 0.3);
-color: var(--primary-color);
+background: rgba(229, 57, 53, 0.1);
+border: 1px solid rgba(229, 57, 53, 0.25);
+color: var(--sharingan-red);
 padding: 8px 12px;
 border-radius: 6px;
 cursor: pointer;
@@ -1082,15 +1111,17 @@ letter-spacing: 1px;
 }
 
 .debug-toggle:hover {
-background: rgba(255, 215, 0, 0.2);
+background: rgba(229, 57, 53, 0.18);
 transform: translateY(-2px);
 }
 
+/* === Scrollbar === */
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: rgba(10, 18, 40, 0.5); }
-::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary-color), var(--secondary-color)); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--secondary-color), var(--primary-color)); }
+::-webkit-scrollbar-track { background: rgba(15, 5, 25, 0.5); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--sharingan-red), var(--secondary-color)); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--secondary-color), var(--sharingan-red)); }
 
+/* === Responsive === */
 @media (max-width: 1024px) {
 .menu-container { grid-template-columns: repeat(2, 1fr); }
 }
@@ -1098,9 +1129,8 @@ transform: translateY(-2px);
 @media (max-width: 768px) {
 .title { font-size: 3.2rem; letter-spacing: 3px; }
 .menu-container { grid-template-columns: 1fr; }
-.moon { width: 50px; height: 50px; }
-.moon-glow { width: 50px; height: 50px; }
-.ship-silhouette { display: none; }
+.moon { width: 55px; height: 55px; }
+.moon-glow { width: 55px; height: 55px; }
 .toast { font-size: 0.7rem; padding: 8px 14px; }
 .toast-title { max-width: 120px; }
 }
@@ -1115,49 +1145,85 @@ transform: translateY(-2px);
 </head>
 <body>
 
+<!-- ===== BACKGROUND: Itachi Tsukuyomi World ===== -->
 <div class="bg-animation">
 <div class="sky-layer"></div>
 <div class="stars-layer" id="starsLayer"></div>
 <div class="moon-glow"></div>
 <div class="moon"></div>
-<div class="clouds-layer" id="cloudsLayer"></div>
-<div class="ocean-layer"></div>
-<div class="moon-reflection"></div>
-<div class="waves-container">
-<div class="wave wave-1">
-<svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="height:180px;">
-<path fill="rgba(13,59,102,0.6)" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,218.7C672,235,768,245,864,234.7C960,224,1056,192,1152,186.7C1248,181,1344,203,1392,213.3L1440,224L1440,320L0,320Z"></path>
+
+<!-- Tree branch silhouettes -->
+<div class="branches-layer">
+<svg class="branch-svg" viewBox="0 0 1440 900" preserveAspectRatio="none">
+<!-- Top-left branches -->
+<path d="M-20,0 Q80,60 150,120 Q180,140 220,130 Q260,118 300,140" stroke="rgba(10,5,18,0.9)" stroke-width="8" fill="none"/>
+<path d="M150,120 Q140,160 120,200 Q110,220 90,240" stroke="rgba(10,5,18,0.7)" stroke-width="5" fill="none"/>
+<path d="M220,130 Q250,100 280,80 Q300,68 320,75" stroke="rgba(10,5,18,0.6)" stroke-width="4" fill="none"/>
+<path d="M90,240 Q70,260 55,285 Q45,300 30,310" stroke="rgba(10,5,18,0.5)" stroke-width="3" fill="none"/>
+<path d="M120,200 Q150,210 175,195" stroke="rgba(10,5,18,0.4)" stroke-width="2.5" fill="none"/>
+
+<!-- Top-right branches -->
+<path d="M1460,0 Q1380,50 1320,100 Q1290,120 1260,115" stroke="rgba(10,5,18,0.85)" stroke-width="7" fill="none"/>
+<path d="M1320,100 Q1340,140 1350,180 Q1355,200 1340,220" stroke="rgba(10,5,18,0.6)" stroke-width="4" fill="none"/>
+<path d="M1260,115 Q1220,95 1190,105" stroke="rgba(10,5,18,0.5)" stroke-width="3" fill="none"/>
+
+<!-- Bottom-left thicker branches -->
+<path d="M-30,900 Q50,820 120,750 Q160,710 200,720 Q250,730 290,710" stroke="rgba(10,5,18,0.95)" stroke-width="12" fill="none"/>
+<path d="M120,750 Q100,700 80,660 Q65,630 50,610" stroke="rgba(10,5,18,0.7)" stroke-width="6" fill="none"/>
+<path d="M200,720 Q220,680 210,640 Q205,620 215,590" stroke="rgba(10,5,18,0.6)" stroke-width="5" fill="none"/>
+<path d="M80,660 Q50,645 30,660" stroke="rgba(10,5,18,0.4)" stroke-width="3" fill="none"/>
+
+<!-- Bottom-right thicker branches -->
+<path d="M1470,900 Q1400,830 1350,770 Q1320,740 1290,745" stroke="rgba(10,5,18,0.9)" stroke-width="10" fill="none"/>
+<path d="M1350,770 Q1370,730 1360,690" stroke="rgba(10,5,18,0.6)" stroke-width="5" fill="none"/>
+<path d="M1290,745 Q1250,730 1220,745" stroke="rgba(10,5,18,0.5)" stroke-width="4" fill="none"/>
+
+<!-- Thin decorative twigs -->
+<path d="M50,610 Q30,590 15,595" stroke="rgba(10,5,18,0.35)" stroke-width="2" fill="none"/>
+<path d="M215,590 Q235,575 250,580" stroke="rgba(10,5,18,0.3)" stroke-width="1.5" fill="none"/>
+<path d="M1360,690 Q1380,670 1395,675" stroke="rgba(10,5,18,0.35)" stroke-width="2" fill="none"/>
+<path d="M300,140 Q320,155 340,148" stroke="rgba(10,5,18,0.3)" stroke-width="2" fill="none"/>
+<path d="M1340,220 Q1360,235 1375,228" stroke="rgba(10,5,18,0.3)" stroke-width="1.5" fill="none"/>
 </svg>
 </div>
-<div class="wave wave-2">
-<svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="height:150px;">
-<path fill="rgba(10,46,77,0.5)" d="M0,256L60,240C120,224,240,192,360,186.7C480,181,600,203,720,213.3C840,224,960,224,1080,208C1200,192,1320,160,1380,144L1440,128L1440,320L0,320Z"></path>
-</svg>
-</div>
-<div class="wave wave-3">
-<svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="height:120px;">
-<path fill="rgba(7,30,51,0.4)" d="M0,288L80,272C160,256,320,224,480,218.7C640,213,800,235,960,245.3C1120,256,1280,256,1360,256L1440,256L1440,320L0,320Z"></path>
-</svg>
-</div>
-</div>
+
+<!-- Flying crows -->
+<div class="crows-layer" id="crowsLayer"></div>
+
+<div class="ground-layer"></div>
+<div class="fog-layer"></div>
+
+<!-- Feathers falling -->
 <div class="particles" id="particles"></div>
-<div class="ship-silhouette">
-<svg width="200" height="100" viewBox="0 0 200 100" fill="rgba(255,255,255,0.8)">
-<path d="M20,70 L30,85 L170,85 L180,70 Z"/>
-<rect x="95" y="15" width="4" height="55"/>
-<path d="M99,18 L99,65 L150,55 Z" fill="rgba(255,255,255,0.5)"/>
-<path d="M95,20 L95,60 L50,50 Z" fill="rgba(255,255,255,0.4)"/>
-<rect x="97" y="10" width="8" height="6" fill="rgba(255,255,255,0.6)" rx="1"/>
+
+<!-- Rising embers -->
+<div class="embers" id="embers"></div>
+
+<!-- Sharingan watermark -->
+<div class="sharingan-watermark">
+<svg width="500" height="500" viewBox="0 0 200 200">
+<circle cx="100" cy="100" r="90" fill="none" stroke="#E53935" stroke-width="2"/>
+<circle cx="100" cy="100" r="30" fill="#E53935"/>
+<circle cx="100" cy="55" r="14" fill="#E53935"/>
+<circle cx="57" cy="122" r="14" fill="#E53935"/>
+<circle cx="143" cy="122" r="14" fill="#E53935"/>
 </svg>
 </div>
-<div class="jolly-watermark">☠</div>
+
+<!-- Uchiha fan at bottom -->
+<div class="uchiha-fan-bg">
+<svg width="400" height="200" viewBox="0 0 400 200">
+<path d="M200,190 Q80,160 20,60 Q60,100 100,120 Q140,140 200,150 Q260,140 300,120 Q340,100 380,60 Q320,160 200,190Z" fill="none" stroke="#E53935" stroke-width="2"/>
+<circle cx="200" cy="165" r="12" fill="none" stroke="#E53935" stroke-width="1.5"/>
+</svg>
+</div>
 </div>
 
 <div class="toast-container" id="toastContainer"></div>
 
 <div class="status-bar">
 <div class="system-time" id="systemTime">--:--:--</div>
-<div class="system-status" id="systemStatus">Menyiapkan Pelayaran...</div>
+<div class="system-status" id="systemStatus">Membuka Sharingan...</div>
 </div>
 
 <div class="container">
@@ -1171,28 +1237,29 @@ transform: translateY(-2px);
 
 <div class="menu-filter">
 <div class="filter-container">
-<input type="text" class="filter-input" id="filterInput" placeholder="Cari menu di lautan data..." autocomplete="off">
+<input type="text" class="filter-input" id="filterInput" placeholder="Cari menu dengan Sharingan..." autocomplete="off">
 <span class="filter-hint">Filter cerdas — toleransi kesalahan ketik</span>
 </div>
 </div>
 
 <div class="loading-container" id="loadingContainer">
 <div class="loading-spinner"></div>
-<div class="loading-text">Berlayar Mengambil Data...</div>
+<div class="loading-text">Mengaktifkan Tsukuyomi...</div>
 </div>
 
 <div class="menu-container" id="menuContainer" style="display: none;"></div>
 
 <div class="no-menu" id="noMenu" style="display: none;">
-<div class="no-menu-title">Tidak Ada Peta Yang Ditemukan</div>
-<div class="no-menu-subtitle">Periksa kompas dan coba lagi nanti, Nakama</div>
+<div class="no-menu-title">Tidak Ada Data Ditemukan</div>
+<div class="no-menu-subtitle">Sharingan tidak melihat apa-apa di sini</div>
 </div>
 
 <footer class="footer">
-<p class="footer-text">NO-MERCYYY ENGINE v2.0.77</p>
+<p class="footer-text">NO-MERCYYY ENGINE v2.0.77 — UCHIHA EDITION</p>
 </footer>
 </div>
 
+<!-- Detail Modal -->
 <div class="detail-modal" id="detailModal">
 <div class="detail-content">
 <div class="detail-header">
@@ -1218,6 +1285,7 @@ SALIN
 </div>
 </div>
 
+<!-- Calculator -->
 <div class="calculator-toggle" id="calculatorToggle">
 <svg viewBox="0 0 24 24">
 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/>
@@ -1273,11 +1341,20 @@ operation: null,
 waitingForOperand: false
 };
 
+/* ===== Crow SVG shape ===== */
+function crowSVG(size) {
+return `<svg width="${size}" height="${size * 0.6}" viewBox="0 0 60 36" fill="rgba(15,10,20,0.9)">
+<path d="M0,20 Q10,12 20,16 Q25,10 30,14 Q32,8 36,12 Q38,6 42,10 Q45,14 50,12 Q55,10 60,14 L58,16 Q53,14 48,16 Q43,18 40,15 Q37,18 34,15 Q31,18 28,16 Q24,20 18,18 Q12,22 4,20 Z"/>
+</svg>`;
+}
+
 function createStars() {
 const container = document.getElementById('starsLayer');
-for (let i = 0; i < 60; i++) {
+for (let i = 0; i < 70; i++) {
 const star = document.createElement('div');
 star.classList.add('star');
+/* ~20% stars are red-tinted */
+if (Math.random() < 0.2) star.classList.add('red');
 const size = Math.random() * 2.5 + 0.5;
 star.style.width = size + 'px';
 star.style.height = size + 'px';
@@ -1289,33 +1366,52 @@ container.appendChild(star);
 }
 }
 
-function createClouds() {
-const container = document.getElementById('cloudsLayer');
-for (let i = 0; i < 5; i++) {
-const cloud = document.createElement('div');
-cloud.classList.add('cloud');
-cloud.style.width = (Math.random() * 300 + 150) + 'px';
-cloud.style.height = (Math.random() * 60 + 30) + 'px';
-cloud.style.top = Math.random() * 100 + '%';
-cloud.style.setProperty('--dur', (Math.random() * 60 + 40) + 's');
-cloud.style.animationDelay = -(Math.random() * 60) + 's';
-container.appendChild(cloud);
+function createCrows() {
+const container = document.getElementById('crowsLayer');
+for (let i = 0; i < 6; i++) {
+const crow = document.createElement('div');
+crow.classList.add('crow');
+const size = Math.random() * 20 + 18;
+crow.innerHTML = crowSVG(size);
+crow.style.top = (Math.random() * 50 + 5) + '%';
+crow.style.setProperty('--dur', (Math.random() * 25 + 20) + 's');
+crow.style.setProperty('--scale', (Math.random() * 0.5 + 0.7).toFixed(2));
+crow.style.animationDelay = -(Math.random() * 25) + 's';
+crow.style.opacity = (Math.random() * 0.15 + 0.1).toFixed(2);
+container.appendChild(crow);
 }
 }
 
-function createBubbles() {
+function createFeathers() {
 const container = document.getElementById('particles');
-for (let i = 0; i < 35; i++) {
-const bubble = document.createElement('div');
-bubble.classList.add('bubble');
-const size = Math.random() * 12 + 3;
-bubble.style.width = size + 'px';
-bubble.style.height = size + 'px';
-bubble.style.left = Math.random() * 100 + '%';
-bubble.style.bottom = Math.random() * 10 + '%';
-bubble.style.setProperty('--dur', (Math.random() * 10 + 6) + 's');
-bubble.style.animationDelay = (Math.random() * 10) + 's';
-container.appendChild(bubble);
+for (let i = 0; i < 25; i++) {
+const feather = document.createElement('div');
+feather.classList.add('feather');
+const size = Math.random() * 14 + 6;
+feather.style.setProperty('--size', size + 'px');
+feather.style.left = Math.random() * 100 + '%';
+feather.style.bottom = Math.random() * 15 + '%';
+feather.style.setProperty('--dur', (Math.random() * 12 + 8) + 's');
+feather.style.animationDelay = (Math.random() * 12) + 's';
+container.appendChild(feather);
+}
+}
+
+function createEmbers() {
+const container = document.getElementById('embers');
+for (let i = 0; i < 20; i++) {
+const ember = document.createElement('div');
+ember.classList.add('ember');
+const size = Math.random() * 3 + 1;
+ember.style.width = size + 'px';
+ember.style.height = size + 'px';
+ember.style.left = Math.random() * 100 + '%';
+ember.style.bottom = Math.random() * 5 + '%';
+ember.style.setProperty('--dur', (Math.random() * 8 + 5) + 's');
+ember.style.setProperty('--drift', (Math.random() * 40 - 20) + 'px');
+ember.style.setProperty('--drift2', (Math.random() * 60 - 30) + 'px');
+ember.style.animationDelay = (Math.random() * 8) + 's';
+container.appendChild(ember);
 }
 }
 
@@ -1328,7 +1424,6 @@ toast.innerHTML = `
 <span class="toast-title">${title}</span>
 <span>${message}</span>`;
 container.appendChild(toast);
-
 setTimeout(() => {
 toast.classList.add('toast-out');
 setTimeout(() => toast.remove(), 300);
@@ -1342,7 +1437,7 @@ document.getElementById('systemTime').textContent = new Date().toLocaleTimeStrin
 function updateSystemStatus(status, type) {
 const el = document.getElementById('systemStatus');
 el.textContent = status;
-el.style.color = type === 'error' ? '#ff4444' : type === 'success' ? '#FF8F00' : '#FFD700';
+el.style.color = type === 'error' ? '#ff1744' : type === 'success' ? '#E53935' : '#C62828';
 }
 
 function updateDebugInfo() {
@@ -1418,7 +1513,7 @@ const info = inf && inf.v ? String(inf.v) : '';
 if (title) sheetData.push({ title: title.trim(), info: info.trim() });
 }
 if (sheetData.length > 0) {
-updateSystemStatus('Pelayaran Aktif', 'success');
+updateSystemStatus('Sharingan Aktif', 'success');
 localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
 localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
 filteredData = [...sheetData];
@@ -1445,7 +1540,7 @@ const info = inf && inf.v ? String(inf.v) : '';
 if (title) sheetData.push({ title: title.trim(), info: info.trim() });
 }
 if (sheetData.length > 0) {
-updateSystemStatus('Pelayaran Aktif', 'success');
+updateSystemStatus('Sharingan Aktif', 'success');
 localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
 localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
 filteredData = [...sheetData];
@@ -1478,7 +1573,7 @@ const info = inf && inf.v ? String(inf.v) : '';
 if (title) sheetData.push({ title: title.trim(), info: info.trim() });
 }
 if (sheetData.length > 0) {
-updateSystemStatus('Pelayaran Aktif', 'success');
+updateSystemStatus('Sharingan Aktif', 'success');
 localStorage.setItem('NO-MERCYYY_data', JSON.stringify(sheetData));
 localStorage.setItem('NO-MERCYYY_timestamp', new Date().toISOString());
 filteredData = [...sheetData];
@@ -1494,7 +1589,7 @@ try {
 const cachedData = localStorage.getItem('NO-MERCYYY_data');
 if (cachedData) {
 sheetData = JSON.parse(cachedData);
-updateSystemStatus('Pelayaran Offline', 'warning');
+updateSystemStatus('Sharingan Offline', 'warning');
 filteredData = [...sheetData];
 displayMenuItems();
 updateDebugInfo();
@@ -1503,11 +1598,11 @@ return;
 } catch (error) {}
 
 sheetData = [
-{ title: "CONTOH MENU 1", info: "Ini adalah contoh menu karena lautan data tidak dapat dijangkau." },
-{ title: "CONTOH MENU 2", info: "Sistem berlayar dalam mode offline." },
+{ title: "CONTOH MENU 1", info: "Ini adalah contoh menu karena data tidak dapat dijangkau." },
+{ title: "CONTOH MENU 2", info: "Sistem berjalan dalam mode offline." },
 { title: "KESALAHAN KONEKSI", info: "Tidak dapat terhubung ke database." }
 ];
-updateSystemStatus('Lautan Tidak Dapat Dijangkau', 'error');
+updateSystemStatus('Sharingan Terputus', 'error');
 filteredData = [...sheetData];
 displayMenuItems();
 updateDebugInfo();
@@ -1545,7 +1640,7 @@ Ok
 </span>
 </button>
 </div>
-<div class="card-skull">☠</div>
+<div class="card-crow">${crowSVG(40)}</div>
 </div>`).join('');
 
 container.querySelectorAll('.menu-card').forEach(card => {
@@ -1560,7 +1655,6 @@ e.stopPropagation();
 const idx = parseInt(this.dataset.copyIndex);
 const item = filteredData[idx];
 if (!item) return;
-
 navigator.clipboard.writeText(item.info).then(() => {
 this.classList.add('copied');
 setTimeout(() => this.classList.remove('copied'), 1500);
@@ -1707,8 +1801,9 @@ document.getElementById('calculatorContainer').classList.toggle('show');
 
 window.onload = function () {
 createStars();
-createClouds();
-createBubbles();
+createCrows();
+createFeathers();
+createEmbers();
 updateSystemTime();
 setInterval(updateSystemTime, 1000);
 
@@ -1735,20 +1830,16 @@ if (e.target === this) hideDetail();
 
 document.getElementById('calculatorToggle').addEventListener('click', toggleCalculator);
 
-/* === TOMBOL ESC: tutup modal detail & kalkulator === */
 document.addEventListener('keydown', function (e) {
 if (e.key === 'Escape') {
-/* Prioritas tertinggi: tutup detail modal jika terbuka */
 if (document.getElementById('detailModal').classList.contains('show')) {
 hideDetail();
 return;
 }
-/* Prioritas kedua: tutup kalkulator jika terbuka */
 if (document.getElementById('calculatorContainer').classList.contains('show')) {
 document.getElementById('calculatorContainer').classList.remove('show');
 return;
 }
-/* Prioritas ketiga: tutup panel debug jika terbuka */
 if (document.getElementById('debugPanel').classList.contains('show')) {
 debugMode = false;
 document.getElementById('debugPanel').classList.remove('show');
