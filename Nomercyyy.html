@@ -804,7 +804,6 @@ box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 .system-time { color: var(--primary-color); }
 .system-status { color: var(--accent-color); }
 
-/* ===== HALAMAN ===== */
 .page-section {
 display: none;
 width: 100%;
@@ -814,7 +813,6 @@ animation: page-enter 0.4s ease forwards;
 
 .page-section.active { display: block; }
 
-/* --- Beranda --- */
 .beranda-hero {
 text-align: center;
 padding: 40px 0 20px;
@@ -940,7 +938,6 @@ opacity: 0.6;
 margin-top: 4px;
 }
 
-/* --- Jadwal --- */
 .jadwal-grid {
 display: grid;
 grid-template-columns: repeat(2, 1fr);
@@ -1006,7 +1003,6 @@ font-weight: 700;
 .jadwal-value.open { color: #4CAF50; }
 .jadwal-value.close { color: #ff9800; }
 
-/* --- Page generik --- */
 .generic-page {
 text-align: center;
 padding: 60px 20px;
@@ -1263,7 +1259,26 @@ color: var(--accent-color);
 opacity: 1;
 }
 
-/* --- Menu Filter (RANDOM) --- */
+.bonus-data-source {
+text-align: center;
+margin-bottom: 24px;
+font-family: 'Cinzel', serif;
+font-size: 0.68rem;
+color: var(--text-secondary);
+opacity: 0.4;
+letter-spacing: 1px;
+}
+
+.bonus-data-source.live {
+opacity: 0.7;
+color: #66BB6A;
+}
+
+.bonus-data-source.cached {
+opacity: 0.6;
+color: var(--accent-color);
+}
+
 .menu-filter {
 width: 100%;
 max-width: 1100px;
@@ -1758,7 +1773,7 @@ border-radius: 8px;
 padding: 12px;
 font-family: 'Courier New', monospace;
 font-size: 0.75rem;
-max-width: 300px;
+max-width: 320px;
 z-index: 100;
 display: none;
 box-shadow: 0 4px 20px rgba(0,0,0,0.5);
@@ -2054,8 +2069,8 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 <div class="stat-label">Total Data RANDOM</div>
 </div>
 <div class="stat-item">
-<div class="stat-number" id="statPasaran">12</div>
-<div class="stat-label">Pasaran Aktif</div>
+<div class="stat-number" id="statBonus">0</div>
+<div class="stat-label">Total Bonus</div>
 </div>
 <div class="stat-item">
 <div class="stat-number">24/7</div>
@@ -2118,7 +2133,7 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 </div>
 </section>
 
-<!-- ====== BONUS ====== -->
+<!-- ====== BONUS (Dinamis dari Spreadsheet) ====== -->
 <section class="page-section" id="page-all-bonus">
 <div class="bonus-header">
 <span class="bonus-header-icon">🎁</span>
@@ -2126,119 +2141,21 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 <p class="bonus-page-subtitle">Kumpulan bonus lengkap untuk seluruh nakama</p>
 </div>
 
-<div class="bonus-list">
+<div class="bonus-data-source" id="bonusDataSource">Memuat sumber data...</div>
 
-<div class="bonus-card">
-<div class="bonus-card-top">
-<div class="bonus-name">Bonus New Member</div>
-<span class="bonus-badge hot">HOT</span>
-</div>
-<div class="bonus-value-display">
-<span class="bonus-percent">100</span>
-<span class="bonus-percent-sign">%</span>
-</div>
-<div class="bonus-desc">Bonus selamat datang untuk member baru. Dapatkan bonus 100% dari deposit pertama Anda. Berlaku untuk semua permainan togel dan slot.</div>
-<div class="bonus-meta">
-<div class="bonus-meta-item"><span class="bonus-meta-icon">🎯</span> Min. Deposit Rp 50.000</div>
-<div class="bonus-meta-item"><span class="bonus-meta-icon">🔄</span> Turnover 8x</div>
-<div class="bonus-meta-item"><span class="bonus-meta-icon">📅</span> Berlaku 1x Seumur Hidup</div>
-</div>
-<div class="card-skull">☠</div>
+<div class="loading-container" id="bonusLoading" style="display:none;">
+<div class="loading-spinner"></div>
+<div class="loading-text">Mengambil Data Bonus...</div>
 </div>
 
-<div class="bonus-card">
-<div class="bonus-card-top">
-<div class="bonus-name">Bonus Harian</div>
-<span class="bonus-badge active">AKTIF</span>
-</div>
-<div class="bonus-value-display">
-<span class="bonus-percent">10</span>
-<span class="bonus-percent-sign">%</span>
-</div>
-<div class="bonus-desc">Bonus deposit harian yang bisa diklaim setiap hari. Tidak ada batasan maksimal klaim dalam seminggu. Semakin sering bermain, semakin besar keuntungan.</div>
-<div class="bonus-meta">
-<div class="bonus-meta-item"><span class="bonus-meta-icon">🎯</span> Min. Deposit Rp 25.000</div>
-<div class="bonus-meta-item"><span class="bonus-meta-icon">🔄</span> Turnover 5x</div>
-<div class="bonus-meta-item"><span class="bonus-meta-icon">⏰</span> Klaim 1x / Hari</div>
-</div>
-<div class="card-skull">☠</div>
+<div class="bonus-list" id="bonusList" style="display:none;"></div>
+
+<div class="no-menu" id="bonusNoData" style="display:none;">
+<div class="no-menu-title">Tidak Ada Bonus Ditemukan</div>
+<div class="no-menu-subtitle">Lautan bonus sedang surut, coba lagi nanti Nakama</div>
 </div>
 
-<div class="bonus-card">
-<div class="bonus-card-top">
-<div class="bonus-name">Bonus Cashback Mingguan</div>
-<span class="bonus-badge active">AKTIF</span>
-</div>
-<div class="bonus-value-display">
-<span class="bonus-percent">15</span>
-<span class="bonus-percent-sign">%</span>
-</div>
-<div class="bonus-desc">Cashback kekalahan dihitung dari total lose selama satu minggu. Dibagikan setiap hari Senin secara otomatis ke saldo akun Anda.</div>
-<div class="bonus-meta">
-<div class="bonus-meta-item"><span class="bonus-meta-icon">🎯</span> Min. Lose Rp 100.000</div>
-<div class="bonus-meta-item"><span class="bonus-meta-icon">🔄</span> Tanpa Turnover</div>
-<div class="bonus-meta-item"><span class="bonus-meta-icon">📅</span> Bagi Setiap Senin</div>
-</div>
-<div class="card-skull">☠</div>
-</div>
-
-<div class="bonus-card">
-<div class="bonus-card-top">
-<div class="bonus-name">Bonus Referral</div>
-<span class="bonus-badge active">AKTIF</span>
-</div>
-<div class="bonus-value-display">
-<span class="bonus-percent">5</span>
-<span class="bonus-percent-sign">%</span>
-</div>
-<div class="bonus-desc">Dapatkan komisi 5% dari setiap taruhan yang dilakukan oleh teman yang Anda undang. Bonus berlaku seumur hidup tanpa batas maksimal.</div>
-<div class="bonus-meta">
-<div class="bonus-meta-item"><span class="bonus-meta-icon">👥</span> Tanpa Batas Referral</div>
-<div class="bonus-meta-item"><span class="bonus-meta-icon">🔄</span> Tanpa Turnover</div>
-<div class="bonus-meta-item"><span class="bonus-meta-icon">♾️</span> Seumur Hidup</div>
-</div>
-<div class="card-skull">☠</div>
-</div>
-
-<div class="bonus-card">
-<div class="bonus-card-top">
-<div class="bonus-name">Bonus Rollingan Slot</div>
-<span class="bonus-badge new">BARU</span>
-</div>
-<div class="bonus-value-display">
-<span class="bonus-percent">0.8</span>
-<span class="bonus-percent-sign">%</span>
-</div>
-<div class="bonus-desc">Bonus rollingan khusus permainan slot dihitung dari total turnover selama satu minggu. Semakin aktif bermain, semakin besar bonus yang diterima.</div>
-<div class="bonus-meta">
-<div class="bonus-meta-item"><span class="bonus-meta-icon">🎰</span> Khusus Slot Games</div>
-<div class="bonus-meta-item"><span class="bonus-meta-icon">🔄</span> Tanpa Syarat Klaim</div>
-<div class="bonus-meta-item"><span class="bonus-meta-icon">📅</span> Bagi Setiap Senin</div>
-</div>
-<div class="card-skull">☠</div>
-</div>
-
-<div class="bonus-card">
-<div class="bonus-card-top">
-<div class="bonus-name">Bonus Event Spesial</div>
-<span class="bonus-badge exclusive">EKSKLUSIF</span>
-</div>
-<div class="bonus-value-display">
-<span class="bonus-percent">???</span>
-<span class="bonus-percent-sign"></span>
-</div>
-<div class="bonus-desc">Event spesial yang diadakan secara berkala dengan hadiah menarik. Hubungi customer service untuk info event terbaru yang sedang berlangsung.</div>
-<div class="bonus-meta">
-<div class="bonus-meta-item"><span class="bonus-meta-icon">🎉</span> Hadiah Misteri</div>
-<div class="bonus-meta-item"><span class="bonus-meta-icon">⏰</span> Periode Terbatas</div>
-<div class="bonus-meta-item"><span class="bonus-meta-icon">💬</span> Tanya CS Untuk Info</div>
-</div>
-<div class="card-skull">☠</div>
-</div>
-
-</div>
-
-<div class="bonus-footer-note">
+<div class="bonus-footer-note" id="bonusFooterNote" style="display:none;">
 <p><strong>Syarat &amp; Ketentuan:</strong> Semua bonus tunduk pada syarat dan ketentuan yang berlaku. Manajemen berhak membatalkan bonus jika ditemukan indikasi kecurangan. Untuk informasi lebih lanjut, silakan hubungi customer service kami.</p>
 </div>
 </section>
@@ -2330,310 +2247,636 @@ SALIN
 </div>
 
 <script>
+/* ===== Variabel Global ===== */
 let sheetData = [];
 let filteredData = [];
+let bonusData = [];
 let currentDetail = null;
 let debugMode = false;
 let activePage = 'beranda';
 let randomDataLoaded = false;
+let bonusDataLoaded = false;
+let bonusFetchSource = '';
 
+/* ===== Konfigurasi Spreadsheet Bonus ===== */
+const BONUS_SHEET_ID = '1WJro0RwXjGd2BuIcWE8czEi-_3L1zavuoAj2h8ZGMSA';
+const BONUS_GID = '0';
+
+/* ===== Data Fallback Bonus (jika fetch gagal) ===== */
+const FALLBACK_BONUS = [
+    {
+        name: 'Bonus New Member',
+        percent: '100',
+        desc: 'Bonus selamat datang untuk member baru. Dapatkan bonus 100% dari deposit pertama Anda. Berlaku untuk semua permainan togel dan slot.',
+        badge: 'hot',
+        meta: [
+            { icon: '🎯', text: 'Min. Deposit Rp 50.000' },
+            { icon: '🔄', text: 'Turnover 8x' },
+            { icon: '📅', text: 'Berlaku 1x Seumur Hidup' }
+        ]
+    },
+    {
+        name: 'Bonus Harian',
+        percent: '10',
+        desc: 'Bonus deposit harian yang bisa diklaim setiap hari. Tidak ada batasan maksimal klaim dalam seminggu.',
+        badge: 'active',
+        meta: [
+            { icon: '🎯', text: 'Min. Deposit Rp 25.000' },
+            { icon: '🔄', text: 'Turnover 5x' },
+            { icon: '⏰', text: 'Klaim 1x / Hari' }
+        ]
+    },
+    {
+        name: 'Bonus Cashback Mingguan',
+        percent: '15',
+        desc: 'Cashback kekalahan dihitung dari total lose selama satu minggu. Dibagikan setiap hari Senin secara otomatis.',
+        badge: 'active',
+        meta: [
+            { icon: '🎯', text: 'Min. Lose Rp 100.000' },
+            { icon: '🔄', text: 'Tanpa Turnover' },
+            { icon: '📅', text: 'Bagi Setiap Senin' }
+        ]
+    },
+    {
+        name: 'Bonus Referral',
+        percent: '5',
+        desc: 'Dapatkan komisi 5% dari setiap taruhan yang dilakukan oleh teman yang Anda undang. Berlaku seumur hidup.',
+        badge: 'active',
+        meta: [
+            { icon: '👥', text: 'Tanpa Batas Referral' },
+            { icon: '🔄', text: 'Tanpa Turnover' },
+            { icon: '♾️', text: 'Seumur Hidup' }
+        ]
+    },
+    {
+        name: 'Bonus Rollingan Slot',
+        percent: '0.8',
+        desc: 'Bonus rollingan khusus permainan slot dihitung dari total turnover selama satu minggu.',
+        badge: 'new',
+        meta: [
+            { icon: '🎰', text: 'Khusus Slot Games' },
+            { icon: '🔄', text: 'Tanpa Syarat Klaim' },
+            { icon: '📅', text: 'Bagi Setiap Senin' }
+        ]
+    },
+    {
+        name: 'Bonus Event Spesial',
+        percent: '???',
+        desc: 'Event spesial yang diadakan secara berkala dengan hadiah menarik. Hubungi customer service untuk info event terbaru.',
+        badge: 'exclusive',
+        meta: [
+            { icon: '🎉', text: 'Hadiah Misteri' },
+            { icon: '⏰', text: 'Periode Terbatas' },
+            { icon: '💬', text: 'Tanya CS Untuk Info' }
+        ]
+    }
+];
+
+/* ===== Elemen Background ===== */
 function seagullSVG(size) {
-return `<svg width="${size}" height="${size * 0.5}" viewBox="0 0 40 20" fill="none" stroke="rgba(20,25,50,0.9)" stroke-width="1.5" stroke-linecap="round">
+    return `<svg width="${size}" height="${size * 0.5}" viewBox="0 0 40 20" fill="none" stroke="rgba(20,25,50,0.9)" stroke-width="1.5" stroke-linecap="round">
 <path d="M0,12 Q8,4 16,10 Q18,11 20,10 Q22,11 24,10 Q32,4 40,12"/>
 </svg>`;
 }
 
 function createStars() {
-const c = document.getElementById('starsLayer');
-for (let i = 0; i < 55; i++) {
-const s = document.createElement('div');
-s.classList.add('star');
-if (Math.random() < 0.25) s.classList.add('warm');
-const sz = Math.random() * 2.5 + 0.5;
-s.style.width = sz + 'px'; s.style.height = sz + 'px';
-s.style.top = Math.random() * 100 + '%'; s.style.left = Math.random() * 100 + '%';
-s.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's');
-s.style.animationDelay = Math.random() * 3 + 's';
-c.appendChild(s);
-}
+    const c = document.getElementById('starsLayer');
+    for (let i = 0; i < 55; i++) {
+        const s = document.createElement('div');
+        s.classList.add('star');
+        if (Math.random() < 0.25) s.classList.add('warm');
+        const sz = Math.random() * 2.5 + 0.5;
+        s.style.width = sz + 'px'; s.style.height = sz + 'px';
+        s.style.top = Math.random() * 100 + '%'; s.style.left = Math.random() * 100 + '%';
+        s.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's');
+        s.style.animationDelay = Math.random() * 3 + 's';
+        c.appendChild(s);
+    }
 }
 
 function createClouds() {
-const c = document.getElementById('cloudsLayer');
-for (let i = 0; i < 7; i++) {
-const cl = document.createElement('div');
-cl.classList.add('cloud');
-cl.classList.add(i > 3 ? 'sunset' : 'dark');
-cl.style.width = (Math.random() * 350 + 120) + 'px';
-cl.style.height = (Math.random() * 50 + 25) + 'px';
-cl.style.top = (Math.random() * 80 + 10) + '%';
-cl.style.setProperty('--dur', (Math.random() * 70 + 40) + 's');
-cl.style.animationDelay = -(Math.random() * 70) + 's';
-c.appendChild(cl);
-}
+    const c = document.getElementById('cloudsLayer');
+    for (let i = 0; i < 7; i++) {
+        const cl = document.createElement('div');
+        cl.classList.add('cloud');
+        cl.classList.add(i > 3 ? 'sunset' : 'dark');
+        cl.style.width = (Math.random() * 350 + 120) + 'px';
+        cl.style.height = (Math.random() * 50 + 25) + 'px';
+        cl.style.top = (Math.random() * 80 + 10) + '%';
+        cl.style.setProperty('--dur', (Math.random() * 70 + 40) + 's');
+        cl.style.animationDelay = -(Math.random() * 70) + 's';
+        c.appendChild(cl);
+    }
 }
 
 function createSeagulls() {
-const c = document.getElementById('seagullsLayer');
-for (let i = 0; i < 5; i++) {
-const g = document.createElement('div');
-g.classList.add('seagull');
-const sz = Math.random() * 16 + 14;
-g.innerHTML = seagullSVG(sz);
-g.style.top = (Math.random() * 60 + 5) + '%';
-g.style.setProperty('--dur', (Math.random() * 30 + 22) + 's');
-g.style.setProperty('--scale', (Math.random() * 0.4 + 0.7).toFixed(2));
-g.style.animationDelay = -(Math.random() * 30) + 's';
-g.style.opacity = (Math.random() * 0.12 + 0.08).toFixed(2);
-c.appendChild(g);
-}
+    const c = document.getElementById('seagullsLayer');
+    for (let i = 0; i < 5; i++) {
+        const g = document.createElement('div');
+        g.classList.add('seagull');
+        const sz = Math.random() * 16 + 14;
+        g.innerHTML = seagullSVG(sz);
+        g.style.top = (Math.random() * 60 + 5) + '%';
+        g.style.setProperty('--dur', (Math.random() * 30 + 22) + 's');
+        g.style.setProperty('--scale', (Math.random() * 0.4 + 0.7).toFixed(2));
+        g.style.animationDelay = -(Math.random() * 30) + 's';
+        g.style.opacity = (Math.random() * 0.12 + 0.08).toFixed(2);
+        c.appendChild(g);
+    }
 }
 
 function createBubbles() {
-const c = document.getElementById('particles');
-for (let i = 0; i < 30; i++) {
-const b = document.createElement('div');
-b.classList.add('bubble');
-const sz = Math.random() * 10 + 3;
-b.style.width = sz + 'px'; b.style.height = sz + 'px';
-b.style.left = Math.random() * 100 + '%'; b.style.bottom = Math.random() * 8 + '%';
-b.style.setProperty('--dur', (Math.random() * 10 + 6) + 's');
-b.style.animationDelay = (Math.random() * 10) + 's';
-c.appendChild(b);
-}
+    const c = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+        const b = document.createElement('div');
+        b.classList.add('bubble');
+        const sz = Math.random() * 10 + 3;
+        b.style.width = sz + 'px'; b.style.height = sz + 'px';
+        b.style.left = Math.random() * 100 + '%'; b.style.bottom = Math.random() * 8 + '%';
+        b.style.setProperty('--dur', (Math.random() * 10 + 6) + 's');
+        b.style.animationDelay = (Math.random() * 10) + 's';
+        c.appendChild(b);
+    }
 }
 
 function createSparkles() {
-const c = document.getElementById('sparkles');
-for (let i = 0; i < 15; i++) {
-const s = document.createElement('div');
-s.classList.add('sparkle');
-const sz = Math.random() * 4 + 1.5;
-s.style.setProperty('--size', sz + 'px');
-s.style.left = (Math.random() * 60 + 20) + '%';
-s.style.bottom = (Math.random() * 20 + 28) + '%';
-s.style.setProperty('--dur', (Math.random() * 8 + 5) + 's');
-s.style.animationDelay = (Math.random() * 8) + 's';
-c.appendChild(s);
-}
+    const c = document.getElementById('sparkles');
+    for (let i = 0; i < 15; i++) {
+        const s = document.createElement('div');
+        s.classList.add('sparkle');
+        const sz = Math.random() * 4 + 1.5;
+        s.style.setProperty('--size', sz + 'px');
+        s.style.left = (Math.random() * 60 + 20) + '%';
+        s.style.bottom = (Math.random() * 20 + 28) + '%';
+        s.style.setProperty('--dur', (Math.random() * 8 + 5) + 's');
+        s.style.animationDelay = (Math.random() * 8) + 's';
+        c.appendChild(s);
+    }
 }
 
-/* ===== Navigasi halaman ===== */
+/* ===== Navigasi Halaman ===== */
 function switchPage(pageName) {
-activePage = pageName;
+    activePage = pageName;
+    document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById('page-' + pageName);
+    if (target) {
+        target.classList.remove('active');
+        void target.offsetWidth;
+        target.classList.add('active');
+    }
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const navItem = document.querySelector(`.nav-item[data-page="${pageName}"]`);
+    if (navItem) navItem.classList.add('active');
 
-document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+    if (pageName === 'random' && !randomDataLoaded) fetchSheetData();
+    if (pageName === 'all-bonus' && !bonusDataLoaded) fetchBonusData();
 
-const target = document.getElementById('page-' + pageName);
-if (target) {
-target.classList.remove('active');
-void target.offsetWidth;
-target.classList.add('active');
-}
-
-document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-const navItem = document.querySelector(`.nav-item[data-page="${pageName}"]`);
-if (navItem) navItem.classList.add('active');
-
-if (pageName === 'random' && !randomDataLoaded) {
-fetchSheetData();
-}
-
-updateDebugInfo();
+    updateDebugInfo();
 }
 
 function initSidebar() {
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('sidebarOverlay');
-const toggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const toggle = document.getElementById('sidebarToggle');
 
-function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('show'); }
-function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+    function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('show'); }
+    function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
 
-toggle.addEventListener('click', function () {
-sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
-});
+    toggle.addEventListener('click', function () {
+        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+    overlay.addEventListener('click', closeSidebar);
 
-overlay.addEventListener('click', closeSidebar);
-
-document.querySelectorAll('.nav-item').forEach(item => {
-item.addEventListener('click', function () {
-const page = this.dataset.page;
-switchPage(page);
-if (window.innerWidth <= 900) closeSidebar();
-});
-});
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function () {
+            switchPage(this.dataset.page);
+            if (window.innerWidth <= 900) closeSidebar();
+        });
+    });
 }
 
 function showToast(title, message) {
-const container = document.getElementById('toastContainer');
-const toast = document.createElement('div');
-toast.classList.add('toast');
-toast.innerHTML = `
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.classList.add('toast');
+    toast.innerHTML = `
 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
 <span class="toast-title">${title}</span>
 <span>${message}</span>`;
-container.appendChild(toast);
-setTimeout(() => {
-toast.classList.add('toast-out');
-setTimeout(() => toast.remove(), 300);
-}, 2000);
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.classList.add('toast-out');
+        setTimeout(() => toast.remove(), 300);
+    }, 2000);
 }
 
 function updateSystemTime() {
-document.getElementById('systemTime').textContent = new Date().toLocaleTimeString('id-ID', { hour12: false });
+    document.getElementById('systemTime').textContent = new Date().toLocaleTimeString('id-ID', { hour12: false });
 }
 
 function updateSystemStatus(status, type) {
-const el = document.getElementById('systemStatus');
-el.textContent = status;
-el.style.color = type === 'error' ? '#ff9800' : type === 'success' ? '#FFD700' : '#FF8F00';
+    const el = document.getElementById('systemStatus');
+    el.textContent = status;
+    el.style.color = type === 'error' ? '#ff9800' : type === 'success' ? '#FFD700' : '#FF8F00';
 }
 
 function updateDebugInfo() {
-if (!debugMode) return;
-document.getElementById('debugInfo').innerHTML = `
-<div>Total Data RANDOM: ${sheetData.length}</div>
+    if (!debugMode) return;
+    const info = document.getElementById('debugInfo');
+    info.innerHTML = `
+<div>Total RANDOM: ${sheetData.length}</div>
 <div>Filtered: ${filteredData.length}</div>
+<div>Total Bonus: ${bonusData.length}</div>
 <div>Active Page: ${activePage}</div>
 <div>Random Loaded: ${randomDataLoaded}</div>
-<div>Cache: ${localStorage.getItem('NO-MERCYYY_random') ? 'Available' : 'Empty'}</div>`;
+<div>Bonus Loaded: ${bonusDataLoaded}</div>
+<div>Bonus Source: ${bonusFetchSource || '—'}</div>
+<div>Cache RANDOM: ${localStorage.getItem('NO-MERCYYY_random') ? 'Yes' : 'No'}</div>
+<div>Cache Bonus: ${localStorage.getItem('NO-MERCYYY_bonus') ? 'Yes' : 'No'}</div>`;
 }
 
+/* ===== Fuzzy Search (hanya untuk RANDOM) ===== */
 function levenshteinDistance(str1, str2) {
-const m = [];
-for (let i = 0; i <= str2.length; i++) m[i] = [i];
-for (let j = 0; j <= str1.length; j++) m[0][j] = j;
-for (let i = 1; i <= str2.length; i++) {
-for (let j = 1; j <= str1.length; j++) {
-if (str2.charAt(i - 1) === str1.charAt(j - 1)) m[i][j] = m[i - 1][j - 1];
-else m[i][j] = Math.min(m[i - 1][j - 1] + 1, m[i][j - 1] + 1, m[i - 1][j] + 1);
-}
-}
-return m[str2.length][str1.length];
+    const m = [];
+    for (let i = 0; i <= str2.length; i++) m[i] = [i];
+    for (let j = 0; j <= str1.length; j++) m[0][j] = j;
+    for (let i = 1; i <= str2.length; i++) {
+        for (let j = 1; j <= str1.length; j++) {
+            if (str2.charAt(i - 1) === str1.charAt(j - 1)) m[i][j] = m[i - 1][j - 1];
+            else m[i][j] = Math.min(m[i - 1][j - 1] + 1, m[i][j - 1] + 1, m[i - 1][j] + 1);
+        }
+    }
+    return m[str2.length][str1.length];
 }
 
 function calculateSimilarity(str1, str2) {
-const d = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase());
-const longer = str1.length > str2.length ? str1 : str2;
-if (longer.length === 0) return 100;
-return Math.round(((longer.length - d) / longer.length) * 100);
+    const d = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase());
+    const longer = str1.length > str2.length ? str1 : str2;
+    if (longer.length === 0) return 100;
+    return Math.round(((longer.length - d) / longer.length) * 100);
 }
 
 function fuzzyMatch(query, text) {
-const ql = query.toLowerCase(), tl = text.toLowerCase();
-if (tl.includes(ql)) return { match: true, score: 100, type: 'exact' };
-const words = tl.split(/\s+/);
-let best = { match: false, score: 0, type: 'none' };
-for (const w of words) {
-if (w.startsWith(ql)) { const s = Math.round((ql.length / w.length) * 100); if (s > best.score) best = { match: true, score: s, type: 'prefix' }; }
-const sim = calculateSimilarity(ql, w);
-if (sim >= 60 && sim > best.score) best = { match: true, score: sim, type: 'fuzzy' };
-if (w.includes(ql)) { const s = Math.round((ql.length / w.length) * 90); if (s > best.score) best = { match: true, score: s, type: 'contains' }; }
-}
-return best;
+    const ql = query.toLowerCase(), tl = text.toLowerCase();
+    if (tl.includes(ql)) return { match: true, score: 100, type: 'exact' };
+    const words = tl.split(/\s+/);
+    let best = { match: false, score: 0, type: 'none' };
+    for (const w of words) {
+        if (w.startsWith(ql)) { const s = Math.round((ql.length / w.length) * 100); if (s > best.score) best = { match: true, score: s, type: 'prefix' }; }
+        const sim = calculateSimilarity(ql, w);
+        if (sim >= 60 && sim > best.score) best = { match: true, score: sim, type: 'fuzzy' };
+        if (w.includes(ql)) { const s = Math.round((ql.length / w.length) * 90); if (s > best.score) best = { match: true, score: s, type: 'contains' }; }
+    }
+    return best;
 }
 
-/* ===== HANYA DIGUNAKAN OLEH MENU RANDOM ===== */
+/* ===== Fetch RANDOM (spreadsheet lama) ===== */
 async function fetchSheetData() {
-const loading = document.getElementById('loadingContainer');
-const container = document.getElementById('menuContainer');
-const noMenu = document.getElementById('noMenu');
+    const loading = document.getElementById('loadingContainer');
+    const container = document.getElementById('menuContainer');
+    const noMenu = document.getElementById('noMenu');
 
-loading.style.display = 'flex';
-container.style.display = 'none';
-noMenu.style.display = 'none';
-updateSystemStatus('Mengambil Data RANDOM...', 'warning');
+    loading.style.display = 'flex';
+    container.style.display = 'none';
+    noMenu.style.display = 'none';
+    updateSystemStatus('Mengambil Data RANDOM...', 'warning');
 
-const sheetId = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
-let success = false;
+    const sheetId = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
+    let success = false;
 
-try {
-const r = await fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=0`);
-if (r.ok) {
-const t = await r.text();
-if (t.includes('google.visualization.Query.setResponse')) {
-const json = JSON.parse(t.substring(47).slice(0, -2));
-sheetData = [];
-for (const row of json.table.rows) {
-const title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
-const info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
-if (title) sheetData.push({ title, info });
-}
-if (sheetData.length > 0) success = true;
-}
-}
-} catch (e) { }
+    try {
+        const r = await fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=0`);
+        if (r.ok) {
+            const t = await r.text();
+            if (t.includes('google.visualization.Query.setResponse')) {
+                const json = JSON.parse(t.substring(47).slice(0, -2));
+                sheetData = [];
+                for (const row of json.table.rows) {
+                    const title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
+                    const info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
+                    if (title) sheetData.push({ title, info });
+                }
+                if (sheetData.length > 0) success = true;
+            }
+        }
+    } catch (e) { }
 
-if (!success) {
-try {
-const r = await fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=REPORTAN`);
-if (r.ok) {
-const t = await r.text();
-if (t.includes('google.visualization.Query.setResponse')) {
-const json = JSON.parse(t.substring(47).slice(0, -2));
-sheetData = [];
-for (const row of json.table.rows) {
-const title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
-const info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
-if (title) sheetData.push({ title, info });
-}
-if (sheetData.length > 0) success = true;
-}
-}
-} catch (e) { }
-}
+    if (!success) {
+        try {
+            const r = await fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=REPORTAN`);
+            if (r.ok) {
+                const t = await r.text();
+                if (t.includes('google.visualization.Query.setResponse')) {
+                    const json = JSON.parse(t.substring(47).slice(0, -2));
+                    sheetData = [];
+                    for (const row of json.table.rows) {
+                        const title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
+                        const info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
+                        if (title) sheetData.push({ title, info });
+                    }
+                    if (sheetData.length > 0) success = true;
+                }
+            }
+        } catch (e) { }
+    }
 
-if (!success) {
-try {
-const cached = localStorage.getItem('NO-MERCYYY_random');
-if (cached) {
-sheetData = JSON.parse(cached);
-if (sheetData.length > 0) success = true;
-}
-} catch (e) { }
-}
+    if (!success) {
+        try {
+            const cached = localStorage.getItem('NO-MERCYYY_random');
+            if (cached) { sheetData = JSON.parse(cached); if (sheetData.length > 0) success = true; }
+        } catch (e) { }
+    }
 
-if (!success) {
-sheetData = [
-{ title: "CONTOH DATA", info: "Tidak dapat terhubung ke spreadsheet. Ini data contoh." }
-];
-}
+    if (!success) {
+        sheetData = [{ title: 'CONTOH DATA', info: 'Tidak dapat terhubung ke spreadsheet. Ini data contoh.' }];
+    }
 
-if (success && sheetData.length > 0) {
-try { localStorage.setItem('NO-MERCYYY_random', JSON.stringify(sheetData)); } catch(e) {}
-}
+    if (success && sheetData.length > 0) {
+        try { localStorage.setItem('NO-MERCYYY_random', JSON.stringify(sheetData)); } catch(e) {}
+    }
 
-randomDataLoaded = true;
-filteredData = [...sheetData];
+    randomDataLoaded = true;
+    filteredData = [...sheetData];
+    document.getElementById('statMenu').textContent = sheetData.length;
 
-document.getElementById('statMenu').textContent = sheetData.length;
-
-if (success && !localStorage.getItem('NO-MERCYYY_random') === null && sheetData[0].title === "CONTOH DATA") {
-updateSystemStatus('RANDOM — Mode Offline', 'warning');
-} else {
-updateSystemStatus('RANDOM — Data Aktif', 'success');
+    updateSystemStatus('RANDOM — Data Aktif', 'success');
+    loading.style.display = 'none';
+    displayMenuItems();
+    updateDebugInfo();
 }
 
-loading.style.display = 'none';
-displayMenuItems();
-updateDebugInfo();
+/* ===== Fetch BONUS dari Spreadsheet Baru ===== */
+async function fetchBonusData() {
+    const loading = document.getElementById('bonusLoading');
+    const list = document.getElementById('bonusList');
+    const noData = document.getElementById('bonusNoData');
+    const sourceEl = document.getElementById('bonusDataSource');
+    const footer = document.getElementById('bonusFooterNote');
+
+    loading.style.display = 'flex';
+    list.style.display = 'none';
+    noData.style.display = 'none';
+    footer.style.display = 'none';
+    sourceEl.textContent = 'Menghubungkan ke spreadsheet...';
+    sourceEl.className = 'bonus-data-source';
+    updateSystemStatus('Mengambil Data Bonus...', 'warning');
+
+    let headers = [];
+    let rows = [];
+    let success = false;
+
+    /* Coba ambil data dari spreadsheet bonus */
+    try {
+        const url = `https://docs.google.com/spreadsheets/d/${BONUS_SHEET_ID}/gviz/tq?tqx=out:json&gid=${BONUS_GID}`;
+        const response = await fetch(url);
+        if (response.ok) {
+            const text = await response.text();
+            if (text.includes('google.visualization.Query.setResponse')) {
+                const json = JSON.parse(text.substring(47).slice(0, -2));
+                const table = json.table;
+
+                /* Ambil header kolom */
+                headers = table.cols.map(col => col.label || col.id || '');
+
+                /* Ambil baris data */
+                rows = table.rows.map(row => {
+                    return row.c.map(cell => {
+                        if (cell === null) return '';
+                        return cell.v !== null && cell.v !== undefined ? String(cell.v).trim() : '';
+                    });
+                });
+
+                if (rows.length > 0) success = true;
+                bonusFetchSource = 'LIVE';
+            }
+        }
+    } catch (e) {
+        console.warn('Fetch bonus live gagal:', e);
+    }
+
+    /* Fallback: coba cache localStorage */
+    if (!success) {
+        try {
+            const cached = localStorage.getItem('NO-MERCYYY_bonus');
+            if (cached) {
+                const parsed = JSON.parse(cached);
+                if (parsed.headers && parsed.rows && parsed.rows.length > 0) {
+                    headers = parsed.headers;
+                    rows = parsed.rows;
+                    success = true;
+                    bonusFetchSource = 'CACHE';
+                }
+            }
+        } catch (e) { }
+    }
+
+    /* Fallback terakhir: data statis */
+    if (!success) {
+        bonusData = [...FALLBACK_BONUS];
+        bonusFetchSource = 'FALLBACK';
+        success = true;
+    }
+
+    /* Proses data jika berhasil dari spreadsheet/cache */
+    if (bonusFetchSource === 'LIVE' || bonusFetchSource === 'CACHE') {
+        bonusData = parseBonusFromSheet(headers, rows);
+
+        /* Simpan ke cache jika dari live */
+        if (bonusFetchSource === 'LIVE') {
+            try {
+                localStorage.setItem('NO-MERCYYY_bonus', JSON.stringify({ headers, rows }));
+            } catch (e) { }
+        }
+
+        /* Jika parsing gagal menghasilkan data, gunakan fallback */
+        if (bonusData.length === 0) {
+            bonusData = [...FALLBACK_BONUS];
+            bonusFetchSource = 'FALLBACK (PARSE GAGAL)';
+        }
+    }
+
+    bonusDataLoaded = true;
+
+    /* Update UI sumber data */
+    if (bonusFetchSource === 'LIVE') {
+        sourceEl.textContent = '● Data langsung dari Google Spreadsheet';
+        sourceEl.className = 'bonus-data-source live';
+    } else if (bonusFetchSource === 'CACHE') {
+        sourceEl.textContent = '● Data dari cache lokal (offline)';
+        sourceEl.className = 'bonus-data-source cached';
+    } else {
+        sourceEl.textContent = '● Data default (spreadsheet tidak terjangkau)';
+        sourceEl.className = 'bonus-data-source';
+    }
+
+    document.getElementById('statBonus').textContent = bonusData.length;
+    updateSystemStatus('BONUS — Data Aktif', 'success');
+
+    loading.style.display = 'none';
+
+    if (bonusData.length > 0) {
+        displayBonusCards();
+    } else {
+        noData.style.display = 'block';
+    }
+
+    updateDebugInfo();
 }
 
+/* ===== Parsing Data Spreadsheet → Format Bonus Card ===== */
+function parseBonusFromSheet(headers, rows) {
+    const result = [];
+
+    /* Mapping fleksibel berdasarkan nama header */
+    const colMap = {};
+    const headerLower = headers.map(h => h.toLowerCase().trim());
+
+    /* Pencarian kolom berdasarkan keyword */
+    const nameKeywords = ['nama', 'name', 'bonus', 'judul', 'title', 'jenis'];
+    const percentKeywords = ['persen', 'percent', 'persentase', 'nilai', 'value', 'jumlah', 'rate', 'diskon'];
+    const descKeywords = ['deskripsi', 'description', 'desc', 'ket', 'keterangan', 'info', 'detail'];
+    const badgeKeywords = ['status', 'badge', 'label', 'tipe', 'type', 'kategori', 'category', 'tag'];
+    const meta1Keywords = ['min', 'minimal', 'deposit', 'mindep', 'syarat', 'requirement'];
+    const meta2Keywords = ['turnover', 'to', 'rollover', 'target'];
+    const meta3Keywords = ['periode', 'klaim', 'frekuensi', 'waktu', 'period', 'jadwal', 'berlaku'];
+
+    function findCol(keywords) {
+        for (let i = 0; i < headerLower.length; i++) {
+            for (const kw of keywords) {
+                if (headerLower[i].includes(kw)) return i;
+            }
+        }
+        return -1;
+    }
+
+    colMap.name = findCol(nameKeywords);
+    colMap.percent = findCol(percentKeywords);
+    colMap.desc = findCol(descKeywords);
+    colMap.badge = findCol(badgeKeywords);
+    colMap.meta1 = findCol(meta1Keywords);
+    colMap.meta2 = findCol(meta2Keywords);
+    colMap.meta3 = findCol(meta3Keywords);
+
+    /* Fallback posisi jika tidak ada header yang cocok */
+    if (colMap.name === -1) colMap.name = 0;
+    if (colMap.percent === -1) colMap.percent = Math.min(1, headers.length - 1);
+    if (colMap.desc === -1) colMap.desc = Math.min(2, headers.length - 1);
+
+    for (const row of rows) {
+        const name = colMap.name >= 0 && row[colMap.name] ? row[colMap.name] : '';
+        if (!name) continue;
+
+        const percent = colMap.percent >= 0 && row[colMap.percent] ? row[colMap.percent] : '—';
+        const desc = colMap.desc >= 0 && row[colMap.desc] ? row[colMap.desc] : '';
+        const badgeRaw = colMap.badge >= 0 && row[colMap.badge] ? row[colMap.badge].toUpperCase() : '';
+
+        /* Mapping badge */
+        let badge = 'active';
+        if (badgeRaw.includes('HOT') || badgeRaw.includes('PANAS')) badge = 'hot';
+        else if (badgeRaw.includes('BARU') || badgeRaw.includes('NEW')) badge = 'new';
+        else if (badgeRaw.includes('EKSKLUSIF') || badgeRaw.includes('EXCLUSIVE') || badgeRaw.includes('SPECIAL')) badge = 'exclusive';
+        else if (badgeRaw.includes('AKTIF') || badgeRaw.includes('ACTIVE')) badge = 'active';
+
+        /* Meta items */
+        const meta = [];
+        const metaIcons = {
+            meta1: '🎯',
+            meta2: '🔄',
+            meta3: '📅'
+        };
+
+        if (colMap.meta1 >= 0 && row[colMap.meta1]) meta.push({ icon: metaIcons.meta1, text: row[colMap.meta1] });
+        if (colMap.meta2 >= 0 && row[colMap.meta2]) meta.push({ icon: metaIcons.meta2, text: row[colMap.meta2] });
+        if (colMap.meta3 >= 0 && row[colMap.meta3]) meta.push({ icon: metaIcons.meta3, text: row[colMap.meta3] });
+
+        /* Jika tidak ada meta terdeteksi dari kolom khusus, coba ambil kolom sisa */
+        if (meta.length === 0) {
+            const usedCols = new Set([colMap.name, colMap.percent, colMap.desc, colMap.badge]);
+            const extraIcons = ['🎯', '🔄', '📅', '⏰', '💎', '🎮'];
+            let iconIdx = 0;
+            for (let i = 0; i < row.length; i++) {
+                if (!usedCols.has(i) && row[i]) {
+                    meta.push({ icon: extraIcons[iconIdx % extraIcons.length], text: row[i] });
+                    iconIdx++;
+                    if (iconIdx >= 3) break;
+                }
+            }
+        }
+
+        result.push({ name, percent, desc, badge, meta });
+    }
+
+    return result;
+}
+
+/* ===== Render Bonus Cards ===== */
+function displayBonusCards() {
+    const list = document.getElementById('bonusList');
+    const noData = document.getElementById('bonusNoData');
+    const footer = document.getElementById('bonusFooterNote');
+
+    if (bonusData.length === 0) {
+        list.style.display = 'none';
+        noData.style.display = 'block';
+        footer.style.display = 'none';
+        return;
+    }
+
+    list.style.display = 'flex';
+    noData.style.display = 'none';
+    footer.style.display = 'block';
+
+    list.innerHTML = bonusData.map((item, idx) => {
+        const percentSign = item.percent !== '???' && item.percent !== '—' ? '%' : '';
+        const badgeLabel = item.badge === 'hot' ? 'HOT' :
+                          item.badge === 'new' ? 'BARU' :
+                          item.badge === 'exclusive' ? 'EKSKLUSIF' : 'AKTIF';
+
+        const metaHTML = item.meta.length > 0
+            ? `<div class="bonus-meta">${item.meta.map(m =>
+                `<div class="bonus-meta-item"><span class="bonus-meta-icon">${m.icon}</span> ${escapeHTML(m.text)}</div>`
+              ).join('')}</div>`
+            : '';
+
+        return `
+<div class="bonus-card" style="animation-delay: ${idx * 0.08}s;">
+    <div class="bonus-card-top">
+        <div class="bonus-name">${escapeHTML(item.name)}</div>
+        <span class="bonus-badge ${item.badge}">${badgeLabel}</span>
+    </div>
+    <div class="bonus-value-display">
+        <span class="bonus-percent">${escapeHTML(item.percent)}</span>
+        <span class="bonus-percent-sign">${percentSign}</span>
+    </div>
+    ${item.desc ? `<div class="bonus-desc">${escapeHTML(item.desc)}</div>` : ''}
+    ${metaHTML}
+    <div class="card-skull">☠</div>
+</div>`;
+    }).join('');
+}
+
+/* ===== Utilitas ===== */
+function escapeHTML(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+/* ===== Display RANDOM Menu Items ===== */
 function displayMenuItems() {
-const container = document.getElementById('menuContainer');
-const noMenu = document.getElementById('noMenu');
+    const container = document.getElementById('menuContainer');
+    const noMenu = document.getElementById('noMenu');
 
-if (filteredData.length === 0) {
-container.style.display = 'none';
-noMenu.style.display = 'block';
-return;
-}
+    if (filteredData.length === 0) {
+        container.style.display = 'none';
+        noMenu.style.display = 'block';
+        return;
+    }
 
-container.style.display = 'grid';
-noMenu.style.display = 'none';
+    container.style.display = 'grid';
+    noMenu.style.display = 'none';
 
-container.innerHTML = filteredData.map((item, i) => `
+    container.innerHTML = filteredData.map((item, i) => `
 <div class="menu-card" data-index="${i}">
 <div class="match-indicator">${item.matchType || 'MATCH'}</div>
 <h3 class="menu-title">${item.title}</h3>
@@ -2648,104 +2891,104 @@ container.innerHTML = filteredData.map((item, i) => `
 <div class="card-skull">☠</div>
 </div>`).join('');
 
-container.querySelectorAll('.menu-card').forEach(card => {
-card.addEventListener('click', function () {
-showDetail(filteredData[parseInt(this.dataset.index)]);
-});
-});
+    container.querySelectorAll('.menu-card').forEach(card => {
+        card.addEventListener('click', function () {
+            showDetail(filteredData[parseInt(this.dataset.index)]);
+        });
+    });
 
-container.querySelectorAll('.card-copy-btn').forEach(btn => {
-btn.addEventListener('click', function (e) {
-e.stopPropagation();
-const item = filteredData[parseInt(this.dataset.copyIndex)];
-if (!item) return;
-navigator.clipboard.writeText(item.info).then(() => {
-this.classList.add('copied');
-setTimeout(() => this.classList.remove('copied'), 1500);
-showToast(item.title, 'info berhasil disalin');
-}).catch(() => {});
-});
-});
+    container.querySelectorAll('.card-copy-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const item = filteredData[parseInt(this.dataset.copyIndex)];
+            if (!item) return;
+            navigator.clipboard.writeText(item.info).then(() => {
+                this.classList.add('copied');
+                setTimeout(() => this.classList.remove('copied'), 1500);
+                showToast(item.title, 'info berhasil disalin');
+            }).catch(() => {});
+        });
+    });
 }
 
 function showDetail(item) {
-currentDetail = item;
-document.getElementById('detailTitle').textContent = item.title;
-document.getElementById('detailText').textContent = item.info;
-document.getElementById('detailModal').classList.add('show');
-updateDebugInfo();
+    currentDetail = item;
+    document.getElementById('detailTitle').textContent = item.title;
+    document.getElementById('detailText').textContent = item.info;
+    document.getElementById('detailModal').classList.add('show');
+    updateDebugInfo();
 }
 
 function hideDetail() {
-document.getElementById('detailModal').classList.remove('show');
-currentDetail = null;
-updateDebugInfo();
+    document.getElementById('detailModal').classList.remove('show');
+    currentDetail = null;
+    updateDebugInfo();
 }
 
 function copyToClipboard() {
-if (!currentDetail) return;
-navigator.clipboard.writeText(currentDetail.info).then(() => {
-const el = document.getElementById('copySuccess');
-el.classList.add('show');
-showToast(currentDetail.title, 'info berhasil disalin');
-setTimeout(() => el.classList.remove('show'), 2000);
-}).catch(() => {});
+    if (!currentDetail) return;
+    navigator.clipboard.writeText(currentDetail.info).then(() => {
+        const el = document.getElementById('copySuccess');
+        el.classList.add('show');
+        showToast(currentDetail.title, 'info berhasil disalin');
+        setTimeout(() => el.classList.remove('show'), 2000);
+    }).catch(() => {});
 }
 
 function filterMenuItems() {
-const q = document.getElementById('filterInput').value.trim();
-if (q === '') {
-filteredData = sheetData.map(item => ({ ...item }));
-} else {
-const results = [];
-for (const item of sheetData) {
-const tm = fuzzyMatch(q, item.title), im = fuzzyMatch(q, item.info);
-const best = tm.score > im.score ? tm : im;
-if (best.match) results.push({ ...item, matchScore: best.score, matchType: best.type.toUpperCase() });
-}
-results.sort((a, b) => b.matchScore - a.matchScore);
-filteredData = results;
-}
-displayMenuItems();
-updateDebugInfo();
+    const q = document.getElementById('filterInput').value.trim();
+    if (q === '') {
+        filteredData = sheetData.map(item => ({ ...item }));
+    } else {
+        const results = [];
+        for (const item of sheetData) {
+            const tm = fuzzyMatch(q, item.title), im = fuzzyMatch(q, item.info);
+            const best = tm.score > im.score ? tm : im;
+            if (best.match) results.push({ ...item, matchScore: best.score, matchType: best.type.toUpperCase() });
+        }
+        results.sort((a, b) => b.matchScore - a.matchScore);
+        filteredData = results;
+    }
+    displayMenuItems();
+    updateDebugInfo();
 }
 
+/* ===== Init ===== */
 window.onload = function () {
-createStars(); createClouds(); createSeagulls(); createBubbles(); createSparkles();
-initSidebar();
-updateSystemTime();
-setInterval(updateSystemTime, 1000);
+    createStars(); createClouds(); createSeagulls(); createBubbles(); createSparkles();
+    initSidebar();
+    updateSystemTime();
+    setInterval(updateSystemTime, 1000);
+    updateSystemStatus('Kapal Berlayar...', 'warning');
 
-updateSystemStatus('Kapal Berlayar...', 'warning');
+    document.getElementById('debugToggle').addEventListener('click', function () {
+        debugMode = !debugMode;
+        document.getElementById('debugPanel').classList.toggle('show', debugMode);
+        updateDebugInfo();
+    });
+    setInterval(updateDebugInfo, 1000);
 
-document.getElementById('debugToggle').addEventListener('click', function () {
-debugMode = !debugMode;
-document.getElementById('debugPanel').classList.toggle('show', debugMode);
-updateDebugInfo();
-});
-setInterval(updateDebugInfo, 1000);
+    let debounce;
+    document.getElementById('filterInput').addEventListener('input', function () {
+        clearTimeout(debounce);
+        debounce = setTimeout(filterMenuItems, 300);
+    });
 
-let debounce;
-document.getElementById('filterInput').addEventListener('input', function () {
-clearTimeout(debounce);
-debounce = setTimeout(filterMenuItems, 300);
-});
+    document.getElementById('detailClose').addEventListener('click', hideDetail);
+    document.getElementById('copyButton').addEventListener('click', copyToClipboard);
+    document.getElementById('detailModal').addEventListener('click', function (e) {
+        if (e.target === this) hideDetail();
+    });
 
-document.getElementById('detailClose').addEventListener('click', hideDetail);
-document.getElementById('copyButton').addEventListener('click', copyToClipboard);
-document.getElementById('detailModal').addEventListener('click', function (e) {
-if (e.target === this) hideDetail();
-});
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            if (document.getElementById('detailModal').classList.contains('show')) { hideDetail(); return; }
+            if (document.getElementById('debugPanel').classList.contains('show')) { debugMode = false; document.getElementById('debugPanel').classList.remove('show'); return; }
+            if (document.getElementById('sidebar').classList.contains('open')) { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); return; }
+        }
+    });
 
-document.addEventListener('keydown', function (e) {
-if (e.key === 'Escape') {
-if (document.getElementById('detailModal').classList.contains('show')) { hideDetail(); return; }
-if (document.getElementById('debugPanel').classList.contains('show')) { debugMode = false; document.getElementById('debugPanel').classList.remove('show'); return; }
-if (document.getElementById('sidebar').classList.contains('open')) { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); return; }
-}
-});
-
-updateDebugInfo();
+    updateDebugInfo();
 };
 </script>
 </body>
