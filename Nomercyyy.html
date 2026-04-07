@@ -1967,20 +1967,24 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 }
 
 /* ===================================================
-   BONUS CONTAINER — 2 KOLOM
+   BONUS CONTAINER — 2 KOLOM, FOLDER BESAR PENUH ISI
    =================================================== */
 #bonusContainer {
   grid-template-columns: repeat(2, 1fr) !important;
-  max-width: 900px !important;
+  max-width: 920px !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  gap: 18px !important;
+  gap: 20px !important;
+  align-items: stretch !important;
 }
 
 #bonusContainer .bonus-card {
   max-width: 100% !important;
-  min-height: 160px !important;
-  padding: 22px 26px !important;
+  min-height: unset !important;
+  padding: 24px 28px 20px !important;
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 #bonusContainer .bonus-card::after {
@@ -1991,32 +1995,47 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 #bonusContainer .bonus-title {
   color: #00D4FF !important;
   text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.25) !important;
-  font-size: 0.92rem !important;
-  letter-spacing: 1.2px !important;
-  margin-bottom: 12px !important;
-}
-
-#bonusContainer .bonus-preview {
-  font-size: 0.82rem !important;
-  line-height: 1.75 !important;
-  -webkit-line-clamp: 5 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 1.5px !important;
+  margin-bottom: 14px !important;
+  flex-shrink: 0 !important;
 }
 
 #bonusContainer .bonus-badge {
   font-size: 0.62rem !important;
-  padding: 2px 12px !important;
-  margin-bottom: 10px !important;
+  padding: 3px 12px !important;
+  margin-bottom: 14px !important;
+  flex-shrink: 0 !important;
+}
+
+/* ===== KONTEN PENUH TANPA POTONG ===== */
+#bonusContainer .bonus-preview {
+  font-size: 0.84rem !important;
+  line-height: 1.85 !important;
+  -webkit-line-clamp: unset !important;
+  -webkit-box-orient: unset !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  display: block !important;
+  flex-grow: 1 !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+}
+
+#bonusContainer .bonus-card .card-bottom-row {
+  margin-top: 16px !important;
+  flex-shrink: 0 !important;
 }
 
 #bonusContainer .bonus-copy-btn {
-  padding: 6px 14px !important;
-  font-size: 0.7rem !important;
+  padding: 7px 16px !important;
+  font-size: 0.72rem !important;
   border-radius: 6px !important;
 }
 
 #bonusContainer .bonus-copy-btn svg {
-  width: 13px !important;
-  height: 13px !important;
+  width: 14px !important;
+  height: 14px !important;
 }
 
 /* Responsive: 2 kolom di desktop, 1 kolom di mobile */
@@ -2034,38 +2053,39 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
   }
 
   #bonusContainer .bonus-card {
-    padding: 18px 18px !important;
-    min-height: 140px !important;
+    padding: 20px 20px 16px !important;
   }
 
   #bonusContainer .bonus-title {
-    font-size: 0.88rem !important;
+    font-size: 0.9rem !important;
   }
 
   #bonusContainer .bonus-preview {
-    font-size: 0.8rem !important;
-    -webkit-line-clamp: 4 !important;
+    font-size: 0.82rem !important;
   }
 }
 
 @media (max-width: 480px) {
   #bonusContainer .bonus-card {
-    padding: 16px 14px !important;
-    min-height: 120px !important;
+    padding: 18px 16px 14px !important;
   }
 
   #bonusContainer .bonus-title {
-    font-size: 0.84rem !important;
+    font-size: 0.86rem !important;
+  }
+
+  #bonusContainer .bonus-preview {
+    font-size: 0.8rem !important;
   }
 
   #bonusContainer .bonus-copy-btn {
-    padding: 5px 10px !important;
-    font-size: 0.65rem !important;
+    padding: 6px 12px !important;
+    font-size: 0.68rem !important;
   }
 
   #bonusContainer .bonus-copy-btn svg {
-    width: 11px !important;
-    height: 11px !important;
+    width: 12px !important;
+    height: 12px !important;
   }
 }
 </style>
@@ -2140,111 +2160,49 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 <div class="sidebar-title">Main Menu</div>
 <div class="sidebar-subtitle">Navigasi Cepat</div>
 </div>
-
 <nav class="sidebar-nav">
 <div class="nav-item active" data-page="beranda">
-<div class="nav-icon">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+<div class="nav-icon"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+<div class="nav-text"><div class="nav-label">Beranda</div><div class="nav-desc">Halaman utama</div></div>
+<div class="nav-arrow"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
 </div>
-<div class="nav-text">
-<div class="nav-label">Beranda</div>
-<div class="nav-desc">Halaman utama</div>
-</div>
-<div class="nav-arrow">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-</div>
-</div>
-
 <div class="nav-item" data-page="jadwal">
-<div class="nav-icon">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+<div class="nav-icon"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg></div>
+<div class="nav-text"><div class="nav-label">Jadwal Pasaran</div><div class="nav-desc">Jadwal buka &amp; tutup</div></div>
+<div class="nav-arrow"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
 </div>
-<div class="nav-text">
-<div class="nav-label">Jadwal Pasaran</div>
-<div class="nav-desc">Jadwal buka &amp; tutup</div>
-</div>
-<div class="nav-arrow">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-</div>
-</div>
-
 <div class="nav-item" data-page="random">
-<div class="nav-icon">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+<div class="nav-icon"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></div>
+<div class="nav-text"><div class="nav-label">RANDOM</div><div class="nav-desc">Link customer service</div></div>
+<div class="nav-arrow"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
 </div>
-<div class="nav-text">
-<div class="nav-label">RANDOM</div>
-<div class="nav-desc">Link customer service</div>
-</div>
-<div class="nav-arrow">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-</div>
-</div>
-
 <div class="nav-item" data-page="prediksi">
-<div class="nav-icon">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
+<div class="nav-icon"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg></div>
+<div class="nav-text"><div class="nav-label">Prediksi Togel</div><div class="nav-desc">Analisa &amp; prediksi</div></div>
+<div class="nav-arrow"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
 </div>
-<div class="nav-text">
-<div class="nav-label">Prediksi Togel</div>
-<div class="nav-desc">Analisa &amp; prediksi</div>
-</div>
-<div class="nav-arrow">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-</div>
-</div>
-
 <div class="nav-item" data-page="scatter">
-<div class="nav-icon">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+<div class="nav-icon"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg></div>
+<div class="nav-text"><div class="nav-label">Shortcut Scatter</div><div class="nav-desc">Akses cepat scatter</div></div>
+<div class="nav-arrow"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
 </div>
-<div class="nav-text">
-<div class="nav-label">Shortcut Scatter</div>
-<div class="nav-desc">Akses cepat scatter</div>
-</div>
-<div class="nav-arrow">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-</div>
-</div>
-
 <div class="nav-item" data-page="gambar-cs">
-<div class="nav-icon">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+<div class="nav-icon"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></div>
+<div class="nav-text"><div class="nav-label">Gambar CS</div><div class="nav-desc">Foto customer service</div></div>
+<div class="nav-arrow"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
 </div>
-<div class="nav-text">
-<div class="nav-label">Gambar CS</div>
-<div class="nav-desc">Foto customer service</div>
-</div>
-<div class="nav-arrow">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-</div>
-</div>
-
 <div class="nav-item bonus-nav" data-page="bonus">
-<div class="nav-icon">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/></svg>
-</div>
-<div class="nav-text">
-<div class="nav-label">BONUS</div>
-<div class="nav-desc">Info bonus &amp; promosi</div>
-</div>
-<div class="nav-arrow">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-</div>
+<div class="nav-icon"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/></svg></div>
+<div class="nav-text"><div class="nav-label">BONUS</div><div class="nav-desc">Info bonus &amp; promosi</div></div>
+<div class="nav-arrow"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
 </div>
 </nav>
-
-<div class="sidebar-footer">
-<div class="sidebar-footer-text">NO-MERCYYY v2.0.77</div>
-</div>
+<div class="sidebar-footer"><div class="sidebar-footer-text">NO-MERCYYY v2.0.77</div></div>
 </aside>
 
 <main class="main-content">
 <header class="header">
-<div class="logo-container">
-<div class="logo-glow"></div>
-<h1 class="title">NO-MERCYYY</h1>
-</div>
+<div class="logo-container"><div class="logo-glow"></div><h1 class="title">NO-MERCYYY</h1></div>
 <p class="subtitle">Sistem Menu Digital</p>
 </header>
 
@@ -2255,132 +2213,40 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 <div class="beranda-desc">Sistem menu digital NO-MERCYYY siap mengantar Anda menavigasi lautan data. Pilih menu di sidebar kiri untuk memulai petualangan.</div>
 </div>
 <div class="beranda-features">
-<div class="feature-card">
-<div class="feature-icon">🔗</div>
-<div class="feature-title">RANDOM</div>
-<div class="feature-desc">Ambil link customer service secara acak langsung dari database Google Spreadsheet.</div>
-</div>
-<div class="feature-card">
-<div class="feature-icon">📅</div>
-<div class="feature-title">Jadwal Pasaran</div>
-<div class="feature-desc">Pantau jadwal buka dan tutup seluruh pasaran togel terlengkap.</div>
-</div>
-<div class="feature-card">
-<div class="feature-icon">🎁</div>
-<div class="feature-title">BONUS</div>
-<div class="feature-desc">Cek info bonus dan promosi terbaru dari kru NO-MERCYYY.</div>
-</div>
+<div class="feature-card"><div class="feature-icon">🔗</div><div class="feature-title">RANDOM</div><div class="feature-desc">Ambil link customer service secara acak langsung dari database Google Spreadsheet.</div></div>
+<div class="feature-card"><div class="feature-icon">📅</div><div class="feature-title">Jadwal Pasaran</div><div class="feature-desc">Pantau jadwal buka dan tutup seluruh pasaran togel terlengkap.</div></div>
+<div class="feature-card"><div class="feature-icon">🎁</div><div class="feature-title">BONUS</div><div class="feature-desc">Cek info bonus dan promosi terbaru dari kru NO-MERCYYY.</div></div>
 </div>
 <div class="beranda-stats">
-<div class="stat-item">
-<div class="stat-number" id="statMenu">0</div>
-<div class="stat-label">Total Data RANDOM</div>
-</div>
-<div class="stat-item">
-<div class="stat-number" id="statBonus">0</div>
-<div class="stat-label">Total Data BONUS</div>
-</div>
-<div class="stat-item">
-<div class="stat-number">24/7</div>
-<div class="stat-label">Sistem Online</div>
-</div>
+<div class="stat-item"><div class="stat-number" id="statMenu">0</div><div class="stat-label">Total Data RANDOM</div></div>
+<div class="stat-item"><div class="stat-number" id="statBonus">0</div><div class="stat-label">Total Data BONUS</div></div>
+<div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Sistem Online</div></div>
 </div>
 </section>
 
 <section class="page-section" id="page-jadwal">
 <div class="jadwal-grid">
-<div class="jadwal-card">
-<div class="jadwal-pasaran">SGP / Singapore</div>
-<div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">17:45 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">17:30 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">17:45 WIB</span></div>
-</div>
-<div class="jadwal-card">
-<div class="jadwal-pasaran">HK / Hongkong</div>
-<div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">23:00 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">22:45 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">23:00 WIB</span></div>
-</div>
-<div class="jadwal-card">
-<div class="jadwal-pasaran">SYD / Sydney</div>
-<div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">14:00 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">13:35 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">14:00 WIB</span></div>
-</div>
-<div class="jadwal-card">
-<div class="jadwal-pasaran">CAM / Cambodia</div>
-<div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">11:50 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">11:35 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">11:50 WIB</span></div>
-</div>
-<div class="jadwal-card">
-<div class="jadwal-pasaran">CHN / China</div>
-<div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">15:30 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">15:15 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">15:30 WIB</span></div>
-</div>
-<div class="jadwal-card">
-<div class="jadwal-pasaran">TAIWAN</div>
-<div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">20:45 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">20:30 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">20:45 WIB</span></div>
-</div>
-<div class="jadwal-card">
-<div class="jadwal-pasaran">JAPAN</div>
-<div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">17:00 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">16:45 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">17:00 WIB</span></div>
-</div>
-<div class="jadwal-card">
-<div class="jadwal-pasaran">PCSO</div>
-<div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">00:30 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">00:15 WIB</span></div>
-<div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">00:30 WIB</span></div>
-</div>
+<div class="jadwal-card"><div class="jadwal-pasaran">SGP / Singapore</div><div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">17:45 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">17:30 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">17:45 WIB</span></div></div>
+<div class="jadwal-card"><div class="jadwal-pasaran">HK / Hongkong</div><div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">23:00 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">22:45 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">23:00 WIB</span></div></div>
+<div class="jadwal-card"><div class="jadwal-pasaran">SYD / Sydney</div><div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">14:00 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">13:35 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">14:00 WIB</span></div></div>
+<div class="jadwal-card"><div class="jadwal-pasaran">CAM / Cambodia</div><div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">11:50 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">11:35 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">11:50 WIB</span></div></div>
+<div class="jadwal-card"><div class="jadwal-pasaran">CHN / China</div><div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">15:30 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">15:15 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">15:30 WIB</span></div></div>
+<div class="jadwal-card"><div class="jadwal-pasaran">TAIWAN</div><div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">20:45 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">20:30 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">20:45 WIB</span></div></div>
+<div class="jadwal-card"><div class="jadwal-pasaran">JAPAN</div><div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">17:00 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">16:45 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">17:00 WIB</span></div></div>
+<div class="jadwal-card"><div class="jadwal-pasaran">PCSO</div><div class="jadwal-row"><span class="jadwal-label">Buka</span><span class="jadwal-value open">00:30 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Tutup</span><span class="jadwal-value close">00:15 WIB</span></div><div class="jadwal-row"><span class="jadwal-label">Result</span><span class="jadwal-value" style="color:var(--primary-color);">00:30 WIB</span></div></div>
 </div>
 </section>
 
 <section class="page-section" id="page-random">
-<div class="menu-filter">
-<div class="filter-container">
-<input type="text" class="filter-input" id="filterInput" placeholder="Cari link CS di lautan data..." autocomplete="off">
-<span class="filter-hint">Filter cerdas — toleransi kesalahan ketik</span>
-</div>
-</div>
-<div class="loading-container" id="loadingContainer" style="display:none;">
-<div class="loading-spinner"></div>
-<div class="loading-text">Berlayar Mengambil Data...</div>
-</div>
+<div class="menu-filter"><div class="filter-container"><input type="text" class="filter-input" id="filterInput" placeholder="Cari link CS di lautan data..." autocomplete="off"><span class="filter-hint">Filter cerdas — toleransi kesalahan ketik</span></div></div>
+<div class="loading-container" id="loadingContainer" style="display:none;"><div class="loading-spinner"></div><div class="loading-text">Berlayar Mengambil Data...</div></div>
 <div class="menu-container" id="menuContainer" style="display: none;"></div>
-<div class="no-menu" id="noMenu" style="display: none;">
-<div class="no-menu-title">Tidak Ada Data Ditemukan</div>
-<div class="no-menu-subtitle">Periksa kompas dan coba lagi, Nakama</div>
-</div>
+<div class="no-menu" id="noMenu" style="display: none;"><div class="no-menu-title">Tidak Ada Data Ditemukan</div><div class="no-menu-subtitle">Periksa kompas dan coba lagi, Nakama</div></div>
 </section>
 
-<section class="page-section" id="page-prediksi">
-<div class="generic-page">
-<div class="generic-icon">📈</div>
-<div class="generic-title">Prediksi Togel</div>
-<div class="generic-desc">Modul analisa dan prediksi togel sedang dalam pengembangan. Nantikan update berikutnya dari kru NO-MERCYYY.</div>
-</div>
-</section>
-
-<section class="page-section" id="page-scatter">
-<div class="generic-page">
-<div class="generic-icon">💎</div>
-<div class="generic-title">Shortcut Scatter</div>
-<div class="generic-desc">Akses cepat ke fitur scatter sedang disiapkan. Kru kapal sedang memetakan koordinat baru di Grand Line.</div>
-</div>
-</section>
-
-<section class="page-section" id="page-gambar-cs">
-<div class="generic-page">
-<div class="generic-icon">📸</div>
-<div class="generic-title">Gambar CS</div>
-<div class="generic-desc">Galeri foto customer service akan segera hadir. Para kru sedang mengumpulkan potret terbaik untuk Anda.</div>
-</div>
-</section>
+<section class="page-section" id="page-prediksi"><div class="generic-page"><div class="generic-icon">📈</div><div class="generic-title">Prediksi Togel</div><div class="generic-desc">Modul analisa dan prediksi togel sedang dalam pengembangan. Nantikan update berikutnya dari kru NO-MERCYYY.</div></div></section>
+<section class="page-section" id="page-scatter"><div class="generic-page"><div class="generic-icon">💎</div><div class="generic-title">Shortcut Scatter</div><div class="generic-desc">Akses cepat ke fitur scatter sedang disiapkan. Kru kapal sedang memetakan koordinat baru di Grand Line.</div></div></section>
+<section class="page-section" id="page-gambar-cs"><div class="generic-page"><div class="generic-icon">📸</div><div class="generic-title">Gambar CS</div><div class="generic-desc">Galeri foto customer service akan segera hadir. Para kru sedang mengumpulkan potret terbaik untuk Anda.</div></div></section>
 
 <section class="page-section" id="page-bonus">
 <div class="bonus-page-header">
@@ -2394,624 +2260,90 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 <span id="bonusCountText">0 Bonus</span>
 </div>
 </div>
-<div class="menu-filter">
-<div class="filter-container bonus-filter">
-<input type="text" class="filter-input" id="bonusFilterInput" placeholder="Cari info bonus di lautan promosi..." autocomplete="off">
-<span class="filter-hint">Filter cerdas — cari berdasarkan judul atau isi bonus</span>
-</div>
-</div>
-<div class="loading-container" id="bonusLoadingContainer" style="display:none;">
-<div class="loading-spinner bonus-spinner"></div>
-<div class="loading-text bonus-text">Mengambil Data Bonus...</div>
-</div>
+<div class="menu-filter"><div class="filter-container bonus-filter"><input type="text" class="filter-input" id="bonusFilterInput" placeholder="Cari info bonus di lautan promosi..." autocomplete="off"><span class="filter-hint">Filter cerdas — cari berdasarkan judul atau isi bonus</span></div></div>
+<div class="loading-container" id="bonusLoadingContainer" style="display:none;"><div class="loading-spinner bonus-spinner"></div><div class="loading-text bonus-text">Mengambil Data Bonus...</div></div>
 <div class="menu-container" id="bonusContainer" style="display: none;"></div>
-<div class="no-menu" id="bonusNoMenu" style="display: none;">
-<div class="no-menu-title bonus-empty">Tidak Ada Bonus Ditemukan</div>
-<div class="no-menu-subtitle">Belum ada harta karun bonus di lokasi ini, Nakama</div>
-</div>
+<div class="no-menu" id="bonusNoMenu" style="display: none;"><div class="no-menu-title bonus-empty">Tidak Ada Bonus Ditemukan</div><div class="no-menu-subtitle">Belum ada harta karun bonus di lokasi ini, Nakama</div></div>
 </section>
 
-<footer class="footer">
-<p class="footer-text">NO-MERCYYY ENGINE v2.0.77 — GRAND LINE EDITION</p>
-</footer>
+<footer class="footer"><p class="footer-text">NO-MERCYYY ENGINE v2.0.77 — GRAND LINE EDITION</p></footer>
 </main>
-
 </div>
 
-<div class="detail-modal" id="detailModal">
-<div class="detail-content">
-<div class="detail-header">
-<h2 class="detail-title" id="detailTitle">MENU TITLE</h2>
-<button class="detail-close" id="detailClose">
-<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-</button>
-</div>
-<div class="detail-body">
-<div class="detail-text" id="detailText">MENU CONTENT</div>
-</div>
-<div class="detail-actions">
-<button class="copy-button" id="copyButton">
-<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle;margin-right:6px;">
-<path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-</svg>
-SALIN
-</button>
-<span id="copySuccess" class="copy-success">Tersalin!</span>
-</div>
-</div>
-</div>
-
-<div class="detail-modal bonus-modal" id="bonusDetailModal">
-<div class="detail-content">
-<div class="detail-header">
-<h2 class="detail-title" id="bonusDetailTitle">BONUS TITLE</h2>
-<button class="detail-close" id="bonusDetailClose">
-<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-</button>
-</div>
-<div class="detail-body">
-<div class="detail-text" id="bonusDetailText">BONUS CONTENT</div>
-</div>
-<div class="detail-actions">
-<button class="copy-button" id="bonusCopyButton">
-<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle;margin-right:6px;">
-<path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-</svg>
-SALIN
-</button>
-<span id="bonusCopySuccess" class="copy-success">Tersalin!</span>
-</div>
-</div>
-</div>
+<div class="detail-modal" id="detailModal"><div class="detail-content"><div class="detail-header"><h2 class="detail-title" id="detailTitle">MENU TITLE</h2><button class="detail-close" id="detailClose"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div><div class="detail-body"><div class="detail-text" id="detailText">MENU CONTENT</div></div><div class="detail-actions"><button class="copy-button" id="copyButton"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>SALIN</button><span id="copySuccess" class="copy-success">Tersalin!</span></div></div></div>
+<div class="detail-modal bonus-modal" id="bonusDetailModal"><div class="detail-content"><div class="detail-header"><h2 class="detail-title" id="bonusDetailTitle">BONUS TITLE</h2><button class="detail-close" id="bonusDetailClose"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div><div class="detail-body"><div class="detail-text" id="bonusDetailText">BONUS CONTENT</div></div><div class="detail-actions"><button class="copy-button" id="bonusCopyButton"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>SALIN</button><span id="bonusCopySuccess" class="copy-success">Tersalin!</span></div></div></div>
 
 <button class="debug-toggle" id="debugToggle">DEBUG</button>
-
-<div class="debug-panel" id="debugPanel">
-<div class="debug-title">DEBUG INFO</div>
-<div class="debug-info" id="debugInfo">Loading...</div>
-</div>
+<div class="debug-panel" id="debugPanel"><div class="debug-title">DEBUG INFO</div><div class="debug-info" id="debugInfo">Loading...</div></div>
 
 <script>
 let sheetData = [];
 let filteredData = [];
 let currentDetail = null;
-
 let bonusData = [];
 let filteredBonusData = [];
 let currentBonusDetail = null;
-
 let debugMode = false;
 let activePage = 'beranda';
 let randomDataLoaded = false;
 let bonusDataLoaded = false;
-
 const SHEET_ID = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
 const RANDOM_GID = '0';
 const BONUS_GID = '252063146';
 
-function seagullSVG(size) {
-return '<svg width="'+size+'" height="'+(size*0.5)+'" viewBox="0 0 40 20" fill="none" stroke="rgba(20,25,50,0.9)" stroke-width="1.5" stroke-linecap="round"><path d="M0,12 Q8,4 16,10 Q18,11 20,10 Q22,11 24,10 Q32,4 40,12"/></svg>';
-}
+function seagullSVG(size) { return '<svg width="'+size+'" height="'+(size*0.5)+'" viewBox="0 0 40 20" fill="none" stroke="rgba(20,25,50,0.9)" stroke-width="1.5" stroke-linecap="round"><path d="M0,12 Q8,4 16,10 Q18,11 20,10 Q22,11 24,10 Q32,4 40,12"/></svg>'; }
+function createStars() { var c = document.getElementById('starsLayer'); for (var i = 0; i < 55; i++) { var s = document.createElement('div'); s.classList.add('star'); if (Math.random() < 0.25) s.classList.add('warm'); var sz = Math.random() * 2.5 + 0.5; s.style.width = sz + 'px'; s.style.height = sz + 'px'; s.style.top = Math.random() * 100 + '%'; s.style.left = Math.random() * 100 + '%'; s.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's'); s.style.animationDelay = Math.random() * 3 + 's'; c.appendChild(s); } }
+function createClouds() { var c = document.getElementById('cloudsLayer'); for (var i = 0; i < 7; i++) { var cl = document.createElement('div'); cl.classList.add('cloud'); cl.classList.add(i > 3 ? 'sunset' : 'dark'); cl.style.width = (Math.random() * 350 + 120) + 'px'; cl.style.height = (Math.random() * 50 + 25) + 'px'; cl.style.top = (Math.random() * 80 + 10) + '%'; cl.style.setProperty('--dur', (Math.random() * 70 + 40) + 's'); cl.style.animationDelay = -(Math.random() * 70) + 's'; c.appendChild(cl); } }
+function createSeagulls() { var c = document.getElementById('seagullsLayer'); for (var i = 0; i < 5; i++) { var g = document.createElement('div'); g.classList.add('seagull'); var sz = Math.random() * 16 + 14; g.innerHTML = seagullSVG(sz); g.style.top = (Math.random() * 60 + 5) + '%'; g.style.setProperty('--dur', (Math.random() * 30 + 22) + 's'); g.style.setProperty('--scale', (Math.random() * 0.4 + 0.7).toFixed(2)); g.style.animationDelay = -(Math.random() * 30) + 's'; g.style.opacity = (Math.random() * 0.12 + 0.08).toFixed(2); c.appendChild(g); } }
+function createBubbles() { var c = document.getElementById('particles'); for (var i = 0; i < 30; i++) { var b = document.createElement('div'); b.classList.add('bubble'); var sz = Math.random() * 10 + 3; b.style.width = sz + 'px'; b.style.height = sz + 'px'; b.style.left = Math.random() * 100 + '%'; b.style.bottom = Math.random() * 8 + '%'; b.style.setProperty('--dur', (Math.random() * 10 + 6) + 's'); b.style.animationDelay = (Math.random() * 10) + 's'; c.appendChild(b); } }
+function createSparkles() { var c = document.getElementById('sparkles'); for (var i = 0; i < 15; i++) { var s = document.createElement('div'); s.classList.add('sparkle'); var sz = Math.random() * 4 + 1.5; s.style.setProperty('--size', sz + 'px'); s.style.left = (Math.random() * 60 + 20) + '%'; s.style.bottom = (Math.random() * 20 + 28) + '%'; s.style.setProperty('--dur', (Math.random() * 8 + 5) + 's'); s.style.animationDelay = (Math.random() * 8) + 's'; c.appendChild(s); } }
 
-function createStars() {
-var c = document.getElementById('starsLayer');
-for (var i = 0; i < 55; i++) {
-var s = document.createElement('div');
-s.classList.add('star');
-if (Math.random() < 0.25) s.classList.add('warm');
-var sz = Math.random() * 2.5 + 0.5;
-s.style.width = sz + 'px'; s.style.height = sz + 'px';
-s.style.top = Math.random() * 100 + '%'; s.style.left = Math.random() * 100 + '%';
-s.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's');
-s.style.animationDelay = Math.random() * 3 + 's';
-c.appendChild(s);
-}
-}
+function switchPage(pageName) { activePage = pageName; document.querySelectorAll('.page-section').forEach(function(p) { p.classList.remove('active'); }); var target = document.getElementById('page-' + pageName); if (target) { target.classList.remove('active'); void target.offsetWidth; target.classList.add('active'); } document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); }); var navItem = document.querySelector('.nav-item[data-page="'+pageName+'"]'); if (navItem) navItem.classList.add('active'); if (pageName === 'random' && !randomDataLoaded) fetchSheetData(); if (pageName === 'bonus' && !bonusDataLoaded) fetchBonusData(); updateDebugInfo(); }
+function initSidebar() { var sidebar = document.getElementById('sidebar'); var overlay = document.getElementById('sidebarOverlay'); var toggle = document.getElementById('sidebarToggle'); function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('show'); } function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('show'); } toggle.addEventListener('click', function() { sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); }); overlay.addEventListener('click', closeSidebar); document.querySelectorAll('.nav-item').forEach(function(item) { item.addEventListener('click', function() { switchPage(this.dataset.page); if (window.innerWidth <= 900) closeSidebar(); }); }); }
+function showToast(title, message, isBonus) { var container = document.getElementById('toastContainer'); var toast = document.createElement('div'); toast.classList.add('toast'); if (isBonus) toast.classList.add('bonus-toast'); toast.innerHTML = '<svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span class="toast-title">'+title+'</span><span>'+message+'</span>'; container.appendChild(toast); setTimeout(function() { toast.classList.add('toast-out'); setTimeout(function() { toast.remove(); }, 300); }, 2000); }
+function updateSystemTime() { document.getElementById('systemTime').textContent = new Date().toLocaleTimeString('id-ID', { hour12: false }); }
+function updateSystemStatus(status, type) { var el = document.getElementById('systemStatus'); el.textContent = status; el.style.color = type === 'error' ? '#ff9800' : type === 'success' ? '#FFD700' : '#FF8F00'; }
+function updateDebugInfo() { if (!debugMode) return; document.getElementById('debugInfo').innerHTML = '<div>Random Data: '+sheetData.length+' | Filtered: '+filteredData.length+'</div><div>Bonus Data: '+bonusData.length+' | Filtered: '+filteredBonusData.length+'</div><div>Active Page: '+activePage+'</div><div>Random Loaded: '+randomDataLoaded+' | Bonus Loaded: '+bonusDataLoaded+'</div>'; }
+function levenshteinDistance(str1, str2) { var m = []; for (var i = 0; i <= str2.length; i++) m[i] = [i]; for (var j = 0; j <= str1.length; j++) m[0][j] = j; for (var i = 1; i <= str2.length; i++) { for (var j = 1; j <= str1.length; j++) { if (str2.charAt(i - 1) === str1.charAt(j - 1)) m[i][j] = m[i - 1][j - 1]; else m[i][j] = Math.min(m[i - 1][j - 1] + 1, m[i][j - 1] + 1, m[i - 1][j] + 1); } } return m[str2.length][str1.length]; }
+function calculateSimilarity(str1, str2) { var d = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase()); var longer = str1.length > str2.length ? str1 : str2; if (longer.length === 0) return 100; return Math.round(((longer.length - d) / longer.length) * 100); }
+function fuzzyMatch(query, text) { var ql = query.toLowerCase(), tl = text.toLowerCase(); if (tl.includes(ql)) return { match: true, score: 100, type: 'exact' }; var words = tl.split(/\s+/); var best = { match: false, score: 0, type: 'none' }; for (var k = 0; k < words.length; k++) { var w = words[k]; if (w.startsWith(ql)) { var s = Math.round((ql.length / w.length) * 100); if (s > best.score) best = { match: true, score: s, type: 'prefix' }; } var sim = calculateSimilarity(ql, w); if (sim >= 60 && sim > best.score) best = { match: true, score: sim, type: 'fuzzy' }; if (w.includes(ql)) { var s2 = Math.round((ql.length / w.length) * 90); if (s2 > best.score) best = { match: true, score: s2, type: 'contains' }; } } return best; }
+async function fetchGoogleSheet(gid) { var url = 'https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+gid; var response = await fetch(url); if (!response.ok) throw new Error('HTTP ' + response.status); var text = await response.text(); if (!text.includes('google.visualization.Query.setResponse')) throw new Error('Format tidak valid'); var json = JSON.parse(text.substring(47).slice(0, -2)); var data = []; for (var i = 0; i < json.table.rows.length; i++) { var row = json.table.rows[i]; var title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : ''; var info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : ''; if (title) data.push({ title: title, info: info }); } return data; }
 
-function createClouds() {
-var c = document.getElementById('cloudsLayer');
-for (var i = 0; i < 7; i++) {
-var cl = document.createElement('div');
-cl.classList.add('cloud');
-cl.classList.add(i > 3 ? 'sunset' : 'dark');
-cl.style.width = (Math.random() * 350 + 120) + 'px';
-cl.style.height = (Math.random() * 50 + 25) + 'px';
-cl.style.top = (Math.random() * 80 + 10) + '%';
-cl.style.setProperty('--dur', (Math.random() * 70 + 40) + 's');
-cl.style.animationDelay = -(Math.random() * 70) + 's';
-c.appendChild(cl);
-}
-}
+async function fetchSheetData() { var loading = document.getElementById('loadingContainer'); var container = document.getElementById('menuContainer'); var noMenu = document.getElementById('noMenu'); loading.style.display = 'flex'; container.style.display = 'none'; noMenu.style.display = 'none'; updateSystemStatus('Mengambil Data RANDOM...', 'warning'); var success = false; try { sheetData = await fetchGoogleSheet(RANDOM_GID); if (sheetData.length > 0) success = true; } catch (e) {} if (!success) { try { var url = 'https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=REPORTAN'; var r = await fetch(url); if (r.ok) { var t = await r.text(); if (t.includes('google.visualization.Query.setResponse')) { var json = JSON.parse(t.substring(47).slice(0, -2)); sheetData = []; for (var i = 0; i < json.table.rows.length; i++) { var row = json.table.rows[i]; var title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : ''; var info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : ''; if (title) sheetData.push({ title: title, info: info }); } if (sheetData.length > 0) success = true; } } } catch (e) {} } if (!success) { try { var cached = localStorage.getItem('NO-MERCYYY_random'); if (cached) { sheetData = JSON.parse(cached); if (sheetData.length > 0) success = true; } } catch (e) {} } if (!success) { sheetData = [{ title: "CONTOH DATA", info: "Tidak dapat terhubung ke spreadsheet. Ini data contoh." }]; } if (success && sheetData[0].title !== "CONTOH DATA") { try { localStorage.setItem('NO-MERCYYY_random', JSON.stringify(sheetData)); } catch(e) {} } randomDataLoaded = true; filteredData = sheetData.slice(); document.getElementById('statMenu').textContent = sheetData.length; updateSystemStatus(sheetData[0].title === "CONTOH DATA" ? 'RANDOM — Mode Offline' : 'RANDOM — Data Aktif', sheetData[0].title === "CONTOH DATA" ? 'warning' : 'success'); loading.style.display = 'none'; displayMenuItems(); updateDebugInfo(); }
 
-function createSeagulls() {
-var c = document.getElementById('seagullsLayer');
-for (var i = 0; i < 5; i++) {
-var g = document.createElement('div');
-g.classList.add('seagull');
-var sz = Math.random() * 16 + 14;
-g.innerHTML = seagullSVG(sz);
-g.style.top = (Math.random() * 60 + 5) + '%';
-g.style.setProperty('--dur', (Math.random() * 30 + 22) + 's');
-g.style.setProperty('--scale', (Math.random() * 0.4 + 0.7).toFixed(2));
-g.style.animationDelay = -(Math.random() * 30) + 's';
-g.style.opacity = (Math.random() * 0.12 + 0.08).toFixed(2);
-c.appendChild(g);
-}
-}
+function displayMenuItems() { var container = document.getElementById('menuContainer'); var noMenu = document.getElementById('noMenu'); if (filteredData.length === 0) { container.style.display = 'none'; noMenu.style.display = 'block'; return; } container.style.display = 'grid'; noMenu.style.display = 'none'; var html = ''; for (var i = 0; i < filteredData.length; i++) { var item = filteredData[i]; html += '<div class="menu-card" data-index="'+i+'"><div class="match-indicator">'+(item.matchType || 'MATCH')+'</div><h3 class="menu-title">'+item.title+'</h3><div class="menu-preview">'+item.info+'</div><div class="card-bottom-row"><button class="card-copy-btn" data-copy-index="'+i+'"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span class="btn-label">Salin</span><span class="btn-check"><svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ok</span></button></div><div class="card-skull">☠</div></div>'; } container.innerHTML = html; container.querySelectorAll('.menu-card').forEach(function(card) { card.addEventListener('click', function() { showDetail(filteredData[parseInt(this.dataset.index)]); }); }); container.querySelectorAll('.card-copy-btn').forEach(function(btn) { btn.addEventListener('click', function(e) { e.stopPropagation(); var item = filteredData[parseInt(this.dataset.copyIndex)]; if (!item) return; navigator.clipboard.writeText(item.info).then(function() { btn.classList.add('copied'); setTimeout(function() { btn.classList.remove('copied'); }, 1500); showToast(item.title, 'info berhasil disalin', false); }).catch(function() {}); }); }); }
 
-function createBubbles() {
-var c = document.getElementById('particles');
-for (var i = 0; i < 30; i++) {
-var b = document.createElement('div');
-b.classList.add('bubble');
-var sz = Math.random() * 10 + 3;
-b.style.width = sz + 'px'; b.style.height = sz + 'px';
-b.style.left = Math.random() * 100 + '%'; b.style.bottom = Math.random() * 8 + '%';
-b.style.setProperty('--dur', (Math.random() * 10 + 6) + 's');
-b.style.animationDelay = (Math.random() * 10) + 's';
-c.appendChild(b);
-}
-}
+function filterMenuItems() { var q = document.getElementById('filterInput').value.trim(); if (q === '') { filteredData = sheetData.map(function(item) { return Object.assign({}, item); }); } else { var results = []; for (var i = 0; i < sheetData.length; i++) { var item = sheetData[i]; var tm = fuzzyMatch(q, item.title), im = fuzzyMatch(q, item.info); var best = tm.score > im.score ? tm : im; if (best.match) { var copy = Object.assign({}, item); copy.matchScore = best.score; copy.matchType = best.type.toUpperCase(); results.push(copy); } } results.sort(function(a, b) { return b.matchScore - a.matchScore; }); filteredData = results; } displayMenuItems(); updateDebugInfo(); }
 
-function createSparkles() {
-var c = document.getElementById('sparkles');
-for (var i = 0; i < 15; i++) {
-var s = document.createElement('div');
-s.classList.add('sparkle');
-var sz = Math.random() * 4 + 1.5;
-s.style.setProperty('--size', sz + 'px');
-s.style.left = (Math.random() * 60 + 20) + '%';
-s.style.bottom = (Math.random() * 20 + 28) + '%';
-s.style.setProperty('--dur', (Math.random() * 8 + 5) + 's');
-s.style.animationDelay = (Math.random() * 8) + 's';
-c.appendChild(s);
-}
-}
+function showDetail(item) { currentDetail = item; document.getElementById('detailTitle').textContent = item.title; document.getElementById('detailText').textContent = item.info; document.getElementById('detailModal').classList.add('show'); updateDebugInfo(); }
+function hideDetail() { document.getElementById('detailModal').classList.remove('show'); currentDetail = null; updateDebugInfo(); }
+function copyToClipboard() { if (!currentDetail) return; navigator.clipboard.writeText(currentDetail.info).then(function() { var el = document.getElementById('copySuccess'); el.classList.add('show'); showToast(currentDetail.title, 'info berhasil disalin', false); setTimeout(function() { el.classList.remove('show'); }, 2000); }).catch(function() {}); }
 
-function switchPage(pageName) {
-activePage = pageName;
-document.querySelectorAll('.page-section').forEach(function(p) { p.classList.remove('active'); });
-var target = document.getElementById('page-' + pageName);
-if (target) {
-target.classList.remove('active');
-void target.offsetWidth;
-target.classList.add('active');
-}
-document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
-var navItem = document.querySelector('.nav-item[data-page="'+pageName+'"]');
-if (navItem) navItem.classList.add('active');
-if (pageName === 'random' && !randomDataLoaded) fetchSheetData();
-if (pageName === 'bonus' && !bonusDataLoaded) fetchBonusData();
-updateDebugInfo();
-}
+async function fetchBonusData() { var loading = document.getElementById('bonusLoadingContainer'); var container = document.getElementById('bonusContainer'); var noMenu = document.getElementById('bonusNoMenu'); loading.style.display = 'flex'; container.style.display = 'none'; noMenu.style.display = 'none'; updateSystemStatus('Mengambil Data BONUS...', 'warning'); var success = false; try { bonusData = await fetchGoogleSheet(BONUS_GID); if (bonusData.length > 0) success = true; } catch (e) {} if (!success) { try { var url = 'https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=BONUS'; var r = await fetch(url); if (r.ok) { var t = await r.text(); if (t.includes('google.visualization.Query.setResponse')) { var json = JSON.parse(t.substring(47).slice(0, -2)); bonusData = []; for (var i = 0; i < json.table.rows.length; i++) { var row = json.table.rows[i]; var title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : ''; var info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : ''; if (title) bonusData.push({ title: title, info: info }); } if (bonusData.length > 0) success = true; } } } catch (e) {} } if (!success) { try { var cached = localStorage.getItem('NO-MERCYYY_bonus'); if (cached) { bonusData = JSON.parse(cached); if (bonusData.length > 0) success = true; } } catch (e) {} } if (!success) { bonusData = [{ title: "BELUM ADA DATA", info: "Tidak dapat terhubung ke sheet BONUS. Pastikan sheet BONUS memiliki data di kolom A (judul) dan B (isi)." }]; } if (success && bonusData[0].title !== "BELUM ADA DATA") { try { localStorage.setItem('NO-MERCYYY_bonus', JSON.stringify(bonusData)); } catch(e) {} } bonusDataLoaded = true; filteredBonusData = bonusData.slice(); document.getElementById('statBonus').textContent = bonusData.length; document.getElementById('bonusCountText').textContent = bonusData.length + ' Bonus'; updateSystemStatus(bonusData[0].title === "BELUM ADA DATA" ? 'BONUS — Mode Offline' : 'BONUS — Data Aktif', bonusData[0].title === "BELUM ADA DATA" ? 'warning' : 'success'); loading.style.display = 'none'; displayBonusItems(); updateDebugInfo(); }
 
-function initSidebar() {
-var sidebar = document.getElementById('sidebar');
-var overlay = document.getElementById('sidebarOverlay');
-var toggle = document.getElementById('sidebarToggle');
-function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('show'); }
-function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
-toggle.addEventListener('click', function() {
-sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
-});
-overlay.addEventListener('click', closeSidebar);
-document.querySelectorAll('.nav-item').forEach(function(item) {
-item.addEventListener('click', function() {
-switchPage(this.dataset.page);
-if (window.innerWidth <= 900) closeSidebar();
-});
-});
-}
+function displayBonusItems() { var container = document.getElementById('bonusContainer'); var noMenu = document.getElementById('bonusNoMenu'); if (filteredBonusData.length === 0) { container.style.display = 'none'; noMenu.style.display = 'block'; return; } container.style.display = 'grid'; noMenu.style.display = 'none'; var html = ''; for (var i = 0; i < filteredBonusData.length; i++) { var item = filteredBonusData[i]; html += '<div class="bonus-card" data-bonus-index="'+i+'"><div class="bonus-match-indicator">'+(item.matchType || 'BONUS')+'</div><div class="bonus-badge">Bonus</div><h3 class="bonus-title">'+item.title+'</h3><div class="bonus-preview">'+item.info+'</div><div class="card-bottom-row"><button class="bonus-copy-btn" data-bonus-copy-index="'+i+'"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span class="btn-label">Salin</span><span class="btn-check"><svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ok</span></button></div><div class="card-gift">🎁</div></div>'; } container.innerHTML = html; container.querySelectorAll('.bonus-card').forEach(function(card) { card.addEventListener('click', function() { showBonusDetail(filteredBonusData[parseInt(this.dataset.bonusIndex)]); }); }); container.querySelectorAll('.bonus-copy-btn').forEach(function(btn) { btn.addEventListener('click', function(e) { e.stopPropagation(); var item = filteredBonusData[parseInt(this.dataset.bonusCopyIndex)]; if (!item) return; navigator.clipboard.writeText(item.info).then(function() { btn.classList.add('copied'); setTimeout(function() { btn.classList.remove('copied'); }, 1500); showToast(item.title, 'bonus berhasil disalin', true); }).catch(function() {}); }); }); }
 
-function showToast(title, message, isBonus) {
-var container = document.getElementById('toastContainer');
-var toast = document.createElement('div');
-toast.classList.add('toast');
-if (isBonus) toast.classList.add('bonus-toast');
-toast.innerHTML = '<svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span class="toast-title">'+title+'</span><span>'+message+'</span>';
-container.appendChild(toast);
-setTimeout(function() {
-toast.classList.add('toast-out');
-setTimeout(function() { toast.remove(); }, 300);
-}, 2000);
-}
+function filterBonusItems() { var q = document.getElementById('bonusFilterInput').value.trim(); if (q === '') { filteredBonusData = bonusData.map(function(item) { return Object.assign({}, item); }); } else { var results = []; for (var i = 0; i < bonusData.length; i++) { var item = bonusData[i]; var tm = fuzzyMatch(q, item.title), im = fuzzyMatch(q, item.info); var best = tm.score > im.score ? tm : im; if (best.match) { var copy = Object.assign({}, item); copy.matchScore = best.score; copy.matchType = best.type.toUpperCase(); results.push(copy); } } results.sort(function(a, b) { return b.matchScore - a.matchScore; }); filteredBonusData = results; } document.getElementById('bonusCountText').textContent = filteredBonusData.length + ' Bonus'; displayBonusItems(); updateDebugInfo(); }
 
-function updateSystemTime() {
-document.getElementById('systemTime').textContent = new Date().toLocaleTimeString('id-ID', { hour12: false });
-}
-
-function updateSystemStatus(status, type) {
-var el = document.getElementById('systemStatus');
-el.textContent = status;
-el.style.color = type === 'error' ? '#ff9800' : type === 'success' ? '#FFD700' : '#FF8F00';
-}
-
-function updateDebugInfo() {
-if (!debugMode) return;
-document.getElementById('debugInfo').innerHTML = '<div>Random Data: '+sheetData.length+' | Filtered: '+filteredData.length+'</div><div>Bonus Data: '+bonusData.length+' | Filtered: '+filteredBonusData.length+'</div><div>Active Page: '+activePage+'</div><div>Random Loaded: '+randomDataLoaded+' | Bonus Loaded: '+bonusDataLoaded+'</div><div>Sheet ID: '+SHEET_ID.substring(0,12)+'...</div>';
-}
-
-function levenshteinDistance(str1, str2) {
-var m = [];
-for (var i = 0; i <= str2.length; i++) m[i] = [i];
-for (var j = 0; j <= str1.length; j++) m[0][j] = j;
-for (var i = 1; i <= str2.length; i++) {
-for (var j = 1; j <= str1.length; j++) {
-if (str2.charAt(i - 1) === str1.charAt(j - 1)) m[i][j] = m[i - 1][j - 1];
-else m[i][j] = Math.min(m[i - 1][j - 1] + 1, m[i][j - 1] + 1, m[i - 1][j] + 1);
-}
-}
-return m[str2.length][str1.length];
-}
-
-function calculateSimilarity(str1, str2) {
-var d = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase());
-var longer = str1.length > str2.length ? str1 : str2;
-if (longer.length === 0) return 100;
-return Math.round(((longer.length - d) / longer.length) * 100);
-}
-
-function fuzzyMatch(query, text) {
-var ql = query.toLowerCase(), tl = text.toLowerCase();
-if (tl.includes(ql)) return { match: true, score: 100, type: 'exact' };
-var words = tl.split(/\s+/);
-var best = { match: false, score: 0, type: 'none' };
-for (var k = 0; k < words.length; k++) {
-var w = words[k];
-if (w.startsWith(ql)) { var s = Math.round((ql.length / w.length) * 100); if (s > best.score) best = { match: true, score: s, type: 'prefix' }; }
-var sim = calculateSimilarity(ql, w);
-if (sim >= 60 && sim > best.score) best = { match: true, score: sim, type: 'fuzzy' };
-if (w.includes(ql)) { var s2 = Math.round((ql.length / w.length) * 90); if (s2 > best.score) best = { match: true, score: s2, type: 'contains' }; }
-}
-return best;
-}
-
-async function fetchGoogleSheet(gid) {
-var url = 'https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+gid;
-var response = await fetch(url);
-if (!response.ok) throw new Error('HTTP ' + response.status);
-var text = await response.text();
-if (!text.includes('google.visualization.Query.setResponse')) throw new Error('Format tidak valid');
-var json = JSON.parse(text.substring(47).slice(0, -2));
-var data = [];
-for (var i = 0; i < json.table.rows.length; i++) {
-var row = json.table.rows[i];
-var title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
-var info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
-if (title) data.push({ title: title, info: info });
-}
-return data;
-}
-
-async function fetchSheetData() {
-var loading = document.getElementById('loadingContainer');
-var container = document.getElementById('menuContainer');
-var noMenu = document.getElementById('noMenu');
-loading.style.display = 'flex';
-container.style.display = 'none';
-noMenu.style.display = 'none';
-updateSystemStatus('Mengambil Data RANDOM...', 'warning');
-var success = false;
-try {
-sheetData = await fetchGoogleSheet(RANDOM_GID);
-if (sheetData.length > 0) success = true;
-} catch (e) {}
-if (!success) {
-try {
-var url = 'https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=REPORTAN';
-var r = await fetch(url);
-if (r.ok) {
-var t = await r.text();
-if (t.includes('google.visualization.Query.setResponse')) {
-var json = JSON.parse(t.substring(47).slice(0, -2));
-sheetData = [];
-for (var i = 0; i < json.table.rows.length; i++) {
-var row = json.table.rows[i];
-var title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
-var info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
-if (title) sheetData.push({ title: title, info: info });
-}
-if (sheetData.length > 0) success = true;
-}
-}
-} catch (e) {}
-}
-if (!success) {
-try {
-var cached = localStorage.getItem('NO-MERCYYY_random');
-if (cached) { sheetData = JSON.parse(cached); if (sheetData.length > 0) success = true; }
-} catch (e) {}
-}
-if (!success) {
-sheetData = [{ title: "CONTOH DATA", info: "Tidak dapat terhubung ke spreadsheet. Ini data contoh." }];
-}
-if (success && sheetData[0].title !== "CONTOH DATA") {
-try { localStorage.setItem('NO-MERCYYY_random', JSON.stringify(sheetData)); } catch(e) {}
-}
-randomDataLoaded = true;
-filteredData = sheetData.slice();
-document.getElementById('statMenu').textContent = sheetData.length;
-updateSystemStatus(
-sheetData[0].title === "CONTOH DATA" ? 'RANDOM — Mode Offline' : 'RANDOM — Data Aktif',
-sheetData[0].title === "CONTOH DATA" ? 'warning' : 'success'
-);
-loading.style.display = 'none';
-displayMenuItems();
-updateDebugInfo();
-}
-
-function displayMenuItems() {
-var container = document.getElementById('menuContainer');
-var noMenu = document.getElementById('noMenu');
-if (filteredData.length === 0) {
-container.style.display = 'none';
-noMenu.style.display = 'block';
-return;
-}
-container.style.display = 'grid';
-noMenu.style.display = 'none';
-var html = '';
-for (var i = 0; i < filteredData.length; i++) {
-var item = filteredData[i];
-html += '<div class="menu-card" data-index="'+i+'"><div class="match-indicator">'+(item.matchType || 'MATCH')+'</div><h3 class="menu-title">'+item.title+'</h3><div class="menu-preview">'+item.info+'</div><div class="card-bottom-row"><button class="card-copy-btn" data-copy-index="'+i+'"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span class="btn-label">Salin</span><span class="btn-check"><svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ok</span></button></div><div class="card-skull">☠</div></div>';
-}
-container.innerHTML = html;
-container.querySelectorAll('.menu-card').forEach(function(card) {
-card.addEventListener('click', function() {
-showDetail(filteredData[parseInt(this.dataset.index)]);
-});
-});
-container.querySelectorAll('.card-copy-btn').forEach(function(btn) {
-btn.addEventListener('click', function(e) {
-e.stopPropagation();
-var item = filteredData[parseInt(this.dataset.copyIndex)];
-if (!item) return;
-navigator.clipboard.writeText(item.info).then(function() {
-btn.classList.add('copied');
-setTimeout(function() { btn.classList.remove('copied'); }, 1500);
-showToast(item.title, 'info berhasil disalin', false);
-}).catch(function() {});
-});
-});
-}
-
-function filterMenuItems() {
-var q = document.getElementById('filterInput').value.trim();
-if (q === '') {
-filteredData = sheetData.map(function(item) { return Object.assign({}, item); });
-} else {
-var results = [];
-for (var i = 0; i < sheetData.length; i++) {
-var item = sheetData[i];
-var tm = fuzzyMatch(q, item.title), im = fuzzyMatch(q, item.info);
-var best = tm.score > im.score ? tm : im;
-if (best.match) {
-var copy = Object.assign({}, item);
-copy.matchScore = best.score;
-copy.matchType = best.type.toUpperCase();
-results.push(copy);
-}
-}
-results.sort(function(a, b) { return b.matchScore - a.matchScore; });
-filteredData = results;
-}
-displayMenuItems();
-updateDebugInfo();
-}
-
-function showDetail(item) {
-currentDetail = item;
-document.getElementById('detailTitle').textContent = item.title;
-document.getElementById('detailText').textContent = item.info;
-document.getElementById('detailModal').classList.add('show');
-updateDebugInfo();
-}
-
-function hideDetail() {
-document.getElementById('detailModal').classList.remove('show');
-currentDetail = null;
-updateDebugInfo();
-}
-
-function copyToClipboard() {
-if (!currentDetail) return;
-navigator.clipboard.writeText(currentDetail.info).then(function() {
-var el = document.getElementById('copySuccess');
-el.classList.add('show');
-showToast(currentDetail.title, 'info berhasil disalin', false);
-setTimeout(function() { el.classList.remove('show'); }, 2000);
-}).catch(function() {});
-}
-
-async function fetchBonusData() {
-var loading = document.getElementById('bonusLoadingContainer');
-var container = document.getElementById('bonusContainer');
-var noMenu = document.getElementById('bonusNoMenu');
-loading.style.display = 'flex';
-container.style.display = 'none';
-noMenu.style.display = 'none';
-updateSystemStatus('Mengambil Data BONUS...', 'warning');
-var success = false;
-try {
-bonusData = await fetchGoogleSheet(BONUS_GID);
-if (bonusData.length > 0) success = true;
-} catch (e) {}
-if (!success) {
-try {
-var url = 'https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=BONUS';
-var r = await fetch(url);
-if (r.ok) {
-var t = await r.text();
-if (t.includes('google.visualization.Query.setResponse')) {
-var json = JSON.parse(t.substring(47).slice(0, -2));
-bonusData = [];
-for (var i = 0; i < json.table.rows.length; i++) {
-var row = json.table.rows[i];
-var title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
-var info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
-if (title) bonusData.push({ title: title, info: info });
-}
-if (bonusData.length > 0) success = true;
-}
-}
-} catch (e) {}
-}
-if (!success) {
-try {
-var cached = localStorage.getItem('NO-MERCYYY_bonus');
-if (cached) { bonusData = JSON.parse(cached); if (bonusData.length > 0) success = true; }
-} catch (e) {}
-}
-if (!success) {
-bonusData = [{ title: "BELUM ADA DATA", info: "Tidak dapat terhubung ke sheet BONUS. Pastikan sheet BONUS memiliki data di kolom A (judul) dan B (isi)." }];
-}
-if (success && bonusData[0].title !== "BELUM ADA DATA") {
-try { localStorage.setItem('NO-MERCYYY_bonus', JSON.stringify(bonusData)); } catch(e) {}
-}
-bonusDataLoaded = true;
-filteredBonusData = bonusData.slice();
-document.getElementById('statBonus').textContent = bonusData.length;
-document.getElementById('bonusCountText').textContent = bonusData.length + ' Bonus';
-updateSystemStatus(
-bonusData[0].title === "BELUM ADA DATA" ? 'BONUS — Mode Offline' : 'BONUS — Data Aktif',
-bonusData[0].title === "BELUM ADA DATA" ? 'warning' : 'success'
-);
-loading.style.display = 'none';
-displayBonusItems();
-updateDebugInfo();
-}
-
-function displayBonusItems() {
-var container = document.getElementById('bonusContainer');
-var noMenu = document.getElementById('bonusNoMenu');
-if (filteredBonusData.length === 0) {
-container.style.display = 'none';
-noMenu.style.display = 'block';
-return;
-}
-container.style.display = 'grid';
-noMenu.style.display = 'none';
-var html = '';
-for (var i = 0; i < filteredBonusData.length; i++) {
-var item = filteredBonusData[i];
-html += '<div class="bonus-card" data-bonus-index="'+i+'"><div class="bonus-match-indicator">'+(item.matchType || 'BONUS')+'</div><div class="bonus-badge">Bonus</div><h3 class="bonus-title">'+item.title+'</h3><div class="bonus-preview">'+item.info+'</div><div class="card-bottom-row"><button class="bonus-copy-btn" data-bonus-copy-index="'+i+'"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span class="btn-label">Salin</span><span class="btn-check"><svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ok</span></button></div><div class="card-gift">🎁</div></div>';
-}
-container.innerHTML = html;
-container.querySelectorAll('.bonus-card').forEach(function(card) {
-card.addEventListener('click', function() {
-showBonusDetail(filteredBonusData[parseInt(this.dataset.bonusIndex)]);
-});
-});
-container.querySelectorAll('.bonus-copy-btn').forEach(function(btn) {
-btn.addEventListener('click', function(e) {
-e.stopPropagation();
-var item = filteredBonusData[parseInt(this.dataset.bonusCopyIndex)];
-if (!item) return;
-navigator.clipboard.writeText(item.info).then(function() {
-btn.classList.add('copied');
-setTimeout(function() { btn.classList.remove('copied'); }, 1500);
-showToast(item.title, 'bonus berhasil disalin', true);
-}).catch(function() {});
-});
-});
-}
-
-function filterBonusItems() {
-var q = document.getElementById('bonusFilterInput').value.trim();
-if (q === '') {
-filteredBonusData = bonusData.map(function(item) { return Object.assign({}, item); });
-} else {
-var results = [];
-for (var i = 0; i < bonusData.length; i++) {
-var item = bonusData[i];
-var tm = fuzzyMatch(q, item.title), im = fuzzyMatch(q, item.info);
-var best = tm.score > im.score ? tm : im;
-if (best.match) {
-var copy = Object.assign({}, item);
-copy.matchScore = best.score;
-copy.matchType = best.type.toUpperCase();
-results.push(copy);
-}
-}
-results.sort(function(a, b) { return b.matchScore - a.matchScore; });
-filteredBonusData = results;
-}
-document.getElementById('bonusCountText').textContent = filteredBonusData.length + ' Bonus';
-displayBonusItems();
-updateDebugInfo();
-}
-
-function showBonusDetail(item) {
-currentBonusDetail = item;
-document.getElementById('bonusDetailTitle').textContent = item.title;
-document.getElementById('bonusDetailText').textContent = item.info;
-document.getElementById('bonusDetailModal').classList.add('show');
-updateDebugInfo();
-}
-
-function hideBonusDetail() {
-document.getElementById('bonusDetailModal').classList.remove('show');
-currentBonusDetail = null;
-updateDebugInfo();
-}
-
-function copyBonusToClipboard() {
-if (!currentBonusDetail) return;
-navigator.clipboard.writeText(currentBonusDetail.info).then(function() {
-var el = document.getElementById('bonusCopySuccess');
-el.classList.add('show');
-showToast(currentBonusDetail.title, 'bonus berhasil disalin', true);
-setTimeout(function() { el.classList.remove('show'); }, 2000);
-}).catch(function() {});
-}
+function showBonusDetail(item) { currentBonusDetail = item; document.getElementById('bonusDetailTitle').textContent = item.title; document.getElementById('bonusDetailText').textContent = item.info; document.getElementById('bonusDetailModal').classList.add('show'); updateDebugInfo(); }
+function hideBonusDetail() { document.getElementById('bonusDetailModal').classList.remove('show'); currentBonusDetail = null; updateDebugInfo(); }
+function copyBonusToClipboard() { if (!currentBonusDetail) return; navigator.clipboard.writeText(currentBonusDetail.info).then(function() { var el = document.getElementById('bonusCopySuccess'); el.classList.add('show'); showToast(currentBonusDetail.title, 'bonus berhasil disalin', true); setTimeout(function() { el.classList.remove('show'); }, 2000); }).catch(function() {}); }
 
 window.onload = function() {
 createStars(); createClouds(); createSeagulls(); createBubbles(); createSparkles();
-initSidebar();
-updateSystemTime();
-setInterval(updateSystemTime, 1000);
+initSidebar(); updateSystemTime(); setInterval(updateSystemTime, 1000);
 updateSystemStatus('Kapal Berlayar...', 'warning');
-
-document.getElementById('debugToggle').addEventListener('click', function() {
-debugMode = !debugMode;
-document.getElementById('debugPanel').classList.toggle('show', debugMode);
-updateDebugInfo();
-});
+document.getElementById('debugToggle').addEventListener('click', function() { debugMode = !debugMode; document.getElementById('debugPanel').classList.toggle('show', debugMode); updateDebugInfo(); });
 setInterval(updateDebugInfo, 1000);
-
-var debounceRandom;
-document.getElementById('filterInput').addEventListener('input', function() {
-clearTimeout(debounceRandom);
-debounceRandom = setTimeout(filterMenuItems, 300);
-});
-
-var debounceBonus;
-document.getElementById('bonusFilterInput').addEventListener('input', function() {
-clearTimeout(debounceBonus);
-debounceBonus = setTimeout(filterBonusItems, 300);
-});
-
+var debounceRandom; document.getElementById('filterInput').addEventListener('input', function() { clearTimeout(debounceRandom); debounceRandom = setTimeout(filterMenuItems, 300); });
+var debounceBonus; document.getElementById('bonusFilterInput').addEventListener('input', function() { clearTimeout(debounceBonus); debounceBonus = setTimeout(filterBonusItems, 300); });
 document.getElementById('detailClose').addEventListener('click', hideDetail);
 document.getElementById('copyButton').addEventListener('click', copyToClipboard);
-document.getElementById('detailModal').addEventListener('click', function(e) {
-if (e.target === this) hideDetail();
-});
-
+document.getElementById('detailModal').addEventListener('click', function(e) { if (e.target === this) hideDetail(); });
 document.getElementById('bonusDetailClose').addEventListener('click', hideBonusDetail);
 document.getElementById('bonusCopyButton').addEventListener('click', copyBonusToClipboard);
-document.getElementById('bonusDetailModal').addEventListener('click', function(e) {
-if (e.target === this) hideBonusDetail();
-});
-
-document.addEventListener('keydown', function(e) {
-if (e.key === 'Escape') {
-if (document.getElementById('bonusDetailModal').classList.contains('show')) { hideBonusDetail(); return; }
-if (document.getElementById('detailModal').classList.contains('show')) { hideDetail(); return; }
-if (document.getElementById('debugPanel').classList.contains('show')) { debugMode = false; document.getElementById('debugPanel').classList.remove('show'); return; }
-if (document.getElementById('sidebar').classList.contains('open')) { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); return; }
-}
-});
-
+document.getElementById('bonusDetailModal').addEventListener('click', function(e) { if (e.target === this) hideBonusDetail(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { if (document.getElementById('bonusDetailModal').classList.contains('show')) { hideBonusDetail(); return; } if (document.getElementById('detailModal').classList.contains('show')) { hideDetail(); return; } if (document.getElementById('debugPanel').classList.contains('show')) { debugMode = false; document.getElementById('debugPanel').classList.remove('show'); return; } if (document.getElementById('sidebar').classList.contains('open')) { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); return; } } });
 updateDebugInfo();
 };
 </script>
