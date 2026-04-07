@@ -1197,7 +1197,6 @@ box-shadow: 0 12px 35px rgba(255,215,0,0.1), 0 4px 15px rgba(0,0,0,0.4);
 border-color: rgba(255,215,0,0.28);
 }
 
-/* ===== BONUS CARD ===== */
 .bonus-card {
 background: linear-gradient(135deg, rgba(14,18,32,0.9), rgba(10,14,28,0.94));
 border: 1px solid var(--bonus-card-border);
@@ -1391,7 +1390,6 @@ pointer-events: none;
 
 .bonus-card:hover .bonus-match-indicator { opacity: 1; }
 
-/* ===== BONUS PAGE HEADER ===== */
 .bonus-page-header {
 text-align: center;
 margin-bottom: 28px;
@@ -1969,11 +1967,11 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 }
 
 /* ===================================================
-   BONUS CONTAINER — SATU KOLOM SESUAI GAMBAR
+   BONUS CONTAINER — 2 KOLOM
    =================================================== */
 #bonusContainer {
-  grid-template-columns: 1fr !important;
-  max-width: 680px !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  max-width: 900px !important;
   margin-left: auto !important;
   margin-right: auto !important;
   gap: 18px !important;
@@ -1989,39 +1987,42 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
   width: 5px !important;
 }
 
+/* ===== JUDUL FOLDER BONUS — BIRU TERANG ===== */
 #bonusContainer .bonus-title {
-  font-size: 1rem !important;
-  letter-spacing: 1.5px !important;
-  margin-bottom: 14px !important;
+  color: #00D4FF !important;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.25) !important;
+  font-size: 0.92rem !important;
+  letter-spacing: 1.2px !important;
+  margin-bottom: 12px !important;
 }
 
 #bonusContainer .bonus-preview {
-  font-size: 0.85rem !important;
-  line-height: 1.8 !important;
-  -webkit-line-clamp: 6 !important;
+  font-size: 0.82rem !important;
+  line-height: 1.75 !important;
+  -webkit-line-clamp: 5 !important;
 }
 
 #bonusContainer .bonus-badge {
-  font-size: 0.65rem !important;
-  padding: 3px 14px !important;
-  margin-bottom: 14px !important;
+  font-size: 0.62rem !important;
+  padding: 2px 12px !important;
+  margin-bottom: 10px !important;
 }
 
 #bonusContainer .bonus-copy-btn {
-  padding: 7px 18px !important;
-  font-size: 0.75rem !important;
-  border-radius: 8px !important;
+  padding: 6px 14px !important;
+  font-size: 0.7rem !important;
+  border-radius: 6px !important;
 }
 
 #bonusContainer .bonus-copy-btn svg {
-  width: 15px !important;
-  height: 15px !important;
+  width: 13px !important;
+  height: 13px !important;
 }
 
-/* Responsive: tetap 1 kolom di semua ukuran layar */
+/* Responsive: 2 kolom di desktop, 1 kolom di mobile */
 @media (max-width: 1200px) {
   #bonusContainer {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
@@ -2038,12 +2039,12 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
   }
 
   #bonusContainer .bonus-title {
-    font-size: 0.9rem !important;
+    font-size: 0.88rem !important;
   }
 
   #bonusContainer .bonus-preview {
     font-size: 0.8rem !important;
-    -webkit-line-clamp: 5 !important;
+    -webkit-line-clamp: 4 !important;
   }
 }
 
@@ -2053,14 +2054,18 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
     min-height: 120px !important;
   }
 
+  #bonusContainer .bonus-title {
+    font-size: 0.84rem !important;
+  }
+
   #bonusContainer .bonus-copy-btn {
-    padding: 5px 12px !important;
-    font-size: 0.68rem !important;
+    padding: 5px 10px !important;
+    font-size: 0.65rem !important;
   }
 
   #bonusContainer .bonus-copy-btn svg {
-    width: 12px !important;
-    height: 12px !important;
+    width: 11px !important;
+    height: 11px !important;
   }
 }
 </style>
