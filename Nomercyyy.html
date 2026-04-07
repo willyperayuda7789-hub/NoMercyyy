@@ -1966,64 +1966,53 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 .sidebar { width: 260px; min-width: 260px; }
 }
 
-/* ===================================================
-BONUS CONTAINER — 2 KOLOM
-#ERROR!
+/* ===== BONUS CONTAINER: 2 KOLOM, KARTU LEBAR BESAR ===== */
 #bonusContainer {
 grid-template-columns: repeat(2, 1fr) !important;
-max-width: 900px !important;
+max-width: 960px !important;
 margin-left: auto !important;
 margin-right: auto !important;
-gap: 18px !important;
+gap: 20px !important;
 }
 
 #bonusContainer .bonus-card {
-max-width: 100% !important;
-min-height: 160px !important;
-padding: 22px 26px !important;
+min-height: 170px !important;
+padding: 24px 28px !important;
 }
 
 #bonusContainer .bonus-card::after {
 width: 5px !important;
 }
 
-/* ===== JUDUL FOLDER BONUS — BIRU TERANG ===== */
 #bonusContainer .bonus-title {
 color: #00D4FF !important;
 text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.25) !important;
-font-size: 0.92rem !important;
-letter-spacing: 1.2px !important;
+font-size: 0.95rem !important;
+letter-spacing: 1.3px !important;
 margin-bottom: 12px !important;
 }
 
 #bonusContainer .bonus-preview {
-font-size: 0.82rem !important;
-line-height: 1.75 !important;
+font-size: 0.84rem !important;
+line-height: 1.8 !important;
 -webkit-line-clamp: 5 !important;
 }
 
 #bonusContainer .bonus-badge {
-font-size: 0.62rem !important;
-padding: 2px 12px !important;
-margin-bottom: 10px !important;
+font-size: 0.63rem !important;
+padding: 3px 14px !important;
+margin-bottom: 12px !important;
 }
 
 #bonusContainer .bonus-copy-btn {
-padding: 6px 14px !important;
-font-size: 0.7rem !important;
-border-radius: 6px !important;
+padding: 7px 16px !important;
+font-size: 0.72rem !important;
+border-radius: 7px !important;
 }
 
 #bonusContainer .bonus-copy-btn svg {
-width: 13px !important;
-height: 13px !important;
-}
-
-/* Responsive: 2 kolom di desktop, 1 kolom di mobile */
-@media (max-width: 1200px) {
-#bonusContainer {
-grid-template-columns: repeat(2, 1fr) !important;
-}
+width: 14px !important;
+height: 14px !important;
 }
 
 @media (max-width: 768px) {
@@ -2034,38 +2023,38 @@ padding: 0 4px !important;
 }
 
 #bonusContainer .bonus-card {
-padding: 18px 18px !important;
-min-height: 140px !important;
+padding: 20px 20px !important;
+min-height: 150px !important;
 }
 
 #bonusContainer .bonus-title {
-font-size: 0.88rem !important;
+font-size: 0.9rem !important;
 }
 
 #bonusContainer .bonus-preview {
-font-size: 0.8rem !important;
+font-size: 0.82rem !important;
 -webkit-line-clamp: 4 !important;
 }
 }
 
 @media (max-width: 480px) {
 #bonusContainer .bonus-card {
-padding: 16px 14px !important;
-min-height: 120px !important;
+padding: 18px 16px !important;
+min-height: 130px !important;
 }
 
 #bonusContainer .bonus-title {
-font-size: 0.84rem !important;
+font-size: 0.86rem !important;
 }
 
 #bonusContainer .bonus-copy-btn {
-padding: 5px 10px !important;
-font-size: 0.65rem !important;
+padding: 6px 12px !important;
+font-size: 0.67rem !important;
 }
 
 #bonusContainer .bonus-copy-btn svg {
-width: 11px !important;
-height: 11px !important;
+width: 12px !important;
+height: 12px !important;
 }
 }
 </style>
