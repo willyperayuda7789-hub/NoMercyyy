@@ -853,6 +853,11 @@ animation: page-enter 0.4s ease forwards;
 
 .page-section.active { display: block; }
 
+/* ===== HALAMAN BONUS: LEBAR PENUH ===== */
+#page-bonus {
+max-width: 100% !important;
+}
+
 .beranda-hero {
 text-align: center;
 padding: 40px 0 20px;
@@ -1080,6 +1085,11 @@ margin-bottom: 24px;
 position: relative;
 }
 
+/* ===== FILTER BONUS: LEBAR PENUH ===== */
+#page-bonus .menu-filter {
+max-width: 100% !important;
+}
+
 .filter-container {
 position: relative;
 display: flex;
@@ -1200,8 +1210,8 @@ border-color: rgba(255,215,0,0.28);
 .bonus-card {
 background: linear-gradient(135deg, rgba(14,18,32,0.9), rgba(10,14,28,0.94));
 border: 1px solid var(--bonus-card-border);
-border-radius: 16px;
-padding: 20px;
+border-radius: 0;
+padding: 22px 26px;
 backdrop-filter: blur(12px);
 transition: all 0.4s ease;
 position: relative;
@@ -1211,6 +1221,7 @@ height: 100%;
 display: flex;
 flex-direction: column;
 box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+min-height: 160px;
 }
 
 .bonus-card::before {
@@ -1230,10 +1241,15 @@ pointer-events: none;
 content: '';
 position: absolute;
 top: 0; left: 0;
-width: 4px; height: 100%;
+width: 5px; height: 100%;
 background: linear-gradient(to bottom, var(--bonus-accent), #FFD700, var(--bonus-accent));
-border-radius: 4px 0 0 4px;
+border-radius: 0;
 pointer-events: none;
+}
+
+/* Hapus garis kiri di kartu pertama tiap baris */
+#bonusContainer .bonus-card:nth-child(odd)::after {
+display: none;
 }
 
 .bonus-card:hover {
@@ -1255,13 +1271,13 @@ transition: opacity 0.4s ease;
 
 .bonus-title {
 font-family: 'Cinzel', serif;
-color: var(--bonus-accent);
-font-size: 0.9rem;
+color: #00D4FF;
+font-size: 0.92rem;
 font-weight: 700;
-margin-bottom: 10px;
+margin-bottom: 12px;
 text-transform: uppercase;
 letter-spacing: 1.2px;
-text-shadow: 0 0 8px var(--bonus-accent-glow);
+text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.25);
 line-height: 1.35;
 }
 
@@ -1270,9 +1286,9 @@ display: inline-block;
 background: linear-gradient(135deg, rgba(255,143,0,0.2), rgba(255,215,0,0.12));
 border: 1px solid rgba(255,143,0,0.3);
 color: var(--bonus-accent);
-padding: 2px 10px;
+padding: 2px 12px;
 border-radius: 20px;
-font-size: 0.6rem;
+font-size: 0.62rem;
 font-family: 'Cinzel', serif;
 font-weight: 700;
 text-transform: uppercase;
@@ -1284,15 +1300,15 @@ width: fit-content;
 
 .bonus-preview {
 color: var(--text-primary);
-line-height: 1.65;
+line-height: 1.75;
 flex-grow: 1;
 overflow: hidden;
 text-overflow: ellipsis;
 display: -webkit-box;
--webkit-line-clamp: 4;
+-webkit-line-clamp: 5;
 -webkit-box-orient: vertical;
 font-family: 'Cinzel', serif;
-font-size: 0.8rem;
+font-size: 0.82rem;
 opacity: 0.85;
 }
 
@@ -1312,7 +1328,7 @@ gap: 5px;
 background: rgba(255,143,0,0.08);
 border: 1px solid rgba(255,143,0,0.2);
 color: var(--bonus-accent);
-padding: 5px 12px;
+padding: 6px 14px;
 border-radius: 6px;
 cursor: pointer;
 font-family: 'Cinzel', serif;
@@ -1954,88 +1970,23 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 .toast { font-size: 0.7rem; padding: 8px 14px; }
 .toast-title { max-width: 120px; }
 .beranda-stats { flex-direction: column; gap: 16px; }
-}
 
-@media (max-width: 480px) {
-.title { font-size: 2rem; }
-.subtitle { font-size: 0.75rem; letter-spacing: 2px; }
-.card-copy-btn { padding: 4px 8px; font-size: 0.6rem; }
-.card-copy-btn svg { width: 11px; height: 11px; }
-.bonus-copy-btn { padding: 4px 8px; font-size: 0.6rem; }
-.bonus-copy-btn svg { width: 11px; height: 11px; }
-.sidebar { width: 260px; min-width: 260px; }
-}
-
-/* ===================================================
-BONUS CONTAINER — 2 KOLOM
-#ERROR!
-#bonusContainer {
-grid-template-columns: repeat(2, 1fr) !important;
-max-width: 900px !important;
-margin-left: auto !important;
-margin-right: auto !important;
-gap: 18px !important;
-}
-
-#bonusContainer .bonus-card {
-max-width: 100% !important;
-min-height: 160px !important;
-padding: 22px 26px !important;
-}
-
-#bonusContainer .bonus-card::after {
-width: 5px !important;
-}
-
-/* ===== JUDUL FOLDER BONUS — BIRU TERANG ===== */
-#bonusContainer .bonus-title {
-color: #00D4FF !important;
-text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.25) !important;
-font-size: 0.92rem !important;
-letter-spacing: 1.2px !important;
-margin-bottom: 12px !important;
-}
-
-#bonusContainer .bonus-preview {
-font-size: 0.82rem !important;
-line-height: 1.75 !important;
--webkit-line-clamp: 5 !important;
-}
-
-#bonusContainer .bonus-badge {
-font-size: 0.62rem !important;
-padding: 2px 12px !important;
-margin-bottom: 10px !important;
-}
-
-#bonusContainer .bonus-copy-btn {
-padding: 6px 14px !important;
-font-size: 0.7rem !important;
-border-radius: 6px !important;
-}
-
-#bonusContainer .bonus-copy-btn svg {
-width: 13px !important;
-height: 13px !important;
-}
-
-/* Responsive: 2 kolom di desktop, 1 kolom di mobile */
-@media (max-width: 1200px) {
-#bonusContainer {
-grid-template-columns: repeat(2, 1fr) !important;
-}
-}
-
-@media (max-width: 768px) {
+/* ===== BONUS RESPONSIVE: MOBILE 1 KOLOM PENUH ===== */
 #bonusContainer {
 grid-template-columns: 1fr !important;
-max-width: 100% !important;
-padding: 0 4px !important;
+width: calc(100% + 32px) !important;
+margin-left: -16px !important;
+margin-right: -16px !important;
 }
 
 #bonusContainer .bonus-card {
 padding: 18px 18px !important;
 min-height: 140px !important;
+}
+
+/* Di mobile 1 kolom, tampilkan garis kembali */
+#bonusContainer .bonus-card:nth-child(odd)::after {
+display: block;
 }
 
 #bonusContainer .bonus-title {
@@ -2049,6 +2000,20 @@ font-size: 0.8rem !important;
 }
 
 @media (max-width: 480px) {
+.title { font-size: 2rem; }
+.subtitle { font-size: 0.75rem; letter-spacing: 2px; }
+.card-copy-btn { padding: 4px 8px; font-size: 0.6rem; }
+.card-copy-btn svg { width: 11px; height: 11px; }
+.bonus-copy-btn { padding: 5px 10px; font-size: 0.65rem; }
+.bonus-copy-btn svg { width: 11px; height: 11px; }
+.sidebar { width: 260px; min-width: 260px; }
+
+#bonusContainer {
+width: calc(100% + 32px) !important;
+margin-left: -16px !important;
+margin-right: -16px !important;
+}
+
 #bonusContainer .bonus-card {
 padding: 16px 14px !important;
 min-height: 120px !important;
@@ -2057,15 +2022,26 @@ min-height: 120px !important;
 #bonusContainer .bonus-title {
 font-size: 0.84rem !important;
 }
-
-#bonusContainer .bonus-copy-btn {
-padding: 5px 10px !important;
-font-size: 0.65rem !important;
 }
 
-#bonusContainer .bonus-copy-btn svg {
-width: 11px !important;
-height: 11px !important;
+/* ===================================================
+   BONUS CONTAINER — 2 KOLOM PENUH TANPA RUANG KOSONG
+   =================================================== */
+#bonusContainer {
+grid-template-columns: repeat(2, 1fr) !important;
+max-width: 100% !important;
+width: calc(100% + 48px) !important;
+margin-left: -24px !important;
+margin-right: -24px !important;
+gap: 0 !important;
+}
+
+@media (max-width: 1200px) {
+#bonusContainer {
+grid-template-columns: repeat(2, 1fr) !important;
+width: calc(100% + 32px) !important;
+margin-left: -16px !important;
+margin-right: -16px !important;
 }
 }
 </style>
