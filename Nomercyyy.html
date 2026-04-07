@@ -853,10 +853,6 @@ animation: page-enter 0.4s ease forwards;
 
 .page-section.active { display: block; }
 
-#page-bonus {
-max-width: 100% !important;
-}
-
 .beranda-hero {
 text-align: center;
 padding: 40px 0 20px;
@@ -1084,10 +1080,6 @@ margin-bottom: 24px;
 position: relative;
 }
 
-#page-bonus .menu-filter {
-max-width: 100% !important;
-}
-
 .filter-container {
 position: relative;
 display: flex;
@@ -1205,24 +1197,20 @@ box-shadow: 0 12px 35px rgba(255,215,0,0.1), 0 4px 15px rgba(0,0,0,0.4);
 border-color: rgba(255,215,0,0.28);
 }
 
-/* ===================================================
-   BONUS CARD — UKURAN LEBIH KECIL
-   =================================================== */
 .bonus-card {
 background: linear-gradient(135deg, rgba(14,18,32,0.9), rgba(10,14,28,0.94));
 border: 1px solid var(--bonus-card-border);
-border-radius: 0;
-padding: 14px 18px;
+border-radius: 16px;
+padding: 20px;
 backdrop-filter: blur(12px);
-transition: all 0.35s ease;
+transition: all 0.4s ease;
 position: relative;
 overflow: hidden;
 cursor: pointer;
 height: 100%;
 display: flex;
 flex-direction: column;
-box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-min-height: 110px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
 .bonus-card::before {
@@ -1232,7 +1220,7 @@ top: 0; left: 0;
 width: 100%; height: 100%;
 background: linear-gradient(135deg, rgba(255,143,0,0.04), rgba(255,215,0,0.02));
 opacity: 0;
-transition: opacity 0.35s ease;
+transition: opacity 0.4s ease;
 pointer-events: none;
 }
 
@@ -1242,43 +1230,39 @@ pointer-events: none;
 content: '';
 position: absolute;
 top: 0; left: 0;
-width: 3px; height: 100%;
+width: 4px; height: 100%;
 background: linear-gradient(to bottom, var(--bonus-accent), #FFD700, var(--bonus-accent));
-border-radius: 0;
+border-radius: 4px 0 0 4px;
 pointer-events: none;
 }
 
-#bonusContainer .bonus-card:nth-child(odd)::after {
-display: none;
-}
-
 .bonus-card:hover {
-transform: translateY(-3px);
-box-shadow: 0 6px 20px rgba(255,143,0,0.1), 0 2px 8px rgba(0,0,0,0.3);
-border-color: rgba(255,143,0,0.28);
+transform: translateY(-6px);
+box-shadow: 0 12px 35px rgba(255,143,0,0.12), 0 4px 15px rgba(0,0,0,0.4);
+border-color: rgba(255,143,0,0.32);
 }
 
 .bonus-card .card-gift {
 position: absolute;
-bottom: 6px; right: 8px;
-font-size: 1.6rem;
+bottom: 8px; right: 12px;
+font-size: 2.2rem;
 opacity: 0.04;
 pointer-events: none;
-transition: opacity 0.35s ease;
+transition: opacity 0.4s ease;
 }
 
-.bonus-card:hover .card-gift { opacity: 0.08; }
+.bonus-card:hover .card-gift { opacity: 0.09; }
 
 .bonus-title {
 font-family: 'Cinzel', serif;
-color: #00D4FF;
-font-size: 0.78rem;
+color: var(--bonus-accent);
+font-size: 0.9rem;
 font-weight: 700;
-margin-bottom: 6px;
+margin-bottom: 10px;
 text-transform: uppercase;
-letter-spacing: 1px;
-text-shadow: 0 0 8px rgba(0, 212, 255, 0.4), 0 0 16px rgba(0, 212, 255, 0.2);
-line-height: 1.3;
+letter-spacing: 1.2px;
+text-shadow: 0 0 8px var(--bonus-accent-glow);
+line-height: 1.35;
 }
 
 .bonus-badge {
@@ -1286,56 +1270,56 @@ display: inline-block;
 background: linear-gradient(135deg, rgba(255,143,0,0.2), rgba(255,215,0,0.12));
 border: 1px solid rgba(255,143,0,0.3);
 color: var(--bonus-accent);
-padding: 1px 8px;
-border-radius: 16px;
-font-size: 0.55rem;
+padding: 2px 10px;
+border-radius: 20px;
+font-size: 0.6rem;
 font-family: 'Cinzel', serif;
 font-weight: 700;
 text-transform: uppercase;
-letter-spacing: 1.2px;
-margin-bottom: 6px;
+letter-spacing: 1.5px;
+margin-bottom: 10px;
 animation: bonus-badge-glow 3s ease-in-out infinite;
 width: fit-content;
 }
 
 .bonus-preview {
 color: var(--text-primary);
-line-height: 1.6;
+line-height: 1.65;
 flex-grow: 1;
 overflow: hidden;
 text-overflow: ellipsis;
 display: -webkit-box;
--webkit-line-clamp: 3;
+-webkit-line-clamp: 4;
 -webkit-box-orient: vertical;
 font-family: 'Cinzel', serif;
-font-size: 0.72rem;
-opacity: 0.82;
+font-size: 0.8rem;
+opacity: 0.85;
 }
 
 .bonus-card .card-bottom-row {
 display: flex;
 align-items: center;
 justify-content: flex-end;
-margin-top: 8px;
-gap: 6px;
+margin-top: 12px;
+gap: 8px;
 flex-shrink: 0;
 }
 
 .bonus-copy-btn {
 display: inline-flex;
 align-items: center;
-gap: 4px;
+gap: 5px;
 background: rgba(255,143,0,0.08);
 border: 1px solid rgba(255,143,0,0.2);
 color: var(--bonus-accent);
-padding: 4px 10px;
-border-radius: 5px;
+padding: 5px 12px;
+border-radius: 6px;
 cursor: pointer;
 font-family: 'Cinzel', serif;
-font-size: 0.62rem;
+font-size: 0.7rem;
 text-transform: uppercase;
-letter-spacing: 0.8px;
-transition: all 0.25s ease;
+letter-spacing: 1px;
+transition: all 0.3s ease;
 white-space: nowrap;
 flex-shrink: 0;
 position: relative;
@@ -1356,13 +1340,13 @@ transition: left 0.4s ease;
 .bonus-copy-btn:hover {
 background: rgba(255,143,0,0.16);
 border-color: rgba(255,143,0,0.45);
-box-shadow: 0 2px 8px var(--bonus-accent-glow);
+box-shadow: 0 2px 10px var(--bonus-accent-glow);
 transform: translateY(-1px);
 }
 
 .bonus-copy-btn:active { animation: copy-pop 0.3s ease; }
 
-.bonus-copy-btn svg { width: 11px; height: 11px; flex-shrink: 0; }
+.bonus-copy-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
 
 .bonus-copy-btn.copied {
 background: rgba(255,215,0,0.2);
@@ -1382,7 +1366,7 @@ opacity: 0;
 transition: opacity 0.2s ease;
 display: flex;
 align-items: center;
-gap: 3px;
+gap: 4px;
 white-space: nowrap;
 }
 
@@ -1390,14 +1374,14 @@ white-space: nowrap;
 
 .bonus-match-indicator {
 position: absolute;
-top: 6px; right: 6px;
+top: 8px; right: 8px;
 background: rgba(255,215,0,0.18);
 color: #FFD700;
-padding: 1px 5px;
-border-radius: 3px;
-font-size: 0.52rem;
+padding: 2px 6px;
+border-radius: 4px;
+font-size: 0.6rem;
 text-transform: uppercase;
-letter-spacing: 0.4px;
+letter-spacing: 0.5px;
 opacity: 0;
 transition: opacity 0.3s ease;
 font-family: 'Cinzel', serif;
@@ -1408,30 +1392,30 @@ pointer-events: none;
 
 .bonus-page-header {
 text-align: center;
-margin-bottom: 24px;
+margin-bottom: 28px;
 position: relative;
 }
 
 .bonus-page-icon {
-font-size: 3rem;
+font-size: 3.5rem;
 display: block;
-margin-bottom: 10px;
+margin-bottom: 12px;
 animation: float-icon 3s ease-in-out infinite;
 }
 
 .bonus-page-title {
 font-family: 'Pirata One', cursive;
-font-size: 1.8rem;
+font-size: 2rem;
 color: var(--bonus-accent);
 text-shadow: 0 0 16px var(--bonus-accent-glow);
-margin-bottom: 6px;
+margin-bottom: 8px;
 letter-spacing: 2px;
 }
 
 .bonus-page-desc {
 font-family: 'Cinzel', serif;
 color: var(--text-secondary);
-font-size: 0.82rem;
+font-size: 0.85rem;
 opacity: 0.65;
 max-width: 500px;
 margin: 0 auto;
@@ -1442,7 +1426,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 gap: 12px;
-margin-bottom: 16px;
+margin-bottom: 20px;
 }
 
 .bonus-count-pill {
@@ -1452,16 +1436,16 @@ gap: 6px;
 background: rgba(255,143,0,0.1);
 border: 1px solid rgba(255,143,0,0.2);
 color: var(--bonus-accent);
-padding: 5px 14px;
+padding: 6px 16px;
 border-radius: 20px;
 font-family: 'Cinzel', serif;
-font-size: 0.7rem;
+font-size: 0.75rem;
 font-weight: 700;
 letter-spacing: 1px;
 text-transform: uppercase;
 }
 
-.bonus-count-pill svg { width: 13px; height: 13px; }
+.bonus-count-pill svg { width: 14px; height: 14px; }
 
 .menu-card .card-skull {
 position: absolute;
@@ -1970,31 +1954,6 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 .toast { font-size: 0.7rem; padding: 8px 14px; }
 .toast-title { max-width: 120px; }
 .beranda-stats { flex-direction: column; gap: 16px; }
-
-#bonusContainer {
-grid-template-columns: 1fr !important;
-width: calc(100% + 32px) !important;
-margin-left: -16px !important;
-margin-right: -16px !important;
-}
-
-#bonusContainer .bonus-card {
-padding: 12px 14px !important;
-min-height: 100px !important;
-}
-
-#bonusContainer .bonus-card:nth-child(odd)::after {
-display: block;
-}
-
-#bonusContainer .bonus-title {
-font-size: 0.74rem !important;
-}
-
-#bonusContainer .bonus-preview {
-font-size: 0.7rem !important;
--webkit-line-clamp: 3 !important;
-}
 }
 
 @media (max-width: 480px) {
@@ -2002,56 +1961,111 @@ font-size: 0.7rem !important;
 .subtitle { font-size: 0.75rem; letter-spacing: 2px; }
 .card-copy-btn { padding: 4px 8px; font-size: 0.6rem; }
 .card-copy-btn svg { width: 11px; height: 11px; }
+.bonus-copy-btn { padding: 4px 8px; font-size: 0.6rem; }
+.bonus-copy-btn svg { width: 11px; height: 11px; }
 .sidebar { width: 260px; min-width: 260px; }
-
-#bonusContainer {
-width: calc(100% + 32px) !important;
-margin-left: -16px !important;
-margin-right: -16px !important;
-}
-
-#bonusContainer .bonus-card {
-padding: 10px 12px !important;
-min-height: 90px !important;
-}
-
-#bonusContainer .bonus-title {
-font-size: 0.7rem !important;
-}
-
-#bonusContainer .bonus-preview {
-font-size: 0.66rem !important;
-}
-
-#bonusContainer .bonus-copy-btn {
-padding: 3px 8px !important;
-font-size: 0.58rem !important;
-}
-
-#bonusContainer .bonus-copy-btn svg {
-width: 10px !important;
-height: 10px !important;
-}
 }
 
 /* ===================================================
-   BONUS CONTAINER — 2 KOLOM PENUH TANPA RUANG KOSONG
-   =================================================== */
+BONUS CONTAINER — 2 KOLOM
+#ERROR!
 #bonusContainer {
 grid-template-columns: repeat(2, 1fr) !important;
-max-width: 100% !important;
-width: calc(100% + 48px) !important;
-margin-left: -24px !important;
-margin-right: -24px !important;
-gap: 0 !important;
+max-width: 900px !important;
+margin-left: auto !important;
+margin-right: auto !important;
+gap: 18px !important;
 }
 
+#bonusContainer .bonus-card {
+max-width: 100% !important;
+min-height: 160px !important;
+padding: 22px 26px !important;
+}
+
+#bonusContainer .bonus-card::after {
+width: 5px !important;
+}
+
+/* ===== JUDUL FOLDER BONUS — BIRU TERANG ===== */
+#bonusContainer .bonus-title {
+color: #00D4FF !important;
+text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.25) !important;
+font-size: 0.92rem !important;
+letter-spacing: 1.2px !important;
+margin-bottom: 12px !important;
+}
+
+#bonusContainer .bonus-preview {
+font-size: 0.82rem !important;
+line-height: 1.75 !important;
+-webkit-line-clamp: 5 !important;
+}
+
+#bonusContainer .bonus-badge {
+font-size: 0.62rem !important;
+padding: 2px 12px !important;
+margin-bottom: 10px !important;
+}
+
+#bonusContainer .bonus-copy-btn {
+padding: 6px 14px !important;
+font-size: 0.7rem !important;
+border-radius: 6px !important;
+}
+
+#bonusContainer .bonus-copy-btn svg {
+width: 13px !important;
+height: 13px !important;
+}
+
+/* Responsive: 2 kolom di desktop, 1 kolom di mobile */
 @media (max-width: 1200px) {
 #bonusContainer {
 grid-template-columns: repeat(2, 1fr) !important;
-width: calc(100% + 32px) !important;
-margin-left: -16px !important;
-margin-right: -16px !important;
+}
+}
+
+@media (max-width: 768px) {
+#bonusContainer {
+grid-template-columns: 1fr !important;
+max-width: 100% !important;
+padding: 0 4px !important;
+}
+
+#bonusContainer .bonus-card {
+padding: 18px 18px !important;
+min-height: 140px !important;
+}
+
+#bonusContainer .bonus-title {
+font-size: 0.88rem !important;
+}
+
+#bonusContainer .bonus-preview {
+font-size: 0.8rem !important;
+-webkit-line-clamp: 4 !important;
+}
+}
+
+@media (max-width: 480px) {
+#bonusContainer .bonus-card {
+padding: 16px 14px !important;
+min-height: 120px !important;
+}
+
+#bonusContainer .bonus-title {
+font-size: 0.84rem !important;
+}
+
+#bonusContainer .bonus-copy-btn {
+padding: 5px 10px !important;
+font-size: 0.65rem !important;
+}
+
+#bonusContainer .bonus-copy-btn svg {
+width: 11px !important;
+height: 11px !important;
 }
 }
 </style>
@@ -2880,7 +2894,7 @@ noMenu.style.display = 'none';
 var html = '';
 for (var i = 0; i < filteredBonusData.length; i++) {
 var item = filteredBonusData[i];
-html += '<div class="bonus-card" data-bonus-index="'+i+'"><div class="bonus-match-indicator">'+(item.matchType || 'BONUS')+'</div><div class="bonus-badge">Bonus</div><h3 class="bonus-title">'+item.title+'</h3><div class="bonus-preview">'+item.info+'</div><div class="card-bottom-row"><button class="bonus-copy-btn" data-bonus-copy-index="'+i+'"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span class="btn-label">Salin</span><span class="btn-check"><svg fill="currentColor" viewBox="0 0 24 24" style="width:11px;height:11px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ok</span></button></div><div class="card-gift">🎁</div></div>';
+html += '<div class="bonus-card" data-bonus-index="'+i+'"><div class="bonus-match-indicator">'+(item.matchType || 'BONUS')+'</div><div class="bonus-badge">Bonus</div><h3 class="bonus-title">'+item.title+'</h3><div class="bonus-preview">'+item.info+'</div><div class="card-bottom-row"><button class="bonus-copy-btn" data-bonus-copy-index="'+i+'"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span class="btn-label">Salin</span><span class="btn-check"><svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ok</span></button></div><div class="card-gift">🎁</div></div>';
 }
 container.innerHTML = html;
 container.querySelectorAll('.bonus-card').forEach(function(card) {
