@@ -1197,7 +1197,7 @@ box-shadow: 0 12px 35px rgba(255,215,0,0.1), 0 4px 15px rgba(0,0,0,0.4);
 border-color: rgba(255,215,0,0.28);
 }
 
-/* ===== BONUS CARD - Beda Nuansa ===== */
+/* ===== BONUS CARD ===== */
 .bonus-card {
 background: linear-gradient(135deg, rgba(14,18,32,0.9), rgba(10,14,28,0.94));
 border: 1px solid var(--bonus-card-border);
@@ -1967,6 +1967,102 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 .bonus-copy-btn svg { width: 11px; height: 11px; }
 .sidebar { width: 260px; min-width: 260px; }
 }
+
+/* ===================================================
+   BONUS CONTAINER — SATU KOLOM SESUAI GAMBAR
+   =================================================== */
+#bonusContainer {
+  grid-template-columns: 1fr !important;
+  max-width: 680px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  gap: 18px !important;
+}
+
+#bonusContainer .bonus-card {
+  max-width: 100% !important;
+  min-height: 160px !important;
+  padding: 22px 26px !important;
+}
+
+#bonusContainer .bonus-card::after {
+  width: 5px !important;
+}
+
+#bonusContainer .bonus-title {
+  font-size: 1rem !important;
+  letter-spacing: 1.5px !important;
+  margin-bottom: 14px !important;
+}
+
+#bonusContainer .bonus-preview {
+  font-size: 0.85rem !important;
+  line-height: 1.8 !important;
+  -webkit-line-clamp: 6 !important;
+}
+
+#bonusContainer .bonus-badge {
+  font-size: 0.65rem !important;
+  padding: 3px 14px !important;
+  margin-bottom: 14px !important;
+}
+
+#bonusContainer .bonus-copy-btn {
+  padding: 7px 18px !important;
+  font-size: 0.75rem !important;
+  border-radius: 8px !important;
+}
+
+#bonusContainer .bonus-copy-btn svg {
+  width: 15px !important;
+  height: 15px !important;
+}
+
+/* Responsive: tetap 1 kolom di semua ukuran layar */
+@media (max-width: 1200px) {
+  #bonusContainer {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #bonusContainer {
+    grid-template-columns: 1fr !important;
+    max-width: 100% !important;
+    padding: 0 4px !important;
+  }
+
+  #bonusContainer .bonus-card {
+    padding: 18px 18px !important;
+    min-height: 140px !important;
+  }
+
+  #bonusContainer .bonus-title {
+    font-size: 0.9rem !important;
+  }
+
+  #bonusContainer .bonus-preview {
+    font-size: 0.8rem !important;
+    -webkit-line-clamp: 5 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #bonusContainer .bonus-card {
+    padding: 16px 14px !important;
+    min-height: 120px !important;
+  }
+
+  #bonusContainer .bonus-copy-btn {
+    padding: 5px 12px !important;
+    font-size: 0.68rem !important;
+  }
+
+  #bonusContainer .bonus-copy-btn svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -2119,7 +2215,6 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 </div>
 </div>
 
-<!-- ===== KOLOM BONUS ===== -->
 <div class="nav-item bonus-nav" data-page="bonus">
 <div class="nav-icon">
 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/></svg>
@@ -2148,7 +2243,6 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 <p class="subtitle">Sistem Menu Digital</p>
 </header>
 
-<!-- ====== BERANDA ====== -->
 <section class="page-section active" id="page-beranda">
 <div class="beranda-hero">
 <span class="skull-big">☠</span>
@@ -2188,7 +2282,6 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 </div>
 </section>
 
-<!-- ====== JADWAL PASARAN ====== -->
 <section class="page-section" id="page-jadwal">
 <div class="jadwal-grid">
 <div class="jadwal-card">
@@ -2242,7 +2335,6 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 </div>
 </section>
 
-<!-- ====== RANDOM (Data dari Spreadsheet) ====== -->
 <section class="page-section" id="page-random">
 <div class="menu-filter">
 <div class="filter-container">
@@ -2250,21 +2342,17 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 <span class="filter-hint">Filter cerdas — toleransi kesalahan ketik</span>
 </div>
 </div>
-
 <div class="loading-container" id="loadingContainer" style="display:none;">
 <div class="loading-spinner"></div>
 <div class="loading-text">Berlayar Mengambil Data...</div>
 </div>
-
 <div class="menu-container" id="menuContainer" style="display: none;"></div>
-
 <div class="no-menu" id="noMenu" style="display: none;">
 <div class="no-menu-title">Tidak Ada Data Ditemukan</div>
 <div class="no-menu-subtitle">Periksa kompas dan coba lagi, Nakama</div>
 </div>
 </section>
 
-<!-- ====== PREDIKSI ====== -->
 <section class="page-section" id="page-prediksi">
 <div class="generic-page">
 <div class="generic-icon">📈</div>
@@ -2273,7 +2361,6 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 </div>
 </section>
 
-<!-- ====== SCATTER ====== -->
 <section class="page-section" id="page-scatter">
 <div class="generic-page">
 <div class="generic-icon">💎</div>
@@ -2282,7 +2369,6 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 </div>
 </section>
 
-<!-- ====== GAMBAR CS ====== -->
 <section class="page-section" id="page-gambar-cs">
 <div class="generic-page">
 <div class="generic-icon">📸</div>
@@ -2291,41 +2377,33 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 </div>
 </section>
 
-<!-- ====== BONUS (Data dari Sheet BONUS) ====== -->
 <section class="page-section" id="page-bonus">
-
 <div class="bonus-page-header">
 <span class="bonus-page-icon">🎁</span>
 <div class="bonus-page-title">Bonus & Promosi</div>
 <div class="bonus-page-desc">Kumpulan info bonus dan promosi terbaru dari kru NO-MERCYYY, langsung dari database.</div>
 </div>
-
 <div class="bonus-count-bar">
 <div class="bonus-count-pill">
 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/></svg>
 <span id="bonusCountText">0 Bonus</span>
 </div>
 </div>
-
 <div class="menu-filter">
 <div class="filter-container bonus-filter">
 <input type="text" class="filter-input" id="bonusFilterInput" placeholder="Cari info bonus di lautan promosi..." autocomplete="off">
 <span class="filter-hint">Filter cerdas — cari berdasarkan judul atau isi bonus</span>
 </div>
 </div>
-
 <div class="loading-container" id="bonusLoadingContainer" style="display:none;">
 <div class="loading-spinner bonus-spinner"></div>
 <div class="loading-text bonus-text">Mengambil Data Bonus...</div>
 </div>
-
 <div class="menu-container" id="bonusContainer" style="display: none;"></div>
-
 <div class="no-menu" id="bonusNoMenu" style="display: none;">
 <div class="no-menu-title bonus-empty">Tidak Ada Bonus Ditemukan</div>
 <div class="no-menu-subtitle">Belum ada harta karun bonus di lokasi ini, Nakama</div>
 </div>
-
 </section>
 
 <footer class="footer">
@@ -2335,7 +2413,6 @@ box-shadow: 4px 0 30px rgba(0,0,0,0.5);
 
 </div>
 
-<!-- Modal Detail (RANDOM) -->
 <div class="detail-modal" id="detailModal">
 <div class="detail-content">
 <div class="detail-header">
@@ -2359,7 +2436,6 @@ SALIN
 </div>
 </div>
 
-<!-- Modal Detail (BONUS) -->
 <div class="detail-modal bonus-modal" id="bonusDetailModal">
 <div class="detail-content">
 <div class="detail-header">
@@ -2391,7 +2467,6 @@ SALIN
 </div>
 
 <script>
-/* ===== STATE ===== */
 let sheetData = [];
 let filteredData = [];
 let currentDetail = null;
@@ -2405,25 +2480,21 @@ let activePage = 'beranda';
 let randomDataLoaded = false;
 let bonusDataLoaded = false;
 
-/* ===== KONFIGURASI SPREADSHEET ===== */
 const SHEET_ID = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
 const RANDOM_GID = '0';
 const BONUS_GID = '252063146';
 
-/* ===== BACKGROUND ANIMASI ===== */
 function seagullSVG(size) {
-return `<svg width="${size}" height="${size * 0.5}" viewBox="0 0 40 20" fill="none" stroke="rgba(20,25,50,0.9)" stroke-width="1.5" stroke-linecap="round">
-<path d="M0,12 Q8,4 16,10 Q18,11 20,10 Q22,11 24,10 Q32,4 40,12"/>
-</svg>`;
+return '<svg width="'+size+'" height="'+(size*0.5)+'" viewBox="0 0 40 20" fill="none" stroke="rgba(20,25,50,0.9)" stroke-width="1.5" stroke-linecap="round"><path d="M0,12 Q8,4 16,10 Q18,11 20,10 Q22,11 24,10 Q32,4 40,12"/></svg>';
 }
 
 function createStars() {
-const c = document.getElementById('starsLayer');
-for (let i = 0; i < 55; i++) {
-const s = document.createElement('div');
+var c = document.getElementById('starsLayer');
+for (var i = 0; i < 55; i++) {
+var s = document.createElement('div');
 s.classList.add('star');
 if (Math.random() < 0.25) s.classList.add('warm');
-const sz = Math.random() * 2.5 + 0.5;
+var sz = Math.random() * 2.5 + 0.5;
 s.style.width = sz + 'px'; s.style.height = sz + 'px';
 s.style.top = Math.random() * 100 + '%'; s.style.left = Math.random() * 100 + '%';
 s.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's');
@@ -2433,9 +2504,9 @@ c.appendChild(s);
 }
 
 function createClouds() {
-const c = document.getElementById('cloudsLayer');
-for (let i = 0; i < 7; i++) {
-const cl = document.createElement('div');
+var c = document.getElementById('cloudsLayer');
+for (var i = 0; i < 7; i++) {
+var cl = document.createElement('div');
 cl.classList.add('cloud');
 cl.classList.add(i > 3 ? 'sunset' : 'dark');
 cl.style.width = (Math.random() * 350 + 120) + 'px';
@@ -2448,11 +2519,11 @@ c.appendChild(cl);
 }
 
 function createSeagulls() {
-const c = document.getElementById('seagullsLayer');
-for (let i = 0; i < 5; i++) {
-const g = document.createElement('div');
+var c = document.getElementById('seagullsLayer');
+for (var i = 0; i < 5; i++) {
+var g = document.createElement('div');
 g.classList.add('seagull');
-const sz = Math.random() * 16 + 14;
+var sz = Math.random() * 16 + 14;
 g.innerHTML = seagullSVG(sz);
 g.style.top = (Math.random() * 60 + 5) + '%';
 g.style.setProperty('--dur', (Math.random() * 30 + 22) + 's');
@@ -2464,11 +2535,11 @@ c.appendChild(g);
 }
 
 function createBubbles() {
-const c = document.getElementById('particles');
-for (let i = 0; i < 30; i++) {
-const b = document.createElement('div');
+var c = document.getElementById('particles');
+for (var i = 0; i < 30; i++) {
+var b = document.createElement('div');
 b.classList.add('bubble');
-const sz = Math.random() * 10 + 3;
+var sz = Math.random() * 10 + 3;
 b.style.width = sz + 'px'; b.style.height = sz + 'px';
 b.style.left = Math.random() * 100 + '%'; b.style.bottom = Math.random() * 8 + '%';
 b.style.setProperty('--dur', (Math.random() * 10 + 6) + 's');
@@ -2478,11 +2549,11 @@ c.appendChild(b);
 }
 
 function createSparkles() {
-const c = document.getElementById('sparkles');
-for (let i = 0; i < 15; i++) {
-const s = document.createElement('div');
+var c = document.getElementById('sparkles');
+for (var i = 0; i < 15; i++) {
+var s = document.createElement('div');
 s.classList.add('sparkle');
-const sz = Math.random() * 4 + 1.5;
+var sz = Math.random() * 4 + 1.5;
 s.style.setProperty('--size', sz + 'px');
 s.style.left = (Math.random() * 60 + 20) + '%';
 s.style.bottom = (Math.random() * 20 + 28) + '%';
@@ -2492,99 +2563,75 @@ c.appendChild(s);
 }
 }
 
-/* ===== NAVIGASI ===== */
 function switchPage(pageName) {
 activePage = pageName;
-document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-const target = document.getElementById('page-' + pageName);
+document.querySelectorAll('.page-section').forEach(function(p) { p.classList.remove('active'); });
+var target = document.getElementById('page-' + pageName);
 if (target) {
 target.classList.remove('active');
 void target.offsetWidth;
 target.classList.add('active');
 }
-document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-const navItem = document.querySelector(`.nav-item[data-page="${pageName}"]`);
+document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
+var navItem = document.querySelector('.nav-item[data-page="'+pageName+'"]');
 if (navItem) navItem.classList.add('active');
-
-/* Muat data saat pertama kali halaman dibuka */
-if (pageName === 'random' && !randomDataLoaded) {
-fetchSheetData();
-}
-if (pageName === 'bonus' && !bonusDataLoaded) {
-fetchBonusData();
-}
-
+if (pageName === 'random' && !randomDataLoaded) fetchSheetData();
+if (pageName === 'bonus' && !bonusDataLoaded) fetchBonusData();
 updateDebugInfo();
 }
 
 function initSidebar() {
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('sidebarOverlay');
-const toggle = document.getElementById('sidebarToggle');
-
+var sidebar = document.getElementById('sidebar');
+var overlay = document.getElementById('sidebarOverlay');
+var toggle = document.getElementById('sidebarToggle');
 function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('show'); }
 function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
-
-toggle.addEventListener('click', function () {
+toggle.addEventListener('click', function() {
 sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
 });
-
 overlay.addEventListener('click', closeSidebar);
-
-document.querySelectorAll('.nav-item').forEach(item => {
-item.addEventListener('click', function () {
+document.querySelectorAll('.nav-item').forEach(function(item) {
+item.addEventListener('click', function() {
 switchPage(this.dataset.page);
 if (window.innerWidth <= 900) closeSidebar();
 });
 });
 }
 
-/* ===== TOAST ===== */
 function showToast(title, message, isBonus) {
-const container = document.getElementById('toastContainer');
-const toast = document.createElement('div');
+var container = document.getElementById('toastContainer');
+var toast = document.createElement('div');
 toast.classList.add('toast');
 if (isBonus) toast.classList.add('bonus-toast');
-toast.innerHTML = `
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-<span class="toast-title">${title}</span>
-<span>${message}</span>`;
+toast.innerHTML = '<svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span class="toast-title">'+title+'</span><span>'+message+'</span>';
 container.appendChild(toast);
-setTimeout(() => {
+setTimeout(function() {
 toast.classList.add('toast-out');
-setTimeout(() => toast.remove(), 300);
+setTimeout(function() { toast.remove(); }, 300);
 }, 2000);
 }
 
-/* ===== STATUS BAR ===== */
 function updateSystemTime() {
 document.getElementById('systemTime').textContent = new Date().toLocaleTimeString('id-ID', { hour12: false });
 }
 
 function updateSystemStatus(status, type) {
-const el = document.getElementById('systemStatus');
+var el = document.getElementById('systemStatus');
 el.textContent = status;
 el.style.color = type === 'error' ? '#ff9800' : type === 'success' ? '#FFD700' : '#FF8F00';
 }
 
-/* ===== DEBUG ===== */
 function updateDebugInfo() {
 if (!debugMode) return;
-document.getElementById('debugInfo').innerHTML = `
-<div>Random Data: ${sheetData.length} | Filtered: ${filteredData.length}</div>
-<div>Bonus Data: ${bonusData.length} | Filtered: ${filteredBonusData.length}</div>
-<div>Active Page: ${activePage}</div>
-<div>Random Loaded: ${randomDataLoaded} | Bonus Loaded: ${bonusDataLoaded}</div>
-<div>Sheet ID: ${SHEET_ID.substring(0,12)}...</div>`;
+document.getElementById('debugInfo').innerHTML = '<div>Random Data: '+sheetData.length+' | Filtered: '+filteredData.length+'</div><div>Bonus Data: '+bonusData.length+' | Filtered: '+filteredBonusData.length+'</div><div>Active Page: '+activePage+'</div><div>Random Loaded: '+randomDataLoaded+' | Bonus Loaded: '+bonusDataLoaded+'</div><div>Sheet ID: '+SHEET_ID.substring(0,12)+'...</div>';
 }
 
-/* ===== FUZZY SEARCH ===== */
 function levenshteinDistance(str1, str2) {
-const m = [];
-for (let i = 0; i <= str2.length; i++) m[i] = [i];
-for (let j = 0; j <= str1.length; j++) m[0][j] = j;
-for (let i = 1; i <= str2.length; i++) {
-for (let j = 1; j <= str1.length; j++) {
+var m = [];
+for (var i = 0; i <= str2.length; i++) m[i] = [i];
+for (var j = 0; j <= str1.length; j++) m[0][j] = j;
+for (var i = 1; i <= str2.length; i++) {
+for (var j = 1; j <= str1.length; j++) {
 if (str2.charAt(i - 1) === str1.charAt(j - 1)) m[i][j] = m[i - 1][j - 1];
 else m[i][j] = Math.min(m[i - 1][j - 1] + 1, m[i][j - 1] + 1, m[i - 1][j] + 1);
 }
@@ -2593,182 +2640,160 @@ return m[str2.length][str1.length];
 }
 
 function calculateSimilarity(str1, str2) {
-const d = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase());
-const longer = str1.length > str2.length ? str1 : str2;
+var d = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase());
+var longer = str1.length > str2.length ? str1 : str2;
 if (longer.length === 0) return 100;
 return Math.round(((longer.length - d) / longer.length) * 100);
 }
 
 function fuzzyMatch(query, text) {
-const ql = query.toLowerCase(), tl = text.toLowerCase();
+var ql = query.toLowerCase(), tl = text.toLowerCase();
 if (tl.includes(ql)) return { match: true, score: 100, type: 'exact' };
-const words = tl.split(/\s+/);
-let best = { match: false, score: 0, type: 'none' };
-for (const w of words) {
-if (w.startsWith(ql)) { const s = Math.round((ql.length / w.length) * 100); if (s > best.score) best = { match: true, score: s, type: 'prefix' }; }
-const sim = calculateSimilarity(ql, w);
+var words = tl.split(/\s+/);
+var best = { match: false, score: 0, type: 'none' };
+for (var k = 0; k < words.length; k++) {
+var w = words[k];
+if (w.startsWith(ql)) { var s = Math.round((ql.length / w.length) * 100); if (s > best.score) best = { match: true, score: s, type: 'prefix' }; }
+var sim = calculateSimilarity(ql, w);
 if (sim >= 60 && sim > best.score) best = { match: true, score: sim, type: 'fuzzy' };
-if (w.includes(ql)) { const s = Math.round((ql.length / w.length) * 90); if (s > best.score) best = { match: true, score: s, type: 'contains' }; }
+if (w.includes(ql)) { var s2 = Math.round((ql.length / w.length) * 90); if (s2 > best.score) best = { match: true, score: s2, type: 'contains' }; }
 }
 return best;
 }
 
-/* ===== FETCH DATA DARI GOOGLE SPREADSHEET (GENERIC) ===== */
 async function fetchGoogleSheet(gid) {
-const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${gid}`;
-const response = await fetch(url);
+var url = 'https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+gid;
+var response = await fetch(url);
 if (!response.ok) throw new Error('HTTP ' + response.status);
-const text = await response.text();
+var text = await response.text();
 if (!text.includes('google.visualization.Query.setResponse')) throw new Error('Format tidak valid');
-const json = JSON.parse(text.substring(47).slice(0, -2));
-const data = [];
-for (const row of json.table.rows) {
-const title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
-const info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
-if (title) data.push({ title, info });
+var json = JSON.parse(text.substring(47).slice(0, -2));
+var data = [];
+for (var i = 0; i < json.table.rows.length; i++) {
+var row = json.table.rows[i];
+var title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
+var info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
+if (title) data.push({ title: title, info: info });
 }
 return data;
 }
 
-/* ===== RANDOM PAGE ===== */
 async function fetchSheetData() {
-const loading = document.getElementById('loadingContainer');
-const container = document.getElementById('menuContainer');
-const noMenu = document.getElementById('noMenu');
-
+var loading = document.getElementById('loadingContainer');
+var container = document.getElementById('menuContainer');
+var noMenu = document.getElementById('noMenu');
 loading.style.display = 'flex';
 container.style.display = 'none';
 noMenu.style.display = 'none';
 updateSystemStatus('Mengambil Data RANDOM...', 'warning');
-
-let success = false;
-
-/* Percobaan 1: GID 0 */
+var success = false;
 try {
 sheetData = await fetchGoogleSheet(RANDOM_GID);
 if (sheetData.length > 0) success = true;
 } catch (e) {}
-
-/* Percobaan 2: Sheet REPORTAN */
 if (!success) {
 try {
-const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=REPORTAN`;
-const r = await fetch(url);
+var url = 'https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=REPORTAN';
+var r = await fetch(url);
 if (r.ok) {
-const t = await r.text();
+var t = await r.text();
 if (t.includes('google.visualization.Query.setResponse')) {
-const json = JSON.parse(t.substring(47).slice(0, -2));
+var json = JSON.parse(t.substring(47).slice(0, -2));
 sheetData = [];
-for (const row of json.table.rows) {
-const title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
-const info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
-if (title) sheetData.push({ title, info });
+for (var i = 0; i < json.table.rows.length; i++) {
+var row = json.table.rows[i];
+var title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
+var info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
+if (title) sheetData.push({ title: title, info: info });
 }
 if (sheetData.length > 0) success = true;
 }
 }
 } catch (e) {}
 }
-
-/* Percobaan 3: Cache localStorage */
 if (!success) {
 try {
-const cached = localStorage.getItem('NO-MERCYYY_random');
+var cached = localStorage.getItem('NO-MERCYYY_random');
 if (cached) { sheetData = JSON.parse(cached); if (sheetData.length > 0) success = true; }
 } catch (e) {}
 }
-
-/* Fallback data contoh */
 if (!success) {
 sheetData = [{ title: "CONTOH DATA", info: "Tidak dapat terhubung ke spreadsheet. Ini data contoh." }];
 }
-
-/* Simpan ke cache jika berhasil dari network */
 if (success && sheetData[0].title !== "CONTOH DATA") {
 try { localStorage.setItem('NO-MERCYYY_random', JSON.stringify(sheetData)); } catch(e) {}
 }
-
 randomDataLoaded = true;
-filteredData = [...sheetData];
+filteredData = sheetData.slice();
 document.getElementById('statMenu').textContent = sheetData.length;
-
 updateSystemStatus(
 sheetData[0].title === "CONTOH DATA" ? 'RANDOM — Mode Offline' : 'RANDOM — Data Aktif',
 sheetData[0].title === "CONTOH DATA" ? 'warning' : 'success'
 );
-
 loading.style.display = 'none';
 displayMenuItems();
 updateDebugInfo();
 }
 
 function displayMenuItems() {
-const container = document.getElementById('menuContainer');
-const noMenu = document.getElementById('noMenu');
-
+var container = document.getElementById('menuContainer');
+var noMenu = document.getElementById('noMenu');
 if (filteredData.length === 0) {
 container.style.display = 'none';
 noMenu.style.display = 'block';
 return;
 }
-
 container.style.display = 'grid';
 noMenu.style.display = 'none';
-
-container.innerHTML = filteredData.map((item, i) => `
-<div class="menu-card" data-index="${i}">
-<div class="match-indicator">${item.matchType || 'MATCH'}</div>
-<h3 class="menu-title">${item.title}</h3>
-<div class="menu-preview">${item.info}</div>
-<div class="card-bottom-row">
-<button class="card-copy-btn" data-copy-index="${i}">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-<span class="btn-label">Salin</span>
-<span class="btn-check"><svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ok</span>
-</button>
-</div>
-<div class="card-skull">☠</div>
-</div>`).join('');
-
-container.querySelectorAll('.menu-card').forEach(card => {
-card.addEventListener('click', function () {
+var html = '';
+for (var i = 0; i < filteredData.length; i++) {
+var item = filteredData[i];
+html += '<div class="menu-card" data-index="'+i+'"><div class="match-indicator">'+(item.matchType || 'MATCH')+'</div><h3 class="menu-title">'+item.title+'</h3><div class="menu-preview">'+item.info+'</div><div class="card-bottom-row"><button class="card-copy-btn" data-copy-index="'+i+'"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span class="btn-label">Salin</span><span class="btn-check"><svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ok</span></button></div><div class="card-skull">☠</div></div>';
+}
+container.innerHTML = html;
+container.querySelectorAll('.menu-card').forEach(function(card) {
+card.addEventListener('click', function() {
 showDetail(filteredData[parseInt(this.dataset.index)]);
 });
 });
-
-container.querySelectorAll('.card-copy-btn').forEach(btn => {
-btn.addEventListener('click', function (e) {
+container.querySelectorAll('.card-copy-btn').forEach(function(btn) {
+btn.addEventListener('click', function(e) {
 e.stopPropagation();
-const item = filteredData[parseInt(this.dataset.copyIndex)];
+var item = filteredData[parseInt(this.dataset.copyIndex)];
 if (!item) return;
-navigator.clipboard.writeText(item.info).then(() => {
-this.classList.add('copied');
-setTimeout(() => this.classList.remove('copied'), 1500);
+navigator.clipboard.writeText(item.info).then(function() {
+btn.classList.add('copied');
+setTimeout(function() { btn.classList.remove('copied'); }, 1500);
 showToast(item.title, 'info berhasil disalin', false);
-}).catch(() => {});
+}).catch(function() {});
 });
 });
 }
 
 function filterMenuItems() {
-const q = document.getElementById('filterInput').value.trim();
+var q = document.getElementById('filterInput').value.trim();
 if (q === '') {
-filteredData = sheetData.map(item => ({ ...item }));
+filteredData = sheetData.map(function(item) { return Object.assign({}, item); });
 } else {
-const results = [];
-for (const item of sheetData) {
-const tm = fuzzyMatch(q, item.title), im = fuzzyMatch(q, item.info);
-const best = tm.score > im.score ? tm : im;
-if (best.match) results.push({ ...item, matchScore: best.score, matchType: best.type.toUpperCase() });
+var results = [];
+for (var i = 0; i < sheetData.length; i++) {
+var item = sheetData[i];
+var tm = fuzzyMatch(q, item.title), im = fuzzyMatch(q, item.info);
+var best = tm.score > im.score ? tm : im;
+if (best.match) {
+var copy = Object.assign({}, item);
+copy.matchScore = best.score;
+copy.matchType = best.type.toUpperCase();
+results.push(copy);
 }
-results.sort((a, b) => b.matchScore - a.matchScore);
+}
+results.sort(function(a, b) { return b.matchScore - a.matchScore; });
 filteredData = results;
 }
 displayMenuItems();
 updateDebugInfo();
 }
 
-/* ===== RANDOM DETAIL MODAL ===== */
 function showDetail(item) {
 currentDetail = item;
 document.getElementById('detailTitle').textContent = item.title;
@@ -2785,150 +2810,125 @@ updateDebugInfo();
 
 function copyToClipboard() {
 if (!currentDetail) return;
-navigator.clipboard.writeText(currentDetail.info).then(() => {
-const el = document.getElementById('copySuccess');
+navigator.clipboard.writeText(currentDetail.info).then(function() {
+var el = document.getElementById('copySuccess');
 el.classList.add('show');
 showToast(currentDetail.title, 'info berhasil disalin', false);
-setTimeout(() => el.classList.remove('show'), 2000);
-}).catch(() => {});
+setTimeout(function() { el.classList.remove('show'); }, 2000);
+}).catch(function() {});
 }
 
-/* ===== BONUS PAGE ===== */
 async function fetchBonusData() {
-const loading = document.getElementById('bonusLoadingContainer');
-const container = document.getElementById('bonusContainer');
-const noMenu = document.getElementById('bonusNoMenu');
-
+var loading = document.getElementById('bonusLoadingContainer');
+var container = document.getElementById('bonusContainer');
+var noMenu = document.getElementById('bonusNoMenu');
 loading.style.display = 'flex';
 container.style.display = 'none';
 noMenu.style.display = 'none';
 updateSystemStatus('Mengambil Data BONUS...', 'warning');
-
-let success = false;
-
-/* Percobaan 1: GID BONUS */
+var success = false;
 try {
 bonusData = await fetchGoogleSheet(BONUS_GID);
 if (bonusData.length > 0) success = true;
 } catch (e) {}
-
-/* Percobaan 2: Nama sheet BONUS */
 if (!success) {
 try {
-const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=BONUS`;
-const r = await fetch(url);
+var url = 'https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=BONUS';
+var r = await fetch(url);
 if (r.ok) {
-const t = await r.text();
+var t = await r.text();
 if (t.includes('google.visualization.Query.setResponse')) {
-const json = JSON.parse(t.substring(47).slice(0, -2));
+var json = JSON.parse(t.substring(47).slice(0, -2));
 bonusData = [];
-for (const row of json.table.rows) {
-const title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
-const info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
-if (title) bonusData.push({ title, info });
+for (var i = 0; i < json.table.rows.length; i++) {
+var row = json.table.rows[i];
+var title = row.c[0] && row.c[0].v ? String(row.c[0].v).trim() : '';
+var info = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : '';
+if (title) bonusData.push({ title: title, info: info });
 }
 if (bonusData.length > 0) success = true;
 }
 }
 } catch (e) {}
 }
-
-/* Percobaan 3: Cache localStorage */
 if (!success) {
 try {
-const cached = localStorage.getItem('NO-MERCYYY_bonus');
+var cached = localStorage.getItem('NO-MERCYYY_bonus');
 if (cached) { bonusData = JSON.parse(cached); if (bonusData.length > 0) success = true; }
 } catch (e) {}
 }
-
-/* Fallback */
 if (!success) {
 bonusData = [{ title: "BELUM ADA DATA", info: "Tidak dapat terhubung ke sheet BONUS. Pastikan sheet BONUS memiliki data di kolom A (judul) dan B (isi)." }];
 }
-
-/* Simpan cache */
 if (success && bonusData[0].title !== "BELUM ADA DATA") {
 try { localStorage.setItem('NO-MERCYYY_bonus', JSON.stringify(bonusData)); } catch(e) {}
 }
-
 bonusDataLoaded = true;
-filteredBonusData = [...bonusData];
+filteredBonusData = bonusData.slice();
 document.getElementById('statBonus').textContent = bonusData.length;
 document.getElementById('bonusCountText').textContent = bonusData.length + ' Bonus';
-
 updateSystemStatus(
 bonusData[0].title === "BELUM ADA DATA" ? 'BONUS — Mode Offline' : 'BONUS — Data Aktif',
 bonusData[0].title === "BELUM ADA DATA" ? 'warning' : 'success'
 );
-
 loading.style.display = 'none';
 displayBonusItems();
 updateDebugInfo();
 }
 
 function displayBonusItems() {
-const container = document.getElementById('bonusContainer');
-const noMenu = document.getElementById('bonusNoMenu');
-
+var container = document.getElementById('bonusContainer');
+var noMenu = document.getElementById('bonusNoMenu');
 if (filteredBonusData.length === 0) {
 container.style.display = 'none';
 noMenu.style.display = 'block';
 return;
 }
-
 container.style.display = 'grid';
 noMenu.style.display = 'none';
-
-container.innerHTML = filteredBonusData.map((item, i) => `
-<div class="bonus-card" data-bonus-index="${i}">
-<div class="bonus-match-indicator">${item.matchType || 'BONUS'}</div>
-<div class="bonus-badge">Bonus</div>
-<h3 class="bonus-title">${item.title}</h3>
-<div class="bonus-preview">${item.info}</div>
-<div class="card-bottom-row">
-<button class="bonus-copy-btn" data-bonus-copy-index="${i}">
-<svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-<span class="btn-label">Salin</span>
-<span class="btn-check"><svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ok</span>
-</button>
-</div>
-<div class="card-gift">🎁</div>
-</div>`).join('');
-
-/* Event: Klik card untuk lihat detail */
-container.querySelectorAll('.bonus-card').forEach(card => {
-card.addEventListener('click', function () {
+var html = '';
+for (var i = 0; i < filteredBonusData.length; i++) {
+var item = filteredBonusData[i];
+html += '<div class="bonus-card" data-bonus-index="'+i+'"><div class="bonus-match-indicator">'+(item.matchType || 'BONUS')+'</div><div class="bonus-badge">Bonus</div><h3 class="bonus-title">'+item.title+'</h3><div class="bonus-preview">'+item.info+'</div><div class="card-bottom-row"><button class="bonus-copy-btn" data-bonus-copy-index="'+i+'"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span class="btn-label">Salin</span><span class="btn-check"><svg fill="currentColor" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Ok</span></button></div><div class="card-gift">🎁</div></div>';
+}
+container.innerHTML = html;
+container.querySelectorAll('.bonus-card').forEach(function(card) {
+card.addEventListener('click', function() {
 showBonusDetail(filteredBonusData[parseInt(this.dataset.bonusIndex)]);
 });
 });
-
-/* Event: Tombol salin */
-container.querySelectorAll('.bonus-copy-btn').forEach(btn => {
-btn.addEventListener('click', function (e) {
+container.querySelectorAll('.bonus-copy-btn').forEach(function(btn) {
+btn.addEventListener('click', function(e) {
 e.stopPropagation();
-const item = filteredBonusData[parseInt(this.dataset.bonusCopyIndex)];
+var item = filteredBonusData[parseInt(this.dataset.bonusCopyIndex)];
 if (!item) return;
-navigator.clipboard.writeText(item.info).then(() => {
-this.classList.add('copied');
-setTimeout(() => this.classList.remove('copied'), 1500);
+navigator.clipboard.writeText(item.info).then(function() {
+btn.classList.add('copied');
+setTimeout(function() { btn.classList.remove('copied'); }, 1500);
 showToast(item.title, 'bonus berhasil disalin', true);
-}).catch(() => {});
+}).catch(function() {});
 });
 });
 }
 
 function filterBonusItems() {
-const q = document.getElementById('bonusFilterInput').value.trim();
+var q = document.getElementById('bonusFilterInput').value.trim();
 if (q === '') {
-filteredBonusData = bonusData.map(item => ({ ...item }));
+filteredBonusData = bonusData.map(function(item) { return Object.assign({}, item); });
 } else {
-const results = [];
-for (const item of bonusData) {
-const tm = fuzzyMatch(q, item.title), im = fuzzyMatch(q, item.info);
-const best = tm.score > im.score ? tm : im;
-if (best.match) results.push({ ...item, matchScore: best.score, matchType: best.type.toUpperCase() });
+var results = [];
+for (var i = 0; i < bonusData.length; i++) {
+var item = bonusData[i];
+var tm = fuzzyMatch(q, item.title), im = fuzzyMatch(q, item.info);
+var best = tm.score > im.score ? tm : im;
+if (best.match) {
+var copy = Object.assign({}, item);
+copy.matchScore = best.score;
+copy.matchType = best.type.toUpperCase();
+results.push(copy);
 }
-results.sort((a, b) => b.matchScore - a.matchScore);
+}
+results.sort(function(a, b) { return b.matchScore - a.matchScore; });
 filteredBonusData = results;
 }
 document.getElementById('bonusCountText').textContent = filteredBonusData.length + ' Bonus';
@@ -2936,7 +2936,6 @@ displayBonusItems();
 updateDebugInfo();
 }
 
-/* ===== BONUS DETAIL MODAL ===== */
 function showBonusDetail(item) {
 currentBonusDetail = item;
 document.getElementById('bonusDetailTitle').textContent = item.title;
@@ -2953,61 +2952,53 @@ updateDebugInfo();
 
 function copyBonusToClipboard() {
 if (!currentBonusDetail) return;
-navigator.clipboard.writeText(currentBonusDetail.info).then(() => {
-const el = document.getElementById('bonusCopySuccess');
+navigator.clipboard.writeText(currentBonusDetail.info).then(function() {
+var el = document.getElementById('bonusCopySuccess');
 el.classList.add('show');
 showToast(currentBonusDetail.title, 'bonus berhasil disalin', true);
-setTimeout(() => el.classList.remove('show'), 2000);
-}).catch(() => {});
+setTimeout(function() { el.classList.remove('show'); }, 2000);
+}).catch(function() {});
 }
 
-/* ===== INIT ===== */
-window.onload = function () {
+window.onload = function() {
 createStars(); createClouds(); createSeagulls(); createBubbles(); createSparkles();
 initSidebar();
 updateSystemTime();
 setInterval(updateSystemTime, 1000);
-
 updateSystemStatus('Kapal Berlayar...', 'warning');
 
-/* Debug toggle */
-document.getElementById('debugToggle').addEventListener('click', function () {
+document.getElementById('debugToggle').addEventListener('click', function() {
 debugMode = !debugMode;
 document.getElementById('debugPanel').classList.toggle('show', debugMode);
 updateDebugInfo();
 });
 setInterval(updateDebugInfo, 1000);
 
-/* Filter RANDOM */
-let debounceRandom;
-document.getElementById('filterInput').addEventListener('input', function () {
+var debounceRandom;
+document.getElementById('filterInput').addEventListener('input', function() {
 clearTimeout(debounceRandom);
 debounceRandom = setTimeout(filterMenuItems, 300);
 });
 
-/* Filter BONUS */
-let debounceBonus;
-document.getElementById('bonusFilterInput').addEventListener('input', function () {
+var debounceBonus;
+document.getElementById('bonusFilterInput').addEventListener('input', function() {
 clearTimeout(debounceBonus);
 debounceBonus = setTimeout(filterBonusItems, 300);
 });
 
-/* Modal RANDOM: tutup */
 document.getElementById('detailClose').addEventListener('click', hideDetail);
 document.getElementById('copyButton').addEventListener('click', copyToClipboard);
-document.getElementById('detailModal').addEventListener('click', function (e) {
+document.getElementById('detailModal').addEventListener('click', function(e) {
 if (e.target === this) hideDetail();
 });
 
-/* Modal BONUS: tutup */
 document.getElementById('bonusDetailClose').addEventListener('click', hideBonusDetail);
 document.getElementById('bonusCopyButton').addEventListener('click', copyBonusToClipboard);
-document.getElementById('bonusDetailModal').addEventListener('click', function (e) {
+document.getElementById('bonusDetailModal').addEventListener('click', function(e) {
 if (e.target === this) hideBonusDetail();
 });
 
-/* Keyboard: Escape */
-document.addEventListener('keydown', function (e) {
+document.addEventListener('keydown', function(e) {
 if (e.key === 'Escape') {
 if (document.getElementById('bonusDetailModal').classList.contains('show')) { hideBonusDetail(); return; }
 if (document.getElementById('detailModal').classList.contains('show')) { hideDetail(); return; }
