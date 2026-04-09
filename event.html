@@ -1,1 +1,1293 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Event</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Playfair Display"', 'serif'],
+                        body: ['"DM Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        bg: '#0C0C0C',
+                        surface: '#161616',
+                        card: '#1E1E1E',
+                        border: '#2A2A2A',
+                        muted: '#777777',
+                        fg: '#F0EDE6',
+                        accent: '#D4943A',
+                        accentLight: '#F0B95A',
+                        accentDark: '#A06E1F',
+                        danger: '#C0392B',
+                        success: '#27AE60',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --bg: #0C0C0C;
+            --surface: #161616;
+            --card: #1E1E1E;
+            --border: #2A2A2A;
+            --muted: #777777;
+            --fg: #F0EDE6;
+            --accent: #D4943A;
+            --accent-light: #F0B95A;
+            --accent-dark: #A06E1F;
+        }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+        /* Hero Background */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(212,148,58,0.15) 0%, transparent 70%);
+            top: -200px; right: -100px;
+            animation: floatBlob 12s ease-in-out infinite;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(212,148,58,0.08) 0%, transparent 70%);
+            bottom: -150px; left: -100px;
+            animation: floatBlob 15s ease-in-out infinite reverse;
+        }
+        @keyframes floatBlob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -40px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* Grid pattern overlay */
+        .grid-pattern {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(212,148,58,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212,148,58,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+        }
+
+        /* Particle canvas */
+        #particleCanvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* Card hover effect */
+        .event-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s ease;
+        }
+        .event-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(212,148,58,0.08), 0 0 0 1px rgba(212,148,58,0.15);
+        }
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.23,1,0.32,1);
+        }
+        .event-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Shimmer loading */
+        .shimmer {
+            background: linear-gradient(90deg, #1E1E1E 25%, #2A2A2A 50%, #1E1E1E 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Fade in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.23,1,0.32,1);
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Search input */
+        .search-input {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--fg);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(212,148,58,0.1);
+        }
+        .search-input::placeholder { color: var(--muted); }
+
+        /* Filter chip */
+        .filter-chip {
+            padding: 6px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .filter-chip:hover {
+            border-color: var(--accent);
+            color: var(--fg);
+        }
+        .filter-chip.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #0C0C0C;
+            font-weight: 500;
+        }
+
+        /* Status badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .badge-upcoming { background: rgba(212,148,58,0.15); color: var(--accent-light); }
+        .badge-ongoing { background: rgba(39,174,96,0.15); color: #2ECC71; }
+        .badge-done { background: rgba(119,119,119,0.15); color: #999; }
+        .badge-cancelled { background: rgba(192,57,43,0.15); color: #E74C3C; }
+
+        /* Date ribbon */
+        .date-ribbon {
+            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+            color: #0C0C0C;
+            font-weight: 700;
+            text-align: center;
+            min-width: 72px;
+            border-radius: 8px;
+            padding: 8px 4px;
+        }
+        .date-ribbon .day { font-size: 1.5rem; line-height: 1; font-family: 'Playfair Display', serif; }
+        .date-ribbon .month { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 24px; right: 24px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+            transform: translateY(120%);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            max-width: 380px;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+            padding: 20px;
+        }
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .modal-content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            max-width: 640px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+        }
+        .modal-overlay.open .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Stat counter */
+        .stat-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .stat-box:hover { border-color: rgba(212,148,58,0.3); }
+
+        /* Pulse dot */
+        .pulse-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #2ECC71;
+            position: relative;
+        }
+        .pulse-dot::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            border: 2px solid #2ECC71;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 0.6; transform: scale(1.3); }
+        }
+
+        /* View toggle */
+        .view-btn {
+            width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .view-btn:hover { border-color: var(--accent); color: var(--fg); }
+        .view-btn.active { background: var(--accent); border-color: var(--accent); color: #0C0C0C; }
+
+        /* Timeline view */
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            padding-bottom: 32px;
+        }
+        .timeline-item:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 32px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 6px;
+            top: 6px;
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 3px solid var(--accent);
+            z-index: 1;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .date-ribbon { min-width: 56px; }
+            .date-ribbon .day { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Toast -->
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-circle-info text-accent"></i>
+        <span id="toastMsg" class="text-sm text-fg"></span>
+    </div>
+
+    <!-- Modal Detail -->
+    <div id="modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Detail Event">
+        <div class="modal-content" id="modalContent"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-bg/70 border-b border-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-accent to-accentDark flex items-center justify-center">
+                    <i class="fa-solid fa-calendar-star text-bg text-sm"></i>
+                </div>
+                <span class="font-display font-bold text-lg tracking-tight text-fg">EventHub</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="pulse-dot hidden sm:block"></div>
+                <span class="text-xs text-muted hidden sm:block" id="liveStatus">Memuat data...</span>
+                <button onclick="refreshData()" class="view-btn" title="Refresh data" aria-label="Refresh data">
+                    <i class="fa-solid fa-arrows-rotate text-xs" id="refreshIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-16">
+        <!-- Hero Section -->
+        <section class="relative min-h-[320px] sm:min-h-[380px] flex items-center overflow-hidden">
+            <div class="hero-bg"></div>
+            <div class="grid-pattern"></div>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 w-full">
+                <div class="max-w-2xl">
+                    <p class="text-accent font-medium text-sm tracking-widest uppercase mb-3 fade-in">Agenda & Jadwal</p>
+                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-900 leading-[1.1] mb-5 fade-in" style="transition-delay:0.1s">
+                        Semua Event<br>
+                        <span class="text-accent">dalam Satu Tempat</span>
+                    </h1>
+                    <p class="text-muted text-base sm:text-lg leading-relaxed max-w-lg fade-in" style="transition-delay:0.2s">
+                        Pantau, cari, dan kelola seluruh rangkaian event dari satu dasbor yang selalu terkini secara real-time.
+                    </p>
+                </div>
+            </div>
+            <!-- Decorative element -->
+            <div class="absolute right-8 top-1/2 -translate-y-1/2 w-48 h-48 rounded-full border border-border opacity-20 hidden lg:block" style="animation: floatBlob 10s ease-in-out infinite;"></div>
+            <div class="absolute right-20 top-1/2 -translate-y-1/2 w-28 h-28 rounded-full border border-accent/20 hidden lg:block" style="animation: floatBlob 8s ease-in-out infinite reverse;"></div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 -mt-4 mb-8">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 fade-in" id="statsGrid">
+                <div class="stat-box">
+                    <div class="text-2xl font-display font-bold text-fg" id="statTotal">-</div>
+                    <div class="text-xs text-muted mt-1">Total Event</div>
+                </div>
+                <div class="stat-box">
+                    <div class="text-2xl font-display font-bold text-accentLight" id="statUpcoming">-</div>
+                    <div class="text-xs text-muted mt-1">Akan Datang</div>
+                </div>
+                <div class="stat-box">
+                    <div class="text-2xl font-display font-bold text-success" id="statOngoing">-</div>
+                    <div class="text-xs text-muted mt-1">Berlangsung</div>
+                </div>
+                <div class="stat-box">
+                    <div class="text-2xl font-display font-bold text-muted" id="statDone">-</div>
+                    <div class="text-xs text-muted mt-1">Selesai</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Filter -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 mb-6">
+            <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center fade-in">
+                <div class="relative flex-1">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm"></i>
+                    <input type="text" id="searchInput" class="search-input w-full pl-11 pr-4 py-3 rounded-xl text-sm font-body" placeholder="Cari event..." aria-label="Cari event">
+                </div>
+                <div class="flex items-center gap-2">
+                    <button class="view-btn active" id="btnGridView" onclick="setView('grid')" title="Tampilan grid" aria-label="Tampilan grid">
+                        <i class="fa-solid fa-grid-2 text-xs"></i>
+                    </button>
+                    <button class="view-btn" id="btnTimelineView" onclick="setView('timeline')" title="Tampilan timeline" aria-label="Tampilan timeline">
+                        <i class="fa-solid fa-timeline text-xs"></i>
+                    </button>
+                    <select id="sortSelect" class="search-input py-3 px-3 rounded-xl text-sm cursor-pointer" aria-label="Urutkan">
+                        <option value="date-asc">Terdekat</option>
+                        <option value="date-desc">Terjauh</option>
+                        <option value="name-asc">Nama A-Z</option>
+                        <option value="name-desc">Nama Z-A</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Filter Chips -->
+            <div class="flex gap-2 mt-3 overflow-x-auto pb-1 fade-in" id="filterChips" style="transition-delay:0.1s">
+                <button class="filter-chip active" data-filter="all" onclick="setFilter('all', this)">Semua</button>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6" id="loadingSection">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="shimmer rounded-2xl h-48" style="animation-delay:0s"></div>
+                <div class="shimmer rounded-2xl h-48" style="animation-delay:0.15s"></div>
+                <div class="shimmer rounded-2xl h-48" style="animation-delay:0.3s"></div>
+                <div class="shimmer rounded-2xl h-48" style="animation-delay:0.1s"></div>
+                <div class="shimmer rounded-2xl h-48" style="animation-delay:0.25s"></div>
+                <div class="shimmer rounded-2xl h-48" style="animation-delay:0.4s"></div>
+            </div>
+        </section>
+
+        <!-- Error State -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 hidden" id="errorSection">
+            <div class="text-center py-20">
+                <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-danger/10 flex items-center justify-center">
+                    <i class="fa-solid fa-triangle-exclamation text-danger text-2xl"></i>
+                </div>
+                <h3 class="font-display text-xl font-bold mb-2">Gagal Memuat Data</h3>
+                <p class="text-muted text-sm mb-6 max-w-md mx-auto" id="errorMsg">Terjadi kesalahan saat mengambil data dari Google Sheet.</p>
+                <button onclick="refreshData()" class="inline-flex items-center gap-2 bg-accent hover:bg-accentLight text-bg font-semibold px-6 py-3 rounded-xl transition-colors text-sm">
+                    <i class="fa-solid fa-arrows-rotate"></i> Coba Lagi
+                </button>
+            </div>
+        </section>
+
+        <!-- Empty State -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 hidden" id="emptySection">
+            <div class="text-center py-20">
+                <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-card flex items-center justify-center">
+                    <i class="fa-solid fa-inbox text-muted text-2xl"></i>
+                </div>
+                <h3 class="font-display text-xl font-bold mb-2">Tidak Ada Event Ditemukan</h3>
+                <p class="text-muted text-sm max-w-md mx-auto">Coba ubah kata kunci pencarian atau filter yang dipilih.</p>
+            </div>
+        </section>
+
+        <!-- Event Grid View -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-16 hidden" id="gridView">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="eventGrid"></div>
+        </section>
+
+        <!-- Event Timeline View -->
+        <section class="max-w-3xl mx-auto px-4 sm:px-6 pb-16 hidden" id="timelineView">
+            <div id="eventTimeline"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-border py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-2 text-muted text-xs">
+                <i class="fa-solid fa-database text-accent/50"></i>
+                Data bersumber dari Google Sheet (real-time)
+            </div>
+            <div class="text-muted text-xs">
+                Terakhir diperbarui: <span id="lastUpdate">-</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================================
+        // Konfigurasi & State
+        // ============================================================
+        const SHEET_ID = '1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
+        const GID = '1232746230';
+        const API_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${GID}`;
+
+        let allEvents = [];         // Data mentah dari sheet
+        let filteredEvents = [];    // Data setelah difilter & diurutkan
+        let currentView = 'grid';
+        let currentFilter = 'all';
+        let columnMap = {};         // Pemetaan kolom -> peran
+
+        // ============================================================
+        // Pemetaan kolom otomatis berdasarkan nama header
+        // ============================================================
+        function mapColumns(cols) {
+            const map = {};
+            const aliases = {
+                title: ['nama', 'name', 'judul', 'title', 'event', 'kegiatan', 'acara'],
+                date: ['tanggal', 'date', 'tgl', 'hari', 'start_date', 'tanggal_mulai', 'start'],
+                endDate: ['tanggal_selesai', 'end_date', 'end', 'sampai', 'hingga', 'tgl_selesai'],
+                time: ['waktu', 'time', 'jam', 'pukul', 'start_time'],
+                endTime: ['waktu_selesai', 'end_time', 'jam_selesai'],
+                location: ['lokasi', 'location', 'tempat', 'place', 'venue', 'alamat'],
+                description: ['deskripsi', 'description', 'desc', 'keterangan', 'ket', 'detail', 'info', 'notes'],
+                category: ['kategori', 'category', 'jenis', 'type', 'tag'],
+                status: ['status', 'keadaan', 'kondisi'],
+                image: ['gambar', 'image', 'foto', 'photo', 'img', 'poster', 'thumbnail', 'link_gambar'],
+                link: ['link', 'url', 'daftar', 'registrasi', 'pendaftaran', 'ticket', 'tiket'],
+                speaker: ['pembicara', 'speaker', 'narasumber', 'mentor'],
+                organizer: ['penyelenggara', 'organizer', 'panitia', 'oleh'],
+                contact: ['kontak', 'contact', 'cp', 'hubungi', 'telepon', 'phone', 'wa', 'whatsapp'],
+            };
+
+            cols.forEach(col => {
+                const label = (col.label || '').toLowerCase().trim();
+                if (!label) return;
+                for (const [role, keywords] of Object.entries(aliases)) {
+                    if (!map[role] && keywords.some(kw => label.includes(kw))) {
+                        map[role] = col.id;
+                    }
+                }
+                // Fallback: kolom pertama yang belum terpetakan sebagai title
+                if (!map.title && !map.date && !map.description && !map.location) {
+                    map.title = col.id;
+                }
+            });
+
+            return map;
+        }
+
+        // ============================================================
+        // Ambil data dari Google Sheet
+        // ============================================================
+        async function fetchSheetData() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const text = await response.text();
+
+                // Ekstrak JSON dari response gviz
+                const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/);
+                if (!match) throw new Error('Format respons tidak dikenali');
+
+                const data = JSON.parse(match[1]);
+                if (data.status === 'error') {
+                    throw new Error(data.errors?.[0]?.message || 'Error dari Google Sheets API');
+                }
+
+                const table = data.table;
+                columnMap = mapColumns(table.cols);
+
+                // Parse baris menjadi objek
+                allEvents = table.rows.map((row, idx) => {
+                    const event = { _index: idx };
+                    row.c.forEach((cell, ci) => {
+                        if (cell) {
+                            event[table.cols[ci].label] = cell.v;
+                            // Simpan juga formatted value jika ada
+                            if (cell.f !== undefined && cell.f !== null) {
+                                event[table.cols[ci].label + '_formatted'] = cell.f;
+                            }
+                        }
+                    });
+                    return event;
+                });
+
+                return true;
+            } catch (err) {
+                console.error('Gagal mengambil data:', err);
+                throw err;
+            }
+        }
+
+        // ============================================================
+        // Deteksi status event secara otomatis
+        // ============================================================
+        function detectStatus(event) {
+            // Jika ada kolom status, gunakan itu
+            const statusCol = columnMap.status;
+            if (statusCol) {
+                const headerLabel = Object.keys(event).find(k => k === statusCol);
+                if (headerLabel) {
+                    const val = String(event[headerLabel] || '').toLowerCase();
+                    if (val.includes('batal') || val.includes('cancel')) return 'cancelled';
+                    if (val.includes('selesai') || val.includes('done') || val.includes('usai')) return 'done';
+                    if (val.includes('berlangsung') || val.includes('ongoing') || val.includes('now')) return 'ongoing';
+                    if (val.includes('akan') || val.includes('upcoming') || val.includes('mendatang')) return 'upcoming';
+                }
+            }
+
+            // Deteksi berdasarkan tanggal
+            const dateCol = columnMap.date;
+            if (dateCol) {
+                const headerLabel = Object.keys(event).find(k => k === dateCol);
+                if (headerLabel) {
+                    const raw = event[headerLabel];
+                    const eventDate = parseDate(raw);
+                    if (eventDate) {
+                        const now = new Date();
+                        const endDate = getEndDate(event);
+                        if (endDate && now > endDate) return 'done';
+                        if (endDate && now >= eventDate && now <= endDate) return 'ongoing';
+                        if (now > eventDate && !endDate) {
+                            // Cek apakah masih hari ini
+                            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                            const eventDay = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
+                            if (eventDay.getTime() === today.getTime()) return 'ongoing';
+                            return 'done';
+                        }
+                        return 'upcoming';
+                    }
+                }
+            }
+
+            return 'upcoming';
+        }
+
+        function parseDate(raw) {
+            if (!raw) return null;
+            if (raw instanceof Date) return raw;
+            // Google Sheets menyimpan tanggal sebagai number (serial date) atau string
+            if (typeof raw === 'number') {
+                // Konversi serial date Excel ke JS Date
+                const epoch = new Date(1899, 11, 30);
+                return new Date(epoch.getTime() + raw * 86400000);
+            }
+            const d = new Date(raw);
+            return isNaN(d.getTime()) ? null : d;
+        }
+
+        function getEndDate(event) {
+            const endCol = columnMap.endDate;
+            if (!endCol) return null;
+            const headerLabel = Object.keys(event).find(k => k === endCol);
+            if (!headerLabel) return null;
+            return parseDate(event[headerLabel]);
+        }
+
+        function formatDate(date) {
+            if (!date) return '-';
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
+            return {
+                day: date.getDate(),
+                month: months[date.getMonth()],
+                year: date.getFullYear(),
+                full: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`,
+                time: date.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            };
+        }
+
+        // ============================================================
+        // Dapatkan nilai dari event berdasarkan role
+        // ============================================================
+        function getField(event, role) {
+            const colId = columnMap[role];
+            if (!colId) return null;
+            const headerLabel = Object.keys(event).find(k => k === colId);
+            if (!headerLabel) return null;
+            return event[headerLabel];
+        }
+
+        function getFieldFormatted(event, role) {
+            const colId = columnMap[role];
+            if (!colId) return null;
+            const key = Object.keys(event).find(k => k === colId);
+            if (!key) return null;
+            return event[key + '_formatted'] || event[key];
+        }
+
+        // ============================================================
+        // Filter, sort, dan render
+        // ============================================================
+        function getUniqueCategories() {
+            const cats = new Set();
+            allEvents.forEach(ev => {
+                const cat = getField(ev, 'category');
+                if (cat) cats.add(String(cat).trim());
+            });
+            return [...cats].sort();
+        }
+
+        function applyFiltersAndSort() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const sortVal = document.getElementById('sortSelect').value;
+
+            filteredEvents = allEvents.filter(ev => {
+                // Filter kategori
+                if (currentFilter !== 'all') {
+                    const cat = getField(ev, 'category');
+                    if (String(cat || '').trim().toLowerCase() !== currentFilter.toLowerCase()) return false;
+                }
+                // Filter pencarian
+                if (query) {
+                    const searchable = Object.values(ev).filter(v => typeof v === 'string').join(' ').toLowerCase();
+                    if (!searchable.includes(query)) return false;
+                }
+                return true;
+            });
+
+            // Sort
+            filteredEvents.sort((a, b) => {
+                switch (sortVal) {
+                    case 'date-asc': {
+                        const da = parseDate(getField(a, 'date')) || new Date(9999, 11, 31);
+                        const db = parseDate(getField(b, 'date')) || new Date(9999, 11, 31);
+                        return da - db;
+                    }
+                    case 'date-desc': {
+                        const da = parseDate(getField(a, 'date')) || new Date(0);
+                        const db = parseDate(getField(b, 'date')) || new Date(0);
+                        return db - da;
+                    }
+                    case 'name-asc': {
+                        const na = (getField(a, 'title') || '').toString().toLowerCase();
+                        const nb = (getField(b, 'title') || '').toString().toLowerCase();
+                        return na.localeCompare(nb);
+                    }
+                    case 'name-desc': {
+                        const na = (getField(a, 'title') || '').toString().toLowerCase();
+                        const nb = (getField(b, 'title') || '').toString().toLowerCase();
+                        return nb.localeCompare(na);
+                    }
+                    default: return 0;
+                }
+            });
+
+            renderView();
+        }
+
+        // ============================================================
+        // Render tampilan Grid
+        // ============================================================
+        function renderGridView() {
+            const container = document.getElementById('eventGrid');
+            if (filteredEvents.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = filteredEvents.map((ev, i) => {
+                const title = getField(ev, 'title') || 'Tanpa Judul';
+                const dateRaw = getField(ev, 'date');
+                const date = parseDate(dateRaw);
+                const dateInfo = formatDate(date);
+                const time = getFieldFormatted(ev, 'time') || '';
+                const endTime = getFieldFormatted(ev, 'endTime') || '';
+                const location = getField(ev, 'location') || '';
+                const desc = getField(ev, 'description') || '';
+                const category = getField(ev, 'category') || '';
+                const status = detectStatus(ev);
+                const img = getField(ev, 'image') || '';
+                const speaker = getField(ev, 'speaker') || '';
+
+                const statusLabel = { upcoming: 'Akan Datang', ongoing: 'Berlangsung', done: 'Selesai', cancelled: 'Dibatalkan' };
+                const statusClass = `badge-${status}`;
+
+                const timeStr = time ? (endTime ? `${time} - ${endTime}` : time) : '';
+                const descShort = desc ? (desc.length > 100 ? desc.substring(0, 100) + '...' : desc) : '';
+
+                return `
+                    <div class="event-card bg-card rounded-2xl border border-border cursor-pointer fade-in"
+                         style="transition-delay:${Math.min(i * 0.06, 0.4)}s"
+                         onclick="openDetail(${ev._index})"
+                         role="button" tabindex="0" aria-label="Lihat detail ${title}"
+                         onkeydown="if(event.key==='Enter')openDetail(${ev._index})">
+                        ${img ? `<div class="h-40 overflow-hidden rounded-t-2xl"><img src="${img}" alt="${title}" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>` : ''}
+                        <div class="p-5">
+                            <div class="flex items-start gap-4">
+                                ${date ? `
+                                <div class="date-ribbon flex-shrink-0">
+                                    <div class="day">${dateInfo.day}</div>
+                                    <div class="month">${dateInfo.month}</div>
+                                </div>` : ''}
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+                                        ${category ? `<span class="text-[0.65rem] text-accent bg-accent/10 px-2 py-0.5 rounded-md font-medium">${category}</span>` : ''}
+                                        <span class="badge ${statusClass}">${statusLabel[status]}</span>
+                                    </div>
+                                    <h3 class="font-display font-bold text-fg text-base leading-snug mb-1.5 line-clamp-2">${title}</h3>
+                                    ${speaker ? `<p class="text-xs text-muted mb-1"><i class="fa-solid fa-microphone text-accent/60 mr-1"></i>${speaker}</p>` : ''}
+                                    ${timeStr ? `<p class="text-xs text-muted mb-1"><i class="fa-regular fa-clock text-accent/60 mr-1"></i>${timeStr}</p>` : ''}
+                                    ${location ? `<p class="text-xs text-muted mb-2"><i class="fa-solid fa-location-dot text-accent/60 mr-1"></i>${location}</p>` : ''}
+                                    ${descShort ? `<p class="text-xs text-muted/70 leading-relaxed">${descShort}</p>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Trigger animasi fade-in
+            requestAnimationFrame(() => {
+                container.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+            });
+        }
+
+        // ============================================================
+        // Render tampilan Timeline
+        // ============================================================
+        function renderTimelineView() {
+            const container = document.getElementById('eventTimeline');
+            if (filteredEvents.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            const statusLabel = { upcoming: 'Akan Datang', ongoing: 'Berlangsung', done: 'Selesai', cancelled: 'Dibatalkan' };
+
+            container.innerHTML = filteredEvents.map((ev, i) => {
+                const title = getField(ev, 'title') || 'Tanpa Judul';
+                const dateRaw = getField(ev, 'date');
+                const date = parseDate(dateRaw);
+                const dateInfo = formatDate(date);
+                const time = getFieldFormatted(ev, 'time') || '';
+                const endTime = getFieldFormatted(ev, 'endTime') || '';
+                const location = getField(ev, 'location') || '';
+                const desc = getField(ev, 'description') || '';
+                const category = getField(ev, 'category') || '';
+                const status = detectStatus(ev);
+                const timeStr = time ? (endTime ? `${time} - ${endTime}` : time) : '';
+                const descShort = desc ? (desc.length > 120 ? desc.substring(0, 120) + '...' : desc) : '';
+
+                return `
+                    <div class="timeline-item fade-in" style="transition-delay:${Math.min(i * 0.08, 0.5)}s">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-card rounded-xl border border-border p-5 cursor-pointer hover:border-accent/30 transition-colors"
+                             onclick="openDetail(${ev._index})" role="button" tabindex="0"
+                             onkeydown="if(event.key==='Enter')openDetail(${ev._index})">
+                            <div class="flex items-center gap-2 mb-2 flex-wrap">
+                                ${date ? `<span class="text-xs font-semibold text-accent">${dateInfo.full}</span>` : ''}
+                                ${timeStr ? `<span class="text-xs text-muted"><i class="fa-regular fa-clock mr-1"></i>${timeStr}</span>` : ''}
+                                ${category ? `<span class="text-[0.65rem] text-accent bg-accent/10 px-2 py-0.5 rounded-md font-medium">${category}</span>` : ''}
+                                <span class="badge badge-${status}">${statusLabel[status]}</span>
+                            </div>
+                            <h3 class="font-display font-bold text-fg text-lg mb-1.5">${title}</h3>
+                            ${location ? `<p class="text-xs text-muted mb-2"><i class="fa-solid fa-location-dot text-accent/60 mr-1"></i>${location}</p>` : ''}
+                            ${descShort ? `<p class="text-sm text-muted/70 leading-relaxed">${descShort}</p>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            requestAnimationFrame(() => {
+                container.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+            });
+        }
+
+        function renderView() {
+            const gridEl = document.getElementById('gridView');
+            const timelineEl = document.getElementById('timelineView');
+            const emptyEl = document.getElementById('emptySection');
+
+            if (filteredEvents.length === 0) {
+                gridEl.classList.add('hidden');
+                timelineEl.classList.add('hidden');
+                emptyEl.classList.remove('hidden');
+                return;
+            }
+
+            emptyEl.classList.add('hidden');
+
+            if (currentView === 'grid') {
+                gridEl.classList.remove('hidden');
+                timelineEl.classList.add('hidden');
+                renderGridView();
+            } else {
+                gridEl.classList.add('hidden');
+                timelineEl.classList.remove('hidden');
+                renderTimelineView();
+            }
+        }
+
+        // ============================================================
+        // Modal Detail
+        // ============================================================
+        function openDetail(index) {
+            const ev = allEvents[index];
+            if (!ev) return;
+
+            const title = getField(ev, 'title') || 'Tanpa Judul';
+            const date = parseDate(getField(ev, 'date'));
+            const dateInfo = formatDate(date);
+            const endDate = getEndDate(ev);
+            const endDateInfo = formatDate(endDate);
+            const time = getFieldFormatted(ev, 'time') || '';
+            const endTime = getFieldFormatted(ev, 'endTime') || '';
+            const location = getField(ev, 'location') || '';
+            const desc = getField(ev, 'description') || '';
+            const category = getField(ev, 'category') || '';
+            const status = detectStatus(ev);
+            const img = getField(ev, 'image') || '';
+            const speaker = getField(ev, 'speaker') || '';
+            const organizer = getField(ev, 'organizer') || '';
+            const contact = getField(ev, 'contact') || '';
+            const link = getField(ev, 'link') || '';
+
+            const statusLabel = { upcoming: 'Akan Datang', ongoing: 'Berlangsung', done: 'Selesai', cancelled: 'Dibatalkan' };
+            const timeStr = time ? (endTime ? `${time} - ${endTime}` : time) : '';
+            const dateStr = date
+                ? (endDate && endDate.getTime() !== date.getTime()
+                    ? `${dateInfo.full} — ${endDateInfo.full}`
+                    : dateInfo.full)
+                : '-';
+
+            // Kumpulkan semua field tambahan yang belum terpetakan
+            const knownRoles = new Set(Object.values(columnMap));
+            const extraFields = Object.keys(ev).filter(k => !k.endsWith('_formatted') && !knownRoles.has(k) && ev[k] !== null && ev[k] !== undefined);
+
+            const modal = document.getElementById('modalContent');
+            modal.innerHTML = `
+                ${img ? `<div class="h-52 sm:h-64 overflow-hidden rounded-t-2xl relative"><img src="${img}" alt="${title}" class="w-full h-full object-cover"><div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent"></div></div>` : ''}
+                <div class="p-6 sm:p-8">
+                    <div class="flex items-start justify-between gap-4 mb-4">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            ${category ? `<span class="text-xs text-accent bg-accent/10 px-2.5 py-1 rounded-lg font-medium">${category}</span>` : ''}
+                            <span class="badge badge-${status}">${statusLabel[status]}</span>
+                        </div>
+                        <button onclick="closeModal()" class="w-8 h-8 rounded-lg border border-border flex items-center justify-center text-muted hover:text-fg hover:border-fg/20 transition-colors" aria-label="Tutup">
+                            <i class="fa-solid fa-xmark text-sm"></i>
+                        </button>
+                    </div>
+                    <h2 class="font-display text-2xl sm:text-3xl font-bold text-fg leading-tight mb-5">${title}</h2>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-regular fa-calendar text-accent text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-fg font-medium">${dateStr}</div>
+                                ${timeStr ? `<div class="text-xs text-muted">${timeStr}</div>` : ''}
+                            </div>
+                        </div>
+                        ${location ? `
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-location-dot text-accent text-sm"></i>
+                            </div>
+                            <div class="text-sm text-fg">${location}</div>
+                        </div>` : ''}
+                        ${speaker ? `
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-microphone text-accent text-sm"></i>
+                            </div>
+                            <div class="text-sm text-fg">${speaker}</div>
+                        </div>` : ''}
+                        ${organizer ? `
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-building text-accent text-sm"></i>
+                            </div>
+                            <div class="text-sm text-fg">${organizer}</div>
+                        </div>` : ''}
+                        ${contact ? `
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-phone text-accent text-sm"></i>
+                            </div>
+                            <div class="text-sm text-fg">${contact}</div>
+                        </div>` : ''}
+                    </div>
+
+                    ${desc ? `
+                    <div class="bg-bg rounded-xl p-4 mb-6 border border-border">
+                        <h4 class="text-xs font-semibold text-muted uppercase tracking-wider mb-2">Deskripsi</h4>
+                        <p class="text-sm text-fg/80 leading-relaxed whitespace-pre-wrap">${desc}</p>
+                    </div>` : ''}
+
+                    ${extraFields.length > 0 ? `
+                    <div class="bg-bg rounded-xl p-4 mb-6 border border-border">
+                        <h4 class="text-xs font-semibold text-muted uppercase tracking-wider mb-2">Informasi Lainnya</h4>
+                        ${extraFields.map(k => `
+                            <div class="flex justify-between py-1.5 border-b border-border/50 last:border-0">
+                                <span class="text-xs text-muted">${k}</span>
+                                <span class="text-xs text-fg text-right max-w-[60%]">${ev[k]}</span>
+                            </div>
+                        `).join('')}
+                    </div>` : ''}
+
+                    ${link ? `
+                    <a href="${link}" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 bg-accent hover:bg-accentLight text-bg font-semibold px-6 py-3 rounded-xl transition-colors text-sm w-full justify-center">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Link Event
+                    </a>` : ''}
+                </div>
+            `;
+
+            document.getElementById('modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // ============================================================
+        // Filter, View, Sort handlers
+        // ============================================================
+        function setFilter(value, btn) {
+            currentFilter = value;
+            document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            applyFiltersAndSort();
+        }
+
+        function setView(view) {
+            currentView = view;
+            document.getElementById('btnGridView').classList.toggle('active', view === 'grid');
+            document.getElementById('btnTimelineView').classList.toggle('active', view === 'timeline');
+            renderView();
+        }
+
+        // ============================================================
+        // Update statistik
+        // ============================================================
+        function updateStats() {
+            let upcoming = 0, ongoing = 0, done = 0;
+            allEvents.forEach(ev => {
+                const s = detectStatus(ev);
+                if (s === 'upcoming') upcoming++;
+                else if (s === 'ongoing') ongoing++;
+                else if (s === 'done') done++;
+            });
+            animateCounter('statTotal', allEvents.length);
+            animateCounter('statUpcoming', upcoming);
+            animateCounter('statOngoing', ongoing);
+            animateCounter('statDone', done);
+        }
+
+        function animateCounter(id, target) {
+            const el = document.getElementById(id);
+            let current = 0;
+            const step = Math.max(1, Math.floor(target / 20));
+            const interval = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(interval);
+                }
+                el.textContent = current;
+            }, 40);
+        }
+
+        // ============================================================
+        // Toast notification
+        // ============================================================
+        function showToast(msg, duration = 3500) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), duration);
+        }
+
+        // ============================================================
+        // Refresh data
+        // ============================================================
+        async function refreshData() {
+            const icon = document.getElementById('refreshIcon');
+            icon.classList.add('fa-spin');
+            document.getElementById('liveStatus').textContent = 'Memperbarui...';
+            showLoading();
+
+            try {
+                await fetchSheetData();
+                buildFilterChips();
+                updateStats();
+                applyFiltersAndSort();
+                document.getElementById('liveStatus').textContent = `${allEvents.length} event dimuat`;
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleString('id-ID');
+                showToast(`Berhasil memuat ${allEvents.length} event`);
+            } catch (err) {
+                showError(err.message);
+            } finally {
+                icon.classList.remove('fa-spin');
+            }
+        }
+
+        // ============================================================
+        // Tampilkan / sembunyikan section
+        // ============================================================
+        function showLoading() {
+            document.getElementById('loadingSection').classList.remove('hidden');
+            document.getElementById('errorSection').classList.add('hidden');
+            document.getElementById('emptySection').classList.add('hidden');
+            document.getElementById('gridView').classList.add('hidden');
+            document.getElementById('timelineView').classList.add('hidden');
+        }
+
+        function showError(msg) {
+            document.getElementById('loadingSection').classList.add('hidden');
+            document.getElementById('errorSection').classList.remove('hidden');
+            document.getElementById('emptySection').classList.add('hidden');
+            document.getElementById('gridView').classList.add('hidden');
+            document.getElementById('timelineView').classList.add('hidden');
+            document.getElementById('errorMsg').textContent = msg;
+            document.getElementById('liveStatus').textContent = 'Gagal memuat';
+        }
+
+        // ============================================================
+        // Bangun filter chips berdasarkan kategori unik
+        // ============================================================
+        function buildFilterChips() {
+            const container = document.getElementById('filterChips');
+            const categories = getUniqueCategories();
+            let html = `<button class="filter-chip active" data-filter="all" onclick="setFilter('all', this)">Semua</button>`;
+            categories.forEach(cat => {
+                html += `<button class="filter-chip" data-filter="${cat}" onclick="setFilter('${cat.replace(/'/g, "\\'")}', this)">${cat}</button>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        // Particle Background
+        // ============================================================
+        function initParticles() {
+            const canvas = document.getElementById('particleCanvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            const PARTICLE_COUNT = 40;
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            // Cek reduced motion
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReduced) return;
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                    this.pulse = Math.random() * Math.PI * 2;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    this.pulse += 0.02;
+                    if (this.x < -20 || this.x > canvas.width + 20 || this.y < -20 || this.y > canvas.height + 20) {
+                        this.reset();
+                    }
+                }
+                draw() {
+                    const o = this.opacity * (0.6 + 0.4 * Math.sin(this.pulse));
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, Math.max(0.1, this.size), 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(212, 148, 58, ${o})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Garis koneksi
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 150) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(212, 148, 58, ${0.06 * (1 - dist / 150)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // ============================================================
+        // Intersection Observer untuk fade-in
+        // ============================================================
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        }
+
+        // ============================================================
+        // Event listeners
+        // ============================================================
+        document.getElementById('searchInput').addEventListener('input', () => applyFiltersAndSort());
+        document.getElementById('sortSelect').addEventListener('change', () => applyFiltersAndSort());
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modal')) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ============================================================
+        // Inisialisasi
+        // ============================================================
+        async function init() {
+            initParticles();
+            initScrollAnimations();
+
+            // Animasi fade-in elemen hero
+            setTimeout(() => {
+                document.querySelectorAll('section:first-of-type .fade-in').forEach(el => el.classList.add('visible'));
+            }, 100);
+
+            await refreshData();
+        }
+
+        init();
+    </script>
+</body>
+</html>
