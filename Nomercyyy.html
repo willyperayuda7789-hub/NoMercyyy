@@ -459,182 +459,182 @@ function doFilt(data,q,fields){if(!q)return data.map(function(i){return JSON.par
 
 /* FETCH: Random & Bonus */
 async function fetchGS(gid){
-  var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+gid;
-  var r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);
-  var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
-  var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];
-  for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf})}
-  return d;
+var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+gid;
+var r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);
+var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
+var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];
+for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf})}
+return d;
 }
 
 /* FETCH: Event — 1 baris = 1 card, kolom A = judul, kolom B-I = steps */
 async function fetchEV(){
-  var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+EVENT_GID;
-  var r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);
-  var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
-  var j=JSON.parse(t.substring(47).slice(0,-2));
-  var colLabels=[];
-  for(var c=1;c<j.table.cols.length&&c<=8;c++){var lbl=j.table.cols[c].label?j.table.cols[c].label.trim():'';colLabels.push(lbl||('STEP'+c))}
-  var d=[];
-  for(var i=0;i<j.table.rows.length;i++){
-    var row=j.table.rows[i];var title=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';if(!title)continue;
-    var steps=[];
-    for(var k=0;k<colLabels.length;k++){var ci=k+1;if(row.c[ci]&&row.c[ci].v){var v=String(row.c[ci].v).trim();if(v)steps.push({label:colLabels[k],text:v})}}
-    if(steps.length>0)d.push({title:title,steps:steps});
-  }
-  return d;
+var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+EVENT_GID;
+var r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);
+var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
+var j=JSON.parse(t.substring(47).slice(0,-2));
+var colLabels=[];
+for(var c=1;c<j.table.cols.length&&c<=8;c++){var lbl=j.table.cols[c].label?j.table.cols[c].label.trim():'';colLabels.push(lbl||('STEP'+c))}
+var d=[];
+for(var i=0;i<j.table.rows.length;i++){
+var row=j.table.rows[i];var title=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';if(!title)continue;
+var steps=[];
+for(var k=0;k<colLabels.length;k++){var ci=k+1;if(row.c[ci]&&row.c[ci].v){var v=String(row.c[ci].v).trim();if(v)steps.push({label:colLabels[k],text:v})}}
+if(steps.length>0)d.push({title:title,steps:steps});
+}
+return d;
 }
 
 /* ===== RANDOM ===== */
 async function fetchRandom(){
-  var ld=document.getElementById('loadingContainer'),ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');
-  ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data RANDOM...','warning');
-  var ok=false;try{sheetData=await fetchGS(RANDOM_GID);if(sheetData.length>0)ok=true}catch(e){}
-  if(!ok){try{var c=localStorage.getItem('NM_random');if(c){sheetData=JSON.parse(c);if(sheetData.length>0)ok=true}}catch(e){}}
-  if(!ok)sheetData=[{title:'CONTOH DATA',info:'Tidak dapat terhubung.'}];
-  if(ok&&sheetData[0].title!=='CONTOH DATA')try{localStorage.setItem('NM_random',JSON.stringify(sheetData))}catch(e){}
-  randomDataLoaded=true;filteredData=sheetData.slice();document.getElementById('statMenu').textContent=sheetData.length;
-  updStat(sheetData[0].title==='CONTOH DATA'?'RANDOM — Offline':'RANDOM — Aktif',sheetData[0].title==='CONTOH DATA'?'warning':'success');
-  ld.style.display='none';rndRender();updDbg();
+var ld=document.getElementById('loadingContainer'),ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');
+ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data RANDOM...','warning');
+var ok=false;try{sheetData=await fetchGS(RANDOM_GID);if(sheetData.length>0)ok=true}catch(e){}
+if(!ok){try{var c=localStorage.getItem('NM_random');if(c){sheetData=JSON.parse(c);if(sheetData.length>0)ok=true}}catch(e){}}
+if(!ok)sheetData=[{title:'CONTOH DATA',info:'Tidak dapat terhubung.'}];
+if(ok&&sheetData[0].title!=='CONTOH DATA')try{localStorage.setItem('NM_random',JSON.stringify(sheetData))}catch(e){}
+randomDataLoaded=true;filteredData=sheetData.slice();document.getElementById('statMenu').textContent=sheetData.length;
+updStat(sheetData[0].title==='CONTOH DATA'?'RANDOM — Offline':'RANDOM — Aktif',sheetData[0].title==='CONTOH DATA'?'warning':'success');
+ld.style.display='none';rndRender();updDbg();
 }
 function rndRender(){
-  var ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');
-  if(!filteredData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';
-  for(var i=0;i<filteredData.length;i++){var it=filteredData[i];h+='<div class="menu-card" data-idx="'+i+'"><div class="match-indicator">'+(it.mt||'MATCH')+'</div><h3 class="menu-title">'+it.title+'</h3><div class="menu-preview">'+it.info+'</div><div class="card-bottom-row"><button class="card-copy-btn" data-ci="'+i+'">'+CPY+'<span class="btn-label">Salin</span><span class="btn-check">'+CHK+' Ok</span></button></div><div class="card-skull">&#9760;</div></div>'}
-  ct.innerHTML=h;
-  ct.querySelectorAll('.menu-card').forEach(function(c){c.addEventListener('click',function(){currentDetail=filteredData[parseInt(this.dataset.idx)];document.getElementById('detailTitle').textContent=currentDetail.title;document.getElementById('detailText').textContent=currentDetail.info;document.getElementById('detailModal').classList.add('show')})});
-  ct.querySelectorAll('.card-copy-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredData[parseInt(this.dataset.ci)];if(!it)return;navigator.clipboard.writeText(it.info).then(function(){b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);toast(it.title,'disalin','random')})})});
+var ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');
+if(!filteredData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';
+for(var i=0;i<filteredData.length;i++){var it=filteredData[i];h+='<div class="menu-card" data-idx="'+i+'"><div class="match-indicator">'+(it.mt||'MATCH')+'</div><h3 class="menu-title">'+it.title+'</h3><div class="menu-preview">'+it.info+'</div><div class="card-bottom-row"><button class="card-copy-btn" data-ci="'+i+'">'+CPY+'<span class="btn-label">Salin</span><span class="btn-check">'+CHK+' Ok</span></button></div><div class="card-skull">&#9760;</div></div>'}
+ct.innerHTML=h;
+ct.querySelectorAll('.menu-card').forEach(function(c){c.addEventListener('click',function(){currentDetail=filteredData[parseInt(this.dataset.idx)];document.getElementById('detailTitle').textContent=currentDetail.title;document.getElementById('detailText').textContent=currentDetail.info;document.getElementById('detailModal').classList.add('show')})});
+ct.querySelectorAll('.card-copy-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredData[parseInt(this.dataset.ci)];if(!it)return;navigator.clipboard.writeText(it.info).then(function(){b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);toast(it.title,'disalin','random')})})});
 }
 
 /* ===== BONUS ===== */
 async function fetchBonus(){
-  var ld=document.getElementById('bonusLoadingContainer'),ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');
-  ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data BONUS...','warning');
-  var ok=false;try{bonusData=await fetchGS(BONUS_GID);if(bonusData.length>0)ok=true}catch(e){}
-  if(!ok){try{var c=localStorage.getItem('NM_bonus');if(c){bonusData=JSON.parse(c);if(bonusData.length>0)ok=true}}catch(e){}}
-  if(!ok)bonusData=[{title:'BELUM ADA DATA',info:'Tidak dapat terhubung.'}];
-  if(ok&&bonusData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_bonus',JSON.stringify(bonusData))}catch(e){}
-  bonusDataLoaded=true;filteredBonusData=bonusData.slice();document.getElementById('statBonus').textContent=bonusData.length;
-  document.getElementById('bonusCountText').textContent=bonusData.length+' Bonus';
-  updStat(bonusData[0].title==='BELUM ADA DATA'?'BONUS — Offline':'BONUS — Aktif',bonusData[0].title==='BELUM ADA DATA'?'warning':'success');
-  ld.style.display='none';bonRender();updDbg();
+var ld=document.getElementById('bonusLoadingContainer'),ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');
+ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data BONUS...','warning');
+var ok=false;try{bonusData=await fetchGS(BONUS_GID);if(bonusData.length>0)ok=true}catch(e){}
+if(!ok){try{var c=localStorage.getItem('NM_bonus');if(c){bonusData=JSON.parse(c);if(bonusData.length>0)ok=true}}catch(e){}}
+if(!ok)bonusData=[{title:'BELUM ADA DATA',info:'Tidak dapat terhubung.'}];
+if(ok&&bonusData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_bonus',JSON.stringify(bonusData))}catch(e){}
+bonusDataLoaded=true;filteredBonusData=bonusData.slice();document.getElementById('statBonus').textContent=bonusData.length;
+document.getElementById('bonusCountText').textContent=bonusData.length+' Bonus';
+updStat(bonusData[0].title==='BELUM ADA DATA'?'BONUS — Offline':'BONUS — Aktif',bonusData[0].title==='BELUM ADA DATA'?'warning':'success');
+ld.style.display='none';bonRender();updDbg();
 }
 function bonRender(){
-  var ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');
-  if(!filteredBonusData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';
-  for(var i=0;i<filteredBonusData.length;i++){var it=filteredBonusData[i];h+='<div class="bonus-card" data-bi="'+i+'"><div class="bonus-badge">Bonus</div><h3 class="bonus-title">'+it.title+'</h3><div class="bonus-preview">'+it.info+'</div><div class="card-bottom-row"><button class="bonus-copy-btn" data-bci="'+i+'">'+CPY+'<span class="btn-label">Salin</span><span class="btn-check">'+CHK+' Ok</span></button></div><div class="card-gift">&#127873;</div></div>'}
-  ct.innerHTML=h;
-  ct.querySelectorAll('.bonus-card').forEach(function(c){c.addEventListener('click',function(){currentBonusDetail=filteredBonusData[parseInt(this.dataset.bi)];document.getElementById('bonusDetailTitle').textContent=currentBonusDetail.title;document.getElementById('bonusDetailText').textContent=currentBonusDetail.info;document.getElementById('bonusDetailModal').classList.add('show')})});
-  ct.querySelectorAll('.bonus-copy-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredBonusData[parseInt(this.dataset.bci)];if(!it)return;navigator.clipboard.writeText(it.info).then(function(){b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);toast(it.title,'disalin','bonus')})})});
+var ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');
+if(!filteredBonusData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';
+for(var i=0;i<filteredBonusData.length;i++){var it=filteredBonusData[i];h+='<div class="bonus-card" data-bi="'+i+'"><div class="bonus-badge">Bonus</div><h3 class="bonus-title">'+it.title+'</h3><div class="bonus-preview">'+it.info+'</div><div class="card-bottom-row"><button class="bonus-copy-btn" data-bci="'+i+'">'+CPY+'<span class="btn-label">Salin</span><span class="btn-check">'+CHK+' Ok</span></button></div><div class="card-gift">&#127873;</div></div>'}
+ct.innerHTML=h;
+ct.querySelectorAll('.bonus-card').forEach(function(c){c.addEventListener('click',function(){currentBonusDetail=filteredBonusData[parseInt(this.dataset.bi)];document.getElementById('bonusDetailTitle').textContent=currentBonusDetail.title;document.getElementById('bonusDetailText').textContent=currentBonusDetail.info;document.getElementById('bonusDetailModal').classList.add('show')})});
+ct.querySelectorAll('.bonus-copy-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredBonusData[parseInt(this.dataset.bci)];if(!it)return;navigator.clipboard.writeText(it.info).then(function(){b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);toast(it.title,'disalin','bonus')})})});
 }
 
 /* ===== EVENT: STEP-BY-STEP CARD LAYOUT ===== */
 async function fetchEvent(){
-  var ld=document.getElementById('eventLoadingContainer'),ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
-  ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data Event...','warning');
-  var ok=false;
-  try{eventData=await fetchEV();if(eventData.length>0)ok=true}catch(e){}
-  if(!ok){try{var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=EVENT';var r=await fetch(url);if(r.ok){var t=await r.text();if(t.includes('google.visualization.Query.setResponse')){var j=JSON.parse(t.substring(47).slice(0,-2));var colLabels=[];for(var c=1;c<j.table.cols.length&&c<=8;c++){var lbl=j.table.cols[c].label?j.table.cols[c].label.trim():'';colLabels.push(lbl||('STEP'+c))}eventData=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var title=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';if(!title)continue;var steps=[];for(var k=0;k<colLabels.length;k++){var ci=k+1;if(row.c[ci]&&row.c[ci].v){var v=String(row.c[ci].v).trim();if(v)steps.push({label:colLabels[k],text:v})}}if(steps.length>0)eventData.push({title:title,steps:steps})}if(eventData.length>0)ok=true}}}catch(e){}}
-  if(!ok){try{var c=localStorage.getItem('NM_event2');if(c){eventData=JSON.parse(c);if(eventData.length>0)ok=true}}catch(e){}}
-  if(!ok)eventData=[{title:'BELUM ADA DATA',steps:[{label:'Info',text:'Tidak dapat terhubung ke sheet EVENT. Pastikan kolom A berisi judul dan kolom B-I berisi langkah-langkah (STEP1, STEP2, dll).'}]}];
-  if(ok&&eventData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_event2',JSON.stringify(eventData))}catch(e){}
-  eventDataLoaded=true;filteredEventData=eventData.slice();
-  var ts=0;for(var k=0;k<eventData.length;k++)ts+=eventData[k].steps.length;
-  document.getElementById('statEvent').textContent=eventData.length;
-  document.getElementById('eventCountText').textContent=eventData.length+' Panduan ('+ts+' step)';
-  updStat(eventData[0].title==='BELUM ADA DATA'?'EVENT — Offline':'EVENT — Aktif',eventData[0].title==='BELUM ADA DATA'?'warning':'success');
-  ld.style.display='none';evRender();updDbg();
+var ld=document.getElementById('eventLoadingContainer'),ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
+ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data Event...','warning');
+var ok=false;
+try{eventData=await fetchEV();if(eventData.length>0)ok=true}catch(e){}
+if(!ok){try{var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=EVENT';var r=await fetch(url);if(r.ok){var t=await r.text();if(t.includes('google.visualization.Query.setResponse')){var j=JSON.parse(t.substring(47).slice(0,-2));var colLabels=[];for(var c=1;c<j.table.cols.length&&c<=8;c++){var lbl=j.table.cols[c].label?j.table.cols[c].label.trim():'';colLabels.push(lbl||('STEP'+c))}eventData=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var title=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';if(!title)continue;var steps=[];for(var k=0;k<colLabels.length;k++){var ci=k+1;if(row.c[ci]&&row.c[ci].v){var v=String(row.c[ci].v).trim();if(v)steps.push({label:colLabels[k],text:v})}}if(steps.length>0)eventData.push({title:title,steps:steps})}if(eventData.length>0)ok=true}}}catch(e){}}
+if(!ok){try{var c=localStorage.getItem('NM_event2');if(c){eventData=JSON.parse(c);if(eventData.length>0)ok=true}}catch(e){}}
+if(!ok)eventData=[{title:'BELUM ADA DATA',steps:[{label:'Info',text:'Tidak dapat terhubung ke sheet EVENT. Pastikan kolom A berisi judul dan kolom B-I berisi langkah-langkah (STEP1, STEP2, dll).'}]}];
+if(ok&&eventData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_event2',JSON.stringify(eventData))}catch(e){}
+eventDataLoaded=true;filteredEventData=eventData.slice();
+var ts=0;for(var k=0;k<eventData.length;k++)ts+=eventData[k].steps.length;
+document.getElementById('statEvent').textContent=eventData.length;
+document.getElementById('eventCountText').textContent=eventData.length+' Panduan ('+ts+' step)';
+updStat(eventData[0].title==='BELUM ADA DATA'?'EVENT — Offline':'EVENT — Aktif',eventData[0].title==='BELUM ADA DATA'?'warning':'success');
+ld.style.display='none';evRender();updDbg();
 }
 
 /* Build copy-all text dari satu card */
 function buildCardText(card){
-  var txt=card.title+'\n'+('\u2500'.repeat(35))+'\n';
-  for(var i=0;i<card.steps.length;i++){txt+='['+card.steps[i].label+']\n'+card.steps[i].text+'\n\n'}
-  return txt.trim();
+var txt=card.title+'\n'+('\u2500'.repeat(35))+'\n';
+for(var i=0;i<card.steps.length;i++){txt+='['+card.steps[i].label+']\n'+card.steps[i].text+'\n\n'}
+return txt.trim();
 }
 
 function evRender(){
-  var ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
-  if(!filteredEventData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';
-  var h='';
-  for(var i=0;i<filteredEventData.length;i++){
-    var fd=filteredEventData[i];var sc=fd.steps.length;
-    h+='<div class="ev-card" data-ei="'+i+'">';
-    h+='<div class="ev-card-header"><div class="ev-card-title"><span class="ev-card-title-icon">&#128193;</span>'+fd.title+'</div></div>';
-    h+='<div class="ev-card-body">';
-    for(var j=0;j<sc;j++){
-      var st=fd.steps[j];
-      h+='<div class="ev-step">';
-      h+='<div class="ev-step-label"><span class="ev-step-label-dot"></span>'+st.label+'</div>';
-      h+='<div class="ev-step-text">'+st.text+'</div>';
-      h+='<button class="ev-step-copy" data-sci="'+i+'" data-ski="'+j+'">'+CPY+'<span class="btn-label">Copy</span><span class="btn-check">'+CHK+' Ok</span></button>';
-      h+='</div>';
-    }
-    h+='</div>';
-    h+='<div class="ev-card-footer">';
-    h+='<span style="font-family:Cinzel,serif;font-size:.6rem;color:var(--text-secondary);opacity:.4;text-transform:uppercase;letter-spacing:1px">'+sc+' step</span>';
-    h+='<button class="ev-copy-all" data-cai="'+i+'">'+CPY+'<span class="btn-label">Copy</span><span class="btn-check">'+CHK+' Ok</span></button>';
-    h+='</div>';
-    h+='</div>';
-  }
-  ct.innerHTML=h;
-  /* Copy per step */
-  ct.querySelectorAll('.ev-step-copy').forEach(function(b){
-    b.addEventListener('click',function(e){
-      e.stopPropagation();
-      var ci=parseInt(this.dataset.sci),ki=parseInt(this.dataset.ski);
-      var fd=filteredEventData[ci];if(!fd||!fd.steps[ki])return;
-      navigator.clipboard.writeText(fd.steps[ki].text).then(function(){
-        b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);
-        toast(fd.steps[ki].label,'disalin','event');
-      });
-    });
-  });
-  /* Copy all per card */
-  ct.querySelectorAll('.ev-copy-all').forEach(function(b){
-    b.addEventListener('click',function(e){
-      e.stopPropagation();
-      var ci=parseInt(this.dataset.cai);var fd=filteredEventData[ci];if(!fd)return;
-      navigator.clipboard.writeText(buildCardText(fd)).then(function(){
-        b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);
-        toast(fd.title,fd.steps.length+' step disalin','event');
-      });
-    });
-  });
+var ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
+if(!filteredEventData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';
+var h='';
+for(var i=0;i<filteredEventData.length;i++){
+var fd=filteredEventData[i];var sc=fd.steps.length;
+h+='<div class="ev-card" data-ei="'+i+'">';
+h+='<div class="ev-card-header"><div class="ev-card-title"><span class="ev-card-title-icon">&#128193;</span>'+fd.title+'</div></div>';
+h+='<div class="ev-card-body">';
+for(var j=0;j<sc;j++){
+var st=fd.steps[j];
+h+='<div class="ev-step">';
+h+='<div class="ev-step-label"><span class="ev-step-label-dot"></span>'+st.label+'</div>';
+h+='<div class="ev-step-text">'+st.text+'</div>';
+h+='<button class="ev-step-copy" data-sci="'+i+'" data-ski="'+j+'">'+CPY+'<span class="btn-label">Copy</span><span class="btn-check">'+CHK+' Ok</span></button>';
+h+='</div>';
+}
+h+='</div>';
+h+='<div class="ev-card-footer">';
+h+='<span style="font-family:Cinzel,serif;font-size:.6rem;color:var(--text-secondary);opacity:.4;text-transform:uppercase;letter-spacing:1px">'+sc+' step</span>';
+h+='<button class="ev-copy-all" data-cai="'+i+'">'+CPY+'<span class="btn-label">Copy</span><span class="btn-check">'+CHK+' Ok</span></button>';
+h+='</div>';
+h+='</div>';
+}
+ct.innerHTML=h;
+/* Copy per step */
+ct.querySelectorAll('.ev-step-copy').forEach(function(b){
+b.addEventListener('click',function(e){
+e.stopPropagation();
+var ci=parseInt(this.dataset.sci),ki=parseInt(this.dataset.ski);
+var fd=filteredEventData[ci];if(!fd||!fd.steps[ki])return;
+navigator.clipboard.writeText(fd.steps[ki].text).then(function(){
+b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);
+toast(fd.steps[ki].label,'disalin','event');
+});
+});
+});
+/* Copy all per card */
+ct.querySelectorAll('.ev-copy-all').forEach(function(b){
+b.addEventListener('click',function(e){
+e.stopPropagation();
+var ci=parseInt(this.dataset.cai);var fd=filteredEventData[ci];if(!fd)return;
+navigator.clipboard.writeText(buildCardText(fd)).then(function(){
+b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);
+toast(fd.title,fd.steps.length+' step disalin','event');
+});
+});
+});
 }
 
 /* ===== INIT ===== */
 window.onload=function(){
-  initBG();initSB();updTime();setInterval(updTime,1000);updStat('Kapal Berlayar...','warning');
-  document.getElementById('debugToggle').addEventListener('click',function(){debugMode=!debugMode;document.getElementById('debugPanel').classList.toggle('show',debugMode);updDbg()});
-  setInterval(updDbg,1000);
-  var dr,db,de;
-  document.getElementById('filterInput').addEventListener('input',function(){clearTimeout(dr);dr=setTimeout(function(){filteredData=doFilt(sheetData,document.getElementById('filterInput').value.trim(),['title','info']);rndRender();updDbg()},300)});
-  document.getElementById('bonusFilterInput').addEventListener('input',function(){clearTimeout(db);db=setTimeout(function(){filteredBonusData=doFilt(bonusData,document.getElementById('bonusFilterInput').value.trim(),['title','info']);document.getElementById('bonusCountText').textContent=filteredBonusData.length+' Bonus';bonRender();updDbg()},300)});
-  document.getElementById('eventFilterInput').addEventListener('input',function(){clearTimeout(de);de=setTimeout(function(){filteredEventData=doFilt(eventData,document.getElementById('eventFilterInput').value.trim(),['title','steps']);var ts=0;for(var k=0;k<filteredEventData.length;k++)ts+=filteredEventData[k].steps.length;document.getElementById('eventCountText').textContent=filteredEventData.length+' Panduan ('+ts+' step)';evRender();updDbg()},300)});
-  /* Modal RANDOM */
-  document.getElementById('detailClose').addEventListener('click',function(){document.getElementById('detailModal').classList.remove('show');currentDetail=null});
-  document.getElementById('copyButton').addEventListener('click',function(){if(!currentDetail)return;navigator.clipboard.writeText(currentDetail.info).then(function(){var el=document.getElementById('copySuccess');el.classList.add('show');toast(currentDetail.title,'disalin','random');setTimeout(function(){el.classList.remove('show')},2000)})});
-  document.getElementById('detailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentDetail=null}});
-  /* Modal BONUS */
-  document.getElementById('bonusDetailClose').addEventListener('click',function(){document.getElementById('bonusDetailModal').classList.remove('show');currentBonusDetail=null});
-  document.getElementById('bonusCopyButton').addEventListener('click',function(){if(!currentBonusDetail)return;navigator.clipboard.writeText(currentBonusDetail.info).then(function(){var el=document.getElementById('bonusCopySuccess');el.classList.add('show');toast(currentBonusDetail.title,'disalin','bonus');setTimeout(function(){el.classList.remove('show')},2000)})});
-  document.getElementById('bonusDetailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentBonusDetail=null}});
-  /* Modal EVENT */
-  document.getElementById('eventDetailClose').addEventListener('click',function(){document.getElementById('eventDetailModal').classList.remove('show');currentEventDetail=null});
-  document.getElementById('eventCopyAllBtn').addEventListener('click',function(){if(!currentEventDetail)return;navigator.clipboard.writeText(buildCardText(currentEventDetail)).then(function(){var el=document.getElementById('eventCopyAllSuccess');el.classList.add('show');toast(currentEventDetail.title,currentEventDetail.steps.length+' step disalin','event');setTimeout(function(){el.classList.remove('show')},2000)})});
-  document.getElementById('eventDetailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentEventDetail=null}});
-  /* Keyboard */
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'){
-      if(document.getElementById('eventDetailModal').classList.contains('show')){document.getElementById('eventDetailModal').classList.remove('show');currentEventDetail=null;return}
-      if(document.getElementById('bonusDetailModal').classList.contains('show')){document.getElementById('bonusDetailModal').classList.remove('show');currentBonusDetail=null;return}
-      if(document.getElementById('detailModal').classList.contains('show')){document.getElementById('detailModal').classList.remove('show');currentDetail=null;return}
-      if(debugMode){debugMode=false;document.getElementById('debugPanel').classList.remove('show');return}
-      if(document.getElementById('sidebar').classList.contains('open')){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('show');return}
-    }
-  });
-  updDbg();
+initBG();initSB();updTime();setInterval(updTime,1000);updStat('Kapal Berlayar...','warning');
+document.getElementById('debugToggle').addEventListener('click',function(){debugMode=!debugMode;document.getElementById('debugPanel').classList.toggle('show',debugMode);updDbg()});
+setInterval(updDbg,1000);
+var dr,db,de;
+document.getElementById('filterInput').addEventListener('input',function(){clearTimeout(dr);dr=setTimeout(function(){filteredData=doFilt(sheetData,document.getElementById('filterInput').value.trim(),['title','info']);rndRender();updDbg()},300)});
+document.getElementById('bonusFilterInput').addEventListener('input',function(){clearTimeout(db);db=setTimeout(function(){filteredBonusData=doFilt(bonusData,document.getElementById('bonusFilterInput').value.trim(),['title','info']);document.getElementById('bonusCountText').textContent=filteredBonusData.length+' Bonus';bonRender();updDbg()},300)});
+document.getElementById('eventFilterInput').addEventListener('input',function(){clearTimeout(de);de=setTimeout(function(){filteredEventData=doFilt(eventData,document.getElementById('eventFilterInput').value.trim(),['title','steps']);var ts=0;for(var k=0;k<filteredEventData.length;k++)ts+=filteredEventData[k].steps.length;document.getElementById('eventCountText').textContent=filteredEventData.length+' Panduan ('+ts+' step)';evRender();updDbg()},300)});
+/* Modal RANDOM */
+document.getElementById('detailClose').addEventListener('click',function(){document.getElementById('detailModal').classList.remove('show');currentDetail=null});
+document.getElementById('copyButton').addEventListener('click',function(){if(!currentDetail)return;navigator.clipboard.writeText(currentDetail.info).then(function(){var el=document.getElementById('copySuccess');el.classList.add('show');toast(currentDetail.title,'disalin','random');setTimeout(function(){el.classList.remove('show')},2000)})});
+document.getElementById('detailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentDetail=null}});
+/* Modal BONUS */
+document.getElementById('bonusDetailClose').addEventListener('click',function(){document.getElementById('bonusDetailModal').classList.remove('show');currentBonusDetail=null});
+document.getElementById('bonusCopyButton').addEventListener('click',function(){if(!currentBonusDetail)return;navigator.clipboard.writeText(currentBonusDetail.info).then(function(){var el=document.getElementById('bonusCopySuccess');el.classList.add('show');toast(currentBonusDetail.title,'disalin','bonus');setTimeout(function(){el.classList.remove('show')},2000)})});
+document.getElementById('bonusDetailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentBonusDetail=null}});
+/* Modal EVENT */
+document.getElementById('eventDetailClose').addEventListener('click',function(){document.getElementById('eventDetailModal').classList.remove('show');currentEventDetail=null});
+document.getElementById('eventCopyAllBtn').addEventListener('click',function(){if(!currentEventDetail)return;navigator.clipboard.writeText(buildCardText(currentEventDetail)).then(function(){var el=document.getElementById('eventCopyAllSuccess');el.classList.add('show');toast(currentEventDetail.title,currentEventDetail.steps.length+' step disalin','event');setTimeout(function(){el.classList.remove('show')},2000)})});
+document.getElementById('eventDetailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentEventDetail=null}});
+/* Keyboard */
+document.addEventListener('keydown',function(e){
+if(e.key==='Escape'){
+if(document.getElementById('eventDetailModal').classList.contains('show')){document.getElementById('eventDetailModal').classList.remove('show');currentEventDetail=null;return}
+if(document.getElementById('bonusDetailModal').classList.contains('show')){document.getElementById('bonusDetailModal').classList.remove('show');currentBonusDetail=null;return}
+if(document.getElementById('detailModal').classList.contains('show')){document.getElementById('detailModal').classList.remove('show');currentDetail=null;return}
+if(debugMode){debugMode=false;document.getElementById('debugPanel').classList.remove('show');return}
+if(document.getElementById('sidebar').classList.contains('open')){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('show');return}
+}
+});
+updDbg();
 };
 </script>
 </body>
