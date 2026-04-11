@@ -218,7 +218,7 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 .bonus-count-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,143,0,.1);border:1px solid rgba(255,143,0,.2);color:var(--bonus-accent);padding:6px 16px;border-radius:20px;font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .bonus-count-pill svg{width:14px;height:14px}
 
-/* ========== EVENT: LAYOUT STEP-BY-STEP (REFERENSI GAMBAR) ========== */
+/* ========== EVENT: FULL-WIDTH HORIZONTAL FOLDERS ========== */
 .event-page-header{text-align:center;margin-bottom:28px}
 .event-page-icon{font-size:3.5rem;display:block;margin-bottom:12px;animation:float-icon 3s ease-in-out infinite}
 .event-page-title{font-family:'Pirata One',cursive;font-size:2rem;color:var(--event-accent);text-shadow:0 0 16px var(--event-accent-glow);margin-bottom:8px;letter-spacing:2px}
@@ -227,37 +227,178 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 .event-count-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,68,68,.1);border:1px solid rgba(255,68,68,.2);color:var(--event-accent);padding:6px 16px;border-radius:20px;font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .event-count-pill svg{width:14px;height:14px}
 
-/* Container: 2 kolom, full-width cards */
-#eventContainer{grid-template-columns:repeat(2,1fr)!important;gap:20px!important}
+/* Container: 1 kolom full-width, card besar kesamping */
+#eventContainer{
+  grid-template-columns:1fr!important;
+  gap:24px!important;
+  max-width:100%!important;
+}
 
-/* Card utama: border merah, hitam, judul di atas, step di dalam */
-.ev-card{background:linear-gradient(160deg,rgba(10,8,14,.96),rgba(6,4,10,.98));border:1.5px solid var(--event-card-border);border-radius:14px;overflow:hidden;cursor:default;position:relative;transition:all .35s ease;box-shadow:0 4px 24px rgba(0,0,0,.5),0 0 0 0 var(--event-accent-glow);display:flex;flex-direction:column}
-.ev-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--event-accent),#FF8A80,var(--event-accent));z-index:2}
-.ev-card:hover{border-color:rgba(255,68,68,.45);box-shadow:0 8px 35px rgba(0,0,0,.6),0 0 20px var(--event-accent-glow);transform:translateY(-4px)}
+/* Card utama: full-width, border merah tebal, layout horizontal */
+.ev-card{
+  background:linear-gradient(160deg,rgba(10,8,14,.96),rgba(6,4,10,.98));
+  border:1.5px solid var(--event-card-border);
+  border-radius:14px;
+  overflow:hidden;
+  cursor:default;
+  position:relative;
+  transition:all .35s ease;
+  box-shadow:0 4px 24px rgba(0,0,0,.5),0 0 0 0 var(--event-accent-glow);
+  display:flex;
+  flex-direction:column;
+}
+.ev-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--event-accent),#FF8A80,var(--event-accent),#FF8A80,var(--event-accent));
+  background-size:200% 100%;
+  animation:ev-border-shimmer 4s linear infinite;
+  z-index:2;
+}
+@keyframes ev-border-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.ev-card:hover{
+  border-color:rgba(255,68,68,.5);
+  box-shadow:0 8px 35px rgba(0,0,0,.6),0 0 25px var(--event-accent-glow);
+  transform:translateY(-3px);
+}
 
-/* Header card: judul folder */
-.ev-card-header{padding:20px 22px 14px;border-bottom:1px solid rgba(255,68,68,.12);position:relative;z-index:2}
-.ev-card-title{font-family:'Cinzel',serif;color:var(--event-accent);font-size:1rem;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;text-shadow:0 0 10px var(--event-accent-glow);line-height:1.4}
-.ev-card-title-icon{margin-right:8px;opacity:.7}
+/* Header card: judul folder besar */
+.ev-card-header{
+  padding:22px 28px 16px;
+  border-bottom:1px solid rgba(255,68,68,.12);
+  position:relative;z-index:2;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.ev-card-title-icon{
+  font-size:1.6rem;
+  flex-shrink:0;
+  animation:folder-breathe 3s ease-in-out infinite;
+}
+.ev-card-title{
+  font-family:'Cinzel',serif;
+  color:var(--event-accent);
+  font-size:1.15rem;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  text-shadow:0 0 12px var(--event-accent-glow);
+  line-height:1.4;
+}
+.ev-card-step-count{
+  margin-left:auto;
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  background:rgba(255,68,68,.08);
+  border:1px solid rgba(255,68,68,.15);
+  color:var(--event-accent);
+  padding:4px 12px;
+  border-radius:6px;
+  font-family:'Cinzel',serif;
+  font-size:.65rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  opacity:.7;
+}
 
-/* Body: daftar step */
-.ev-card-body{padding:16px 22px;flex:1;display:flex;flex-direction:column;gap:12px;position:relative;z-index:2}
+/* Body: STEP ditampilkan HORIZONTAL dalam grid */
+.ev-card-body{
+  padding:20px 28px;
+  flex:1;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:14px;
+  position:relative;z-index:2;
+}
 
-/* Satu step block */
-.ev-step{background:var(--ev-section-bg);border:1px solid var(--ev-section-border);border-radius:8px;padding:12px 14px;position:relative;transition:all .25s ease}
-.ev-step:hover{background:rgba(255,68,68,.07);border-color:rgba(255,68,68,.3)}
-.ev-step-label{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(255,68,68,.2),rgba(255,100,80,.12));border:1px solid rgba(255,68,68,.3);color:var(--event-accent);padding:2px 10px;border-radius:4px;font-size:.6rem;font-family:'Cinzel',serif;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;animation:ev-step-glow 3s ease-in-out infinite}
-.ev-step-label-dot{width:4px;height:4px;border-radius:50%;background:var(--event-accent);box-shadow:0 0 5px var(--event-accent-glow)}
-.ev-step-text{color:var(--text-primary);font-family:'Cinzel',serif;font-size:.78rem;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+/* Satu step block — lebih besar & padat */
+.ev-step{
+  background:var(--ev-section-bg);
+  border:1px solid var(--ev-section-border);
+  border-radius:10px;
+  padding:14px 16px;
+  position:relative;
+  transition:all .25s ease;
+  display:flex;
+  flex-direction:column;
+  min-height:100px;
+}
+.ev-step:hover{
+  background:rgba(255,68,68,.07);
+  border-color:rgba(255,68,68,.35);
+  box-shadow:0 4px 16px rgba(255,68,68,.08);
+}
+.ev-step-label{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:linear-gradient(135deg,rgba(255,68,68,.2),rgba(255,100,80,.12));
+  border:1px solid rgba(255,68,68,.3);
+  color:var(--event-accent);
+  padding:3px 12px;
+  border-radius:5px;
+  font-size:.62rem;
+  font-family:'Cinzel',serif;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+  margin-bottom:10px;
+  animation:ev-step-glow 3s ease-in-out infinite;
+  width:fit-content;
+}
+.ev-step-label-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--event-accent);
+  box-shadow:0 0 6px var(--event-accent-glow);
+}
+.ev-step-text{
+  color:var(--text-primary);
+  font-family:'Cinzel',serif;
+  font-size:.8rem;
+  line-height:1.75;
+  white-space:pre-wrap;
+  word-break:break-word;
+  flex:1;
+}
 
-/* Footer card: tombol copy */
-.ev-card-footer{padding:14px 22px 16px;border-top:1px solid rgba(255,68,68,.1);display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2}
-.ev-copy-all{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(255,68,68,.12),rgba(255,100,80,.08));border:1.5px solid rgba(255,68,68,.3);color:var(--event-accent);padding:8px 18px;border-radius:6px;cursor:pointer;font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;transition:all .3s ease;white-space:nowrap;position:relative;overflow:hidden}
+/* Footer card: tombol copy besar */
+.ev-card-footer{
+  padding:16px 28px 18px;
+  border-top:1px solid rgba(255,68,68,.1);
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:12px;
+  position:relative;z-index:2;
+}
+.ev-copy-all{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:linear-gradient(135deg,rgba(255,68,68,.12),rgba(255,100,80,.08));
+  border:1.5px solid rgba(255,68,68,.3);
+  color:var(--event-accent);
+  padding:10px 24px;
+  border-radius:8px;
+  cursor:pointer;
+  font-family:'Cinzel',serif;
+  font-size:.78rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  transition:all .3s ease;
+  white-space:nowrap;
+  position:relative;
+  overflow:hidden;
+}
 .ev-copy-all::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,68,68,.12),transparent);transition:left .4s ease}
 .ev-copy-all:hover::before{left:100%}
-.ev-copy-all:hover{background:linear-gradient(135deg,rgba(255,68,68,.2),rgba(255,100,80,.14));border-color:rgba(255,68,68,.55);box-shadow:0 2px 12px var(--event-accent-glow);transform:translateY(-1px)}
+.ev-copy-all:hover{background:linear-gradient(135deg,rgba(255,68,68,.22),rgba(255,100,80,.14));border-color:rgba(255,68,68,.6);box-shadow:0 4px 18px var(--event-accent-glow);transform:translateY(-2px)}
 .ev-copy-all:active{animation:copy-pop .3s ease}
-.ev-copy-all svg{width:14px;height:14px;flex-shrink:0}
+.ev-copy-all svg{width:16px;height:16px;flex-shrink:0}
 .ev-copy-all.copied{background:rgba(76,175,80,.12);border-color:rgba(76,175,80,.3);color:#4CAF50;pointer-events:none}
 .ev-copy-all .btn-label{transition:opacity .2s ease}
 .ev-copy-all.copied .btn-label{opacity:0;position:absolute}
@@ -265,11 +406,30 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 .ev-copy-all.copied .btn-check{opacity:1}
 
 /* Copy per step di dalam card */
-.ev-step-copy{position:absolute;top:10px;right:10px;display:inline-flex;align-items:center;gap:3px;background:rgba(255,68,68,.06);border:1px solid rgba(255,68,68,.12);color:var(--event-accent);padding:3px 8px;border-radius:4px;cursor:pointer;font-family:'Cinzel',serif;font-size:.55rem;text-transform:uppercase;letter-spacing:.5px;transition:all .25s ease;white-space:nowrap;opacity:.4}
+.ev-step-copy{
+  position:absolute;
+  top:12px;right:12px;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  background:rgba(255,68,68,.06);
+  border:1px solid rgba(255,68,68,.12);
+  color:var(--event-accent);
+  padding:4px 10px;
+  border-radius:5px;
+  cursor:pointer;
+  font-family:'Cinzel',serif;
+  font-size:.58rem;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  transition:all .25s ease;
+  white-space:nowrap;
+  opacity:.35;
+}
 .ev-step:hover .ev-step-copy{opacity:.8}
 .ev-step-copy:hover{opacity:1!important;background:rgba(255,68,68,.16);border-color:rgba(255,68,68,.4);box-shadow:0 2px 8px var(--event-accent-glow)}
 .ev-step-copy:active{animation:copy-pop .3s ease}
-.ev-step-copy svg{width:10px;height:10px;flex-shrink:0}
+.ev-step-copy svg{width:11px;height:11px;flex-shrink:0}
 .ev-step-copy.copied{opacity:1!important;background:rgba(76,175,80,.12);border-color:rgba(76,175,80,.3);color:#4CAF50;pointer-events:none}
 .ev-step-copy .btn-label{transition:opacity .15s ease}
 .ev-step-copy.copied .btn-label{opacity:0;position:absolute}
@@ -333,10 +493,22 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 .toast-title{font-weight:700;max-width:180px;overflow:hidden;text-overflow:ellipsis}
 .toast.bonus-toast .toast-title{color:#FFD700}.toast.event-toast .toast-title{color:#FF8A80}
 ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:rgba(10,16,34,.5)}::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--primary-color),var(--secondary-color));border-radius:4px}
-@media(max-width:1200px){.menu-container{grid-template-columns:repeat(2,1fr)}.beranda-features{grid-template-columns:repeat(2,1fr)}.jadwal-grid{grid-template-columns:1fr}#eventContainer{grid-template-columns:1fr!important}}
-@media(max-width:900px){.sidebar{position:fixed;top:44px;left:0;height:calc(100vh - 44px);transform:translateX(-100%);z-index:55;box-shadow:4px 0 30px rgba(0,0,0,.5)}.sidebar.open{transform:translateX(0)}.sidebar-toggle{display:flex}.sidebar-overlay.show{display:block}.main-content{padding:16px}.title{font-size:3rem}.beranda-features{grid-template-columns:1fr}}
-@media(max-width:768px){.title{font-size:2.6rem;letter-spacing:3px}.menu-container{grid-template-columns:1fr}.sun{width:60px;height:60px}.ship-silhouette{display:none}.toast{font-size:.7rem;padding:8px 14px}.toast-title{max-width:120px}.beranda-stats{flex-direction:column;gap:16px}}
-@media(max-width:480px){.title{font-size:2rem}.subtitle{font-size:.75rem;letter-spacing:2px}.sidebar{width:260px;min-width:260px}.ev-card-header{padding:16px 16px 12px}.ev-card-body{padding:12px 16px;gap:10px}.ev-card-footer{padding:12px 16px 14px}}
+@media(max-width:1200px){.menu-container{grid-template-columns:repeat(2,1fr)}.beranda-features{grid-template-columns:repeat(2,1fr)}.jadwal-grid{grid-template-columns:1fr}}
+@media(max-width:900px){
+  .sidebar{position:fixed;top:44px;left:0;height:calc(100vh - 44px);transform:translateX(-100%);z-index:55;box-shadow:4px 0 30px rgba(0,0,0,.5)}.sidebar.open{transform:translateX(0)}.sidebar-toggle{display:flex}.sidebar-overlay.show{display:block}.main-content{padding:16px}.title{font-size:3rem}.beranda-features{grid-template-columns:1fr}
+  #eventContainer .ev-card-body{grid-template-columns:1fr!important}
+}
+@media(max-width:768px){.title{font-size:2.6rem;letter-spacing:3px}.menu-container{grid-template-columns:1fr}.sun{width:60px;height:60px}.ship-silhouette{display:none}.toast{font-size:.7rem;padding:8px 14px}.toast-title{max-width:120px}.beranda-stats{flex-direction:column;gap:16px}
+  .ev-card-header{padding:18px 20px 14px;flex-direction:column;align-items:flex-start;gap:8px}
+  .ev-card-body{padding:16px 20px!important;gap:12px!important;grid-template-columns:1fr!important}
+  .ev-card-footer{padding:14px 20px 16px}
+  .ev-card-title{font-size:1rem}
+}
+@media(max-width:480px){.title{font-size:2rem}.subtitle{font-size:.75rem;letter-spacing:2px}.sidebar{width:260px;min-width:260px}
+  .ev-card-header{padding:16px 16px 12px}
+  .ev-card-body{padding:12px 16px!important;gap:10px!important}
+  .ev-card-footer{padding:12px 16px 14px}
+}
 #bonusContainer{grid-template-columns:repeat(2,1fr)!important;max-width:960px!important;margin-left:auto!important;margin-right:auto!important;gap:20px!important}
 #bonusContainer .bonus-card{min-height:170px!important;padding:24px 28px!important}
 #bonusContainer .bonus-card::after{width:5px!important}
@@ -407,7 +579,7 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 </section>
 <section class="page-section" id="page-prediksi"><div class="generic-page"><div class="generic-icon">&#128200;</div><div class="generic-title">PREDIKSI TOGEL</div><div class="generic-desc">Modul sedang dalam pengembangan.</div></div></section>
 
-<!-- EVENT: STEP-BY-STEP LAYOUT -->
+<!-- EVENT: FULL-WIDTH HORIZONTAL FOLDERS -->
 <section class="page-section" id="page-scatter">
 <div class="event-page-header"><span class="event-page-icon">&#128193;</span><div class="event-page-title">EVENT SC, BUY, FREE</div><div class="event-page-desc">Kolom A = judul panduan &#8226; Kolom B&#8211;I = langkah-langkah (STEP1, STEP2, dll) &#8226; Setiap step punya Copy, card punya Copy Semua</div></div>
 <div class="event-count-bar"><div class="event-count-pill"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2zM4 18V8h16v10H4z"/></svg><span id="eventCountText">0 Panduan</span></div></div>
@@ -457,7 +629,6 @@ function sim(a,b){var d=lev(a.toLowerCase(),b.toLowerCase());var l=a.length>b.le
 function fz(q,t){var ql=q.toLowerCase(),tl=t.toLowerCase();if(tl.includes(ql))return{m:true,s:100,t:'exact'};var w=tl.split(/\s+/),best={m:false,s:0,t:'none'};for(var k=0;k<w.length;k++){var ww=w[k];if(ww.startsWith(ql)){var s=Math.round(ql.length/ww.length*100);if(s>best.s)best={m:true,s:s,t:'prefix'}}var si=sim(ql,ww);if(si>=60&&si>best.s)best={m:true,s:si,t:'fuzzy'};if(ww.includes(ql)){var s2=Math.round(ql.length/ww.length*90);if(s2>best.s)best={m:true,s:s2,t:'contains'}}}return best}
 function doFilt(data,q,fields){if(!q)return data.map(function(i){return JSON.parse(JSON.stringify(i))});var res=[];for(var i=0;i<data.length;i++){var it=data[i],ss='';for(var f=0;f<fields.length;f++){if(fields[f]==='steps'){for(var s=0;s<it.steps.length;s++)ss+=it.steps[s].label+' '+it.steps[s].text+' '}else{ss+=(it[fields[f]]||'')+' '}}var fm=fz(q,ss);if(fm.m){var c=JSON.parse(JSON.stringify(it));c.ms=fm.s;c.mt=fm.t.toUpperCase();res.push(c)}}res.sort(function(a,b){return b.ms-a.ms});return res}
 
-/* FETCH: Random & Bonus */
 async function fetchGS(gid){
 var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+gid;
 var r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);
@@ -467,7 +638,6 @@ for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&
 return d;
 }
 
-/* FETCH: Event — 1 baris = 1 card, kolom A = judul, kolom B-I = steps */
 async function fetchEV(){
 var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+EVENT_GID;
 var r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);
@@ -485,7 +655,6 @@ if(steps.length>0)d.push({title:title,steps:steps});
 return d;
 }
 
-/* ===== RANDOM ===== */
 async function fetchRandom(){
 var ld=document.getElementById('loadingContainer'),ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');
 ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data RANDOM...','warning');
@@ -506,7 +675,6 @@ ct.querySelectorAll('.menu-card').forEach(function(c){c.addEventListener('click'
 ct.querySelectorAll('.card-copy-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredData[parseInt(this.dataset.ci)];if(!it)return;navigator.clipboard.writeText(it.info).then(function(){b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);toast(it.title,'disalin','random')})})});
 }
 
-/* ===== BONUS ===== */
 async function fetchBonus(){
 var ld=document.getElementById('bonusLoadingContainer'),ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');
 ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data BONUS...','warning');
@@ -528,7 +696,7 @@ ct.querySelectorAll('.bonus-card').forEach(function(c){c.addEventListener('click
 ct.querySelectorAll('.bonus-copy-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredBonusData[parseInt(this.dataset.bci)];if(!it)return;navigator.clipboard.writeText(it.info).then(function(){b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);toast(it.title,'disalin','bonus')})})});
 }
 
-/* ===== EVENT: STEP-BY-STEP CARD LAYOUT ===== */
+/* ===== EVENT: FULL-WIDTH HORIZONTAL CARD LAYOUT ===== */
 async function fetchEvent(){
 var ld=document.getElementById('eventLoadingContainer'),ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
 ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data Event...','warning');
@@ -546,7 +714,6 @@ updStat(eventData[0].title==='BELUM ADA DATA'?'EVENT — Offline':'EVENT — Akt
 ld.style.display='none';evRender();updDbg();
 }
 
-/* Build copy-all text dari satu card */
 function buildCardText(card){
 var txt=card.title+'\n'+('\u2500'.repeat(35))+'\n';
 for(var i=0;i<card.steps.length;i++){txt+='['+card.steps[i].label+']\n'+card.steps[i].text+'\n\n'}
@@ -560,7 +727,15 @@ var h='';
 for(var i=0;i<filteredEventData.length;i++){
 var fd=filteredEventData[i];var sc=fd.steps.length;
 h+='<div class="ev-card" data-ei="'+i+'">';
-h+='<div class="ev-card-header"><div class="ev-card-title"><span class="ev-card-title-icon">&#128193;</span>'+fd.title+'</div></div>';
+
+/* Header: icon folder + judul + jumlah step */
+h+='<div class="ev-card-header">';
+h+='<span class="ev-card-title-icon">&#128193;</span>';
+h+='<div class="ev-card-title">'+fd.title+'</div>';
+h+='<span class="ev-card-step-count">'+sc+' Step</span>';
+h+='</div>';
+
+/* Body: STEP horizontal grid */
 h+='<div class="ev-card-body">';
 for(var j=0;j<sc;j++){
 var st=fd.steps[j];
@@ -571,10 +746,12 @@ h+='<button class="ev-step-copy" data-sci="'+i+'" data-ski="'+j+'">'+CPY+'<span 
 h+='</div>';
 }
 h+='</div>';
+
+/* Footer: Copy semua */
 h+='<div class="ev-card-footer">';
-h+='<span style="font-family:Cinzel,serif;font-size:.6rem;color:var(--text-secondary);opacity:.4;text-transform:uppercase;letter-spacing:1px">'+sc+' step</span>';
-h+='<button class="ev-copy-all" data-cai="'+i+'">'+CPY+'<span class="btn-label">Copy</span><span class="btn-check">'+CHK+' Ok</span></button>';
+h+='<button class="ev-copy-all" data-cai="'+i+'">'+CPY+'<span class="btn-label">Copy Semua Step</span><span class="btn-check">'+CHK+' Tersalin</span></button>';
 h+='</div>';
+
 h+='</div>';
 }
 ct.innerHTML=h;
@@ -612,19 +789,15 @@ var dr,db,de;
 document.getElementById('filterInput').addEventListener('input',function(){clearTimeout(dr);dr=setTimeout(function(){filteredData=doFilt(sheetData,document.getElementById('filterInput').value.trim(),['title','info']);rndRender();updDbg()},300)});
 document.getElementById('bonusFilterInput').addEventListener('input',function(){clearTimeout(db);db=setTimeout(function(){filteredBonusData=doFilt(bonusData,document.getElementById('bonusFilterInput').value.trim(),['title','info']);document.getElementById('bonusCountText').textContent=filteredBonusData.length+' Bonus';bonRender();updDbg()},300)});
 document.getElementById('eventFilterInput').addEventListener('input',function(){clearTimeout(de);de=setTimeout(function(){filteredEventData=doFilt(eventData,document.getElementById('eventFilterInput').value.trim(),['title','steps']);var ts=0;for(var k=0;k<filteredEventData.length;k++)ts+=filteredEventData[k].steps.length;document.getElementById('eventCountText').textContent=filteredEventData.length+' Panduan ('+ts+' step)';evRender();updDbg()},300)});
-/* Modal RANDOM */
 document.getElementById('detailClose').addEventListener('click',function(){document.getElementById('detailModal').classList.remove('show');currentDetail=null});
 document.getElementById('copyButton').addEventListener('click',function(){if(!currentDetail)return;navigator.clipboard.writeText(currentDetail.info).then(function(){var el=document.getElementById('copySuccess');el.classList.add('show');toast(currentDetail.title,'disalin','random');setTimeout(function(){el.classList.remove('show')},2000)})});
 document.getElementById('detailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentDetail=null}});
-/* Modal BONUS */
 document.getElementById('bonusDetailClose').addEventListener('click',function(){document.getElementById('bonusDetailModal').classList.remove('show');currentBonusDetail=null});
 document.getElementById('bonusCopyButton').addEventListener('click',function(){if(!currentBonusDetail)return;navigator.clipboard.writeText(currentBonusDetail.info).then(function(){var el=document.getElementById('bonusCopySuccess');el.classList.add('show');toast(currentBonusDetail.title,'disalin','bonus');setTimeout(function(){el.classList.remove('show')},2000)})});
 document.getElementById('bonusDetailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentBonusDetail=null}});
-/* Modal EVENT */
 document.getElementById('eventDetailClose').addEventListener('click',function(){document.getElementById('eventDetailModal').classList.remove('show');currentEventDetail=null});
 document.getElementById('eventCopyAllBtn').addEventListener('click',function(){if(!currentEventDetail)return;navigator.clipboard.writeText(buildCardText(currentEventDetail)).then(function(){var el=document.getElementById('eventCopyAllSuccess');el.classList.add('show');toast(currentEventDetail.title,currentEventDetail.steps.length+' step disalin','event');setTimeout(function(){el.classList.remove('show')},2000)})});
 document.getElementById('eventDetailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentEventDetail=null}});
-/* Keyboard */
 document.addEventListener('keydown',function(e){
 if(e.key==='Escape'){
 if(document.getElementById('eventDetailModal').classList.contains('show')){document.getElementById('eventDetailModal').classList.remove('show');currentEventDetail=null;return}
