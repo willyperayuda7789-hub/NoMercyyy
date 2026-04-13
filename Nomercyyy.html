@@ -59,6 +59,7 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 @keyframes bonus-badge-glow{0%,100%{box-shadow:0 0 8px var(--bonus-accent-glow),inset 0 0 4px rgba(255,143,0,.15)}50%{box-shadow:0 0 18px var(--bonus-accent-glow),inset 0 0 8px rgba(255,143,0,.25)}}
 @keyframes ev-step-glow{0%,100%{box-shadow:0 0 8px var(--event-accent-glow),inset 0 0 4px rgba(255,68,68,.1)}50%{box-shadow:0 0 18px var(--event-accent-glow),inset 0 0 10px rgba(255,68,68,.2)}}
 @keyframes folder-breathe{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes ev-border-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .app-layout{position:relative;z-index:10;display:flex;min-height:100vh;padding-top:44px}
 .sidebar{width:var(--sidebar-width);min-width:var(--sidebar-width);height:calc(100vh - 44px);position:sticky;top:44px;background:var(--sidebar-bg);backdrop-filter:blur(20px);border-right:1px solid rgba(230,81,0,.12);display:flex;flex-direction:column;overflow:hidden;z-index:50;transition:transform .35s cubic-bezier(.4,0,.2,1)}
 .sidebar-header{padding:24px 20px 16px;border-bottom:1px solid rgba(230,81,0,.1);flex-shrink:0}
@@ -218,7 +219,7 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 .bonus-count-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,143,0,.1);border:1px solid rgba(255,143,0,.2);color:var(--bonus-accent);padding:6px 16px;border-radius:20px;font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .bonus-count-pill svg{width:14px;height:14px}
 
-/* ========== EVENT: FULL-WIDTH HORIZONTAL FOLDERS ========== */
+/* ========== EVENT CARD — BERSIH DENGAN COPY DI BAWAH ========== */
 .event-page-header{text-align:center;margin-bottom:28px}
 .event-page-icon{font-size:3.5rem;display:block;margin-bottom:12px;animation:float-icon 3s ease-in-out infinite}
 .event-page-title{font-family:'Pirata One',cursive;font-size:2rem;color:var(--event-accent);text-shadow:0 0 16px var(--event-accent-glow);margin-bottom:8px;letter-spacing:2px}
@@ -227,23 +228,21 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 .event-count-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,68,68,.1);border:1px solid rgba(255,68,68,.2);color:var(--event-accent);padding:6px 16px;border-radius:20px;font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .event-count-pill svg{width:14px;height:14px}
 
-/* Container: 1 kolom full-width, card besar kesamping */
 #eventContainer{
   grid-template-columns:1fr!important;
-  gap:24px!important;
+  gap:20px!important;
   max-width:100%!important;
 }
 
-/* Card utama: full-width, border merah tebal, layout horizontal */
 .ev-card{
   background:linear-gradient(160deg,rgba(10,8,14,.96),rgba(6,4,10,.98));
   border:1.5px solid var(--event-card-border);
   border-radius:14px;
   overflow:hidden;
-  cursor:default;
+  cursor:pointer;
   position:relative;
   transition:all .35s ease;
-  box-shadow:0 4px 24px rgba(0,0,0,.5),0 0 0 0 var(--event-accent-glow);
+  box-shadow:0 4px 24px rgba(0,0,0,.5);
   display:flex;
   flex-direction:column;
 }
@@ -254,142 +253,89 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
   animation:ev-border-shimmer 4s linear infinite;
   z-index:2;
 }
-@keyframes ev-border-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .ev-card:hover{
-  border-color:rgba(255,68,68,.5);
-  box-shadow:0 8px 35px rgba(0,0,0,.6),0 0 25px var(--event-accent-glow);
+  border-color:rgba(255,68,68,.45);
+  box-shadow:0 8px 35px rgba(0,0,0,.6),0 0 20px var(--event-accent-glow);
   transform:translateY(-3px);
 }
+.ev-card:active{transform:translateY(-1px) scale(.998)}
 
-/* Header card: judul folder besar */
 .ev-card-header{
-  padding:22px 28px 16px;
-  border-bottom:1px solid rgba(255,68,68,.12);
+  padding:18px 24px 14px;
+  border-bottom:1px solid rgba(255,68,68,.1);
   position:relative;z-index:2;
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:12px;
 }
 .ev-card-title-icon{
-  font-size:1.6rem;
+  font-size:1.5rem;
   flex-shrink:0;
   animation:folder-breathe 3s ease-in-out infinite;
 }
 .ev-card-title{
   font-family:'Cinzel',serif;
   color:var(--event-accent);
-  font-size:1.15rem;
+  font-size:1.1rem;
   font-weight:900;
   text-transform:uppercase;
   letter-spacing:2px;
   text-shadow:0 0 12px var(--event-accent-glow);
   line-height:1.4;
-}
-.ev-card-step-count{
-  margin-left:auto;
-  flex-shrink:0;
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  background:rgba(255,68,68,.08);
-  border:1px solid rgba(255,68,68,.15);
-  color:var(--event-accent);
-  padding:4px 12px;
-  border-radius:6px;
-  font-family:'Cinzel',serif;
-  font-size:.65rem;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  opacity:.7;
+  flex:1;min-width:0;
 }
 
-/* Body: STEP ditampilkan HORIZONTAL dalam grid */
 .ev-card-body{
-  padding:20px 28px;
+  padding:18px 24px;
   flex:1;
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:14px;
-  position:relative;z-index:2;
-}
-
-/* Satu step block — lebih besar & padat */
-.ev-step{
-  background:var(--ev-section-bg);
-  border:1px solid var(--ev-section-border);
-  border-radius:10px;
-  padding:14px 16px;
-  position:relative;
-  transition:all .25s ease;
   display:flex;
   flex-direction:column;
-  min-height:100px;
-}
-.ev-step:hover{
-  background:rgba(255,68,68,.07);
-  border-color:rgba(255,68,68,.35);
-  box-shadow:0 4px 16px rgba(255,68,68,.08);
-}
-.ev-step-label{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  background:linear-gradient(135deg,rgba(255,68,68,.2),rgba(255,100,80,.12));
-  border:1px solid rgba(255,68,68,.3);
-  color:var(--event-accent);
-  padding:3px 12px;
-  border-radius:5px;
-  font-size:.62rem;
-  font-family:'Cinzel',serif;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:1.2px;
-  margin-bottom:10px;
-  animation:ev-step-glow 3s ease-in-out infinite;
-  width:fit-content;
-}
-.ev-step-label-dot{
-  width:5px;height:5px;border-radius:50%;
-  background:var(--event-accent);
-  box-shadow:0 0 6px var(--event-accent-glow);
-}
-
-/* UPDATED TEXT STYLE (1.0rem) */
-.ev-step-text{
-  color:#ffffff; /* Warna putih murni agar lebih terang */
-  font-family:'Cinzel',serif;
-  font-size:1.0rem; /* Diubah menjadi tepat 1.0rem */
-  font-weight:600; /* Sedikit tebal agar lebih jelas */
-  line-height:1.6;
-  white-space:pre-wrap;
-  word-break:break-word;
-  flex:1;
-  text-shadow:0 0 4px rgba(255,255,255,0.2); /* Efek glow halus */
-}
-
-/* Footer card: tombol copy besar */
-.ev-card-footer{
-  padding:16px 28px 18px;
-  border-top:1px solid rgba(255,68,68,.1);
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
   gap:12px;
   position:relative;z-index:2;
 }
-.ev-copy-all{
+
+.ev-step{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+.ev-step-text{
+  color:#ffffff;
+  font-family:'Cinzel',serif;
+  font-size:1.0rem;
+  font-weight:600;
+  line-height:1.7;
+  white-space:pre-wrap;
+  word-break:break-word;
+  text-shadow:0 0 4px rgba(255,255,255,0.15);
+}
+.ev-step+.ev-step{
+  padding-top:12px;
+  border-top:1px dashed rgba(255,68,68,.1);
+}
+
+/* ===== FOOTER CARD: Tombol Copy di bawah ===== */
+.ev-card-footer{
+  padding:14px 24px 16px;
+  border-top:1px solid rgba(255,68,68,.08);
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  position:relative;
+  z-index:2;
+}
+.ev-card-copy{
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  background:linear-gradient(135deg,rgba(255,68,68,.12),rgba(255,100,80,.08));
+  gap:6px;
+  background:linear-gradient(135deg,rgba(255,68,68,.1),rgba(255,100,80,.06));
   border:1.5px solid rgba(255,68,68,.3);
   color:var(--event-accent);
-  padding:10px 24px;
-  border-radius:8px;
+  padding:8px 20px;
+  border-radius:7px;
   cursor:pointer;
   font-family:'Cinzel',serif;
-  font-size:.78rem;
+  font-size:.72rem;
   font-weight:700;
   text-transform:uppercase;
   letter-spacing:1.5px;
@@ -398,49 +344,32 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
   position:relative;
   overflow:hidden;
 }
-.ev-copy-all::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,68,68,.12),transparent);transition:left .4s ease}
-.ev-copy-all:hover::before{left:100%}
-.ev-copy-all:hover{background:linear-gradient(135deg,rgba(255,68,68,.22),rgba(255,100,80,.14));border-color:rgba(255,68,68,.6);box-shadow:0 4px 18px var(--event-accent-glow);transform:translateY(-2px)}
-.ev-copy-all:active{animation:copy-pop .3s ease}
-.ev-copy-all svg{width:16px;height:16px;flex-shrink:0}
-.ev-copy-all.copied{background:rgba(76,175,80,.12);border-color:rgba(76,175,80,.3);color:#4CAF50;pointer-events:none}
-.ev-copy-all .btn-label{transition:opacity .2s ease}
-.ev-copy-all.copied .btn-label{opacity:0;position:absolute}
-.ev-copy-all .btn-check{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity .2s ease;display:flex;align-items:center;gap:4px;white-space:nowrap}
-.ev-copy-all.copied .btn-check{opacity:1}
-
-/* Copy per step di dalam card */
-.ev-step-copy{
-  position:absolute;
-  top:12px;right:12px;
-  display:inline-flex;
-  align-items:center;
-  gap:4px;
-  background:rgba(255,68,68,.06);
-  border:1px solid rgba(255,68,68,.12);
-  color:var(--event-accent);
-  padding:4px 10px;
-  border-radius:5px;
-  cursor:pointer;
-  font-family:'Cinzel',serif;
-  font-size:.58rem;
-  text-transform:uppercase;
-  letter-spacing:.5px;
-  transition:all .25s ease;
-  white-space:nowrap;
-  opacity:.35;
+.ev-card-copy::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,68,68,.12),transparent);transition:left .4s ease}
+.ev-card-copy:hover::before{left:100%}
+.ev-card-copy:hover{
+  background:linear-gradient(135deg,rgba(255,68,68,.2),rgba(255,100,80,.12));
+  border-color:rgba(255,68,68,.55);
+  box-shadow:0 3px 14px var(--event-accent-glow);
+  transform:translateY(-1px);
 }
-.ev-step:hover .ev-step-copy{opacity:.8}
-.ev-step-copy:hover{opacity:1!important;background:rgba(255,68,68,.16);border-color:rgba(255,68,68,.4);box-shadow:0 2px 8px var(--event-accent-glow)}
-.ev-step-copy:active{animation:copy-pop .3s ease}
-.ev-step-copy svg{width:11px;height:11px;flex-shrink:0}
-.ev-step-copy.copied{opacity:1!important;background:rgba(76,175,80,.12);border-color:rgba(76,175,80,.3);color:#4CAF50;pointer-events:none}
-.ev-step-copy .btn-label{transition:opacity .15s ease}
-.ev-step-copy.copied .btn-label{opacity:0;position:absolute}
-.ev-step-copy .btn-check{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity .15s ease;display:flex;align-items:center;gap:3px;white-space:nowrap}
-.ev-step-copy.copied .btn-check{opacity:1}
+.ev-card-copy:active{animation:copy-pop .3s ease}
+.ev-card-copy svg{width:14px;height:14px;flex-shrink:0}
+.ev-card-copy.copied{
+  background:rgba(76,175,80,.1);
+  border-color:rgba(76,175,80,.3);
+  color:#4CAF50;
+  pointer-events:none;
+}
+.ev-card-copy .btn-label{transition:opacity .2s ease}
+.ev-card-copy.copied .btn-label{opacity:0;position:absolute}
+.ev-card-copy .btn-check{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  opacity:0;transition:opacity .2s ease;
+  display:flex;align-items:center;gap:4px;white-space:nowrap;
+}
+.ev-card-copy.copied .btn-check{opacity:1}
 
-/* Modal detail event */
+/* ===== MODAL DETAIL EVENT ===== */
 .detail-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(4,6,14,.94);backdrop-filter:blur(14px);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
 .detail-modal.show{display:flex}
 .detail-modal.bonus-modal .detail-content{border-color:rgba(255,143,0,.2);box-shadow:0 10px 50px rgba(0,0,0,.7),0 0 30px var(--bonus-accent-glow)}
@@ -471,6 +400,56 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 .copy-success{color:var(--accent-color);font-size:.85rem;margin-left:12px;opacity:0;transition:opacity .3s ease;font-weight:700;text-transform:uppercase;letter-spacing:1px;font-family:'Cinzel',serif}
 .detail-modal.bonus-modal .copy-success{color:#FFD700}.detail-modal.event-modal .copy-success{color:#FF8A80}
 .copy-success.show{opacity:1}
+.ev-detail-step{
+  background:var(--ev-section-bg);
+  border:1px solid var(--ev-section-border);
+  border-radius:10px;
+  padding:18px 20px;
+  margin-bottom:14px;
+  position:relative;
+  transition:all .25s ease;
+}
+.ev-detail-step:last-child{margin-bottom:0}
+.ev-detail-step:hover{background:rgba(255,68,68,.06);border-color:rgba(255,68,68,.3)}
+.ev-detail-step-label{
+  display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(135deg,rgba(255,68,68,.2),rgba(255,100,80,.12));
+  border:1px solid rgba(255,68,68,.3);
+  color:var(--event-accent);
+  padding:4px 14px;border-radius:5px;
+  font-size:.68rem;font-family:'Cinzel',serif;font-weight:700;
+  text-transform:uppercase;letter-spacing:1.2px;
+  margin-bottom:10px;animation:ev-step-glow 3s ease-in-out infinite;width:fit-content;
+}
+.ev-detail-step-label-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--event-accent);
+  box-shadow:0 0 6px var(--event-accent-glow);
+}
+.ev-detail-step-text{
+  color:#ffffff;font-family:'Cinzel',serif;font-size:1.05rem;font-weight:600;
+  line-height:1.7;white-space:pre-wrap;word-break:break-word;
+  text-shadow:0 0 4px rgba(255,255,255,0.15);
+}
+.ev-detail-step-copy{
+  position:absolute;top:16px;right:16px;
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,68,68,.08);border:1px solid rgba(255,68,68,.15);
+  color:var(--event-accent);padding:5px 12px;border-radius:5px;
+  cursor:pointer;font-family:'Cinzel',serif;font-size:.62rem;
+  text-transform:uppercase;letter-spacing:.5px;
+  transition:all .25s ease;white-space:nowrap;
+}
+.ev-detail-step-copy:hover{background:rgba(255,68,68,.18);border-color:rgba(255,68,68,.4);box-shadow:0 2px 10px var(--event-accent-glow)}
+.ev-detail-step-copy:active{animation:copy-pop .3s ease}
+.ev-detail-step-copy svg{width:12px;height:12px;flex-shrink:0}
+.ev-detail-step-copy.copied{background:rgba(76,175,80,.12);border-color:rgba(76,175,80,.3);color:#4CAF50;pointer-events:none}
+.ev-detail-step-copy .btn-label{transition:opacity .15s ease}
+.ev-detail-step-copy.copied .btn-label{opacity:0;position:absolute}
+.ev-detail-step-copy .btn-check{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity .15s ease;display:flex;align-items:center;gap:3px;white-space:nowrap}
+.ev-detail-step-copy.copied .btn-check{opacity:1}
+.ev-detail-divider{border:none;border-top:1px dashed rgba(255,68,68,.12);margin:16px 0}
+
 .no-menu{text-align:center;padding:60px 0;width:100%;max-width:1100px}
 .no-menu-title{color:var(--primary-color);font-family:'Pirata One',cursive;font-size:2rem;margin-bottom:16px;letter-spacing:2px;text-shadow:0 0 10px var(--gold-glow)}
 .no-menu-title.event-empty{color:var(--event-accent);text-shadow:0 0 10px var(--event-accent-glow)}
@@ -500,18 +479,20 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 @media(max-width:1200px){.menu-container{grid-template-columns:repeat(2,1fr)}.beranda-features{grid-template-columns:repeat(2,1fr)}.jadwal-grid{grid-template-columns:1fr}}
 @media(max-width:900px){
   .sidebar{position:fixed;top:44px;left:0;height:calc(100vh - 44px);transform:translateX(-100%);z-index:55;box-shadow:4px 0 30px rgba(0,0,0,.5)}.sidebar.open{transform:translateX(0)}.sidebar-toggle{display:flex}.sidebar-overlay.show{display:block}.main-content{padding:16px}.title{font-size:3rem}.beranda-features{grid-template-columns:1fr}
-  #eventContainer .ev-card-body{grid-template-columns:1fr!important}
 }
 @media(max-width:768px){.title{font-size:2.6rem;letter-spacing:3px}.menu-container{grid-template-columns:1fr}.sun{width:60px;height:60px}.ship-silhouette{display:none}.toast{font-size:.7rem;padding:8px 14px}.toast-title{max-width:120px}.beranda-stats{flex-direction:column;gap:16px}
-  .ev-card-header{padding:18px 20px 14px;flex-direction:column;align-items:flex-start;gap:8px}
-  .ev-card-body{padding:16px 20px!important;gap:12px!important;grid-template-columns:1fr!important}
-  .ev-card-footer{padding:14px 20px 16px}
+  .ev-card-header{padding:16px 18px 12px}
+  .ev-card-body{padding:14px 18px}
+  .ev-card-footer{padding:12px 18px 14px}
   .ev-card-title{font-size:1rem}
 }
 @media(max-width:480px){.title{font-size:2rem}.subtitle{font-size:.75rem;letter-spacing:2px}.sidebar{width:260px;min-width:260px}
-  .ev-card-header{padding:16px 16px 12px}
-  .ev-card-body{padding:12px 16px!important;gap:10px!important}
-  .ev-card-footer{padding:12px 16px 14px}
+  .ev-card-header{padding:14px 14px 10px}
+  .ev-card-body{padding:12px 14px}
+  .ev-card-footer{padding:10px 14px 12px}
+  .ev-card-copy{padding:7px 16px;font-size:.67rem}
+  .ev-detail-step{padding:14px 16px}
+  .ev-detail-step-text{font-size:.95rem}
 }
 #bonusContainer{grid-template-columns:repeat(2,1fr)!important;max-width:960px!important;margin-left:auto!important;margin-right:auto!important;gap:20px!important}
 #bonusContainer .bonus-card{min-height:170px!important;padding:24px 28px!important}
@@ -582,17 +563,14 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 <div class="no-menu" id="noMenu" style="display:none"><div class="no-menu-title">Tidak Ada Data Ditemukan</div></div>
 </section>
 <section class="page-section" id="page-prediksi"><div class="generic-page"><div class="generic-icon">&#128200;</div><div class="generic-title">PREDIKSI TOGEL</div><div class="generic-desc">Modul sedang dalam pengembangan.</div></div></section>
-
-<!-- EVENT: FULL-WIDTH HORIZONTAL FOLDERS -->
 <section class="page-section" id="page-scatter">
-<div class="event-page-header"><span class="event-page-icon">&#128193;</span><div class="event-page-title">EVENT SC, BUY, FREE</div><div class="event-page-desc">Kolom A = judul panduan &#8226; Kolom B&#8211;I = langkah-langkah (STEP1, STEP2, dll) &#8226; Setiap step punya Copy, card punya Copy Semua</div></div>
+<div class="event-page-header"><span class="event-page-icon">&#128193;</span><div class="event-page-title">EVENT SC, BUY, FREE</div><div class="event-page-desc">Klik folder untuk membuka detail lengkap dengan step-by-step dan Copy</div></div>
 <div class="event-count-bar"><div class="event-count-pill"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2zM4 18V8h16v10H4z"/></svg><span id="eventCountText">0 Panduan</span></div></div>
-<div class="menu-filter"><div class="filter-container event-filter"><input type="text" class="filter-input" id="eventFilterInput" placeholder="Cari judul, step, atau isi..." autocomplete="off"><span class="filter-hint">Filter cerdas &#8212; cari di judul, label step, maupun isi</span></div></div>
+<div class="menu-filter"><div class="filter-container event-filter"><input type="text" class="filter-input" id="eventFilterInput" placeholder="Cari judul atau isi..." autocomplete="off"><span class="filter-hint">Filter cerdas</span></div></div>
 <div class="loading-container" id="eventLoadingContainer" style="display:none"><div class="loading-spinner event-spinner"></div><div class="loading-text event-text">Mengambil Data Panduan Event...</div></div>
 <div class="menu-container" id="eventContainer" style="display:none"></div>
 <div class="no-menu" id="eventNoMenu" style="display:none"><div class="no-menu-title event-empty">Tidak Ada Panduan Event</div><div class="no-menu-subtitle">Belum ada data di sheet EVENT, Nakama</div></div>
 </section>
-
 <section class="page-section" id="page-gambar-cs"><div class="generic-page"><div class="generic-icon">&#128247;</div><div class="generic-title">GAMBAR CS</div><div class="generic-desc">Galeri foto CS akan segera hadir.</div></div></section>
 <section class="page-section" id="page-bonus">
 <div class="bonus-page-header"><span class="bonus-page-icon">&#127873;</span><div class="bonus-page-title">BONUS LINETOGEL</div></div>
@@ -632,75 +610,13 @@ function lev(a,b){var m=[];for(var i=0;i<=b.length;i++)m[i]=[i];for(var j=0;j<=a
 function sim(a,b){var d=lev(a.toLowerCase(),b.toLowerCase());var l=a.length>b.length?a:b;return l.length===0?100:Math.round(((l.length-d)/l.length)*100)}
 function fz(q,t){var ql=q.toLowerCase(),tl=t.toLowerCase();if(tl.includes(ql))return{m:true,s:100,t:'exact'};var w=tl.split(/\s+/),best={m:false,s:0,t:'none'};for(var k=0;k<w.length;k++){var ww=w[k];if(ww.startsWith(ql)){var s=Math.round(ql.length/ww.length*100);if(s>best.s)best={m:true,s:s,t:'prefix'}}var si=sim(ql,ww);if(si>=60&&si>best.s)best={m:true,s:si,t:'fuzzy'};if(ww.includes(ql)){var s2=Math.round(ql.length/ww.length*90);if(s2>best.s)best={m:true,s:s2,t:'contains'}}}return best}
 function doFilt(data,q,fields){if(!q)return data.map(function(i){return JSON.parse(JSON.stringify(i))});var res=[];for(var i=0;i<data.length;i++){var it=data[i],ss='';for(var f=0;f<fields.length;f++){if(fields[f]==='steps'){for(var s=0;s<it.steps.length;s++)ss+=it.steps[s].label+' '+it.steps[s].text+' '}else{ss+=(it[fields[f]]||'')+' '}}var fm=fz(q,ss);if(fm.m){var c=JSON.parse(JSON.stringify(it));c.ms=fm.s;c.mt=fm.t.toUpperCase();res.push(c)}}res.sort(function(a,b){return b.ms-a.ms});return res}
+async function fetchGS(gid){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+gid;var r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf})}return d}
+async function fetchEV(){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+EVENT_GID;var r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var colLabels=[];for(var c=1;c<j.table.cols.length&&c<=8;c++){var lbl=j.table.cols[c].label?j.table.cols[c].label.trim():'';colLabels.push(lbl||('STEP'+c))}var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var title=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';if(!title)continue;var steps=[];for(var k=0;k<colLabels.length;k++){var ci=k+1;if(row.c[ci]&&row.c[ci].v){var v=String(row.c[ci].v).trim();if(v)steps.push({label:colLabels[k],text:v})}}if(steps.length>0)d.push({title:title,steps:steps})}return d}
+async function fetchRandom(){var ld=document.getElementById('loadingContainer'),ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data RANDOM...','warning');var ok=false;try{sheetData=await fetchGS(RANDOM_GID);if(sheetData.length>0)ok=true}catch(e){}if(!ok){try{var c=localStorage.getItem('NM_random');if(c){sheetData=JSON.parse(c);if(sheetData.length>0)ok=true}}catch(e){}}if(!ok)sheetData=[{title:'CONTOH DATA',info:'Tidak dapat terhubung.'}];if(ok&&sheetData[0].title!=='CONTOH DATA')try{localStorage.setItem('NM_random',JSON.stringify(sheetData))}catch(e){}randomDataLoaded=true;filteredData=sheetData.slice();document.getElementById('statMenu').textContent=sheetData.length;updStat(sheetData[0].title==='CONTOH DATA'?'RANDOM — Offline':'RANDOM — Aktif',sheetData[0].title==='CONTOH DATA'?'warning':'success');ld.style.display='none';rndRender();updDbg()}
+function rndRender(){var ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');if(!filteredData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';for(var i=0;i<filteredData.length;i++){var it=filteredData[i];h+='<div class="menu-card" data-idx="'+i+'"><div class="match-indicator">'+(it.mt||'MATCH')+'</div><h3 class="menu-title">'+it.title+'</h3><div class="menu-preview">'+it.info+'</div><div class="card-bottom-row"><button class="card-copy-btn" data-ci="'+i+'">'+CPY+'<span class="btn-label">Salin</span><span class="btn-check">'+CHK+' Ok</span></button></div><div class="card-skull">&#9760;</div></div>'}ct.innerHTML=h;ct.querySelectorAll('.menu-card').forEach(function(c){c.addEventListener('click',function(){currentDetail=filteredData[parseInt(this.dataset.idx)];document.getElementById('detailTitle').textContent=currentDetail.title;document.getElementById('detailText').textContent=currentDetail.info;document.getElementById('detailModal').classList.add('show')})});ct.querySelectorAll('.card-copy-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredData[parseInt(this.dataset.ci)];if(!it)return;navigator.clipboard.writeText(it.info).then(function(){b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);toast(it.title,'disalin','random')})})})}
+async function fetchBonus(){var ld=document.getElementById('bonusLoadingContainer'),ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data BONUS...','warning');var ok=false;try{bonusData=await fetchGS(BONUS_GID);if(bonusData.length>0)ok=true}catch(e){}if(!ok){try{var c=localStorage.getItem('NM_bonus');if(c){bonusData=JSON.parse(c);if(bonusData.length>0)ok=true}}catch(e){}}if(!ok)bonusData=[{title:'BELUM ADA DATA',info:'Tidak dapat terhubung.'}];if(ok&&bonusData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_bonus',JSON.stringify(bonusData))}catch(e){}bonusDataLoaded=true;filteredBonusData=bonusData.slice();document.getElementById('statBonus').textContent=bonusData.length;document.getElementById('bonusCountText').textContent=bonusData.length+' Bonus';updStat(bonusData[0].title==='BELUM ADA DATA'?'BONUS — Offline':'BONUS — Aktif',bonusData[0].title==='BELUM ADA DATA'?'warning':'success');ld.style.display='none';bonRender();updDbg()}
+function bonRender(){var ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');if(!filteredBonusData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';for(var i=0;i<filteredBonusData.length;i++){var it=filteredBonusData[i];h+='<div class="bonus-card" data-bi="'+i+'"><div class="bonus-badge">Bonus</div><h3 class="bonus-title">'+it.title+'</h3><div class="bonus-preview">'+it.info+'</div><div class="card-bottom-row"><button class="bonus-copy-btn" data-bci="'+i+'">'+CPY+'<span class="btn-label">Salin</span><span class="btn-check">'+CHK+' Ok</span></button></div><div class="card-gift">&#127873;</div></div>'}ct.innerHTML=h;ct.querySelectorAll('.bonus-card').forEach(function(c){c.addEventListener('click',function(){currentBonusDetail=filteredBonusData[parseInt(this.dataset.bi)];document.getElementById('bonusDetailTitle').textContent=currentBonusDetail.title;document.getElementById('bonusDetailText').textContent=currentBonusDetail.info;document.getElementById('bonusDetailModal').classList.add('show')})});ct.querySelectorAll('.bonus-copy-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredBonusData[parseInt(this.dataset.bci)];if(!it)return;navigator.clipboard.writeText(it.info).then(function(){b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);toast(it.title,'disalin','bonus')})})})}
 
-async function fetchGS(gid){
-var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+gid;
-var r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);
-var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
-var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];
-for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf})}
-return d;
-}
-
-async function fetchEV(){
-var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+EVENT_GID;
-var r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);
-var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
-var j=JSON.parse(t.substring(47).slice(0,-2));
-var colLabels=[];
-for(var c=1;c<j.table.cols.length&&c<=8;c++){var lbl=j.table.cols[c].label?j.table.cols[c].label.trim():'';colLabels.push(lbl||('STEP'+c))}
-var d=[];
-for(var i=0;i<j.table.rows.length;i++){
-var row=j.table.rows[i];var title=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';if(!title)continue;
-var steps=[];
-for(var k=0;k<colLabels.length;k++){var ci=k+1;if(row.c[ci]&&row.c[ci].v){var v=String(row.c[ci].v).trim();if(v)steps.push({label:colLabels[k],text:v})}}
-if(steps.length>0)d.push({title:title,steps:steps});
-}
-return d;
-}
-
-async function fetchRandom(){
-var ld=document.getElementById('loadingContainer'),ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');
-ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data RANDOM...','warning');
-var ok=false;try{sheetData=await fetchGS(RANDOM_GID);if(sheetData.length>0)ok=true}catch(e){}
-if(!ok){try{var c=localStorage.getItem('NM_random');if(c){sheetData=JSON.parse(c);if(sheetData.length>0)ok=true}}catch(e){}}
-if(!ok)sheetData=[{title:'CONTOH DATA',info:'Tidak dapat terhubung.'}];
-if(ok&&sheetData[0].title!=='CONTOH DATA')try{localStorage.setItem('NM_random',JSON.stringify(sheetData))}catch(e){}
-randomDataLoaded=true;filteredData=sheetData.slice();document.getElementById('statMenu').textContent=sheetData.length;
-updStat(sheetData[0].title==='CONTOH DATA'?'RANDOM — Offline':'RANDOM — Aktif',sheetData[0].title==='CONTOH DATA'?'warning':'success');
-ld.style.display='none';rndRender();updDbg();
-}
-function rndRender(){
-var ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');
-if(!filteredData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';
-for(var i=0;i<filteredData.length;i++){var it=filteredData[i];h+='<div class="menu-card" data-idx="'+i+'"><div class="match-indicator">'+(it.mt||'MATCH')+'</div><h3 class="menu-title">'+it.title+'</h3><div class="menu-preview">'+it.info+'</div><div class="card-bottom-row"><button class="card-copy-btn" data-ci="'+i+'">'+CPY+'<span class="btn-label">Salin</span><span class="btn-check">'+CHK+' Ok</span></button></div><div class="card-skull">&#9760;</div></div>'}
-ct.innerHTML=h;
-ct.querySelectorAll('.menu-card').forEach(function(c){c.addEventListener('click',function(){currentDetail=filteredData[parseInt(this.dataset.idx)];document.getElementById('detailTitle').textContent=currentDetail.title;document.getElementById('detailText').textContent=currentDetail.info;document.getElementById('detailModal').classList.add('show')})});
-ct.querySelectorAll('.card-copy-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredData[parseInt(this.dataset.ci)];if(!it)return;navigator.clipboard.writeText(it.info).then(function(){b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);toast(it.title,'disalin','random')})})});
-}
-
-async function fetchBonus(){
-var ld=document.getElementById('bonusLoadingContainer'),ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');
-ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data BONUS...','warning');
-var ok=false;try{bonusData=await fetchGS(BONUS_GID);if(bonusData.length>0)ok=true}catch(e){}
-if(!ok){try{var c=localStorage.getItem('NM_bonus');if(c){bonusData=JSON.parse(c);if(bonusData.length>0)ok=true}}catch(e){}}
-if(!ok)bonusData=[{title:'BELUM ADA DATA',info:'Tidak dapat terhubung.'}];
-if(ok&&bonusData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_bonus',JSON.stringify(bonusData))}catch(e){}
-bonusDataLoaded=true;filteredBonusData=bonusData.slice();document.getElementById('statBonus').textContent=bonusData.length;
-document.getElementById('bonusCountText').textContent=bonusData.length+' Bonus';
-updStat(bonusData[0].title==='BELUM ADA DATA'?'BONUS — Offline':'BONUS — Aktif',bonusData[0].title==='BELUM ADA DATA'?'warning':'success');
-ld.style.display='none';bonRender();updDbg();
-}
-function bonRender(){
-var ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');
-if(!filteredBonusData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';
-for(var i=0;i<filteredBonusData.length;i++){var it=filteredBonusData[i];h+='<div class="bonus-card" data-bi="'+i+'"><div class="bonus-badge">Bonus</div><h3 class="bonus-title">'+it.title+'</h3><div class="bonus-preview">'+it.info+'</div><div class="card-bottom-row"><button class="bonus-copy-btn" data-bci="'+i+'">'+CPY+'<span class="btn-label">Salin</span><span class="btn-check">'+CHK+' Ok</span></button></div><div class="card-gift">&#127873;</div></div>'}
-ct.innerHTML=h;
-ct.querySelectorAll('.bonus-card').forEach(function(c){c.addEventListener('click',function(){currentBonusDetail=filteredBonusData[parseInt(this.dataset.bi)];document.getElementById('bonusDetailTitle').textContent=currentBonusDetail.title;document.getElementById('bonusDetailText').textContent=currentBonusDetail.info;document.getElementById('bonusDetailModal').classList.add('show')})});
-ct.querySelectorAll('.bonus-copy-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredBonusData[parseInt(this.dataset.bci)];if(!it)return;navigator.clipboard.writeText(it.info).then(function(){b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);toast(it.title,'disalin','bonus')})})});
-}
-
-/* ===== EVENT: FULL-WIDTH HORIZONTAL CARD LAYOUT ===== */
 async function fetchEvent(){
 var ld=document.getElementById('eventLoadingContainer'),ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
 ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Mengambil Data Event...','warning');
@@ -724,67 +640,96 @@ for(var i=0;i<card.steps.length;i++){txt+='['+card.steps[i].label+']\n'+card.ste
 return txt.trim();
 }
 
+/* ===== EVENT: RENDER — Folder + Judul + Teks + Copy di bawah ===== */
 function evRender(){
 var ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
 if(!filteredEventData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';
 var h='';
 for(var i=0;i<filteredEventData.length;i++){
-var fd=filteredEventData[i];var sc=fd.steps.length;
+var fd=filteredEventData[i];
 h+='<div class="ev-card" data-ei="'+i+'">';
 
-/* Header: icon folder + judul + jumlah step */
+/* Header */
 h+='<div class="ev-card-header">';
 h+='<span class="ev-card-title-icon">&#128193;</span>';
 h+='<div class="ev-card-title">'+fd.title+'</div>';
-h+='<span class="ev-card-step-count">'+sc+' Step</span>';
 h+='</div>';
 
-/* Body: STEP horizontal grid */
+/* Body: teks saja */
 h+='<div class="ev-card-body">';
-for(var j=0;j<sc;j++){
-var st=fd.steps[j];
+for(var j=0;j<fd.steps.length;j++){
 h+='<div class="ev-step">';
-h+='<div class="ev-step-label"><span class="ev-step-label-dot"></span>'+st.label+'</div>';
-h+='<div class="ev-step-text">'+st.text+'</div>';
-h+='<button class="ev-step-copy" data-sci="'+i+'" data-ski="'+j+'">'+CPY+'<span class="btn-label">Copy</span><span class="btn-check">'+CHK+' Ok</span></button>';
+h+='<div class="ev-step-text">'+fd.steps[j].text+'</div>';
 h+='</div>';
 }
 h+='</div>';
 
-/* Footer: Copy semua */
+/* Footer: tombol Copy di bawah kanan */
 h+='<div class="ev-card-footer">';
-h+='<button class="ev-copy-all" data-cai="'+i+'">'+CPY+'<span class="btn-label">Copy Semua Step</span><span class="btn-check">'+CHK+' Tersalin</span></button>';
+h+='<button class="ev-card-copy" data-cci="'+i+'">'+CPY+'<span class="btn-label">Copy</span><span class="btn-check">'+CHK+' Ok</span></button>';
 h+='</div>';
 
 h+='</div>';
 }
 ct.innerHTML=h;
-/* Copy per step */
-ct.querySelectorAll('.ev-step-copy').forEach(function(b){
-b.addEventListener('click',function(e){
+
+/* Klik card → buka modal detail (kecuali klik tombol Copy) */
+ct.querySelectorAll('.ev-card').forEach(function(card){
+card.addEventListener('click',function(e){
+if(e.target.closest('.ev-card-copy'))return;
+openEventDetail(parseInt(this.dataset.ei));
+});
+});
+
+/* Tombol Copy di footer card */
+ct.querySelectorAll('.ev-card-copy').forEach(function(btn){
+btn.addEventListener('click',function(e){
 e.stopPropagation();
-var ci=parseInt(this.dataset.sci),ki=parseInt(this.dataset.ski);
-var fd=filteredEventData[ci];if(!fd||!fd.steps[ki])return;
-navigator.clipboard.writeText(fd.steps[ki].text).then(function(){
-b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);
-toast(fd.steps[ki].label,'disalin','event');
-});
-});
-});
-/* Copy all per card */
-ct.querySelectorAll('.ev-copy-all').forEach(function(b){
-b.addEventListener('click',function(e){
-e.stopPropagation();
-var ci=parseInt(this.dataset.cai);var fd=filteredEventData[ci];if(!fd)return;
+var idx=parseInt(this.dataset.cci);
+var fd=filteredEventData[idx];if(!fd)return;
 navigator.clipboard.writeText(buildCardText(fd)).then(function(){
-b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},1500);
-toast(fd.title,fd.steps.length+' step disalin','event');
+btn.classList.add('copied');
+setTimeout(function(){btn.classList.remove('copied')},1500);
+toast(fd.title,'disalin','event');
 });
 });
 });
 }
 
-/* ===== INIT ===== */
+function openEventDetail(idx){
+var fd=filteredEventData[idx];
+if(!fd)return;
+currentEventDetail=fd;
+document.getElementById('eventDetailTitle').textContent=fd.title;
+var bodyHtml='';
+for(var i=0;i<fd.steps.length;i++){
+var st=fd.steps[i];
+bodyHtml+='<div class="ev-detail-step">';
+bodyHtml+='<div class="ev-detail-step-label"><span class="ev-detail-step-label-dot"></span>'+st.label+'</div>';
+bodyHtml+='<button class="ev-detail-step-copy" data-mdsi="'+i+'">'+CPY+'<span class="btn-label">Copy</span><span class="btn-check">'+CHK+' Ok</span></button>';
+bodyHtml+='<div class="ev-detail-step-text">'+st.text+'</div>';
+bodyHtml+='</div>';
+if(i<fd.steps.length-1)bodyHtml+='<hr class="ev-detail-divider">';
+}
+document.getElementById('eventDetailBody').innerHTML=bodyHtml;
+document.getElementById('eventDetailModal').classList.add('show');
+document.querySelectorAll('#eventDetailBody .ev-detail-step-copy').forEach(function(btn){
+btn.addEventListener('click',function(){
+var si=parseInt(this.dataset.mdsi);
+var step=currentEventDetail.steps[si];
+if(!step)return;
+navigator.clipboard.writeText(step.text).then(function(){
+btn.classList.add('copied');
+setTimeout(function(){btn.classList.remove('copied')},1500);
+toast(step.label,'disalin','event');
+});
+});
+});
+var cab=document.getElementById('eventCopyAllBtn');
+cab.classList.remove('copied');
+document.getElementById('eventCopyAllSuccess').classList.remove('show');
+}
+
 window.onload=function(){
 initBG();initSB();updTime();setInterval(updTime,1000);updStat('Kapal Berlayar...','warning');
 document.getElementById('debugToggle').addEventListener('click',function(){debugMode=!debugMode;document.getElementById('debugPanel').classList.toggle('show',debugMode);updDbg()});
@@ -800,7 +745,7 @@ document.getElementById('bonusDetailClose').addEventListener('click',function(){
 document.getElementById('bonusCopyButton').addEventListener('click',function(){if(!currentBonusDetail)return;navigator.clipboard.writeText(currentBonusDetail.info).then(function(){var el=document.getElementById('bonusCopySuccess');el.classList.add('show');toast(currentBonusDetail.title,'disalin','bonus');setTimeout(function(){el.classList.remove('show')},2000)})});
 document.getElementById('bonusDetailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentBonusDetail=null}});
 document.getElementById('eventDetailClose').addEventListener('click',function(){document.getElementById('eventDetailModal').classList.remove('show');currentEventDetail=null});
-document.getElementById('eventCopyAllBtn').addEventListener('click',function(){if(!currentEventDetail)return;navigator.clipboard.writeText(buildCardText(currentEventDetail)).then(function(){var el=document.getElementById('eventCopyAllSuccess');el.classList.add('show');toast(currentEventDetail.title,currentEventDetail.steps.length+' step disalin','event');setTimeout(function(){el.classList.remove('show')},2000)})});
+document.getElementById('eventCopyAllBtn').addEventListener('click',function(){if(!currentEventDetail)return;navigator.clipboard.writeText(buildCardText(currentEventDetail)).then(function(){var el=document.getElementById('eventCopyAllSuccess');el.classList.add('show');var btn=document.getElementById('eventCopyAllBtn');btn.classList.add('copied');toast(currentEventDetail.title,currentEventDetail.steps.length+' step disalin','event');setTimeout(function(){el.classList.remove('show');btn.classList.remove('copied')},2000)})});
 document.getElementById('eventDetailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentEventDetail=null}});
 document.addEventListener('keydown',function(e){
 if(e.key==='Escape'){
