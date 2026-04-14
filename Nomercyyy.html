@@ -57,7 +57,6 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 @keyframes page-enter{0%{opacity:0;transform:translateY(16px)}100%{opacity:1;transform:translateY(0)}}
 @keyframes float-icon{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes bonus-badge-glow{0%,100%{box-shadow:0 0 8px var(--bonus-accent-glow),inset 0 0 4px rgba(255,143,0,.15)}50%{box-shadow:0 0 18px var(--bonus-accent-glow),inset 0 0 8px rgba(255,143,0,.25)}}
-@keyframes folder-breathe{0%,100%{opacity:.6}50%{opacity:1}}
 .app-layout{position:relative;z-index:10;display:flex;min-height:100vh;padding-top:44px}
 .sidebar{width:var(--sidebar-width);min-width:var(--sidebar-width);height:calc(100vh - 44px);position:sticky;top:44px;background:var(--sidebar-bg);backdrop-filter:blur(20px);border-right:1px solid rgba(230,81,0,.12);display:flex;flex-direction:column;overflow:hidden;z-index:50;transition:transform .35s cubic-bezier(.4,0,.2,1)}
 .sidebar-header{padding:24px 20px 16px;border-bottom:1px solid rgba(230,81,0,.1);flex-shrink:0}
@@ -118,8 +117,6 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 .sidebar-toggle:hover{transform:scale(1.08)}.sidebar-toggle svg{width:24px;height:24px;fill:#fff}
 .sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:45;backdrop-filter:blur(4px)}
 .main-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-width:0;padding:20px 24px;position:relative}
-
-/* Header hanya tampil di beranda */
 .header{text-align:center;margin-bottom:32px;position:relative;transition:opacity .35s ease,transform .35s ease}
 .header.hidden-header{opacity:0;transform:translateY(-20px);pointer-events:none;position:absolute;height:0;overflow:hidden;margin:0}
 .logo-container{display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative}
@@ -220,7 +217,6 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 .bonus-count-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,143,0,.1);border:1px solid rgba(255,143,0,.2);color:var(--bonus-accent);padding:6px 16px;border-radius:20px;font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .bonus-count-pill svg{width:14px;height:14px}
 .event-page-header{text-align:center;margin-bottom:28px}
-.event-page-icon{font-size:3.5rem;display:block;margin-bottom:12px;animation:float-icon 3s ease-in-out infinite}
 .event-page-title{font-family:'Pirata One',cursive;font-size:2rem;color:var(--event-accent);text-shadow:0 0 16px var(--event-accent-glow);margin-bottom:8px;letter-spacing:2px}
 .event-page-desc{font-family:'Cinzel',serif;color:var(--text-secondary);font-size:.85rem;opacity:.65;max-width:600px;margin:0 auto;line-height:1.7}
 .event-count-bar{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px}
@@ -264,11 +260,6 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
   align-items:center;
   gap:14px;
 }
-.ev-card-title-icon{
-  font-size:1.6rem;
-  flex-shrink:0;
-  animation:folder-breathe 3s ease-in-out infinite;
-}
 .ev-card-title{
   font-family:'Cinzel',serif;
   color:var(--event-accent);
@@ -278,9 +269,9 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
   letter-spacing:2px;
   text-shadow:0 0 12px var(--event-accent-glow);
   line-height:1.4;
+  flex:1;
 }
 .ev-card-step-count{
-  margin-left:auto;
   flex-shrink:0;
   display:inline-flex;
   align-items:center;
@@ -476,7 +467,6 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 </aside>
 <main class="main-content">
 
-<!-- Header NO-MERCYYY: hanya tampil di BERANDA -->
 <header class="header" id="mainHeader"><div class="logo-container"><div class="logo-glow"></div><h1 class="title">NO-MERCYYY</h1></div><p class="subtitle">Sistem Menu Digital</p></header>
 
 <section class="page-section active" id="page-beranda">
@@ -507,7 +497,7 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 </section>
 <section class="page-section" id="page-prediksi"><div class="generic-page"><div class="generic-icon">&#128200;</div><div class="generic-title">PREDIKSI TOGEL</div><div class="generic-desc">Modul sedang dalam pengembangan.</div></div></section>
 <section class="page-section" id="page-scatter">
-<div class="event-page-header"><span class="event-page-icon">&#128193;</span><div class="event-page-title">EVENT SC, BUY, FREE</div><div class="event-page-desc"></div></div>
+<div class="event-page-header"><div class="event-page-title">EVENT SC, BUY, FREE</div><div class="event-page-desc"></div></div>
 <div class="event-count-bar"><div class="event-count-pill"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2zM4 18V8h16v10H4z"/></svg><span id="eventCountText">0 Panduan</span></div></div>
 <div class="menu-filter"><div class="filter-container event-filter"><input type="text" class="filter-input" id="eventFilterInput" placeholder="Cari judul atau isi..." autocomplete="off"><span class="filter-hint">Filter cerdas &#8212; cari di judul maupun isi</span></div></div>
 <div class="loading-container" id="eventLoadingContainer" style="display:none"><div class="loading-spinner event-spinner"></div><div class="loading-text event-text">Mengambil Data Panduan Event...</div></div>
@@ -550,7 +540,6 @@ function cleanStepLabel(raw){
 function sSGS(s){return '<svg width="'+s+'" height="'+(s*.5)+'" viewBox="0 0 40 20" fill="none" stroke="rgba(20,25,50,0.9)" stroke-width="1.5" stroke-linecap="round"><path d="M0,12 Q8,4 16,10 Q18,11 20,10 Q22,11 24,10 Q32,4 40,12"/></svg>'}
 function initBG(){var c=document.getElementById('starsLayer');for(var i=0;i<55;i++){var s=document.createElement('div');s.classList.add('star');if(Math.random()<.25)s.classList.add('warm');var z=Math.random()*2.5+.5;s.style.cssText='width:'+z+'px;height:'+z+'px;top:'+Math.random()*100+'%;left:'+Math.random()*100+'%;--dur:'+(Math.random()*3+1.5)+'s;animation-delay:'+Math.random()*3+'s';c.appendChild(s)}c=document.getElementById('cloudsLayer');for(var i=0;i<7;i++){var cl=document.createElement('div');cl.classList.add('cloud',i>3?'sunset':'dark');cl.style.cssText='width:'+(Math.random()*350+120)+'px;height:'+(Math.random()*50+25)+'px;top:'+(Math.random()*80+10)+'%;--dur:'+(Math.random()*70+40)+'s;animation-delay:-'+(Math.random()*70)+'s';c.appendChild(cl)}c=document.getElementById('seagullsLayer');for(var i=0;i<5;i++){var g=document.createElement('div');g.classList.add('seagull');var z=Math.random()*16+14;g.innerHTML=sSGS(z);g.style.cssText='top:'+(Math.random()*60+5)+'%;--dur:'+(Math.random()*30+22)+'s;--scale:'+(Math.random()*.4+.7).toFixed(2)+';animation-delay:-'+(Math.random()*30)+'s;opacity:'+(Math.random()*.12+.08).toFixed(2);c.appendChild(g)}c=document.getElementById('particles');for(var i=0;i<25;i++){var b=document.createElement('div');b.classList.add('bubble');var z=Math.random()*10+3;b.style.cssText='width:'+z+'px;height:'+z+'px;left:'+Math.random()*100+'%;bottom:'+Math.random()*8+'%;--dur:'+(Math.random()*10+6)+'s;animation-delay:'+(Math.random()*10)+'s';c.appendChild(b)}c=document.getElementById('sparkles');for(var i=0;i<12;i++){var s=document.createElement('div');s.classList.add('sparkle');var z=Math.random()*4+1.5;s.style.cssText='--size:'+z+'px;left:'+(Math.random()*60+20)+'%;bottom:'+(Math.random()*20+28)+'%;--dur:'+(Math.random()*8+5)+'s;animation-delay:'+(Math.random()*8)+'s';c.appendChild(s)}}
 
-/* Kontrol header NO-MERCYYY: hanya tampil di BERANDA */
 var mainHeader=document.getElementById('mainHeader');
 function switchPage(p){
   activePage=p;
@@ -560,13 +549,11 @@ function switchPage(p){
   document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active')});
   var ni=document.querySelector('.nav-item[data-page="'+p+'"]');
   if(ni)ni.classList.add('active');
-  /* Tampilkan/sembunyikan header NO-MERCYYY */
   if(p==='beranda'){
     mainHeader.classList.remove('hidden-header');
     mainHeader.style.display='';
   } else {
     mainHeader.classList.add('hidden-header');
-    /* Tunggu animasi sebelum benar-benar sembunyikan */
     setTimeout(function(){ if(activePage!=='beranda') mainHeader.style.display='none'; },350);
   }
   if(p==='random'&&!randomDataLoaded)fetchRandom();
@@ -686,7 +673,6 @@ for(var i=0;i<filteredEventData.length;i++){
 var fd=filteredEventData[i];var sc=fd.steps.length;
 h+='<div class="ev-card" data-ei="'+i+'">';
 h+='<div class="ev-card-header">';
-h+='<span class="ev-card-title-icon">&#128193;</span>';
 h+='<div class="ev-card-title">'+fd.title+'</div>';
 h+='<span class="ev-card-step-count">'+sc+'</span>';
 h+='</div>';
