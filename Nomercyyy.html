@@ -118,7 +118,10 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 .sidebar-toggle:hover{transform:scale(1.08)}.sidebar-toggle svg{width:24px;height:24px;fill:#fff}
 .sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:45;backdrop-filter:blur(4px)}
 .main-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-width:0;padding:20px 24px;position:relative}
-.header{text-align:center;margin-bottom:32px;position:relative}
+
+/* Header hanya tampil di beranda */
+.header{text-align:center;margin-bottom:32px;position:relative;transition:opacity .35s ease,transform .35s ease}
+.header.hidden-header{opacity:0;transform:translateY(-20px);pointer-events:none;position:absolute;height:0;overflow:hidden;margin:0}
 .logo-container{display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative}
 .logo-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:340px;height:130px;background:radial-gradient(ellipse,rgba(255,215,0,.08),rgba(255,143,0,.04) 50%,transparent 70%);z-index:-1;animation:pulse-glow 3s ease-in-out infinite}
 .title{font-family:'Pirata One',cursive;font-size:4rem;font-weight:400;background:linear-gradient(180deg,#FFF8E1,#FFD54F 25%,#FFB300 45%,#FF8F00 65%,#E65100 85%,#BF360C 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0;letter-spacing:6px;text-transform:uppercase;position:relative;animation:fire-flicker 3s ease-in-out infinite;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
@@ -472,7 +475,10 @@ body{font-family:'Pirata One','Segoe UI',sans-serif;background:var(--dark-bg);co
 <div class="sidebar-footer"><div class="sidebar-footer-text">NO-MERCYYY v2.0.77</div></div>
 </aside>
 <main class="main-content">
-<header class="header"><div class="logo-container"><div class="logo-glow"></div><h1 class="title">NO-MERCYYY</h1></div><p class="subtitle">Sistem Menu Digital</p></header>
+
+<!-- Header NO-MERCYYY: hanya tampil di BERANDA -->
+<header class="header" id="mainHeader"><div class="logo-container"><div class="logo-glow"></div><h1 class="title">NO-MERCYYY</h1></div><p class="subtitle">Sistem Menu Digital</p></header>
+
 <section class="page-section active" id="page-beranda">
 <div class="beranda-hero"><span class="skull-big">&#9760;</span><div class="beranda-welcome">Selamat Datang, Nakama</div><div class="beranda-desc">Sistem menu digital NO-MERCYYY siap mengantar Anda menavigasi lautan data.</div></div>
 <div class="beranda-features">
@@ -543,7 +549,32 @@ function cleanStepLabel(raw){
 
 function sSGS(s){return '<svg width="'+s+'" height="'+(s*.5)+'" viewBox="0 0 40 20" fill="none" stroke="rgba(20,25,50,0.9)" stroke-width="1.5" stroke-linecap="round"><path d="M0,12 Q8,4 16,10 Q18,11 20,10 Q22,11 24,10 Q32,4 40,12"/></svg>'}
 function initBG(){var c=document.getElementById('starsLayer');for(var i=0;i<55;i++){var s=document.createElement('div');s.classList.add('star');if(Math.random()<.25)s.classList.add('warm');var z=Math.random()*2.5+.5;s.style.cssText='width:'+z+'px;height:'+z+'px;top:'+Math.random()*100+'%;left:'+Math.random()*100+'%;--dur:'+(Math.random()*3+1.5)+'s;animation-delay:'+Math.random()*3+'s';c.appendChild(s)}c=document.getElementById('cloudsLayer');for(var i=0;i<7;i++){var cl=document.createElement('div');cl.classList.add('cloud',i>3?'sunset':'dark');cl.style.cssText='width:'+(Math.random()*350+120)+'px;height:'+(Math.random()*50+25)+'px;top:'+(Math.random()*80+10)+'%;--dur:'+(Math.random()*70+40)+'s;animation-delay:-'+(Math.random()*70)+'s';c.appendChild(cl)}c=document.getElementById('seagullsLayer');for(var i=0;i<5;i++){var g=document.createElement('div');g.classList.add('seagull');var z=Math.random()*16+14;g.innerHTML=sSGS(z);g.style.cssText='top:'+(Math.random()*60+5)+'%;--dur:'+(Math.random()*30+22)+'s;--scale:'+(Math.random()*.4+.7).toFixed(2)+';animation-delay:-'+(Math.random()*30)+'s;opacity:'+(Math.random()*.12+.08).toFixed(2);c.appendChild(g)}c=document.getElementById('particles');for(var i=0;i<25;i++){var b=document.createElement('div');b.classList.add('bubble');var z=Math.random()*10+3;b.style.cssText='width:'+z+'px;height:'+z+'px;left:'+Math.random()*100+'%;bottom:'+Math.random()*8+'%;--dur:'+(Math.random()*10+6)+'s;animation-delay:'+(Math.random()*10)+'s';c.appendChild(b)}c=document.getElementById('sparkles');for(var i=0;i<12;i++){var s=document.createElement('div');s.classList.add('sparkle');var z=Math.random()*4+1.5;s.style.cssText='--size:'+z+'px;left:'+(Math.random()*60+20)+'%;bottom:'+(Math.random()*20+28)+'%;--dur:'+(Math.random()*8+5)+'s;animation-delay:'+(Math.random()*8)+'s';c.appendChild(s)}}
-function switchPage(p){activePage=p;document.querySelectorAll('.page-section').forEach(function(s){s.classList.remove('active')});var t=document.getElementById('page-'+p);if(t){t.classList.remove('active');void t.offsetWidth;t.classList.add('active')}document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active')});var ni=document.querySelector('.nav-item[data-page="'+p+'"]');if(ni)ni.classList.add('active');if(p==='random'&&!randomDataLoaded)fetchRandom();if(p==='bonus'&&!bonusDataLoaded)fetchBonus();if(p==='scatter'&&!eventDataLoaded)fetchEvent();updDbg()}
+
+/* Kontrol header NO-MERCYYY: hanya tampil di BERANDA */
+var mainHeader=document.getElementById('mainHeader');
+function switchPage(p){
+  activePage=p;
+  document.querySelectorAll('.page-section').forEach(function(s){s.classList.remove('active')});
+  var t=document.getElementById('page-'+p);
+  if(t){t.classList.remove('active');void t.offsetWidth;t.classList.add('active')}
+  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active')});
+  var ni=document.querySelector('.nav-item[data-page="'+p+'"]');
+  if(ni)ni.classList.add('active');
+  /* Tampilkan/sembunyikan header NO-MERCYYY */
+  if(p==='beranda'){
+    mainHeader.classList.remove('hidden-header');
+    mainHeader.style.display='';
+  } else {
+    mainHeader.classList.add('hidden-header');
+    /* Tunggu animasi sebelum benar-benar sembunyikan */
+    setTimeout(function(){ if(activePage!=='beranda') mainHeader.style.display='none'; },350);
+  }
+  if(p==='random'&&!randomDataLoaded)fetchRandom();
+  if(p==='bonus'&&!bonusDataLoaded)fetchBonus();
+  if(p==='scatter'&&!eventDataLoaded)fetchEvent();
+  updDbg();
+}
+
 function initSB(){var sb=document.getElementById('sidebar'),ov=document.getElementById('sidebarOverlay'),tg=document.getElementById('sidebarToggle');function op(){sb.classList.add('open');ov.classList.add('show')}function cl(){sb.classList.remove('open');ov.classList.remove('show')}tg.addEventListener('click',function(){sb.classList.contains('open')?cl():op()});ov.addEventListener('click',cl);document.querySelectorAll('.nav-item').forEach(function(it){it.addEventListener('click',function(){switchPage(this.dataset.page);if(window.innerWidth<=900)cl()})})}
 function toast(t,m,tp){var c=document.getElementById('toastContainer'),e=document.createElement('div');e.classList.add('toast');if(tp==='bonus')e.classList.add('bonus-toast');if(tp==='event')e.classList.add('event-toast');e.innerHTML='<svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span class="toast-title">'+t+'</span><span>'+m+'</span>';c.appendChild(e);setTimeout(function(){e.classList.add('toast-out');setTimeout(function(){e.remove()},300)},2000)}
 function updTime(){document.getElementById('systemTime').textContent=new Date().toLocaleTimeString('id-ID',{hour12:false})}
