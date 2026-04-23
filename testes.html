@@ -578,7 +578,6 @@
                         </div>
                         <div class="topup-card" id="topupCard">
                             <div class="topup-icon"><i class="fas fa-gamepad"></i></div>
-                            <div class="topup-title">Top Up Game Murah</div>
                             <div class="topup-desc">Harga terjangkau untuk berbagai game populer. Proses cepat & aman.</div>
                         </div>
                     </div>
@@ -1211,7 +1210,7 @@
         // ===== MISC =====
         document.getElementById('adminBtn').addEventListener('click', ()=>toast('Panel Admin'));
         document.getElementById('notifBtn').addEventListener('click', ()=>toast('Tidak ada notifikasi baru'));
-        document.getElementById('topupCard').addEventListener('click', ()=>toast('Top Up Game Murah'));
+        
 
         const modalOverlay = document.getElementById('modalOverlay');
         function openModal(item) { document.getElementById('modalImg').src=item.img; document.getElementById('modalTitle').textContent=item.name; document.getElementById('modalDesc').textContent=item.desc; modalOverlay.classList.add('show'); }
