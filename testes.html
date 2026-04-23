@@ -137,15 +137,22 @@
         .stab.active { background: var(--accent); color: #fff; box-shadow: 0 3px 12px var(--accent-glow); }
         .stab i { font-size: 12px; }
 
-        .sec-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 18px 22px; }
+        .sec-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 18px 22px; flex-wrap: wrap; gap: 12px; }
         .sec-header-left { display: flex; align-items: center; gap: 12px; }
         .sec-icon-red { font-size: 22px; color: var(--accent); filter: drop-shadow(0 0 8px rgba(230,57,70,0.4)); }
         .sec-title-white { font-size: 16px; font-weight: 800; color: var(--text); }
+
+        .sec-header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
         .btn-add-green { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.25s; border: 1px solid var(--green); background: var(--green); color: #fff; box-shadow: 0 4px 16px rgba(46,204,113,0.2); }
         .btn-add-green:hover { background: var(--green-dark); border-color: var(--green-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(46,204,113,0.3); }
         .btn-add-green:active { transform: translateY(0); }
         .btn-add-green i { font-size: 12px; }
+
+        .btn-reset-default { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.25s; border: 1px solid var(--border); background: var(--bg-input); color: var(--text-muted); }
+        .btn-reset-default:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-dim); transform: translateY(-1px); }
+        .btn-reset-default:active { transform: translateY(0); }
+        .btn-reset-default i { font-size: 11px; }
 
         .table-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
         .data-table { width: 100%; border-collapse: collapse; }
@@ -184,7 +191,7 @@
         .table-empty i { font-size: 40px; opacity: 0.2; margin-bottom: 12px; display: block; }
         .table-empty p { font-size: 13px; }
 
-        /* ===== MODAL FORM TAMBAH PROMO ===== */
+        /* ===== MODAL FORM PROMO ===== */
         .promo-modal-overlay {
             position: fixed; inset: 0;
             background: rgba(0,0,0,0.75);
@@ -221,9 +228,9 @@
             display: flex; align-items: center; gap: 10px;
         }
 
-        .promo-modal-title i {
-            color: var(--accent); font-size: 16px;
-        }
+        .promo-modal-title i { font-size: 16px; }
+        .promo-modal-title .icon-add { color: var(--green); }
+        .promo-modal-title .icon-edit { color: var(--blue); }
 
         .promo-modal-close-x {
             width: 34px; height: 34px; border-radius: 8px;
@@ -311,6 +318,59 @@
         .btn-batal:hover { background: var(--bg-card-alt); border-color: var(--border-light); color: var(--text); transform: translateY(-1px); }
         .btn-batal:active { transform: translateY(0); }
         .btn-batal i { font-size: 13px; }
+
+        /* ===== KONFIRMASI HAPUS ===== */
+        .confirm-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(8px);
+            z-index: 350;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .confirm-overlay.show { display: flex; }
+        .confirm-box {
+            background: #0e0e0e; border: 1px solid var(--border-light);
+            border-radius: 18px; width: 380px; max-width: 92vw;
+            padding: 28px 28px 24px; text-align: center;
+            animation: promoIn 0.3s cubic-bezier(0.16,1,0.3,1);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+        }
+        .confirm-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--accent-glow); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+        .confirm-icon i { font-size: 24px; color: var(--accent); }
+        .confirm-title { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+        .confirm-desc { font-size: 13px; color: var(--text-sec); margin-bottom: 22px; line-height: 1.5; }
+        .confirm-desc strong { color: var(--text); }
+        .confirm-btns { display: flex; gap: 10px; }
+        .confirm-btn-hapus {
+            flex: 1; padding: 11px 16px; border-radius: 10px;
+            border: 1px solid var(--accent); background: var(--accent);
+            color: #fff; font-size: 13px; font-weight: 700;
+            font-family: 'Inter', sans-serif; cursor: pointer;
+            transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .confirm-btn-hapus:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+        .confirm-btn-batal {
+            flex: 1; padding: 11px 16px; border-radius: 10px;
+            border: 1px solid var(--border); background: var(--bg-input);
+            color: var(--text-sec); font-size: 13px; font-weight: 700;
+            font-family: 'Inter', sans-serif; cursor: pointer;
+            transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .confirm-btn-batal:hover { background: var(--bg-card-alt); color: var(--text); }
+
+        /* ===== KONFIRMASI RESET ===== */
+        .confirm-icon.warn { background: var(--orange-dim); }
+        .confirm-icon.warn i { color: var(--orange); }
+        .confirm-btn-reset {
+            flex: 1; padding: 11px 16px; border-radius: 10px;
+            border: 1px solid var(--orange); background: var(--orange);
+            color: #fff; font-size: 13px; font-weight: 700;
+            font-family: 'Inter', sans-serif; cursor: pointer;
+            transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .confirm-btn-reset:hover { background: #cf6d14; border-color: #cf6d14; }
 
         /* ===== BERANDA ===== */
         .datetime-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
@@ -418,7 +478,6 @@
         .badge-ewallet { background:rgba(46,204,113,0.12); color:#58d68d; }
         .badge-qris { background:rgba(243,156,18,0.12); color:#f5b041; }
 
-        /* Gambar modal */
         .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.75); backdrop-filter:blur(10px); z-index:300; display:none; align-items:center; justify-content:center; }
         .modal-overlay.show { display:flex; }
         .modal-box { background:#111; border:1px solid var(--border-light); border-radius:20px; overflow:hidden; max-width:520px; width:92%; animation:mScale 0.3s cubic-bezier(0.16,1,0.3,1); box-shadow:0 30px 80px rgba(0,0,0,0.7); }
@@ -433,12 +492,27 @@
         .toast-wrap { position:fixed; top:60px; right:24px; z-index:400; display:flex; flex-direction:column; gap:8px; pointer-events:none; }
         .toast { background:#161616; border:1px solid var(--border-light); border-radius:12px; padding:12px 20px; font-size:13px; font-weight:600; color:var(--text); box-shadow:0 10px 36px rgba(0,0,0,0.6); display:flex; align-items:center; gap:10px; animation:tIn 0.3s ease, tOut 0.3s ease 2s forwards; pointer-events:auto; }
         .toast i { color:var(--accent); font-size:14px; }
+        .toast .toast-icon-green { color: var(--green); }
+        .toast .toast-icon-blue { color: var(--blue); }
+        .toast .toast-icon-red { color: var(--accent); }
+        .toast .toast-icon-orange { color: var(--orange); }
         @keyframes tIn { from{opacity:0;transform:translateX(30px);} to{opacity:1;transform:translateX(0);} }
         @keyframes tOut { from{opacity:1;transform:translateX(0);} to{opacity:0;transform:translateX(30px);} }
 
+        .row-highlight-edit { animation: rowFlashBlue 1.5s ease; }
+        @keyframes rowFlashBlue { 0%{background:rgba(52,152,219,0.15);} 100%{background:transparent;} }
+        .row-highlight-add { animation: rowFlashGreen 1.5s ease; }
+        @keyframes rowFlashGreen { 0%{background:rgba(46,204,113,0.12);} 100%{background:transparent;} }
+        .row-highlight-delete { animation: rowFlashRed 0.4s ease forwards; }
+        @keyframes rowFlashRed { 0%{opacity:1;transform:translateX(0);} 100%{opacity:0;transform:translateX(-30px);} }
+
+        /* Storage indicator */
+        .storage-indicator { display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:600; color:var(--text-muted); padding:5px 12px; border-radius:8px; background:var(--bg-input); border:1px solid var(--border); }
+        .storage-indicator .dot { width:5px; height:5px; border-radius:50%; background:var(--green); animation: pdot 2s infinite; }
+
         @media (max-width:1100px) { .col-right{width:260px;} .topup-card{width:220px;} }
         @media (max-width:900px) { .sidebar{width:90px;} .main{margin-left:90px;} .sb-label{font-size:9px;} .sb-icon{font-size:20px;} .two-col{flex-direction:column;} .col-right{width:100%;} .topup-card{width:100%;} .welcome-row{flex-direction:column;} }
-        @media (max-width:640px) { .sidebar{width:70px;} .main{margin-left:70px;} .sb-label{font-size:8px;} .sb-icon{font-size:18px;} .scroll-area{padding:16px;} .card-grid-gambar{grid-template-columns:1fr 1fr;gap:10px;} .search-box-gambar input{width:140px;} .search-box-gambar input:focus{width:160px;} .settings-hero{padding:22px 20px 20px;} .settings-hero-title{font-size:18px;} .data-table thead th,.data-table tbody td{padding:10px 12px;} .sec-header{flex-direction:column;gap:14px;align-items:flex-start;} .btn-add-green{width:100%;justify-content:center;} .promo-modal{margin:16px;} .promo-modal-footer{flex-direction:column;} .form-input-num{width:100%;} }
+        @media (max-width:640px) { .sidebar{width:70px;} .main{margin-left:70px;} .sb-label{font-size:8px;} .sb-icon{font-size:18px;} .scroll-area{padding:16px;} .card-grid-gambar{grid-template-columns:1fr 1fr;gap:10px;} .search-box-gambar input{width:140px;} .search-box-gambar input:focus{width:160px;} .settings-hero{padding:22px 20px 20px;} .settings-hero-title{font-size:18px;} .data-table thead th,.data-table tbody td{padding:10px 12px;} .sec-header{flex-direction:column;gap:14px;align-items:flex-start;} .sec-header-right{width:100%;} .btn-add-green,.btn-reset-default{width:100%;justify-content:center;} .promo-modal{margin:16px;} .promo-modal-footer{flex-direction:column;} .form-input-num{width:100%;} }
     </style>
 </head>
 <body>
@@ -568,9 +642,15 @@
                                 <i class="fas fa-bullhorn sec-icon-red"></i>
                                 <div class="sec-title-white">Kelola Informasi & Pengumuman</div>
                             </div>
-                            <button class="btn-add-green" id="btnTambahPromo">
-                                <i class="fas fa-plus"></i> Tambah Promo Baru
-                            </button>
+                            <div class="sec-header-right">
+                                <span class="storage-indicator"><span class="dot"></span> Tersimpan di localStorage</span>
+                                <button class="btn-reset-default" id="btnResetDefault">
+                                    <i class="fas fa-rotate-left"></i> Reset Default
+                                </button>
+                                <button class="btn-add-green" id="btnTambahPromo">
+                                    <i class="fas fa-plus"></i> Tambah Promo Baru
+                                </button>
+                            </div>
                         </div>
                         <div class="table-box">
                             <table class="data-table">
@@ -626,12 +706,12 @@
         </div>
     </div>
 
-    <!-- MODAL TAMBAH PROMO -->
+    <!-- MODAL TAMBAH / EDIT PROMO -->
     <div class="promo-modal-overlay" id="promoModalOverlay">
         <div class="promo-modal">
             <div class="promo-modal-header">
-                <div class="promo-modal-title">
-                    <i class="fas fa-plus-circle"></i> Tambah Promo
+                <div class="promo-modal-title" id="promoModalTitle">
+                    <i class="fas fa-plus-circle icon-add"></i> Tambah Promo
                 </div>
                 <div class="promo-modal-close-x" id="promoCloseX">
                     <i class="fas fa-xmark"></i>
@@ -675,6 +755,32 @@
         </div>
     </div>
 
+    <!-- MODAL KONFIRMASI HAPUS -->
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-box">
+            <div class="confirm-icon"><i class="fas fa-trash-can"></i></div>
+            <div class="confirm-title">Hapus Promo?</div>
+            <div class="confirm-desc" id="confirmDesc">Apakah Anda yakin ingin menghapus <strong id="confirmName"></strong>?</div>
+            <div class="confirm-btns">
+                <button class="confirm-btn-hapus" id="confirmHapus"><i class="fas fa-trash-can"></i> Hapus</button>
+                <button class="confirm-btn-batal" id="confirmBatal"><i class="fas fa-xmark"></i> Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL KONFIRMASI RESET -->
+    <div class="confirm-overlay" id="confirmResetOverlay">
+        <div class="confirm-box">
+            <div class="confirm-icon warn"><i class="fas fa-rotate-left"></i></div>
+            <div class="confirm-title">Reset ke Default?</div>
+            <div class="confirm-desc">Semua perubahan data promo akan dihapus dan dikembalikan ke data awal. Tindakan ini tidak bisa dibatalkan.</div>
+            <div class="confirm-btns">
+                <button class="confirm-btn-reset" id="confirmReset"><i class="fas fa-rotate-left"></i> Reset</button>
+                <button class="confirm-btn-batal" id="confirmResetBatal"><i class="fas fa-xmark"></i> Batal</button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL GAMBAR -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-box">
@@ -693,8 +799,11 @@
         const HARI_ARR = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
         const BULAN_ARR = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 
-        // ===== DATA INFO =====
-        let infoData = [
+        // ★ PERMANEN — Kunci localStorage
+        const STORAGE_KEY = 'nomercy_promo_data';
+
+        // ★ PERMANEN — Data default (hanya dipakai saat pertama kali / reset)
+        const DEFAULT_DATA = [
             { id:1, hari:'Senin', judul:'Bonus Deposit Harian', deskripsi:'Dapatkan bonus 10% untuk setiap deposit minimal Rp 50.000 pada hari Senin.', urutan:1 },
             { id:2, hari:'Selasa', judul:'Cashback Slot Games', deskripsi:'Cashback 5% untuk semua permainan slot setiap hari Selasa tanpa syarat turnover.', urutan:2 },
             { id:3, hari:'Rabu', judul:'Freebet Live Casino', deskripsi:'Freebet Rp 25.000 untuk member aktif yang bermain di live casino hari Rabu.', urutan:3 },
@@ -704,7 +813,40 @@
             { id:7, hari:'Minggu', judul:'Bonus Referral', deskripsi:'Bonus referral 2% seumur hidup dari setiap taruhan teman yang Anda undang.', urutan:7 },
             { id:8, hari:'Setiap Hari', judul:'Promo Member Baru', deskripsi:'Bonus new member 100% untuk deposit pertama kali, maksimal Rp 1.000.000.', urutan:0 }
         ];
-        let nextId = 9;
+
+        // ★ PERMANEN — Fungsi simpan ke localStorage
+        function saveToStorage() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(infoData));
+            } catch(e) {
+                console.warn('localStorage penuh atau tidak tersedia:', e);
+            }
+        }
+
+        // ★ PERMANEN — Fungsi muat dari localStorage
+        function loadFromStorage() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        return parsed;
+                    }
+                }
+            } catch(e) {
+                console.warn('Gagal memuat data dari localStorage:', e);
+            }
+            return null;
+        }
+
+        // ★ PERMANEN — Muat data: prioritas localStorage, fallback ke default
+        let infoData = loadFromStorage() || JSON.parse(JSON.stringify(DEFAULT_DATA));
+
+        // ★ PERMANEN — nextId dihitung dari data yang ada
+        let nextId = infoData.length > 0 ? Math.max(...infoData.map(d => d.id)) + 1 : 1;
+
+        // ===== STATE EDIT =====
+        let editingId = null;
 
         function hariClass(h) {
             const m = { 'Senin':'hari-senin','Selasa':'hari-selasa','Rabu':'hari-rabu','Kamis':'hari-kamis','Jumat':'hari-jumat','Sabtu':'hari-sabtu','Minggu':'hari-minggu','Setiap Hari':'hari-setiap' };
@@ -713,7 +855,7 @@
 
         const infoTableBody = document.getElementById('infoTableBody');
 
-        function renderInfoTable() {
+        function renderInfoTable(highlightId, highlightType) {
             infoTableBody.innerHTML = '';
             const sorted = [...infoData].sort((a,b) => a.urutan - b.urutan);
 
@@ -724,6 +866,12 @@
 
             sorted.forEach(item => {
                 const tr = document.createElement('tr');
+                tr.dataset.id = item.id;
+
+                if (highlightId === item.id && highlightType) {
+                    tr.classList.add(highlightType === 'edit' ? 'row-highlight-edit' : 'row-highlight-add');
+                }
+
                 tr.innerHTML = `
                     <td><span class="hari-badge ${hariClass(item.hari)}">${item.hari}</span></td>
                     <td><span class="tbl-judul">${item.judul}</span></td>
@@ -740,80 +888,91 @@
 
             document.querySelectorAll('.aksi-btn.edit').forEach(btn => {
                 btn.addEventListener('click', () => {
-                    const item = infoData.find(d => d.id === parseInt(btn.dataset.id));
-                    if (item) toast('Edit: ' + item.judul);
+                    const id = parseInt(btn.dataset.id);
+                    const item = infoData.find(d => d.id === id);
+                    if (item) openEditModal(item);
                 });
             });
 
             document.querySelectorAll('.aksi-btn.delete').forEach(btn => {
                 btn.addEventListener('click', () => {
-                    const idx = infoData.findIndex(d => d.id === parseInt(btn.dataset.id));
-                    if (idx > -1) {
-                        const nama = infoData[idx].judul;
-                        infoData.splice(idx, 1);
-                        renderInfoTable();
-                        toast('Dihapus: ' + nama);
-                    }
+                    const id = parseInt(btn.dataset.id);
+                    const item = infoData.find(d => d.id === id);
+                    if (item) openConfirmDelete(item);
                 });
             });
         }
 
         renderInfoTable();
 
-        // ===== MODAL TAMBAH PROMO =====
+        // ===== MODAL PROMO (TAMBAH / EDIT) =====
         const promoModal = document.getElementById('promoModalOverlay');
+        const promoModalTitle = document.getElementById('promoModalTitle');
         const formHari = document.getElementById('formHari');
         const formJudul = document.getElementById('formJudul');
         const formDeskripsi = document.getElementById('formDeskripsi');
         const formUrutan = document.getElementById('formUrutan');
+        const btnSimpan = document.getElementById('btnSimpan');
 
-        function openPromoModal() {
-            // Reset form
+        function openAddModal() {
+            editingId = null;
             formHari.value = 'Senin';
             formJudul.value = '';
             formDeskripsi.value = '';
             formUrutan.value = '0';
+            promoModalTitle.innerHTML = '<i class="fas fa-plus-circle icon-add"></i> Tambah Promo';
+            btnSimpan.innerHTML = '<i class="fas fa-check"></i> Simpan';
             promoModal.classList.add('show');
-            // Focus ke judul setelah animasi
+            setTimeout(() => formJudul.focus(), 350);
+        }
+
+        function openEditModal(item) {
+            editingId = item.id;
+            formHari.value = item.hari;
+            formJudul.value = item.judul;
+            formDeskripsi.value = item.deskripsi;
+            formUrutan.value = item.urutan;
+            promoModalTitle.innerHTML = '<i class="fas fa-pen-to-square icon-edit"></i> Edit Promo';
+            btnSimpan.innerHTML = '<i class="fas fa-check"></i> Perbarui';
+            promoModal.classList.add('show');
             setTimeout(() => formJudul.focus(), 350);
         }
 
         function closePromoModal() {
             promoModal.classList.remove('show');
+            formJudul.style.borderColor = '';
+            formJudul.style.boxShadow = '';
+            formDeskripsi.style.borderColor = '';
+            formDeskripsi.style.boxShadow = '';
         }
 
-        // Tombol hijau "Tambah Promo Baru"
-        document.getElementById('btnTambahPromo').addEventListener('click', openPromoModal);
-
-        // Tombol X di modal
+        document.getElementById('btnTambahPromo').addEventListener('click', openAddModal);
         document.getElementById('promoCloseX').addEventListener('click', closePromoModal);
-
-        // Tombol Batal
         document.getElementById('btnBatal').addEventListener('click', closePromoModal);
-
-        // Klik overlay untuk tutup
         promoModal.addEventListener('click', e => { if (e.target === promoModal) closePromoModal(); });
 
-        // Escape untuk tutup
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closePromoModal(); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                closePromoModal();
+                closeConfirmDelete();
+                closeConfirmReset();
+                closeModal();
+            }
+        });
 
-        // Tombol Simpan
-        document.getElementById('btnSimpan').addEventListener('click', () => {
+        // ★ PERMANEN — Simpan juga menyimpan ke localStorage
+        btnSimpan.addEventListener('click', () => {
             const hari = formHari.value;
             const judul = formJudul.value.trim();
             const deskripsi = formDeskripsi.value.trim();
             const urutan = parseInt(formUrutan.value) || 0;
 
-            // Validasi
             if (!judul) {
                 formJudul.style.borderColor = 'var(--accent)';
                 formJudul.style.boxShadow = '0 0 0 3px var(--accent-glow)';
                 formJudul.focus();
-                toast('Judul promo wajib diisi');
-                setTimeout(() => {
-                    formJudul.style.borderColor = '';
-                    formJudul.style.boxShadow = '';
-                }, 2000);
+                toast('Judul promo wajib diisi', 'red');
+                setTimeout(() => { formJudul.style.borderColor = ''; formJudul.style.boxShadow = ''; }, 2000);
                 return;
             }
 
@@ -821,37 +980,115 @@
                 formDeskripsi.style.borderColor = 'var(--accent)';
                 formDeskripsi.style.boxShadow = '0 0 0 3px var(--accent-glow)';
                 formDeskripsi.focus();
-                toast('Deskripsi promo wajib diisi');
-                setTimeout(() => {
-                    formDeskripsi.style.borderColor = '';
-                    formDeskripsi.style.boxShadow = '';
-                }, 2000);
+                toast('Deskripsi promo wajib diisi', 'red');
+                setTimeout(() => { formDeskripsi.style.borderColor = ''; formDeskripsi.style.boxShadow = ''; }, 2000);
                 return;
             }
 
-            // Tambah data baru
-            infoData.push({
-                id: nextId++,
-                hari: hari,
-                judul: judul,
-                deskripsi: deskripsi,
-                urutan: urutan
-            });
-
-            renderInfoTable();
-            closePromoModal();
-            toast('Promo "' + judul + '" berhasil ditambahkan');
-
-            // Scroll ke baris baru
-            setTimeout(() => {
-                const rows = infoTableBody.querySelectorAll('tr');
-                const lastRow = rows[rows.length - 1];
-                if (lastRow) {
-                    lastRow.style.background = 'rgba(46,204,113,0.08)';
-                    lastRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    setTimeout(() => { lastRow.style.background = ''; }, 1500);
+            if (editingId !== null) {
+                // MODE EDIT
+                const item = infoData.find(d => d.id === editingId);
+                if (item) {
+                    item.hari = hari;
+                    item.judul = judul;
+                    item.deskripsi = deskripsi;
+                    item.urutan = urutan;
+                    saveToStorage(); // ★ PERMANEN
+                    renderInfoTable(editingId, 'edit');
+                    closePromoModal();
+                    toast('Promo "' + judul + '" berhasil diperbarui', 'blue');
+                    scrollToRow(editingId);
                 }
+            } else {
+                // MODE TAMBAH
+                const newId = nextId++;
+                infoData.push({
+                    id: newId,
+                    hari: hari,
+                    judul: judul,
+                    deskripsi: deskripsi,
+                    urutan: urutan
+                });
+                saveToStorage(); // ★ PERMANEN
+                renderInfoTable(newId, 'add');
+                closePromoModal();
+                toast('Promo "' + judul + '" berhasil ditambahkan', 'green');
+                scrollToRow(newId);
+            }
+        });
+
+        function scrollToRow(id) {
+            setTimeout(() => {
+                const row = infoTableBody.querySelector(`tr[data-id="${id}"]`);
+                if (row) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 100);
+        }
+
+        // ===== KONFIRMASI HAPUS =====
+        const confirmOverlay = document.getElementById('confirmOverlay');
+        const confirmName = document.getElementById('confirmName');
+        let pendingDeleteId = null;
+
+        function openConfirmDelete(item) {
+            pendingDeleteId = item.id;
+            confirmName.textContent = item.judul;
+            confirmOverlay.classList.add('show');
+        }
+
+        function closeConfirmDelete() {
+            confirmOverlay.classList.remove('show');
+            pendingDeleteId = null;
+        }
+
+        document.getElementById('confirmBatal').addEventListener('click', closeConfirmDelete);
+        confirmOverlay.addEventListener('click', e => { if (e.target === confirmOverlay) closeConfirmDelete(); });
+
+        // ★ PERMANEN — Hapus juga menyimpan ke localStorage
+        document.getElementById('confirmHapus').addEventListener('click', () => {
+            if (pendingDeleteId === null) return;
+            const idx = infoData.findIndex(d => d.id === pendingDeleteId);
+            if (idx > -1) {
+                const nama = infoData[idx].judul;
+                const row = infoTableBody.querySelector(`tr[data-id="${pendingDeleteId}"]`);
+                if (row) {
+                    row.classList.add('row-highlight-delete');
+                    setTimeout(() => {
+                        infoData.splice(idx, 1);
+                        saveToStorage(); // ★ PERMANEN
+                        renderInfoTable();
+                        toast('Promo "' + nama + '" berhasil dihapus', 'red');
+                    }, 400);
+                } else {
+                    infoData.splice(idx, 1);
+                    saveToStorage(); // ★ PERMANEN
+                    renderInfoTable();
+                    toast('Promo "' + nama + '" berhasil dihapus', 'red');
+                }
+            }
+            closeConfirmDelete();
+        });
+
+        // ★ PERMANEN — Reset ke data default
+        const confirmResetOverlay = document.getElementById('confirmResetOverlay');
+
+        function closeConfirmReset() {
+            confirmResetOverlay.classList.remove('show');
+        }
+
+        document.getElementById('btnResetDefault').addEventListener('click', () => {
+            confirmResetOverlay.classList.add('show');
+        });
+
+        document.getElementById('confirmResetBatal').addEventListener('click', closeConfirmReset);
+        confirmResetOverlay.addEventListener('click', e => { if (e.target === confirmResetOverlay) closeConfirmReset(); });
+
+        document.getElementById('confirmReset').addEventListener('click', () => {
+            infoData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+            nextId = Math.max(...infoData.map(d => d.id)) + 1;
+            saveToStorage(); // ★ PERMANEN
+            renderInfoTable();
+            closeConfirmReset();
+            toast('Data promo berhasil direset ke default', 'orange');
         });
 
         // ===== SETTINGS TABS =====
@@ -870,7 +1107,6 @@
             tab.classList.add('active');
             Object.values(stabContents).forEach(c => { if (c) c.style.display = 'none'; });
             if (stabContents[tab.dataset.stab]) stabContents[tab.dataset.stab].style.display = 'block';
-            toast(tab.textContent.trim());
         });
 
         // ===== SIDEBAR NAV =====
@@ -883,7 +1119,6 @@
                 const page = item.dataset.page;
                 Object.values(pages).forEach(p => p.classList.remove('active'));
                 if (pages[page]) pages[page].classList.add('active');
-                toast(item.querySelector('.sb-label').textContent.replace(/\n/g,' '));
             });
         });
 
@@ -963,7 +1198,6 @@
             pill.classList.add('active');
             currentFilter = pill.dataset.filter;
             applyGambarFilters();
-            toast(pill.textContent.trim());
         });
         searchGambar.addEventListener('input', applyGambarFilters);
         function applyGambarFilters() {
@@ -986,7 +1220,19 @@
         modalOverlay.addEventListener('click', e=>{ if(e.target===modalOverlay) closeModal(); });
 
         const toastWrap = document.getElementById('toastWrap');
-        function toast(msg) { const t=document.createElement('div'); t.className='toast'; t.innerHTML=`<i class="fas fa-circle-info"></i> ${msg}`; toastWrap.appendChild(t); setTimeout(()=>{if(t.parentNode)t.remove();},2400); }
+        function toast(msg, type) {
+            const t = document.createElement('div');
+            t.className = 'toast';
+            let iconClass = 'fas fa-circle-info';
+            let iconColorClass = '';
+            if (type === 'green') { iconClass = 'fas fa-circle-check'; iconColorClass = 'toast-icon-green'; }
+            else if (type === 'blue') { iconClass = 'fas fa-pen-to-square'; iconColorClass = 'toast-icon-blue'; }
+            else if (type === 'red') { iconClass = 'fas fa-circle-exclamation'; iconColorClass = 'toast-icon-red'; }
+            else if (type === 'orange') { iconClass = 'fas fa-rotate-left'; iconColorClass = 'toast-icon-orange'; }
+            t.innerHTML = `<i class="${iconClass} ${iconColorClass}"></i> ${msg}`;
+            toastWrap.appendChild(t);
+            setTimeout(()=>{if(t.parentNode)t.remove();},2400);
+        }
 
         function updateClock() {
             const now=new Date();
