@@ -57,7 +57,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .sb-hd{padding:22px 22px 16px;border-bottom:1px solid var(--bdr);flex-shrink:0}
 .sb-logo{display:flex;align-items:center;gap:14px}
 .sb-icon{width:38px;height:38px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--cyan),var(--violet));display:flex;align-items:center;justify-content:center;box-shadow:0 2px 14px var(--cyan-g)}
-.sb-icon svg{width:19px;height:19px;fill:#fff}
+.sb-icon svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:2}
 .sb-title{font-family:'JetBrains Mono',monospace;font-size:.84rem;font-weight:600;letter-spacing:3px;color:var(--text);background:linear-gradient(90deg,var(--text),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .sb-sub{font-family:'Inter',sans-serif;font-size:.7rem;color:var(--text2);margin-top:5px;padding-left:52px;opacity:.5;letter-spacing:.3px}
 .sb-nav{flex:1;overflow-y:auto;padding:10px 14px;display:flex;flex-direction:column;gap:2px}
@@ -279,7 +279,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .dbg-b{position:fixed;bottom:12px;right:12px;background:rgba(0,229,255,.04);border:1px solid var(--bdr-m);color:var(--cyan);padding:4px 8px;border-radius:var(--radius-xs);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.52rem;z-index:100;transition:all .25s;letter-spacing:.8px}
 .dbg-b:hover{background:rgba(0,229,255,.08);transform:translateY(-1px)}
 
-.footer{position:absolute;bottom:12px;left:0;right:0;text-align:center}
+.footer{position:absolute;bottom:12px;left:0;right:0;text-align:center;pointer-events:none}
 .footer-t{color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:1.5px;opacity:.15}
 
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--cyan-m),var(--violet-m));border-radius:2px}
@@ -356,7 +356,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 <div class="sb-sub">Navigation System</div>
 </div>
 <nav class="sb-nav">
-<div class="ni-wrap active" data-page="BERANDA"><div class="ni-ic"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div><div class="ni-txt"><div class="ni-lbl">BERANDA</div><div class="ni-desc">Halaman utama</div></div></div>
+<!-- FIX #1: data-page="BERANDA" diubah menjadi "beranda" agar cocok dengan id="page-beranda" -->
+<div class="ni-wrap active" data-page="beranda"><div class="ni-ic"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div><div class="ni-txt"><div class="ni-lbl">BERANDA</div><div class="ni-desc">Halaman utama</div></div></div>
 <div class="ni-wrap" data-page="jadwal"><div class="ni-ic"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg></div><div class="ni-txt"><div class="ni-lbl">JADWAL PASARAN</div><div class="ni-desc">Jadwal buka &amp; tutup</div></div></div>
 <div class="ni-wrap" data-page="random"><div class="ni-ic"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></div><div class="ni-txt"><div class="ni-lbl">RANDOM</div><div class="ni-desc">Link customer service</div></div></div>
 <div class="ni-wrap" data-page="prediksi"><div class="ni-ic"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg></div><div class="ni-txt"><div class="ni-lbl">PREDIKSI TOGEL</div><div class="ni-desc">Analisa &amp; prediksi</div></div></div>
@@ -444,6 +445,23 @@ var FETCH_TIMEOUT=8000;
 var CPY='<svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>';
 var CHK='<svg fill="currentColor" viewBox="0 0 24 24" style="width:10px;height:10px"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
 
+/* FIX #3: Fungsi copy dengan fallback untuk non-HTTPS / file:// */
+function copyText(text){
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+        return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function(resolve,reject){
+        var ta=document.createElement('textarea');
+        ta.value=text;
+        ta.style.cssText='position:fixed;opacity:0;left:-9999px;top:-9999px';
+        document.body.appendChild(ta);
+        ta.focus();ta.select();
+        try{document.execCommand('copy');resolve();}
+        catch(e){reject(e);}
+        finally{document.body.removeChild(ta);}
+    });
+}
+
 function cleanStepLabel(r){if(!r)return '';return r.replace(/^STEP\s*/i,'').trim()||r}
 
 async function fetchWithTimeout(url,timeout){
@@ -498,10 +516,10 @@ function updDbg(){
 if(!debugMode)return;
 var ts=0;for(var k=0;k<eventData.length;k++)ts+=eventData[k].steps.length;
 document.getElementById('debugInfo').innerHTML=
-<div>Random: '+sheetData.length+' | F: '+filteredData.length+'</div>'+
-<div>Bonus: '+bonusData.length+' | F: '+filteredBonusData.length+'</div>'+
-<div>Event: '+eventData.length+' ('+ts+')</div>'+
-<div>Active: '+activePage+'</div>';
+'<div>Random: '+sheetData.length+' | F: '+filteredData.length+'</div>'+
+'<div>Bonus: '+bonusData.length+' | F: '+filteredBonusData.length+'</div>'+
+'<div>Event: '+eventData.length+' ('+ts+')</div>'+
+'<div>Active: '+activePage+'</div>';
 }
 
 function lev(a,b){var m=[];for(var i=0;i<=b.length;i++)m[i]=[i];for(var j=0;j<=a.length;j++)m[0][j]=j;for(var i=1;i<=b.length;i++)for(var j=1;j<=a.length;j++){if(b.charAt(i-1)===a.charAt(j-1))m[i][j]=m[i-1][j-1];else m[i][j]=Math.min(m[i-1][j-1]+1,m[i][j-1]+1,m[i-1][j]+1)}return m[b.length][a.length]}
@@ -630,10 +648,11 @@ ct.querySelectorAll('.cp').forEach(function(b){
 b.addEventListener('click',function(e){
 e.stopPropagation();
 var it=filteredData[parseInt(this.dataset.ci)];if(!it)return;
-navigator.clipboard.writeText(it.info).then(function(){
+/* FIX #3: pakai copyText() yang punya fallback */
+copyText(it.info).then(function(){
 b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);
 toast(it.title,'ok','random');
-});
+}).catch(function(){toast('Gagal','copy error','random');});
 });
 });
 }
@@ -672,10 +691,10 @@ ct.querySelectorAll('.bc-cp').forEach(function(b){
 b.addEventListener('click',function(e){
 e.stopPropagation();
 var it=filteredBonusData[parseInt(this.dataset.bci)];if(!it)return;
-navigator.clipboard.writeText(it.info).then(function(){
+copyText(it.info).then(function(){
 b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);
 toast(it.title,'ok','bonus');
-});
+}).catch(function(){toast('Gagal','copy error','bonus');});
 });
 });
 }
@@ -724,10 +743,10 @@ b.addEventListener('click',function(e){
 e.stopPropagation();
 var ci=parseInt(this.dataset.sci),ki=parseInt(this.dataset.ski);
 var fd=filteredEventData[ci];if(!fd||!fd.steps[ki])return;
-navigator.clipboard.writeText(fd.steps[ki].text).then(function(){
+copyText(fd.steps[ki].text).then(function(){
 b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);
 toast('Ok','success','event');
-});
+}).catch(function(){toast('Gagal','copy error','event');});
 });
 });
 }
@@ -766,31 +785,31 @@ evRender();updDbg();
 document.getElementById('detailClose').addEventListener('click',function(){document.getElementById('detailModal').classList.remove('show');currentDetail=null});
 document.getElementById('copyButton').addEventListener('click',function(){
 if(!currentDetail)return;
-navigator.clipboard.writeText(currentDetail.info).then(function(){
+copyText(currentDetail.info).then(function(){
 var el=document.getElementById('copySuccess');el.classList.add('show');
 toast(currentDetail.title,'ok','random');setTimeout(function(){el.classList.remove('show')},2000);
-});
+}).catch(function(){toast('Gagal','copy error','random');});
 });
 document.getElementById('detailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentDetail=null}});
 
 document.getElementById('bonusDetailClose').addEventListener('click',function(){document.getElementById('bonusDetailModal').classList.remove('show');currentBonusDetail=null});
 document.getElementById('bonusCopyButton').addEventListener('click',function(){
 if(!currentBonusDetail)return;
-navigator.clipboard.writeText(currentBonusDetail.info).then(function(){
+copyText(currentBonusDetail.info).then(function(){
 var el=document.getElementById('bonusCopySuccess');el.classList.add('show');
 toast(currentBonusDetail.title,'ok','bonus');setTimeout(function(){el.classList.remove('show')},2000);
-});
+}).catch(function(){toast('Gagal','copy error','bonus');});
 });
 document.getElementById('bonusDetailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentBonusDetail=null}});
 
 document.getElementById('eventDetailClose').addEventListener('click',function(){document.getElementById('eventDetailModal').classList.remove('show');currentEventDetail=null});
 document.getElementById('eventCopyAllBtn').addEventListener('click',function(){
 if(!currentEventDetail)return;
-navigator.clipboard.writeText(buildCardText(currentEventDetail)).then(function(){
+copyText(buildCardText(currentEventDetail)).then(function(){
 var el=document.getElementById('eventCopyAllSuccess');el.classList.add('show');
 toast(currentEventDetail.title,currentEventDetail.steps.length+' items','event');
 setTimeout(function(){el.classList.remove('show')},2000);
-});
+}).catch(function(){toast('Gagal','copy error','event');});
 });
 document.getElementById('eventDetailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentEventDetail=null}});
 
