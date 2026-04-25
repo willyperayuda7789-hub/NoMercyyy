@@ -409,10 +409,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 
 <!-- 3 kartu kategori seperti contoh -->
 <div class="ev-cats">
-  <div class="ev-cat cy" data-evcat="rrn-qris">
     <div class="ev-cat-ring"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13-2h-2v4h-4v2h4v4h2v-4z"/></svg></div>
     <div class="ev-cat-name">EVENT SCATTER</div>
-    <div class="ev-cat-badge" id="evBadge-rrn-qris">0</div>
   </div>
   <div class="ev-cat rs" data-evcat="bank-ewallet">
     <div class="ev-cat-ring"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zm-4.5-9L9 4.5 11.5 1h3l-2.5 3.5L15 8h-3.5z"/></svg></div>
@@ -464,14 +462,12 @@ var randomDataLoaded=false,bonusDataLoaded=false,eventDataLoaded=false;
 var SHEET_ID='1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
 var RANDOM_GID='0',BONUS_GID='252063146',EVENT_GID='1232746230';
 /* GID untuk 2 kategori baru — ganti sesuai sheet */
-var RRN_QRIS_GID='0',EVENT_LAPAK99_GID='0';
 var FETCH_TIMEOUT=8000;
 var CPY='<svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>';
 var CHK='<svg fill="currentColor" viewBox="0 0 24 24" style="width:10px;height:10px"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
 
 /* Data store untuk 3 kategori event */
 var evCatStore={
-  'rrn-qris':{data:[],filtered:[],loaded:false,gid:RRN_QRIS_GID},
   'bank-ewallet':{data:[],filtered:[],loaded:false,gid:BONUS_GID},
   'event-lapak99':{data:[],filtered:[],loaded:false,gid:EVENT_LAPAK99_GID}
 };
