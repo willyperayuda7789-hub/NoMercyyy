@@ -259,28 +259,30 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .ep-pill{display:inline-flex;align-items:center;gap:4px;background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.12);color:var(--violet);padding:3px 10px;border-radius:var(--radius-xs);font-family:'JetBrains Mono',monospace;font-size:.55rem;font-weight:600;letter-spacing:.8px}
 .ep-pill svg{width:10px;height:10px}
 
-#eventContainer{grid-template-columns:1fr!important;gap:14px!important;max-width:100%!important}
-.ec{background:var(--card);border:1px solid rgba(168,85,247,.1);border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;transition:all .3s;box-shadow:0 2px 16px rgba(0,0,0,.3);display:flex;flex-direction:column}
-.ec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--violet),var(--cyan),var(--violet),var(--cyan),var(--violet));background-size:200% 100%;animation:ec-shim 5s linear infinite;z-index:2}
-@keyframes ec-shim{from{background-position:200% 0}to{background-position:-200% 0}}
-.ec:hover{border-color:rgba(168,85,247,.25);box-shadow:0 6px 22px rgba(0,0,0,.4),0 0 14px rgba(168,85,247,.06);transform:translateY(-2px)}
-.ec-hd{padding:14px 20px 10px;border-bottom:1px solid rgba(168,85,247,.06);position:relative;z-index:2;display:flex;align-items:center;gap:10px}
-.ec-title{font-family:'JetBrains Mono',monospace;color:var(--violet);font-size:1.15rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;line-height:1.4;flex:1}
-.ec-sc{flex-shrink:0;background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.08);color:var(--violet);padding:2px 7px;border-radius:var(--radius-xs);font-family:'JetBrains Mono',monospace;font-size:.5rem;font-weight:600;letter-spacing:.4px;opacity:.45}
-.ec-body{padding:12px 20px;flex:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;position:relative;z-index:2}
+/* Event card — folder style */
+#eventContainer{grid-template-columns:repeat(3,1fr)!important;max-width:1080px!important;margin-left:auto!important;margin-right:auto!important;gap:10px!important}
+.ev-card{background:var(--card);border:1px solid rgba(168,85,247,.1);border-radius:var(--radius);padding:16px 18px;backdrop-filter:blur(12px);transition:all .35s;position:relative;overflow:hidden;cursor:pointer;height:100%;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.ev-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(180deg,var(--violet),var(--cyan));border-radius:2px 0 0 2px;pointer-events:none}
+.ev-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(168,85,247,.2),rgba(0,229,255,.15),transparent);opacity:0;transition:opacity .35s;pointer-events:none}
+.ev-card:hover::after{opacity:1}
+.ev-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.3),0 0 10px rgba(168,85,247,.05);border-color:rgba(168,85,247,.22)}
+.ev-card-badge{display:inline-block;padding:1px 7px;border-radius:var(--radius-xs);font-size:.48rem;font-family:'JetBrains Mono',monospace;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:5px;width:fit-content}
+.ev-card-badge.cat-sc{background:rgba(244,63,94,.06);border:1px solid rgba(244,63,94,.15);color:var(--rose)}
+.ev-card-badge.cat-buy{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);color:var(--amber)}
+.ev-card-badge.cat-free{background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.12);color:var(--emerald)}
+.ev-card-badge.cat-other{background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.12);color:var(--violet)}
+.ev-card-t{font-family:'JetBrains Mono',monospace;color:var(--violet);font-size:.82rem;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;line-height:1.4}
+.ev-card-p{color:var(--text);line-height:1.5;flex-grow:1;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;font-family:'Inter',sans-serif;font-size:.86rem;opacity:.68}
+.ev-card-cp{display:inline-flex;align-items:center;gap:4px;background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.12);color:var(--violet);padding:5px 12px;border-radius:var(--radius-xs);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:0.8rem;font-weight:500;text-transform:uppercase;letter-spacing:.6px;transition:all .25s;white-space:nowrap;position:relative;overflow:hidden}
+.ev-card-cp:hover{background:rgba(168,85,247,.1);border-color:rgba(168,85,247,.28);box-shadow:0 2px 6px var(--violet-g);transform:translateY(-1px)}
+.ev-card-cp:active{animation:cpop .25s ease}
+.ev-card-cp svg{width:12px;height:12px;flex-shrink:0}
+.ev-card-cp.ok{background:rgba(0,255,136,.08);border-color:rgba(0,255,136,.2);color:var(--emerald);pointer-events:none}
+.ev-card-cp .bl{transition:opacity .15s}.ev-card-cp.ok .bl{opacity:0;position:absolute}
+.ev-card-cp .ev-ck{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity .15s;display:flex;align-items:center;gap:3px;white-space:nowrap;font-size:0.8rem}.ev-card-cp.ok .ev-ck{opacity:1}
 
-.es{background:rgba(168,85,247,.02);border:1px solid rgba(168,85,247,.06);border-radius:var(--radius-sm);position:relative;transition:all .2s;display:flex;flex-direction:column;min-height:50px;overflow:hidden}
-.es:hover{background:rgba(168,85,247,.04);border-color:rgba(168,85,247,.16);box-shadow:0 2px 8px rgba(168,85,247,.04)}
-.es-t{color:#E2E8F0;font-family:'Inter',sans-serif;font-size:.83rem;font-weight:400;line-height:1.55;white-space:pre-wrap;word-break:break-word;flex:1;padding:10px 10px 30px}
-
-.es-cp{position:absolute;bottom:5px;right:5px;display:inline-flex;align-items:center;gap:3px;background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.28);color:#C084FC;padding:3px 8px;border-radius:3px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.3px;transition:all .2s;white-space:nowrap;opacity:.85;text-shadow:0 0 6px rgba(168,85,247,.35);z-index:5}
-.es:hover .es-cp{opacity:1;background:rgba(168,85,247,.18);border-color:rgba(168,85,247,.4);color:#D8B4FE;text-shadow:0 0 8px rgba(168,85,247,.5);box-shadow:0 1px 6px rgba(168,85,247,.12)}
-.es-cp:hover{background:rgba(168,85,247,.22)!important;border-color:rgba(168,85,247,.5)!important;color:#E9D5FF!important;text-shadow:0 0 10px rgba(168,85,247,.6)!important;box-shadow:0 2px 8px rgba(168,85,247,.2)!important}
-.es-cp:active{animation:cpop .25s ease}
-.es-cp svg{width:10px;height:10px;flex-shrink:0}
-.es-cp.ok{opacity:1!important;background:rgba(0,255,136,.1);border-color:rgba(0,255,136,.25);color:var(--emerald);pointer-events:none;text-shadow:0 0 6px rgba(0,255,136,.3)}
-.es-cp .bl{transition:opacity .12s}.es-cp.ok .bl{opacity:0;position:absolute}
-.es-cp .bc3{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity .12s;display:flex;align-items:center;gap:2px;white-space:nowrap;font-size:0.75rem}.es-cp.ok .bc3{opacity:1}
+@media(max-width:900px){#eventContainer{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:600px){#eventContainer{grid-template-columns:1fr!important;max-width:100%!important;padding:0 2px!important}}
 
 .dm{position:fixed;inset:0;background:rgba(4,6,10,.92);backdrop-filter:blur(12px);z-index:1000;display:none;align-items:center;justify-content:center;padding:18px}
 .dm.show{display:flex}
@@ -311,9 +313,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .dm.em .dcp{background:linear-gradient(90deg,var(--violet),var(--violet-m));box-shadow:0 2px 8px var(--violet-g)}
 .dok{color:var(--emerald);font-size:.65rem;margin-left:6px;opacity:0;transition:opacity .25s;font-family:'JetBrains Mono',monospace;letter-spacing:.5px}
 .dok.show{opacity:1}
-.ev-step{margin-bottom:12px;padding:12px 14px;background:rgba(168,85,247,.03);border:1px solid rgba(168,85,247,.08);border-radius:8px}
-.ev-step:last-child{margin-bottom:0}
-.ev-step-txt{color:var(--text);line-height:1.75;white-space:pre-wrap;word-break:break-word;font-size:.88rem}
 
 .nr{text-align:center;padding:40px 0;width:100%;max-width:1080px}
 .nr-t{color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:1rem;margin-bottom:8px;letter-spacing:1.5px}
@@ -355,22 +354,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .sidebar{position:fixed;top:40px;left:0;height:calc(100vh - 40px);transform:translateX(-100%);z-index:55;box-shadow:3px 0 18px rgba(0,0,0,.4)}.sidebar.open{transform:translateX(0)}
 .sb-tog{display:flex}.sb-ov.show{display:block}
 .main{padding:12px}.hdr-title{font-size:2.2rem;letter-spacing:4px}.bf{grid-template-columns:1fr}
-#eventContainer .ec-body{grid-template-columns:1fr!important}
 }
 @media(max-width:768px){
 .hdr-title{font-size:1.7rem;letter-spacing:2px}.hdr-sub{font-size:.58rem;letter-spacing:2px}
 .mc-w{grid-template-columns:1fr}.bstats{flex-direction:column;gap:10px}
 .toast{font-size:.56rem;padding:4px 10px}.toast-t{max-width:90px}
-.ec-hd{padding:10px 14px 8px;flex-direction:column;align-items:flex-start;gap:4px}
-.ec-body{padding:8px 14px!important;gap:6px!important;grid-template-columns:1fr!important}
-.ec-title{font-size:.85rem}.mc-t{font-size:.76rem}.bc-t{font-size:.76rem}.jp{font-size:.88rem}
+.mc-t{font-size:.76rem}.bc-t{font-size:.76rem}.jp{font-size:.88rem}.ev-card-t{font-size:.76rem}
 }
 @media(max-width:480px){
 .hdr-title{font-size:1.3rem;letter-spacing:1px}.hdr-sub{font-size:.5rem}
 .sidebar{width:320px;min-width:320px}
-.ec-hd{padding:8px 12px 6px}.ec-body{padding:6px 12px!important;gap:5px!important}
-.ec-title{font-size:.78rem}.mc-t{font-size:.72rem}.bc-t{font-size:.72rem}.jp{font-size:.82rem}
-.es-t{font-size:.8rem}
+.mc-t{font-size:.72rem}.bc-t{font-size:.72rem}.jp{font-size:.82rem}.ev-card-t{font-size:.72rem}
 }
 #bonusContainer{grid-template-columns:repeat(2,1fr)!important;max-width:940px!important;margin-left:auto!important;margin-right:auto!important;gap:12px!important}
 #bonusContainer .bc{min-height:140px!important}
@@ -413,7 +407,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 <div class="ni-wrap" data-page="jadwal"><div class="ni-ic"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg></div><div class="ni-txt"><div class="ni-lbl">JADWAL PASARAN</div><div class="ni-desc">Jadwal buka &amp; tutup</div></div></div>
 <div class="ni-wrap" data-page="random"><div class="ni-ic"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></div><div class="ni-txt"><div class="ni-lbl">RANDOM</div><div class="ni-desc">Link customer service</div></div></div>
 <div class="ni-wrap" data-page="prediksi"><div class="ni-ic"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg></div><div class="ni-txt"><div class="ni-lbl">PREDIKSI TOGEL</div><div class="ni-desc">Analisa &amp; prediksi</div></div></div>
-<div class="ni-wrap en" data-page="scatter"><div class="ni-ic"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2zM4 18V8h16v10H4z"/></svg></div><div class="ni-txt"><div class="ni-lbl">EVENT SC,BUY,FREE</div><div class="ni-desc">Panduan langkah</div></div></div>
+<div class="ni-wrap en" data-page="scatter"><div class="ni-ic"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2zM4 18V8h16v10H4z"/></svg></div><div class="ni-txt"><div class="ni-lbl">EVENT SC,BUY,FREE</div><div class="ni-desc">Folder event panduan</div></div></div>
 <div class="ni-wrap" data-page="gambar-cs"><div class="ni-ic"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></div><div class="ni-txt"><div class="ni-lbl">GAMBAR CS</div><div class="ni-desc">Foto customer service</div></div></div>
 <div class="ni-wrap bn" data-page="bonus"><div class="ni-ic"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg></div><div class="ni-txt"><div class="ni-lbl">BONUS</div><div class="ni-desc">Info bonus &amp; promosi</div></div></div>
 </nav>
@@ -427,7 +421,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 <div class="bh"><span class="bh-icon">⬡</span><div class="bh-w">System Online</div><div class="bh-d">Sistem navigasi masa depan aktif. Semua modul terhubung dan siap diakses.</div></div>
 <div class="bf">
 <div class="fc"><div class="fc-i">🔗</div><div class="fc-t">Random</div><div class="fc-d">Ambil link customer service secara acak dari database.</div></div>
-<div class="fc"><div class="fc-i">📁</div><div class="fc-t">Event SC,BUY,FREE</div><div class="fc-d">Panduan langkah dengan fitur salin per item.</div></div>
+<div class="fc"><div class="fc-i">📁</div><div class="fc-t">Event SC,BUY,FREE</div><div class="fc-d">Folder event dengan kolom judul dan isi lengkap.</div></div>
 <div class="fc"><div class="fc-i">🎁</div><div class="fc-t">Bonus</div><div class="fc-d">Cek info bonus dan promosi terbaru.</div></div>
 </div>
 <div class="bstats">
@@ -455,14 +449,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 <section class="pg" id="page-prediksi"><div class="gp"><div class="gp-i">📊</div><div class="gp-t">Prediksi Togel</div><div class="gp-d">Modul sedang dalam pengembangan.</div></div></section>
 
 <section class="pg" id="page-scatter">
-<div class="ep-hd"><div class="ep-t">EVENT SC, BUY, FREE</div><div class="ep-d">Pilih kategori lalu klik kartu untuk melihat detail lengkap.</div></div>
+<div class="ep-hd"><div class="ep-t">EVENT SC, BUY, FREE</div><div class="ep-d">Pilih kategori untuk memfilter, atau lihat semua folder event.</div></div>
 <div class="ev-cat-bar" id="eventCatBar">
 <div class="ev-cat-btn sc-cat" data-cat="SC"><div class="ev-cat-ico"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><div class="ev-cat-info"><div class="ev-cat-name">SC</div><div class="ev-cat-sub">Scatter Event</div></div><div class="ev-cat-cnt" id="catCntSC">0</div></div>
 <div class="ev-cat-btn buy-cat" data-cat="BUY"><div class="ev-cat-ico"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg></div><div class="ev-cat-info"><div class="ev-cat-name">BUY</div><div class="ev-cat-sub">Buy Event</div></div><div class="ev-cat-cnt" id="catCntBUY">0</div></div>
 <div class="ev-cat-btn free-cat" data-cat="FREE"><div class="ev-cat-ico"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm0 16H4V8h16v10z"/></svg></div><div class="ev-cat-info"><div class="ev-cat-name">FREE</div><div class="ev-cat-sub">Free Event</div></div><div class="ev-cat-cnt" id="catCntFREE">0</div></div>
 </div>
-<div class="ep-cnt"><div class="ep-pill"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2zM4 18V8h16v10H4z"/></svg><span id="eventCountText">0 Panduan</span></div></div>
-<div class="mf"><div class="fi-w ef"><input type="text" class="fi" id="eventFilterInput" placeholder="Cari judul atau isi..." autocomplete="off"><span class="fh">Filter cerdas</span></div></div>
+<div class="ep-cnt"><div class="ep-pill"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2zM4 18V8h16v10H4z"/></svg><span id="eventCountText">0 Folder</span></div></div>
+<div class="mf"><div class="fi-w ef"><input type="text" class="fi" id="eventFilterInput" placeholder="Cari judul atau isi event..." autocomplete="off"><span class="fh">Filter cerdas</span></div></div>
 <div class="ld" id="eventLoadingContainer" style="display:none"><div class="ld-sp es"></div><div class="ld-tx es">Loading...</div></div>
 <div class="mc-w" id="eventContainer" style="display:none"></div>
 <div class="nr" id="eventNoMenu" style="display:none"><div class="nr-t eve">NO EVENT DATA</div><div class="nr-s">Belum ada data di sheet EVENT.</div></div>
@@ -485,7 +479,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 
 <div class="dm" id="detailModal"><div class="dc"><div class="dh"><h2 class="dt" id="detailTitle"></h2><button class="dx" id="detailClose"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div><div class="db"><div class="dtxt" id="detailText"></div></div><div class="da"><button class="dcp" id="copyButton">SALIN</button><span id="copySuccess" class="dok">OK</span></div></div></div>
 <div class="dm bm" id="bonusDetailModal"><div class="dc"><div class="dh"><h2 class="dt" id="bonusDetailTitle"></h2><button class="dx" id="bonusDetailClose"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div><div class="db"><div class="dtxt" id="bonusDetailText"></div></div><div class="da"><button class="dcp" id="bonusCopyButton">SALIN</button><span id="bonusCopySuccess" class="dok">OK</span></div></div></div>
-<div class="dm em" id="eventDetailModal"><div class="dc"><div class="dh"><h2 class="dt" id="eventDetailTitle"></h2><button class="dx" id="eventDetailClose"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div><div class="db" id="eventDetailBody"></div><div class="da"><button class="dcp" id="eventCopyAllBtn">SALIN SEMUA</button><span id="eventCopyAllSuccess" class="dok">OK</span></div></div></div>
+<div class="dm em" id="eventDetailModal"><div class="dc"><div class="dh"><h2 class="dt" id="eventDetailTitle"></h2><button class="dx" id="eventDetailClose"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div><div class="db"><div class="dtxt" id="eventDetailText"></div></div><div class="da"><button class="dcp" id="eventCopyAllBtn">SALIN</button><span id="eventCopyAllSuccess" class="dok">OK</span></div></div></div>
 
 <button class="dbg-b" id="debugToggle">DEBUG</button>
 <div class="dbg" id="debugPanel"><div class="dbg-t">DEBUG</div><div class="dbg-i" id="debugInfo">...</div></div>
@@ -507,8 +501,12 @@ function copyText(text){
   if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(text);
   return new Promise(function(resolve,reject){var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;opacity:0;left:-9999px;top:-9999px';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');resolve()}catch(e){reject(e)}finally{document.body.removeChild(ta)}})
 }
+
+/* Deteksi kategori dari judul */
 function getEventCat(title){var t=title.toUpperCase();if(t.indexOf('FREE')!==-1||t.indexOf('GRATIS')!==-1)return'FREE';if(t.indexOf('BUY')!==-1||t.indexOf('BELI')!==-1)return'BUY';if(t.indexOf('SC')!==-1||t.indexOf('SCATTER')!==-1)return'SC';return'OTHER'}
-function cleanStepLabel(r){if(!r)return'';return r.replace(/^STEP\s*/i,'').replace(/^LANGKAH\s*/i,'').replace(/^\d+\.\s*/,'').trim()||r}
+function getCatLabel(cat){if(cat==='SC')return'SC';if(cat==='BUY')return'BUY';if(cat==='FREE')return'FREE';return'EVENT'}
+function getCatClass(cat){if(cat==='SC')return'cat-sc';if(cat==='BUY')return'cat-buy';if(cat==='FREE')return'cat-free';return'cat-other'}
+
 async function fetchWithTimeout(url,timeout){var controller=new AbortController();var timer=setTimeout(function(){controller.abort()},timeout);try{var r=await fetch(url,{signal:controller.signal});clearTimeout(timer);return r}catch(e){clearTimeout(timer);throw e}}
 
 var mainHeader=document.getElementById('mainHeader');
@@ -535,77 +533,96 @@ function initSB(){
 function toast(t,m,tp){var c=document.getElementById('toastContainer'),e=document.createElement('div');e.classList.add('toast');if(tp==='bonus')e.classList.add('bt');if(tp==='event')e.classList.add('et');e.innerHTML='<svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span class="toast-t">'+t+'</span><span>'+m+'</span>';c.appendChild(e);setTimeout(function(){e.classList.add('to');setTimeout(function(){e.remove()},250)},2000)}
 function updTime(){document.getElementById('systemTime').textContent=new Date().toLocaleTimeString('id-ID',{hour12:false})}
 function updStat(s){document.getElementById('sysStatus').textContent=s}
-function updDbg(){if(!debugMode)return;var ts=0;for(var k=0;k<eventData.length;k++)ts+=eventData[k].steps.length;document.getElementById('debugInfo').innerHTML='<div>Random: '+sheetData.length+' | F: '+filteredData.length+'</div><div>Bonus: '+bonusData.length+' | F: '+filteredBonusData.length+'</div><div>Event: '+eventData.length+' ('+ts+') Cat:'+activeEventCat+'</div><div>Active: '+activePage+'</div>'}
+function updDbg(){if(!debugMode)return;document.getElementById('debugInfo').innerHTML='<div>Random: '+sheetData.length+' | F: '+filteredData.length+'</div><div>Bonus: '+bonusData.length+' | F: '+filteredBonusData.length+'</div><div>Event: '+eventData.length+' | F: '+filteredEventData.length+' Cat:'+activeEventCat+'</div><div>Active: '+activePage+'</div>'}
 
 function lev(a,b){var m=[];for(var i=0;i<=b.length;i++)m[i]=[i];for(var j=0;j<=a.length;j++)m[0][j]=j;for(var i=1;i<=b.length;i++)for(var j=1;j<=a.length;j++){if(b.charAt(i-1)===a.charAt(j-1))m[i][j]=m[i-1][j-1];else m[i][j]=Math.min(m[i-1][j-1]+1,m[i][j-1]+1,m[i-1][j]+1)}return m[b.length][a.length]}
 function sim(a,b){var d=lev(a.toLowerCase(),b.toLowerCase());var l=a.length>b.length?a:b;return l.length===0?100:Math.round(((l.length-d)/l.length)*100)}
 function fz(q,t){var ql=q.toLowerCase(),tl=t.toLowerCase();if(tl.includes(ql))return{m:true,s:100,t:'exact'};var w=tl.split(/\s+/),best={m:false,s:0,t:'none'};for(var k=0;k<w.length;k++){var ww=w[k];if(ww.startsWith(ql)){var s=Math.round(ql.length/ww.length*100);if(s>best.s)best={m:true,s:s,t:'prefix'}}var si=sim(ql,ww);if(si>=60&&si>best.s)best={m:true,s:si,t:'fuzzy'};if(ww.includes(ql)){var s2=Math.round(ql.length/ww.length*90);if(s2>best.s)best={m:true,s:s2,t:'contains'}}}return best}
-function doFilt(data,q,fields){if(!q)return data.map(function(i){return JSON.parse(JSON.stringify(i))});var res=[];for(var i=0;i<data.length;i++){var it=data[i],ss='';for(var f=0;f<fields.length;f++){if(fields[f]==='steps'){for(var s=0;s<it.steps.length;s++)ss+=it.steps[s].text+' '}else{ss+=(it[fields[f]]||'')+' '}}var fm=fz(q,ss);if(fm.m){var c=JSON.parse(JSON.stringify(it));c.ms=fm.s;c.mt=fm.t.toUpperCase();res.push(c)}}res.sort(function(a,b){return b.ms-a.ms});return res}
+function doFilt(data,q,fields){if(!q)return data.map(function(i){return JSON.parse(JSON.stringify(i))});var res=[];for(var i=0;i<data.length;i++){var it=data[i],ss='';for(var f=0;f<fields.length;f++){ss+=(it[fields[f]]||'')+' '}var fm=fz(q,ss);if(fm.m){var c=JSON.parse(JSON.stringify(it));c.ms=fm.s;c.mt=fm.t.toUpperCase();res.push(c)}}res.sort(function(a,b){return b.ms-a.ms});return res}
 
+/* Fetch 2 kolom: A = judul, B = isi */
 async function fetchGS(gid){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+gid;var r=await fetchWithTimeout(url,FETCH_TIMEOUT);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf})}return d}
 
-async function fetchEV(){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+EVENT_GID;var r=await fetchWithTimeout(url,FETCH_TIMEOUT);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var colLabels=[];for(var c=1;c<j.table.cols.length&&c<=8;c++){var rawLbl=j.table.cols[c].label?j.table.cols[c].label.trim():'';colLabels.push(cleanStepLabel(rawLbl)||String(c))}var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var title=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';if(!title)continue;var steps=[];for(var k=0;k<colLabels.length;k++){var ci=k+1;if(row.c[ci]&&row.c[ci].v){var v=String(row.c[ci].v).trim();if(v)steps.push({label:colLabels[k],text:v})}}if(steps.length>0)d.push({title:title,steps:steps})}return d}
-
-async function fetchEVFallback(){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=EVENT';var r=await fetchWithTimeout(url,FETCH_TIMEOUT);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var colLabels=[];for(var c=1;c<j.table.cols.length&&c<=8;c++){var rawLbl=j.table.cols[c].label?j.table.cols[c].label.trim():'';colLabels.push(cleanStepLabel(rawLbl)||String(c))}var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var title=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';if(!title)continue;var steps=[];for(var k=0;k<colLabels.length;k++){var ci=k+1;if(row.c[ci]&&row.c[ci].v){var v=String(row.c[ci].v).trim();if(v)steps.push({label:colLabels[k],text:v})}}if(steps.length>0)d.push({title:title,steps:steps})}return d}
+/* Fetch EVENT: Kolom A judul, Kolom B isi — fallback pakai sheet name */
+async function fetchEV(){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+EVENT_GID;var r=await fetchWithTimeout(url,FETCH_TIMEOUT);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf,cat:getEventCat(ti)})}return d}
+async function fetchEVFallback(){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=EVENT';var r=await fetchWithTimeout(url,FETCH_TIMEOUT);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf,cat:getEventCat(ti)})}return d}
 
 async function fetchRandom(){var ld=document.getElementById('loadingContainer'),ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');var ok=false;try{sheetData=await fetchGS(RANDOM_GID);if(sheetData.length>0)ok=true}catch(e){console.warn('[Random]',e.message)}if(!ok){try{var c=localStorage.getItem('NM_random');if(c){sheetData=JSON.parse(c);if(sheetData.length>0)ok=true}}catch(e){}}if(!ok)sheetData=[{title:'CONTOH DATA',info:'Tidak dapat terhubung ke server.\n\nCoba lagi beberapa saat.'}];if(ok&&sheetData[0].title!=='CONTOH DATA')try{localStorage.setItem('NM_random',JSON.stringify(sheetData))}catch(e){}randomDataLoaded=true;filteredData=sheetData.slice();document.getElementById('statMenu').textContent=sheetData.length;updStat(ok?'Online':'Offline');ld.style.display='none';rndRender();updDbg()}
+
 function rndRender(){var ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');if(!filteredData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';for(var i=0;i<filteredData.length;i++){var it=filteredData[i];h+='<div class="mc" data-idx="'+i+'"><h3 class="mc-t">'+it.title+'</h3><div class="mc-p">'+it.info+'</div><div class="mc-bot"><button class="cp" data-ci="'+i+'">'+CPY+'<span class="bl">Salin</span><span class="bc">'+CHK+' Ok</span></button></div></div>'}ct.innerHTML=h;ct.querySelectorAll('.mc').forEach(function(c){c.addEventListener('click',function(){currentDetail=filteredData[parseInt(this.dataset.idx)];document.getElementById('detailTitle').textContent=currentDetail.title;document.getElementById('detailText').textContent=currentDetail.info;document.getElementById('detailModal').classList.add('show')})});ct.querySelectorAll('.cp').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredData[parseInt(this.dataset.ci)];if(!it)return;copyText(it.info).then(function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);toast(it.title,'ok','random')}).catch(function(){toast('Gagal','error','random')})})})}
 
 async function fetchBonus(){var ld=document.getElementById('bonusLoadingContainer'),ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');var ok=false;try{bonusData=await fetchGS(BONUS_GID);if(bonusData.length>0)ok=true}catch(e){console.warn('[Bonus]',e.message)}if(!ok){try{var c=localStorage.getItem('NM_bonus');if(c){bonusData=JSON.parse(c);if(bonusData.length>0)ok=true}}catch(e){}}if(!ok)bonusData=[{title:'BELUM ADA DATA',info:'Tidak dapat terhubung ke server.\n\nCoba lagi beberapa saat.'}];if(ok&&bonusData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_bonus',JSON.stringify(bonusData))}catch(e){}bonusDataLoaded=true;filteredBonusData=bonusData.slice();document.getElementById('statBonus').textContent=bonusData.length;document.getElementById('bonusCountText').textContent=bonusData.length+' Bonus';updStat(ok?'Online':'Offline');ld.style.display='none';bonRender();updDbg()}
+
 function bonRender(){var ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');if(!filteredBonusData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';for(var i=0;i<filteredBonusData.length;i++){var it=filteredBonusData[i];h+='<div class="bc" data-bi="'+i+'"><div class="bc-badge">Bonus</div><h3 class="bc-t">'+it.title+'</h3><div class="bc-p">'+it.info+'</div><div class="mc-bot"><button class="bc-cp" data-bci="'+i+'">'+CPY+'<span class="bl">Salin</span><span class="bc2">'+CHK+' Ok</span></button></div><div class="c-gift">\uD83C\uDF81</div></div>'}ct.innerHTML=h;ct.querySelectorAll('.bc').forEach(function(c){c.addEventListener('click',function(){currentBonusDetail=filteredBonusData[parseInt(this.dataset.bi)];document.getElementById('bonusDetailTitle').textContent=currentBonusDetail.title;document.getElementById('bonusDetailText').textContent=currentBonusDetail.info;document.getElementById('bonusDetailModal').classList.add('show')})});ct.querySelectorAll('.bc-cp').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredBonusData[parseInt(this.dataset.bci)];if(!it)return;copyText(it.info).then(function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);toast(it.title,'ok','bonus')}).catch(function(){toast('Gagal','error','bonus')})})})}
 
+/* ===== EVENT: Fetch Kolom A (judul) + Kolom B (isi folder) ===== */
 async function fetchEvent(){
   var ld=document.getElementById('eventLoadingContainer'),ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
   ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');var ok=false;
   try{eventData=await fetchEV();if(eventData.length>0)ok=true}catch(e){console.warn('[Event] GID:',e.message)}
   if(!ok){try{eventData=await fetchEVFallback();if(eventData.length>0)ok=true}catch(e){console.warn('[Event] Sheet:',e.message)}}
-  if(!ok){try{var c=localStorage.getItem('NM_event2');if(c){eventData=JSON.parse(c);if(eventData.length>0)ok=true}}catch(e){}}
-  if(!ok)eventData=[{title:'BELUM ADA DATA',steps:[{label:'Info',text:'Tidak dapat terhubung ke server.'}]}];
-  if(ok&&eventData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_event2',JSON.stringify(eventData))}catch(e){}
+  if(!ok){try{var c=localStorage.getItem('NM_event3');if(c){eventData=JSON.parse(c);if(eventData.length>0)ok=true}}catch(e){}}
+  if(!ok)eventData=[{title:'BELUM ADA DATA',info:'Tidak dapat terhubung ke server.',cat:'OTHER'}];
+  if(ok&&eventData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_event3',JSON.stringify(eventData))}catch(e){}
   eventDataLoaded=true;
+  /* Hitung per kategori */
   var cntSC=0,cntBUY=0,cntFREE=0;
-  for(var i=0;i<eventData.length;i++){var cat=getEventCat(eventData[i].title);if(cat==='SC')cntSC++;else if(cat==='BUY')cntBUY++;else if(cat==='FREE')cntFREE++}
+  for(var i=0;i<eventData.length;i++){var cat=eventData[i].cat;if(cat==='SC')cntSC++;else if(cat==='BUY')cntBUY++;else if(cat==='FREE')cntFREE++}
   document.getElementById('catCntSC').textContent=cntSC;
   document.getElementById('catCntBUY').textContent=cntBUY;
   document.getElementById('catCntFREE').textContent=cntFREE;
-  var ts=0;for(var k=0;k<eventData.length;k++)ts+=eventData[k].steps.length;
   document.getElementById('statEvent').textContent=eventData.length;
-  document.getElementById('eventCountText').textContent=eventData.length+' Panduan ('+ts+')';
+  document.getElementById('eventCountText').textContent=eventData.length+' Folder';
   updStat(ok?'Online':'Offline');ld.style.display='none';
   activeEventCat=null;filteredEventData=eventData.slice();
   evRender();updDbg();
 }
 
-function buildCardText(card){var txt=card.title+'\n'+('\u2500'.repeat(35))+'\n';for(var i=0;i<card.steps.length;i++){txt+=card.steps[i].text+'\n\n'}return txt.trim()}
-
+/* ===== EVENT: Render kartu folder ===== */
 function evRender(){
   var ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
   if(!filteredEventData.length){ct.style.display='none';nm.style.display='block';return}
-  ct.style.display='grid';nm.style.display='none';var h='';
+  ct.style.display='grid';nm.style.display='none';
+  var h='';
   for(var i=0;i<filteredEventData.length;i++){
     var fd=filteredEventData[i];
-    h+='<div class="ec" data-ei="'+i+'"><div class="ec-hd"><div class="ec-title">'+fd.title+'</div></div><div class="ec-body">';
-    for(var j=0;j<fd.steps.length;j++){var st=fd.steps[j];
-      h+='<div class="es"><div class="es-t">'+st.text+'</div><button class="es-cp" data-sci="'+i+'" data-ski="'+j+'">'+CPY+'<span class="bl">Copy</span><span class="bc3">'+CHK+' Ok</span></button></div>';
-    }
-    h+='</div></div>';
+    var catClass=getCatClass(fd.cat);
+    var catLabel=getCatLabel(fd.cat);
+    h+='<div class="ev-card" data-ei="'+i+'">';
+    h+='<div class="ev-card-badge '+catClass+'">'+catLabel+'</div>';
+    h+='<h3 class="ev-card-t">'+fd.title+'</h3>';
+    h+='<div class="ev-card-p">'+fd.info+'</div>';
+    h+='<div class="mc-bot"><button class="ev-card-cp" data-eci="'+i+'">'+CPY+'<span class="bl">Salin</span><span class="ev-ck">'+CHK+' Ok</span></button></div>';
+    h+='</div>';
   }
   ct.innerHTML=h;
-  ct.querySelectorAll('.ec').forEach(function(card){
+
+  /* Klik kartu → buka modal */
+  ct.querySelectorAll('.ev-card').forEach(function(card){
     card.addEventListener('click',function(e){
-      if(e.target.closest('.es-cp'))return;
-      var idx=parseInt(this.dataset.ei);currentEventDetail=filteredEventData[idx];if(!currentEventDetail)return;
+      if(e.target.closest('.ev-card-cp'))return;
+      var idx=parseInt(this.dataset.ei);
+      currentEventDetail=filteredEventData[idx];
+      if(!currentEventDetail)return;
       document.getElementById('eventDetailTitle').textContent=currentEventDetail.title;
-      var bodyHtml='';
-      for(var s=0;s<currentEventDetail.steps.length;s++){
-        bodyHtml+='<div class="ev-step"><div class="ev-step-txt">'+currentEventDetail.steps[s].text+'</div></div>';
-      }
-      document.getElementById('eventDetailBody').innerHTML=bodyHtml;
+      document.getElementById('eventDetailText').textContent=currentEventDetail.info;
       document.getElementById('eventDetailModal').classList.add('show');
     });
   });
-  ct.querySelectorAll('.es-cp').forEach(function(b){
-    b.addEventListener('click',function(e){e.stopPropagation();var ci=parseInt(this.dataset.sci),ki=parseInt(this.dataset.ski);var fd=filteredEventData[ci];if(!fd||!fd.steps[ki])return;copyText(fd.steps[ki].text).then(function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);toast('Ok','success','event')}).catch(function(){toast('Gagal','error','event')})});
+
+  /* Klik tombol salin per kartu */
+  ct.querySelectorAll('.ev-card-cp').forEach(function(b){
+    b.addEventListener('click',function(e){
+      e.stopPropagation();
+      var idx=parseInt(this.dataset.eci);
+      var fd=filteredEventData[idx];
+      if(!fd)return;
+      copyText(fd.info).then(function(){
+        b.classList.add('ok');
+        setTimeout(function(){b.classList.remove('ok')},1500);
+        toast(fd.title,'ok','event');
+      }).catch(function(){toast('Gagal','error','event')});
+    });
   });
 }
 
@@ -613,39 +630,48 @@ window.onload=function(){
   initSB();updTime();setInterval(updTime,1000);updStat('v2.0.77');
   document.getElementById('debugToggle').addEventListener('click',function(){debugMode=!debugMode;document.getElementById('debugPanel').classList.toggle('show',debugMode);updDbg()});
   setInterval(updDbg,1000);
+
+  /* Tombol kategori SC / BUY / FREE */
   document.querySelectorAll('.ev-cat-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
       var cat=this.dataset.cat;var bar=document.getElementById('eventCatBar');
       if(activeEventCat===cat){activeEventCat=null;this.classList.remove('active');bar.classList.remove('all-mode')}
       else{activeEventCat=cat;bar.querySelectorAll('.ev-cat-btn').forEach(function(b){b.classList.remove('active')});this.classList.add('active');bar.classList.add('all-mode')}
-      var q=document.getElementById('eventFilterInput').value.trim();var base=eventData.slice();
-      if(activeEventCat){base=base.filter(function(ev){return getEventCat(ev.title)===activeEventCat})}
-      filteredEventData=doFilt(base,q,['title','steps']);
-      var ts=0;for(var k=0;k<filteredEventData.length;k++)ts+=filteredEventData[k].steps.length;
-      document.getElementById('eventCountText').textContent=filteredEventData.length+' Panduan ('+ts+')';
+      var q=document.getElementById('eventFilterInput').value.trim();
+      var base=eventData.slice();
+      if(activeEventCat){base=base.filter(function(ev){return ev.cat===activeEventCat})}
+      filteredEventData=doFilt(base,q,['title','info']);
+      document.getElementById('eventCountText').textContent=filteredEventData.length+' Folder';
       evRender();updDbg();
     });
   });
+
   var dr,db,de;
   document.getElementById('filterInput').addEventListener('input',function(){clearTimeout(dr);dr=setTimeout(function(){filteredData=doFilt(sheetData,document.getElementById('filterInput').value.trim(),['title','info']);rndRender();updDbg()},300)});
   document.getElementById('bonusFilterInput').addEventListener('input',function(){clearTimeout(db);db=setTimeout(function(){filteredBonusData=doFilt(bonusData,document.getElementById('bonusFilterInput').value.trim(),['title','info']);document.getElementById('bonusCountText').textContent=filteredBonusData.length+' Bonus';bonRender();updDbg()},300)});
   document.getElementById('eventFilterInput').addEventListener('input',function(){clearTimeout(de);de=setTimeout(function(){
     var q=document.getElementById('eventFilterInput').value.trim();var base=eventData.slice();
-    if(activeEventCat){base=base.filter(function(ev){return getEventCat(ev.title)===activeEventCat})}
-    filteredEventData=doFilt(base,q,['title','steps']);
-    var ts=0;for(var k=0;k<filteredEventData.length;k++)ts+=filteredEventData[k].steps.length;
-    document.getElementById('eventCountText').textContent=filteredEventData.length+' Panduan ('+ts+')';
+    if(activeEventCat){base=base.filter(function(ev){return ev.cat===activeEventCat})}
+    filteredEventData=doFilt(base,q,['title','info']);
+    document.getElementById('eventCountText').textContent=filteredEventData.length+' Folder';
     evRender();updDbg();
   },300)});
+
+  /* Modal Random */
   document.getElementById('detailClose').addEventListener('click',function(){document.getElementById('detailModal').classList.remove('show');currentDetail=null});
   document.getElementById('copyButton').addEventListener('click',function(){if(!currentDetail)return;copyText(currentDetail.info).then(function(){var el=document.getElementById('copySuccess');el.classList.add('show');toast(currentDetail.title,'ok','random');setTimeout(function(){el.classList.remove('show')},2000)}).catch(function(){toast('Gagal','error','random')})});
   document.getElementById('detailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentDetail=null}});
+
+  /* Modal Bonus */
   document.getElementById('bonusDetailClose').addEventListener('click',function(){document.getElementById('bonusDetailModal').classList.remove('show');currentBonusDetail=null});
   document.getElementById('bonusCopyButton').addEventListener('click',function(){if(!currentBonusDetail)return;copyText(currentBonusDetail.info).then(function(){var el=document.getElementById('bonusCopySuccess');el.classList.add('show');toast(currentBonusDetail.title,'ok','bonus');setTimeout(function(){el.classList.remove('show')},2000)}).catch(function(){toast('Gagal','error','bonus')})});
   document.getElementById('bonusDetailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentBonusDetail=null}});
+
+  /* Modal Event */
   document.getElementById('eventDetailClose').addEventListener('click',function(){document.getElementById('eventDetailModal').classList.remove('show');currentEventDetail=null});
-  document.getElementById('eventCopyAllBtn').addEventListener('click',function(){if(!currentEventDetail)return;copyText(buildCardText(currentEventDetail)).then(function(){var el=document.getElementById('eventCopyAllSuccess');el.classList.add('show');toast(currentEventDetail.title,currentEventDetail.steps.length+' items','event');setTimeout(function(){el.classList.remove('show')},2000)}).catch(function(){toast('Gagal','error','event')})});
+  document.getElementById('eventCopyAllBtn').addEventListener('click',function(){if(!currentEventDetail)return;copyText(currentEventDetail.info).then(function(){var el=document.getElementById('eventCopyAllSuccess');el.classList.add('show');toast(currentEventDetail.title,'ok','event');setTimeout(function(){el.classList.remove('show')},2000)}).catch(function(){toast('Gagal','error','event')})});
   document.getElementById('eventDetailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentEventDetail=null}});
+
   document.addEventListener('keydown',function(e){
     if(e.key==='Escape'){
       if(document.getElementById('eventDetailModal').classList.contains('show')){document.getElementById('eventDetailModal').classList.remove('show');currentEventDetail=null;return}
