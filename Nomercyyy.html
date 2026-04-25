@@ -199,7 +199,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .ep-t{font-family:'Inter',sans-serif;font-size:1.3rem;color:var(--violet);font-weight:800;margin-bottom:4px;letter-spacing:2px}
 .ep-d{font-family:'Inter',sans-serif;color:var(--text2);font-size:.78rem;opacity:.35;max-width:540px;margin:0 auto;line-height:1.6}
 
-/* 3 tombol kategori */
 .ev-cat-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;width:100%;max-width:1080px}
 .ev-cat-btn{display:flex;align-items:center;gap:10px;padding:14px 16px;border-radius:var(--radius);cursor:pointer;transition:all .3s;position:relative;overflow:hidden;border:1px solid transparent;user-select:none}
 .ev-cat-btn::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s;pointer-events:none}
@@ -270,7 +269,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .ec-sc{flex-shrink:0;background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.08);color:var(--violet);padding:2px 7px;border-radius:var(--radius-xs);font-family:'JetBrains Mono',monospace;font-size:.5rem;font-weight:600;letter-spacing:.4px;opacity:.45}
 .ec-body{padding:12px 20px;flex:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;position:relative;z-index:2}
 
-/* Step item TANPA label header */
 .es{background:rgba(168,85,247,.02);border:1px solid rgba(168,85,247,.06);border-radius:var(--radius-sm);position:relative;transition:all .2s;display:flex;flex-direction:column;min-height:50px;overflow:hidden}
 .es:hover{background:rgba(168,85,247,.04);border-color:rgba(168,85,247,.16);box-shadow:0 2px 8px rgba(168,85,247,.04)}
 .es-t{color:#E2E8F0;font-family:'Inter',sans-serif;font-size:.83rem;font-weight:400;line-height:1.55;white-space:pre-wrap;word-break:break-word;flex:1;padding:10px 10px 30px}
@@ -510,7 +508,7 @@ function copyText(text){
   return new Promise(function(resolve,reject){var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;opacity:0;left:-9999px;top:-9999px';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');resolve()}catch(e){reject(e)}finally{document.body.removeChild(ta)}})
 }
 function getEventCat(title){var t=title.toUpperCase();if(t.indexOf('FREE')!==-1||t.indexOf('GRATIS')!==-1)return'FREE';if(t.indexOf('BUY')!==-1||t.indexOf('BELI')!==-1)return'BUY';if(t.indexOf('SC')!==-1||t.indexOf('SCATTER')!==-1)return'SC';return'OTHER'}
-function cleanStepLabel(r){if(!r)return'';return r.replace(/^STEP\s*/i,'').trim()||r}
+function cleanStepLabel(r){if(!r)return'';return r.replace(/^STEP\s*/i,'').replace(/^LANGKAH\s*/i,'').replace(/^\d+\.\s*/,'').trim()||r}
 async function fetchWithTimeout(url,timeout){var controller=new AbortController();var timer=setTimeout(function(){controller.abort()},timeout);try{var r=await fetch(url,{signal:controller.signal});clearTimeout(timer);return r}catch(e){clearTimeout(timer);throw e}}
 
 var mainHeader=document.getElementById('mainHeader');
@@ -585,10 +583,9 @@ function evRender(){
   if(!filteredEventData.length){ct.style.display='none';nm.style.display='block';return}
   ct.style.display='grid';nm.style.display='none';var h='';
   for(var i=0;i<filteredEventData.length;i++){
-    var fd=filteredEventData[i];var sc=fd.steps.length;
-    h+='<div class="ec" data-ei="'+i+'"><div class="ec-hd"><div class="ec-title">'+fd.title+'</div><span class="ec-sc">'+sc+' langkah</span></div><div class="ec-body">';
-    for(var j=0;j<sc;j++){var st=fd.steps[j];
-      /* TANPA label header — langsung tampilkan teks saja */
+    var fd=filteredEventData[i];
+    h+='<div class="ec" data-ei="'+i+'"><div class="ec-hd"><div class="ec-title">'+fd.title+'</div></div><div class="ec-body">';
+    for(var j=0;j<fd.steps.length;j++){var st=fd.steps[j];
       h+='<div class="es"><div class="es-t">'+st.text+'</div><button class="es-cp" data-sci="'+i+'" data-ski="'+j+'">'+CPY+'<span class="bl">Copy</span><span class="bc3">'+CHK+' Ok</span></button></div>';
     }
     h+='</div></div>';
@@ -599,7 +596,6 @@ function evRender(){
       if(e.target.closest('.es-cp'))return;
       var idx=parseInt(this.dataset.ei);currentEventDetail=filteredEventData[idx];if(!currentEventDetail)return;
       document.getElementById('eventDetailTitle').textContent=currentEventDetail.title;
-      /* Modal juga TANPA label header */
       var bodyHtml='';
       for(var s=0;s<currentEventDetail.steps.length;s++){
         bodyHtml+='<div class="ev-step"><div class="ev-step-txt">'+currentEventDetail.steps[s].text+'</div></div>';
