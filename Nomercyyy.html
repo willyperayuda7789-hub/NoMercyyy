@@ -202,7 +202,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .ep-pill{display:inline-flex;align-items:center;gap:4px;background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.12);color:var(--violet);padding:3px 10px;border-radius:var(--radius-xs);font-family:'JetBrains Mono',monospace;font-size:.55rem;font-weight:600;letter-spacing:.8px}
 .ep-pill svg{width:10px;height:10px}
 
-/* === 3 TOMBOL KATEGORI EVENT === */
+/* ========== 3 TOMBOL KATEGORI — SELALU TAMPIL ========== */
 .ev-cat-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;width:100%;max-width:1080px}
 .ev-cat-btn{display:flex;align-items:center;gap:10px;padding:14px 16px;border-radius:var(--radius);cursor:pointer;transition:all .3s;position:relative;overflow:hidden;border:1px solid transparent;user-select:none}
 .ev-cat-btn::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s;pointer-events:none}
@@ -215,7 +215,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .ev-cat-sub{font-family:'Inter',sans-serif;font-size:.6rem;opacity:.4;margin-top:2px;transition:opacity .2s}
 .ev-cat-cnt{flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:800;min-width:28px;text-align:right;transition:all .3s}
 
-/* SC — merah/rose */
 .ev-cat-btn.sc-cat{background:rgba(244,63,94,.04);border-color:rgba(244,63,94,.1)}
 .ev-cat-btn.sc-cat::before{background:linear-gradient(135deg,rgba(244,63,94,.06),transparent)}
 .ev-cat-btn.sc-cat .ev-cat-ico{background:rgba(244,63,94,.1);color:var(--rose)}
@@ -229,7 +228,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .ev-cat-btn.sc-cat.active .ev-cat-cnt{color:#FB7185;text-shadow:0 0 12px rgba(244,63,94,.4)}
 .ev-cat-btn.sc-cat.active .ev-cat-sub{opacity:.6}
 
-/* BUY — amber/emas */
 .ev-cat-btn.buy-cat{background:rgba(245,158,11,.04);border-color:rgba(245,158,11,.1)}
 .ev-cat-btn.buy-cat::before{background:linear-gradient(135deg,rgba(245,158,11,.06),transparent)}
 .ev-cat-btn.buy-cat .ev-cat-ico{background:rgba(245,158,11,.1);color:var(--amber)}
@@ -243,7 +241,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .ev-cat-btn.buy-cat.active .ev-cat-cnt{color:#FBBF24;text-shadow:0 0 12px rgba(245,158,11,.4)}
 .ev-cat-btn.buy-cat.active .ev-cat-sub{opacity:.6}
 
-/* FREE — hijau/emerald */
 .ev-cat-btn.free-cat{background:rgba(0,255,136,.03);border-color:rgba(0,255,136,.08)}
 .ev-cat-btn.free-cat::before{background:linear-gradient(135deg,rgba(0,255,136,.05),transparent)}
 .ev-cat-btn.free-cat .ev-cat-ico{background:rgba(0,255,136,.08);color:var(--emerald)}
@@ -257,7 +254,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .ev-cat-btn.free-cat.active .ev-cat-cnt{color:#34D399;text-shadow:0 0 12px rgba(0,255,136,.4)}
 .ev-cat-btn.free-cat.active .ev-cat-sub{opacity:.6}
 
-/* garis pemisah kategori aktif */
 .ev-cat-btn.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 var(--radius) var(--radius)}
 .ev-cat-btn.sc-cat.active::after{background:linear-gradient(90deg,var(--rose),transparent)}
 .ev-cat-btn.buy-cat.active::after{background:linear-gradient(90deg,var(--amber),transparent)}
@@ -268,10 +264,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .ev-cat-bar.all-mode .ev-cat-btn.active{opacity:1}
 
 @media(max-width:600px){
-  .ev-cat-bar{grid-template-columns:1fr;gap:8px}
-  .ev-cat-btn{padding:11px 14px}
-  .ev-cat-cnt{font-size:1rem}
-  .ev-cat-name{font-size:.72rem}
+.ev-cat-bar{grid-template-columns:1fr;gap:8px}
+.ev-cat-btn{padding:11px 14px}
+.ev-cat-cnt{font-size:1rem}
+.ev-cat-name{font-size:.72rem}
 }
 
 #eventContainer{grid-template-columns:1fr!important;gap:14px!important;max-width:100%!important}
@@ -478,7 +474,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 <section class="pg" id="page-scatter">
 <div class="ep-hd"><div class="ep-t">EVENT SC, BUY, FREE</div><div class="ep-d">Pilih kategori lalu klik kartu untuk melihat detail lengkap.</div></div>
 
-<!-- === 3 TOMBOL KATEGORI BARU === -->
+<!-- 3 TOMBOL KATEGORI — SELALU TAMPIL -->
 <div class="ev-cat-bar" id="eventCatBar">
 <div class="ev-cat-btn sc-cat" data-cat="SC">
 <div class="ev-cat-ico"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
@@ -497,6 +493,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 </div>
 </div>
 
+<div class="ep-cnt"><div class="ep-pill"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2zM4 18V8h16v10H4z"/></svg><span id="eventCountText">0 Panduan</span></div></div>
 <div class="mf"><div class="fi-w ef"><input type="text" class="fi" id="eventFilterInput" placeholder="Cari judul atau isi..." autocomplete="off"><span class="fh">Filter cerdas</span></div></div>
 <div class="ld" id="eventLoadingContainer" style="display:none"><div class="ld-sp es"></div><div class="ld-tx es">Loading...</div></div>
 <div class="mc-w" id="eventContainer" style="display:none"></div>
@@ -544,7 +541,6 @@ function copyText(text){
   return new Promise(function(resolve,reject){var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;opacity:0;left:-9999px;top:-9999px';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');resolve()}catch(e){reject(e)}finally{document.body.removeChild(ta)}})
 }
 
-/* Deteksi kategori dari judul event */
 function getEventCat(title){
   var t=title.toUpperCase();
   if(t.indexOf('FREE')!==-1||t.indexOf('GRATIS')!==-1)return'FREE';
@@ -593,15 +589,12 @@ async function fetchEV(){var url='https://docs.google.com/spreadsheets/d/'+SHEET
 
 async function fetchEVFallback(){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=EVENT';var r=await fetchWithTimeout(url,FETCH_TIMEOUT);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var colLabels=[];for(var c=1;c<j.table.cols.length&&c<=8;c++){var rawLbl=j.table.cols[c].label?j.table.cols[c].label.trim():'';colLabels.push(cleanStepLabel(rawLbl)||String(c))}var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var title=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';if(!title)continue;var steps=[];for(var k=0;k<colLabels.length;k++){var ci=k+1;if(row.c[ci]&&row.c[ci].v){var v=String(row.c[ci].v).trim();if(v)steps.push({label:colLabels[k],text:v})}}if(steps.length>0)d.push({title:title,steps:steps})}return d}
 
-/* ====== RANDOM ====== */
 async function fetchRandom(){var ld=document.getElementById('loadingContainer'),ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');var ok=false;try{sheetData=await fetchGS(RANDOM_GID);if(sheetData.length>0)ok=true}catch(e){console.warn('[Random]',e.message)}if(!ok){try{var c=localStorage.getItem('NM_random');if(c){sheetData=JSON.parse(c);if(sheetData.length>0)ok=true}}catch(e){}}if(!ok)sheetData=[{title:'CONTOH DATA',info:'Tidak dapat terhubung ke server.\n\nCoba lagi beberapa saat.'}];if(ok&&sheetData[0].title!=='CONTOH DATA')try{localStorage.setItem('NM_random',JSON.stringify(sheetData))}catch(e){}randomDataLoaded=true;filteredData=sheetData.slice();document.getElementById('statMenu').textContent=sheetData.length;updStat(ok?'Online':'Offline');ld.style.display='none';rndRender();updDbg()}
 function rndRender(){var ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');if(!filteredData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';for(var i=0;i<filteredData.length;i++){var it=filteredData[i];h+='<div class="mc" data-idx="'+i+'"><h3 class="mc-t">'+it.title+'</h3><div class="mc-p">'+it.info+'</div><div class="mc-bot"><button class="cp" data-ci="'+i+'">'+CPY+'<span class="bl">Salin</span><span class="bc">'+CHK+' Ok</span></button></div></div>'}ct.innerHTML=h;ct.querySelectorAll('.mc').forEach(function(c){c.addEventListener('click',function(){currentDetail=filteredData[parseInt(this.dataset.idx)];document.getElementById('detailTitle').textContent=currentDetail.title;document.getElementById('detailText').textContent=currentDetail.info;document.getElementById('detailModal').classList.add('show')})});ct.querySelectorAll('.cp').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredData[parseInt(this.dataset.ci)];if(!it)return;copyText(it.info).then(function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);toast(it.title,'ok','random')}).catch(function(){toast('Gagal','error','random')})})})}
 
-/* ====== BONUS ====== */
 async function fetchBonus(){var ld=document.getElementById('bonusLoadingContainer'),ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');var ok=false;try{bonusData=await fetchGS(BONUS_GID);if(bonusData.length>0)ok=true}catch(e){console.warn('[Bonus]',e.message)}if(!ok){try{var c=localStorage.getItem('NM_bonus');if(c){bonusData=JSON.parse(c);if(bonusData.length>0)ok=true}}catch(e){}}if(!ok)bonusData=[{title:'BELUM ADA DATA',info:'Tidak dapat terhubung ke server.\n\nCoba lagi beberapa saat.'}];if(ok&&bonusData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_bonus',JSON.stringify(bonusData))}catch(e){}bonusDataLoaded=true;filteredBonusData=bonusData.slice();document.getElementById('statBonus').textContent=bonusData.length;document.getElementById('bonusCountText').textContent=bonusData.length+' Bonus';updStat(ok?'Online':'Offline');ld.style.display='none';bonRender();updDbg()}
 function bonRender(){var ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');if(!filteredBonusData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';for(var i=0;i<filteredBonusData.length;i++){var it=filteredBonusData[i];h+='<div class="bc" data-bi="'+i+'"><div class="bc-badge">Bonus</div><h3 class="bc-t">'+it.title+'</h3><div class="bc-p">'+it.info+'</div><div class="mc-bot"><button class="bc-cp" data-bci="'+i+'">'+CPY+'<span class="bl">Salin</span><span class="bc2">'+CHK+' Ok</span></button></div><div class="c-gift">\uD83C\uDF81</div></div>'}ct.innerHTML=h;ct.querySelectorAll('.bc').forEach(function(c){c.addEventListener('click',function(){currentBonusDetail=filteredBonusData[parseInt(this.dataset.bi)];document.getElementById('bonusDetailTitle').textContent=currentBonusDetail.title;document.getElementById('bonusDetailText').textContent=currentBonusDetail.info;document.getElementById('bonusDetailModal').classList.add('show')})});ct.querySelectorAll('.bc-cp').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredBonusData[parseInt(this.dataset.bci)];if(!it)return;copyText(it.info).then(function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);toast(it.title,'ok','bonus')}).catch(function(){toast('Gagal','error','bonus')})})})}
 
-/* ====== EVENT DENGAN KATEGORI ====== */
 async function fetchEvent(){
   var ld=document.getElementById('eventLoadingContainer'),ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
   ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');var ok=false;
@@ -612,28 +605,22 @@ async function fetchEvent(){
   if(ok&&eventData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_event2',JSON.stringify(eventData))}catch(e){}
   eventDataLoaded=true;
 
-  /* Hitung jumlah per kategori & update tombol */
-  var cntSC=0,cntBUY=0,cntFREE=0,cntOther=0;
+  /* Hitung jumlah per kategori — SELALU update angkanya */
+  var cntSC=0,cntBUY=0,cntFREE=0;
   for(var i=0;i<eventData.length;i++){
     var cat=getEventCat(eventData[i].title);
-    if(cat==='SC')cntSC++;else if(cat==='BUY')cntBUY++;else if(cat==='FREE')cntFREE++;else cntOther++;
+    if(cat==='SC')cntSC++;else if(cat==='BUY')cntBUY++;else if(cat==='FREE')cntFREE++;
   }
   document.getElementById('catCntSC').textContent=cntSC;
   document.getElementById('catCntBUY').textContent=cntBUY;
   document.getElementById('catCntFREE').textContent=cntFREE;
-
-  /* Sembunyikan tombol yang count-nya 0 */
-  var bar=document.getElementById('eventCatBar');
-  if(cntSC===0)bar.querySelector('[data-cat="SC"]').style.display='none';
-  if(cntBUY===0)bar.querySelector('[data-cat="BUY"]').style.display='none';
-  if(cntFREE===0)bar.querySelector('[data-cat="FREE"]').style.display='none';
+  /* TIDAK ADA lagi kode yang menyembunyikan tombol */
 
   var ts=0;for(var k=0;k<eventData.length;k++)ts+=eventData[k].steps.length;
   document.getElementById('statEvent').textContent=eventData.length;
   document.getElementById('eventCountText').textContent=eventData.length+' Panduan ('+ts+')';
   updStat(ok?'Online':'Offline');ld.style.display='none';
 
-  /* Render awal: tampilkan semua */
   activeEventCat=null;
   filteredEventData=eventData.slice();
   evRender();updDbg();
@@ -668,43 +655,27 @@ function evRender(){
   });
 }
 
-/* ====== INIT ====== */
 window.onload=function(){
   initSB();updTime();setInterval(updTime,1000);updStat('v2.0.77');
   document.getElementById('debugToggle').addEventListener('click',function(){debugMode=!debugMode;document.getElementById('debugPanel').classList.toggle('show',debugMode);updDbg()});
   setInterval(updDbg,1000);
 
-  /* === Handler 3 tombol kategori === */
+  /* Handler 3 tombol kategori */
   document.querySelectorAll('.ev-cat-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
       var cat=this.dataset.cat;
       var bar=document.getElementById('eventCatBar');
-
       if(activeEventCat===cat){
-        /* Klik lagi = batalkan filter, tampilkan semua */
-        activeEventCat=null;
-        this.classList.remove('active');
-        bar.classList.remove('all-mode');
+        activeEventCat=null;this.classList.remove('active');bar.classList.remove('all-mode');
       }else{
-        /* Aktifkan kategori ini */
-        activeEventCat=cat;
-        bar.querySelectorAll('.ev-cat-btn').forEach(function(b){b.classList.remove('active')});
-        this.classList.add('active');
-        bar.classList.add('all-mode');
+        activeEventCat=cat;bar.querySelectorAll('.ev-cat-btn').forEach(function(b){b.classList.remove('active')});this.classList.add('active');bar.classList.add('all-mode');
       }
-
-      /* Filter data berdasarkan kategori aktif + teks filter */
       var q=document.getElementById('eventFilterInput').value.trim();
       var base=eventData.slice();
-      if(activeEventCat){
-        base=base.filter(function(ev){return getEventCat(ev.title)===activeEventCat});
-      }
+      if(activeEventCat){base=base.filter(function(ev){return getEventCat(ev.title)===activeEventCat})}
       filteredEventData=doFilt(base,q,['title','steps']);
-
-      /* Update count pill */
       var ts=0;for(var k=0;k<filteredEventData.length;k++)ts+=filteredEventData[k].steps.length;
       document.getElementById('eventCountText').textContent=filteredEventData.length+' Panduan ('+ts+')';
-
       evRender();updDbg();
     });
   });
@@ -713,8 +684,7 @@ window.onload=function(){
   document.getElementById('filterInput').addEventListener('input',function(){clearTimeout(dr);dr=setTimeout(function(){filteredData=doFilt(sheetData,document.getElementById('filterInput').value.trim(),['title','info']);rndRender();updDbg()},300)});
   document.getElementById('bonusFilterInput').addEventListener('input',function(){clearTimeout(db);db=setTimeout(function(){filteredBonusData=doFilt(bonusData,document.getElementById('bonusFilterInput').value.trim(),['title','info']);document.getElementById('bonusCountText').textContent=filteredBonusData.length+' Bonus';bonRender();updDbg()},300)});
   document.getElementById('eventFilterInput').addEventListener('input',function(){clearTimeout(de);de=setTimeout(function(){
-    var q=document.getElementById('eventFilterInput').value.trim();
-    var base=eventData.slice();
+    var q=document.getElementById('eventFilterInput').value.trim();var base=eventData.slice();
     if(activeEventCat){base=base.filter(function(ev){return getEventCat(ev.title)===activeEventCat})}
     filteredEventData=doFilt(base,q,['title','steps']);
     var ts=0;for(var k=0;k<filteredEventData.length;k++)ts+=filteredEventData[k].steps.length;
