@@ -280,37 +280,31 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .ev-card-cp .bl{transition:opacity .15s}.ev-card-cp.ok .bl{opacity:0;position:absolute}
 .ev-card-cp .ev-ck{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity .15s;display:flex;align-items:center;gap:3px;white-space:nowrap;font-size:0.8rem}.ev-card-cp.ok .ev-ck{opacity:1}
 
-/* Judul folder ikut warna badge per kategori */
 .ev-card.cat-sc .ev-card-t{color:var(--rose)}
 .ev-card.cat-buy .ev-card-t{color:var(--amber)}
 .ev-card.cat-free .ev-card-t{color:var(--emerald)}
 .ev-card.cat-other .ev-card-t{color:var(--violet)}
 
-/* Border kiri ikut warna kategori */
 .ev-card.cat-sc::before{background:linear-gradient(180deg,var(--rose),#BE123C)}
 .ev-card.cat-buy::before{background:linear-gradient(180deg,var(--amber),#B45309)}
 .ev-card.cat-free::before{background:linear-gradient(180deg,var(--emerald),#059669)}
 .ev-card.cat-other::before{background:linear-gradient(180deg,var(--violet),var(--cyan))}
 
-/* Glow line atas ikut warna kategori */
 .ev-card.cat-sc::after{background:linear-gradient(90deg,transparent,rgba(244,63,94,.2),rgba(244,63,94,.1),transparent)}
 .ev-card.cat-buy::after{background:linear-gradient(90deg,transparent,rgba(245,158,11,.2),rgba(245,158,11,.1),transparent)}
 .ev-card.cat-free::after{background:linear-gradient(90deg,transparent,rgba(0,255,136,.15),rgba(0,255,136,.08),transparent)}
 .ev-card.cat-other::after{background:linear-gradient(90deg,transparent,rgba(168,85,247,.2),rgba(0,229,255,.15),transparent)}
 
-/* Hover border & shadow ikut warna kategori */
 .ev-card.cat-sc:hover{border-color:rgba(244,63,94,.22);box-shadow:0 8px 22px rgba(0,0,0,.3),0 0 10px rgba(244,63,94,.05)}
 .ev-card.cat-buy:hover{border-color:rgba(245,158,11,.22);box-shadow:0 8px 22px rgba(0,0,0,.3),0 0 10px rgba(245,158,11,.05)}
 .ev-card.cat-free:hover{border-color:rgba(0,255,136,.2);box-shadow:0 8px 22px rgba(0,0,0,.3),0 0 10px rgba(0,255,136,.04)}
 .ev-card.cat-other:hover{border-color:rgba(168,85,247,.22);box-shadow:0 8px 22px rgba(0,0,0,.3),0 0 10px rgba(168,85,247,.05)}
 
-/* Border dasar kartu ikut warna kategori */
 .ev-card.cat-sc{border-color:rgba(244,63,94,.1)}
 .ev-card.cat-buy{border-color:rgba(245,158,11,.1)}
 .ev-card.cat-free{border-color:rgba(0,255,136,.08)}
 .ev-card.cat-other{border-color:rgba(168,85,247,.1)}
 
-/* Tombol salin ikut warna kategori */
 .ev-card.cat-sc .ev-card-cp{background:rgba(244,63,94,.05);border-color:rgba(244,63,94,.12);color:var(--rose)}
 .ev-card.cat-sc .ev-card-cp:hover{background:rgba(244,63,94,.1);border-color:rgba(244,63,94,.28);box-shadow:0 2px 6px var(--rose-g)}
 .ev-card.cat-buy .ev-card-cp{background:rgba(245,158,11,.05);border-color:rgba(245,158,11,.12);color:var(--amber)}
@@ -486,10 +480,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 <section class="pg" id="page-prediksi"><div class="gp"><div class="gp-i">📊</div><div class="gp-t">Prediksi Togel</div><div class="gp-d">Modul sedang dalam pengembangan.</div></div></section>
 
 <section class="pg" id="page-scatter">
-<div class="ep-hd"><div class="ep-t">EVENT SC, BUY, FREE</div><div class="ep-d">Pilih kategori untuk memfilter, atau lihat semua folder event.</div></div>
+<div class="ep-hd"><div class="ep-t">EVENT SC, BUY, FREE</div><div class="ep-d">SCATTER dari sheet EVENT, BUY &amp; FREE dari sheet BUY FREE SPIN.</div></div>
 <div class="ev-cat-bar" id="eventCatBar">
 <div class="ev-cat-btn sc-cat" data-cat="SC"><div class="ev-cat-ico"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><div class="ev-cat-info"><div class="ev-cat-name">SCATTER</div><div class="ev-cat-sub">EVENT SCATTER</div></div><div class="ev-cat-cnt" id="catCntSC">0</div></div>
-<div class="ev-cat-btn buy-cat" data-cat="BUY"><div class="ev-cat-ico"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg></div><div class="ev-cat-info"><div class="ev-cat-name">BUY & FREE</div><div class="ev-cat-sub">EVENT BUY & FREE</div></div><div class="ev-cat-cnt" id="catCntBUY">0</div></div>
+<div class="ev-cat-btn buy-cat" data-cat="BUY"><div class="ev-cat-ico"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg></div><div class="ev-cat-info"><div class="ev-cat-name">BUY & FREE</div><div class="ev-cat-sub">BUY FREE SPIN</div></div><div class="ev-cat-cnt" id="catCntBUY">0</div></div>
 <div class="ev-cat-btn free-cat" data-cat="FREE"><div class="ev-cat-ico"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm0 16H4V8h16v10z"/></svg></div><div class="ev-cat-info"><div class="ev-cat-name">SUPER</div><div class="ev-cat-sub">EVENT SUPER</div></div><div class="ev-cat-cnt" id="catCntFREE">0</div></div>
 </div>
 <div class="ep-cnt"><div class="ep-pill"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2zM4 18V8h16v10H4z"/></svg><span id="eventCountText">0 Folder</span></div></div>
@@ -530,6 +524,8 @@ var randomDataLoaded=false,bonusDataLoaded=false,eventDataLoaded=false;
 var activeEventCat=null;
 var SHEET_ID='1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
 var RANDOM_GID='0',BONUS_GID='252063146',EVENT_GID='1232746230';
+/* GID sheet BUY FREE SPIN */
+var BUYFREE_GID='685194017';
 var FETCH_TIMEOUT=8000;
 var CPY='<svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>';
 var CHK='<svg fill="currentColor" viewBox="0 0 24 24" style="width:10px;height:10px"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
@@ -539,7 +535,7 @@ function copyText(text){
   return new Promise(function(resolve,reject){var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;opacity:0;left:-9999px;top:-9999px';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');resolve()}catch(e){reject(e)}finally{document.body.removeChild(ta)}})
 }
 
-/* Deteksi kategori — SC dicari paling akhir agar BUY & FREE diprioritaskan */
+/* Deteksi kategori — FREE & BUY diprioritaskan, SC terakhir */
 function getEventCat(title){
   var t=title.toUpperCase();
   if(t.indexOf('FREE')!==-1||t.indexOf('GRATIS')!==-1)return'FREE';
@@ -583,38 +579,228 @@ function sim(a,b){var d=lev(a.toLowerCase(),b.toLowerCase());var l=a.length>b.le
 function fz(q,t){var ql=q.toLowerCase(),tl=t.toLowerCase();if(tl.includes(ql))return{m:true,s:100,t:'exact'};var w=tl.split(/\s+/),best={m:false,s:0,t:'none'};for(var k=0;k<w.length;k++){var ww=w[k];if(ww.startsWith(ql)){var s=Math.round(ql.length/ww.length*100);if(s>best.s)best={m:true,s:s,t:'prefix'}}var si=sim(ql,ww);if(si>=60&&si>best.s)best={m:true,s:si,t:'fuzzy'};if(ww.includes(ql)){var s2=Math.round(ql.length/ww.length*90);if(s2>best.s)best={m:true,s:s2,t:'contains'}}}return best}
 function doFilt(data,q,fields){if(!q)return data.map(function(i){return JSON.parse(JSON.stringify(i))});var res=[];for(var i=0;i<data.length;i++){var it=data[i],ss='';for(var f=0;f<fields.length;f++){ss+=(it[fields[f]]||'')+' '}var fm=fz(q,ss);if(fm.m){var c=JSON.parse(JSON.stringify(it));c.ms=fm.s;c.mt=fm.t.toUpperCase();res.push(c)}}res.sort(function(a,b){return b.ms-a.ms});return res}
 
-async function fetchGS(gid){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+gid;var r=await fetchWithTimeout(url,FETCH_TIMEOUT);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf})}return d}
+/* Fetch generic sheet data */
+async function fetchGS(gid){
+  var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+gid;
+  var r=await fetchWithTimeout(url,FETCH_TIMEOUT);
+  if(!r.ok)throw new Error('HTTP '+r.status);
+  var t=await r.text();
+  if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
+  var j=JSON.parse(t.substring(47).slice(0,-2));
+  var d=[];
+  for(var i=0;i<j.table.rows.length;i++){
+    var row=j.table.rows[i];
+    var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';
+    var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';
+    if(ti)d.push({title:ti,info:inf})
+  }
+  return d
+}
 
-async function fetchEV(){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+EVENT_GID;var r=await fetchWithTimeout(url,FETCH_TIMEOUT);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf,cat:getEventCat(ti)})}return d}
-async function fetchEVFallback(){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=EVENT';var r=await fetchWithTimeout(url,FETCH_TIMEOUT);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf,cat:getEventCat(ti)})}return d}
+/* Fetch data dari sheet EVENT (untuk SCATTER saja) */
+async function fetchEV(){
+  var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+EVENT_GID;
+  var r=await fetchWithTimeout(url,FETCH_TIMEOUT);
+  if(!r.ok)throw new Error('HTTP '+r.status);
+  var t=await r.text();
+  if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
+  var j=JSON.parse(t.substring(47).slice(0,-2));
+  var d=[];
+  for(var i=0;i<j.table.rows.length;i++){
+    var row=j.table.rows[i];
+    var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';
+    var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';
+    if(ti)d.push({title:ti,info:inf,cat:getEventCat(ti)})
+  }
+  return d
+}
 
-async function fetchRandom(){var ld=document.getElementById('loadingContainer'),ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');var ok=false;try{sheetData=await fetchGS(RANDOM_GID);if(sheetData.length>0)ok=true}catch(e){console.warn('[Random]',e.message)}if(!ok){try{var c=localStorage.getItem('NM_random');if(c){sheetData=JSON.parse(c);if(sheetData.length>0)ok=true}}catch(e){}}if(!ok)sheetData=[{title:'CONTOH DATA',info:'Tidak dapat terhubung ke server.\n\nCoba lagi beberapa saat.'}];if(ok&&sheetData[0].title!=='CONTOH DATA')try{localStorage.setItem('NM_random',JSON.stringify(sheetData))}catch(e){}randomDataLoaded=true;filteredData=sheetData.slice();document.getElementById('statMenu').textContent=sheetData.length;updStat(ok?'Online':'Offline');ld.style.display='none';rndRender();updDbg()}
+/* Fallback: fetch EVENT by sheet name */
+async function fetchEVFallback(){
+  var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=EVENT';
+  var r=await fetchWithTimeout(url,FETCH_TIMEOUT);
+  if(!r.ok)throw new Error('HTTP '+r.status);
+  var t=await r.text();
+  if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
+  var j=JSON.parse(t.substring(47).slice(0,-2));
+  var d=[];
+  for(var i=0;i<j.table.rows.length;i++){
+    var row=j.table.rows[i];
+    var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';
+    var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';
+    if(ti)d.push({title:ti,info:inf,cat:getEventCat(ti)})
+  }
+  return d
+}
 
-function rndRender(){var ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');if(!filteredData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';for(var i=0;i<filteredData.length;i++){var it=filteredData[i];h+='<div class="mc" data-idx="'+i+'"><h3 class="mc-t">'+it.title+'</h3><div class="mc-p">'+it.info+'</div><div class="mc-bot"><button class="cp" data-ci="'+i+'">'+CPY+'<span class="bl">Salin</span><span class="bc">'+CHK+' Ok</span></button></div></div>'}ct.innerHTML=h;ct.querySelectorAll('.mc').forEach(function(c){c.addEventListener('click',function(){currentDetail=filteredData[parseInt(this.dataset.idx)];document.getElementById('detailTitle').textContent=currentDetail.title;document.getElementById('detailText').textContent=currentDetail.info;document.getElementById('detailModal').classList.add('show')})});ct.querySelectorAll('.cp').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredData[parseInt(this.dataset.ci)];if(!it)return;copyText(it.info).then(function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);toast(it.title,'ok','random')}).catch(function(){toast('Gagal','error','random')})})})}
+/* Fetch data dari sheet BUY FREE SPIN (GID 685194017) — untuk BUY & FREE */
+async function fetchBuyFree(){
+  var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+BUYFREE_GID;
+  var r=await fetchWithTimeout(url,FETCH_TIMEOUT);
+  if(!r.ok)throw new Error('HTTP '+r.status);
+  var t=await r.text();
+  if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
+  var j=JSON.parse(t.substring(47).slice(0,-2));
+  var d=[];
+  for(var i=0;i<j.table.rows.length;i++){
+    var row=j.table.rows[i];
+    var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';
+    var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';
+    if(ti)d.push({title:ti,info:inf,cat:getEventCat(ti),src:'buyfree'})
+  }
+  return d
+}
 
-async function fetchBonus(){var ld=document.getElementById('bonusLoadingContainer'),ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');var ok=false;try{bonusData=await fetchGS(BONUS_GID);if(bonusData.length>0)ok=true}catch(e){console.warn('[Bonus]',e.message)}if(!ok){try{var c=localStorage.getItem('NM_bonus');if(c){bonusData=JSON.parse(c);if(bonusData.length>0)ok=true}}catch(e){}}if(!ok)bonusData=[{title:'BELUM ADA DATA',info:'Tidak dapat terhubung ke server.\n\nCoba lagi beberapa saat.'}];if(ok&&bonusData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_bonus',JSON.stringify(bonusData))}catch(e){}bonusDataLoaded=true;filteredBonusData=bonusData.slice();document.getElementById('statBonus').textContent=bonusData.length;document.getElementById('bonusCountText').textContent=bonusData.length+' Bonus';updStat(ok?'Online':'Offline');ld.style.display='none';bonRender();updDbg()}
+/* Fallback: fetch BUY FREE SPIN by sheet name */
+async function fetchBuyFreeFallback(){
+  var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=BUY%20FREE%20SPIN';
+  var r=await fetchWithTimeout(url,FETCH_TIMEOUT);
+  if(!r.ok)throw new Error('HTTP '+r.status);
+  var t=await r.text();
+  if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
+  var j=JSON.parse(t.substring(47).slice(0,-2));
+  var d=[];
+  for(var i=0;i<j.table.rows.length;i++){
+    var row=j.table.rows[i];
+    var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';
+    var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';
+    if(ti)d.push({title:ti,info:inf,cat:getEventCat(ti),src:'buyfree'})
+  }
+  return d
+}
 
-function bonRender(){var ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');if(!filteredBonusData.length){ct.style.display='none';nm.style.display='block';return}ct.style.display='grid';nm.style.display='none';var h='';for(var i=0;i<filteredBonusData.length;i++){var it=filteredBonusData[i];h+='<div class="bc" data-bi="'+i+'"><div class="bc-badge">Bonus</div><h3 class="bc-t">'+it.title+'</h3><div class="bc-p">'+it.info+'</div><div class="mc-bot"><button class="bc-cp" data-bci="'+i+'">'+CPY+'<span class="bl">Salin</span><span class="bc2">'+CHK+' Ok</span></button></div><div class="c-gift">\uD83C\uDF81</div></div>'}ct.innerHTML=h;ct.querySelectorAll('.bc').forEach(function(c){c.addEventListener('click',function(){currentBonusDetail=filteredBonusData[parseInt(this.dataset.bi)];document.getElementById('bonusDetailTitle').textContent=currentBonusDetail.title;document.getElementById('bonusDetailText').textContent=currentBonusDetail.info;document.getElementById('bonusDetailModal').classList.add('show')})});ct.querySelectorAll('.bc-cp').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var it=filteredBonusData[parseInt(this.dataset.bci)];if(!it)return;copyText(it.info).then(function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);toast(it.title,'ok','bonus')}).catch(function(){toast('Gagal','error','bonus')})})})}
+async function fetchRandom(){
+  var ld=document.getElementById('loadingContainer'),ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');
+  ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');
+  var ok=false;
+  try{sheetData=await fetchGS(RANDOM_GID);if(sheetData.length>0)ok=true}catch(e){console.warn('[Random]',e.message)}
+  if(!ok){try{var c=localStorage.getItem('NM_random');if(c){sheetData=JSON.parse(c);if(sheetData.length>0)ok=true}}catch(e){}}
+  if(!ok)sheetData=[{title:'CONTOH DATA',info:'Tidak dapat terhubung ke server.\n\nCoba lagi beberapa saat.'}];
+  if(ok&&sheetData[0].title!=='CONTOH DATA')try{localStorage.setItem('NM_random',JSON.stringify(sheetData))}catch(e){}
+  randomDataLoaded=true;filteredData=sheetData.slice();
+  document.getElementById('statMenu').textContent=sheetData.length;updStat(ok?'Online':'Offline');
+  ld.style.display='none';rndRender();updDbg()
+}
 
+function rndRender(){
+  var ct=document.getElementById('menuContainer'),nm=document.getElementById('noMenu');
+  if(!filteredData.length){ct.style.display='none';nm.style.display='block';return}
+  ct.style.display='grid';nm.style.display='none';
+  var h='';
+  for(var i=0;i<filteredData.length;i++){
+    var it=filteredData[i];
+    h+='<div class="mc" data-idx="'+i+'"><h3 class="mc-t">'+it.title+'</h3><div class="mc-p">'+it.info+'</div><div class="mc-bot"><button class="cp" data-ci="'+i+'">'+CPY+'<span class="bl">Salin</span><span class="bc">'+CHK+' Ok</span></button></div></div>'
+  }
+  ct.innerHTML=h;
+  ct.querySelectorAll('.mc').forEach(function(c){
+    c.addEventListener('click',function(){
+      currentDetail=filteredData[parseInt(this.dataset.idx)];
+      document.getElementById('detailTitle').textContent=currentDetail.title;
+      document.getElementById('detailText').textContent=currentDetail.info;
+      document.getElementById('detailModal').classList.add('show')
+    })
+  });
+  ct.querySelectorAll('.cp').forEach(function(b){
+    b.addEventListener('click',function(e){
+      e.stopPropagation();var it=filteredData[parseInt(this.dataset.ci)];if(!it)return;
+      copyText(it.info).then(function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);toast(it.title,'ok','random')}).catch(function(){toast('Gagal','error','random')})
+    })
+  })
+}
+
+async function fetchBonus(){
+  var ld=document.getElementById('bonusLoadingContainer'),ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');
+  ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');
+  var ok=false;
+  try{bonusData=await fetchGS(BONUS_GID);if(bonusData.length>0)ok=true}catch(e){console.warn('[Bonus]',e.message)}
+  if(!ok){try{var c=localStorage.getItem('NM_bonus');if(c){bonusData=JSON.parse(c);if(bonusData.length>0)ok=true}}catch(e){}}
+  if(!ok)bonusData=[{title:'BELUM ADA DATA',info:'Tidak dapat terhubung ke server.\n\nCoba lagi beberapa saat.'}];
+  if(ok&&bonusData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_bonus',JSON.stringify(bonusData))}catch(e){}
+  bonusDataLoaded=true;filteredBonusData=bonusData.slice();
+  document.getElementById('statBonus').textContent=bonusData.length;
+  document.getElementById('bonusCountText').textContent=bonusData.length+' Bonus';
+  updStat(ok?'Online':'Offline');ld.style.display='none';bonRender();updDbg()
+}
+
+function bonRender(){
+  var ct=document.getElementById('bonusContainer'),nm=document.getElementById('bonusNoMenu');
+  if(!filteredBonusData.length){ct.style.display='none';nm.style.display='block';return}
+  ct.style.display='grid';nm.style.display='none';
+  var h='';
+  for(var i=0;i<filteredBonusData.length;i++){
+    var it=filteredBonusData[i];
+    h+='<div class="bc" data-bi="'+i+'"><div class="bc-badge">Bonus</div><h3 class="bc-t">'+it.title+'</h3><div class="bc-p">'+it.info+'</div><div class="mc-bot"><button class="bc-cp" data-bci="'+i+'">'+CPY+'<span class="bl">Salin</span><span class="bc2">'+CHK+' Ok</span></button></div><div class="c-gift">\uD83C\uDF81</div></div>'
+  }
+  ct.innerHTML=h;
+  ct.querySelectorAll('.bc').forEach(function(c){
+    c.addEventListener('click',function(){
+      currentBonusDetail=filteredBonusData[parseInt(this.dataset.bi)];
+      document.getElementById('bonusDetailTitle').textContent=currentBonusDetail.title;
+      document.getElementById('bonusDetailText').textContent=currentBonusDetail.info;
+      document.getElementById('bonusDetailModal').classList.add('show')
+    })
+  });
+  ct.querySelectorAll('.bc-cp').forEach(function(b){
+    b.addEventListener('click',function(e){
+      e.stopPropagation();var it=filteredBonusData[parseInt(this.dataset.bci)];if(!it)return;
+      copyText(it.info).then(function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);toast(it.title,'ok','bonus')}).catch(function(){toast('Gagal','error','bonus')})
+    })
+  })
+}
+
+/* Fetch event: SC dari sheet EVENT, BUY & FREE dari sheet BUY FREE SPIN */
 async function fetchEvent(){
   var ld=document.getElementById('eventLoadingContainer'),ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
-  ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');var ok=false;
-  try{eventData=await fetchEV();if(eventData.length>0)ok=true}catch(e){console.warn('[Event] GID:',e.message)}
-  if(!ok){try{eventData=await fetchEVFallback();if(eventData.length>0)ok=true}catch(e){console.warn('[Event] Sheet:',e.message)}}
-  if(!ok){try{var c=localStorage.getItem('NM_event3');if(c){eventData=JSON.parse(c);if(eventData.length>0)ok=true}}catch(e){}}
+  ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');
+  var scData=[],buyFreeData=[];
+  var scOk=false,bfOk=false;
+
+  /* 1) Ambil data SC dari sheet EVENT asli */
+  try{scData=await fetchEV();if(scData.length>0)scOk=true}catch(e){console.warn('[Event SC GID]',e.message)}
+  if(!scOk){try{scData=await fetchEVFallback();if(scData.length>0)scOk=true}catch(e){console.warn('[Event SC Sheet]',e.message)}}
+
+  /* 2) Ambil data BUY & FREE dari sheet BUY FREE SPIN (GID 685194017) */
+  try{buyFreeData=await fetchBuyFree();if(buyFreeData.length>0)bfOk=true}catch(e){console.warn('[BuyFree GID]',e.message)}
+  if(!bfOk){try{buyFreeData=await fetchBuyFreeFallback();if(buyFreeData.length>0)bfOk=true}catch(e){console.warn('[BuyFree Sheet]',e.message)}}
+
+  /* 3) Dari sheet EVENT, ambil HANYA yang kategori SC */
+  var scOnly=[];
+  if(scOk){for(var i=0;i<scData.length;i++){if(scData[i].cat==='SC')scOnly.push(scData[i])}}
+
+  /* 4) Dari sheet BUY FREE SPIN, ambil HANYA yang kategori BUY atau FREE */
+  var bfFiltered=[];
+  if(bfOk){for(var j=0;j<buyFreeData.length;j++){var c=buyFreeData[j].cat;if(c==='BUY'||c==='FREE')bfFiltered.push(buyFreeData[j])}}
+
+  /* 5) Gabungkan */
+  eventData=scOnly.concat(bfFiltered);
+  var ok=eventData.length>0;
+
+  /* 6) Fallback localStorage */
+  if(!ok){
+    try{var cached=localStorage.getItem('NM_event4');if(cached){eventData=JSON.parse(cached);if(eventData.length>0)ok=true}}catch(e){}
+  }
+
   if(!ok)eventData=[{title:'BELUM ADA DATA',info:'Tidak dapat terhubung ke server.',cat:'OTHER'}];
-  if(ok&&eventData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_event3',JSON.stringify(eventData))}catch(e){}
+
+  /* 7) Simpan cache */
+  if(ok&&eventData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_event4',JSON.stringify(eventData))}catch(e){}
+
   eventDataLoaded=true;
+
+  /* 8) Hitung per kategori */
   var cntSC=0,cntBUY=0,cntFREE=0;
-  for(var i=0;i<eventData.length;i++){var cat=eventData[i].cat;if(cat==='SC')cntSC++;else if(cat==='BUY')cntBUY++;else if(cat==='FREE')cntFREE++}
+  for(var k=0;k<eventData.length;k++){
+    var cat=eventData[k].cat;
+    if(cat==='SC')cntSC++;else if(cat==='BUY')cntBUY++;else if(cat==='FREE')cntFREE++
+  }
   document.getElementById('catCntSC').textContent=cntSC;
-  document.getElementById('catCntBUY').textContent=cntBUY;
+  document.getElementById('catCntBUY').textContent=cntBUY+cntFREE;
   document.getElementById('catCntFREE').textContent=cntFREE;
   document.getElementById('statEvent').textContent=eventData.length;
   document.getElementById('eventCountText').textContent=eventData.length+' Folder';
   updStat(ok?'Online':'Offline');ld.style.display='none';
   activeEventCat=null;filteredEventData=eventData.slice();
-  evRender();updDbg();
+  evRender();updDbg()
 }
 
 function evRender(){
@@ -634,30 +820,19 @@ function evRender(){
     h+='</div>';
   }
   ct.innerHTML=h;
-
   ct.querySelectorAll('.ev-card').forEach(function(card){
     card.addEventListener('click',function(e){
       if(e.target.closest('.ev-card-cp'))return;
-      var idx=parseInt(this.dataset.ei);
-      currentEventDetail=filteredEventData[idx];
-      if(!currentEventDetail)return;
+      var idx=parseInt(this.dataset.ei);currentEventDetail=filteredEventData[idx];if(!currentEventDetail)return;
       document.getElementById('eventDetailTitle').textContent=currentEventDetail.title;
       document.getElementById('eventDetailText').textContent=currentEventDetail.info;
       document.getElementById('eventDetailModal').classList.add('show');
     });
   });
-
   ct.querySelectorAll('.ev-card-cp').forEach(function(b){
     b.addEventListener('click',function(e){
-      e.stopPropagation();
-      var idx=parseInt(this.dataset.eci);
-      var fd=filteredEventData[idx];
-      if(!fd)return;
-      copyText(fd.info).then(function(){
-        b.classList.add('ok');
-        setTimeout(function(){b.classList.remove('ok')},1500);
-        toast(fd.title,'ok','event');
-      }).catch(function(){toast('Gagal','error','event')});
+      e.stopPropagation();var idx=parseInt(this.dataset.eci);var fd=filteredEventData[idx];if(!fd)return;
+      copyText(fd.info).then(function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);toast(fd.title,'ok','event')}).catch(function(){toast('Gagal','error','event')});
     });
   });
 }
@@ -667,11 +842,24 @@ window.onload=function(){
   document.getElementById('debugToggle').addEventListener('click',function(){debugMode=!debugMode;document.getElementById('debugPanel').classList.toggle('show',debugMode);updDbg()});
   setInterval(updDbg,1000);
 
+  /* Klik kategori event */
   document.querySelectorAll('.ev-cat-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
       var cat=this.dataset.cat;var bar=document.getElementById('eventCatBar');
       if(activeEventCat===cat){activeEventCat=null;this.classList.remove('active');bar.classList.remove('all-mode')}
-      else{activeEventCat=cat;bar.querySelectorAll('.ev-cat-btn').forEach(function(b){b.classList.remove('active')});this.classList.add('active');bar.classList.add('all-mode')}
+      else{
+        activeEventCat=cat;
+        bar.querySelectorAll('.ev-cat-btn').forEach(function(b){b.classList.remove('active')});
+        this.classList.add('active');bar.classList.add('all-mode');
+        /* Untuk BUY: tampilkan gabungan BUY + FREE dari sheet BUY FREE SPIN */
+        if(cat==='BUY'){
+          var q=document.getElementById('eventFilterInput').value.trim();
+          var base=eventData.filter(function(ev){return ev.cat==='BUY'||ev.cat==='FREE'});
+          filteredEventData=doFilt(base,q,['title','info']);
+          document.getElementById('eventCountText').textContent=filteredEventData.length+' Folder';
+          evRender();updDbg();return;
+        }
+      }
       var q=document.getElementById('eventFilterInput').value.trim();
       var base=eventData.slice();
       if(activeEventCat){base=base.filter(function(ev){return ev.cat===activeEventCat})}
@@ -686,12 +874,16 @@ window.onload=function(){
   document.getElementById('bonusFilterInput').addEventListener('input',function(){clearTimeout(db);db=setTimeout(function(){filteredBonusData=doFilt(bonusData,document.getElementById('bonusFilterInput').value.trim(),['title','info']);document.getElementById('bonusCountText').textContent=filteredBonusData.length+' Bonus';bonRender();updDbg()},300)});
   document.getElementById('eventFilterInput').addEventListener('input',function(){clearTimeout(de);de=setTimeout(function(){
     var q=document.getElementById('eventFilterInput').value.trim();var base=eventData.slice();
-    if(activeEventCat){base=base.filter(function(ev){return ev.cat===activeEventCat})}
+    if(activeEventCat){
+      if(activeEventCat==='BUY'){base=base.filter(function(ev){return ev.cat==='BUY'||ev.cat==='FREE'})}
+      else{base=base.filter(function(ev){return ev.cat===activeEventCat})}
+    }
     filteredEventData=doFilt(base,q,['title','info']);
     document.getElementById('eventCountText').textContent=filteredEventData.length+' Folder';
     evRender();updDbg();
   },300)});
 
+  /* Modal handlers */
   document.getElementById('detailClose').addEventListener('click',function(){document.getElementById('detailModal').classList.remove('show');currentDetail=null});
   document.getElementById('copyButton').addEventListener('click',function(){if(!currentDetail)return;copyText(currentDetail.info).then(function(){var el=document.getElementById('copySuccess');el.classList.add('show');toast(currentDetail.title,'ok','random');setTimeout(function(){el.classList.remove('show')},2000)}).catch(function(){toast('Gagal','error','random')})});
   document.getElementById('detailModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show');currentDetail=null}});
