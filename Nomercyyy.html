@@ -284,34 +284,28 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .ev-card.cat-buy .ev-card-t{color:var(--amber)}
 .ev-card.cat-free .ev-card-t{color:var(--emerald)}
 .ev-card.cat-other .ev-card-t{color:var(--violet)}
-
 .ev-card.cat-sc::before{background:linear-gradient(180deg,var(--rose),#BE123C)}
 .ev-card.cat-buy::before{background:linear-gradient(180deg,var(--amber),#B45309)}
 .ev-card.cat-free::before{background:linear-gradient(180deg,var(--emerald),#059669)}
 .ev-card.cat-other::before{background:linear-gradient(180deg,var(--violet),var(--cyan))}
-
 .ev-card.cat-sc::after{background:linear-gradient(90deg,transparent,rgba(244,63,94,.2),rgba(244,63,94,.1),transparent)}
 .ev-card.cat-buy::after{background:linear-gradient(90deg,transparent,rgba(245,158,11,.2),rgba(245,158,11,.1),transparent)}
 .ev-card.cat-free::after{background:linear-gradient(90deg,transparent,rgba(0,255,136,.15),rgba(0,255,136,.08),transparent)}
 .ev-card.cat-other::after{background:linear-gradient(90deg,transparent,rgba(168,85,247,.2),rgba(0,229,255,.15),transparent)}
-
 .ev-card.cat-sc:hover{border-color:rgba(244,63,94,.22);box-shadow:0 8px 22px rgba(0,0,0,.3),0 0 10px rgba(244,63,94,.05)}
 .ev-card.cat-buy:hover{border-color:rgba(245,158,11,.22);box-shadow:0 8px 22px rgba(0,0,0,.3),0 0 10px rgba(245,158,11,.05)}
 .ev-card.cat-free:hover{border-color:rgba(0,255,136,.2);box-shadow:0 8px 22px rgba(0,0,0,.3),0 0 10px rgba(0,255,136,.04)}
 .ev-card.cat-other:hover{border-color:rgba(168,85,247,.22);box-shadow:0 8px 22px rgba(0,0,0,.3),0 0 10px rgba(168,85,247,.05)}
-
 .ev-card.cat-sc{border-color:rgba(244,63,94,.1)}
 .ev-card.cat-buy{border-color:rgba(245,158,11,.1)}
 .ev-card.cat-free{border-color:rgba(0,255,136,.08)}
 .ev-card.cat-other{border-color:rgba(168,85,247,.1)}
-
 .ev-card.cat-sc .ev-card-cp{background:rgba(244,63,94,.05);border-color:rgba(244,63,94,.12);color:var(--rose)}
 .ev-card.cat-sc .ev-card-cp:hover{background:rgba(244,63,94,.1);border-color:rgba(244,63,94,.28);box-shadow:0 2px 6px var(--rose-g)}
 .ev-card.cat-buy .ev-card-cp{background:rgba(245,158,11,.05);border-color:rgba(245,158,11,.12);color:var(--amber)}
 .ev-card.cat-buy .ev-card-cp:hover{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.28);box-shadow:0 2px 6px var(--amber-g)}
 .ev-card.cat-free .ev-card-cp{background:rgba(0,255,136,.05);border-color:rgba(0,255,136,.12);color:var(--emerald)}
 .ev-card.cat-free .ev-card-cp:hover{background:rgba(0,255,136,.1);border-color:rgba(0,255,136,.28);box-shadow:0 2px 6px var(--emerald-g)}
-
 @media(max-width:900px){#eventContainer{grid-template-columns:repeat(2,1fr)!important}}
 @media(max-width:600px){#eventContainer{grid-template-columns:1fr!important;max-width:100%!important;padding:0 2px!important}}
 
@@ -368,7 +362,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .toast svg{width:10px;height:10px;flex-shrink:0}
 .toast-t{font-weight:600;max-width:120px;overflow:hidden;text-overflow:ellipsis}
 
-.dbg{position:fixed;bottom:46px;right:12px;background:var(--surface);border:1px solid var(--bdr-m);border-radius:var(--radius-sm);padding:8px;font-family:'JetBrains Mono',monospace;font-size:.6rem;max-width:280px;z-index:100;display:none;box-shadow:0 3px 12px rgba(0,0,0,.4)}
+.dbg{position:fixed;bottom:46px;right:12px;background:var(--surface);border:1px solid var(--bdr-m);border-radius:var(--radius-sm);padding:8px;font-family:'JetBrains Mono',monospace;font-size:.6rem;max-width:300px;z-index:100;display:none;box-shadow:0 3px 12px rgba(0,0,0,.4)}
 .dbg.show{display:block}
 .dbg-t{color:var(--cyan);margin-bottom:4px;font-size:.58rem}
 .dbg-i{color:var(--text2);margin-bottom:1px;line-height:1.3}
@@ -480,9 +474,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 <section class="pg" id="page-prediksi"><div class="gp"><div class="gp-i">📊</div><div class="gp-t">Prediksi Togel</div><div class="gp-d">Modul sedang dalam pengembangan.</div></div></section>
 
 <section class="pg" id="page-scatter">
-<div class="ep-hd"><div class="ep-t">EVENT SC, BUY, FREE</div><div class="ep-d">SCATTER dari sheet EVENT (maks 15 baris). BUY &amp; FREE dari sheet BUY FREE SPIN.</div></div>
+<div class="ep-hd"><div class="ep-t">EVENT SC, BUY, FREE</div><div class="ep-d">SCATTER: sheet EVENT baris 1-15 saja. BUY &amp; FREE: sheet BUY FREE SPIN.</div></div>
 <div class="ev-cat-bar" id="eventCatBar">
-<div class="ev-cat-btn sc-cat" data-cat="SC"><div class="ev-cat-ico"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><div class="ev-cat-info"><div class="ev-cat-name">SCATTER</div><div class="ev-cat-sub">EVENT SCATTER</div></div><div class="ev-cat-cnt" id="catCntSC">0</div></div>
+<div class="ev-cat-btn sc-cat" data-cat="SC"><div class="ev-cat-ico"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><div class="ev-cat-info"><div class="ev-cat-name">SCATTER</div><div class="ev-cat-sub">EVENT SCATTER (1-15)</div></div><div class="ev-cat-cnt" id="catCntSC">0</div></div>
 <div class="ev-cat-btn buy-cat" data-cat="BUY"><div class="ev-cat-ico"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg></div><div class="ev-cat-info"><div class="ev-cat-name">BUY & FREE</div><div class="ev-cat-sub">BUY FREE SPIN</div></div><div class="ev-cat-cnt" id="catCntBUY">0</div></div>
 <div class="ev-cat-btn free-cat" data-cat="FREE"><div class="ev-cat-ico"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm0 16H4V8h16v10z"/></svg></div><div class="ev-cat-info"><div class="ev-cat-name">SUPER</div><div class="ev-cat-sub">EVENT SUPER</div></div><div class="ev-cat-cnt" id="catCntFREE">0</div></div>
 </div>
@@ -519,7 +513,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 var sheetData=[],filteredData=[],currentDetail=null;
 var bonusData=[],filteredBonusData=[],currentBonusDetail=null;
 var eventData=[],filteredEventData=[],currentEventDetail=null;
-/* === Data SCATTER: khusus dari sheet EVENT, maks 15 baris === */
+/* scatterData: HANYA data dari sheet EVENT, baris 1-15, tidak lebih */
 var scatterData=[];
 var debugMode=false,activePage='beranda';
 var randomDataLoaded=false,bonusDataLoaded=false,eventDataLoaded=false;
@@ -528,7 +522,8 @@ var SHEET_ID='1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
 var RANDOM_GID='0',BONUS_GID='252063146',EVENT_GID='1232746230';
 var BUYFREE_GID='685194017';
 var FETCH_TIMEOUT=8000;
-var SCATTER_MAX_ROWS=15;
+/* Batas maksimum baris untuk SCATTER — baris 16+ DIKECUALIKAN */
+var SCATTER_MAX=15;
 var CPY='<svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>';
 var CHK='<svg fill="currentColor" viewBox="0 0 24 24" style="width:10px;height:10px"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
 
@@ -573,7 +568,7 @@ function initSB(){
 function toast(t,m,tp){var c=document.getElementById('toastContainer'),e=document.createElement('div');e.classList.add('toast');if(tp==='bonus')e.classList.add('bt');if(tp==='event')e.classList.add('et');e.innerHTML='<svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span class="toast-t">'+t+'</span><span>'+m+'</span>';c.appendChild(e);setTimeout(function(){e.classList.add('to');setTimeout(function(){e.remove()},250)},2000)}
 function updTime(){document.getElementById('systemTime').textContent=new Date().toLocaleTimeString('id-ID',{hour12:false})}
 function updStat(s){document.getElementById('sysStatus').textContent=s}
-function updDbg(){if(!debugMode)return;document.getElementById('debugInfo').innerHTML='<div>Random: '+sheetData.length+' | F: '+filteredData.length+'</div><div>Bonus: '+bonusData.length+' | F: '+filteredBonusData.length+'</div><div>Event: '+eventData.length+' | F: '+filteredEventData.length+' Cat:'+activeEventCat+'</div><div>Scatter(15baris): '+scatterData.length+'</div><div>Active: '+activePage+'</div>'}
+function updDbg(){if(!debugMode)return;document.getElementById('debugInfo').innerHTML='<div>Random: '+sheetData.length+' | F: '+filteredData.length+'</div><div>Bonus: '+bonusData.length+' | F: '+filteredBonusData.length+'</div><div>Event total: '+eventData.length+' | F: '+filteredEventData.length+' Cat:'+activeEventCat+'</div><div>Scatter (baris 1-15): '+scatterData.length+'</div><div>Scatter source: EVENT sheet only</div><div>Active: '+activePage+'</div>'}
 
 function lev(a,b){var m=[];for(var i=0;i<=b.length;i++)m[i]=[i];for(var j=0;j<=a.length;j++)m[0][j]=j;for(var i=1;i<=b.length;i++)for(var j=1;j<=a.length;j++){if(b.charAt(i-1)===a.charAt(j-1))m[i][j]=m[i-1][j-1];else m[i][j]=Math.min(m[i-1][j-1]+1,m[i][j-1]+1,m[i-1][j]+1)}return m[b.length][a.length]}
 function sim(a,b){var d=lev(a.toLowerCase(),b.toLowerCase());var l=a.length>b.length?a:b;return l.length===0?100:Math.round(((l.length-d)/l.length)*100)}
@@ -597,10 +592,14 @@ async function fetchGS(gid){
   return d
 }
 
-/* =====================================================
-   Fetch sheet EVENT — HANYA 15 BARIS PERTAMA
-   Semua row masuk ke scatterData (tanpa filter kategori)
-   ===================================================== */
+/* ================================================================
+   fetchEV — Ambil data dari sheet EVENT
+   SAFETY TRIPLE LAYER:
+   1. Loop dibatasi maxRows = min(15, totalRows)
+   2. Setelah loop, slice(0, 15) sebagai safety kedua
+   3. Setiap item ditandai src:'event' agar tidak bercampur
+   Baris 16 dan seterusnya: TIDAK AKAN MASUK
+   ================================================================ */
 async function fetchEV(){
   var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+EVENT_GID;
   var r=await fetchWithTimeout(url,FETCH_TIMEOUT);
@@ -608,14 +607,21 @@ async function fetchEV(){
   var t=await r.text();
   if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
   var j=JSON.parse(t.substring(47).slice(0,-2));
+  var totalRows=j.table.rows.length;
   var d=[];
-  var maxRows=Math.min(SCATTER_MAX_ROWS, j.table.rows.length);
-  for(var i=0;i<maxRows;i++){
+  /* LAYER 1: Batasi loop maksimal 15 baris */
+  var loopLimit=Math.min(SCATTER_MAX, totalRows);
+  for(var i=0;i<loopLimit;i++){
     var row=j.table.rows[i];
     var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';
     var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';
     if(ti)d.push({title:ti,info:inf,cat:'SC',src:'event'})
   }
+  /* LAYER 2: Slice sebagai safety — pastikan tidak lebih dari 15 */
+  d=d.slice(0, SCATTER_MAX);
+  /* LAYER 3: Validasi final — hapus item yang tidak punya src:'event' */
+  d=d.filter(function(item){return item.src==='event'});
+  console.log('[fetchEV] Total rows di sheet: '+totalRows+', Yang masuk scatter: '+d.length+' (maks '+SCATTER_MAX+')');
   return d
 }
 
@@ -626,14 +632,18 @@ async function fetchEVFallback(){
   var t=await r.text();
   if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');
   var j=JSON.parse(t.substring(47).slice(0,-2));
+  var totalRows=j.table.rows.length;
   var d=[];
-  var maxRows=Math.min(SCATTER_MAX_ROWS, j.table.rows.length);
-  for(var i=0;i<maxRows;i++){
+  var loopLimit=Math.min(SCATTER_MAX, totalRows);
+  for(var i=0;i<loopLimit;i++){
     var row=j.table.rows[i];
     var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';
     var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';
     if(ti)d.push({title:ti,info:inf,cat:'SC',src:'event'})
   }
+  d=d.slice(0, SCATTER_MAX);
+  d=d.filter(function(item){return item.src==='event'});
+  console.log('[fetchEVFallback] Total rows: '+totalRows+', Scatter: '+d.length);
   return d
 }
 
@@ -751,51 +761,84 @@ function bonRender(){
   })
 }
 
-/* =====================================================
-   fetchEvent:
-   - SCATTER badge → scatterData (EVENT sheet, maks 15 baris, SEMUA row)
-   - BUY & FREE badge → dari BUY FREE SPIN sheet (BUY + FREE)
-   - SUPER badge → dari BUY FREE SPIN sheet (FREE saja)
-   - Gabungan (tanpa filter) → scatterData + buyFreeFiltered
-   ===================================================== */
+/* ================================================================
+   fetchEvent — Logika utama badge SCATTER / BUY&FREE / SUPER
+
+   SCATTER:
+     - Sumber: HANYA sheet EVENT (gid=1232746230)
+     - Batas: HANYA baris 1 sampai 15
+     - Baris 16+: TIDAK MASUK, sama sekali tidak diambil
+     - Tidak ada filter kata kunci — semua 15 row masuk
+
+   BUY & FREE:
+     - Sumber: sheet BUY FREE SPIN (gid=685194017)
+     - Filter: hanya row dengan cat BUY atau FREE
+
+   SUPER:
+     - Sumber: sheet BUY FREE SPIN
+     - Filter: hanya row dengan cat FREE
+   ================================================================ */
 async function fetchEvent(){
   var ld=document.getElementById('eventLoadingContainer'),ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
   ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');
+
   var evRaw=[],buyFreeData=[];
   var evOk=false,bfOk=false;
 
-  /* 1) Ambil SEMUA data dari sheet EVENT, maks 15 baris → scatterData */
+  /* === 1. SCATTER: Ambil dari sheet EVENT, MAKS 15 BARIS === */
   try{evRaw=await fetchEV();if(evRaw.length>0)evOk=true}catch(e){console.warn('[Event EV GID]',e.message)}
   if(!evOk){try{evRaw=await fetchEVFallback();if(evRaw.length>0)evOk=true}catch(e){console.warn('[Event EV Sheet]',e.message)}}
 
-  /* scatterData = semua row dari EVENT sheet (maks 15), semua cat='SC' */
-  scatterData=evOk?evRaw.slice():[];
+  /* scatterData = hasil fetch, SUDAH terpotong maks 15 oleh fetchEV */
+  scatterData=evOk?evRaw.slice(0, SCATTER_MAX):[];
 
-  /* 2) Ambil data dari sheet BUY FREE SPIN */
+  /* === 2. BUY & FREE / SUPER: Ambil dari sheet BUY FREE SPIN === */
   try{buyFreeData=await fetchBuyFree();if(buyFreeData.length>0)bfOk=true}catch(e){console.warn('[BuyFree GID]',e.message)}
   if(!bfOk){try{buyFreeData=await fetchBuyFreeFallback();if(buyFreeData.length>0)bfOk=true}catch(e){console.warn('[BuyFree Sheet]',e.message)}}
 
-  /* Filter BUY FREE SPIN: hanya BUY dan FREE */
+  /* Filter BUY FREE SPIN: hanya BUY dan FREE (bukan SC/OTHER) */
   var bfFiltered=[];
-  if(bfOk){for(var j=0;j<buyFreeData.length;j++){var c=buyFreeData[j].cat;if(c==='BUY'||c==='FREE')bfFiltered.push(buyFreeData[j])}}
+  if(bfOk){
+    for(var j=0;j<buyFreeData.length;j++){
+      var c=buyFreeData[j].cat;
+      if(c==='BUY'||c==='FREE')bfFiltered.push(buyFreeData[j]);
+    }
+  }
 
-  /* 3) Gabungkan: scatterData + bfFiltered */
+  /* === 3. Gabungkan untuk tampilan "SEMUA" === */
   eventData=scatterData.concat(bfFiltered);
   var ok=eventData.length>0;
 
-  /* 4) Fallback localStorage */
+  /* === 4. Fallback localStorage — DENGAN VALIDASI SCATTER MAX === */
   if(!ok){
-    try{var cached=localStorage.getItem('NM_event5');if(cached){var parsed=JSON.parse(cached);if(parsed.scatter){scatterData=parsed.scatter}if(parsed.bf){bfFiltered=parsed.bf}eventData=scatterData.concat(bfFiltered);if(eventData.length>0)ok=true}}catch(e){}
+    try{
+      var cached=localStorage.getItem('NM_event6');
+      if(cached){
+        var parsed=JSON.parse(cached);
+        /* Restore scatter: WAJIB slice ke maks 15, hanya src:event */
+        if(parsed.scatter&&Array.isArray(parsed.scatter)){
+          scatterData=parsed.scatter.filter(function(item){return item.src==='event'}).slice(0, SCATTER_MAX);
+        }
+        /* Restore buyfree */
+        if(parsed.bf&&Array.isArray(parsed.bf)){
+          bfFiltered=parsed.bf.filter(function(item){return item.src==='buyfree'});
+        }
+        eventData=scatterData.concat(bfFiltered);
+        if(eventData.length>0)ok=true;
+      }
+    }catch(e){}
   }
 
-  if(!ok)eventData=[{title:'BELUM ADA DATA',info:'Tidak dapat terhubung ke server.',cat:'OTHER'}];
+  if(!ok)eventData=[{title:'BELUM ADA DATA',info:'Tidak dapat terhubung ke server.',cat:'OTHER',src:'placeholder'}];
 
-  /* 5) Simpan cache */
-  if(ok&&eventData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_event5',JSON.stringify({scatter:scatterData,bf:bfFiltered}))}catch(e){}
+  /* === 5. Simpan cache === */
+  if(ok&&eventData[0].src!=='placeholder'){
+    try{localStorage.setItem('NM_event6',JSON.stringify({scatter:scatterData,bf:bfFiltered}))}catch(e){}
+  }
 
   eventDataLoaded=true;
 
-  /* 6) Hitung per kategori */
+  /* === 6. Hitung per badge === */
   var cntSC=scatterData.length;
   var cntBUY=0,cntFREE=0;
   for(var k=0;k<bfFiltered.length;k++){
@@ -808,9 +851,12 @@ async function fetchEvent(){
   document.getElementById('catCntFREE').textContent=cntFREE;
   document.getElementById('statEvent').textContent=eventData.length;
   document.getElementById('eventCountText').textContent=eventData.length+' Folder';
+
+  console.log('[fetchEvent] Scatter(baris1-15): '+cntSC+' | BUY+FREE: '+(cntBUY+cntFREE)+' | FREE(super): '+cntFREE+' | Total: '+eventData.length);
+
   updStat(ok?'Online':'Offline');ld.style.display='none';
   activeEventCat=null;filteredEventData=eventData.slice();
-  evRender();updDbg()
+  evRender();updDbg();
 }
 
 function evRender(){
@@ -847,17 +893,21 @@ function evRender(){
   });
 }
 
-/* Helper: apply filter berdasarkan activeEventCat */
+/* ================================================================
+   applyEventFilter — Saat klik badge atau ketik di search
+   SCATTER: HANYA ambil dari scatterData (sudah pasti maks 15, src:event)
+   Tidak ada cara data baris 16+ bisa masuk ke sini
+   ================================================================ */
 function applyEventFilter(q){
   var base;
   if(activeEventCat==='SC'){
-    /* SCATTER: hanya dari scatterData (EVENT sheet, maks 15 baris) */
+    /* SCATTER: HANYA scatterData — sudah dijamin maks 15 baris */
     base=scatterData;
   }else if(activeEventCat==='BUY'){
-    /* BUY & FREE: dari BUY FREE SPIN sheet */
+    /* BUY & FREE: HANYA dari BUY FREE SPIN sheet */
     base=eventData.filter(function(ev){return ev.src==='buyfree'&&(ev.cat==='BUY'||ev.cat==='FREE')});
   }else if(activeEventCat==='FREE'){
-    /* SUPER: hanya FREE dari BUY FREE SPIN sheet */
+    /* SUPER: HANYA FREE dari BUY FREE SPIN sheet */
     base=eventData.filter(function(ev){return ev.src==='buyfree'&&ev.cat==='FREE'});
   }else{
     /* Semua: scatterData + buyFreeFiltered */
