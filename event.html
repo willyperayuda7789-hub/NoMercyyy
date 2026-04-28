@@ -1,1 +1,703 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Event Folders - Scatter | Buy & Free | Super Scatter (Card + Copy Button)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            background: linear-gradient(145deg, #f4f7fb 0%, #e9eef3 100%);
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Roboto', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #1a2c3e;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header style dengan badge terpisah */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.5rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+        }
+
+        .badge-scatter {
+            background: linear-gradient(135deg, #ffd89b, #c7e9fb);
+            color: #b45f1b;
+            border: 1px solid #ffcd94;
+        }
+
+        .badge-buyfree {
+            background: linear-gradient(135deg, #d4fc79, #96e6a1);
+            color: #2a6b2f;
+            border: 1px solid #b3e6a0;
+        }
+
+        .badge-super {
+            background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+            color: #6a1b9a;
+            border: 1px solid #e0b3ff;
+        }
+
+        .badge-icon {
+            font-size: 1.2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #2b5876, #1e3c5c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+            font-weight: 800;
+        }
+
+        .sub {
+            color: #4a627a;
+            font-weight: 500;
+            border-bottom: 2px solid #ffc857;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* layout grid folder */
+        .folders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* kartu folder utama */
+        .folder-card {
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0,0,0,0.02);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            border: 1px solid rgba(255,255,255,0.5);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .folder-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 36px -16px rgba(0, 0, 0, 0.2);
+            border-color: #ffe0a3;
+        }
+
+        .category-ribbon {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(4px);
+            padding: 4px 10px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            z-index: 2;
+        }
+
+        .folder-header {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 2px solid #ffda9e;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #fef8ed;
+        }
+
+        .folder-icon {
+            font-size: 2rem;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .folder-title {
+            font-size: 1.55rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            background: linear-gradient(130deg, #2c3e4e, #1f2f3c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            word-break: break-word;
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        /* ========= STYLE CONTENT ITEM MIRIP GAMBAR ========= */
+        /* Setiap item (isi dari kolom B) akan tampil seperti blok BONUS CASHBACK */
+        .items-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .bonus-item {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid #eef2f8;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.03);
+            transition: all 0.2s;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bonus-item:hover {
+            border-color: #ffda9e;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Header item biasanya menampilkan judul seperti "BONUS CASHBACK" , ambil dari baris pertama atau dari isi yang memiliki pola */
+        .bonus-header {
+            background: #fef6e8;
+            padding: 0.9rem 1.2rem;
+            border-bottom: 1px solid #ffe1b3;
+        }
+
+        .bonus-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #c46e2e;
+            letter-spacing: -0.2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bonus-title-icon {
+            font-size: 1.5rem;
+        }
+
+        .bonus-description {
+            padding: 1.2rem 1.2rem 1rem 1.2rem;
+            font-size: 0.9rem;
+            line-height: 1.55;
+            color: #2c3e50;
+            background: white;
+            white-space: pre-line;
+            word-break: break-word;
+            font-weight: 500;
+        }
+
+        /* area tombol salin di kanan bawah seperti gambar */
+        .copy-action {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0.5rem 1.2rem 1rem 1.2rem;
+            background: white;
+            border-top: 1px solid #f0f2f5;
+        }
+
+        .copy-btn {
+            background: #eef2fa;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 8px 18px;
+            border-radius: 40px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #2c5f8a;
+            font-weight: 700;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .copy-btn:hover {
+            background: #e0e8f2;
+            transform: scale(0.96);
+            color: #1e4663;
+        }
+
+        .copy-btn:active {
+            background: #d0dcec;
+        }
+
+        .empty-folder {
+            color: #8da0b0;
+            font-style: italic;
+            padding: 1rem;
+            text-align: center;
+            background: #fafcff;
+            border-radius: 24px;
+        }
+
+        /* loading dan error */
+        .loading-state, .error-state, .no-data {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 48px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+            margin-top: 2rem;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #e2e8f0;
+            border-top-color: #f5a623;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            margin: 0 auto 1rem auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-state {
+            background: #fff5f0;
+            border-left: 6px solid #e67e22;
+        }
+
+        button.retry-btn {
+            background: #ffcd7e;
+            border: none;
+            padding: 10px 26px;
+            border-radius: 60px;
+            font-weight: 700;
+            margin-top: 1.2rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            color: #2d3e50;
+        }
+
+        button.retry-btn:hover {
+            background: #ffbc4a;
+            transform: scale(0.97);
+        }
+
+        .footer-note {
+            margin-top: 3.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            border-top: 1px solid #dce5ec;
+            padding-top: 1.8rem;
+        }
+
+        .toast-message {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #1e2f3c;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            pointer-events: none;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.85);
+        }
+
+        .toast-message.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 680px) {
+            body {
+                padding: 1rem;
+            }
+            .folder-title {
+                font-size: 1.3rem;
+            }
+            .folders-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .bonus-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="badge-group">
+            <div class="badge badge-scatter">
+                <span class="badge-icon">✨</span> SCATTER
+            </div>
+            <div class="badge badge-buyfree">
+                <span class="badge-icon">🎁</span> BUY & FREE
+            </div>
+            <div class="badge badge-super">
+                <span class="badge-icon">⭐</span> SUPER SCATTER
+            </div>
+        </div>
+        <h1>🎲 EVENT FOLDER · STYLE BONUS</h1>
+        <div class="sub">Setiap item (Kolom B) tampil seperti kartu bonus dengan tombol SALIN di kanan bawah</div>
+        <p style="margin-top: 14px; font-size: 0.85rem; color: #5f7f9e;">✨ Format persis seperti gambar: judul besar, deskripsi, dan tombol Salin</p>
+    </div>
+
+    <div id="foldersContainer" class="folders-grid">
+        <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Memuat data dari spreadsheet...</p>
+            <p>Menampilkan folder & item dengan tombol SALIN</p>
+        </div>
+    </div>
+    <div class="footer-note">
+        <span>📋 Klik tombol "SALIN" untuk menyalin teks item (deskripsi bonus/dll) ke clipboard</span>
+    </div>
+</div>
+<div id="toastMsg" class="toast-message">📋 Berhasil disalin!</div>
+
+<script>
+    // ============================================================
+    // KONFIGURASI SPREADSHEET (KOLOM A = JUDUL FOLDER, KOLOM B = ISI ITEM)
+    // Setiap baris yang memiliki isi di kolom B akan menjadi 1 item dengan tampilan BONUS CARD
+    // ============================================================
+    const SPREADSHEET_ID = '1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs';
+    const GID = '0';
+    const SHEET_API = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
+
+    // Helper toast
+    let toastTimeout = null;
+    function showToast(message = "📋 Teks disalin ke clipboard!") {
+        const toast = document.getElementById('toastMsg');
+        if (!toast) return;
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toast.textContent = message;
+        toast.classList.add('show');
+        toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2000);
+    }
+
+    // Fungsi copy menggunakan clipboard API modern
+    async function copyToClipboard(text, customMsg = null) {
+        try {
+            await navigator.clipboard.writeText(text);
+            const preview = text.length > 60 ? text.substring(0, 60) + '…' : text;
+            showToast(`✅ Disalin: "${preview}"`);
+            return true;
+        } catch (err) {
+            // fallback
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.top = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            const success = document.execCommand('copy');
+            document.body.removeChild(textarea);
+            if (success) {
+                const preview = text.length > 60 ? text.substring(0, 60) + '…' : text;
+                showToast(`📋 Disalin: "${preview}"`);
+            } else {
+                showToast(`❌ Gagal menyalin, silakan copy manual.`);
+            }
+            return success;
+        }
+    }
+
+    // Parse row dari Google Sheets
+    async function fetchFolderItems() {
+        const response = await fetch(SHEET_API, { cache: 'no-store', headers: { 'Accept': 'application/json' } });
+        if (!response.ok) throw new Error(`HTTP ${response.status} - Gagal mengambil data`);
+        const rawText = await response.text();
+        const jsonStart = rawText.indexOf('{');
+        const jsonEnd = rawText.lastIndexOf('}');
+        if (jsonStart === -1 || jsonEnd === -1) throw new Error('Format JSON tidak valid');
+        const jsonStr = rawText.substring(jsonStart, jsonEnd + 1);
+        const parsed = JSON.parse(jsonStr);
+        if (!parsed.table || !parsed.table.rows) throw new Error('Tabel tidak ditemukan');
+
+        const rows = parsed.table.rows;
+        const foldersMap = new Map(); // key: judul folder, value: array of item strings (kolom B)
+
+        for (const row of rows) {
+            if (!row.c) continue;
+            const titleCell = row.c[0];   // kolom A (judul folder)
+            const contentCell = row.c[1]; // kolom B (isi item)
+            let title = titleCell && titleCell.v != null ? String(titleCell.v).trim() : '';
+            let content = contentCell && contentCell.v != null ? String(contentCell.v).trim() : '';
+            if (title === "") continue;
+            if (!foldersMap.has(title)) foldersMap.set(title, []);
+            // jika content tidak kosong, tambahkan sebagai item terpisah
+            if (content !== "") {
+                foldersMap.get(title).push(content);
+            }
+        }
+
+        // Konversi map ke array of object
+        const folders = [];
+        for (const [title, items] of foldersMap.entries()) {
+            folders.push({ title, items });
+        }
+        return folders;
+    }
+
+    // Menentukan kategori folder untuk ribbon & border
+    function getCategoryType(title) {
+        const upper = title.toUpperCase();
+        if (upper.includes('SUPER SCATTER') || (upper.includes('SUPER') && upper.includes('SCATTER'))) return 'super';
+        if (upper.includes('SCATTER')) return 'scatter';
+        if (upper.includes('BUY') && upper.includes('FREE')) return 'buyfree';
+        if (upper.includes('BUYFREE')) return 'buyfree';
+        return null;
+    }
+
+    function getFolderIcon(title) {
+        const upper = title.toUpperCase();
+        if (upper.includes('SUPER SCATTER')) return '🌟';
+        if (upper.includes('SCATTER')) return '✨';
+        if (upper.includes('BUY') && upper.includes('FREE')) return '🎁';
+        return '📁';
+    }
+
+    // Fungsi untuk mengekstrak judul item (baris pertama atau bisa jadi teks diawali kata kunci BONUS)
+    // Agar mirip gambar: menampilkan teks seperti "BONUS CASHBACK" di header, dan deskripsi di bawah.
+    // Karena dari spreadsheet kolom B bisa berisi teks panjang, kita akan coba pisahkan baris pertama sebagai title (jika mengandung kata BONUS/ CASHBACK)
+    // Aturan: Jika teks mengandung newline, ambil baris pertama sebagai potensial judul, sisanya deskripsi.
+    // Tapi agar lebih mirip gambar, kita gunakan smart formatting:
+    // Jika teks diawali dengan kata seperti "BONUS" atau "CASHBACK" atau "Bonus", kita jadikan itu title.
+    // Namun supaya universal: Kita akan menampilkan seluruh teks dalam area deskripsi dan tetap ada tombol salin, tapi header bonus bisa diambil dari baris pertama atau potongan.
+    // Agar lebih meyakinkan: Kita buat title item dari kalimat pertama (sebelum titik dua/baris pertama), sisanya deskripsi.
+    function parseItemContent(rawText) {
+        // rawText dari kolom B (string)
+        if (!rawText) return { title: "Informasi", description: "" };
+        // cek apakah mengandung baris baru
+        const lines = rawText.split(/\r?\n/);
+        let title = "";
+        let description = "";
+        if (lines.length === 1) {
+            // jika hanya satu baris, kita lihat apakah panjang teks > 45? Kita bisa gunakan 40 karakter awal sebagai title? tapi jadikan title saja full? 
+            // Supaya mirip gambar: "BONUS CASHBACK" sebagai title
+            if (rawText.toUpperCase().startsWith("BONUS")) {
+                const match = rawText.match(/^(BONUS[^:\n]*)/i);
+                if (match) title = match[1].trim();
+                else title = rawText.substring(0, Math.min(50, rawText.length));
+                description = rawText.length > title.length ? rawText.substring(title.length).trim() : "";
+            } else {
+                title = rawText.length > 55 ? rawText.substring(0, 50) + "..." : rawText;
+                description = "";
+            }
+        } else {
+            title = lines[0].trim();
+            description = lines.slice(1).join("\n").trim();
+        }
+        // jika description kosong dan title cukup panjang, kita bisa pindahkan sebagian ke description (opsional)
+        if (!description && title.length > 60) {
+            description = title.substring(55);
+            title = title.substring(0, 55) + "...";
+        }
+        return { title: title || "Informasi", description: description || rawText };
+    }
+
+    // render folder dengan style bonus card (seperti gambar BONUS CASHBACK + tombol Salin)
+    function renderFolders(folders) {
+        const container = document.getElementById('foldersContainer');
+        if (!container) return;
+        if (!folders.length) {
+            container.innerHTML = `
+                <div class="no-data" style="grid-column:1/-1;">
+                    <div style="font-size:3rem;">📂</div>
+                    <h3>Belum ada data folder</h3>
+                    <p>Pastikan Kolom A (judul) terisi dan Kolom B (isi) memiliki teks di spreadsheet.</p>
+                    <button class="retry-btn" onclick="refreshData()">⟳ Muat Ulang</button>
+                </div>
+            `;
+            return;
+        }
+
+        let html = '';
+        for (const folder of folders) {
+            const folderTitle = folder.title;
+            const folderTitleEscaped = escapeHtml(folderTitle);
+            const icon = getFolderIcon(folderTitle);
+            const category = getCategoryType(folderTitle);
+            let borderTopStyle = '';
+            let ribbonLabel = '';
+            if (category === 'scatter') {
+                borderTopStyle = 'border-top: 3px solid #f39c12;';
+                ribbonLabel = '✨ SCATTER';
+            } else if (category === 'buyfree') {
+                borderTopStyle = 'border-top: 3px solid #27ae60;';
+                ribbonLabel = '🎁 BUY & FREE';
+            } else if (category === 'super') {
+                borderTopStyle = 'border-top: 3px solid #8e44ad;';
+                ribbonLabel = '⭐ SUPER SCATTER';
+            }
+
+            const items = folder.items;
+            let itemsHtml = `<ul class="items-list">`;
+            if (!items.length) {
+                itemsHtml += `<li><div class="empty-folder">Tidak ada konten dalam folder ini</div></li>`;
+            } else {
+                for (let idx = 0; idx < items.length; idx++) {
+                    const rawContent = items[idx];
+                    const { title: itemTitle, description: itemDesc } = parseItemContent(rawContent);
+                    const fullTextForCopy = rawContent; // untuk copy seluruh teks asli dari kolom B
+                    const escapedTitle = escapeHtml(itemTitle);
+                    const escapedDesc = escapeHtml(itemDesc);
+                    // Gunakan data attribute untuk copy teks lengkap
+                    itemsHtml += `
+                        <li class="bonus-item">
+                            <div class="bonus-header">
+                                <div class="bonus-title">
+                                    <span class="bonus-title-icon">🏆</span> ${escapedTitle}
+                                </div>
+                            </div>
+                            <div class="bonus-description">
+                                ${escapedDesc.replace(/\n/g, '<br>')}
+                            </div>
+                            <div class="copy-action">
+                                <button class="copy-btn" data-copy-full="${escapeHtml(fullTextForCopy).replace(/"/g, '&quot;')}">
+                                    📋 SALIN
+                                </button>
+                            </div>
+                        </li>
+                    `;
+                }
+            }
+            itemsHtml += `</ul>`;
+
+            const ribbonHtml = ribbonLabel ? `<div class="category-ribbon" style="background: ${category === 'scatter' ? '#e67e22cc' : category === 'buyfree' ? '#2ecc71cc' : '#9b59b6cc'}">${ribbonLabel}</div>` : '';
+
+            html += `
+                <div class="folder-card" style="${borderTopStyle}">
+                    ${ribbonHtml}
+                    <div class="folder-header">
+                        <div class="folder-icon">${icon}</div>
+                        <div class="folder-title">${folderTitleEscaped}</div>
+                    </div>
+                    <div class="folder-content" style="padding: 1.2rem 1.2rem 1.3rem 1.2rem;">
+                        ${itemsHtml}
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+
+        // attach event listener ke semua tombol salin setelah render
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const rawText = btn.getAttribute('data-copy-full');
+                if (rawText) {
+                    const decoded = decodeHtmlEntities(rawText);
+                    await copyToClipboard(decoded);
+                } else {
+                    showToast("Teks tidak ditemukan");
+                }
+            });
+        });
+    }
+
+    function decodeHtmlEntities(str) {
+        if (!str) return '';
+        const txt = document.createElement('textarea');
+        txt.innerHTML = str;
+        return txt.value;
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+
+    function showError(errMsg) {
+        const container = document.getElementById('foldersContainer');
+        if (container) {
+            container.innerHTML = `
+                <div class="error-state" style="grid-column:1/-1;">
+                    <div style="font-size:2.5rem;">⚠️</div>
+                    <h3>Gagal Memuat Data</h3>
+                    <p>${escapeHtml(errMsg)}</p>
+                    <p style="font-size:0.85rem;">Pastikan spreadsheet publik dengan akses "Siapa pun dengan tautan dapat melihat"</p>
+                    <button class="retry-btn" onclick="refreshData()">⟳ Muat Ulang</button>
+                </div>
+            `;
+        }
+    }
+
+    async function loadData() {
+        const container = document.getElementById('foldersContainer');
+        if (container) {
+            container.innerHTML = `
+                <div class="loading-state" style="grid-column:1/-1;">
+                    <div class="spinner"></div>
+                    <p>Mengambil data dari Google Sheets ...</p>
+                    <p style="font-size:0.8rem;">Memformat item seperti kartu BONUS dengan tombol SALIN</p>
+                </div>
+            `;
+        }
+        try {
+            const folders = await fetchFolderItems();
+            renderFolders(folders);
+        } catch (err) {
+            console.error(err);
+            let msg = err.message || "Kesalahan tidak diketahui";
+            if (msg.includes('Failed to fetch')) msg = "Gagal terhubung ke Google Sheets. Cek koneksi atau CORS.";
+            showError(msg);
+        }
+    }
+
+    window.refreshData = function() { loadData(); };
+    window.addEventListener('DOMContentLoaded', loadData);
+</script>
+</body>
+</html>
