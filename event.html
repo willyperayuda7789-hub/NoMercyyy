@@ -564,7 +564,7 @@
         return { headers, data: jsonData };
     }
     
-    // Render data Scatter ke dalam tampilan
+    // Render data Scatter ke dalam tampilan dengan format yang memperhatikan kolom A (judul folder) dan kolom B (isi folder)
     function renderScatterData() {
         const container = document.getElementById("scatterDataContainer");
         if (!container) return;
@@ -574,48 +574,72 @@
             return;
         }
         
-        // Jika hanya 1 baris data, tampilkan sebagai kartu detail
-        if (scatterRawData.length === 1) {
-            const singleData = scatterRawData[0];
-            let html = `<div class="data-card">`;
-            for (const [key, value] of Object.entries(singleData)) {
-                if (key && value !== undefined) {
-                    html += `
-                        <div class="data-row">
-                            <div class="data-label">${escapeHtml(key)}</div>
-                            <div class="data-value">${escapeHtml(String(value))}</div>
+        // Deteksi apakah kolom A (header pertama) dan kolom B (header kedua) ada
+        // Idealnya sheet memiliki minimal 2 kolom: Kolom A --> judul folder, Kolom B --> isi folder.
+        // Untuk fleksibilitas, jika header pertama dan kedua ada maka kita bisa menampilkan dalam mode folder.
+        // Jika tidak kita tampilkan default tabel.
+        
+        const hasAtLeastTwoCols = scatterHeaders.length >= 2;
+        
+        // Jika baris data lebih dari 0 dan kita ingin menonjolkan struktur folder (Judul dan Isi)
+        // Kita akan menampilkan dalam gaya kartu yang menarik dimana setiap baris mewakili satu folder item.
+        if (hasAtLeastTwoCols) {
+            let html = `<div style="display: flex; flex-direction: column; gap: 1rem;">`;
+            for (let idx = 0; idx < scatterRawData.length; idx++) {
+                const row = scatterRawData[idx];
+                const judulFolder = row[scatterHeaders[0]] || "Tanpa Judul";
+                const isiFolder = row[scatterHeaders[1]] || "Tidak ada konten";
+                html += `
+                    <div class="data-card" style="transition: all 0.2s;">
+                        <div class="data-row" style="border-bottom: 1px solid rgba(255,200,100,0.3);">
+                            <div class="data-label" style="font-size:1rem;">📁 ${escapeHtml(judulFolder)}</div>
+                            <div class="data-value" style="font-weight:500;"></div>
                         </div>
-                    `;
-                }
+                        <div class="data-row">
+                            <div class="data-label">📄 Isi Folder</div>
+                            <div class="data-value">${escapeHtml(isiFolder)}</div>
+                        </div>
+                    </div>
+                `;
             }
             html += `</div>`;
             container.innerHTML = html;
         } 
         else {
-            // Jika lebih dari 1 baris, tampilkan dalam bentuk tabel
-            const headers = scatterHeaders;
-            let html = `<div class="data-card" style="overflow-x: auto;">
-                            <table class="data-table">
-                                <thead><tr>`;
-            for (let h of headers) {
-                html += `<th>${escapeHtml(h)}</th>`;
-            }
-            html += `</tr></thead><tbody>`;
-            
-            for (let row of scatterRawData) {
-                html += `<tr>`;
-                for (let h of headers) {
-                    let value = row[h] !== undefined ? row[h] : "";
-                    html += `<td>${escapeHtml(String(value))}</td>`;
+            // Jika tidak memenuhi syarat minimal 2 kolom, tampilkan sebagai kartu biasa atau tabel
+            if (scatterRawData.length === 1) {
+                let html = `<div class="data-card">`;
+                for (const [key, value] of Object.entries(scatterRawData[0])) {
+                    if (key && value !== undefined) {
+                        html += `<div class="data-row"><div class="data-label">${escapeHtml(key)}</div><div class="data-value">${escapeHtml(String(value))}</div></div>`;
+                    }
                 }
-                html += `</tr>`;
+                html += `</div>`;
+                container.innerHTML = html;
+            } 
+            else {
+                let html = `<div class="data-card" style="overflow-x: auto;">
+                                <table class="data-table">
+                                    <thead><tr>`;
+                for (let h of scatterHeaders) {
+                    html += `<th>${escapeHtml(h)}</th>`;
+                }
+                html += `</tr></thead><tbody>`;
+                for (let row of scatterRawData) {
+                    html += `<tr>`;
+                    for (let h of scatterHeaders) {
+                        let value = row[h] !== undefined ? row[h] : "";
+                        html += `<td>${escapeHtml(String(value))}</td>`;
+                    }
+                    html += `</tr>`;
+                }
+                html += `</tbody></table>
+                         <div style="margin-top: 1rem; font-size: 0.8rem; color: #a9b7e6; text-align: right;">
+                            📊 Total ${scatterRawData.length} baris data
+                         </div>
+                         </div>`;
+                container.innerHTML = html;
             }
-            html += `</tbody></table>
-                     <div style="margin-top: 1rem; font-size: 0.8rem; color: #a9b7e6; text-align: right;">
-                        📊 Total ${scatterRawData.length} baris data
-                     </div>
-                     </div>`;
-            container.innerHTML = html;
         }
     }
     
@@ -627,6 +651,8 @@
             if (m === '<') return '&lt;';
             if (m === '>') return '&gt;';
             return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
         });
     }
     
