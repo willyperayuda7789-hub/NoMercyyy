@@ -173,7 +173,7 @@
             gap: 1.5rem;
         }
 
-        /* Card Folder seperti contoh gambar: gaya folder dengan latar, border, efek hover */
+        /* Card Folder gaya folder dengan latar, border, efek hover */
         .folder-card {
             background: linear-gradient(135deg, rgba(25, 35, 55, 0.95), rgba(15, 22, 40, 0.98));
             backdrop-filter: blur(4px);
@@ -220,14 +220,14 @@
             flex: 1;
         }
 
-        /* Isi folder */
+        /* Isi folder - TEKS WARNA PUTIH */
         .folder-body {
             padding: 1.2rem 1.5rem 1.5rem 1.5rem;
             flex: 1;
         }
 
         .folder-content {
-            color: #d1dcff;
+            color: #FFFFFF !important;
             line-height: 1.55;
             font-size: 0.95rem;
             white-space: pre-wrap;
@@ -249,12 +249,12 @@
             border-radius: 10px;
         }
 
-        /* Jika konten berupa list atau teks panjang */
         .folder-content p {
             margin-bottom: 0.5rem;
+            color: #FFFFFF;
         }
 
-        /* Tombol salin (seperti pada contoh gambar) */
+        /* Tombol salin */
         .copy-btn {
             background: rgba(255, 180, 70, 0.15);
             border: 1px solid #ffb347;
@@ -319,14 +319,6 @@
             transform: scale(0.98);
         }
 
-        /* info status */
-        .info-status {
-            background: rgba(0,0,0,0.2);
-            border-radius: 1rem;
-            margin-top: 1rem;
-            font-size: 0.8rem;
-        }
-
         @media (max-width: 760px) {
             .folder-grid {
                 grid-template-columns: 1fr;
@@ -341,25 +333,6 @@
             .folder-icon {
                 font-size: 1.6rem;
             }
-        }
-
-        /* data-row untuk info sheet */
-        .data-row {
-            display: flex;
-            padding: 0.6rem 0;
-            border-bottom: 1px solid rgba(255, 200, 100, 0.15);
-            gap: 1rem;
-            align-items: flex-start;
-        }
-        .data-label {
-            font-weight: 700;
-            width: 140px;
-            color: #ffdf9c;
-            font-size: 0.85rem;
-        }
-        .data-value {
-            color: #e0e6ff;
-            flex: 1;
         }
     </style>
 </head>
@@ -384,7 +357,7 @@
 
     <!-- Area Halaman Dinamis -->
     <div class="page-container">
-        <!-- HALAMAN SCATTER (data dari Google Sheets) dengan folder grid 2 kolom -->
+        <!-- HALAMAN SCATTER (data dari Google Sheets) dengan folder grid 2 kolom & teks putih, tanpa info sumber data -->
         <div id="page-scatter" class="page active-page">
             <div class="page-header">
                 <h2>📂 SCATTER · FOLDER DATA</h2>
@@ -393,23 +366,10 @@
             <div id="scatterDataContainer">
                 <div class="loading">⏳ Mengambil data folder dari Google Sheets...</div>
             </div>
-            <div class="info-status" style="margin-top: 1.5rem; background: rgba(0,0,0,0.3); border-radius: 1rem; padding: 0.8rem 1.2rem;">
-                <div class="data-row">
-                    <div class="data-label">📌 Sumber Data</div>
-                    <div class="data-value">
-                        <a href="https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/edit?gid=0" target="_blank" style="color:#ffb347;">
-                            Sheet SCATTER (Kolom A = Judul Folder, Kolom B = Isi Folder)
-                        </a>
-                    </div>
-                </div>
-                <div class="data-row">
-                    <div class="data-label">🔄 Status Sinkronisasi</div>
-                    <div class="data-value" id="dataStatus">Menunggu sinkronisasi...</div>
-                </div>
-            </div>
+            <!-- Bagian Sumber Data & Status Sinkronisasi TELAH DIHAPUS sesuai permintaan -->
         </div>
 
-        <!-- HALAMAN BUY & FREE (Isian mandiri) -->
+        <!-- HALAMAN BUY & FREE (Isian mandiri) dengan teks putih -->
         <div id="page-buyfree" class="page">
             <div class="page-header">
                 <h2>🛒 BUY & FREE SHEET</h2>
@@ -418,16 +378,16 @@
             <div class="folder-grid">
                 <div class="folder-card">
                     <div class="folder-header"><span class="folder-icon">🎁</span><div class="folder-title">Paket Buy Spin</div></div>
-                    <div class="folder-body"><div class="folder-content">Buy 10 Free Spin + Gratis 5 Extra Spin<br>Minimal deposit IDR 50.000<br>Maksimal klaim 2x/hari</div><button class="copy-btn" onclick="copyTextFromEvent('Buy 10 Free Spin + Gratis 5 Extra Spin | Min Deposit 50k')">📋 SALIN</button></div>
+                    <div class="folder-body"><div class="folder-content" style="color:#FFFFFF !important;">Buy 10 Free Spin + Gratis 5 Extra Spin<br>Minimal deposit IDR 50.000<br>Maksimal klaim 2x/hari</div><button class="copy-btn" onclick="copyTextFromEvent('Buy 10 Free Spin + Gratis 5 Extra Spin | Min Deposit 50k')">📋 SALIN</button></div>
                 </div>
                 <div class="folder-card">
                     <div class="folder-header"><span class="folder-icon">💰</span><div class="folder-title">Syarat Turnover</div></div>
-                    <div class="folder-body"><div class="folder-content">Turnover x5 sebelum withdraw.<br>Bonus rollingan 0.5% (LIVE GAMES & SLOT)<br>Cashback up to 5% (Live Games)</div><button class="copy-btn" onclick="copyTextFromEvent('Turnover x5, rollingan 0.5% all games, cashback 5% live games')">📋 SALIN</button></div>
+                    <div class="folder-body"><div class="folder-content" style="color:#FFFFFF !important;">Turnover x5 sebelum withdraw.<br>Bonus rollingan 0.5% (LIVE GAMES & SLOT)<br>Cashback up to 5% (Live Games)</div><button class="copy-btn" onclick="copyTextFromEvent('Turnover x5, rollingan 0.5% all games, cashback 5% live games')">📋 SALIN</button></div>
                 </div>
             </div>
         </div>
 
-        <!-- HALAMAN SUPER EVENT (Isian mandiri folder gaya) -->
+        <!-- HALAMAN SUPER EVENT (Isian mandiri folder gaya) dengan teks putih -->
         <div id="page-super" class="page">
             <div class="page-header">
                 <h2>⚡ SUPER EVENT</h2>
@@ -436,11 +396,11 @@
             <div class="folder-grid">
                 <div class="folder-card">
                     <div class="folder-header"><span class="folder-icon">🏆</span><div class="folder-title">SUPER SPECTACULAR</div></div>
-                    <div class="folder-body"><div class="folder-content">• Kumpulkan 3 simbol SUPER untuk aktivasi bonus<br>• Hadiah Maksimal x5000 dari total taruhan<br>• Jackpot Progresif mencapai miliaran rupiah</div><button class="copy-btn" onclick="copyTextFromEvent('SUPER EVENT: kumpulkan 3 simbol SUPER, hadiah x5000 + Jackpot Progresif')">📋 SALIN</button></div>
+                    <div class="folder-body"><div class="folder-content" style="color:#FFFFFF !important;">• Kumpulkan 3 simbol SUPER untuk aktivasi bonus<br>• Hadiah Maksimal x5000 dari total taruhan<br>• Jackpot Progresif mencapai miliaran rupiah</div><button class="copy-btn" onclick="copyTextFromEvent('SUPER EVENT: kumpulkan 3 simbol SUPER, hadiah x5000 + Jackpot Progresif')">📋 SALIN</button></div>
                 </div>
                 <div class="folder-card">
                     <div class="folder-header"><span class="folder-icon">⚡</span><div class="folder-title">Event Period</div></div>
-                    <div class="folder-body"><div class="folder-content">Periode: 1 - 30 Juni 2026<br>Level dimulai dari 0, kemenangan beruntun memberi multiplier tambahan.<br>Segera mainkan dan raih kemenangan super!</div><button class="copy-btn" onclick="copyTextFromEvent('Event SUPER berlangsung 1-30 Juni 2026, tingkatkan kemenanganmu!')">📋 SALIN</button></div>
+                    <div class="folder-body"><div class="folder-content" style="color:#FFFFFF !important;">Periode: 1 - 30 Juni 2026<br>Level dimulai dari 0, kemenangan beruntun memberi multiplier tambahan.<br>Segera mainkan dan raih kemenangan super!</div><button class="copy-btn" onclick="copyTextFromEvent('Event SUPER berlangsung 1-30 Juni 2026, tingkatkan kemenanganmu!')">📋 SALIN</button></div>
                 </div>
             </div>
         </div>
@@ -451,8 +411,6 @@
     // ============================================================
     // KONFIGURASI GOOGLE SHEETS - SCATTER SHEET (KOLOM A = judul folder, KOLOM B = isi folder)
     // ============================================================
-    // URL CSV untuk sheet "SCATTER" (gid=0 diasumsikan sheet SCATTER). 
-    // Jika sheet SCATTER memiliki gid berbeda, cek URL dan ganti parameter ?gid=XXXXX
     const GOOGLE_SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=0";
     
     let scatterFolders = [];     // array { judul, isi }
@@ -460,12 +418,9 @@
     // Fungsi mengambil data dari Google Sheets
     async function fetchScatterData() {
         const container = document.getElementById("scatterDataContainer");
-        const statusSpan = document.getElementById("dataStatus");
-        
         if (!container) return;
         
         container.innerHTML = '<div class="loading"><span>📂</span> Memuat data folder dari Google Sheets...</div>';
-        if (statusSpan) statusSpan.innerHTML = "Mengambil data...";
         
         try {
             const response = await fetch(GOOGLE_SHEETS_CSV_URL, {
@@ -482,7 +437,6 @@
                 throw new Error("Data CSV kosong. Pastikan sheet sudah dipublikasikan.");
             }
             
-            // Parsing CSV menjadi array of objects
             const parsed = parseCSVToArray(csvText);
             
             if (!parsed || parsed.length === 0) {
@@ -490,24 +444,15 @@
             }
             
             // Konversi ke format folder: ambil kolom pertama sebagai judul, kolom kedua sebagai isi
-            // Diasumsikan baris pertama adalah header (Kolom A, Kolom B)
-            // Jika hanya 1 baris data tanpa header? Kami tetap aman: minimal 2 kolom
             const folders = [];
-            // Cek apakah baris pertama kemungkinan header? Kita lihat isi
-            // Asumsi: baris pertama adalah header, kita ambil mulai index 1 (data)
-            const hasHeaderRow = parsed.length >= 1;
-            let startIdx = 0;
-            // Jika terdapat setidaknya 2 baris dan baris pertama mengandung kata "judul" atau "folder"? Tidak perlu terlalu kaku.
-            // Tapi agar fleksibel: user bisa punya header (Judul Folder, Isi Folder). Kita akan coba cerdas: jika baris pertama memiliki 2 kolom dan bukan angka/numeric? 
-            // Lebih aman: kita asumsikan semua baris adalah data, tetapi jika ada baris header yg mengandung kata "judul" bisa diabaikan.
-            // Kita buat aturan sederhana: jika baris pertama mengandung kata "judul" atau "folder" atau "title" (case-insensitive) maka lewati baris itu sebagai header.
             let dataRows = [...parsed];
+            // Cerdas: jika baris pertama mengandung kata 'judul'/'folder'/'title' atau 'isi'/'deskripsi' maka skip header
             if (dataRows.length > 0 && dataRows[0].length >= 2) {
                 const firstRowVal0 = String(dataRows[0][0]).toLowerCase();
                 const firstRowVal1 = String(dataRows[0][1]).toLowerCase();
                 if (firstRowVal0.includes("judul") || firstRowVal0.includes("folder") || firstRowVal0.includes("title") ||
                     firstRowVal1.includes("isi") || firstRowVal1.includes("konten") || firstRowVal1.includes("deskripsi")) {
-                    dataRows = dataRows.slice(1); // skip header
+                    dataRows = dataRows.slice(1);
                 }
             }
             
@@ -522,7 +467,6 @@
                         folders.push({ judul: `Folder ${i+1}`, isi: isi });
                     }
                 } else if (row.length === 1 && row[0].trim() !== "") {
-                    // Jika hanya satu kolom, jadikan judul dan isi kosong? Tapi dari requirement kolom A dan B, kita harap minimal 2 kolom.
                     folders.push({ judul: row[0].trim(), isi: "(Konten belum tersedia di kolom B)" });
                 }
             }
@@ -533,13 +477,10 @@
             
             scatterFolders = folders;
             renderFolderGrid();
-            if (statusSpan) {
-                statusSpan.innerHTML = `✅ Berhasil • ${scatterFolders.length} folder dimuat • ${new Date().toLocaleTimeString()}`;
-            }
             
         } catch (error) {
             console.error(error);
-            // Tampilkan error dengan data contoh folder (menyerupai gambar: bonus cashback & rollingan)
+            // Tampilkan error dengan data contoh folder (menyerupai gambar: bonus cashback & rollingan) dengan teks putih
             container.innerHTML = `
                 <div class="error-message">
                     <strong>⚠️ Gagal mengambil data dari Google Sheets</strong><br>
@@ -549,15 +490,13 @@
                 </div>
                 <div id="exampleFolderGrid"></div>
             `;
-            // Tampilkan contoh folder seperti gambar: BONUS CASHBACK & BONUS ROLLINGAN
             const exampleDiv = document.getElementById("exampleFolderGrid");
             if (exampleDiv) {
                 exampleDiv.innerHTML = generateFolderGridFromArray([
-                    { judul: "BONUS CASHBACK", isi: "Bonus Cashback up to 5% (Live Games) = Bonus Kekalahan 5% hanya berlaku untuk permainan Live Games. Minimal kekalahan Rp.100.000, Untuk nominal 100,000 - 249,999,999 mendapatkan 2.5%, diatas 250rb mendapatkan 5%. Syarat mudah, dibagikan setiap hari Senin." },
-                    { judul: "BONUS ROLLINGAN", isi: "Bonus rollingan turnover LIVE GAMES sebesar 0.5% dari total bettingan - Bonus Rollingan turnover PRAGMATIC PLAY sebesar 0.5% - Bonus Rollingan turnover SLOT sebesar 0.5%. Rollingan tanpa batas maksimal, dibagikan setiap hari." }
+                    { judul: "BONUS CASHBACK", isi: "Bonus Cashback up to 5% ( Live Games ) = Bonus Kekalahan 5% hanya berlaku untuk permainan Live Games. Minimal kekalahan Rp.100.000, Untuk nominal 100,000- 249,999,999 mendapatkan 2.5%, diatas 250rb mendapatkan 5%. Syarat mudah, dibagikan setiap hari Senin." },
+                    { judul: "BONUS ROLLINGAN", isi: "Bonus rollingan turnover LIVE GAMES sebesar 0.5% dari total bettingan - Bonus Rollingan turnover PRAGMATIC PLAY sebesar 0.5% dari total bettingan - Bonus Rollingan turnover SLOT sebesar 0.5% dari total bettingan. Rollingan tanpa batas maksimal, dibagikan setiap hari." }
                 ]);
             }
-            if (statusSpan) statusSpan.innerHTML = "❌ Gagal mengambil data (menampilkan contoh)";
         }
     }
     
@@ -600,19 +539,16 @@
                 rows.push(currentRow);
             }
         }
-        // Filter baris yang benar-benar kosong semua kolom
         return rows.filter(row => row.some(cell => cell !== ""));
     }
     
-    // Generate grid folder dari array folders
+    // Generate grid folder dari array folders (teks isi folder dipastikan putih via class)
     function generateFolderGridFromArray(foldersArray) {
         if (!foldersArray.length) return '<div class="loading">📭 Tidak ada folder</div>';
         let html = `<div class="folder-grid">`;
         for (let folder of foldersArray) {
             const judul = escapeHtml(folder.judul);
             const isi = escapeHtml(folder.isi);
-            // Buat ID untuk tombol salin unik
-            const uniqueId = 'copy_' + Math.random().toString(36).substring(2, 8);
             html += `
                 <div class="folder-card">
                     <div class="folder-header">
@@ -620,7 +556,7 @@
                         <div class="folder-title">${judul}</div>
                     </div>
                     <div class="folder-body">
-                        <div class="folder-content" id="${uniqueId}_content">${isi.replace(/\n/g, '<br>')}</div>
+                        <div class="folder-content" style="color:#FFFFFF !important;">${isi.replace(/\n/g, '<br>')}</div>
                         <button class="copy-btn" data-copy-text="${isi.replace(/"/g, '&quot;')}">📋 SALIN</button>
                     </div>
                 </div>
@@ -648,7 +584,6 @@
                 e.stopPropagation();
                 let textToCopy = btn.getAttribute('data-copy-text');
                 if (!textToCopy) {
-                    // fallback ambil dari parent .folder-content
                     const parentContent = btn.closest('.folder-body')?.querySelector('.folder-content');
                     if (parentContent) textToCopy = parentContent.innerText || "";
                 }
