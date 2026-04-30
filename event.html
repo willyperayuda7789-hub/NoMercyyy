@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Event Badge - Scatter, Buy & Free, Super Event</title>
+    <title>Event Badge - SCATTER Data dari Google Sheets</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none; /* mencegah highlight teks berlebih saat klik badge, tapi tidak mengganggu input */
         }
 
         body {
@@ -22,7 +21,7 @@
             padding: 24px 16px;
         }
 
-        /* Container utama seperti kartu premium */
+        /* Container utama */
         .app-container {
             max-width: 1200px;
             width: 100%;
@@ -34,7 +33,7 @@
             border: 1px solid rgba(255, 215, 0, 0.2);
         }
 
-        /* Area 3 Badge + indikator */
+        /* 3 Badge */
         .badges-panel {
             display: flex;
             justify-content: center;
@@ -78,7 +77,6 @@
             letter-spacing: 1px;
         }
 
-        /* efek hover & active */
         .badge:hover {
             transform: translateY(-6px);
             border-color: #ffcd7e;
@@ -86,22 +84,12 @@
             box-shadow: 0 18px 28px -8px black;
         }
 
-        /* badge aktif (terpilih) */
         .badge.active {
             background: linear-gradient(115deg, #1e2a3e, #0f172a);
             border: 1px solid #f9b81b;
             box-shadow: 0 0 15px rgba(255, 180, 40, 0.5), inset 0 1px 0 rgba(255,255,200,0.1);
         }
 
-        .badge.active h3 {
-            background: linear-gradient(135deg, #FFE6A3, #FFD966);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 6px #ffb34755;
-        }
-
-        /* indikator garis bawah elegan */
         .badge.active::after {
             content: '';
             position: absolute;
@@ -114,7 +102,7 @@
             box-shadow: 0 0 6px gold;
         }
 
-        /* konten halaman (kartu isian) */
+        /* Konten halaman */
         .page-container {
             background: rgba(8, 14, 26, 0.7);
             backdrop-filter: blur(8px);
@@ -146,7 +134,7 @@
             }
         }
 
-        /* judul halaman */
+        /* Header halaman */
         .page-header {
             display: flex;
             align-items: baseline;
@@ -178,136 +166,112 @@
             border: 1px solid #ffcd7e55;
         }
 
-        /* area isian dinamis: input, textarea, tombol */
-        .content-editor {
+        /* Data card untuk menampilkan dari Google Sheets */
+        .data-card {
+            background: rgba(15, 20, 34, 0.8);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 200, 100, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .data-row {
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .field-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .field-group label {
-            font-weight: 600;
-            color: #cbd5f0;
-            letter-spacing: 0.5px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .field-group label i {
-            font-style: normal;
-            font-size: 1.2rem;
-        }
-
-        input, textarea {
-            background: #0f1422e6;
-            border: 1px solid #334155;
-            border-radius: 1.2rem;
-            padding: 12px 18px;
-            font-family: inherit;
-            font-size: 1rem;
-            color: #f1f3fa;
-            transition: all 0.2s;
-            resize: vertical;
-            outline: none;
-        }
-
-        input:focus, textarea:focus {
-            border-color: #f9b81b;
-            box-shadow: 0 0 0 3px rgba(249, 184, 27, 0.25);
-            background: #111827;
-        }
-
-        textarea {
-            min-height: 100px;
-        }
-
-        /* tombol simpan & reset */
-        .action-buttons {
-            display: flex;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 200, 100, 0.15);
             gap: 1rem;
-            margin-top: 0.8rem;
-            flex-wrap: wrap;
+            align-items: flex-start;
         }
 
-        .btn {
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 700;
+            width: 160px;
+            color: #ffdf9c;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+
+        .data-value {
+            color: #e0e6ff;
+            flex: 1;
+            word-break: break-word;
+            line-height: 1.4;
+        }
+
+        /* Loading & Error */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #ffd966;
+            font-size: 1rem;
+        }
+
+        .error-message {
+            background: rgba(51, 0, 0, 0.7);
+            border-left: 4px solid #ff6666;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            color: #ffbaba;
+            margin-bottom: 1rem;
+        }
+
+        .error-message a {
+            color: #ffb347;
+            text-decoration: none;
+        }
+
+        .error-message a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-refresh {
             background: linear-gradient(95deg, #2a3a55, #1a2538);
             border: none;
-            padding: 10px 20px;
+            padding: 8px 20px;
             border-radius: 40px;
             font-weight: 600;
             color: #ffeaac;
             cursor: pointer;
             transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
             font-size: 0.85rem;
             border: 1px solid #ffcd7e55;
         }
 
-        .btn-primary {
-            background: linear-gradient(115deg, #dba534, #c97e1a);
-            color: #0f0f1f;
-            font-weight: bold;
-            border: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        .btn-refresh:hover {
+            background: linear-gradient(95deg, #3a4a6a, #2a3550);
+            transform: scale(0.98);
         }
 
-        .btn-primary:hover {
-            background: linear-gradient(115deg, #f0b84d, #dd952b);
-            transform: scale(0.97);
-            box-shadow: 0 2px 6px black;
+        /* Untuk tabel jika data berbentuk tabel */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
         }
 
-        .btn-secondary {
-            background: #1f2a3e;
-            border: 1px solid #5e6e8c;
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 200, 100, 0.2);
+            color: #e0e6ff;
         }
 
-        .btn-secondary:hover {
-            background: #2f3b55;
-            color: white;
-        }
-
-        /* preview konten tersimpan */
-        .saved-preview {
-            background: #03060e70;
-            border-radius: 1.5rem;
-            padding: 1rem 1.4rem;
-            margin-top: 1.2rem;
-            border-left: 5px solid #ffb347;
-        }
-
-        .saved-preview p {
-            color: #bbd1ff;
-            font-size: 0.85rem;
-        }
-
-        .saved-preview strong {
+        .data-table th {
+            background: rgba(255, 200, 100, 0.1);
             color: #ffdf9c;
+            font-weight: 600;
         }
 
-        .preview-text {
-            margin-top: 8px;
-            font-style: italic;
-            word-break: break-word;
-            color: #e6e9ff;
+        .data-table tr:hover {
+            background: rgba(255, 200, 100, 0.05);
         }
 
-        hr {
-            border-color: #2e3a55;
-            margin: 0.5rem 0;
-        }
-
-        /* responsif */
+        /* Responsif */
         @media (max-width: 700px) {
             .app-container {
                 padding: 1rem;
@@ -316,345 +280,408 @@
                 gap: 0.8rem;
             }
             .badge {
-                min-width: 120px;
+                min-width: 110px;
                 padding: 0.6rem 1rem;
             }
             .badge h3 {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             .page-header h2 {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
+            }
+            .data-label {
+                width: 110px;
+                font-size: 0.8rem;
+            }
+            .data-table {
+                font-size: 0.8rem;
+            }
+            .data-table th,
+            .data-table td {
+                padding: 0.5rem;
             }
         }
 
-        /* angka / event icon kecil (seperti contoh gambar: ada angka 11 dll) */
-        .badge .event-number {
-            font-size: 1.6rem;
-            font-weight: 800;
-            background: linear-gradient(145deg, #FFD966, #ffbb44);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            line-height: 1;
-            margin-right: 6px;
-        }
-        .badge-title-flex {
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            gap: 6px;
+        /* Utility */
+        code {
+            background: #1e1e2e;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #ffd966;
         }
     </style>
 </head>
 <body>
 
 <div class="app-container">
-    <!-- 3 Badges sesuai gaya "SCATTER EVENT SCATTER 11", "BUY & FREE SHEET BUYFREE", "SUPER EVENT SUPER 0" dari konteks gambar -->
+    <!-- 3 Badges sesuai konsep -->
     <div class="badges-panel">
-        <div class="badge" data-page="scatter">
-            <div class="badge-title-flex">
-                <span class="event-number">✨</span>
-                <h3>SCATTER</h3>
-            </div>
-            <p>EVENT SCATTER • 11x</p>
+        <div class="badge active" data-page="scatter">
+            <h3>🎲 SCATTER</h3>
+            <p>EVENT SCATTER • DATA SHEET</p>
         </div>
         <div class="badge" data-page="buyfree">
-            <div class="badge-title-flex">
-                <span class="event-number">🎟️</span>
-                <h3>BUY & FREE</h3>
-            </div>
-            <p>SHEET BUYFREE • SPIN</p>
+            <h3>🎟️ BUY & FREE</h3>
+            <p>SHEET BUYFREE</p>
         </div>
         <div class="badge" data-page="super">
-            <div class="badge-title-flex">
-                <span class="event-number">⚡</span>
-                <h3>SUPER</h3>
-            </div>
-            <p>EVENT SUPER • 0</p>
+            <h3>⚡ SUPER</h3>
+            <p>EVENT SUPER</p>
         </div>
     </div>
 
-    <!-- Halaman dinamis yang masing-masing bisa diisi & disimpan -->
+    <!-- Area Halaman Dinamis -->
     <div class="page-container">
-        <!-- Halaman Scatter Event -->
-        <div id="page-scatter" class="page">
+        <!-- HALAMAN SCATTER (Mengambil data dari Google Sheets) -->
+        <div id="page-scatter" class="page active-page">
             <div class="page-header">
-                <h2>🎲 SCATTER EVENT</h2>
-                <div class="badge-icon">Freespin Boost</div>
+                <h2>📊 SCATTER EVENT · GOOGLE SHEETS</h2>
+                <button class="btn-refresh" id="refreshScatterBtn">⟳ Refresh Data</button>
             </div>
-            <div class="content-editor">
-                <div class="field-group">
-                    <label><i>📝</i> Judul / Catatan Event Scatter</label>
-                    <input type="text" id="scatter-title" placeholder="Contoh: Mega Scatter Harvest" value="Scatter Wild Jackpot">
+            <div id="scatterDataContainer">
+                <div class="loading">⏳ Mengambil data dari Google Sheets...</div>
+            </div>
+            <div class="data-card" style="margin-top: 1rem; background: rgba(0,0,0,0.3);">
+                <div class="data-row">
+                    <div class="data-label">📌 Sumber Data</div>
+                    <div class="data-value">
+                        <a href="https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/edit?gid=0" target="_blank" style="color:#ffb347;">
+                            Sheet SCATTER (Google Sheets)
+                        </a>
+                    </div>
                 </div>
-                <div class="field-group">
-                    <label><i>📋</i> Deskripsi lengkap</label>
-                    <textarea id="scatter-desc" placeholder="Tulis detail event scatter, multiplier, atau aturan main...">✨ Event Scatter dengan total 11x kesempatan! Dapatkan free spin & bonus besar setiap scatter muncul. Kumpulkan 3 scatter untuk memasuki babak bonus.</textarea>
-                </div>
-                <div class="action-buttons">
-                    <button class="btn btn-primary" id="save-scatter">💾 Simpan Halaman Scatter</button>
-                    <button class="btn btn-secondary" id="reset-scatter">⟳ Reset Default</button>
-                </div>
-                <div class="saved-preview" id="preview-scatter">
-                    <strong>📌 Konten tersimpan:</strong>
-                    <div class="preview-text" id="scatter-preview-text">Menunggu perubahan...</div>
+                <div class="data-row">
+                    <div class="data-label">🔄 Status</div>
+                    <div class="data-value" id="dataStatus">Menunggu sinkronisasi...</div>
                 </div>
             </div>
         </div>
 
-        <!-- Halaman Buy & Free -->
+        <!-- HALAMAN BUY & FREE (Isian mandiri, bisa juga dihubungkan ke sheet lain) -->
         <div id="page-buyfree" class="page">
             <div class="page-header">
                 <h2>🛒 BUY & FREE SHEET</h2>
-                <div class="badge-icon">Bonus Buy / Freebet</div>
+                <div class="badge-icon">Bonus / Freebet</div>
             </div>
-            <div class="content-editor">
-                <div class="field-group">
-                    <label><i>🏷️</i> Paket / Fitur</label>
-                    <input type="text" id="buyfree-title" placeholder="Nama promo buy & free" value="Buy Free Combo Sheet">
-                </div>
-                <div class="field-group">
-                    <label><i>📄</i> Syarat & ketentuan Bonus</label>
-                    <textarea id="buyfree-desc" placeholder="Isi informasi buy free spin atau freebet sheet...">🎁 Buy Free Sheet: Beli 10 free spin + gratis 5 spin tambahan. Event berlaku untuk semua member. Min pembelian 50k. Dapatkan juga extra sheet untuk jackpot!</textarea>
-                </div>
-                <div class="action-buttons">
-                    <button class="btn btn-primary" id="save-buyfree">💾 Simpan Halaman Buy & Free</button>
-                    <button class="btn btn-secondary" id="reset-buyfree">⟳ Reset Default</button>
-                </div>
-                <div class="saved-preview" id="preview-buyfree">
-                    <strong>📌 Konten tersimpan:</strong>
-                    <div class="preview-text" id="buyfree-preview-text">Belum ada simpanan.</div>
-                </div>
+            <div class="data-card">
+                <div class="data-row"><div class="data-label">🎁 Paket Buy Spin</div><div class="data-value">Buy 10 Free Spin + Gratis 5 Extra Spin</div></div>
+                <div class="data-row"><div class="data-label">💰 Minimal Deposit</div><div class="data-value">IDR 50.000</div></div>
+                <div class="data-row"><div class="data-label">📅 Periode</div><div class="data-value">1 - 30 Juni 2026</div></div>
+                <div class="data-row"><div class="data-label">📋 Syarat & Ketentuan</div><div class="data-value">Maksimal klaim 2x per hari. Bonus berlaku untuk semua member aktif. Turnover x5 sebelum withdraw.</div></div>
+                <div class="data-row"><div class="data-label">🔥 Status</div><div class="data-value"><span style="color:#4caf50;">● AKTIF</span></div></div>
             </div>
         </div>
 
-        <!-- Halaman Super Event -->
+        <!-- HALAMAN SUPER EVENT (Isian mandiri) -->
         <div id="page-super" class="page">
             <div class="page-header">
                 <h2>⚡ SUPER EVENT</h2>
-                <div class="badge-icon">Grand Jackpot 0</div>
+                <div class="badge-icon">Jackpot Progresif</div>
             </div>
-            <div class="content-editor">
-                <div class="field-group">
-                    <label><i>🔥</i> Nama Event Super</label>
-                    <input type="text" id="super-title" placeholder="Super Event spesial" value="SUPER SPECTACULAR">
-                </div>
-                <div class="field-group">
-                    <label><i>🎯</i> Detail Super Event & multiplier</label>
-                    <textarea id="super-desc" placeholder="Tuliskan event super menarik...">💥 SUPER EVENT: Saat spin muncul simbol SUPER, kumpulkan hingga level MAX. Dapatkan hadiah hingga x5000. Saat ini level progress 0, tapi segera mulai petualanganmu!</textarea>
-                </div>
-                <div class="action-buttons">
-                    <button class="btn btn-primary" id="save-super">💾 Simpan Halaman Super</button>
-                    <button class="btn btn-secondary" id="reset-super">⟳ Reset Default</button>
-                </div>
-                <div class="saved-preview" id="preview-super">
-                    <strong>📌 Konten tersimpan:</strong>
-                    <div class="preview-text" id="super-preview-text">Menunggu update.</div>
-                </div>
+            <div class="data-card">
+                <div class="data-row"><div class="data-label">🏆 Nama Event</div><div class="data-value">SUPER SPECTACULAR SEASON 2</div></div>
+                <div class="data-row"><div class="data-label">💎 Level Saat Ini</div><div class="data-value">Level 0 (Mulai dari 0)</div></div>
+                <div class="data-row"><div class="data-label">🎯 Target Kemenangan</div><div class="data-value">Kumpulkan 3 simbol SUPER untuk aktivasi bonus</div></div>
+                <div class="data-row"><div class="data-label">🏅 Hadiah Maksimal</div><div class="data-value">x5000 dari total taruhan + Jackpot Progresif</div></div>
+                <div class="data-row"><div class="data-label">📢 Info</div><div class="data-value">Event berlangsung hingga 30 Juni 2026. Segera mainkan dan raih kemenangan super!</div></div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    (function() {
-        // ========================
-        // Data penyimpanan (localStorage opsional, tapi kita gunakan memory + localStorage agar tahan reload)
-        // Setiap halaman punya objek: { title, desc }
-        // Default values berdasarkan placeholder / nilai awal input
-        const defaultData = {
-            scatter: {
-                title: "Scatter Wild Jackpot",
-                desc: "✨ Event Scatter dengan total 11x kesempatan! Dapatkan free spin & bonus besar setiap scatter muncul. Kumpulkan 3 scatter untuk memasuki babak bonus."
-            },
-            buyfree: {
-                title: "Buy Free Combo Sheet",
-                desc: "🎁 Buy Free Sheet: Beli 10 free spin + gratis 5 spin tambahan. Event berlaku untuk semua member. Min pembelian 50k. Dapatkan juga extra sheet untuk jackpot!"
-            },
-            super: {
-                title: "SUPER SPECTACULAR",
-                desc: "💥 SUPER EVENT: Saat spin muncul simbol SUPER, kumpulkan hingga level MAX. Dapatkan hadiah hingga x5000. Saat ini level progress 0, tapi segera mulai petualanganmu!"
-            }
-        };
+    // ============================================================
+    // KONFIGURASI GOOGLE SHEETS - SCATTER SHEET
+    // ============================================================
+    // URL untuk mengambil data dari Google Sheets dalam format CSV
+    // CATATAN: Anda perlu mempublikasikan sheet SCATTER ke web terlebih dahulu:
+    // 1. Buka Google Sheets: https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/edit?gid=0
+    // 2. Klik File -> Bagikan -> Publikasikan ke web
+    // 3. Pilih sheet "SCATTER" (atau sheet yang berisi data)
+    // 4. Pilih format "CSV" -> klik Publikasikan
+    // 5. Copy URL yang dihasilkan dan tempelkan di variabel di bawah ini
+    // ============================================================
+    const GOOGLE_SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=0";
+    
+    // Jika sheet SCATTER memiliki gid yang berbeda (misal bukan sheet pertama),
+    // Anda bisa cek di URL browser saat membuka sheet SCATTER, biasanya ada &gid=xxxxx
+    // Contoh: https://docs.google.com/spreadsheets/d/.../edit#gid=123456789
+    // Gunakan angka tersebut untuk mengganti gid=0
+    
+    let scatterRawData = [];     // Menyimpan data asli dari CSV
+    let scatterHeaders = [];     // Menyimpan header kolom
 
-        // mengambil data dari localStorage atau gunakan default
-        function loadStoredData() {
-            const stored = localStorage.getItem("eventBadgePages");
-            if(stored) {
-                try {
-                    const parsed = JSON.parse(stored);
-                    // merge dengan default jika ada field kurang (biar aman)
-                    return {
-                        scatter: { ...defaultData.scatter, ...parsed.scatter },
-                        buyfree: { ...defaultData.buyfree, ...parsed.buyfree },
-                        super: { ...defaultData.super, ...parsed.super }
-                    };
-                } catch(e) { console.warn(e); }
-            }
-            return { ...defaultData };
-        }
-
-        let pageData = loadStoredData();
-
-        // referensi DOM elements
-        // Scatter
-        const scatterTitle = document.getElementById('scatter-title');
-        const scatterDesc = document.getElementById('scatter-desc');
-        const scatterPreviewDiv = document.getElementById('scatter-preview-text');
-        // BuyFree
-        const buyfreeTitle = document.getElementById('buyfree-title');
-        const buyfreeDesc = document.getElementById('buyfree-desc');
-        const buyfreePreviewDiv = document.getElementById('buyfree-preview-text');
-        // Super
-        const superTitle = document.getElementById('super-title');
-        const superDesc = document.getElementById('super-desc');
-        const superPreviewDiv = document.getElementById('super-preview-text');
-
-        // tombol simpan
-        const saveScatterBtn = document.getElementById('save-scatter');
-        const saveBuyfreeBtn = document.getElementById('save-buyfree');
-        const saveSuperBtn = document.getElementById('save-super');
-        // reset
-        const resetScatterBtn = document.getElementById('reset-scatter');
-        const resetBuyfreeBtn = document.getElementById('reset-buyfree');
-        const resetSuperBtn = document.getElementById('reset-super');
-
-        // fungsi update tampilan input sesuai data saat ini (memuat ke field)
-        function updateInputsFromData() {
-            // scatter
-            scatterTitle.value = pageData.scatter.title;
-            scatterDesc.value = pageData.scatter.desc;
-            // buyfree
-            buyfreeTitle.value = pageData.buyfree.title;
-            buyfreeDesc.value = pageData.buyfree.desc;
-            // super
-            superTitle.value = pageData.super.title;
-            superDesc.value = pageData.super.desc;
-            // refresh preview semua
-            updateAllPreviews();
-        }
-
-        // memperbarui preview text di setiap halaman berdasarkan data saat ini
-        function updateAllPreviews() {
-            if(scatterPreviewDiv) {
-                scatterPreviewDiv.innerHTML = `<strong>${escapeHtml(pageData.scatter.title)}</strong><br>${escapeHtml(pageData.scatter.desc)}`;
-            }
-            if(buyfreePreviewDiv) {
-                buyfreePreviewDiv.innerHTML = `<strong>${escapeHtml(pageData.buyfree.title)}</strong><br>${escapeHtml(pageData.buyfree.desc)}`;
-            }
-            if(superPreviewDiv) {
-                superPreviewDiv.innerHTML = `<strong>${escapeHtml(pageData.super.title)}</strong><br>${escapeHtml(pageData.super.desc)}`;
-            }
-        }
-
-        // helper sederhana untuk menghindari XSS
-        function escapeHtml(str) {
-            if(!str) return '';
-            return str.replace(/[&<>]/g, function(m) {
-                if(m === '&') return '&amp;';
-                if(m === '<') return '&lt;';
-                if(m === '>') return '&gt;';
-                return m;
-            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-                return c;
+    // Fungsi untuk mengambil data dari Google Sheets
+    async function fetchScatterData() {
+        const container = document.getElementById("scatterDataContainer");
+        const statusSpan = document.getElementById("dataStatus");
+        
+        if (!container) return;
+        
+        container.innerHTML = '<div class="loading"><span>🔄</span> Menghubungi Google Sheets...</div>';
+        if (statusSpan) statusSpan.innerHTML = "Mengambil data...";
+        
+        try {
+            // Fetch data dari URL CSV
+            const response = await fetch(GOOGLE_SHEETS_CSV_URL, {
+                cache: "no-store",
+                headers: { "Cache-Control": "no-cache" }
             });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: Gagal mengambil data dari server`);
+            }
+            
+            const csvText = await response.text();
+            
+            if (!csvText || csvText.trim() === "") {
+                throw new Error("Data CSV kosong. Pastikan sheet berisi data dan sudah dipublikasikan.");
+            }
+            
+            // Parse CSV
+            const parsedResult = parseCSVToJSON(csvText);
+            
+            if (!parsedResult || parsedResult.data.length === 0) {
+                throw new Error("Tidak ada baris data yang ditemukan di CSV.");
+            }
+            
+            scatterHeaders = parsedResult.headers;
+            scatterRawData = parsedResult.data;
+            
+            // Render data ke tampilan
+            renderScatterData();
+            
+            if (statusSpan) {
+                statusSpan.innerHTML = `✅ Berhasil dimuat • ${scatterRawData.length} baris data • ${new Date().toLocaleTimeString()}`;
+            }
+            
+        } catch (error) {
+            console.error("Error fetchScatterData:", error);
+            
+            // Tampilkan pesan error yang informatif beserta panduan
+            container.innerHTML = `
+                <div class="error-message">
+                    <strong>⚠️ Gagal mengambil data dari Google Sheets</strong><br><br>
+                    <strong>Penyebab:</strong> ${error.message}<br><br>
+                    <strong>📌 Cara Memperbaiki:</strong><br>
+                    1. Buka <a href="https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/edit?gid=0" target="_blank">Google Sheets Anda</a><br>
+                    2. Klik menu <strong>File → Bagikan → Publikasikan ke web</strong><br>
+                    3. Pilih sheet <strong>"SCATTER"</strong> (atau sheet yang berisi data Scatter)<br>
+                    4. Pilih format <strong>"CSV"</strong> → klik tombol <strong>"Publikasikan"</strong><br>
+                    5. Salin URL yang diberikan dan ganti nilai <code>GOOGLE_SHEETS_CSV_URL</code> di kode ini<br><br>
+                    <strong>💡 Saat ini menampilkan data contoh:</strong>
+                </div>
+                <div id="exampleScatterData"></div>
+            `;
+            
+            // Tampilkan data contoh agar tidak kosong
+            const exampleDiv = document.getElementById("exampleScatterData");
+            if (exampleDiv) {
+                exampleDiv.innerHTML = `
+                    <div class="data-card">
+                        <div class="data-row"><div class="data-label">📊 Event</div><div class="data-value">Scatter Lucky 11</div></div>
+                        <div class="data-row"><div class="data-label">🎯 Multiplier</div><div class="data-value">x11 hingga x555</div></div>
+                        <div class="data-row"><div class="data-label">✨ Minimal Scatter</div><div class="data-value">3 Scatter memicu Free Spin</div></div>
+                        <div class="data-row"><div class="data-label">🏆 Hadiah Jackpot</div><div class="data-value">IDR 50,000,000</div></div>
+                        <div class="data-row"><div class="data-label">📅 Periode Event</div><div class="data-value">1 - 30 Juni 2026</div></div>
+                        <div class="data-row"><div class="data-label">🔥 Status</div><div class="data-value"><span style="color:#4caf50;">Aktif</span></div></div>
+                        <div class="data-row"><div class="data-label">📝 Catatan</div><div class="data-value">Setelah publikasi web sukses, data asli dari Google Sheets akan muncul di sini.</div></div>
+                    </div>
+                `;
+            }
+            
+            if (statusSpan) statusSpan.innerHTML = "❌ Gagal mengambil data (gunakan contoh sementara)";
         }
-
-        // menyimpan data spesifik page ke localStorage & pageData
-        function savePage(pageKey, titleVal, descVal) {
-            if(!pageData[pageKey]) pageData[pageKey] = {};
-            pageData[pageKey].title = titleVal;
-            pageData[pageKey].desc = descVal;
-            // simpan ke localStorage
-            localStorage.setItem("eventBadgePages", JSON.stringify(pageData));
-            // update preview
-            updateAllPreviews();
-        }
-
-        // reset halaman individual ke default
-        function resetPage(pageKey) {
-            const def = defaultData[pageKey];
-            if(def) {
-                pageData[pageKey] = { title: def.title, desc: def.desc };
-                localStorage.setItem("eventBadgePages", JSON.stringify(pageData));
-                updateInputsFromData();  // refresh semua field&preview
+    }
+    
+    // Parse CSV string menjadi array of objects
+    function parseCSVToJSON(csvString) {
+        const rows = [];
+        let currentRow = [];
+        let currentField = "";
+        let inQuotes = false;
+        
+        // Loop karakter per karakter untuk parsing CSV yang robust
+        for (let i = 0; i < csvString.length; i++) {
+            const char = csvString[i];
+            const nextChar = csvString[i + 1];
+            
+            if (char === '"') {
+                if (inQuotes && nextChar === '"') {
+                    currentField += '"';
+                    i++;
+                } else {
+                    inQuotes = !inQuotes;
+                }
+            } 
+            else if (char === ',' && !inQuotes) {
+                currentRow.push(currentField.trim());
+                currentField = "";
+            } 
+            else if ((char === '\n' || (char === '\r' && nextChar === '\n')) && !inQuotes) {
+                if (char === '\r') i++;
+                currentRow.push(currentField.trim());
+                rows.push(currentRow);
+                currentRow = [];
+                currentField = "";
+            } 
+            else {
+                currentField += char;
             }
         }
-
-        // event simpan masing-masing
-        saveScatterBtn.addEventListener('click', () => {
-            savePage('scatter', scatterTitle.value, scatterDesc.value);
-            // feedback kecil (opsional)
-            const btn = saveScatterBtn;
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '✓ Tersimpan!';
-            setTimeout(() => { btn.innerHTML = originalText; }, 1200);
+        
+        // Push baris terakhir jika ada
+        if (currentField !== "" || currentRow.length > 0) {
+            currentRow.push(currentField.trim());
+            if (currentRow.length > 0 && !(currentRow.length === 1 && currentRow[0] === "" && rows.length === 0)) {
+                rows.push(currentRow);
+            }
+        }
+        
+        if (rows.length < 2) {
+            return { headers: [], data: [] };
+        }
+        
+        const headers = rows[0].map(h => h.trim());
+        const dataRows = rows.slice(1);
+        
+        const jsonData = dataRows.map(row => {
+            const obj = {};
+            headers.forEach((header, idx) => {
+                let val = (row[idx] !== undefined) ? row[idx] : "";
+                // Hapus karakter aneh yang mungkin tersisa
+                val = val.replace(/^\s+|\s+$/g, '');
+                obj[header] = val;
+            });
+            return obj;
+        }).filter(obj => {
+            // Hapus baris yang benar-benar kosong (semua value empty string)
+            return Object.values(obj).some(v => v !== "");
         });
-        saveBuyfreeBtn.addEventListener('click', () => {
-            savePage('buyfree', buyfreeTitle.value, buyfreeDesc.value);
-            const btn = saveBuyfreeBtn;
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '✓ Tersimpan!';
-            setTimeout(() => { btn.innerHTML = originalText; }, 1200);
+        
+        return { headers, data: jsonData };
+    }
+    
+    // Render data Scatter ke dalam tampilan
+    function renderScatterData() {
+        const container = document.getElementById("scatterDataContainer");
+        if (!container) return;
+        
+        if (!scatterRawData || scatterRawData.length === 0) {
+            container.innerHTML = '<div class="error-message">📭 Tidak ada data yang ditemukan di sheet SCATTER. Pastikan sheet berisi data dengan baris header dan setidaknya satu baris konten.</div>';
+            return;
+        }
+        
+        // Jika hanya 1 baris data, tampilkan sebagai kartu detail
+        if (scatterRawData.length === 1) {
+            const singleData = scatterRawData[0];
+            let html = `<div class="data-card">`;
+            for (const [key, value] of Object.entries(singleData)) {
+                if (key && value !== undefined) {
+                    html += `
+                        <div class="data-row">
+                            <div class="data-label">${escapeHtml(key)}</div>
+                            <div class="data-value">${escapeHtml(String(value))}</div>
+                        </div>
+                    `;
+                }
+            }
+            html += `</div>`;
+            container.innerHTML = html;
+        } 
+        else {
+            // Jika lebih dari 1 baris, tampilkan dalam bentuk tabel
+            const headers = scatterHeaders;
+            let html = `<div class="data-card" style="overflow-x: auto;">
+                            <table class="data-table">
+                                <thead><tr>`;
+            for (let h of headers) {
+                html += `<th>${escapeHtml(h)}</th>`;
+            }
+            html += `</tr></thead><tbody>`;
+            
+            for (let row of scatterRawData) {
+                html += `<tr>`;
+                for (let h of headers) {
+                    let value = row[h] !== undefined ? row[h] : "";
+                    html += `<td>${escapeHtml(String(value))}</td>`;
+                }
+                html += `</tr>`;
+            }
+            html += `</tbody></table>
+                     <div style="margin-top: 1rem; font-size: 0.8rem; color: #a9b7e6; text-align: right;">
+                        📊 Total ${scatterRawData.length} baris data
+                     </div>
+                     </div>`;
+            container.innerHTML = html;
+        }
+    }
+    
+    // Helper sanitasi HTML
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
         });
-        saveSuperBtn.addEventListener('click', () => {
-            savePage('super', superTitle.value, superDesc.value);
-            const btn = saveSuperBtn;
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '✓ Tersimpan!';
-            setTimeout(() => { btn.innerHTML = originalText; }, 1200);
-        });
-
-        // reset
-        resetScatterBtn.addEventListener('click', () => { resetPage('scatter'); });
-        resetBuyfreeBtn.addEventListener('click', () => { resetPage('buyfree'); });
-        resetSuperBtn.addEventListener('click', () => { resetPage('super'); });
-
-        // ========== BADGE NAVIGASI ==========
+    }
+    
+    // ===================== BADGE NAVIGASI =====================
+    function initNavigation() {
         const badges = document.querySelectorAll('.badge');
         const pages = {
             scatter: document.getElementById('page-scatter'),
             buyfree: document.getElementById('page-buyfree'),
             super: document.getElementById('page-super')
         };
-
+        
         function setActivePage(pageId) {
-            // nonaktif semua page & badge aktif
+            // Sembunyikan semua halaman
             Object.values(pages).forEach(page => {
-                if(page) page.classList.remove('active-page');
+                if (page) page.classList.remove('active-page');
             });
-            badges.forEach(badge => badge.classList.remove('active'));
-            // aktifkan halaman target
-            if(pages[pageId]) pages[pageId].classList.add('active-page');
-            // aktifkan badge yang cocok dengan data-page
+            // Nonaktifkan semua badge
+            badges.forEach(b => b.classList.remove('active'));
+            // Aktifkan halaman target
+            if (pages[pageId]) pages[pageId].classList.add('active-page');
+            // Aktifkan badge yang sesuai
             const targetBadge = Array.from(badges).find(b => b.getAttribute('data-page') === pageId);
-            if(targetBadge) targetBadge.classList.add('active');
+            if (targetBadge) targetBadge.classList.add('active');
         }
-
-        // Pasang event listener pada badge
+        
         badges.forEach(badge => {
-            badge.addEventListener('click', (e) => {
+            badge.addEventListener('click', () => {
                 const pageKey = badge.getAttribute('data-page');
-                if(pageKey && pages[pageKey]) {
+                if (pageKey && pages[pageKey]) {
                     setActivePage(pageKey);
                 }
             });
         });
-
-        // inisialisasi pertama : muat data, set halaman default ke 'scatter', update UI
-        updateInputsFromData();
+        
+        // Set default (scatter aktif)
         setActivePage('scatter');
-
-        // tambahan: ketika user mengubah input tanpa menyimpan, preview hanya akan muncul setelah simpan (agar sesuai dengan konsep "halaman yang dapat diisi setiap halaman" seperti contoh. Namun ada juga preview yang menunjukkan konten tersimpan. Ini bagus untuk menunjukkan halaman masing-masing punya data berbeda. 
-        // Untuk pengalaman lebih baik, preview akan selalu merefleksikan data tersimpan.
-        // Jika ingin fitur live preview sebelum simpan tidak diminta, kita sudah sesuai.
-        // Opsi tambahan: agar tidak bingung, kita bisa menampilkan status di preview bahwa konten yang ditampilkan adalah yang tersimpan.
-        // semua sudah baik.
-
-        // Untuk mempertahankan konsistensi saat edit tanpa simpan, tidak mengubah data sampai klik simpan. sesuai request user "dapat diisi setiap halaman" dan menyimpan per halaman, sudah excellent.
-        // Bonus: tambahkan indikator kecil untuk localStorage load.
-        console.log("Aplikasi 3 Badge dengan halaman isi siap!");
-    })();
+    }
+    
+    // Event Listener untuk tombol refresh
+    function initRefreshButton() {
+        const refreshBtn = document.getElementById('refreshScatterBtn');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', () => {
+                fetchScatterData();
+            });
+        }
+    }
+    
+    // Jalankan semua inisialisasi saat DOM siap
+    document.addEventListener('DOMContentLoaded', () => {
+        initNavigation();
+        initRefreshButton();
+        fetchScatterData();  // Ambil data dari Google Sheets saat pertama kali load
+    });
 </script>
 </body>
 </html>
