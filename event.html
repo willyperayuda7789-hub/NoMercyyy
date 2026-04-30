@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Event Badge - SCATTER Data dari Google Sheets</title>
+    <title>Event Badge - SCATTER Data | Folder Style 2 Kolom</title>
     <style>
         * {
             margin: 0;
@@ -23,7 +23,7 @@
 
         /* Container utama */
         .app-container {
-            max-width: 1200px;
+            max-width: 1300px;
             width: 100%;
             background: rgba(18, 25, 45, 0.65);
             backdrop-filter: blur(2px);
@@ -166,40 +166,117 @@
             border: 1px solid #ffcd7e55;
         }
 
-        /* Data card untuk menampilkan dari Google Sheets */
-        .data-card {
-            background: rgba(15, 20, 34, 0.8);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 200, 100, 0.3);
-            margin-bottom: 1rem;
+        /* ========== FOLDER GRID 2 KOLOM ========== */
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
         }
 
-        .data-row {
+        /* Card Folder seperti contoh gambar: gaya folder dengan latar, border, efek hover */
+        .folder-card {
+            background: linear-gradient(135deg, rgba(25, 35, 55, 0.95), rgba(15, 22, 40, 0.98));
+            backdrop-filter: blur(4px);
+            border-radius: 1.2rem;
+            border: 1px solid rgba(255, 200, 100, 0.35);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.4);
             display: flex;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(255, 200, 100, 0.15);
-            gap: 1rem;
-            align-items: flex-start;
+            flex-direction: column;
         }
 
-        .data-row:last-child {
-            border-bottom: none;
+        .folder-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffcd7e;
+            box-shadow: 0 20px 28px -12px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(135deg, rgba(30, 42, 65, 0.98), rgba(18, 26, 45, 0.98));
         }
 
-        .data-label {
+        /* Header folder dengan icon dan judul */
+        .folder-header {
+            padding: 1.2rem 1.5rem 0.8rem 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid rgba(255, 200, 100, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .folder-icon {
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+        }
+
+        .folder-title {
+            font-size: 1.35rem;
             font-weight: 700;
-            width: 160px;
-            color: #ffdf9c;
-            font-size: 0.9rem;
-            letter-spacing: 0.3px;
+            background: linear-gradient(115deg, #FFE6B3, #FFC875);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.2px;
+            word-break: break-word;
+            flex: 1;
         }
 
-        .data-value {
-            color: #e0e6ff;
+        /* Isi folder */
+        .folder-body {
+            padding: 1.2rem 1.5rem 1.5rem 1.5rem;
             flex: 1;
+        }
+
+        .folder-content {
+            color: #d1dcff;
+            line-height: 1.55;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
             word-break: break-word;
-            line-height: 1.4;
+            max-height: 280px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .folder-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .folder-content::-webkit-scrollbar-track {
+            background: #1e2a3e;
+            border-radius: 10px;
+        }
+        .folder-content::-webkit-scrollbar-thumb {
+            background: #ffb347;
+            border-radius: 10px;
+        }
+
+        /* Jika konten berupa list atau teks panjang */
+        .folder-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Tombol salin (seperti pada contoh gambar) */
+        .copy-btn {
+            background: rgba(255, 180, 70, 0.15);
+            border: 1px solid #ffb347;
+            color: #ffd966;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            backdrop-filter: blur(2px);
+        }
+
+        .copy-btn:hover {
+            background: #ffb347;
+            color: #1a1f2e;
+            border-color: #fff0c0;
+            box-shadow: 0 0 8px rgba(255,180,70,0.6);
         }
 
         /* Loading & Error */
@@ -224,10 +301,6 @@
             text-decoration: none;
         }
 
-        .error-message a:hover {
-            text-decoration: underline;
-        }
-
         .btn-refresh {
             background: linear-gradient(95deg, #2a3a55, #1a2538);
             border: none;
@@ -246,77 +319,54 @@
             transform: scale(0.98);
         }
 
-        /* Untuk tabel jika data berbentuk tabel */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 0.5rem;
+        /* info status */
+        .info-status {
+            background: rgba(0,0,0,0.2);
+            border-radius: 1rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
         }
 
-        .data-table th,
-        .data-table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 200, 100, 0.2);
-            color: #e0e6ff;
+        @media (max-width: 760px) {
+            .folder-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .page-container {
+                padding: 1.2rem;
+            }
+            .folder-title {
+                font-size: 1.1rem;
+            }
+            .folder-icon {
+                font-size: 1.6rem;
+            }
         }
 
-        .data-table th {
-            background: rgba(255, 200, 100, 0.1);
+        /* data-row untuk info sheet */
+        .data-row {
+            display: flex;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255, 200, 100, 0.15);
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        .data-label {
+            font-weight: 700;
+            width: 140px;
             color: #ffdf9c;
-            font-weight: 600;
-        }
-
-        .data-table tr:hover {
-            background: rgba(255, 200, 100, 0.05);
-        }
-
-        /* Responsif */
-        @media (max-width: 700px) {
-            .app-container {
-                padding: 1rem;
-            }
-            .badges-panel {
-                gap: 0.8rem;
-            }
-            .badge {
-                min-width: 110px;
-                padding: 0.6rem 1rem;
-            }
-            .badge h3 {
-                font-size: 1rem;
-            }
-            .page-header h2 {
-                font-size: 1.3rem;
-            }
-            .data-label {
-                width: 110px;
-                font-size: 0.8rem;
-            }
-            .data-table {
-                font-size: 0.8rem;
-            }
-            .data-table th,
-            .data-table td {
-                padding: 0.5rem;
-            }
-        }
-
-        /* Utility */
-        code {
-            background: #1e1e2e;
-            padding: 0.2rem 0.4rem;
-            border-radius: 6px;
-            font-family: monospace;
             font-size: 0.85rem;
-            color: #ffd966;
+        }
+        .data-value {
+            color: #e0e6ff;
+            flex: 1;
         }
     </style>
 </head>
 <body>
 
 <div class="app-container">
-    <!-- 3 Badges sesuai konsep -->
+    <!-- 3 Badges -->
     <div class="badges-panel">
         <div class="badge active" data-page="scatter">
             <h3>🎲 SCATTER</h3>
@@ -334,58 +384,64 @@
 
     <!-- Area Halaman Dinamis -->
     <div class="page-container">
-        <!-- HALAMAN SCATTER (Mengambil data dari Google Sheets) -->
+        <!-- HALAMAN SCATTER (data dari Google Sheets) dengan folder grid 2 kolom -->
         <div id="page-scatter" class="page active-page">
             <div class="page-header">
-                <h2>📊 SCATTER EVENT · GOOGLE SHEETS</h2>
+                <h2>📂 SCATTER · FOLDER DATA</h2>
                 <button class="btn-refresh" id="refreshScatterBtn">⟳ Refresh Data</button>
             </div>
             <div id="scatterDataContainer">
-                <div class="loading">⏳ Mengambil data dari Google Sheets...</div>
+                <div class="loading">⏳ Mengambil data folder dari Google Sheets...</div>
             </div>
-            <div class="data-card" style="margin-top: 1rem; background: rgba(0,0,0,0.3);">
+            <div class="info-status" style="margin-top: 1.5rem; background: rgba(0,0,0,0.3); border-radius: 1rem; padding: 0.8rem 1.2rem;">
                 <div class="data-row">
                     <div class="data-label">📌 Sumber Data</div>
                     <div class="data-value">
                         <a href="https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/edit?gid=0" target="_blank" style="color:#ffb347;">
-                            Sheet SCATTER (Google Sheets)
+                            Sheet SCATTER (Kolom A = Judul Folder, Kolom B = Isi Folder)
                         </a>
                     </div>
                 </div>
                 <div class="data-row">
-                    <div class="data-label">🔄 Status</div>
+                    <div class="data-label">🔄 Status Sinkronisasi</div>
                     <div class="data-value" id="dataStatus">Menunggu sinkronisasi...</div>
                 </div>
             </div>
         </div>
 
-        <!-- HALAMAN BUY & FREE (Isian mandiri, bisa juga dihubungkan ke sheet lain) -->
+        <!-- HALAMAN BUY & FREE (Isian mandiri) -->
         <div id="page-buyfree" class="page">
             <div class="page-header">
                 <h2>🛒 BUY & FREE SHEET</h2>
                 <div class="badge-icon">Bonus / Freebet</div>
             </div>
-            <div class="data-card">
-                <div class="data-row"><div class="data-label">🎁 Paket Buy Spin</div><div class="data-value">Buy 10 Free Spin + Gratis 5 Extra Spin</div></div>
-                <div class="data-row"><div class="data-label">💰 Minimal Deposit</div><div class="data-value">IDR 50.000</div></div>
-                <div class="data-row"><div class="data-label">📅 Periode</div><div class="data-value">1 - 30 Juni 2026</div></div>
-                <div class="data-row"><div class="data-label">📋 Syarat & Ketentuan</div><div class="data-value">Maksimal klaim 2x per hari. Bonus berlaku untuk semua member aktif. Turnover x5 sebelum withdraw.</div></div>
-                <div class="data-row"><div class="data-label">🔥 Status</div><div class="data-value"><span style="color:#4caf50;">● AKTIF</span></div></div>
+            <div class="folder-grid">
+                <div class="folder-card">
+                    <div class="folder-header"><span class="folder-icon">🎁</span><div class="folder-title">Paket Buy Spin</div></div>
+                    <div class="folder-body"><div class="folder-content">Buy 10 Free Spin + Gratis 5 Extra Spin<br>Minimal deposit IDR 50.000<br>Maksimal klaim 2x/hari</div><button class="copy-btn" onclick="copyTextFromEvent('Buy 10 Free Spin + Gratis 5 Extra Spin | Min Deposit 50k')">📋 SALIN</button></div>
+                </div>
+                <div class="folder-card">
+                    <div class="folder-header"><span class="folder-icon">💰</span><div class="folder-title">Syarat Turnover</div></div>
+                    <div class="folder-body"><div class="folder-content">Turnover x5 sebelum withdraw.<br>Bonus rollingan 0.5% (LIVE GAMES & SLOT)<br>Cashback up to 5% (Live Games)</div><button class="copy-btn" onclick="copyTextFromEvent('Turnover x5, rollingan 0.5% all games, cashback 5% live games')">📋 SALIN</button></div>
+                </div>
             </div>
         </div>
 
-        <!-- HALAMAN SUPER EVENT (Isian mandiri) -->
+        <!-- HALAMAN SUPER EVENT (Isian mandiri folder gaya) -->
         <div id="page-super" class="page">
             <div class="page-header">
                 <h2>⚡ SUPER EVENT</h2>
                 <div class="badge-icon">Jackpot Progresif</div>
             </div>
-            <div class="data-card">
-                <div class="data-row"><div class="data-label">🏆 Nama Event</div><div class="data-value">SUPER SPECTACULAR SEASON 2</div></div>
-                <div class="data-row"><div class="data-label">💎 Level Saat Ini</div><div class="data-value">Level 0 (Mulai dari 0)</div></div>
-                <div class="data-row"><div class="data-label">🎯 Target Kemenangan</div><div class="data-value">Kumpulkan 3 simbol SUPER untuk aktivasi bonus</div></div>
-                <div class="data-row"><div class="data-label">🏅 Hadiah Maksimal</div><div class="data-value">x5000 dari total taruhan + Jackpot Progresif</div></div>
-                <div class="data-row"><div class="data-label">📢 Info</div><div class="data-value">Event berlangsung hingga 30 Juni 2026. Segera mainkan dan raih kemenangan super!</div></div>
+            <div class="folder-grid">
+                <div class="folder-card">
+                    <div class="folder-header"><span class="folder-icon">🏆</span><div class="folder-title">SUPER SPECTACULAR</div></div>
+                    <div class="folder-body"><div class="folder-content">• Kumpulkan 3 simbol SUPER untuk aktivasi bonus<br>• Hadiah Maksimal x5000 dari total taruhan<br>• Jackpot Progresif mencapai miliaran rupiah</div><button class="copy-btn" onclick="copyTextFromEvent('SUPER EVENT: kumpulkan 3 simbol SUPER, hadiah x5000 + Jackpot Progresif')">📋 SALIN</button></div>
+                </div>
+                <div class="folder-card">
+                    <div class="folder-header"><span class="folder-icon">⚡</span><div class="folder-title">Event Period</div></div>
+                    <div class="folder-body"><div class="folder-content">Periode: 1 - 30 Juni 2026<br>Level dimulai dari 0, kemenangan beruntun memberi multiplier tambahan.<br>Segera mainkan dan raih kemenangan super!</div><button class="copy-btn" onclick="copyTextFromEvent('Event SUPER berlangsung 1-30 Juni 2026, tingkatkan kemenanganmu!')">📋 SALIN</button></div>
+                </div>
             </div>
         </div>
     </div>
@@ -393,121 +449,128 @@
 
 <script>
     // ============================================================
-    // KONFIGURASI GOOGLE SHEETS - SCATTER SHEET
+    // KONFIGURASI GOOGLE SHEETS - SCATTER SHEET (KOLOM A = judul folder, KOLOM B = isi folder)
     // ============================================================
-    // URL untuk mengambil data dari Google Sheets dalam format CSV
-    // CATATAN: Anda perlu mempublikasikan sheet SCATTER ke web terlebih dahulu:
-    // 1. Buka Google Sheets: https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/edit?gid=0
-    // 2. Klik File -> Bagikan -> Publikasikan ke web
-    // 3. Pilih sheet "SCATTER" (atau sheet yang berisi data)
-    // 4. Pilih format "CSV" -> klik Publikasikan
-    // 5. Copy URL yang dihasilkan dan tempelkan di variabel di bawah ini
-    // ============================================================
+    // URL CSV untuk sheet "SCATTER" (gid=0 diasumsikan sheet SCATTER). 
+    // Jika sheet SCATTER memiliki gid berbeda, cek URL dan ganti parameter ?gid=XXXXX
     const GOOGLE_SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=0";
     
-    // Jika sheet SCATTER memiliki gid yang berbeda (misal bukan sheet pertama),
-    // Anda bisa cek di URL browser saat membuka sheet SCATTER, biasanya ada &gid=xxxxx
-    // Contoh: https://docs.google.com/spreadsheets/d/.../edit#gid=123456789
-    // Gunakan angka tersebut untuk mengganti gid=0
-    
-    let scatterRawData = [];     // Menyimpan data asli dari CSV
-    let scatterHeaders = [];     // Menyimpan header kolom
+    let scatterFolders = [];     // array { judul, isi }
 
-    // Fungsi untuk mengambil data dari Google Sheets
+    // Fungsi mengambil data dari Google Sheets
     async function fetchScatterData() {
         const container = document.getElementById("scatterDataContainer");
         const statusSpan = document.getElementById("dataStatus");
         
         if (!container) return;
         
-        container.innerHTML = '<div class="loading"><span>🔄</span> Menghubungi Google Sheets...</div>';
+        container.innerHTML = '<div class="loading"><span>📂</span> Memuat data folder dari Google Sheets...</div>';
         if (statusSpan) statusSpan.innerHTML = "Mengambil data...";
         
         try {
-            // Fetch data dari URL CSV
             const response = await fetch(GOOGLE_SHEETS_CSV_URL, {
                 cache: "no-store",
                 headers: { "Cache-Control": "no-cache" }
             });
             
             if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: Gagal mengambil data dari server`);
+                throw new Error(`HTTP ${response.status}: Gagal mengambil data`);
             }
             
             const csvText = await response.text();
-            
             if (!csvText || csvText.trim() === "") {
-                throw new Error("Data CSV kosong. Pastikan sheet berisi data dan sudah dipublikasikan.");
+                throw new Error("Data CSV kosong. Pastikan sheet sudah dipublikasikan.");
             }
             
-            // Parse CSV
-            const parsedResult = parseCSVToJSON(csvText);
+            // Parsing CSV menjadi array of objects
+            const parsed = parseCSVToArray(csvText);
             
-            if (!parsedResult || parsedResult.data.length === 0) {
-                throw new Error("Tidak ada baris data yang ditemukan di CSV.");
+            if (!parsed || parsed.length === 0) {
+                throw new Error("Tidak ada data di sheet SCATTER.");
             }
             
-            scatterHeaders = parsedResult.headers;
-            scatterRawData = parsedResult.data;
+            // Konversi ke format folder: ambil kolom pertama sebagai judul, kolom kedua sebagai isi
+            // Diasumsikan baris pertama adalah header (Kolom A, Kolom B)
+            // Jika hanya 1 baris data tanpa header? Kami tetap aman: minimal 2 kolom
+            const folders = [];
+            // Cek apakah baris pertama kemungkinan header? Kita lihat isi
+            // Asumsi: baris pertama adalah header, kita ambil mulai index 1 (data)
+            const hasHeaderRow = parsed.length >= 1;
+            let startIdx = 0;
+            // Jika terdapat setidaknya 2 baris dan baris pertama mengandung kata "judul" atau "folder"? Tidak perlu terlalu kaku.
+            // Tapi agar fleksibel: user bisa punya header (Judul Folder, Isi Folder). Kita akan coba cerdas: jika baris pertama memiliki 2 kolom dan bukan angka/numeric? 
+            // Lebih aman: kita asumsikan semua baris adalah data, tetapi jika ada baris header yg mengandung kata "judul" bisa diabaikan.
+            // Kita buat aturan sederhana: jika baris pertama mengandung kata "judul" atau "folder" atau "title" (case-insensitive) maka lewati baris itu sebagai header.
+            let dataRows = [...parsed];
+            if (dataRows.length > 0 && dataRows[0].length >= 2) {
+                const firstRowVal0 = String(dataRows[0][0]).toLowerCase();
+                const firstRowVal1 = String(dataRows[0][1]).toLowerCase();
+                if (firstRowVal0.includes("judul") || firstRowVal0.includes("folder") || firstRowVal0.includes("title") ||
+                    firstRowVal1.includes("isi") || firstRowVal1.includes("konten") || firstRowVal1.includes("deskripsi")) {
+                    dataRows = dataRows.slice(1); // skip header
+                }
+            }
             
-            // Render data ke tampilan
-            renderScatterData();
+            for (let i = 0; i < dataRows.length; i++) {
+                const row = dataRows[i];
+                if (row.length >= 2) {
+                    let judul = (row[0] !== undefined ? String(row[0]).trim() : "Folder Tanpa Judul");
+                    let isi = (row[1] !== undefined ? String(row[1]).trim() : "Tidak ada konten.");
+                    if (judul !== "") {
+                        folders.push({ judul: judul, isi: isi });
+                    } else if (isi !== "") {
+                        folders.push({ judul: `Folder ${i+1}`, isi: isi });
+                    }
+                } else if (row.length === 1 && row[0].trim() !== "") {
+                    // Jika hanya satu kolom, jadikan judul dan isi kosong? Tapi dari requirement kolom A dan B, kita harap minimal 2 kolom.
+                    folders.push({ judul: row[0].trim(), isi: "(Konten belum tersedia di kolom B)" });
+                }
+            }
             
+            if (folders.length === 0) {
+                throw new Error("Tidak ada baris data yang valid dengan minimal 2 kolom (judul & isi).");
+            }
+            
+            scatterFolders = folders;
+            renderFolderGrid();
             if (statusSpan) {
-                statusSpan.innerHTML = `✅ Berhasil dimuat • ${scatterRawData.length} baris data • ${new Date().toLocaleTimeString()}`;
+                statusSpan.innerHTML = `✅ Berhasil • ${scatterFolders.length} folder dimuat • ${new Date().toLocaleTimeString()}`;
             }
             
         } catch (error) {
-            console.error("Error fetchScatterData:", error);
-            
-            // Tampilkan pesan error yang informatif beserta panduan
+            console.error(error);
+            // Tampilkan error dengan data contoh folder (menyerupai gambar: bonus cashback & rollingan)
             container.innerHTML = `
                 <div class="error-message">
-                    <strong>⚠️ Gagal mengambil data dari Google Sheets</strong><br><br>
-                    <strong>Penyebab:</strong> ${error.message}<br><br>
-                    <strong>📌 Cara Memperbaiki:</strong><br>
-                    1. Buka <a href="https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/edit?gid=0" target="_blank">Google Sheets Anda</a><br>
-                    2. Klik menu <strong>File → Bagikan → Publikasikan ke web</strong><br>
-                    3. Pilih sheet <strong>"SCATTER"</strong> (atau sheet yang berisi data Scatter)<br>
-                    4. Pilih format <strong>"CSV"</strong> → klik tombol <strong>"Publikasikan"</strong><br>
-                    5. Salin URL yang diberikan dan ganti nilai <code>GOOGLE_SHEETS_CSV_URL</code> di kode ini<br><br>
-                    <strong>💡 Saat ini menampilkan data contoh:</strong>
+                    <strong>⚠️ Gagal mengambil data dari Google Sheets</strong><br>
+                    ${error.message}<br><br>
+                    <strong>📌 Solusi:</strong> Publikasikan sheet SCATTER ke web (File → Bagikan → Publikasikan ke web → CSV).<br>
+                    Pastikan sheet memiliki minimal 2 kolom: <strong>Kolom A (Judul Folder)</strong> dan <strong>Kolom B (Isi Folder)</strong>.
                 </div>
-                <div id="exampleScatterData"></div>
+                <div id="exampleFolderGrid"></div>
             `;
-            
-            // Tampilkan data contoh agar tidak kosong
-            const exampleDiv = document.getElementById("exampleScatterData");
+            // Tampilkan contoh folder seperti gambar: BONUS CASHBACK & BONUS ROLLINGAN
+            const exampleDiv = document.getElementById("exampleFolderGrid");
             if (exampleDiv) {
-                exampleDiv.innerHTML = `
-                    <div class="data-card">
-                        <div class="data-row"><div class="data-label">📊 Event</div><div class="data-value">Scatter Lucky 11</div></div>
-                        <div class="data-row"><div class="data-label">🎯 Multiplier</div><div class="data-value">x11 hingga x555</div></div>
-                        <div class="data-row"><div class="data-label">✨ Minimal Scatter</div><div class="data-value">3 Scatter memicu Free Spin</div></div>
-                        <div class="data-row"><div class="data-label">🏆 Hadiah Jackpot</div><div class="data-value">IDR 50,000,000</div></div>
-                        <div class="data-row"><div class="data-label">📅 Periode Event</div><div class="data-value">1 - 30 Juni 2026</div></div>
-                        <div class="data-row"><div class="data-label">🔥 Status</div><div class="data-value"><span style="color:#4caf50;">Aktif</span></div></div>
-                        <div class="data-row"><div class="data-label">📝 Catatan</div><div class="data-value">Setelah publikasi web sukses, data asli dari Google Sheets akan muncul di sini.</div></div>
-                    </div>
-                `;
+                exampleDiv.innerHTML = generateFolderGridFromArray([
+                    { judul: "BONUS CASHBACK", isi: "Bonus Cashback up to 5% (Live Games) = Bonus Kekalahan 5% hanya berlaku untuk permainan Live Games. Minimal kekalahan Rp.100.000, Untuk nominal 100,000 - 249,999,999 mendapatkan 2.5%, diatas 250rb mendapatkan 5%. Syarat mudah, dibagikan setiap hari Senin." },
+                    { judul: "BONUS ROLLINGAN", isi: "Bonus rollingan turnover LIVE GAMES sebesar 0.5% dari total bettingan - Bonus Rollingan turnover PRAGMATIC PLAY sebesar 0.5% - Bonus Rollingan turnover SLOT sebesar 0.5%. Rollingan tanpa batas maksimal, dibagikan setiap hari." }
+                ]);
             }
-            
-            if (statusSpan) statusSpan.innerHTML = "❌ Gagal mengambil data (gunakan contoh sementara)";
+            if (statusSpan) statusSpan.innerHTML = "❌ Gagal mengambil data (menampilkan contoh)";
         }
     }
     
-    // Parse CSV string menjadi array of objects
-    function parseCSVToJSON(csvString) {
+    // Parse CSV menjadi array of array
+    function parseCSVToArray(csvString) {
         const rows = [];
         let currentRow = [];
         let currentField = "";
         let inQuotes = false;
         
-        // Loop karakter per karakter untuk parsing CSV yang robust
         for (let i = 0; i < csvString.length; i++) {
             const char = csvString[i];
             const nextChar = csvString[i + 1];
-            
             if (char === '"') {
                 if (inQuotes && nextChar === '"') {
                     currentField += '"';
@@ -515,134 +578,110 @@
                 } else {
                     inQuotes = !inQuotes;
                 }
-            } 
+            }
             else if (char === ',' && !inQuotes) {
                 currentRow.push(currentField.trim());
                 currentField = "";
-            } 
+            }
             else if ((char === '\n' || (char === '\r' && nextChar === '\n')) && !inQuotes) {
                 if (char === '\r') i++;
                 currentRow.push(currentField.trim());
                 rows.push(currentRow);
                 currentRow = [];
                 currentField = "";
-            } 
+            }
             else {
                 currentField += char;
             }
         }
-        
-        // Push baris terakhir jika ada
         if (currentField !== "" || currentRow.length > 0) {
             currentRow.push(currentField.trim());
             if (currentRow.length > 0 && !(currentRow.length === 1 && currentRow[0] === "" && rows.length === 0)) {
                 rows.push(currentRow);
             }
         }
-        
-        if (rows.length < 2) {
-            return { headers: [], data: [] };
-        }
-        
-        const headers = rows[0].map(h => h.trim());
-        const dataRows = rows.slice(1);
-        
-        const jsonData = dataRows.map(row => {
-            const obj = {};
-            headers.forEach((header, idx) => {
-                let val = (row[idx] !== undefined) ? row[idx] : "";
-                // Hapus karakter aneh yang mungkin tersisa
-                val = val.replace(/^\s+|\s+$/g, '');
-                obj[header] = val;
-            });
-            return obj;
-        }).filter(obj => {
-            // Hapus baris yang benar-benar kosong (semua value empty string)
-            return Object.values(obj).some(v => v !== "");
-        });
-        
-        return { headers, data: jsonData };
+        // Filter baris yang benar-benar kosong semua kolom
+        return rows.filter(row => row.some(cell => cell !== ""));
     }
     
-    // Render data Scatter ke dalam tampilan dengan format yang memperhatikan kolom A (judul folder) dan kolom B (isi folder)
-    function renderScatterData() {
+    // Generate grid folder dari array folders
+    function generateFolderGridFromArray(foldersArray) {
+        if (!foldersArray.length) return '<div class="loading">📭 Tidak ada folder</div>';
+        let html = `<div class="folder-grid">`;
+        for (let folder of foldersArray) {
+            const judul = escapeHtml(folder.judul);
+            const isi = escapeHtml(folder.isi);
+            // Buat ID untuk tombol salin unik
+            const uniqueId = 'copy_' + Math.random().toString(36).substring(2, 8);
+            html += `
+                <div class="folder-card">
+                    <div class="folder-header">
+                        <span class="folder-icon">📁</span>
+                        <div class="folder-title">${judul}</div>
+                    </div>
+                    <div class="folder-body">
+                        <div class="folder-content" id="${uniqueId}_content">${isi.replace(/\n/g, '<br>')}</div>
+                        <button class="copy-btn" data-copy-text="${isi.replace(/"/g, '&quot;')}">📋 SALIN</button>
+                    </div>
+                </div>
+            `;
+        }
+        html += `</div>`;
+        return html;
+    }
+    
+    // Render folder grid utama untuk halaman SCATTER
+    function renderFolderGrid() {
         const container = document.getElementById("scatterDataContainer");
         if (!container) return;
-        
-        if (!scatterRawData || scatterRawData.length === 0) {
-            container.innerHTML = '<div class="error-message">📭 Tidak ada data yang ditemukan di sheet SCATTER. Pastikan sheet berisi data dengan baris header dan setidaknya satu baris konten.</div>';
+        if (!scatterFolders.length) {
+            container.innerHTML = '<div class="error-message">📭 Tidak ada data folder ditemukan di sheet. Harap isi kolom A (Judul) dan kolom B (Isi).</div>';
             return;
         }
+        const gridHtml = generateFolderGridFromArray(scatterFolders);
+        container.innerHTML = gridHtml;
         
-        // Deteksi apakah kolom A (header pertama) dan kolom B (header kedua) ada
-        // Idealnya sheet memiliki minimal 2 kolom: Kolom A --> judul folder, Kolom B --> isi folder.
-        // Untuk fleksibilitas, jika header pertama dan kedua ada maka kita bisa menampilkan dalam mode folder.
-        // Jika tidak kita tampilkan default tabel.
-        
-        const hasAtLeastTwoCols = scatterHeaders.length >= 2;
-        
-        // Jika baris data lebih dari 0 dan kita ingin menonjolkan struktur folder (Judul dan Isi)
-        // Kita akan menampilkan dalam gaya kartu yang menarik dimana setiap baris mewakili satu folder item.
-        if (hasAtLeastTwoCols) {
-            let html = `<div style="display: flex; flex-direction: column; gap: 1rem;">`;
-            for (let idx = 0; idx < scatterRawData.length; idx++) {
-                const row = scatterRawData[idx];
-                const judulFolder = row[scatterHeaders[0]] || "Tanpa Judul";
-                const isiFolder = row[scatterHeaders[1]] || "Tidak ada konten";
-                html += `
-                    <div class="data-card" style="transition: all 0.2s;">
-                        <div class="data-row" style="border-bottom: 1px solid rgba(255,200,100,0.3);">
-                            <div class="data-label" style="font-size:1rem;">📁 ${escapeHtml(judulFolder)}</div>
-                            <div class="data-value" style="font-weight:500;"></div>
-                        </div>
-                        <div class="data-row">
-                            <div class="data-value">${escapeHtml(isiFolder)}</div>
-                        </div>
-                    </div>
-                `;
-            }
-            html += `</div>`;
-            container.innerHTML = html;
-        } 
-        else {
-            // Jika tidak memenuhi syarat minimal 2 kolom, tampilkan sebagai kartu biasa atau tabel
-            if (scatterRawData.length === 1) {
-                let html = `<div class="data-card">`;
-                for (const [key, value] of Object.entries(scatterRawData[0])) {
-                    if (key && value !== undefined) {
-                        html += `<div class="data-row"><div class="data-label">${escapeHtml(key)}</div><div class="data-value">${escapeHtml(String(value))}</div></div>`;
-                    }
+        // Pasang event listener untuk setiap tombol salin
+        const copyButtons = container.querySelectorAll('.copy-btn');
+        copyButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                let textToCopy = btn.getAttribute('data-copy-text');
+                if (!textToCopy) {
+                    // fallback ambil dari parent .folder-content
+                    const parentContent = btn.closest('.folder-body')?.querySelector('.folder-content');
+                    if (parentContent) textToCopy = parentContent.innerText || "";
                 }
-                html += `</div>`;
-                container.innerHTML = html;
-            } 
-            else {
-                let html = `<div class="data-card" style="overflow-x: auto;">
-                                <table class="data-table">
-                                    <thead><tr>`;
-                for (let h of scatterHeaders) {
-                    html += `<th>${escapeHtml(h)}</th>`;
+                if (textToCopy) {
+                    copyToClipboard(textToCopy, btn);
+                } else {
+                    alert("Tidak ada teks untuk disalin.");
                 }
-                html += `</tr></thead><tbody>`;
-                for (let row of scatterRawData) {
-                    html += `<tr>`;
-                    for (let h of scatterHeaders) {
-                        let value = row[h] !== undefined ? row[h] : "";
-                        html += `<td>${escapeHtml(String(value))}</td>`;
-                    }
-                    html += `</tr>`;
-                }
-                html += `</tbody></table>
-                         <div style="margin-top: 1rem; font-size: 0.8rem; color: #a9b7e6; text-align: right;">
-                            📊 Total ${scatterRawData.length} baris data
-                         </div>
-                         </div>`;
-                container.innerHTML = html;
-            }
+            });
+        });
+    }
+    
+    // fungsi copy clipboard
+    async function copyToClipboard(text, buttonElem) {
+        try {
+            await navigator.clipboard.writeText(text);
+            const originalText = buttonElem.innerHTML;
+            buttonElem.innerHTML = "✅ TERSALIN!";
+            setTimeout(() => {
+                buttonElem.innerHTML = originalText;
+            }, 1800);
+        } catch (err) {
+            alert("Gagal menyalin, silakan salin manual.");
         }
     }
     
-    // Helper sanitasi HTML
+    // fungsi global untuk tombol salin di halaman buyfree/super
+    window.copyTextFromEvent = function(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Teks berhasil disalin!");
+        }).catch(() => alert("Gagal menyalin"));
+    };
+    
     function escapeHtml(str) {
         if (!str) return '';
         return str.replace(/[&<>]/g, function(m) {
@@ -655,7 +694,7 @@
         });
     }
     
-    // ===================== BADGE NAVIGASI =====================
+    // Navigasi antar badge
     function initNavigation() {
         const badges = document.querySelectorAll('.badge');
         const pages = {
@@ -663,49 +702,31 @@
             buyfree: document.getElementById('page-buyfree'),
             super: document.getElementById('page-super')
         };
-        
         function setActivePage(pageId) {
-            // Sembunyikan semua halaman
-            Object.values(pages).forEach(page => {
-                if (page) page.classList.remove('active-page');
-            });
-            // Nonaktifkan semua badge
+            Object.values(pages).forEach(p => p?.classList.remove('active-page'));
             badges.forEach(b => b.classList.remove('active'));
-            // Aktifkan halaman target
             if (pages[pageId]) pages[pageId].classList.add('active-page');
-            // Aktifkan badge yang sesuai
             const targetBadge = Array.from(badges).find(b => b.getAttribute('data-page') === pageId);
             if (targetBadge) targetBadge.classList.add('active');
         }
-        
         badges.forEach(badge => {
             badge.addEventListener('click', () => {
                 const pageKey = badge.getAttribute('data-page');
-                if (pageKey && pages[pageKey]) {
-                    setActivePage(pageKey);
-                }
+                if (pageKey && pages[pageKey]) setActivePage(pageKey);
             });
         });
-        
-        // Set default (scatter aktif)
         setActivePage('scatter');
     }
     
-    // Event Listener untuk tombol refresh
-    function initRefreshButton() {
+    function initRefresh() {
         const refreshBtn = document.getElementById('refreshScatterBtn');
-        if (refreshBtn) {
-            refreshBtn.addEventListener('click', () => {
-                fetchScatterData();
-            });
-        }
+        if (refreshBtn) refreshBtn.addEventListener('click', fetchScatterData);
     }
     
-    // Jalankan semua inisialisasi saat DOM siap
     document.addEventListener('DOMContentLoaded', () => {
         initNavigation();
-        initRefreshButton();
-        fetchScatterData();  // Ambil data dari Google Sheets saat pertama kali load
+        initRefresh();
+        fetchScatterData();
     });
 </script>
 </body>
