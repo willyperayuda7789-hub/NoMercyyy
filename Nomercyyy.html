@@ -514,14 +514,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 var sheetData=[],filteredData=[],currentDetail=null;
 var bonusData=[],filteredBonusData=[],currentBonusDetail=null;
 var eventData=[],filteredEventData=[],currentEventDetail=null;
-/* === DATA BUYFREE (dari sheet terpisah) === */
+/* === Data BUYFREE — hanya dari sheet BUYFREE === */
 var buyFreeData=[],buyFreeDataLoaded=false;
 var debugMode=false,activePage='beranda';
 var randomDataLoaded=false,bonusDataLoaded=false,eventDataLoaded=false;
 var activeEventCat=null;
 var SHEET_ID='1uymGF_AHUstAJ9je9kw9ZAldKMs45OYFGbNz7Dr1L2Y';
 var RANDOM_GID='0',BONUS_GID='252063146',EVENT_GID='1232746230';
-/* GID sheet BUYFREE */
 var BUYFREE_GID='948829668';
 var FETCH_TIMEOUT=8000;
 var CPY='<svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>';
@@ -532,7 +531,7 @@ if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard
 return new Promise(function(resolve,reject){var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;opacity:0;left:-9999px;top:-9999px';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');resolve()}catch(e){reject(e)}finally{document.body.removeChild(ta)}})
 }
 
-/* Deteksi kategori dari judul — BUY tidak lagi dicocokkan karena datanya dari sheet BUYFREE */
+/* Deteksi kategori dari judul — BUY tidak lagi dicocokkan, datanya eksklusif dari sheet BUYFREE */
 function getEventCat(title){
 var t=title.toUpperCase();
 if(t.indexOf('FREE')!==-1||t.indexOf('GRATIS')!==-1)return'FREE';
@@ -568,7 +567,7 @@ document.querySelectorAll('.ni-wrap').forEach(function(it){it.addEventListener('
 function toast(t,m,tp){var c=document.getElementById('toastContainer'),e=document.createElement('div');e.classList.add('toast');if(tp==='bonus')e.classList.add('bt');if(tp==='event')e.classList.add('et');e.innerHTML='<svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span class="toast-t">'+t+'</span><span>'+m+'</span>';c.appendChild(e);setTimeout(function(){e.classList.add('to');setTimeout(function(){e.remove()},250)},2000)}
 function updTime(){document.getElementById('systemTime').textContent=new Date().toLocaleTimeString('id-ID',{hour12:false})}
 function updStat(s){document.getElementById('sysStatus').textContent=s}
-function updDbg(){if(!debugMode)return;document.getElementById('debugInfo').innerHTML='<div>Random: '+sheetData.length+' | F: '+filteredData.length+'</div><div>Bonus: '+bonusData.length+' | F: '+filteredBonusData.length+'</div><div>Event: '+eventData.length+' | BF: '+buyFreeData.length+' | F: '+filteredEventData.length+' Cat:'+activeEventCat+'</div><div>Active: '+activePage+'</div>'}
+function updDbg(){if(!debugMode)return;document.getElementById('debugInfo').innerHTML='<div>Random: '+sheetData.length+' | F: '+filteredData.length+'</div><div>Bonus: '+bonusData.length+' | F: '+filteredBonusData.length+'</div><div>Event: '+eventData.length+' | BUYFREE: '+buyFreeData.length+' | F: '+filteredEventData.length+' Cat:'+activeEventCat+'</div><div>Active: '+activePage+'</div>'}
 
 function lev(a,b){var m=[];for(var i=0;i<=b.length;i++)m[i]=[i];for(var j=0;j<=a.length;j++)m[0][j]=j;for(var i=1;i<=b.length;i++)for(var j=1;j<=a.length;j++){if(b.charAt(i-1)===a.charAt(j-1))m[i][j]=m[i-1][j-1];else m[i][j]=Math.min(m[i-1][j-1]+1,m[i][j-1]+1,m[i-1][j]+1)}return m[b.length][a.length]}
 function sim(a,b){var d=lev(a.toLowerCase(),b.toLowerCase());var l=a.length>b.length?a:b;return l.length===0?100:Math.round(((l.length-d)/l.length)*100)}
@@ -578,22 +577,64 @@ function doFilt(data,q,fields){if(!q)return data.map(function(i){return JSON.par
 /* Fetch umum dari Google Sheet berdasarkan GID */
 async function fetchGS(gid){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+gid;var r=await fetchWithTimeout(url,FETCH_TIMEOUT);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf})}return d}
 
-/* Fetch EVENT sheet (SC + SUPER) */
+/* Fetch EVENT sheet (SC + SUPER saja) */
 async function fetchEV(){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&gid='+EVENT_GID;var r=await fetchWithTimeout(url,FETCH_TIMEOUT);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf,cat:getEventCat(ti)})}return d}
 async function fetchEVFallback(){var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=EVENT';var r=await fetchWithTimeout(url,FETCH_TIMEOUT);if(!r.ok)throw new Error('HTTP '+r.status);var t=await r.text();if(!t.includes('google.visualization.Query.setResponse'))throw new Error('Invalid');var j=JSON.parse(t.substring(47).slice(0,-2));var d=[];for(var i=0;i<j.table.rows.length;i++){var row=j.table.rows[i];var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';if(ti)d.push({title:ti,info:inf,cat:getEventCat(ti)})}return d}
 
-/* === Fetch sheet BUYFREE (GID 948829668) === */
+/* ============================================================
+   Fetch sheet BUYFREE — EKSCLUSIF untuk kolom BUY & FREE
+   Primary: pakai sheet name "BUYFREE" (lebih reliabel)
+   Fallback 1: pakai GID 948829668
+   Fallback 2: cache localStorage
+   ============================================================ */
 async function fetchBuyFree(){
+var data=null;
+
+/* --- Cara 1: pakai sheet name (paling reliabel) --- */
 try{
-var data=await fetchGS(BUYFREE_GID);
+var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=BUYFREE';
+var r=await fetchWithTimeout(url,FETCH_TIMEOUT);
+if(r.ok){
+var t=await r.text();
+if(t.includes('google.visualization.Query.setResponse')){
+var j=JSON.parse(t.substring(47).slice(0,-2));
+data=[];
+for(var i=0;i<j.table.rows.length;i++){
+var row=j.table.rows[i];
+var ti=row.c[0]&&row.c[0].v?String(row.c[0].v).trim():'';
+var inf=row.c[1]&&row.c[1].v?String(row.c[1].v).trim():'';
+if(ti)data.push({title:ti,info:inf});
+}
+if(data.length>0)console.log('[BuyFree] OK via sheet name, '+data.length+' rows');
+}
+}
+}catch(e){console.warn('[BuyFree] sheet name failed:',e.message)}
+
+/* --- Cara 2: fallback pakai GID --- */
+if(!data||data.length===0){
+try{
+data=await fetchGS(BUYFREE_GID);
+if(data.length>0)console.log('[BuyFree] OK via GID, '+data.length+' rows');
+}catch(e){console.warn('[BuyFree] GID failed:',e.message);data=null}
+}
+
+/* --- Cara 3: fallback cache localStorage --- */
+if(!data||data.length===0){
+try{
+var c=localStorage.getItem('NM_buyfree');
+if(c){data=JSON.parse(c);if(data&&data.length>0)console.log('[BuyFree] fallback cache, '+data.length+' rows');else data=null}
+}catch(e){data=null}
+}
+
+/* Finalisasi */
+if(data&&data.length>0){
 buyFreeData=data.map(function(d){return{title:d.title,info:d.info,cat:'BUY'}});
 buyFreeDataLoaded=true;
-try{localStorage.setItem('NM_buyfree',JSON.stringify(buyFreeData))}catch(e){}
-}catch(e){
-console.warn('[BuyFree]',e.message);
-try{var c=localStorage.getItem('NM_buyfree');if(c){buyFreeData=JSON.parse(c);if(buyFreeData.length>0)buyFreeDataLoaded=true}}catch(ex){}
+try{localStorage.setItem('NM_buyfree',JSON.stringify(data))}catch(e){}
+}else{
+buyFreeData=[];
+buyFreeDataLoaded=false;
 }
-if(!buyFreeDataLoaded)buyFreeData=[];
 }
 
 /* Ambil data dasar untuk filter event (gabungan EVENT + BUYFREE) */
@@ -616,10 +657,10 @@ async function fetchEvent(){
 var ld=document.getElementById('eventLoadingContainer'),ct=document.getElementById('eventContainer'),nm=document.getElementById('eventNoMenu');
 ld.style.display='flex';ct.style.display='none';nm.style.display='none';updStat('Loading...');
 
-/* Fetch EVENT dan BUYFREE secara bersamaan */
+/* Fetch EVENT (SC + SUPER) dan BUYFREE secara bersamaan */
 var evOk=false,bfOk=false;
 var evPromise=fetchEV().then(function(d){eventData=d;if(d.length>0)evOk=true}).catch(function(e){console.warn('[Event] GID:',e.message);return fetchEVFallback().then(function(d){eventData=d;if(d.length>0)evOk=true}).catch(function(e2){console.warn('[Event] Sheet:',e2.message)})});
-var bfPromise=fetchBuyFree().then(function(){if(buyFreeData.length>0)bfOk=true}).catch(function(e){console.warn('[BuyFree]',e.message)});
+var bfPromise=fetchBuyFree().then(function(){if(buyFreeData.length>0)bfOk=true});
 
 await Promise.all([evPromise,bfPromise]);
 
@@ -630,7 +671,11 @@ if(evOk&&eventData[0].title!=='BELUM ADA DATA')try{localStorage.setItem('NM_even
 
 eventDataLoaded=true;
 
-/* Hitung per kategori: SC dari EVENT, BUY dari BUYFREE, FREE dari EVENT */
+/* Hitung per kategori:
+   SC → dari EVENT sheet (cat==='SC')
+   BUY & FREE → EKSKLUSIF dari sheet BUYFREE
+   SUPER → dari EVENT sheet (cat==='FREE')
+*/
 var cntSC=0,cntFREE=0;
 for(var i=0;i<eventData.length;i++){var cat=eventData[i].cat;if(cat==='SC')cntSC++;else if(cat==='FREE')cntFREE++}
 document.getElementById('catCntSC').textContent=cntSC;
@@ -714,7 +759,7 @@ var dr,db,de;
 document.getElementById('filterInput').addEventListener('input',function(){clearTimeout(dr);dr=setTimeout(function(){filteredData=doFilt(sheetData,document.getElementById('filterInput').value.trim(),['title','info']);rndRender();updDbg()},300)});
 document.getElementById('bonusFilterInput').addEventListener('input',function(){clearTimeout(db);db=setTimeout(function(){filteredBonusData=doFilt(bonusData,document.getElementById('bonusFilterInput').value.trim(),['title','info']);document.getElementById('bonusCountText').textContent=filteredBonusData.length+' Bonus';bonRender();updDbg()},300)});
 
-/* Filter event — menggunakan getEventBase() agar BUY ambil dari buyFreeData */
+/* Filter event — getEventBase() memastikan BUY hanya ambil dari buyFreeData */
 document.getElementById('eventFilterInput').addEventListener('input',function(){clearTimeout(de);de=setTimeout(function(){
 var q=document.getElementById('eventFilterInput').value.trim();
 var base=getEventBase();
