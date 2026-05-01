@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Event Badge - Data Dinamis | Scatter, Buy & Free, Super, Gambar Event</title>
+    <title>Event Badge - GAMBAR EVENT | Galeri 2 Kolom</title>
     <style>
         * {
             margin: 0;
@@ -162,13 +162,14 @@
             border: 1px solid #ffcd7e55;
         }
 
-        .folder-grid {
+        /* ========== GALERI GRID 2 KOLOM UNTUK GAMBAR ========== */
+        .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
         }
 
-        .folder-card {
+        .gambar-card {
             background: linear-gradient(135deg, rgba(25, 35, 55, 0.95), rgba(15, 22, 40, 0.98));
             backdrop-filter: blur(4px);
             border-radius: 1.2rem;
@@ -180,65 +181,69 @@
             flex-direction: column;
         }
 
-        .folder-card:hover {
+        .gambar-card:hover {
             transform: translateY(-5px);
             border-color: #ffcd7e;
             box-shadow: 0 20px 28px -12px rgba(0, 0, 0, 0.6);
             background: linear-gradient(135deg, rgba(30, 42, 65, 0.98), rgba(18, 26, 45, 0.98));
         }
 
-        .folder-header {
-            padding: 1.2rem 1.5rem 0.8rem 1.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-bottom: 2px solid rgba(255, 200, 100, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        /* Header folder (judul dari kolom A) */
+        .gambar-folder-header {
+            padding: 1rem 1.2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid rgba(255, 200, 100, 0.4);
         }
 
-        .folder-icon {
-            font-size: 2rem;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-        }
-
-        .folder-title {
-            font-size: 1.35rem;
+        .gambar-folder-title {
+            font-size: 1.25rem;
             font-weight: 700;
             background: linear-gradient(115deg, #FFE6B3, #FFC875);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            letter-spacing: -0.2px;
-            word-break: break-word;
-            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .folder-body {
-            padding: 1.2rem 1.5rem 1.5rem 1.5rem;
+        /* Konten dalam folder (kolom B dan C) */
+        .gambar-content {
+            padding: 1.2rem;
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .folder-content {
-            color: #FFFFFF !important;
-            line-height: 1.55;
-            font-size: 0.95rem;
-            white-space: pre-wrap;
-            word-break: break-word;
+        .gambar-subtitle {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffdd99;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed rgba(255,200,100,0.3);
+        }
+
+        .gambar-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background: rgba(0,0,0,0.2);
+            border-radius: 0.8rem;
+            padding: 10px;
+        }
+
+        .gambar-event {
+            max-width: 100%;
             max-height: 280px;
-            overflow-y: auto;
-            padding-right: 6px;
+            object-fit: contain;
+            border-radius: 0.6rem;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
 
-        .folder-content::-webkit-scrollbar {
-            width: 4px;
-        }
-        .folder-content::-webkit-scrollbar-track {
-            background: #1e2a3e;
-            border-radius: 10px;
-        }
-        .folder-content::-webkit-scrollbar-thumb {
-            background: #ffb347;
-            border-radius: 10px;
+        .gambar-event:hover {
+            transform: scale(1.02);
         }
 
         .copy-btn {
@@ -254,8 +259,9 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-top: 12px;
+            margin-top: 8px;
             backdrop-filter: blur(2px);
+            width: fit-content;
         }
 
         .copy-btn:hover {
@@ -263,71 +269,6 @@
             color: #1a1f2e;
             border-color: #fff0c0;
             box-shadow: 0 0 8px rgba(255,180,70,0.6);
-        }
-
-        /* Style khusus untuk gambar event */
-        .gambar-card {
-            background: linear-gradient(135deg, rgba(25, 35, 55, 0.95), rgba(15, 22, 40, 0.98));
-            backdrop-filter: blur(4px);
-            border-radius: 1.2rem;
-            border: 1px solid rgba(255, 200, 100, 0.35);
-            transition: all 0.3s ease;
-            overflow: hidden;
-            box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.4);
-        }
-
-        .gambar-card:hover {
-            transform: translateY(-5px);
-            border-color: #ffcd7e;
-            box-shadow: 0 20px 28px -12px rgba(0, 0, 0, 0.6);
-        }
-
-        .gambar-header {
-            padding: 1rem 1.2rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-bottom: 2px solid rgba(255, 200, 100, 0.3);
-        }
-
-        .gambar-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            background: linear-gradient(115deg, #FFE6B3, #FFC875);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            word-break: break-word;
-        }
-
-        .gambar-body {
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .gambar-event {
-            width: 100%;
-            max-height: 300px;
-            object-fit: contain;
-            border-radius: 0.8rem;
-            cursor: pointer;
-            transition: transform 0.2s;
-            background: rgba(0,0,0,0.3);
-        }
-
-        .gambar-event:hover {
-            transform: scale(1.02);
-        }
-
-        .gambar-url {
-            font-size: 0.7rem;
-            color: #88aaff;
-            margin-top: 10px;
-            word-break: break-all;
-            text-align: center;
-            background: rgba(0,0,0,0.3);
-            padding: 6px 10px;
-            border-radius: 20px;
         }
 
         .loading {
@@ -365,15 +306,12 @@
         }
 
         @media (max-width: 760px) {
-            .folder-grid {
+            .gallery-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
             .page-container {
                 padding: 1.2rem;
-            }
-            .folder-title {
-                font-size: 1.1rem;
             }
             .badge h3 {
                 font-size: 1rem;
@@ -416,7 +354,7 @@
     </div>
 
     <div class="page-container">
-        <!-- HALAMAN SCATTER (gid=0) -->
+        <!-- HALAMAN SCATTER (gid=0) - TIDAK BERUBAH -->
         <div id="page-scatter" class="page">
             <div class="page-header">
                 <h2>📂 SCATTER · FOLDER DATA</h2>
@@ -427,7 +365,7 @@
             </div>
         </div>
 
-        <!-- HALAMAN BUY & FREE (gid=1728740039) -->
+        <!-- HALAMAN BUY & FREE (gid=1728740039) - TIDAK BERUBAH -->
         <div id="page-buyfree" class="page">
             <div class="page-header">
                 <h2>🛒 BUY & FREE · DATA SHEET</h2>
@@ -438,7 +376,7 @@
             </div>
         </div>
 
-        <!-- HALAMAN SUPER (gid=108287537) -->
+        <!-- HALAMAN SUPER (gid=108287537) - TIDAK BERUBAH -->
         <div id="page-super" class="page">
             <div class="page-header">
                 <h2>⚡ SUPER · FOLDER DATA (SUPER SCATTER)</h2>
@@ -449,10 +387,10 @@
             </div>
         </div>
 
-        <!-- HALAMAN GAMBAR EVENT (mengambil dari sheet GAMBAR EVENT, kolom A = judul, kolom B = URL gambar) -->
+        <!-- HALAMAN GAMBAR EVENT (gid=411325602) - KOLOM A = Judul Folder, B = Judul Dalam Isi, C = URL Gambar -->
         <div id="page-gambar" class="page active-page">
             <div class="page-header">
-                <h2>🖼️ GALLERY GAMBAR EVENT</h2>
+                <h2>🖼️ GALERI GAMBAR EVENT</h2>
                 <button class="btn-refresh" id="refreshGambarBtn">⟳ Refresh Data</button>
             </div>
             <div id="gambarDataContainer">
@@ -460,7 +398,7 @@
             </div>
         </div>
     </div>
-    <div class="credit-note">Data diambil secara realtime dari Google Sheets | Kolom A = Judul | Kolom B = Isi / URL Gambar</div>
+    <div class="credit-note">Data diambil secara realtime dari Google Sheets | GAMBAR EVENT: Kolom A = Judul Folder | Kolom B = Sub Judul | Kolom C = URL Gambar</div>
 </div>
 
 <script>
@@ -474,31 +412,11 @@
     // 2. BUY & FREE (gid=1728740039)
     const GOOGLE_SHEETS_CSV_URL_BUYFREE = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=1728740039";
     
-    // 3. SUPER (gid=108287537) -> SHEET "SUPER SCATTER"
+    // 3. SUPER (gid=108287537)
     const GOOGLE_SHEETS_CSV_URL_SUPER = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=108287537";
     
-    // 4. GAMBAR EVENT (gid baru - asumsikan sheet GAMBAR EVENT, jika belum ada, user tinggal menambah sheet dengan nama "GAMBAR EVENT")
-    //    Gunakan gid yang sama dengan sheet GAMBAR EVENT. Jika sheet belum dibuat, akan tampil error contoh.
-    //    Untuk memudahkan, gunakan gid yang belum terpakai. Tapi karena kita tidak tahu gid pasti, kita asumsikan user akan membuat sheet baru.
-    //    Alternatif: gunakan gid=0 (scatter) sebagai fallback? Tidak, lebih baik user diminta membuat sheet.
-    //    Saya akan gunakan parameter export tanpa gid spesifik? Tidak bisa karena akan mengambil sheet pertama.
-    //    Karena user bisa menambahkan sheet baru, kita bisa menggunakan parameter gid yang sesuai.
-    //    Untuk demo, kita gunakan gid yang belum dipakai sebelumnya. Biasanya sheet baru akan memiliki gid otomatis.
-    //    Solusi: kita bisa meminta user untuk membuat sheet bernama "GAMBAR EVENT" dan mengambil gid-nya.
-    //    Tapi untuk kemudahan, saya tambahkan instruksi di error message.
-    //    Sementara kita gunakan gid=123456789 (placeholder), tetapi akan error. Biar user membuat sheet sendiri.
-    //    Lebih baik kita gunakan URL yang sama dengan parameter gid, namun user harus mengganti gid sesuai sheet GAMBAR EVENT.
-    //    Saya akan buat variabel terpisah dan beri komentar.
-    
-    // === INSTRUKSI: Buat sheet baru dengan nama "GAMBAR EVENT" di spreadsheet yang sama, lalu ganti gid di bawah ini ===
-    // Cara mendapatkan gid: buka sheet GAMBAR EVENT, lihat URL, ambil angka setelah gid=
-    // Contoh: https://docs.google.com/spreadsheets/d/.../edit?gid=123456789
-    const GOOGLE_SHEETS_CSV_URL_GAMBAR = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=108287537"; // SEMENTARA menggunakan gid yang sama dengan super sebagai contoh, user harus ganti dengan gid sheet GAMBAR EVENT
-
-    let scatterFolders = [];
-    let buyfreeFolders = [];
-    let superFolders = [];
-    let gambarFolders = [];
+    // 4. GAMBAR EVENT (gid=411325602) -> SHEET "GAMBAR EVENT"
+    const GOOGLE_SHEETS_CSV_URL_GAMBAR = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=411325602";
 
     // ==================== FUNGSI UTILITY ====================
     function parseCSVToArray(csvString) {
@@ -542,47 +460,71 @@
         return rows.filter(row => row.some(cell => cell !== ""));
     }
     
-    function generateFolderGridFromArray(foldersArray) {
-        if (!foldersArray.length) return '<div class="loading">📭 Tidak ada folder</div>';
-        let html = `<div class="folder-grid">`;
-        for (let folder of foldersArray) {
-            const judul = escapeHtml(folder.judul);
-            const isi = escapeHtml(folder.isi);
+    // Fungsi khusus untuk menampilkan data gambar event (3 kolom)
+    function generateGambarGridFromData(dataRows) {
+        if (!dataRows.length) return '<div class="loading">📭 Tidak ada data gambar</div>';
+        
+        // Kelompokkan berdasarkan judul folder (kolom A)
+        const grouped = {};
+        for (const row of dataRows) {
+            const folderName = row.judul || "Folder Tanpa Nama";
+            if (!grouped[folderName]) {
+                grouped[folderName] = [];
+            }
+            grouped[folderName].push({
+                subJudul: row.subJudul,
+                urlGambar: row.urlGambar
+            });
+        }
+        
+        let html = `<div class="gallery-grid">`;
+        for (const [folderName, items] of Object.entries(grouped)) {
             html += `
-                <div class="folder-card">
-                    <div class="folder-header">
-                        <span class="folder-icon">📁</span>
-                        <div class="folder-title">${judul}</div>
+                <div class="gambar-card">
+                    <div class="gambar-folder-header">
+                        <div class="gambar-folder-title">
+                            <span>📁</span> ${escapeHtml(folderName)}
+                        </div>
                     </div>
-                    <div class="folder-body">
-                        <div class="folder-content" style="color:#FFFFFF !important;">${isi.replace(/\n/g, '<br>')}</div>
-                        <button class="copy-btn" data-copy-text="${isi.replace(/"/g, '&quot;')}">📋 SALIN</button>
-                    </div>
-                </div>
+                    <div class="gambar-content">
             `;
+            
+            for (const item of items) {
+                const isValidUrl = item.urlGambar && (item.urlGambar.match(/\.(jpeg|jpg|gif|png|webp|svg)$/i) || item.urlGambar.startsWith('http'));
+                html += `
+                    <div class="gambar-subtitle">✨ ${escapeHtml(item.subJudul || "Tanpa Judul")}</div>
+                    <div class="gambar-wrapper">
+                        ${isValidUrl ? 
+                            `<img src="${escapeHtml(item.urlGambar)}" alt="${escapeHtml(item.subJudul)}" class="gambar-event" onclick="window.open('${escapeHtml(item.urlGambar)}', '_blank')" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'color:#ff8888; text-align:center; padding:20px;\\'>⚠️ Gambar tidak dapat dimuat<br><small style=\\'font-size:11px;\\'>${escapeHtml(item.urlGambar)}</small></div>'">` : 
+                            `<div style="color:#ffaa66; text-align:center; padding:20px;">⚠️ URL Gambar tidak valid<br><small>${escapeHtml(item.urlGambar || 'Tidak ada URL')}</small></div>`
+                        }
+                    </div>
+                    <button class="copy-btn" data-copy-text="${escapeHtml(item.urlGambar || '')}">📋 SALIN URL GAMBAR</button>
+                `;
+            }
+            html += `</div></div>`;
         }
         html += `</div>`;
         return html;
     }
     
-    // Generate grid untuk gambar event (tampilan khusus gambar)
-    function generateGambarGridFromArray(gambarArray) {
-        if (!gambarArray.length) return '<div class="loading">📭 Tidak ada data gambar</div>';
-        let html = `<div class="folder-grid">`;
-        for (let item of gambarArray) {
-            const judul = escapeHtml(item.judul);
-            const urlGambar = escapeHtml(item.isi);
-            // Validasi URL gambar (jika tidak valid, tampilkan teks saja)
-            const isValidUrl = urlGambar.match(/\.(jpeg|jpg|gif|png|webp|svg)$/i) || urlGambar.startsWith('http');
+    // Fungsi untuk folder biasa (scatter, buyfree, super)
+    function generateFolderGridFromArray(foldersArray) {
+        if (!foldersArray.length) return '<div class="loading">📭 Tidak ada folder</div>';
+        let html = `<div class="gallery-grid">`;
+        for (let folder of foldersArray) {
+            const judul = escapeHtml(folder.judul);
+            const isi = escapeHtml(folder.isi);
             html += `
                 <div class="gambar-card">
-                    <div class="gambar-header">
-                        <div class="gambar-title">${judul}</div>
+                    <div class="gambar-folder-header">
+                        <div class="gambar-folder-title">
+                            <span>📁</span> ${judul}
+                        </div>
                     </div>
-                    <div class="gambar-body">
-                        ${isValidUrl ? `<img src="${urlGambar}" alt="${judul}" class="gambar-event" onclick="window.open('${urlGambar}', '_blank')" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div style="display:none; color:#ff8888; text-align:center;">⚠️ Gambar tidak dapat dimuat</div>` : `<div style="color:#ffaa66; text-align:center; padding:20px;">⚠️ URL Gambar tidak valid</div>`}
-                        <div class="gambar-url">📎 ${urlGambar.substring(0, 60)}${urlGambar.length > 60 ? '...' : ''}</div>
-                        <button class="copy-btn" data-copy-text="${urlGambar}">📋 SALIN URL</button>
+                    <div class="gambar-content">
+                        <div style="color:#FFFFFF; line-height:1.5;">${isi.replace(/\n/g, '<br>')}</div>
+                        <button class="copy-btn" data-copy-text="${isi.replace(/"/g, '&quot;')}">📋 SALIN TEKS</button>
                     </div>
                 </div>
             `;
@@ -604,7 +546,7 @@
         const btn = e.currentTarget;
         let textToCopy = btn.getAttribute('data-copy-text');
         if (!textToCopy) {
-            const parentContent = btn.closest('.folder-body')?.querySelector('.folder-content');
+            const parentContent = btn.closest('.gambar-content')?.querySelector('.folder-content');
             if (parentContent) textToCopy = parentContent.innerText || "";
         }
         if (textToCopy) {
@@ -637,36 +579,34 @@
         });
     }
 
-    // ==================== AMBIL DATA DARI CSV & RENDER ====================
-    async function fetchAndRender(url, containerId, foldersArrayRef, isGambarMode = false, customErrorExamples = null) {
+    // ==================== AMBIL DATA DARI CSV ====================
+    
+    // Fungsi untuk halaman SCATTER, BUYFREE, SUPER (2 kolom)
+    async function fetchAndRender(url, containerId, customErrorExamples = null) {
         const container = document.getElementById(containerId);
         if (!container) return;
         
         container.innerHTML = '<div class="loading">⏳ Mengambil data dari Google Sheets...</div>';
         
         try {
-            const response = await fetch(url, {
-                cache: "no-store",
-                headers: { "Cache-Control": "no-cache" }
-            });
-            
-            if (!response.ok) throw new Error(`HTTP ${response.status}: Gagal mengambil data`);
+            const response = await fetch(url, { cache: "no-store", headers: { "Cache-Control": "no-cache" } });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
             
             const csvText = await response.text();
-            if (!csvText || csvText.trim() === "") throw new Error("Data CSV kosong. Pastikan sheet sudah dipublikasikan ke web.");
+            if (!csvText || csvText.trim() === "") throw new Error("Data CSV kosong.");
             
             const parsed = parseCSVToArray(csvText);
-            if (!parsed || parsed.length === 0) throw new Error("Tidak ada data di sheet.");
+            if (!parsed || parsed.length === 0) throw new Error("Tidak ada data.");
             
             const folders = [];
             let dataRows = [...parsed];
             
-            // Skip header jika baris pertama mengandung kata kunci judul/isi
+            // Skip header jika baris pertama mengandung kata kunci
             if (dataRows.length > 0 && dataRows[0].length >= 2) {
                 const firstRowVal0 = String(dataRows[0][0]).toLowerCase();
                 const firstRowVal1 = String(dataRows[0][1]).toLowerCase();
-                if (firstRowVal0.includes("judul") || firstRowVal0.includes("folder") || firstRowVal0.includes("title") ||
-                    firstRowVal1.includes("isi") || firstRowVal1.includes("konten") || firstRowVal1.includes("deskripsi") || firstRowVal1.includes("url")) {
+                if (firstRowVal0.includes("judul") || firstRowVal0.includes("folder") || 
+                    firstRowVal1.includes("isi") || firstRowVal1.includes("konten")) {
                     dataRows = dataRows.slice(1);
                 }
             }
@@ -674,54 +614,26 @@
             for (let i = 0; i < dataRows.length; i++) {
                 const row = dataRows[i];
                 if (row.length >= 2) {
-                    let judul = (row[0] !== undefined ? String(row[0]).trim() : "Folder Tanpa Judul");
-                    let isi = (row[1] !== undefined ? String(row[1]).trim() : "Tidak ada konten.");
-                    if (judul !== "") {
-                        folders.push({ judul: judul, isi: isi });
-                    } else if (isi !== "") {
-                        folders.push({ judul: `Item ${i+1}`, isi: isi });
-                    }
-                } else if (row.length === 1 && row[0].trim() !== "") {
-                    folders.push({ judul: row[0].trim(), isi: "(Konten belum tersedia di kolom B)" });
+                    let judul = row[0] ? String(row[0]).trim() : "Folder Tanpa Judul";
+                    let isi = row[1] ? String(row[1]).trim() : "Tidak ada konten.";
+                    if (judul !== "") folders.push({ judul, isi });
                 }
             }
             
-            if (folders.length === 0) throw new Error("Tidak ada baris data yang valid dengan minimal 2 kolom (judul & isi).");
+            if (folders.length === 0) throw new Error("Tidak ada data valid.");
             
-            // Update array referensi dan render
-            if (foldersArrayRef === 'scatter') scatterFolders = folders;
-            else if (foldersArrayRef === 'buyfree') buyfreeFolders = folders;
-            else if (foldersArrayRef === 'super') superFolders = folders;
-            else if (foldersArrayRef === 'gambar') gambarFolders = folders;
-            
-            if (isGambarMode) {
-                container.innerHTML = generateGambarGridFromArray(folders);
-            } else {
-                const gridHtml = generateFolderGridFromArray(folders);
-                container.innerHTML = gridHtml;
-            }
+            container.innerHTML = generateFolderGridFromArray(folders);
             attachCopyButtonsToContainer(container);
             
         } catch (error) {
-            console.error(`Error fetching ${containerId}:`, error);
-            let errorHtml = `
-                <div class="error-message">
-                    <strong>⚠️ Gagal mengambil data dari Google Sheets</strong><br>
-                    ${error.message}<br><br>
-                    <strong>📌 Solusi:</strong> Pastikan sheet sudah dipublikasikan ke web (File → Bagikan → Publikasikan ke web → CSV).<br>
-                    Pastikan sheet memiliki minimal 2 kolom: <strong>Kolom A (Judul Folder)</strong> dan <strong>Kolom B (Isi / URL Gambar)</strong>.
-                </div>
-            `;
-            if (customErrorExamples && customErrorExamples.length) {
+            console.error(error);
+            let errorHtml = `<div class="error-message"><strong>⚠️ Gagal mengambil data</strong><br>${error.message}<br><br>📌 Pastikan sheet sudah dipublikasikan ke web (CSV).</div>`;
+            if (customErrorExamples) {
                 errorHtml += `<div id="exampleFallbackGrid"></div>`;
                 container.innerHTML = errorHtml;
                 const exampleDiv = container.querySelector("#exampleFallbackGrid");
                 if (exampleDiv) {
-                    if (isGambarMode) {
-                        exampleDiv.innerHTML = generateGambarGridFromArray(customErrorExamples);
-                    } else {
-                        exampleDiv.innerHTML = generateFolderGridFromArray(customErrorExamples);
-                    }
+                    exampleDiv.innerHTML = generateFolderGridFromArray(customErrorExamples);
                     attachCopyButtonsToContainer(exampleDiv);
                 }
             } else {
@@ -730,38 +642,121 @@
         }
     }
     
-    // Fungsi spesifik untuk masing-masing halaman
+    // Fungsi khusus untuk GAMBAR EVENT (3 kolom: A=judul folder, B=sub judul, C=URL gambar)
+    async function fetchGambarData() {
+        const container = document.getElementById("gambarDataContainer");
+        if (!container) return;
+        
+        container.innerHTML = '<div class="loading">🖼️ Mengambil data gambar event dari Google Sheets...</div>';
+        
+        // Contoh data jika gagal mengambil
+        const contohData = [
+            { judul: "PROMO AGUSTUS", subJudul: "Banner Special 17 Agustus", urlGambar: "https://picsum.photos/id/1/400/250" },
+            { judul: "PROMO AGUSTUS", subJudul: "Bonus Merdeka", urlGambar: "https://picsum.photos/id/26/400/250" },
+            { judul: "EVENT SCATTER", subJudul: "Jackpot Progresif", urlGambar: "https://picsum.photos/id/29/400/250" },
+            { judul: "EVENT SCATTER", subJudul: "Free Spin 50x", urlGambar: "https://picsum.photos/id/32/400/250" }
+        ];
+        
+        try {
+            const response = await fetch(GOOGLE_SHEETS_CSV_URL_GAMBAR, {
+                cache: "no-store",
+                headers: { "Cache-Control": "no-cache" }
+            });
+            
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            const csvText = await response.text();
+            if (!csvText || csvText.trim() === "") throw new Error("Data CSV kosong.");
+            
+            const parsed = parseCSVToArray(csvText);
+            if (!parsed || parsed.length === 0) throw new Error("Tidak ada data.");
+            
+            const gambarItems = [];
+            let dataRows = [...parsed];
+            
+            // Skip header jika baris pertama mengandung kata kunci
+            if (dataRows.length > 0 && dataRows[0].length >= 2) {
+                const firstRowVal0 = String(dataRows[0][0]).toLowerCase();
+                if (firstRowVal0.includes("judul") || firstRowVal0.includes("folder")) {
+                    dataRows = dataRows.slice(1);
+                }
+            }
+            
+            for (let i = 0; i < dataRows.length; i++) {
+                const row = dataRows[i];
+                if (row.length >= 3) {
+                    let judul = row[0] ? String(row[0]).trim() : "Folder Tanpa Judul";
+                    let subJudul = row[1] ? String(row[1]).trim() : "Tanpa Judul";
+                    let urlGambar = row[2] ? String(row[2]).trim() : "";
+                    if (judul !== "" && urlGambar !== "") {
+                        gambarItems.push({ judul, subJudul, urlGambar });
+                    }
+                }
+            }
+            
+            if (gambarItems.length === 0) {
+                // Tampilkan contoh jika tidak ada data
+                container.innerHTML = `
+                    <div class="error-message">
+                        <strong>⚠️ Tidak ada data gambar yang valid</strong><br>
+                        Pastikan sheet GAMBAR EVENT memiliki minimal 3 kolom:<br>
+                        Kolom A = Judul Folder | Kolom B = Sub Judul | Kolom C = URL Gambar
+                    </div>
+                    <div id="contohGambarGrid"></div>
+                `;
+                const contohDiv = container.querySelector("#contohGambarGrid");
+                if (contohDiv) {
+                    contohDiv.innerHTML = generateGambarGridFromData(contohData);
+                    attachCopyButtonsToContainer(contohDiv);
+                }
+                return;
+            }
+            
+            container.innerHTML = generateGambarGridFromData(gambarItems);
+            attachCopyButtonsToContainer(container);
+            
+        } catch (error) {
+            console.error(error);
+            container.innerHTML = `
+                <div class="error-message">
+                    <strong>⚠️ Gagal mengambil data dari Google Sheets</strong><br>
+                    ${error.message}<br><br>
+                    <strong>📌 Solusi:</strong> Publikasikan sheet GAMBAR EVENT ke web (File → Bagikan → Publikasikan ke web → CSV).<br>
+                    Pastikan sheet memiliki 3 kolom: <strong>Kolom A (Judul Folder)</strong>, <strong>Kolom B (Sub Judul)</strong>, <strong>Kolom C (URL Gambar)</strong>.
+                </div>
+                <div id="contohGambarGrid"></div>
+            `;
+            const contohDiv = container.querySelector("#contohGambarGrid");
+            if (contohDiv) {
+                contohDiv.innerHTML = generateGambarGridFromData(contohData);
+                attachCopyButtonsToContainer(contohDiv);
+            }
+        }
+    }
+
+    // Fungsi untuk halaman lainnya dengan contoh data
     function fetchScatterData() {
         const examples = [
-            { judul: "📌 CONTOH: BONUS CASHBACK", isi: "Bonus Cashback up to 5% (Live Games) = Bonus Kekalahan 5% hanya berlaku untuk permainan Live Games." },
-            { judul: "📌 CONTOH: BONUS ROLLINGAN", isi: "Bonus rollingan turnover 0.5% dari total bettingan. Rollingan tanpa batas maksimal." }
+            { judul: "📌 CONTOH: BONUS CASHBACK", isi: "Bonus Cashback up to 5% (Live Games) - Minimal kekalahan Rp.100.000" },
+            { judul: "📌 CONTOH: BONUS ROLLINGAN", isi: "Bonus rollingan turnover 0.5% dari total bettingan" }
         ];
-        fetchAndRender(GOOGLE_SHEETS_CSV_URL_SCATTER, "scatterDataContainer", "scatter", false, examples);
+        fetchAndRender(GOOGLE_SHEETS_CSV_URL_SCATTER, "scatterDataContainer", examples);
     }
     
     function fetchBuyFreeData() {
         const examples = [
-            { judul: "📌 CONTOH: PAKET BUY SPIN", isi: "Buy 10 Free Spin + Gratis 5 Extra Spin. Minimal deposit IDR 50.000." },
-            { judul: "📌 CONTOH: SYARAT TURNOVER", isi: "Turnover x5 sebelum withdraw. Bonus rollingan 0.5% (LIVE GAMES & SLOT)." }
+            { judul: "📌 CONTOH: PAKET BUY SPIN", isi: "Buy 10 Free Spin + Gratis 5 Extra Spin. Minimal deposit IDR 50.000" },
+            { judul: "📌 CONTOH: SYARAT TURNOVER", isi: "Turnover x5 sebelum withdraw. Bonus rollingan 0.5%" }
         ];
-        fetchAndRender(GOOGLE_SHEETS_CSV_URL_BUYFREE, "buyfreeDataContainer", "buyfree", false, examples);
+        fetchAndRender(GOOGLE_SHEETS_CSV_URL_BUYFREE, "buyfreeDataContainer", examples);
     }
     
     function fetchSuperData() {
         const examples = [
-            { judul: "📌 CONTOH: EVENT SUPER SCATTER", isi: "Kumpulkan 3 Scatter SUPER untuk mendapatkan bonus besar. Hadiah hingga x5000 lipat." },
-            { judul: "📌 CONTOH: JACKPOT PROGRESIF", isi: "Jackpot progresif mencapai miliaran rupiah. Semakin sering bermain, semakin besar peluang Anda!" }
+            { judul: "📌 CONTOH: EVENT SUPER SCATTER", isi: "Kumpulkan 3 Scatter SUPER untuk bonus besar. Hadiah hingga x5000" },
+            { judul: "📌 CONTOH: JACKPOT PROGRESIF", isi: "Jackpot progresif mencapai miliaran rupiah" }
         ];
-        fetchAndRender(GOOGLE_SHEETS_CSV_URL_SUPER, "superDataContainer", "super", false, examples);
-    }
-    
-    function fetchGambarData() {
-        const examples = [
-            { judul: "🎉 CONTOH: BANNER EVENT SPESIAL", isi: "https://picsum.photos/id/1/400/250" },
-            { judul: "🏆 CONTOH: HADIAH JACKPOT", isi: "https://picsum.photos/id/26/400/250" },
-            { judul: "⚡ CONTOH: SUPER SCATTER PROMO", isi: "https://picsum.photos/id/29/400/250" }
-        ];
-        fetchAndRender(GOOGLE_SHEETS_CSV_URL_GAMBAR, "gambarDataContainer", "gambar", true, examples);
+        fetchAndRender(GOOGLE_SHEETS_CSV_URL_SUPER, "superDataContainer", examples);
     }
 
     // ==================== NAVIGASI BADGE ====================
@@ -786,11 +781,10 @@
                 if (pageKey && pages[pageKey]) setActivePage(pageKey);
             });
         });
-        // Default aktifkan GAMBAR EVENT
         setActivePage('gambar');
     }
     
-    // ==================== INIT & REFRESH BUTTONS ====================
+    // ==================== INIT ====================
     document.addEventListener('DOMContentLoaded', () => {
         initNavigation();
         
