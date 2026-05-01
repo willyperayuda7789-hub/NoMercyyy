@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Event Badge - GAMBAR EVENT | Galeri 2 Kolom + Modal Preview & Copy Gambar</title>
+    <title>Event Badge - GAMBAR EVENT | Galeri 2 Kolom + Modal Preview & Salin Gambar</title>
     <style>
         * {
             margin: 0;
@@ -299,6 +299,29 @@
             box-shadow: 0 0 8px rgba(111, 207, 151, 0.6);
         }
 
+        /* Tombol SALIN untuk subjudul */
+        .salin-sub-btn {
+            background: rgba(255, 180, 70, 0.15);
+            border: 1px solid #ffb347;
+            color: #ffd966;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .salin-sub-btn:hover {
+            background: #ffb347;
+            color: #1a1f2e;
+            border-color: #fff0c0;
+            box-shadow: 0 0 8px rgba(255,180,70,0.6);
+        }
+
         .loading {
             text-align: center;
             padding: 2rem;
@@ -452,7 +475,7 @@
             margin-top: 8px;
         }
 
-        .modal-copy-btn, .modal-copy-image-btn {
+        .modal-salin-btn, .modal-copy-image-btn {
             background: rgba(255, 180, 70, 0.2);
             border: 1px solid #ffb347;
             border-radius: 40px;
@@ -473,7 +496,7 @@
             color: #d4ffcc;
         }
 
-        .modal-copy-btn:hover, .modal-copy-image-btn:hover {
+        .modal-salin-btn:hover, .modal-copy-image-btn:hover {
             background: #ffb347;
             color: #1a1f2e;
         }
@@ -557,7 +580,7 @@
     </div>
 
     <div class="page-container">
-        <!-- HALAMAN SCATTER (gid=0) - TIDAK BERUBAH -->
+        <!-- HALAMAN SCATTER (gid=0) -->
         <div id="page-scatter" class="page">
             <div class="page-header">
                 <h2>📂 SCATTER · FOLDER DATA</h2>
@@ -568,7 +591,7 @@
             </div>
         </div>
 
-        <!-- HALAMAN BUY & FREE (gid=1728740039) - TIDAK BERUBAH -->
+        <!-- HALAMAN BUY & FREE (gid=1728740039) -->
         <div id="page-buyfree" class="page">
             <div class="page-header">
                 <h2>🛒 BUY & FREE · DATA SHEET</h2>
@@ -579,7 +602,7 @@
             </div>
         </div>
 
-        <!-- HALAMAN SUPER (gid=108287537) - TIDAK BERUBAH -->
+        <!-- HALAMAN SUPER (gid=108287537) -->
         <div id="page-super" class="page">
             <div class="page-header">
                 <h2>⚡ SUPER · FOLDER DATA (SUPER SCATTER)</h2>
@@ -590,7 +613,7 @@
             </div>
         </div>
 
-        <!-- HALAMAN GAMBAR EVENT (gid=411325602) - Klik gambar modal + copy gambar -->
+        <!-- HALAMAN GAMBAR EVENT (gid=411325602) - Dengan Subjudul Screenshot Kemenangan Akhir -->
         <div id="page-gambar" class="page active-page">
             <div class="page-header">
                 <h2>🖼️ GALERI GAMBAR EVENT</h2>
@@ -601,7 +624,7 @@
             </div>
         </div>
     </div>
-    <div class="credit-note">✨ Klik gambar → preview modal | Tombol SALIN GAMBAR (copy image ke clipboard) | Tekan ESC untuk tutup modal | Data realtime dari Google Sheets</div>
+    <div class="credit-note">✨ Klik gambar → preview modal | Tombol SALIN (subjudul) | Tombol SALIN GAMBAR | Data realtime dari Google Sheets</div>
 </div>
 
 <!-- MODAL PREVIEW -->
@@ -617,7 +640,7 @@
                 <span id="modalSubtitleText">Subjudul Event</span>
             </div>
             <div class="modal-action-buttons">
-                <button id="modalCopySubBtn" class="modal-copy-btn">📋 Salin Subjudul</button>
+                <button id="modalSalinSubBtn" class="modal-salin-btn">📋 SALIN</button>
                 <button id="modalCopyImageBtn" class="modal-copy-image-btn">🖼️ SALIN GAMBAR</button>
             </div>
             <div class="modal-hint">💡 Tekan ESC atau klik luar untuk menutup | Salin Gambar = copy langsung ke clipboard</div>
@@ -660,7 +683,7 @@
         }, 2000);
     }
 
-    async function copyTextToClipboard(text, successMsg = "✅ Tersalin!") {
+    async function copyTextToClipboard(text, successMsg = "✅ Teks berhasil disalin!") {
         try {
             await navigator.clipboard.writeText(text);
             showToast(successMsg);
@@ -728,7 +751,7 @@
         return rows.filter(row => row.some(cell => cell !== ""));
     }
     
-    // Fungsi untuk folder biasa (scatter, buyfree, super) - TIDAK BERUBAH
+    // Fungsi untuk folder biasa (scatter, buyfree, super)
     function generateFolderGridFromArray(foldersArray) {
         if (!foldersArray.length) return '<div class="loading">📭 Tidak ada folder</div>';
         let html = `<div class="gallery-grid">`;
@@ -744,7 +767,7 @@
                     </div>
                     <div class="gambar-content">
                         <div style="color:#FFFFFF; line-height:1.5;">${isi.replace(/\n/g, '<br>')}</div>
-                        <button class="copy-btn" data-copy-text="${isi.replace(/"/g, '&quot;')}">📋 SALIN TEKS</button>
+                        <button class="copy-btn" data-copy-text="${isi.replace(/"/g, '&quot;')}">📋 SALIN</button>
                     </div>
                 </div>
             `;
@@ -753,7 +776,7 @@
         return html;
     }
     
-    // Fungsi untuk GAMBAR EVENT (3 kolom) + modal preview + copy gambar
+    // Fungsi untuk GAMBAR EVENT dengan subjudul "Screenshot Kemenangan Akhir"
     function generateGambarGridFromData(dataRows) {
         if (!dataRows.length) return '<div class="loading">📭 Tidak ada data gambar</div>';
         
@@ -783,18 +806,19 @@
             
             for (const item of items) {
                 const isValidUrl = item.urlGambar && (item.urlGambar.match(/\.(jpeg|jpg|gif|png|webp|svg)$/i) || item.urlGambar.startsWith('http'));
+                const subJudulText = item.subJudul || "Tanpa Judul";
                 html += `
                     <div class="gambar-subtitle">
-                        <span>✨ ${escapeHtml(item.subJudul || "Tanpa Judul")}</span>
-                        <button class="copy-sub-btn" data-copy-value="${escapeHtml(item.subJudul || "")}">📋 COPY</button>
+                        <span>✨ ${escapeHtml(subJudulText)}</span>
+                        <button class="salin-sub-btn" data-copy-value="${escapeHtml(subJudulText)}">📋 SALIN</button>
                     </div>
-                    <div class="gambar-wrapper" data-img-url="${escapeHtml(item.urlGambar || '')}" data-img-sub="${escapeHtml(item.subJudul || 'Gambar')}">
+                    <div class="gambar-wrapper" data-img-url="${escapeHtml(item.urlGambar || '')}" data-img-sub="${escapeHtml(subJudulText)}">
                         ${isValidUrl ? 
-                            `<img src="${escapeHtml(item.urlGambar)}" alt="${escapeHtml(item.subJudul)}" class="gambar-event" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'color:#ff8888; text-align:center; padding:20px;\\'>⚠️ Gambar tidak dapat dimuat<br><small style=\\'font-size:11px;\\'>${escapeHtml(item.urlGambar)}</small></div>'">` : 
+                            `<img src="${escapeHtml(item.urlGambar)}" alt="${escapeHtml(subJudulText)}" class="gambar-event" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'color:#ff8888; text-align:center; padding:20px;\\'>⚠️ Gambar tidak dapat dimuat<br><small style=\\'font-size:11px;\\'>${escapeHtml(item.urlGambar)}</small></div>'">` : 
                             `<div style="color:#ffaa66; text-align:center; padding:20px;">⚠️ URL Gambar tidak valid<br><small>${escapeHtml(item.urlGambar || 'Tidak ada URL')}</small></div>`
                         }
                     </div>
-                    ${isValidUrl ? `<button class="copy-image-btn" data-img-url="${escapeHtml(item.urlGambar)}" data-img-title="${escapeHtml(item.subJudul || 'gambar')}">🖼️ SALIN GAMBAR</button>` : ''}
+                    ${isValidUrl ? `<button class="copy-image-btn" data-img-url="${escapeHtml(item.urlGambar)}" data-img-title="${escapeHtml(subJudulText)}">🖼️ SALIN GAMBAR</button>` : ''}
                 `;
             }
             html += `</div></div>`;
@@ -834,7 +858,6 @@
 
     // ==================== AMBIL DATA DARI CSV ====================
     
-    // Fungsi untuk halaman SCATTER, BUYFREE, SUPER (2 kolom) - TIDAK BERUBAH
     async function fetchAndRender(url, containerId, customErrorExamples = null) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -894,18 +917,19 @@
         }
     }
     
-    // Fungsi khusus untuk GAMBAR EVENT dengan modal preview + copy gambar
+    // Fungsi khusus untuk GAMBAR EVENT dengan modal preview + salin subjudul + salin gambar
     async function fetchGambarData() {
         const container = document.getElementById("gambarDataContainer");
         if (!container) return;
         
         container.innerHTML = '<div class="loading">🖼️ Mengambil data gambar event dari Google Sheets...</div>';
         
+        // Contoh data dengan subjudul "Screenshot Kemenangan Akhir"
         const contohData = [
-            { judul: "PROMO AGUSTUS", subJudul: "Banner Special 17 Agustus", urlGambar: "https://picsum.photos/id/1/400/250" },
-            { judul: "PROMO AGUSTUS", subJudul: "Bonus Merdeka", urlGambar: "https://picsum.photos/id/26/400/250" },
-            { judul: "EVENT SCATTER", subJudul: "Jackpot Progresif", urlGambar: "https://picsum.photos/id/29/400/250" },
-            { judul: "EVENT SCATTER", subJudul: "Free Spin 50x", urlGambar: "https://picsum.photos/id/32/400/250" }
+            { judul: "SCREENSHOT KEMENANGAN", subJudul: "Screenshot Kemenangan Akhir - Jackpot 500x", urlGambar: "https://picsum.photos/id/1/400/250" },
+            { judul: "SCREENSHOT KEMENANGAN", subJudul: "Screenshot Kemenangan Akhir - Maxwin", urlGambar: "https://picsum.photos/id/26/400/250" },
+            { judul: "EVENT SCATTER", subJudul: "Free Spin 50x", urlGambar: "https://picsum.photos/id/29/400/250" },
+            { judul: "EVENT SCATTER", subJudul: "Jackpot Progresif", urlGambar: "https://picsum.photos/id/32/400/250" }
         ];
         
         try {
@@ -983,13 +1007,13 @@
         }
     }
     
-    // Attach event untuk gambar (modal preview, copy subjudul, copy gambar)
+    // Attach event untuk gambar (modal preview, salin subjudul, salin gambar)
     function attachGambarEvents(container) {
-        // Copy subjudul
-        const copySubBtns = container.querySelectorAll('.copy-sub-btn');
-        copySubBtns.forEach(btn => {
-            btn.removeEventListener('click', handleGambarSubCopy);
-            btn.addEventListener('click', handleGambarSubCopy);
+        // Tombol SALIN untuk subjudul
+        const salinSubBtns = container.querySelectorAll('.salin-sub-btn');
+        salinSubBtns.forEach(btn => {
+            btn.removeEventListener('click', handleGambarSubSalin);
+            btn.addEventListener('click', handleGambarSubSalin);
         });
         
         // Klik wrapper gambar -> buka modal
@@ -1007,7 +1031,7 @@
         });
     }
     
-    function handleGambarSubCopy(e) {
+    function handleGambarSubSalin(e) {
         e.stopPropagation();
         const btn = e.currentTarget;
         const subText = btn.getAttribute('data-copy-value');
@@ -1045,7 +1069,7 @@
     const modalOverlay = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
     const modalSubtitleSpan = document.getElementById('modalSubtitleText');
-    const modalCopySubBtn = document.getElementById('modalCopySubBtn');
+    const modalSalinSubBtn = document.getElementById('modalSalinSubBtn');
     const modalCopyImageBtn = document.getElementById('modalCopyImageBtn');
     let currentModalImageUrl = "";
     let currentModalSubtitle = "";
@@ -1068,7 +1092,7 @@
     document.getElementById('closeModalBtn').addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
     
-    modalCopySubBtn.addEventListener('click', () => {
+    modalSalinSubBtn.addEventListener('click', () => {
         if (currentModalSubtitle) copyTextToClipboard(currentModalSubtitle, `📋 Subjudul disalin: "${currentModalSubtitle.substring(0, 50)}"`);
         else showToast("Subjudul kosong", true);
     });
@@ -1084,7 +1108,7 @@
         }
     });
     
-    // Fungsi untuk halaman lainnya dengan contoh data (SCATTER, BUYFREE, SUPER) - TIDAK BERUBAH
+    // Fungsi untuk halaman lainnya dengan contoh data (SCATTER, BUYFREE, SUPER)
     function fetchScatterData() {
         const examples = [
             { judul: "📌 CONTOH: BONUS CASHBACK", isi: "Bonus Cashback up to 5% (Live Games) - Minimal kekalahan Rp.100.000" },
