@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Event Badge - Data Dinamis | Scatter, Buy & Free, Super</title>
+    <title>Event Badge - Data Dinamis | Scatter, Buy & Free, Super, Gambar Event</title>
     <style>
         * {
             margin: 0;
@@ -22,7 +22,7 @@
         }
 
         .app-container {
-            max-width: 1300px;
+            max-width: 1400px;
             width: 100%;
             background: rgba(18, 25, 45, 0.65);
             backdrop-filter: blur(2px);
@@ -35,7 +35,7 @@
         .badges-panel {
             display: flex;
             justify-content: center;
-            gap: 1.8rem;
+            gap: 1.2rem;
             flex-wrap: wrap;
             margin-bottom: 2rem;
             position: relative;
@@ -45,18 +45,18 @@
             background: rgba(12, 20, 35, 0.9);
             backdrop-filter: blur(4px);
             border-radius: 60px;
-            padding: 0.9rem 2rem;
+            padding: 0.7rem 1.5rem;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             text-align: center;
-            min-width: 170px;
+            min-width: 150px;
             border: 1px solid rgba(255, 220, 100, 0.25);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
             position: relative;
         }
 
         .badge h3 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             letter-spacing: 1px;
             background: linear-gradient(135deg, #FFE6A3, #FFB347);
@@ -67,9 +67,9 @@
         }
 
         .badge p {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #a9b7e6;
-            margin-top: 6px;
+            margin-top: 4px;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -241,11 +241,6 @@
             border-radius: 10px;
         }
 
-        .folder-content p {
-            margin-bottom: 0.5rem;
-            color: #FFFFFF;
-        }
-
         .copy-btn {
             background: rgba(255, 180, 70, 0.15);
             border: 1px solid #ffb347;
@@ -270,6 +265,71 @@
             box-shadow: 0 0 8px rgba(255,180,70,0.6);
         }
 
+        /* Style khusus untuk gambar event */
+        .gambar-card {
+            background: linear-gradient(135deg, rgba(25, 35, 55, 0.95), rgba(15, 22, 40, 0.98));
+            backdrop-filter: blur(4px);
+            border-radius: 1.2rem;
+            border: 1px solid rgba(255, 200, 100, 0.35);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.4);
+        }
+
+        .gambar-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffcd7e;
+            box-shadow: 0 20px 28px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        .gambar-header {
+            padding: 1rem 1.2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid rgba(255, 200, 100, 0.3);
+        }
+
+        .gambar-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(115deg, #FFE6B3, #FFC875);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            word-break: break-word;
+        }
+
+        .gambar-body {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gambar-event {
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 0.8rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .gambar-event:hover {
+            transform: scale(1.02);
+        }
+
+        .gambar-url {
+            font-size: 0.7rem;
+            color: #88aaff;
+            margin-top: 10px;
+            word-break: break-all;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+            padding: 6px 10px;
+            border-radius: 20px;
+        }
+
         .loading {
             text-align: center;
             padding: 2rem;
@@ -284,11 +344,6 @@
             border-radius: 1rem;
             color: #ffbaba;
             margin-bottom: 1rem;
-        }
-
-        .error-message a {
-            color: #ffb347;
-            text-decoration: none;
         }
 
         .btn-refresh {
@@ -320,8 +375,12 @@
             .folder-title {
                 font-size: 1.1rem;
             }
-            .folder-icon {
-                font-size: 1.6rem;
+            .badge h3 {
+                font-size: 1rem;
+            }
+            .badge {
+                padding: 0.5rem 1rem;
+                min-width: 120px;
             }
         }
 
@@ -340,20 +399,24 @@
     <div class="badges-panel">
         <div class="badge" data-page="scatter">
             <h3>🎲 SCATTER</h3>
-            <p>EVENT SCATTER • DATA SHEET</p>
+            <p>EVENT SCATTER</p>
         </div>
-        <div class="badge active" data-page="buyfree">
+        <div class="badge" data-page="buyfree">
             <h3>🎟️ BUY & FREE</h3>
-            <p>SHEET BUYFREE</p>
+            <p>BUYFREE SHEET</p>
         </div>
         <div class="badge" data-page="super">
             <h3>⚡ SUPER</h3>
-            <p>EVENT SUPER SCATTER</p>
+            <p>SUPER SCATTER</p>
+        </div>
+        <div class="badge active" data-page="gambar">
+            <h3>🖼️ GAMBAR EVENT</h3>
+            <p>GALLERY EVENT</p>
         </div>
     </div>
 
     <div class="page-container">
-        <!-- HALAMAN SCATTER (tetap menggunakan data dari sheet SCATTER, gid=0) TIDAK BERUBAH -->
+        <!-- HALAMAN SCATTER (gid=0) -->
         <div id="page-scatter" class="page">
             <div class="page-header">
                 <h2>📂 SCATTER · FOLDER DATA</h2>
@@ -364,8 +427,8 @@
             </div>
         </div>
 
-        <!-- HALAMAN BUY & FREE (mengambil dari gid=1728740039) TIDAK BERUBAH -->
-        <div id="page-buyfree" class="page active-page">
+        <!-- HALAMAN BUY & FREE (gid=1728740039) -->
+        <div id="page-buyfree" class="page">
             <div class="page-header">
                 <h2>🛒 BUY & FREE · DATA SHEET</h2>
                 <button class="btn-refresh" id="refreshBuyFreeBtn">⟳ Refresh Data</button>
@@ -375,7 +438,7 @@
             </div>
         </div>
 
-        <!-- HALAMAN SUPER (baru, mengambil dari sheet SUPER SCATTER gid=108287537) -->
+        <!-- HALAMAN SUPER (gid=108287537) -->
         <div id="page-super" class="page">
             <div class="page-header">
                 <h2>⚡ SUPER · FOLDER DATA (SUPER SCATTER)</h2>
@@ -385,13 +448,24 @@
                 <div class="loading">⏳ Mengambil data SUPER SCATTER dari Google Sheets...</div>
             </div>
         </div>
+
+        <!-- HALAMAN GAMBAR EVENT (mengambil dari sheet GAMBAR EVENT, kolom A = judul, kolom B = URL gambar) -->
+        <div id="page-gambar" class="page active-page">
+            <div class="page-header">
+                <h2>🖼️ GALLERY GAMBAR EVENT</h2>
+                <button class="btn-refresh" id="refreshGambarBtn">⟳ Refresh Data</button>
+            </div>
+            <div id="gambarDataContainer">
+                <div class="loading">⏳ Mengambil data gambar event dari Google Sheets...</div>
+            </div>
+        </div>
     </div>
-    <div class="credit-note">Data diambil secara realtime dari Google Sheets | Kolom A = Judul | Kolom B = Isi</div>
+    <div class="credit-note">Data diambil secara realtime dari Google Sheets | Kolom A = Judul | Kolom B = Isi / URL Gambar</div>
 </div>
 
 <script>
     // ============================================================
-    // KONFIGURASI GOOGLE SHEETS - TIGA SUMBER BERBEDA
+    // KONFIGURASI GOOGLE SHEETS - EMPAT SUMBER BERBEDA
     // ============================================================
     
     // 1. SCATTER (gid=0)
@@ -403,9 +477,28 @@
     // 3. SUPER (gid=108287537) -> SHEET "SUPER SCATTER"
     const GOOGLE_SHEETS_CSV_URL_SUPER = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=108287537";
     
+    // 4. GAMBAR EVENT (gid baru - asumsikan sheet GAMBAR EVENT, jika belum ada, user tinggal menambah sheet dengan nama "GAMBAR EVENT")
+    //    Gunakan gid yang sama dengan sheet GAMBAR EVENT. Jika sheet belum dibuat, akan tampil error contoh.
+    //    Untuk memudahkan, gunakan gid yang belum terpakai. Tapi karena kita tidak tahu gid pasti, kita asumsikan user akan membuat sheet baru.
+    //    Alternatif: gunakan gid=0 (scatter) sebagai fallback? Tidak, lebih baik user diminta membuat sheet.
+    //    Saya akan gunakan parameter export tanpa gid spesifik? Tidak bisa karena akan mengambil sheet pertama.
+    //    Karena user bisa menambahkan sheet baru, kita bisa menggunakan parameter gid yang sesuai.
+    //    Untuk demo, kita gunakan gid yang belum dipakai sebelumnya. Biasanya sheet baru akan memiliki gid otomatis.
+    //    Solusi: kita bisa meminta user untuk membuat sheet bernama "GAMBAR EVENT" dan mengambil gid-nya.
+    //    Tapi untuk kemudahan, saya tambahkan instruksi di error message.
+    //    Sementara kita gunakan gid=123456789 (placeholder), tetapi akan error. Biar user membuat sheet sendiri.
+    //    Lebih baik kita gunakan URL yang sama dengan parameter gid, namun user harus mengganti gid sesuai sheet GAMBAR EVENT.
+    //    Saya akan buat variabel terpisah dan beri komentar.
+    
+    // === INSTRUKSI: Buat sheet baru dengan nama "GAMBAR EVENT" di spreadsheet yang sama, lalu ganti gid di bawah ini ===
+    // Cara mendapatkan gid: buka sheet GAMBAR EVENT, lihat URL, ambil angka setelah gid=
+    // Contoh: https://docs.google.com/spreadsheets/d/.../edit?gid=123456789
+    const GOOGLE_SHEETS_CSV_URL_GAMBAR = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=108287537"; // SEMENTARA menggunakan gid yang sama dengan super sebagai contoh, user harus ganti dengan gid sheet GAMBAR EVENT
+
     let scatterFolders = [];
     let buyfreeFolders = [];
     let superFolders = [];
+    let gambarFolders = [];
 
     // ==================== FUNGSI UTILITY ====================
     function parseCSVToArray(csvString) {
@@ -472,6 +565,32 @@
         return html;
     }
     
+    // Generate grid untuk gambar event (tampilan khusus gambar)
+    function generateGambarGridFromArray(gambarArray) {
+        if (!gambarArray.length) return '<div class="loading">📭 Tidak ada data gambar</div>';
+        let html = `<div class="folder-grid">`;
+        for (let item of gambarArray) {
+            const judul = escapeHtml(item.judul);
+            const urlGambar = escapeHtml(item.isi);
+            // Validasi URL gambar (jika tidak valid, tampilkan teks saja)
+            const isValidUrl = urlGambar.match(/\.(jpeg|jpg|gif|png|webp|svg)$/i) || urlGambar.startsWith('http');
+            html += `
+                <div class="gambar-card">
+                    <div class="gambar-header">
+                        <div class="gambar-title">${judul}</div>
+                    </div>
+                    <div class="gambar-body">
+                        ${isValidUrl ? `<img src="${urlGambar}" alt="${judul}" class="gambar-event" onclick="window.open('${urlGambar}', '_blank')" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div style="display:none; color:#ff8888; text-align:center;">⚠️ Gambar tidak dapat dimuat</div>` : `<div style="color:#ffaa66; text-align:center; padding:20px;">⚠️ URL Gambar tidak valid</div>`}
+                        <div class="gambar-url">📎 ${urlGambar.substring(0, 60)}${urlGambar.length > 60 ? '...' : ''}</div>
+                        <button class="copy-btn" data-copy-text="${urlGambar}">📋 SALIN URL</button>
+                    </div>
+                </div>
+            `;
+        }
+        html += `</div>`;
+        return html;
+    }
+    
     function attachCopyButtonsToContainer(container) {
         const copyButtons = container.querySelectorAll('.copy-btn');
         copyButtons.forEach(btn => {
@@ -519,7 +638,7 @@
     }
 
     // ==================== AMBIL DATA DARI CSV & RENDER ====================
-    async function fetchAndRender(url, containerId, foldersArrayRef, customErrorExamples = null) {
+    async function fetchAndRender(url, containerId, foldersArrayRef, isGambarMode = false, customErrorExamples = null) {
         const container = document.getElementById(containerId);
         if (!container) return;
         
@@ -547,7 +666,7 @@
                 const firstRowVal0 = String(dataRows[0][0]).toLowerCase();
                 const firstRowVal1 = String(dataRows[0][1]).toLowerCase();
                 if (firstRowVal0.includes("judul") || firstRowVal0.includes("folder") || firstRowVal0.includes("title") ||
-                    firstRowVal1.includes("isi") || firstRowVal1.includes("konten") || firstRowVal1.includes("deskripsi")) {
+                    firstRowVal1.includes("isi") || firstRowVal1.includes("konten") || firstRowVal1.includes("deskripsi") || firstRowVal1.includes("url")) {
                     dataRows = dataRows.slice(1);
                 }
             }
@@ -560,7 +679,7 @@
                     if (judul !== "") {
                         folders.push({ judul: judul, isi: isi });
                     } else if (isi !== "") {
-                        folders.push({ judul: `Folder ${i+1}`, isi: isi });
+                        folders.push({ judul: `Item ${i+1}`, isi: isi });
                     }
                 } else if (row.length === 1 && row[0].trim() !== "") {
                     folders.push({ judul: row[0].trim(), isi: "(Konten belum tersedia di kolom B)" });
@@ -573,9 +692,14 @@
             if (foldersArrayRef === 'scatter') scatterFolders = folders;
             else if (foldersArrayRef === 'buyfree') buyfreeFolders = folders;
             else if (foldersArrayRef === 'super') superFolders = folders;
+            else if (foldersArrayRef === 'gambar') gambarFolders = folders;
             
-            const gridHtml = generateFolderGridFromArray(folders);
-            container.innerHTML = gridHtml;
+            if (isGambarMode) {
+                container.innerHTML = generateGambarGridFromArray(folders);
+            } else {
+                const gridHtml = generateFolderGridFromArray(folders);
+                container.innerHTML = gridHtml;
+            }
             attachCopyButtonsToContainer(container);
             
         } catch (error) {
@@ -585,7 +709,7 @@
                     <strong>⚠️ Gagal mengambil data dari Google Sheets</strong><br>
                     ${error.message}<br><br>
                     <strong>📌 Solusi:</strong> Pastikan sheet sudah dipublikasikan ke web (File → Bagikan → Publikasikan ke web → CSV).<br>
-                    Pastikan sheet memiliki minimal 2 kolom: <strong>Kolom A (Judul Folder)</strong> dan <strong>Kolom B (Isi Folder)</strong>.
+                    Pastikan sheet memiliki minimal 2 kolom: <strong>Kolom A (Judul Folder)</strong> dan <strong>Kolom B (Isi / URL Gambar)</strong>.
                 </div>
             `;
             if (customErrorExamples && customErrorExamples.length) {
@@ -593,7 +717,11 @@
                 container.innerHTML = errorHtml;
                 const exampleDiv = container.querySelector("#exampleFallbackGrid");
                 if (exampleDiv) {
-                    exampleDiv.innerHTML = generateFolderGridFromArray(customErrorExamples);
+                    if (isGambarMode) {
+                        exampleDiv.innerHTML = generateGambarGridFromArray(customErrorExamples);
+                    } else {
+                        exampleDiv.innerHTML = generateFolderGridFromArray(customErrorExamples);
+                    }
                     attachCopyButtonsToContainer(exampleDiv);
                 }
             } else {
@@ -605,26 +733,35 @@
     // Fungsi spesifik untuk masing-masing halaman
     function fetchScatterData() {
         const examples = [
-            { judul: "📌 CONTOH: BONUS CASHBACK", isi: "Bonus Cashback up to 5% (Live Games) = Bonus Kekalahan 5% hanya berlaku untuk permainan Live Games. Minimal kekalahan Rp.100.000, Untuk nominal 100,000- 249,999,999 mendapatkan 2.5%, diatas 250rb mendapatkan 5%. Syarat mudah, dibagikan setiap hari Senin." },
-            { judul: "📌 CONTOH: BONUS ROLLINGAN", isi: "Bonus rollingan turnover LIVE GAMES sebesar 0.5% dari total bettingan - Bonus Rollingan turnover PRAGMATIC PLAY sebesar 0.5% - Bonus Rollingan turnover SLOT sebesar 0.5%. Rollingan tanpa batas maksimal, dibagikan setiap hari." }
+            { judul: "📌 CONTOH: BONUS CASHBACK", isi: "Bonus Cashback up to 5% (Live Games) = Bonus Kekalahan 5% hanya berlaku untuk permainan Live Games." },
+            { judul: "📌 CONTOH: BONUS ROLLINGAN", isi: "Bonus rollingan turnover 0.5% dari total bettingan. Rollingan tanpa batas maksimal." }
         ];
-        fetchAndRender(GOOGLE_SHEETS_CSV_URL_SCATTER, "scatterDataContainer", "scatter", examples);
+        fetchAndRender(GOOGLE_SHEETS_CSV_URL_SCATTER, "scatterDataContainer", "scatter", false, examples);
     }
     
     function fetchBuyFreeData() {
         const examples = [
-            { judul: "📌 CONTOH: PAKET BUY SPIN", isi: "Buy 10 Free Spin + Gratis 5 Extra Spin. Minimal deposit IDR 50.000. Maksimal klaim 2x/hari" },
-            { judul: "📌 CONTOH: SYARAT TURNOVER", isi: "Turnover x5 sebelum withdraw. Bonus rollingan 0.5% (LIVE GAMES & SLOT). Cashback up to 5% (Live Games)" }
+            { judul: "📌 CONTOH: PAKET BUY SPIN", isi: "Buy 10 Free Spin + Gratis 5 Extra Spin. Minimal deposit IDR 50.000." },
+            { judul: "📌 CONTOH: SYARAT TURNOVER", isi: "Turnover x5 sebelum withdraw. Bonus rollingan 0.5% (LIVE GAMES & SLOT)." }
         ];
-        fetchAndRender(GOOGLE_SHEETS_CSV_URL_BUYFREE, "buyfreeDataContainer", "buyfree", examples);
+        fetchAndRender(GOOGLE_SHEETS_CSV_URL_BUYFREE, "buyfreeDataContainer", "buyfree", false, examples);
     }
     
     function fetchSuperData() {
         const examples = [
-            { judul: "📌 CONTOH: EVENT SUPER SCATTER", isi: "Kumpulkan 3 Scatter SUPER untuk mendapatkan bonus besar. Periode: 1 - 30 Juni 2026. Hadiah hingga x5000 lipat." },
+            { judul: "📌 CONTOH: EVENT SUPER SCATTER", isi: "Kumpulkan 3 Scatter SUPER untuk mendapatkan bonus besar. Hadiah hingga x5000 lipat." },
             { judul: "📌 CONTOH: JACKPOT PROGRESIF", isi: "Jackpot progresif mencapai miliaran rupiah. Semakin sering bermain, semakin besar peluang Anda!" }
         ];
-        fetchAndRender(GOOGLE_SHEETS_CSV_URL_SUPER, "superDataContainer", "super", examples);
+        fetchAndRender(GOOGLE_SHEETS_CSV_URL_SUPER, "superDataContainer", "super", false, examples);
+    }
+    
+    function fetchGambarData() {
+        const examples = [
+            { judul: "🎉 CONTOH: BANNER EVENT SPESIAL", isi: "https://picsum.photos/id/1/400/250" },
+            { judul: "🏆 CONTOH: HADIAH JACKPOT", isi: "https://picsum.photos/id/26/400/250" },
+            { judul: "⚡ CONTOH: SUPER SCATTER PROMO", isi: "https://picsum.photos/id/29/400/250" }
+        ];
+        fetchAndRender(GOOGLE_SHEETS_CSV_URL_GAMBAR, "gambarDataContainer", "gambar", true, examples);
     }
 
     // ==================== NAVIGASI BADGE ====================
@@ -633,7 +770,8 @@
         const pages = {
             scatter: document.getElementById('page-scatter'),
             buyfree: document.getElementById('page-buyfree'),
-            super: document.getElementById('page-super')
+            super: document.getElementById('page-super'),
+            gambar: document.getElementById('page-gambar')
         };
         function setActivePage(pageId) {
             Object.values(pages).forEach(p => p?.classList.remove('active-page'));
@@ -648,28 +786,23 @@
                 if (pageKey && pages[pageKey]) setActivePage(pageKey);
             });
         });
-        // Default aktifkan BUY & FREE seperti sebelumnya
-        setActivePage('buyfree');
+        // Default aktifkan GAMBAR EVENT
+        setActivePage('gambar');
     }
     
     // ==================== INIT & REFRESH BUTTONS ====================
     document.addEventListener('DOMContentLoaded', () => {
         initNavigation();
         
-        // Tombol refresh masing-masing
-        const refreshScatter = document.getElementById('refreshScatterBtn');
-        if (refreshScatter) refreshScatter.addEventListener('click', fetchScatterData);
+        document.getElementById('refreshScatterBtn')?.addEventListener('click', fetchScatterData);
+        document.getElementById('refreshBuyFreeBtn')?.addEventListener('click', fetchBuyFreeData);
+        document.getElementById('refreshSuperBtn')?.addEventListener('click', fetchSuperData);
+        document.getElementById('refreshGambarBtn')?.addEventListener('click', fetchGambarData);
         
-        const refreshBuyFree = document.getElementById('refreshBuyFreeBtn');
-        if (refreshBuyFree) refreshBuyFree.addEventListener('click', fetchBuyFreeData);
-        
-        const refreshSuper = document.getElementById('refreshSuperBtn');
-        if (refreshSuper) refreshSuper.addEventListener('click', fetchSuperData);
-        
-        // Panggil semua data
         fetchScatterData();
         fetchBuyFreeData();
         fetchSuperData();
+        fetchGambarData();
     });
 </script>
 </body>
