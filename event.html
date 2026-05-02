@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Event Badge - GAMBAR EVENT | Galeri Dinamis + Judul Center</title>
+    <title>Event Badge - GAMBAR EVENT | Live Search Real-time</title>
     <style>
         * {
             margin: 0;
@@ -133,7 +133,7 @@
 
         .page-header {
             display: flex;
-            align-items: baseline;
+            align-items: center;
             gap: 1rem;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -150,6 +150,76 @@
             -webkit-background-clip: text;
             color: transparent;
             letter-spacing: -0.3px;
+        }
+
+        /* Search Box Styling - Live Search */
+        .search-wrapper {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.3rem 0.3rem 0.3rem 1rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 200, 100, 0.3);
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+
+        .search-wrapper:focus-within {
+            border-color: #ffb347;
+            box-shadow: 0 0 12px rgba(255, 180, 70, 0.3);
+        }
+
+        .search-input {
+            background: transparent;
+            border: none;
+            padding: 0.5rem 0.8rem;
+            color: #ffe6b3;
+            font-size: 0.9rem;
+            min-width: 220px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .search-input::placeholder {
+            color: #a9b7e6;
+            font-size: 0.85rem;
+        }
+
+        .search-icon {
+            color: #ffb347;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .search-info {
+            background: rgba(255, 180, 70, 0.15);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            color: #ffd966;
+            white-space: nowrap;
+        }
+
+        .btn-reset {
+            background: rgba(255, 180, 70, 0.2);
+            border: 1px solid #ffb347;
+            padding: 7px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #ffd966;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-reset:hover {
+            background: rgba(255, 180, 70, 0.4);
+            transform: scale(0.98);
         }
 
         /* ========== GALERI GRID 2 KOLOM ========== */
@@ -178,7 +248,6 @@
             background: linear-gradient(135deg, rgba(30, 42, 65, 0.98), rgba(18, 26, 45, 0.98));
         }
 
-        /* JUDUL FOLDER DI TENGAH - CENTER */
         .gambar-folder-header {
             padding: 1rem 1.2rem;
             background: rgba(0, 0, 0, 0.3);
@@ -314,7 +383,6 @@
             box-shadow: 0 0 8px rgba(255,180,70,0.6);
         }
 
-        /* Style untuk folder card pada halaman Scatter, BuyFree, Super - judul juga center */
         .folder-card {
             background: linear-gradient(135deg, rgba(25, 35, 55, 0.95), rgba(15, 22, 40, 0.98));
             backdrop-filter: blur(4px);
@@ -377,25 +445,24 @@
             margin-bottom: 1rem;
         }
 
-        .btn-refresh {
-            background: linear-gradient(95deg, #2a3a55, #1a2538);
-            border: none;
-            padding: 8px 20px;
-            border-radius: 40px;
-            font-weight: 600;
-            color: #ffeaac;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.85rem;
-            border: 1px solid #ffcd7e55;
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #ffd966;
+            font-size: 1.1rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 1rem;
         }
 
-        .btn-refresh:hover {
-            background: linear-gradient(95deg, #3a4a6a, #2a3550);
-            transform: scale(0.98);
+        /* Highlight pencarian */
+        .highlight {
+            background: rgba(255, 180, 70, 0.4);
+            color: #fff5e0;
+            border-radius: 4px;
+            padding: 0 2px;
         }
 
-        /* MODAL PREVIEW - Judul di tengah (CENTER) */
+        /* MODAL PREVIEW */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -437,10 +504,9 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-        /* HEADER MODAL dengan judul CENTER */
         .modal-header {
             display: flex;
-            justify-content: center;    /* Membuat judul di tengah secara horizontal */
+            justify-content: center;
             align-items: center;
             padding: 1rem 1.5rem;
             background: rgba(0, 0, 0, 0.5);
@@ -457,10 +523,8 @@
             color: transparent;
             margin: 0;
             text-align: center;
-            letter-spacing: 0.5px;
         }
 
-        /* Tombol close tetap di pojok kanan namun tidak mengganggu center title */
         .modal-close {
             position: absolute;
             right: 1.2rem;
@@ -576,6 +640,16 @@
                 padding: 0.5rem 1rem;
                 min-width: 120px;
             }
+            .search-wrapper {
+                width: 100%;
+            }
+            .search-input {
+                flex: 1;
+                min-width: 150px;
+            }
+            .search-info {
+                display: none;
+            }
         }
 
         .credit-note {
@@ -631,8 +705,13 @@
     <div class="page-container">
         <div id="page-scatter" class="page">
             <div class="page-header">
-                <h2> EVENT SCATTER MAHJONG WAYS 1 & MAHJONG WAYS 2</h2>
-                <button class="btn-refresh" id="refreshScatterBtn">⟳ Refresh Data</button>
+                <h2>🎲 EVENT SCATTER MAHJONG WAYS</h2>
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchScatter" class="search-input" placeholder="Ketik untuk mencari...">
+                    <span class="search-info" id="scatterInfo">⚡ Live search</span>
+                    <button class="btn-reset" id="resetScatterBtn">↺ RESET</button>
+                </div>
             </div>
             <div id="scatterDataContainer"><div class="loading">⏳ Mengambil data...</div></div>
         </div>
@@ -640,7 +719,12 @@
         <div id="page-buyfree" class="page">
             <div class="page-header">
                 <h2>💸 BUYSPIN & FREESPIN 💸</h2>
-                <button class="btn-refresh" id="refreshBuyFreeBtn">⟳ Refresh Data</button>
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchBuyfree" class="search-input" placeholder="Ketik untuk mencari...">
+                    <span class="search-info">⚡ Live search</span>
+                    <button class="btn-reset" id="resetBuyfreeBtn">↺ RESET</button>
+                </div>
             </div>
             <div id="buyfreeDataContainer"><div class="loading">⏳ Mengambil data...</div></div>
         </div>
@@ -648,7 +732,12 @@
         <div id="page-super" class="page">
             <div class="page-header">
                 <h2>⚡ OLYMPUS X SUPER SCATTER ⚡</h2>
-                <button class="btn-refresh" id="refreshSuperBtn">⟳ Refresh Data</button>
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchSuper" class="search-input" placeholder="Ketik untuk mencari...">
+                    <span class="search-info">⚡ Live search</span>
+                    <button class="btn-reset" id="resetSuperBtn">↺ RESET</button>
+                </div>
             </div>
             <div id="superDataContainer"><div class="loading">⏳ Mengambil data...</div></div>
         </div>
@@ -656,15 +745,20 @@
         <div id="page-gambar" class="page active-page">
             <div class="page-header">
                 <h2>🖼️ GALERI GAMBAR EVENT</h2>
-                <button class="btn-refresh" id="refreshGambarBtn">⟳ Refresh Data</button>
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchGambar" class="search-input" placeholder="Ketik untuk mencari...">
+                    <span class="search-info">⚡ Live search</span>
+                    <button class="btn-reset" id="resetGambarBtn">↺ RESET</button>
+                </div>
             </div>
             <div id="gambarDataContainer"><div class="loading">⏳ Mengambil data gambar event...</div></div>
         </div>
     </div>
-    <div class="credit-note">✨ Semua judul folder di tengah (center) | Klik gambar → preview modal dengan judul di tengah</div>
+    <div class="credit-note">✨ Live search - hasil langsung berubah saat mengetik | Klik gambar → preview modal</div>
 </div>
 
-<!-- MODAL PREVIEW dengan judul di tengah (center) -->
+<!-- MODAL PREVIEW -->
 <div id="imageModal" class="modal-overlay">
     <div class="modal-container">
         <div class="modal-header">
@@ -693,6 +787,12 @@
     const GOOGLE_SHEETS_CSV_URL_BUYFREE = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=1728740039";
     const GOOGLE_SHEETS_CSV_URL_SUPER = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=108287537";
     const GOOGLE_SHEETS_CSV_URL_GAMBAR = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=411325602";
+
+    // Data storage untuk search
+    let scatterData = [];
+    let buyfreeData = [];
+    let superData = [];
+    let gambarData = [];
 
     function showToast(msg, isError = false) {
         let toast = document.querySelector('.toast-msg');
@@ -754,22 +854,33 @@
         }
         return rows.filter(row => row.some(cell => cell !== ""));
     }
+    
     function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
 
-    // GENERATE UNTUK HALAMAN SCATTER, BUYFREE, SUPER (judul folder center)
-    function generateFolderGridFromArray(foldersArray) {
-        if (!foldersArray.length) return '<div class="loading">📭 Tidak ada folder</div>';
+    // Fungsi highlight teks
+    function highlightText(text, keyword) {
+        if (!keyword || keyword.trim() === '') return text;
+        const regex = new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+        return text.replace(regex, '<span class="highlight">$1</span>');
+    }
+
+    function generateFolderGridFromArray(foldersArray, keyword = '') {
+        if (!foldersArray.length) return '<div class="no-results">🔍 Tidak ada data yang ditemukan</div>';
         let html = `<div class="gallery-grid">`;
         for (let folder of foldersArray) { 
-            const judul = escapeHtml(folder.judul); 
-            const isi = escapeHtml(folder.isi);
+            let judul = escapeHtml(folder.judul);
+            let isi = escapeHtml(folder.isi);
+            if (keyword) {
+                judul = highlightText(judul, keyword);
+                isi = highlightText(isi, keyword);
+            }
             html += `<div class="folder-card">
                         <div class="folder-header">
-                            <div class="folder-title"><span></span> ${judul}</div>
+                            <div class="folder-title">📁 ${judul}</div>
                         </div>
                         <div class="folder-content">
                             <div style="line-height:1.6;">${isi.replace(/\n/g, '<br>')}</div>
-                            <button class="copy-btn" data-copy-text="${isi.replace(/"/g, '&quot;')}">📋 SALIN</button>
+                            <button class="copy-btn" data-copy-text="${folder.isi.replace(/"/g, '&quot;')}">📋 SALIN TEKS</button>
                         </div>
                     </div>`;
         }
@@ -777,9 +888,8 @@
         return html;
     }
 
-    // GENERATE GAMBAR EVENT (judul folder center)
-    function generateGambarGridFromData(dataRows) {
-        if (!dataRows.length) return '<div class="loading">📭 Tidak ada data gambar</div>';
+    function generateGambarGridFromData(dataRows, keyword = '') {
+        if (!dataRows.length) return '<div class="no-results">🔍 Tidak ada gambar yang ditemukan</div>';
         const grouped = {};
         for (const row of dataRows) {
             const folderName = row.judul || "Folder Tanpa Nama";
@@ -788,22 +898,25 @@
         }
         let html = `<div class="gallery-grid">`;
         for (const [folderName, items] of Object.entries(grouped)) {
+            let displayFolderName = escapeHtml(folderName);
+            if (keyword) displayFolderName = highlightText(displayFolderName, keyword);
             html += `<div class="gambar-card">
                         <div class="gambar-folder-header">
-                            <div class="gambar-folder-title"><span></span> ${escapeHtml(folderName)}</div>
+                            <div class="gambar-folder-title">🖼️ ${displayFolderName}</div>
                         </div>
                         <div class="gambar-content">`;
             for (const item of items) {
                 const isValidUrl = item.urlGambar && (item.urlGambar.match(/\.(jpeg|jpg|gif|png|webp|svg)$/i) || item.urlGambar.startsWith('http'));
-                const subJudulText = item.subJudul || "Tanpa Judul";
+                let subJudulText = escapeHtml(item.subJudul || "Tanpa Judul");
+                if (keyword) subJudulText = highlightText(subJudulText, keyword);
                 html += `<div class="gambar-subtitle">
-                            <span>✨ ${escapeHtml(subJudulText)}</span>
-                            <button class="salin-sub-btn" data-copy-value="${escapeHtml(subJudulText)}">📋 SALIN</button>
+                            <span>✨ ${subJudulText}</span>
+                            <button class="salin-sub-btn" data-copy-value="${escapeHtml(item.subJudul || '')}">📋 SALIN</button>
                          </div>
-                         <div class="gambar-wrapper" data-img-url="${escapeHtml(item.urlGambar || '')}" data-img-sub="${escapeHtml(subJudulText)}" data-folder-name="${escapeHtml(folderName)}">
-                            ${isValidUrl ? `<img src="${escapeHtml(item.urlGambar)}" alt="${escapeHtml(subJudulText)}" class="gambar-event" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'color:#ff8888; text-align:center; padding:20px;\\'>⚠️ Gambar tidak dapat dimuat<br><small>${escapeHtml(item.urlGambar)}</small></div>'">` : `<div style="color:#ffaa66; text-align:center; padding:20px;">⚠️ URL Gambar tidak valid<br><small>${escapeHtml(item.urlGambar || 'Tidak ada URL')}</small></div>`}
+                         <div class="gambar-wrapper" data-img-url="${escapeHtml(item.urlGambar || '')}" data-img-sub="${escapeHtml(item.subJudul || '')}" data-folder-name="${escapeHtml(folderName)}">
+                            ${isValidUrl ? `<img src="${escapeHtml(item.urlGambar)}" alt="${escapeHtml(item.subJudul)}" class="gambar-event" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'color:#ff8888; text-align:center; padding:20px;\\'>⚠️ Gambar tidak dapat dimuat<br><small>${escapeHtml(item.urlGambar)}</small></div>'">` : `<div style="color:#ffaa66; text-align:center; padding:20px;">⚠️ URL Gambar tidak valid<br><small>${escapeHtml(item.urlGambar || 'Tidak ada URL')}</small></div>`}
                          </div>
-                         ${isValidUrl ? `<button class="copy-image-btn" data-img-url="${escapeHtml(item.urlGambar)}" data-img-title="${escapeHtml(subJudulText)}">🖼️ SALIN GAMBAR</button>` : ''}`;
+                         ${isValidUrl ? `<button class="copy-image-btn" data-img-url="${escapeHtml(item.urlGambar)}" data-img-title="${escapeHtml(item.subJudul)}">🖼️ SALIN GAMBAR</button>` : ''}`;
             }
             html += `</div></div>`;
         }
@@ -811,7 +924,128 @@
         return html;
     }
 
-    // Event handlers
+    // Live search functions
+    function performSearchScatter() {
+        const keyword = document.getElementById('searchScatter').value;
+        const infoSpan = document.getElementById('scatterInfo');
+        if (!keyword.trim()) {
+            renderScatterData(scatterData, '');
+            if (infoSpan) infoSpan.innerHTML = `📊 ${scatterData.length} total`;
+            return;
+        }
+        const filtered = scatterData.filter(item => 
+            item.judul.toLowerCase().includes(keyword.toLowerCase()) || 
+            item.isi.toLowerCase().includes(keyword.toLowerCase())
+        );
+        renderScatterData(filtered, keyword);
+        if (infoSpan) infoSpan.innerHTML = `🔍 ${filtered.length} hasil`;
+    }
+
+    function performSearchBuyfree() {
+        const keyword = document.getElementById('searchBuyfree').value;
+        if (!keyword.trim()) {
+            renderBuyfreeData(buyfreeData, '');
+            return;
+        }
+        const filtered = buyfreeData.filter(item => 
+            item.judul.toLowerCase().includes(keyword.toLowerCase()) || 
+            item.isi.toLowerCase().includes(keyword.toLowerCase())
+        );
+        renderBuyfreeData(filtered, keyword);
+    }
+
+    function performSearchSuper() {
+        const keyword = document.getElementById('searchSuper').value;
+        if (!keyword.trim()) {
+            renderSuperData(superData, '');
+            return;
+        }
+        const filtered = superData.filter(item => 
+            item.judul.toLowerCase().includes(keyword.toLowerCase()) || 
+            item.isi.toLowerCase().includes(keyword.toLowerCase())
+        );
+        renderSuperData(filtered, keyword);
+    }
+
+    function performSearchGambar() {
+        const keyword = document.getElementById('searchGambar').value;
+        if (!keyword.trim()) {
+            renderGambarData(gambarData, '');
+            return;
+        }
+        const filtered = gambarData.filter(item => 
+            item.judul.toLowerCase().includes(keyword.toLowerCase()) || 
+            item.subJudul.toLowerCase().includes(keyword.toLowerCase())
+        );
+        renderGambarData(filtered, keyword);
+    }
+
+    function resetScatter() {
+        document.getElementById('searchScatter').value = '';
+        renderScatterData(scatterData, '');
+        document.getElementById('scatterInfo').innerHTML = `📊 ${scatterData.length} total`;
+        showToast('✅ Reset filter, menampilkan semua data');
+    }
+
+    function resetBuyfree() {
+        document.getElementById('searchBuyfree').value = '';
+        renderBuyfreeData(buyfreeData, '');
+        showToast('✅ Reset filter, menampilkan semua data');
+    }
+
+    function resetSuper() {
+        document.getElementById('searchSuper').value = '';
+        renderSuperData(superData, '');
+        showToast('✅ Reset filter, menampilkan semua data');
+    }
+
+    function resetGambar() {
+        document.getElementById('searchGambar').value = '';
+        renderGambarData(gambarData, '');
+        showToast('✅ Reset filter, menampilkan semua data');
+    }
+
+    function renderScatterData(data, keyword = '') {
+        const container = document.getElementById('scatterDataContainer');
+        if (!data.length) {
+            container.innerHTML = '<div class="no-results">📭 Tidak ada data</div>';
+            return;
+        }
+        container.innerHTML = generateFolderGridFromArray(data, keyword);
+        attachCopyButtonsToContainer(container);
+    }
+
+    function renderBuyfreeData(data, keyword = '') {
+        const container = document.getElementById('buyfreeDataContainer');
+        if (!data.length) {
+            container.innerHTML = '<div class="no-results">📭 Tidak ada data</div>';
+            return;
+        }
+        container.innerHTML = generateFolderGridFromArray(data, keyword);
+        attachCopyButtonsToContainer(container);
+    }
+
+    function renderSuperData(data, keyword = '') {
+        const container = document.getElementById('superDataContainer');
+        if (!data.length) {
+            container.innerHTML = '<div class="no-results">📭 Tidak ada data</div>';
+            return;
+        }
+        container.innerHTML = generateFolderGridFromArray(data, keyword);
+        attachCopyButtonsToContainer(container);
+    }
+
+    function renderGambarData(data, keyword = '') {
+        const container = document.getElementById('gambarDataContainer');
+        if (!data.length) {
+            container.innerHTML = '<div class="no-results">📭 Tidak ada data gambar</div>';
+            return;
+        }
+        container.innerHTML = generateGambarGridFromData(data, keyword);
+        attachGambarEvents(container);
+    }
+
+    // Event handlers for gambar
     function handleImageWrapperClick(e) {
         const wrapper = e.currentTarget;
         const imgUrl = wrapper.getAttribute('data-img-url');
@@ -819,7 +1053,7 @@
         const folderName = wrapper.getAttribute('data-folder-name') || "Gambar Event";
         if (imgUrl && imgUrl.startsWith('http')) {
             const modalHeader = document.getElementById('modalHeaderTitle');
-            if (modalHeader) modalHeader.innerHTML = `${escapeHtml(folderName)}`; // display folder name (center)
+            if (modalHeader) modalHeader.innerHTML = `${escapeHtml(folderName)}`;
             openModal(imgUrl, imgSub);
         } else showToast("Gambar tidak valid", true);
     }
@@ -855,16 +1089,16 @@
         const copyImageBtns = container.querySelectorAll('.copy-image-btn');
         copyImageBtns.forEach(btn => { btn.removeEventListener('click', handleImageCopyClick); btn.addEventListener('click', handleImageCopyClick); });
     }
+    
     function handleGambarSubSalin(e) { e.stopPropagation(); const btn = e.currentTarget; const subText = btn.getAttribute('data-copy-value'); if (subText) copyTextToClipboard(subText, `📋 Subjudul disalin: "${subText.substring(0, 50)}"`); else showToast("Subjudul kosong", true); }
     async function handleImageCopyClick(e) { e.stopPropagation(); const btn = e.currentTarget; const imgUrl = btn.getAttribute('data-img-url'); const imgTitle = btn.getAttribute('data-img-title') || "gambar"; if (imgUrl) await copyImageToClipboard(imgUrl, imgTitle); else showToast("URL tidak valid", true); }
     function attachCopyButtonsToContainer(container) { const copyButtons = container.querySelectorAll('.copy-btn'); copyButtons.forEach(btn => { btn.removeEventListener('click', handleCopyClick); btn.addEventListener('click', handleCopyClick); }); }
     function handleCopyClick(e) { e.stopPropagation(); const btn = e.currentTarget; let textToCopy = btn.getAttribute('data-copy-text'); if (textToCopy) copyTextToClipboard(textToCopy); else showToast("Tidak ada teks untuk disalin", true); }
 
     // FETCH DATA
-    async function fetchAndRender(url, containerId) {
+    async function fetchAndStoreData(url, storageArray, renderCallback, containerId) {
         const container = document.getElementById(containerId);
-        if (!container) return;
-        container.innerHTML = '<div class="loading">⏳ Mengambil data...</div>';
+        if (container) container.innerHTML = '<div class="loading">⏳ Mengambil data...</div>';
         try {
             const response = await fetch(url, { cache: "no-store" });
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -873,28 +1107,29 @@
             const parsed = parseCSVToArray(csvText);
             let dataRows = [...parsed];
             if (dataRows.length > 0 && dataRows[0].length >= 2 && (String(dataRows[0][0]).toLowerCase().includes("judul") || String(dataRows[0][1]).toLowerCase().includes("isi"))) dataRows = dataRows.slice(1);
-            const folders = [];
+            storageArray.length = 0;
             for (let i = 0; i < dataRows.length; i++) {
                 const row = dataRows[i];
                 if (row.length >= 2) {
                     let judul = row[0] ? String(row[0]).trim() : "Folder Tanpa Judul";
                     let isi = row[1] ? String(row[1]).trim() : "Tidak ada konten.";
-                    if (judul !== "") folders.push({ judul, isi });
+                    if (judul !== "") storageArray.push({ judul, isi });
                 }
             }
-            if (folders.length === 0) throw new Error("Tidak ada data valid.");
-            container.innerHTML = generateFolderGridFromArray(folders);
-            attachCopyButtonsToContainer(container);
+            if (storageArray.length === 0) throw new Error("Tidak ada data valid.");
+            renderCallback(storageArray, '');
+            if (containerId === 'scatterDataContainer' && document.getElementById('scatterInfo')) {
+                document.getElementById('scatterInfo').innerHTML = `📊 ${storageArray.length} total`;
+            }
         } catch (error) {
             console.error(error);
-            container.innerHTML = `<div class="error-message"><strong>⚠️ Gagal mengambil data</strong><br>${error.message}<br><br>📌 Pastikan sheet sudah dipublikasikan ke web (CSV).</div>`;
+            if (container) container.innerHTML = `<div class="error-message"><strong>⚠️ Gagal mengambil data</strong><br>${error.message}<br><br>📌 Pastikan sheet sudah dipublikasikan ke web (CSV).</div>`;
         }
     }
 
     async function fetchGambarData() {
         const container = document.getElementById("gambarDataContainer");
-        if (!container) return;
-        container.innerHTML = '<div class="loading">🖼️ Mengambil data gambar event...</div>';
+        if (container) container.innerHTML = '<div class="loading">🖼️ Mengambil data gambar event...</div>';
         try {
             const response = await fetch(GOOGLE_SHEETS_CSV_URL_GAMBAR, { cache: "no-store", headers: { "Cache-Control": "no-cache" } });
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -903,33 +1138,29 @@
             const parsed = parseCSVToArray(csvText);
             let dataRows = [...parsed];
             if (dataRows.length > 0 && dataRows[0].length >= 2 && (String(dataRows[0][0]).toLowerCase().includes("judul") || String(dataRows[0][1]).toLowerCase().includes("sub"))) dataRows = dataRows.slice(1);
-            const gambarItems = [];
+            gambarData.length = 0;
             for (let i = 0; i < dataRows.length; i++) {
                 const row = dataRows[i];
                 if (row.length >= 3) {
                     let judul = row[0] ? String(row[0]).trim() : "Folder Tanpa Judul";
                     let subJudul = row[1] ? String(row[1]).trim() : "Tanpa Judul";
                     let urlGambar = row[2] ? String(row[2]).trim() : "";
-                    if (judul !== "" && urlGambar !== "") gambarItems.push({ judul, subJudul, urlGambar });
+                    if (judul !== "" && urlGambar !== "") gambarData.push({ judul, subJudul, urlGambar });
                 }
             }
-            if (gambarItems.length === 0) throw new Error("Data tidak valid");
-            container.innerHTML = generateGambarGridFromData(gambarItems);
-            attachGambarEvents(container);
+            if (gambarData.length === 0) throw new Error("Data tidak valid");
+            renderGambarData(gambarData, '');
         } catch (error) {
+            console.error(error);
             const contohData = [
                 { judul: "SCREENSHOT KEMENANGAN MAXWIN", subJudul: "Screenshot Kemenangan Akhir - Jackpot 500x", urlGambar: "https://picsum.photos/id/1/400/250" },
                 { judul: "EVENT SCATTER BONANZA", subJudul: "Free Spin 50x", urlGambar: "https://picsum.photos/id/29/400/250" }
             ];
-            container.innerHTML = `<div class="error-message"><strong>⚠️ Gagal mengambil data</strong><br>${error.message}<br><br>📌 Menampilkan contoh data.</div><div id="contohGambarGrid"></div>`;
-            const contohDiv = container.querySelector("#contohGambarGrid");
-            if (contohDiv) { contohDiv.innerHTML = generateGambarGridFromData(contohData); attachGambarEvents(contohDiv); }
+            if (container) container.innerHTML = `<div class="error-message"><strong>⚠️ Gagal mengambil data</strong><br>${error.message}<br><br>📌 Menampilkan contoh data.</div><div id="contohGambarGrid"></div>`;
+            const contohDiv = container?.querySelector("#contohGambarGrid");
+            if (contohDiv) { contohDiv.innerHTML = generateGambarGridFromData(contohData, ''); attachGambarEvents(contohDiv); }
         }
     }
-
-    function fetchScatterData() { fetchAndRender(GOOGLE_SHEETS_CSV_URL_SCATTER, "scatterDataContainer"); }
-    function fetchBuyFreeData() { fetchAndRender(GOOGLE_SHEETS_CSV_URL_BUYFREE, "buyfreeDataContainer"); }
-    function fetchSuperData() { fetchAndRender(GOOGLE_SHEETS_CSV_URL_SUPER, "superDataContainer"); }
 
     function initNavigation() {
         const badges = document.querySelectorAll('.badge');
@@ -941,11 +1172,29 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         initNavigation();
-        document.getElementById('refreshScatterBtn')?.addEventListener('click', fetchScatterData);
-        document.getElementById('refreshBuyFreeBtn')?.addEventListener('click', fetchBuyFreeData);
-        document.getElementById('refreshSuperBtn')?.addEventListener('click', fetchSuperData);
-        document.getElementById('refreshGambarBtn')?.addEventListener('click', fetchGambarData);
-        fetchScatterData(); fetchBuyFreeData(); fetchSuperData(); fetchGambarData();
+        
+        // Live search listeners (input event - langsung saat mengetik)
+        const searchScatter = document.getElementById('searchScatter');
+        const searchBuyfree = document.getElementById('searchBuyfree');
+        const searchSuper = document.getElementById('searchSuper');
+        const searchGambar = document.getElementById('searchGambar');
+        
+        if (searchScatter) searchScatter.addEventListener('input', performSearchScatter);
+        if (searchBuyfree) searchBuyfree.addEventListener('input', performSearchBuyfree);
+        if (searchSuper) searchSuper.addEventListener('input', performSearchSuper);
+        if (searchGambar) searchGambar.addEventListener('input', performSearchGambar);
+        
+        // Reset button listeners
+        document.getElementById('resetScatterBtn')?.addEventListener('click', resetScatter);
+        document.getElementById('resetBuyfreeBtn')?.addEventListener('click', resetBuyfree);
+        document.getElementById('resetSuperBtn')?.addEventListener('click', resetSuper);
+        document.getElementById('resetGambarBtn')?.addEventListener('click', resetGambar);
+        
+        // Fetch all data
+        fetchAndStoreData(GOOGLE_SHEETS_CSV_URL_SCATTER, scatterData, renderScatterData, "scatterDataContainer");
+        fetchAndStoreData(GOOGLE_SHEETS_CSV_URL_BUYFREE, buyfreeData, renderBuyfreeData, "buyfreeDataContainer");
+        fetchAndStoreData(GOOGLE_SHEETS_CSV_URL_SUPER, superData, renderSuperData, "superDataContainer");
+        fetchGambarData();
     });
 </script>
 </body>
