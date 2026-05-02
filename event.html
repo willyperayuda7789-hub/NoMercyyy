@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Event Badge - GAMBAR EVENT | Galeri Dinamis + Judul Folder Center</title>
+    <title>Event Badge - GAMBAR EVENT | Galeri Dinamis + Judul Center</title>
     <style>
         * {
             margin: 0;
@@ -395,7 +395,7 @@
             transform: scale(0.98);
         }
 
-        /* MODAL PREVIEW */
+        /* MODAL PREVIEW - Judul di tengah (CENTER) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -437,26 +437,35 @@
             to { transform: scale(1); opacity: 1; }
         }
 
+        /* HEADER MODAL dengan judul CENTER */
         .modal-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;    /* Membuat judul di tengah secara horizontal */
             align-items: center;
             padding: 1rem 1.5rem;
             background: rgba(0, 0, 0, 0.5);
             border-bottom: 1px solid rgba(255, 200, 100, 0.3);
+            position: relative;
         }
 
         .modal-header h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-size: 1.3rem;
+            font-weight: 700;
             background: linear-gradient(135deg, #FFE6B3, #FFB347);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             margin: 0;
+            text-align: center;
+            letter-spacing: 0.5px;
         }
 
+        /* Tombol close tetap di pojok kanan namun tidak mengganggu center title */
         .modal-close {
+            position: absolute;
+            right: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
             background: rgba(255,80,80,0.2);
             border: none;
             font-size: 1.8rem;
@@ -652,10 +661,10 @@
             <div id="gambarDataContainer"><div class="loading">⏳ Mengambil data gambar event...</div></div>
         </div>
     </div>
-    <div class="credit-note">✨ Semua judul folder di tengah (center) | Klik gambar → preview modal</div>
+    <div class="credit-note">✨ Semua judul folder di tengah (center) | Klik gambar → preview modal dengan judul di tengah</div>
 </div>
 
-<!-- MODAL PREVIEW -->
+<!-- MODAL PREVIEW dengan judul di tengah (center) -->
 <div id="imageModal" class="modal-overlay">
     <div class="modal-container">
         <div class="modal-header">
@@ -810,7 +819,7 @@
         const folderName = wrapper.getAttribute('data-folder-name') || "Gambar Event";
         if (imgUrl && imgUrl.startsWith('http')) {
             const modalHeader = document.getElementById('modalHeaderTitle');
-            if (modalHeader) modalHeader.innerHTML = ` ${escapeHtml(folderName)}`;
+            if (modalHeader) modalHeader.innerHTML = `${escapeHtml(folderName)}`; // display folder name (center)
             openModal(imgUrl, imgSub);
         } else showToast("Gambar tidak valid", true);
     }
