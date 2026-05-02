@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Event Badge - GAMBAR EVENT | Galeri 2 Kolom + Modal Preview & Salin Gambar</title>
+    <title>Event Badge - GAMBAR EVENT | Galeri Dinamis + Modal Tanpa Label Default</title>
     <style>
         * {
             margin: 0;
@@ -162,7 +162,7 @@
             border: 1px solid #ffcd7e55;
         }
 
-        /* ========== GALERI GRID 2 KOLOM UNTUK GAMBAR ========== */
+        /* ========== GALERI GRID 2 KOLOM ========== */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -275,7 +275,6 @@
             box-shadow: 0 0 8px rgba(255,180,70,0.6);
         }
 
-        /* Tombol Salin Gambar */
         .copy-image-btn {
             background: linear-gradient(95deg, #2a5a3e, #1e3a2a);
             border: 1px solid #6fcf97;
@@ -299,7 +298,6 @@
             box-shadow: 0 0 8px rgba(111, 207, 151, 0.6);
         }
 
-        /* Tombol SALIN untuk subjudul */
         .salin-sub-btn {
             background: rgba(255, 180, 70, 0.15);
             border: 1px solid #ffb347;
@@ -356,7 +354,7 @@
             transform: scale(0.98);
         }
 
-        /* MODAL PREVIEW */
+        /* MODAL PREVIEW - TIDAK ADA TEKS DEFAULT */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -407,6 +405,7 @@
             border-bottom: 1px solid rgba(255, 200, 100, 0.3);
         }
 
+        /* Header modal hanya menampilkan folder dinamis, tanpa teks "Preview Gambar Event" */
         .modal-header h3 {
             font-size: 1.2rem;
             font-weight: 600;
@@ -414,6 +413,7 @@
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
+            margin: 0;
         }
 
         .modal-close {
@@ -580,58 +580,47 @@
     </div>
 
     <div class="page-container">
-        <!-- HALAMAN SCATTER (gid=0) -->
         <div id="page-scatter" class="page">
             <div class="page-header">
                 <h2>📂 SCATTER · FOLDER DATA</h2>
                 <button class="btn-refresh" id="refreshScatterBtn">⟳ Refresh Data</button>
             </div>
-            <div id="scatterDataContainer">
-                <div class="loading">⏳ Mengambil data folder dari Google Sheets (SCATTER)...</div>
-            </div>
+            <div id="scatterDataContainer"><div class="loading">⏳ Mengambil data...</div></div>
         </div>
 
-        <!-- HALAMAN BUY & FREE (gid=1728740039) -->
         <div id="page-buyfree" class="page">
             <div class="page-header">
                 <h2>🛒 BUY & FREE · DATA SHEET</h2>
                 <button class="btn-refresh" id="refreshBuyFreeBtn">⟳ Refresh Data</button>
             </div>
-            <div id="buyfreeDataContainer">
-                <div class="loading">⏳ Mengambil data BUY & FREE dari Google Sheets...</div>
-            </div>
+            <div id="buyfreeDataContainer"><div class="loading">⏳ Mengambil data...</div></div>
         </div>
 
-        <!-- HALAMAN SUPER (gid=108287537) -->
         <div id="page-super" class="page">
             <div class="page-header">
                 <h2>⚡ SUPER · FOLDER DATA (SUPER SCATTER)</h2>
                 <button class="btn-refresh" id="refreshSuperBtn">⟳ Refresh Data</button>
             </div>
-            <div id="superDataContainer">
-                <div class="loading">⏳ Mengambil data SUPER SCATTER dari Google Sheets...</div>
-            </div>
+            <div id="superDataContainer"><div class="loading">⏳ Mengambil data...</div></div>
         </div>
 
-        <!-- HALAMAN GAMBAR EVENT (gid=411325602) - Subjudul diambil dari Kolom B & ditampilkan sebagai teks Screenshot Kemenangan Akhir sesuai folder -->
+        <!-- HALAMAN GAMBAR EVENT: Header modal dinamis tanpa teks default -->
         <div id="page-gambar" class="page active-page">
             <div class="page-header">
                 <h2>🖼️ GALERI GAMBAR EVENT</h2>
                 <button class="btn-refresh" id="refreshGambarBtn">⟳ Refresh Data</button>
             </div>
-            <div id="gambarDataContainer">
-                <div class="loading">⏳ Mengambil data gambar event dari Google Sheets...</div>
-            </div>
+            <div id="gambarDataContainer"><div class="loading">⏳ Mengambil data gambar event...</div></div>
         </div>
     </div>
-    <div class="credit-note">✨ Klik gambar → preview modal | Tombol SALIN (subjudul) | Tombol SALIN GAMBAR | Data realtime dari Google Sheets</div>
+    <div class="credit-note">✨ Klik gambar → preview modal | Header modal = Nama Folder (tanpa teks "Preview Gambar Event") | Tombol salin subjudul & gambar</div>
 </div>
 
-<!-- MODAL PREVIEW -->
+<!-- MODAL PREVIEW: header hanya menampilkan nama folder dari gambar yang diklik -->
 <div id="imageModal" class="modal-overlay">
     <div class="modal-container">
         <div class="modal-header">
-            <h3>🖼️ Preview Gambar Event</h3>
+            <h3 id="modalHeaderTitle">📂</h3>
             <button class="modal-close" id="closeModalBtn">&times;</button>
         </div>
         <div class="modal-body">
@@ -643,14 +632,14 @@
                 <button id="modalSalinSubBtn" class="modal-salin-btn">📋 SALIN</button>
                 <button id="modalCopyImageBtn" class="modal-copy-image-btn">🖼️ SALIN GAMBAR</button>
             </div>
-            <div class="modal-hint">💡 Tekan ESC atau klik luar untuk menutup | Salin Gambar = copy langsung ke clipboard</div>
+            <div class="modal-hint">💡 Tekan ESC / klik luar | Header hanya menampilkan nama folder gambar</div>
         </div>
     </div>
 </div>
 
 <script>
     // ============================================================
-    // KONFIGURASI GOOGLE SHEETS
+    // KONFIGURASI SHEETS (SAMA)
     // ============================================================
     const GOOGLE_SHEETS_CSV_URL_SCATTER = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=0";
     const GOOGLE_SHEETS_CSV_URL_BUYFREE = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=1728740039";
@@ -675,12 +664,8 @@
     }
 
     async function copyTextToClipboard(text, successMsg = "✅ Teks berhasil disalin!") {
-        try {
-            await navigator.clipboard.writeText(text);
-            showToast(successMsg);
-        } catch(err) {
-            showToast("❌ Gagal menyalin teks", true);
-        }
+        try { await navigator.clipboard.writeText(text); showToast(successMsg); } 
+        catch(err) { showToast("❌ Gagal menyalin teks", true); }
     }
 
     async function copyImageToClipboard(imageUrl, imageTitle = "Gambar") {
@@ -690,9 +675,7 @@
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const blob = await response.blob();
             if (!blob.type.startsWith('image/')) throw new Error('Bukan gambar valid');
-            await navigator.clipboard.write([
-                new ClipboardItem({ [blob.type]: blob })
-            ]);
+            await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
             showToast(`🖼️ Gambar "${imageTitle.substring(0, 40)}" berhasil disalin!`, false);
         } catch (error) {
             console.error(error);
@@ -702,17 +685,13 @@
 
     function parseCSVToArray(csvString) {
         const rows = [];
-        let currentRow = [];
-        let currentField = "";
-        let inQuotes = false;
+        let currentRow = [], currentField = "", inQuotes = false;
         for (let i = 0; i < csvString.length; i++) {
-            const char = csvString[i];
-            const nextChar = csvString[i + 1];
+            const char = csvString[i], nextChar = csvString[i+1];
             if (char === '"') {
                 if (inQuotes && nextChar === '"') { currentField += '"'; i++; } 
                 else { inQuotes = !inQuotes; }
-            }
-            else if (char === ',' && !inQuotes) { currentRow.push(currentField.trim()); currentField = ""; }
+            } else if (char === ',' && !inQuotes) { currentRow.push(currentField.trim()); currentField = ""; }
             else if ((char === '\n' || (char === '\r' && nextChar === '\n')) && !inQuotes) {
                 if (char === '\r') i++;
                 currentRow.push(currentField.trim());
@@ -727,40 +706,33 @@
         }
         return rows.filter(row => row.some(cell => cell !== ""));
     }
-
     function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
 
-    // GENERATE GAMBAR EVENT: menampilkan teks subjudul persis dari kolom B (Screenshot Kemenangan Akhir / dll) sesuai folder
+    // GENERATE GALERI GAMBAR: menyimpan folder name di data-folder-name
     function generateGambarGridFromData(dataRows) {
         if (!dataRows.length) return '<div class="loading">📭 Tidak ada data gambar</div>';
         const grouped = {};
         for (const row of dataRows) {
             const folderName = row.judul || "Folder Tanpa Nama";
             if (!grouped[folderName]) grouped[folderName] = [];
-            grouped[folderName].push({ subJudul: row.subJudul, urlGambar: row.urlGambar });
+            grouped[folderName].push({ subJudul: row.subJudul, urlGambar: row.urlGambar, folderRaw: folderName });
         }
         let html = `<div class="gallery-grid">`;
         for (const [folderName, items] of Object.entries(grouped)) {
-            html += `
-                <div class="gambar-card">
-                    <div class="gambar-folder-header">
-                        <div class="gambar-folder-title"><span>📁</span> ${escapeHtml(folderName)}</div>
-                    </div>
-                    <div class="gambar-content">
-            `;
+            html += `<div class="gambar-card" data-folder-parent="${escapeHtml(folderName)}">
+                        <div class="gambar-folder-header"><div class="gambar-folder-title"><span>📁</span> ${escapeHtml(folderName)}</div></div>
+                        <div class="gambar-content">`;
             for (const item of items) {
                 const isValidUrl = item.urlGambar && (item.urlGambar.match(/\.(jpeg|jpg|gif|png|webp|svg)$/i) || item.urlGambar.startsWith('http'));
                 const subJudulText = item.subJudul || "Tanpa Judul";
-                html += `
-                    <div class="gambar-subtitle">
-                        <span>✨ ${escapeHtml(subJudulText)}</span>
-                        <button class="salin-sub-btn" data-copy-value="${escapeHtml(subJudulText)}">📋 SALIN</button>
-                    </div>
-                    <div class="gambar-wrapper" data-img-url="${escapeHtml(item.urlGambar || '')}" data-img-sub="${escapeHtml(subJudulText)}">
-                        ${isValidUrl ? `<img src="${escapeHtml(item.urlGambar)}" alt="${escapeHtml(subJudulText)}" class="gambar-event" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'color:#ff8888; text-align:center; padding:20px;\\'>⚠️ Gambar tidak dapat dimuat<br><small style=\\'font-size:11px;\\'>${escapeHtml(item.urlGambar)}</small></div>'">` : `<div style="color:#ffaa66; text-align:center; padding:20px;">⚠️ URL Gambar tidak valid<br><small>${escapeHtml(item.urlGambar || 'Tidak ada URL')}</small></div>`}
-                    </div>
-                    ${isValidUrl ? `<button class="copy-image-btn" data-img-url="${escapeHtml(item.urlGambar)}" data-img-title="${escapeHtml(subJudulText)}">🖼️ SALIN GAMBAR</button>` : ''}
-                `;
+                html += `<div class="gambar-subtitle">
+                            <span>✨ ${escapeHtml(subJudulText)}</span>
+                            <button class="salin-sub-btn" data-copy-value="${escapeHtml(subJudulText)}">📋 SALIN</button>
+                         </div>
+                         <div class="gambar-wrapper" data-img-url="${escapeHtml(item.urlGambar || '')}" data-img-sub="${escapeHtml(subJudulText)}" data-folder-name="${escapeHtml(folderName)}">
+                            ${isValidUrl ? `<img src="${escapeHtml(item.urlGambar)}" alt="${escapeHtml(subJudulText)}" class="gambar-event" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'color:#ff8888; text-align:center; padding:20px;\\'>⚠️ Gambar tidak dapat dimuat<br><small>${escapeHtml(item.urlGambar)}</small></div>'">` : `<div style="color:#ffaa66; text-align:center; padding:20px;">⚠️ URL Gambar tidak valid<br><small>${escapeHtml(item.urlGambar || 'Tidak ada URL')}</small></div>`}
+                         </div>
+                         ${isValidUrl ? `<button class="copy-image-btn" data-img-url="${escapeHtml(item.urlGambar)}" data-img-title="${escapeHtml(subJudulText)}">🖼️ SALIN GAMBAR</button>` : ''}`;
             }
             html += `</div></div>`;
         }
@@ -768,53 +740,29 @@
         return html;
     }
 
-    function attachGambarEvents(container) {
-        const salinSubBtns = container.querySelectorAll('.salin-sub-btn');
-        salinSubBtns.forEach(btn => {
-            btn.removeEventListener('click', handleGambarSubSalin);
-            btn.addEventListener('click', handleGambarSubSalin);
-        });
-        const wrappers = container.querySelectorAll('.gambar-wrapper');
-        wrappers.forEach(wrapper => {
-            wrapper.removeEventListener('click', handleImageWrapperClick);
-            wrapper.addEventListener('click', handleImageWrapperClick);
-        });
-        const copyImageBtns = container.querySelectorAll('.copy-image-btn');
-        copyImageBtns.forEach(btn => {
-            btn.removeEventListener('click', handleImageCopyClick);
-            btn.addEventListener('click', handleImageCopyClick);
-        });
-    }
-
-    function handleGambarSubSalin(e) {
-        e.stopPropagation();
-        const btn = e.currentTarget;
-        const subText = btn.getAttribute('data-copy-value');
-        if (subText) copyTextToClipboard(subText, `📋 Subjudul disalin: "${subText.substring(0, 50)}"`);
-        else showToast("Subjudul kosong", true);
-    }
+    // Event klik gambar: update header modal hanya dengan folder name (tanpa teks "Preview Gambar Event")
     function handleImageWrapperClick(e) {
         const wrapper = e.currentTarget;
         const imgUrl = wrapper.getAttribute('data-img-url');
         const imgSub = wrapper.getAttribute('data-img-sub');
-        if (imgUrl && imgUrl.startsWith('http')) openModal(imgUrl, imgSub);
-        else showToast("Gambar tidak valid", true);
-    }
-    async function handleImageCopyClick(e) {
-        e.stopPropagation();
-        const btn = e.currentTarget;
-        const imgUrl = btn.getAttribute('data-img-url');
-        const imgTitle = btn.getAttribute('data-img-title') || "gambar";
-        if (imgUrl) await copyImageToClipboard(imgUrl, imgTitle);
-        else showToast("URL gambar tidak valid", true);
+        const folderName = wrapper.getAttribute('data-folder-name') || "Gambar Event";
+        if (imgUrl && imgUrl.startsWith('http')) {
+            const modalHeader = document.getElementById('modalHeaderTitle');
+            if (modalHeader) {
+                modalHeader.innerHTML = `📁 ${escapeHtml(folderName)}`;
+            }
+            openModal(imgUrl, imgSub);
+        } else showToast("Gambar tidak valid", true);
     }
 
+    // Modal logic
     const modalOverlay = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
     const modalSubtitleSpan = document.getElementById('modalSubtitleText');
     const modalSalinSubBtn = document.getElementById('modalSalinSubBtn');
     const modalCopyImageBtn = document.getElementById('modalCopyImageBtn');
     let currentModalImageUrl = "", currentModalSubtitle = "";
+
     function openModal(imageUrl, subtitleText) {
         modalImage.src = imageUrl;
         modalSubtitleSpan.innerText = subtitleText || "Tanpa Judul";
@@ -823,24 +771,36 @@
         modalOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
+
     function closeModal() { modalOverlay.classList.remove('active'); document.body.style.overflow = ''; setTimeout(() => { modalImage.src = ""; }, 200); }
     document.getElementById('closeModalBtn').addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
     modalSalinSubBtn.addEventListener('click', () => { if (currentModalSubtitle) copyTextToClipboard(currentModalSubtitle, `📋 Subjudul disalin: "${currentModalSubtitle.substring(0, 50)}"`); else showToast("Subjudul kosong", true); });
-    modalCopyImageBtn.addEventListener('click', async () => { if (currentModalImageUrl) await copyImageToClipboard(currentModalImageUrl, currentModalSubtitle || "gambar"); else showToast("Tidak ada gambar untuk disalin", true); });
+    modalCopyImageBtn.addEventListener('click', async () => { if (currentModalImageUrl) await copyImageToClipboard(currentModalImageUrl, currentModalSubtitle || "gambar"); else showToast("Tidak ada gambar", true); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal(); });
 
+    function attachGambarEvents(container) {
+        const salinSubBtns = container.querySelectorAll('.salin-sub-btn');
+        salinSubBtns.forEach(btn => { btn.removeEventListener('click', handleGambarSubSalin); btn.addEventListener('click', handleGambarSubSalin); });
+        const wrappers = container.querySelectorAll('.gambar-wrapper');
+        wrappers.forEach(wrapper => { wrapper.removeEventListener('click', handleImageWrapperClick); wrapper.addEventListener('click', handleImageWrapperClick); });
+        const copyImageBtns = container.querySelectorAll('.copy-image-btn');
+        copyImageBtns.forEach(btn => { btn.removeEventListener('click', handleImageCopyClick); btn.addEventListener('click', handleImageCopyClick); });
+    }
+    function handleGambarSubSalin(e) { e.stopPropagation(); const btn = e.currentTarget; const subText = btn.getAttribute('data-copy-value'); if (subText) copyTextToClipboard(subText, `📋 Subjudul disalin: "${subText.substring(0, 50)}"`); else showToast("Subjudul kosong", true); }
+    async function handleImageCopyClick(e) { e.stopPropagation(); const btn = e.currentTarget; const imgUrl = btn.getAttribute('data-img-url'); const imgTitle = btn.getAttribute('data-img-title') || "gambar"; if (imgUrl) await copyImageToClipboard(imgUrl, imgTitle); else showToast("URL tidak valid", true); }
+
+    // FETCH DATA GAMBAR
     async function fetchGambarData() {
         const container = document.getElementById("gambarDataContainer");
         if (!container) return;
-        container.innerHTML = '<div class="loading">🖼️ Mengambil data gambar event dari Google Sheets...</div>';
+        container.innerHTML = '<div class="loading">🖼️ Mengambil data gambar event...</div>';
         try {
             const response = await fetch(GOOGLE_SHEETS_CSV_URL_GAMBAR, { cache: "no-store", headers: { "Cache-Control": "no-cache" } });
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const csvText = await response.text();
             if (!csvText || csvText.trim() === "") throw new Error("Data CSV kosong.");
             const parsed = parseCSVToArray(csvText);
-            if (!parsed || parsed.length === 0) throw new Error("Tidak ada data.");
             let dataRows = [...parsed];
             if (dataRows.length > 0 && dataRows[0].length >= 2 && (String(dataRows[0][0]).toLowerCase().includes("judul") || String(dataRows[0][1]).toLowerCase().includes("sub"))) dataRows = dataRows.slice(1);
             const gambarItems = [];
@@ -853,23 +813,21 @@
                     if (judul !== "" && urlGambar !== "") gambarItems.push({ judul, subJudul, urlGambar });
                 }
             }
-            if (gambarItems.length === 0) throw new Error("Data gambar tidak valid (butuh 3 kolom: Judul, SubJudul, URL)");
+            if (gambarItems.length === 0) throw new Error("Data tidak valid");
             container.innerHTML = generateGambarGridFromData(gambarItems);
             attachGambarEvents(container);
         } catch (error) {
-            console.error(error);
             const contohData = [
-                { judul: "SCREENSHOT KEMENANGAN", subJudul: "Screenshot Kemenangan Akhir - Jackpot 500x", urlGambar: "https://picsum.photos/id/1/400/250" },
-                { judul: "SCREENSHOT KEMENANGAN", subJudul: "Screenshot Kemenangan Akhir - Maxwin", urlGambar: "https://picsum.photos/id/26/400/250" },
-                { judul: "EVENT SCATTER", subJudul: "Free Spin 50x", urlGambar: "https://picsum.photos/id/29/400/250" }
+                { judul: "SCREENSHOT KEMENANGAN MAXWIN", subJudul: "Screenshot Kemenangan Akhir - Jackpot 500x", urlGambar: "https://picsum.photos/id/1/400/250" },
+                { judul: "EVENT SCATTER BONANZA", subJudul: "Free Spin 50x", urlGambar: "https://picsum.photos/id/29/400/250" }
             ];
-            container.innerHTML = `<div class="error-message"><strong>⚠️ Gagal mengambil data dari Google Sheets</strong><br>${error.message}<br><br>📌 Menampilkan contoh data (subjudul sesuai folder).</div><div id="contohGambarGrid"></div>`;
+            container.innerHTML = `<div class="error-message"><strong>⚠️ Gagal mengambil data</strong><br>${error.message}<br><br>📌 Menampilkan contoh data (header modal = nama folder).</div><div id="contohGambarGrid"></div>`;
             const contohDiv = container.querySelector("#contohGambarGrid");
             if (contohDiv) { contohDiv.innerHTML = generateGambarGridFromData(contohData); attachGambarEvents(contohDiv); }
         }
     }
 
-    // Fungsi untuk halaman lainnya (scatter, buyfree, super) tetap seperti semula
+    // Fungsi lainnya scatter, buyfree, super (minimal change)
     function generateFolderGridFromArray(foldersArray) {
         if (!foldersArray.length) return '<div class="loading">📭 Tidak ada folder</div>';
         let html = `<div class="gallery-grid">`;
@@ -880,10 +838,34 @@
     }
     function attachCopyButtonsToContainer(container) { const copyButtons = container.querySelectorAll('.copy-btn'); copyButtons.forEach(btn => { btn.removeEventListener('click', handleCopyClick); btn.addEventListener('click', handleCopyClick); }); }
     function handleCopyClick(e) { e.stopPropagation(); const btn = e.currentTarget; let textToCopy = btn.getAttribute('data-copy-text'); if (textToCopy) copyTextToClipboard(textToCopy); else showToast("Tidak ada teks untuk disalin", true); }
-    async function fetchAndRender(url, containerId, customErrorExamples = null) { const container = document.getElementById(containerId); if (!container) return; container.innerHTML = '<div class="loading">⏳ Mengambil data dari Google Sheets...</div>'; try { const response = await fetch(url, { cache: "no-store", headers: { "Cache-Control": "no-cache" } }); if (!response.ok) throw new Error(`HTTP ${response.status}`); const csvText = await response.text(); if (!csvText || csvText.trim() === "") throw new Error("Data CSV kosong."); const parsed = parseCSVToArray(csvText); if (!parsed || parsed.length === 0) throw new Error("Tidak ada data."); let dataRows = [...parsed]; if (dataRows.length > 0 && dataRows[0].length >= 2 && (String(dataRows[0][0]).toLowerCase().includes("judul") || String(dataRows[0][1]).toLowerCase().includes("isi"))) dataRows = dataRows.slice(1); const folders = []; for (let i = 0; i < dataRows.length; i++) { const row = dataRows[i]; if (row.length >= 2) { let judul = row[0] ? String(row[0]).trim() : "Folder Tanpa Judul"; let isi = row[1] ? String(row[1]).trim() : "Tidak ada konten."; if (judul !== "") folders.push({ judul, isi }); } } if (folders.length === 0) throw new Error("Tidak ada data valid."); container.innerHTML = generateFolderGridFromArray(folders); attachCopyButtonsToContainer(container); } catch (error) { console.error(error); let errorHtml = `<div class="error-message"><strong>⚠️ Gagal mengambil data</strong><br>${error.message}<br><br>📌 Pastikan sheet sudah dipublikasikan ke web (CSV).</div>`; if (customErrorExamples) { errorHtml += `<div id="exampleFallbackGrid"></div>`; container.innerHTML = errorHtml; const exampleDiv = container.querySelector("#exampleFallbackGrid"); if (exampleDiv) { exampleDiv.innerHTML = generateFolderGridFromArray(customErrorExamples); attachCopyButtonsToContainer(exampleDiv); } } else { container.innerHTML = errorHtml; } } }
-    function fetchScatterData() { const examples = [{ judul: "📌 CONTOH: BONUS CASHBACK", isi: "Bonus Cashback up to 5% (Live Games) - Minimal kekalahan Rp.100.000" }, { judul: "📌 CONTOH: BONUS ROLLINGAN", isi: "Bonus rollingan turnover 0.5% dari total bettingan" }]; fetchAndRender(GOOGLE_SHEETS_CSV_URL_SCATTER, "scatterDataContainer", examples); }
-    function fetchBuyFreeData() { const examples = [{ judul: "📌 CONTOH: PAKET BUY SPIN", isi: "Buy 10 Free Spin + Gratis 5 Extra Spin. Minimal deposit IDR 50.000" }, { judul: "📌 CONTOH: SYARAT TURNOVER", isi: "Turnover x5 sebelum withdraw. Bonus rollingan 0.5%" }]; fetchAndRender(GOOGLE_SHEETS_CSV_URL_BUYFREE, "buyfreeDataContainer", examples); }
-    function fetchSuperData() { const examples = [{ judul: "📌 CONTOH: EVENT SUPER SCATTER", isi: "Kumpulkan 3 Scatter SUPER untuk bonus besar. Hadiah hingga x5000" }, { judul: "📌 CONTOH: JACKPOT PROGRESIF", isi: "Jackpot progresif mencapai miliaran rupiah" }]; fetchAndRender(GOOGLE_SHEETS_CSV_URL_SUPER, "superDataContainer", examples); }
+    async function fetchAndRender(url, containerId, customErrorExamples = null) { 
+        const container = document.getElementById(containerId); if (!container) return;
+        container.innerHTML = '<div class="loading">⏳ Mengambil data...</div>';
+        try {
+            const response = await fetch(url, { cache: "no-store" });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const csvText = await response.text();
+            if (!csvText || csvText.trim() === "") throw new Error("Data CSV kosong.");
+            const parsed = parseCSVToArray(csvText);
+            let dataRows = [...parsed];
+            if (dataRows.length > 0 && dataRows[0].length >= 2 && (String(dataRows[0][0]).toLowerCase().includes("judul") || String(dataRows[0][1]).toLowerCase().includes("isi"))) dataRows = dataRows.slice(1);
+            const folders = [];
+            for (let i = 0; i < dataRows.length; i++) {
+                const row = dataRows[i];
+                if (row.length >= 2) {
+                    let judul = row[0] ? String(row[0]).trim() : "Folder Tanpa Judul";
+                    let isi = row[1] ? String(row[1]).trim() : "Tidak ada konten.";
+                    if (judul !== "") folders.push({ judul, isi });
+                }
+            }
+            if (folders.length === 0) throw new Error("Tidak ada data valid.");
+            container.innerHTML = generateFolderGridFromArray(folders);
+            attachCopyButtonsToContainer(container);
+        } catch (error) { console.error(error); container.innerHTML = `<div class="error-message"><strong>⚠️ Gagal mengambil data</strong><br>${error.message}</div>`; }
+    }
+    function fetchScatterData() { fetchAndRender(GOOGLE_SHEETS_CSV_URL_SCATTER, "scatterDataContainer"); }
+    function fetchBuyFreeData() { fetchAndRender(GOOGLE_SHEETS_CSV_URL_BUYFREE, "buyfreeDataContainer"); }
+    function fetchSuperData() { fetchAndRender(GOOGLE_SHEETS_CSV_URL_SUPER, "superDataContainer"); }
 
     function initNavigation() {
         const badges = document.querySelectorAll('.badge');
