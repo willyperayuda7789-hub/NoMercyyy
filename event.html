@@ -948,7 +948,7 @@ const imgSub = wrapper.getAttribute('data-img-sub');
 const folderName = wrapper.getAttribute('data-folder-name') || "Gambar Event";
 if (imgUrl && imgUrl.startsWith('http')) {
 const modalHeader = document.getElementById('modalHeaderTitle');
-if (modalHeader) modalHeader.innerHTML = `📁 ${escapeHtml(folderName)}`;
+if (modalHeader) modalHeader.innerHTML = ` ${escapeHtml(folderName)}`;
 openModal(imgUrl, imgSub);
 } else showToast("Gambar tidak valid", true);
 }
