@@ -781,7 +781,7 @@
         for (const [folderName, items] of Object.entries(grouped)) {
             html += `<div class="gambar-card">
                         <div class="gambar-folder-header">
-                            <div class="gambar-folder-title"><span>📁</span> ${escapeHtml(folderName)}</div>
+                            <div class="gambar-folder-title"><span></span> ${escapeHtml(folderName)}</div>
                         </div>
                         <div class="gambar-content">`;
             for (const item of items) {
@@ -810,7 +810,7 @@
         const folderName = wrapper.getAttribute('data-folder-name') || "Gambar Event";
         if (imgUrl && imgUrl.startsWith('http')) {
             const modalHeader = document.getElementById('modalHeaderTitle');
-            if (modalHeader) modalHeader.innerHTML = `📁 ${escapeHtml(folderName)}`;
+            if (modalHeader) modalHeader.innerHTML = ` ${escapeHtml(folderName)}`;
             openModal(imgUrl, imgSub);
         } else showToast("Gambar tidak valid", true);
     }
