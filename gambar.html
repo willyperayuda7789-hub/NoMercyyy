@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMBAR CS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>RRN QRIS · BADGE & GALLERY | Copy Image + Modal</title>
     <style>
         * {
             margin: 0;
@@ -13,14 +13,14 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #0a0000 0%, #1a0000 50%, #0a0000 100%);
-            font-family: 'Segoe UI', 'Poppins', 'Impact', system-ui, sans-serif;
+            background: linear-gradient(145deg, #0a0505 0%, #140202 100%);
+            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
             padding: 1.5rem;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Background dengan awan Akatsuki dan efek Sharingan Itachi */
+        /* Efek latar Sharingan redup */
         body::before {
             content: "";
             position: fixed;
@@ -28,449 +28,418 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 40%, rgba(180, 0, 0, 0.15) 2%, transparent 2.5%),
-                radial-gradient(circle at 80% 70%, rgba(200, 0, 0, 0.12) 1.8%, transparent 2.2%),
-                repeating-linear-gradient(45deg, rgba(100, 0, 0, 0.05) 0px, rgba(100, 0, 0, 0.05) 2px, transparent 2px, transparent 8px);
-            background-size: 50px 50px, 60px 60px, auto;
+            background: radial-gradient(circle at 20% 30%, rgba(200, 30, 30, 0.1), transparent 70%);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* Awan merah Akatsuki (effect) */
-        body::after {
-            content: "";
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(ellipse, rgba(180, 30, 30, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Container utama dengan border Sharingan */
-        .itachi-container {
-            max-width: 1300px;
+        /* Container utama */
+        .rrn-container {
+            max-width: 1400px;
             width: 100%;
             margin: 0 auto;
             position: relative;
             z-index: 2;
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(8, 2, 2, 0.8);
             backdrop-filter: blur(12px);
-            border-radius: 2.5rem;
-            border: 2px solid rgba(200, 30, 30, 0.6);
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.2), inset 0 1px 0 rgba(255, 100, 100, 0.2);
-            padding: 1.8rem;
-            transition: all 0.3s;
+            border-radius: 2rem;
+            border: 1px solid rgba(200, 60, 60, 0.6);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,80,80,0.1);
+            padding: 1.5rem;
         }
 
-        /* Header dengan gambar Itachi style */
-        .header {
+        /* Header */
+        .header-rrn {
             text-align: center;
             margin-bottom: 2rem;
-            position: relative;
         }
-
-        .sharingan-eye {
-            font-size: 3rem;
-            filter: drop-shadow(0 0 10px #ff0000);
+        .badge-logo {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 8px #ff3a3a);
             animation: pulseRed 2s infinite;
+            display: inline-block;
         }
-
         @keyframes pulseRed {
-            0% { text-shadow: 0 0 5px red; opacity: 0.8; }
-            100% { text-shadow: 0 0 20px #ff4444; opacity: 1; }
+            0% { text-shadow: 0 0 0 #ff4d4d; transform: scale(1);}
+            100% { text-shadow: 0 0 15px #ff4d4d; transform: scale(1.02);}
         }
-
-        .header h1 {
-            font-size: 2.2rem;
-            background: linear-gradient(135deg, #ff3333, #990000, #ff6666);
+        .header-rrn h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ff5a5a, #b11f1f, #ff8a8a);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 4px;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-top: 0.5rem;
+            letter-spacing: 2px;
+            font-weight: 800;
+            margin-top: 0.3rem;
+        }
+        .header-rrn p {
+            color: #db9f9f;
+            font-size: 0.8rem;
         }
 
-        .header p {
-            color: #cc8888;
-            font-style: italic;
-            letter-spacing: 1px;
-        }
-
-        /* 3 BADGE - Style Sharingan / Akatsuki */
-        .badge-area {
+        /* 3 BADGE */
+        .badge-zone {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.8rem;
-            margin-bottom: 2.5rem;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
-
-        .itachi-badge {
+        .rrn-badge {
             flex: 1;
-            min-width: 190px;
-            background: linear-gradient(145deg, #1a0505, #0a0000);
-            border-radius: 30px;
-            padding: 1.4rem 0.8rem;
+            min-width: 170px;
+            background: linear-gradient(145deg, #1e0808, #0a0101);
+            border-radius: 50px;
+            padding: 1rem 0.7rem;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(220, 40, 40, 0.5);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            transition: 0.25s;
+            border: 1px solid #a33636;
+            box-shadow: 0 5px 12px black;
         }
-
-        /* Efek Mangekyou Sharingan pada badge hover */
-        .itachi-badge::before {
-            content: "⭕";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            font-size: 90px;
-            color: rgba(255, 50, 50, 0.15);
-            transition: transform 0.4s;
-            pointer-events: none;
-            font-family: monospace;
+        .rrn-badge:hover {
+            transform: translateY(-6px);
+            border-color: #ff6a6a;
+            background: linear-gradient(145deg, #321111, #120202);
+            box-shadow: 0 0 20px rgba(255, 60, 60, 0.5);
         }
-
-        .itachi-badge:hover::before {
-            transform: translate(-50%, -50%) scale(1.2);
+        .rrn-badge.active {
+            background: linear-gradient(145deg, #aa2828, #5e0101);
+            border: 2px solid #ff9a9a;
+            box-shadow: 0 0 20px #ff4d4d;
         }
-
-        .itachi-badge:hover {
-            transform: translateY(-8px);
-            border-color: #ff3333;
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
-            background: linear-gradient(145deg, #2a0808, #0f0000);
-        }
-
-        /* Badge Aktif */
-        .itachi-badge.active {
-            background: linear-gradient(145deg, #8b0000, #4a0000);
-            border: 2px solid #ff5555;
-            box-shadow: 0 0 30px rgba(255, 50, 50, 0.7);
-        }
-
-        .itachi-badge.active .badge-icon {
-            filter: drop-shadow(0 0 8px #ff8888);
-        }
-
         .badge-icon {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            display: inline-block;
+            font-size: 2.2rem;
         }
-
         .badge-title {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: #ff6666;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .badge-sub {
-            font-size: 0.7rem;
-            color: #cc9999;
-            font-weight: bold;
-            margin-top: 0.25rem;
-        }
-
-        .itachi-badge.active .badge-title {
-            color: #ffcccc;
-            text-shadow: 0 0 5px red;
-        }
-
-        /* Area konten halaman */
-        .content-area {
-            background: rgba(15, 5, 5, 0.7);
-            backdrop-filter: blur(8px);
-            border-radius: 1.8rem;
-            padding: 2rem;
-            border: 1px solid #8b0000;
-            min-height: 460px;
-        }
-
-        .page {
-            display: none;
-            animation: fadeSlideUp 0.3s ease;
-        }
-
-        .page.active-page {
-            display: block;
-        }
-
-        @keyframes fadeSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Styling form dengan nuansa darah */
-        .page h2 {
-            color: #ff4444;
-            font-size: 1.8rem;
-            border-left: 5px solid #ff0000;
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
             font-weight: 800;
+            font-size: 1rem;
+            color: #ffbcbc;
+            text-transform: uppercase;
+        }
+        .badge-detail {
+            font-size: 0.65rem;
+            color: #cf9a9a;
         }
 
-        .form-group {
-            margin-bottom: 1.3rem;
+        /* PANEL KONTEN */
+        .content-panel {
+            background: rgba(10, 2, 2, 0.6);
+            border-radius: 1.5rem;
+            border: 1px solid #942a2a;
+            overflow: hidden;
         }
-
-        label {
-            display: block;
-            color: #ffaaaa;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            max-width: 550px;
-            padding: 0.8rem 1rem;
-            background: #1e0a0a;
-            border: 1px solid #6b2a2a;
-            border-radius: 1rem;
-            color: #ffdddd;
-            font-size: 0.9rem;
-            transition: 0.2s;
-        }
-
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #ff3333;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-            background: #2a0f0f;
-        }
-
-        button {
-            background: linear-gradient(135deg, #b22222, #6b0000);
-            border: none;
-            padding: 0.7rem 1.8rem;
-            border-radius: 2rem;
-            font-weight: bold;
-            color: #fff0f0;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.9rem;
-            margin-top: 0.3rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-        }
-
-        button:hover {
-            background: linear-gradient(135deg, #dc143c, #8b0000);
-            transform: scale(1.02);
-            box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
-        }
-
-        .preview-card {
-            background: #0f0303;
-            border-radius: 1.2rem;
-            padding: 1rem;
-            margin-top: 1.8rem;
-            border-left: 4px solid #ff0000;
-            border-right: 1px solid #4a1010;
-        }
-
-        .preview-title {
-            color: #ff8888;
-            font-weight: bold;
-            margin-bottom: 0.8rem;
+        .panel-toolbar {
             display: flex;
+            justify-content: space-between;
             align-items: center;
+            padding: 0.8rem 1.2rem;
+            background: #1c0606b3;
+            border-bottom: 2px solid #b14444;
+            flex-wrap: wrap;
             gap: 0.5rem;
         }
-
-        .info-text {
-            color: #e0b0b0;
-            word-break: break-word;
-            line-height: 1.5;
+        .panel-toolbar h3 {
+            color: #ffbcbc;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .refresh-sheet {
+            background: #3e1313;
+            border: none;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            color: #ffc9c9;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .refresh-sheet:hover {
+            background: #b44141;
+            color: white;
+            box-shadow: 0 0 8px #ff6666;
         }
 
-        .feedback {
-            margin-top: 0.5rem;
-            font-size: 0.8rem;
-            color: #ff8888;
+        /* GALLERY FOLDER */
+        .gallery-scroll {
+            max-height: 520px;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .gallery-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+        .gallery-scroll::-webkit-scrollbar-track {
+            background: #2b0808;
+            border-radius: 10px;
+        }
+        .gallery-scroll::-webkit-scrollbar-thumb {
+            background: #c24646;
+            border-radius: 10px;
+        }
+        .folder-block {
+            background: #0c0101c2;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            border-left: 6px solid #e04e4e;
+        }
+        .folder-head {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 0.8rem 1.2rem;
+            background: linear-gradient(90deg, #2b0b0b, #100101);
+        }
+        .folder-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #ffc1c1;
+        }
+        .folder-sub-count {
+            font-size: 0.7rem;
+            background: #9f3a3a70;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            color: #ffcdcd;
+        }
+        .image-masonry {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1.2rem;
+        }
+        .gambar-card {
+            width: 180px;
+            background: #130202f2;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: 0.2s;
+            border: 1px solid #bc4a4a;
+            cursor: pointer;
+            box-shadow: 0 6px 12px black;
+        }
+        .gambar-card:hover {
+            transform: scale(1.02);
+            border-color: #ff8686;
+            box-shadow: 0 0 16px #ff5e5e;
+        }
+        .gambar-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+            background: #2a0808;
+        }
+        .gambar-caption {
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #f0c0c0;
+            background: #1a0404;
+            border-top: 1px solid #a14444;
+            word-break: break-word;
+        }
+        .empty-gallery {
+            color: #e6a3a3;
+            text-align: center;
+            padding: 2rem;
+            font-style: italic;
+        }
+
+        /* ========= MODAL PREVIEW GAMBAR ========= */
+        .modal-gambar {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.2s ease;
+        }
+        .modal-gambar.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            background: #0f0202e6;
+            border-radius: 2rem;
+            border: 2px solid #ff6f6f;
+            box-shadow: 0 0 40px rgba(255, 30, 30, 0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .modal-header-preview {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.7rem 1.2rem;
+            background: #2f0a0a;
+            border-bottom: 1px solid #cc5a5a;
+        }
+        .modal-header-preview span {
+            color: #ffc9c9;
             font-weight: bold;
         }
-
-        /* Responsive */
-        @media (max-width: 750px) {
-            .itachi-container {
-                padding: 1rem;
-            }
-            .badge-area {
-                gap: 0.8rem;
-            }
-            .itachi-badge {
-                min-width: 120px;
-                padding: 1rem 0.3rem;
-            }
-            .badge-title {
-                font-size: 1rem;
-            }
-            .badge-icon {
-                font-size: 2rem;
-            }
-            .page h2 {
-                font-size: 1.3rem;
-            }
+        .close-modal-btn {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #ffb7b7;
+            transition: 0.2s;
+        }
+        .close-modal-btn:hover {
+            color: red;
+            transform: scale(1.1);
+        }
+        .modal-body-img {
+            padding: 1rem;
+            text-align: center;
+        }
+        .modal-body-img img {
+            max-width: 100%;
+            max-height: 65vh;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px black;
+            object-fit: contain;
+        }
+        .modal-footer {
+            padding: 0.8rem;
+            background: #1c0404cc;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            border-top: 1px solid #b15555;
+        }
+        .copy-image-btn {
+            background: linear-gradient(145deg, #a13a3a, #5c1111);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .copy-image-btn:hover {
+            background: #dd4b4b;
+            box-shadow: 0 0 12px #ff7a7a;
+            transform: scale(1.02);
+        }
+        .toast-msg {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #222;
+            color: #ffdd99;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            z-index: 1100;
+            background: #1c0404e6;
+            border-left: 4px solid #ff5e5e;
+            pointer-events: none;
+            transition: 0.2s;
+        }
+        .info-text {
+            font-size: 0.7rem;
+            color: #fdadad;
+        }
+        @media (max-width: 600px) {
+            .gambar-card { width: 140px; }
+            .gambar-card img { height: 120px; }
+            .folder-name { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
-
-<div class="itachi-container">
-    <div class="header">
-        <div class="sharingan-eye"></div>
-        <h1>GAMBAR CS</h1>
-        <p>〝 Kebaikan dapat menimbulkan kebencian. 〞 — Akatsuki Scatter</p>
+<div class="rrn-container">
+    <div class="header-rrn">
+        <div class="badge-logo">🔴🍥 RRN</div>
+        <h1>BADGE QRIS · SHARINGAN GALLERY</h1>
+        <p>〘 Klik gambar untuk preview + SALIN GAMBAR (Clipboard) | Tekan ESC tutup 〙</p>
     </div>
 
-    <!-- 3 BADGE dengan tema Uchiha -->
-    <div class="badge-area">
-        <div class="itachi-badge active" data-page="page1">
-            <div class="badge-icon">🍥</div>
+    <div class="badge-zone">
+        <div class="rrn-badge active" data-tab="rrnGallery">
+            <div class="badge-icon">📂🌀</div>
             <div class="badge-title">RRN QRIS</div>
-            <div class="badge-sub"></div>
+            <div class="badge-detail">Folder & QRIS Code</div>
         </div>
-        <div class="itachi-badge" data-page="page2">
-            <div class="badge-icon">💀</div>
+        <div class="rrn-badge" data-tab="ewalletBank">
+            <div class="badge-icon">💳⚡</div>
             <div class="badge-title">PROFIL EWALLET / BANK</div>
-            <div class="badge-sub"></div>
+            <div class="badge-detail">Akun Resmi Deposit</div>
         </div>
-        <div class="itachi-badge" data-page="page3">
-            <div class="badge-icon">🔥</div>
+        <div class="rrn-badge" data-tab="togelGuide">
+            <div class="badge-icon">🎯🔥</div>
             <div class="badge-title">CARA BERMAIN TOGEL</div>
-            <div class="badge-sub"></div>
+            <div class="badge-detail">Panduan Scatter JP</div>
         </div>
     </div>
 
-    <div class="content-area">
-        <!-- HALAMAN 1: SCATTER dengan tema Itachi -->
-        <div id="page1" class="page active-page">
-            <h2>🍂 SCATTER · Sharingan's Power</h2>
-            <div class="form-group">
-                <label>👁️ Nama Teknik Scatter</label>
-                <input type="text" id="scatterName" placeholder="Tsukuyomi Scatter / Amaterasu Burst">
-            </div>
-            <div class="form-group">
-                <label>🌀 Jumlah Scatter (Simbol Sharingan)</label>
-                <input type="text" id="scatterAmount" placeholder="3, 4, atau 5 magatama">
-            </div>
-            <div class="form-group">
-                <label>🔥 Hadiah / Genjutsu Reward</label>
-                <textarea id="scatterReward" rows="2" placeholder="Contoh: Meningkatkan chakra, free spin, dll"></textarea>
-            </div>
-            <button id="saveScatterBtn">💾 Simpan Scatter & Genjutsu</button>
-            <div id="scatterFeedback" class="feedback"></div>
-            <div class="preview-card">
-                <div class="preview-title">🕷️ Data Tersimpan (Scatter Itachi)</div>
-                <div id="scatterPreview" class="info-text">Belum ada data, isi form dengan kekuatanmu.</div>
-            </div>
+    <div class="content-panel">
+        <div class="panel-toolbar">
+            <h3><span id="panelTitle">📁 RRN QRIS · DATA SHEET</span></h3>
+            <button class="refresh-sheet" id="refreshSheetBtn">⟳ Refresh Data</button>
         </div>
-
-        <!-- HALAMAN 2: BUY & FREE (seperti Akatsuki contract) -->
-        <div id="page2" class="page">
-            <h2>🩸 BUY & FREE · Akatsuki Pact</h2>
-            <div class="form-group">
-                <label>💀 Harga Buy Feature (Ryo / Chakra)</label>
-                <input type="text" id="buyPrice" placeholder="5000 Ryo / 10.000">
-            </div>
-            <div class="form-group">
-                <label>🎴 FreeSpin / Free Jutsu</label>
-                <input type="text" id="freeSpin" placeholder="15 FreeSpin + Sharingan Boost">
-            </div>
-            <div class="form-group">
-                <label>📜 Catatan Akatsuki (Buyfree Sheet)</label>
-                <textarea id="buyfreeNote" rows="2" placeholder="Tulis ritual Akatsuki atau bonus tambahan..."></textarea>
-            </div>
-            <button id="saveBuyfreeBtn">💾 Simpan Buy & Free</button>
-            <div id="buyfreeFeedback" class="feedback"></div>
-            <div class="preview-card">
-                <div class="preview-title">📖 Buyfree Sheet · Akatsuki Scroll</div>
-                <div id="buyfreePreview" class="info-text">Belum ada kontrak pembelian.</div>
-            </div>
-        </div>
-
-        <!-- HALAMAN 3: SUPER SCATTER (Mangekyou Sharingan) -->
-        <div id="page3" class="page">
-            <h2>⚡ SUPER SCATTER · Mangekyou Eternal</h2>
-            <div class="form-group">
-                <label>🌀 Nama Super Scatter</label>
-                <input type="text" id="superName" placeholder="Susano'o Scatter / Tsukuyomi Ultimate">
-            </div>
-            <div class="form-group">
-                <label>🔥 Multiplier / Kekuatan Super</label>
-                <input type="text" id="superMulti" placeholder="x50, x100, Instant Genjutsu">
-            </div>
-            <div class="form-group">
-                <label>👁️ Deskripsi Mangekyou Scatter</label>
-                <textarea id="superDesc" rows="2" placeholder="Amaterasu hitam, proteksi genjutsu..."></textarea>
-            </div>
-            <button id="saveSuperBtn">💾 Simpan Super Scatter</button>
-            <div id="superFeedback" class="feedback"></div>
-            <div class="preview-card">
-                <div class="preview-title">𖦹 Mangekyou Record</div>
-                <div id="superPreview" class="info-text">Belum ada data Super Scatter.</div>
-            </div>
+        <div id="dynamicGalleryArea" class="gallery-scroll">
+            <div class="empty-gallery">⏳ Membaca data dari Google Sheets ...</div>
         </div>
     </div>
 </div>
 
+<!-- MODAL PREVIEW + SALIN GAMBAR -->
+<div id="imageModal" class="modal-gambar">
+    <div class="modal-content">
+        <div class="modal-header-preview">
+            <span>🖼️ PREVIEW GAMBAR QRIS · RRN BADGE</span>
+            <button class="close-modal-btn" id="closeModalBtn">✖</button>
+        </div>
+        <div class="modal-body-img">
+            <img id="modalImage" src="" alt="Preview QRIS">
+        </div>
+        <div class="modal-footer">
+            <button id="copyModalImageBtn" class="copy-image-btn">📋 SALIN GAMBAR</button>
+        </div>
+        <div class="info-text" style="text-align:center; padding:6px; background:#130101;">Tekan ESC atau klik ✖ untuk menutup</div>
+    </div>
+</div>
+
 <script>
-    // STORAGE KEYS
-    const STORAGE = {
-        SCATTER: 'itachi_scatter_data',
-        BUYFREE: 'akatsuki_buyfree',
-        SUPER: 'mangekyou_super'
-    };
+    // ==================== Konfigurasi Google Sheets ====================
+    const SPREADSHEET_ID = '1Yb0qlCugxmz4_X2Ef1k-D1YssPWA8GHax4Eolke-IpY';
+    const SHEET_NAME = 'RRN QRIS';
+    
+    let currentGroupedData = [];
+    let currentModalImgUrl = "";
+    let currentModalImgElement = null; // untuk keperluan salin gambar
 
-    let scatterState = { name: '', amount: '', reward: '' };
-    let buyfreeState = { price: '', freespin: '', note: '' };
-    let superState = { name: '', multiplier: '', desc: '' };
-
-    function loadData() {
-        const savedScatter = localStorage.getItem(STORAGE.SCATTER);
-        if(savedScatter) scatterState = JSON.parse(savedScatter);
-        const savedBuy = localStorage.getItem(STORAGE.BUYFREE);
-        if(savedBuy) buyfreeState = JSON.parse(savedBuy);
-        const savedSuper = localStorage.getItem(STORAGE.SUPER);
-        if(savedSuper) superState = JSON.parse(savedSuper);
-        
-        document.getElementById('scatterName').value = scatterState.name || '';
-        document.getElementById('scatterAmount').value = scatterState.amount || '';
-        document.getElementById('scatterReward').value = scatterState.reward || '';
-        
-        document.getElementById('buyPrice').value = buyfreeState.price || '';
-        document.getElementById('freeSpin').value = buyfreeState.freespin || '';
-        document.getElementById('buyfreeNote').value = buyfreeState.note || '';
-        
-        document.getElementById('superName').value = superState.name || '';
-        document.getElementById('superMulti').value = superState.multiplier || '';
-        document.getElementById('superDesc').value = superState.desc || '';
-        
-        updatePreviews();
-    }
-
+    // Helper: escape HTML
     function escapeHtml(str) {
         if(!str) return '';
         return str.replace(/[&<>]/g, function(m) {
@@ -480,118 +449,300 @@
             return m;
         });
     }
-
-    function updatePreviews() {
-        const scatterPreview = document.getElementById('scatterPreview');
-        if(scatterState.name || scatterState.amount || scatterState.reward) {
-            scatterPreview.innerHTML = `
-                <strong>👁️ Teknik:</strong> ${escapeHtml(scatterState.name) || '-'}<br>
-                <strong>🌀 Jumlah Scatter:</strong> ${escapeHtml(scatterState.amount) || '-'}<br>
-                <strong>🔥 Reward:</strong> ${escapeHtml(scatterState.reward) || '-'}
-            `;
-        } else {
-            scatterPreview.innerHTML = 'Belum ada data Scatter. Isi dengan Tsukuyomi mu.';
-        }
-        
-        const buyfreePreview = document.getElementById('buyfreePreview');
-        if(buyfreeState.price || buyfreeState.freespin || buyfreeState.note) {
-            buyfreePreview.innerHTML = `
-                <strong>💀 Harga Buy:</strong> ${escapeHtml(buyfreeState.price) || '-'}<br>
-                <strong>🎴 FreeSpin/Jutsu:</strong> ${escapeHtml(buyfreeState.freespin) || '-'}<br>
-                <strong>📜 Catatan:</strong> ${escapeHtml(buyfreeState.note) || '-'}
-            `;
-        } else {
-            buyfreePreview.innerHTML = 'Belum ada data Buy & Free.';
-        }
-        
-        const superPreview = document.getElementById('superPreview');
-        if(superState.name || superState.multiplier || superState.desc) {
-            superPreview.innerHTML = `
-                <strong>⚡ Nama Super Scatter:</strong> ${escapeHtml(superState.name) || '-'}<br>
-                <strong>🔥 Multiplier:</strong> ${escapeHtml(superState.multiplier) || '-'}<br>
-                <strong>👁️ Deskripsi:</strong> ${escapeHtml(superState.desc) || '-'}
-            `;
-        } else {
-            superPreview.innerHTML = 'Belum ada data Super Scatter (Mangekyou).';
-        }
+    function escapeAttr(str) {
+        if(!str) return '';
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    function saveScatter() {
-        scatterState = {
-            name: document.getElementById('scatterName').value.trim(),
-            amount: document.getElementById('scatterAmount').value.trim(),
-            reward: document.getElementById('scatterReward').value.trim()
-        };
-        localStorage.setItem(STORAGE.SCATTER, JSON.stringify(scatterState));
-        updatePreviews();
-        const fb = document.getElementById('scatterFeedback');
-        fb.innerHTML = '✅ Sharingan Scatter tersimpan!';
-        setTimeout(() => fb.innerHTML = '', 2000);
-    }
-    
-    function saveBuyfree() {
-        buyfreeState = {
-            price: document.getElementById('buyPrice').value.trim(),
-            freespin: document.getElementById('freeSpin').value.trim(),
-            note: document.getElementById('buyfreeNote').value.trim()
-        };
-        localStorage.setItem(STORAGE.BUYFREE, JSON.stringify(buyfreeState));
-        updatePreviews();
-        const fb = document.getElementById('buyfreeFeedback');
-        fb.innerHTML = '✅ Akatsuki Buy & Free tersimpan!';
-        setTimeout(() => fb.innerHTML = '', 2000);
-    }
-    
-    function saveSuper() {
-        superState = {
-            name: document.getElementById('superName').value.trim(),
-            multiplier: document.getElementById('superMulti').value.trim(),
-            desc: document.getElementById('superDesc').value.trim()
-        };
-        localStorage.setItem(STORAGE.SUPER, JSON.stringify(superState));
-        updatePreviews();
-        const fb = document.getElementById('superFeedback');
-        fb.innerHTML = '⚡ Super Scatter Mangekyou tersimpan!';
-        setTimeout(() => fb.innerHTML = '', 2000);
-    }
-    
-    // Badge Navigation
-    function initTabs() {
-        const badges = document.querySelectorAll('.itachi-badge');
-        const pages = {
-            page1: document.getElementById('page1'),
-            page2: document.getElementById('page2'),
-            page3: document.getElementById('page3')
-        };
-        
-        function switchPage(pageId) {
-            Object.values(pages).forEach(p => p?.classList.remove('active-page'));
-            if(pages[pageId]) pages[pageId].classList.add('active-page');
-            
-            badges.forEach(b => {
-                const target = b.getAttribute('data-page');
-                if(target === pageId) b.classList.add('active');
-                else b.classList.remove('active');
-            });
+    // Fetch dari Google Sheets (metode gviz json)
+    async function fetchRRNData() {
+        const galleryDiv = document.getElementById('dynamicGalleryArea');
+        if (!galleryDiv) return [];
+        galleryDiv.innerHTML = '<div class="empty-gallery">🌀 Membuka Mangekyou, sinkronisasi data sheet RRN QRIS ...</div>';
+        try {
+            const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+            const resp = await fetch(url);
+            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+            const text = await resp.text();
+            const jsonStart = text.indexOf('(');
+            const jsonEnd = text.lastIndexOf(')');
+            if (jsonStart === -1 || jsonEnd === -1) throw new Error("Format respons tidak sesuai");
+            const jsonStr = text.substring(jsonStart + 1, jsonEnd);
+            const jsonData = JSON.parse(jsonStr);
+            const rows = jsonData.table.rows;
+            if (!rows || rows.length === 0) {
+                galleryDiv.innerHTML = `<div class="empty-gallery">⚠️ Sheet "${SHEET_NAME}" tidak memiliki data. Masukkan folder (kolom A), sub (B), URL gambar (C).</div>`;
+                return [];
+            }
+            const raw = [];
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const colA = (row.c[0] && row.c[0].v !== undefined && row.c[0].v !== null) ? String(row.c[0].v).trim() : '';
+                const colB = (row.c[1] && row.c[1].v !== undefined && row.c[1].v !== null) ? String(row.c[1].v).trim() : '';
+                const colC = (row.c[2] && row.c[2].v !== undefined && row.c[2].v !== null) ? String(row.c[2].v).trim() : '';
+                if (colA === '' && colB === '' && colC === '') continue;
+                raw.push({
+                    folder: colA || "(Folder tanpa nama)",
+                    sub: colB || "",
+                    imageUrl: colC || ""
+                });
+            }
+            if (raw.length === 0) {
+                galleryDiv.innerHTML = `<div class="empty-gallery">📭 Tidak ada baris data. Isi minimal kolom A (judul folder).</div>`;
+                return [];
+            }
+            // grouping by folder
+            const mapFolder = new Map();
+            for (const item of raw) {
+                const folderName = item.folder;
+                if (!mapFolder.has(folderName)) {
+                    mapFolder.set(folderName, { folder: folderName, items: [] });
+                }
+                mapFolder.get(folderName).items.push({
+                    sub: item.sub,
+                    imageUrl: item.imageUrl
+                });
+            }
+            const grouped = Array.from(mapFolder.values());
+            currentGroupedData = grouped;
+            renderGallery(grouped);
+            return grouped;
+        } catch (err) {
+            console.error(err);
+            galleryDiv.innerHTML = `<div class="empty-gallery">❌ Gagal fetch data: ${err.message}. Pastikan spreadsheet dipublikasikan (File → Share → Publish to web) dan sheet bernama "${SHEET_NAME}".</div>`;
+            return [];
         }
+    }
+
+    // Render gallery folder dengan gambar
+    function renderGallery(grouped) {
+        const container = document.getElementById('dynamicGalleryArea');
+        if (!container) return;
+        if (!grouped || grouped.length === 0) {
+            container.innerHTML = `<div class="empty-gallery">✨ Tidak ada folder/gambar. Tambahkan data di Google Sheets.</div>`;
+            return;
+        }
+        let html = '';
+        for (const folder of grouped) {
+            const folderTitle = escapeHtml(folder.folder);
+            const items = folder.items;
+            html += `<div class="folder-block">
+                        <div class="folder-head">
+                            <span class="folder-name">📂 ${folderTitle}</span>
+                            <span class="folder-sub-count">${items.length} item(s)</span>
+                        </div>
+                        <div class="image-masonry">`;
+            let hasAny = false;
+            for (let idx = 0; idx < items.length; idx++) {
+                const subText = (items[idx].sub && items[idx].sub.trim() !== "") ? items[idx].sub : "QRIS Code";
+                const rawUrl = items[idx].imageUrl;
+                let validUrl = false;
+                let finalUrl = "";
+                if (rawUrl && (rawUrl.startsWith('http://') || rawUrl.startsWith('https://'))) {
+                    finalUrl = rawUrl;
+                    validUrl = true;
+                }
+                if (validUrl) {
+                    hasAny = true;
+                    const safeUrl = escapeAttr(finalUrl);
+                    const safeSub = escapeHtml(subText);
+                    html += `<div class="gambar-card" data-img-url="${safeUrl}" data-subtitle="${safeSub}">
+                                <img src="${safeUrl}" alt="${safeSub}" loading="lazy" 
+                                     onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22330000%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffaaaa%22%3Eerror%3C%2Ftext%3E%3C%2Fsvg%3E';">
+                                <div class="gambar-caption">🎴 ${safeSub}</div>
+                              </div>`;
+                } else {
+                    hasAny = true;
+                    html += `<div class="gambar-card" style="justify-content:center; background:#1f0606;">
+                                <div style="font-size:2rem; text-align:center; padding:0.8rem;">⚠️🖼️</div>
+                                <div class="gambar-caption">${escapeHtml(subText)}<br><span style="font-size:0.6rem;">URL tidak valid</span></div>
+                              </div>`;
+                }
+            }
+            if (!hasAny) {
+                html += `<div class="empty-gallery" style="padding:1rem;">💀 Tidak ada gambar pada folder ini. Isi kolom C dengan URL gambar.</div>`;
+            }
+            html += `</div></div>`;
+        }
+        container.innerHTML = html;
         
-        badges.forEach(badge => {
-            badge.addEventListener('click', () => {
-                const targetPage = badge.getAttribute('data-page');
-                if(targetPage) switchPage(targetPage);
+        // attach event click ke setiap gambar-card (preview modal)
+        const imageCards = document.querySelectorAll('.gambar-card');
+        imageCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                // cari data img-url dari attribute
+                const imgUrl = card.getAttribute('data-img-url');
+                const sub = card.getAttribute('data-subtitle') || "QRIS RRN";
+                if (imgUrl && imgUrl !== "" && (imgUrl.startsWith('http'))) {
+                    openModal(imgUrl, sub);
+                } else {
+                    // jika tidak ada url valid, bisa tampilkan pesan
+                    showToast("⚠️ Gambar tidak valid / URL rusak", 1500);
+                }
             });
         });
     }
-    
-    function bindButtons() {
-        document.getElementById('saveScatterBtn').addEventListener('click', saveScatter);
-        document.getElementById('saveBuyfreeBtn').addEventListener('click', saveBuyfree);
-        document.getElementById('saveSuperBtn').addEventListener('click', saveSuper);
+
+    // ============ MODAL PREVIEW + SALIN GAMBAR ============
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const copyModalBtn = document.getElementById('copyModalImageBtn');
+    let currentImageBlobUrl = null;
+
+    function openModal(imgUrl, title) {
+        modalImg.src = imgUrl;
+        currentModalImgUrl = imgUrl;
+        modal.classList.add('active');
+        // tambahkan event ESC
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        modalImg.src = '';
+        currentModalImgUrl = '';
+    }
+
+    // Fungsi SALIN GAMBAR ke clipboard (menggunakan fetch + ClipboardItem)
+    async function copyImageToClipboard(imageUrl) {
+        if (!imageUrl) {
+            showToast("Tidak ada gambar untuk disalin", 1500);
+            return;
+        }
+        try {
+            // fetch gambar sebagai blob
+            const response = await fetch(imageUrl);
+            if (!response.ok) throw new Error("Gagal mengambil gambar");
+            const blob = await response.blob();
+            if (!blob.type.startsWith('image/')) throw new Error("Bukan tipe gambar");
+            await navigator.clipboard.write([
+                new ClipboardItem({
+                    [blob.type]: blob
+                })
+            ]);
+            showToast("✅ Gambar berhasil disalin ke clipboard!", 2000);
+        } catch (err) {
+            console.warn(err);
+            showToast("❌ Gagal menyalin gambar. Periksa izin clipboard atau CORS gambar.", 2500);
+        }
+    }
+
+    function showToast(msg, duration = 2000) {
+        let toast = document.querySelector('.toast-msg');
+        if(toast) toast.remove();
+        const div = document.createElement('div');
+        div.className = 'toast-msg';
+        div.innerText = msg;
+        document.body.appendChild(div);
+        setTimeout(() => div.remove(), duration);
+    }
+
+    // Event untuk modal
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+    }
+    if (copyModalBtn) {
+        copyModalBtn.addEventListener('click', async () => {
+            if (modalImg.src && modalImg.src.startsWith('http')) {
+                await copyImageToClipboard(modalImg.src);
+            } else {
+                showToast("Gambar tidak valid untuk disalin", 1500);
+            }
+        });
+    }
+    // Tutup modal dengan ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+    // klik luar modal content -> tutup (opsional)
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // ============ BADGE NAVIGASI ============
+    function switchBadge(tabId) {
+        const panelTitle = document.getElementById('panelTitle');
+        const refreshBtn = document.getElementById('refreshSheetBtn');
+        const galleryDiv = document.getElementById('dynamicGalleryArea');
+        
+        // update active class
+        document.querySelectorAll('.rrn-badge').forEach(b => {
+            if(b.getAttribute('data-tab') === tabId) b.classList.add('active');
+            else b.classList.remove('active');
+        });
+        
+        if (tabId === 'rrnGallery') {
+            panelTitle.innerHTML = '📁 RRN QRIS · LIST FOLDER & GAMBAR';
+            refreshBtn.style.display = 'inline-flex';
+            fetchRRNData(); // refresh data dari sheet
+        } 
+        else if (tabId === 'ewalletBank') {
+            panelTitle.innerHTML = '💳 PROFIL EWALLET / BANK (RRN OFFICIAL)';
+            refreshBtn.style.display = 'none';
+            galleryDiv.innerHTML = `
+                <div style="background:#0a0101; border-radius:1.2rem; padding:1.5rem;">
+                    <div style="border-left:4px solid #ea5a5a; padding-left:14px; margin-bottom:1rem;">
+                        <strong style="color:#ffbcbc;">🏦 REKENING BANK</strong><br>
+                        • BCA : 4560 1234 5678 a.n RRN SHARINGAN<br>
+                        • MANDIRI : 123-00-1234567 a.n UCHIHA GROUP<br>
+                        • BRI : 4213 9876 5432 a.n ITACHI RRN
+                    </div>
+                    <div style="border-left:4px solid #ea5a5a; padding-left:14px; margin-bottom:1rem;">
+                        <strong style="color:#ffbcbc;">📱 E-WALLET & QRIS</strong><br>
+                        • DANA / OVO : 081234567890 (RRN OFFICIAL)<br>
+                        • QRIS ALL PAY : rrn.qris.sharingan<br>
+                        • Limit : Unlimited Mangekyou
+                    </div>
+                    <div class="info-text" style="background:#1d0303; padding:0.6rem; border-radius:1rem;">💎 Minimal deposit 10k Ryo, bonus new member scatter 20%</div>
+                </div>
+            `;
+        }
+        else if (tabId === 'togelGuide') {
+            panelTitle.innerHTML = '🎮 CARA BERMAIN TOGEL · SCATTER JP';
+            refreshBtn.style.display = 'none';
+            galleryDiv.innerHTML = `
+                <div style="background:#0a0101; border-radius:1.2rem; padding:1.5rem;">
+                    <h4 style="color:#ffa76e;">🔥 PANDUAN TOGEL RRN (Akatsuki Method)</h4>
+                    <ul style="margin-left:1.2rem; margin-top:12px; color:#ffcfcf; line-height:1.6;">
+                        <li>1️⃣ Pilih pasaran: SGP, HK, SDY, atau Macau.</li>
+                        <li>2️⃣ Tentukan jenis taruhan (4D/3D/2D, Colok Bebas, Scatter Sharingan).</li>
+                        <li>3️⃣ Deposit ke PROFIL BANK/EWALLET minimal 10k.</li>
+                        <li>4️⃣ Klaim voucher "AMATERASU" untuk freebet jika deposit pertama.</li>
+                        <li>5️⃣ Input nomor prediksi & tunggu result. Jackpot x1000 untuk 4D akurat!</li>
+                    </ul>
+                    <div class="info-text" style="background:#240606; margin-top:1rem; padding:0.7rem; border-radius:1rem;">✨ BONUS SCATTER: Buy Free Spin / Buy Feature cashback 15% khusus member RRN QRIS</div>
+                </div>
+            `;
+        }
     }
     
-    loadData();
-    initTabs();
-    bindButtons();
+    // init event listeners
+    function init() {
+        const badges = document.querySelectorAll('.rrn-badge');
+        badges.forEach(b => {
+            b.addEventListener('click', () => {
+                const tab = b.getAttribute('data-tab');
+                if(tab) switchBadge(tab);
+            });
+        });
+        const refreshBtn = document.getElementById('refreshSheetBtn');
+        if(refreshBtn) {
+            refreshBtn.addEventListener('click', () => {
+                // jika sedang di tab RRN QRIS, refresh data
+                const activeTab = document.querySelector('.rrn-badge.active')?.getAttribute('data-tab');
+                if(activeTab === 'rrnGallery') fetchRRNData();
+                else fetchRRNData(); // biar aman
+            });
+        }
+        // default load RRN QRIS
+        switchBadge('rrnGallery');
+    }
+    
+    init();
 </script>
 </body>
 </html>
