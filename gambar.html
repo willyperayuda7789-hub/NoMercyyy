@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>RRN QRIS · Sharingan Gallery | Modal Hanya Isi Teks</title>
+    <title>RRN QRIS · Sharingan Gallery | Modal Preview Hanya Isi Teks</title>
     <style>
         * {
             margin: 0;
@@ -250,37 +250,7 @@
             display: block;
             background: #200505;
         }
-        /* Tombol copy kecil - hanya ikon, tanpa teks */
-        .copy-btn-float {
-            position: absolute;
-            bottom: 6px;
-            right: 6px;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(4px);
-            border: 1px solid #ff8a6a;
-            border-radius: 30px;
-            padding: 4px 8px;
-            font-size: 0.65rem;
-            font-weight: bold;
-            color: #ffdddd;
-            cursor: pointer;
-            transition: 0.15s;
-            z-index: 3;
-            font-family: monospace;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-        .copy-btn-float:hover {
-            background: #c55a5a;
-            color: white;
-            border-color: white;
-            transform: scale(1.05);
-        }
-        /* Hanya ikon copy, tanpa teks */
-        .copy-btn-float span {
-            display: none;
-        }
+        /* Tidak ada tombol copy apapun di thumbnail */
         .empty-folder-inner {
             color: #f0adad;
             text-align: center;
@@ -460,7 +430,7 @@
     <div class="rrn-header">
         <div class="logo-rrn">🔴🍥 RRN QRIS</div>
         <h1>BADGE · SHARINGAN GALLERY</h1>
-        <p>〘 Klik thumbnail = Preview | Di modal hanya tampil ISI SUBJUDUL | Tombol 📋 = Copy subjudul 〙</p>
+        <p>〘 Klik gambar = Preview | Di modal hanya tampil ISI SUBJUDUL (tanpa label) | Klik teks/📋 di modal untuk copy 〙</p>
     </div>
 
     <div class="badge-row">
@@ -650,15 +620,14 @@
                 const safeUrl = escapeAttr(finalUrl);
                 
                 if(isValidUrl) {
+                    // Thumbnail murni tanpa tombol copy apapun
                     html += `<div class="image-card-mini" data-img-url="${safeUrl}" data-subtitle="${safeSub}">
                                 <img src="${safeUrl}" alt="thumbnail" loading="lazy" 
                                      onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22330000%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffaaaa%22%3Eerror%3C%2Ftext%3E%3C%2Fsvg%3E';">
-                                <button class="copy-btn-float" data-copy-val="${safeSub}">📋<span></span></button>
                               </div>`;
                 } else {
                     html += `<div class="image-card-mini" style="justify-content:center; background:#1e0707;" data-subtitle="${safeSub}">
-                                <div style="font-size:1rem; text-align:center; padding:0.8rem; color:#ffaaaa;">⚠️ Gambar tidak valid</div>
-                                <button class="copy-btn-float" data-copy-val="${safeSub}">📋<span></span></button>
+                                <div style="font-size:1rem; text-align:center; padding:1rem; color:#ffaaaa;">⚠️ Gambar tidak valid</div>
                               </div>`;
                 }
             }
@@ -673,26 +642,13 @@
         html += `</div>`;
         container.innerHTML = html;
         
-        // Event untuk tombol copy subjudul dari thumbnail (hanya ikon)
-        document.querySelectorAll('.copy-btn-float').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const subVal = btn.getAttribute('data-copy-val');
-                if(subVal && subVal.trim() !== "") {
-                    copyToClipboard(subVal, "📋 Subjudul tersalin:");
-                } else {
-                    copyToClipboard("QRIS RRN", "📋 Tersalin:");
-                }
-            });
-        });
-        
         // Klik gambar -> buka modal (isi subjudul tanpa label)
         document.querySelectorAll('.image-card-mini').forEach(card => {
             const imgUrl = card.getAttribute('data-img-url');
             const subTitle = card.getAttribute('data-subtitle') || "QRIS RRN";
             
             card.addEventListener('click', (e) => {
-                if(e.target.classList.contains('copy-btn-float')) return;
+                // Mencegah jika klik di dalam area yang bukan (tidak ada tombol lagi, langsung buka modal)
                 if(imgUrl && imgUrl.startsWith('http')) {
                     openModal(imgUrl, subTitle);
                 } else {
