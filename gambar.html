@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>RRN QRIS · Sharingan Gallery | Modal Preview Hanya Isi Teks</title>
+    <title>RRN QRIS · Sharingan Gallery | Ukuran Folder Lebih Besar</title>
     <style>
         * {
             margin: 0;
@@ -141,16 +141,18 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 1.1rem;
         }
         .refresh-btn {
             background: #421616;
             border: none;
-            padding: 0.3rem 1rem;
+            padding: 0.4rem 1.2rem;
             border-radius: 30px;
             color: #ffe0e0;
             font-weight: bold;
             cursor: pointer;
             transition: 0.2s;
+            font-size: 0.85rem;
         }
         .refresh-btn:hover {
             background: #c14d4d;
@@ -159,7 +161,7 @@
         }
 
         .gallery-scroll {
-            max-height: 580px;
+            max-height: 620px;
             overflow-y: auto;
             padding: 1.5rem;
             display: flex;
@@ -178,15 +180,16 @@
             border-radius: 10px;
         }
 
+        /* GRID 5 KOLOM dengan ukuran folder lebih besar */
         .folder-grid-wrapper {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 1.2rem;
+            gap: 1.5rem;
             width: 100%;
         }
         .folder-card {
             background: #0c0202c9;
-            border-radius: 1.2rem;
+            border-radius: 1.5rem;
             overflow: hidden;
             border-left: 6px solid #e86060;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -203,20 +206,20 @@
             display: flex;
             align-items: baseline;
             flex-wrap: wrap;
-            gap: 6px;
-            padding: 0.8rem 0.8rem;
+            gap: 8px;
+            padding: 1rem 1rem;
             background: linear-gradient(90deg, #2b0c0c, #100202);
         }
         .folder-name {
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 800;
             color: #ffcfcf;
             word-break: break-word;
         }
         .folder-count {
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             background: #ab464680;
-            padding: 0.2rem 0.5rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 30px;
             color: #ffdbdb;
             white-space: nowrap;
@@ -224,13 +227,13 @@
         .image-grid-folder {
             display: flex;
             flex-direction: column;
-            gap: 0.7rem;
-            padding: 0.8rem;
+            gap: 0.9rem;
+            padding: 1rem;
             flex: 1;
         }
         .image-card-mini {
             background: #120202f5;
-            border-radius: 0.8rem;
+            border-radius: 1rem;
             overflow: hidden;
             transition: 0.2s;
             border: 1px solid #c55353;
@@ -245,7 +248,7 @@
         }
         .image-card-mini img {
             width: 100%;
-            height: 100px;
+            height: 130px;
             object-fit: cover;
             display: block;
             background: #200505;
@@ -254,19 +257,24 @@
         .empty-folder-inner {
             color: #f0adad;
             text-align: center;
-            padding: 1rem;
+            padding: 1.5rem;
             font-style: italic;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
         }
         .view-all-badge {
-            margin-top: 0.5rem;
+            margin-top: 0.6rem;
             text-align: center;
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             background: #42161680;
             border-radius: 20px;
-            padding: 0.2rem;
+            padding: 0.3rem;
             color: #ffbcbc;
             cursor: pointer;
+            transition: 0.2s;
+        }
+        .view-all-badge:hover {
+            background: #8b3a3a;
+            color: white;
         }
 
         /* MODAL PREVIEW - Hanya isi teks subjudul */
@@ -306,18 +314,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.6rem 1.2rem;
+            padding: 0.8rem 1.5rem;
             background: #2b0a0a;
             border-bottom: 1px solid #db6b6b;
         }
         .modal-header span {
             color: #ffcfcf;
             font-weight: bold;
+            font-size: 1rem;
         }
         .modal-close {
             background: none;
             border: none;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             cursor: pointer;
             color: #ffbcbc;
         }
@@ -326,7 +335,7 @@
             transform: scale(1.1);
         }
         .modal-img-area {
-            padding: 1rem;
+            padding: 1.2rem;
             text-align: center;
         }
         .modal-img-area img {
@@ -337,7 +346,7 @@
             box-shadow: 0 0 15px black;
         }
         .modal-sub-info {
-            padding: 0.5rem 1rem;
+            padding: 0.7rem 1.2rem;
             background: #1f0404cc;
             text-align: center;
             border-top: 1px solid #b55;
@@ -351,10 +360,10 @@
             font-weight: bold;
             color: #ffd6a5;
             cursor: pointer;
-            padding: 6px 12px;
+            padding: 8px 15px;
             border-radius: 30px;
             transition: 0.1s;
-            font-size: 0.9rem;
+            font-size: 1rem;
             background: #2e0a0a;
             display: inline-block;
             letter-spacing: 0.5px;
@@ -366,12 +375,15 @@
         .copy-icon-modal {
             background: #874040;
             border: none;
-            padding: 0.3rem 0.8rem;
+            padding: 0.4rem 1rem;
             border-radius: 30px;
             color: white;
             font-weight: bold;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
+        }
+        .copy-icon-modal:hover {
+            background: #b55a5a;
         }
         .modal-footer {
             padding: 0.8rem;
@@ -384,14 +396,18 @@
         .copy-image-btn {
             background: linear-gradient(145deg, #a13d3d, #631212);
             border: none;
-            padding: 0.5rem 1.5rem;
+            padding: 0.6rem 1.8rem;
             border-radius: 40px;
             color: white;
             font-weight: bold;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+        .copy-image-btn:hover {
+            background: linear-gradient(145deg, #c54a4a, #8a1a1a);
         }
         .toast-notification {
             position: fixed;
@@ -400,9 +416,9 @@
             transform: translateX(-50%);
             background: #1c0606e6;
             color: #ffddbb;
-            padding: 0.5rem 1.2rem;
+            padding: 0.6rem 1.5rem;
             border-radius: 40px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             z-index: 1200;
             border-left: 4px solid #ff5e5e;
             pointer-events: none;
@@ -412,15 +428,24 @@
             .folder-grid-wrapper {
                 grid-template-columns: repeat(4, 1fr);
             }
+            .image-card-mini img {
+                height: 120px;
+            }
         }
         @media (max-width: 800px) {
             .folder-grid-wrapper {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .image-card-mini img {
+                height: 140px;
+            }
         }
         @media (max-width: 500px) {
             .folder-grid-wrapper {
                 grid-template-columns: 1fr;
+            }
+            .image-card-mini img {
+                height: 160px;
             }
         }
     </style>
@@ -430,7 +455,7 @@
     <div class="rrn-header">
         <div class="logo-rrn">🔴🍥 RRN QRIS</div>
         <h1>BADGE · SHARINGAN GALLERY</h1>
-        <p>〘 Klik gambar = Preview | Di modal hanya tampil ISI SUBJUDUL (tanpa label) | Klik teks/📋 di modal untuk copy 〙</p>
+        <p>〘 Klik gambar = Preview | Di modal hanya tampil ISI SUBJUDUL | Klik teks/📋 di modal untuk copy 〙</p>
     </div>
 
     <div class="badge-row">
@@ -479,7 +504,7 @@
         <div class="modal-footer">
             <button id="copyImageModalBtn" class="copy-image-btn">📸 SALIN GAMBAR</button>
         </div>
-        <div style="text-align:center; font-size:0.65rem; padding:5px; background:#160202;">Tekan ESC atau ✖ untuk menutup</div>
+        <div style="text-align:center; font-size:0.7rem; padding:8px; background:#160202;">Tekan ESC atau ✖ untuk menutup</div>
     </div>
 </div>
 
@@ -620,14 +645,14 @@
                 const safeUrl = escapeAttr(finalUrl);
                 
                 if(isValidUrl) {
-                    // Thumbnail murni tanpa tombol copy apapun
+                    // Thumbnail tanpa tombol copy
                     html += `<div class="image-card-mini" data-img-url="${safeUrl}" data-subtitle="${safeSub}">
                                 <img src="${safeUrl}" alt="thumbnail" loading="lazy" 
                                      onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22330000%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffaaaa%22%3Eerror%3C%2Ftext%3E%3C%2Fsvg%3E';">
                               </div>`;
                 } else {
                     html += `<div class="image-card-mini" style="justify-content:center; background:#1e0707;" data-subtitle="${safeSub}">
-                                <div style="font-size:1rem; text-align:center; padding:1rem; color:#ffaaaa;">⚠️ Gambar tidak valid</div>
+                                <div style="font-size:1rem; text-align:center; padding:1.2rem; color:#ffaaaa;">⚠️ Gambar tidak valid</div>
                               </div>`;
                 }
             }
@@ -648,7 +673,6 @@
             const subTitle = card.getAttribute('data-subtitle') || "QRIS RRN";
             
             card.addEventListener('click', (e) => {
-                // Mencegah jika klik di dalam area yang bukan (tidak ada tombol lagi, langsung buka modal)
                 if(imgUrl && imgUrl.startsWith('http')) {
                     openModal(imgUrl, subTitle);
                 } else {
@@ -755,35 +779,35 @@
             panelTitle.innerHTML = '💳 PROFIL EWALLET / BANK (RRN OFFICIAL)';
             refreshBtn.style.display = 'none';
             contentDiv.innerHTML = `
-                <div style="background:#0a0101; border-radius:1.2rem; padding:1.5rem;">
-                    <div style="border-left:4px solid #ea5a5a; padding-left:14px; margin-bottom:1rem;">
-                        <strong style="color:#ffbcbc;">🏦 REKENING BANK</strong><br>
+                <div style="background:#0a0101; border-radius:1.5rem; padding:1.8rem;">
+                    <div style="border-left:4px solid #ea5a5a; padding-left:14px; margin-bottom:1.2rem;">
+                        <strong style="color:#ffbcbc; font-size:1rem;">🏦 REKENING BANK</strong><br>
                         • BCA : 4560 1234 5678 a.n RRN SHARINGAN<br>
                         • MANDIRI : 123-00-1234567 a.n UCHIHA GROUP<br>
                         • BRI : 4213 9876 5432 a.n ITACHI RRN
                     </div>
-                    <div style="border-left:4px solid #ea5a5a; padding-left:14px; margin-bottom:1rem;">
-                        <strong style="color:#ffbcbc;">📱 E-WALLET & QRIS</strong><br>
+                    <div style="border-left:4px solid #ea5a5a; padding-left:14px; margin-bottom:1.2rem;">
+                        <strong style="color:#ffbcbc; font-size:1rem;">📱 E-WALLET & QRIS</strong><br>
                         • DANA / OVO : 081234567890 (RRN OFFICIAL)<br>
                         • QRIS ALL PAY : rrn.qris.sharingan<br>
                         • Limit : Unlimited Mangekyou
                     </div>
-                    <div class="empty-folder" style="background:#1d0303; padding:0.6rem;">💎 Minimal deposit 10k Ryo, bonus new member scatter 20%</div>
+                    <div class="empty-folder" style="background:#1d0303; padding:0.8rem; font-size:0.85rem;">💎 Minimal deposit 10k Ryo, bonus new member scatter 20%</div>
                 </div>
             `;
         } else if(tabId === 'tutorialGame') {
             panelTitle.innerHTML = '🎮 CARA BERMAIN TOGEL · SCATTER JP';
             refreshBtn.style.display = 'none';
-            contentDiv.innerHTML = `<div style="background:#0a0101; border-radius:1.2rem; padding:1.5rem;">
-                <h4 style="color:#ffa76e;">🔥 PANDUAN TOGEL RRN</h4>
-                <ul style="margin-left:1.2rem; color:#ffcfcf; line-height:1.6;">
+            contentDiv.innerHTML = `<div style="background:#0a0101; border-radius:1.5rem; padding:1.8rem;">
+                <h4 style="color:#ffa76e; margin-bottom:0.8rem;">🔥 PANDUAN TOGEL RRN</h4>
+                <ul style="margin-left:1.5rem; color:#ffcfcf; line-height:1.8; font-size:0.9rem;">
                     <li>1️⃣ Pilih pasaran: SGP, HK, SDY, atau Macau.</li>
                     <li>2️⃣ Tentukan jenis taruhan (4D/3D/2D, Colok Bebas, Scatter Sharingan).</li>
                     <li>3️⃣ Deposit ke PROFIL BANK/EWALLET minimal 10k.</li>
                     <li>4️⃣ Klaim voucher "AMATERASU" untuk freebet jika deposit pertama.</li>
                     <li>5️⃣ Input nomor prediksi & tunggu result. Jackpot x1000 untuk 4D akurat!</li>
                 </ul>
-                <div class="empty-folder" style="background:#240606; margin-top:1rem;">✨ BONUS SCATTER: Buy Free Spin / Buy Feature cashback 15% khusus member RRN QRIS</div>
+                <div class="empty-folder" style="background:#240606; margin-top:1.2rem; padding:0.8rem;">✨ BONUS SCATTER: Buy Free Spin / Buy Feature cashback 15% khusus member RRN QRIS</div>
             </div>`;
         }
     }
