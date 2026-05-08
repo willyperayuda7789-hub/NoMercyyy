@@ -205,16 +205,19 @@
         .folder-header {
             display: flex;
             align-items: baseline;
+            justify-content: center;   /* pusatkan horizontal */
             flex-wrap: wrap;
             gap: 8px;
-            padding: 1rem 1rem;
+            padding: 1rem 0.8rem;
             background: linear-gradient(90deg, #2b0c0c, #100202);
+            text-align: center;
         }
         .folder-name {
             font-size: 1rem;
             font-weight: 800;
             color: #ffcfcf;
             word-break: break-word;
+            display: inline-block;
         }
         .folder-count {
             font-size: 0.7rem;
@@ -446,6 +449,10 @@
             }
             .image-card-mini img {
                 height: 160px;
+            }
+            .folder-header {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
