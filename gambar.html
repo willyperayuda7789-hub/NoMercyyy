@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>RRN QRIS · BADGE GALLERY | Copy Subjudul Klik Langsung</title>
+    <title>RRN QRIS · Sharingan Gallery | 5 Folder per Baris</title>
     <style>
         * {
             margin: 0;
@@ -32,9 +32,8 @@
             z-index: 0;
         }
 
-        /* Container utama */
         .rrn-master {
-            max-width: 1400px;
+            max-width: 1600px;
             width: 100%;
             margin: 0 auto;
             position: relative;
@@ -47,7 +46,6 @@
             padding: 1.5rem;
         }
 
-        /* Header */
         .rrn-header {
             text-align: center;
             margin-bottom: 2rem;
@@ -164,12 +162,12 @@
 
         /* GALLERY SCROLL */
         .gallery-scroll {
-            max-height: 530px;
+            max-height: 580px;
             overflow-y: auto;
-            padding: 1rem;
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.8rem;
         }
         .gallery-scroll::-webkit-scrollbar {
             width: 5px;
@@ -183,65 +181,82 @@
             border-radius: 10px;
         }
 
-        /* FOLDER CARD */
+        /* FOLDER CARD - FLEX GRID UNTUK 5 FOLDER PER BARIS */
+        .folder-grid-wrapper {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.2rem;
+            width: 100%;
+        }
         .folder-card {
             background: #0c0202c9;
             border-radius: 1.2rem;
             overflow: hidden;
             border-left: 6px solid #e86060;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .folder-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            border-left-color: #ff9f9f;
         }
         .folder-header {
             display: flex;
             align-items: baseline;
             flex-wrap: wrap;
-            gap: 10px;
-            padding: 0.8rem 1.2rem;
+            gap: 6px;
+            padding: 0.8rem 0.8rem;
             background: linear-gradient(90deg, #2b0c0c, #100202);
         }
         .folder-name {
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             font-weight: 800;
             color: #ffcfcf;
+            word-break: break-word;
         }
         .folder-count {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             background: #ab464680;
-            padding: 0.2rem 0.7rem;
+            padding: 0.2rem 0.5rem;
             border-radius: 30px;
             color: #ffdbdb;
+            white-space: nowrap;
         }
-        .image-grid {
+        .image-grid-folder {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            padding: 1.2rem;
+            flex-direction: column;
+            gap: 0.7rem;
+            padding: 0.8rem;
+            flex: 1;
         }
-        .image-card {
-            width: 180px;
+        .image-card-mini {
             background: #120202f5;
-            border-radius: 1rem;
+            border-radius: 0.8rem;
             overflow: hidden;
             transition: 0.2s;
             border: 1px solid #c55353;
             cursor: pointer;
-            box-shadow: 0 5px 12px black;
+            box-shadow: 0 2px 6px black;
         }
-        .image-card:hover {
-            transform: translateY(-4px);
+        .image-card-mini:hover {
+            transform: translateY(-2px);
             border-color: #ff9090;
-            box-shadow: 0 0 14px #ff6666;
+            box-shadow: 0 0 10px #ff6666;
         }
-        .image-card img {
+        .image-card-mini img {
             width: 100%;
-            height: 150px;
+            height: 100px;
             object-fit: cover;
             display: block;
             background: #200505;
         }
-        .image-caption {
-            padding: 0.5rem;
+        .image-caption-mini {
+            padding: 0.3rem 0.4rem;
             text-align: center;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: 600;
             color: #f7cece;
             background: #1c0707;
@@ -249,49 +264,58 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
-        .caption-text {
+        .caption-text-mini {
             flex: 1;
             text-align: left;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             word-break: break-word;
             cursor: pointer;
-            transition: 0.1s;
-            padding: 2px 4px;
+            padding: 2px 3px;
             border-radius: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        .caption-text:hover {
+        .caption-text-mini:hover {
             background: #8b3a3a;
             color: white;
         }
-        .copy-icon-only {
+        .copy-icon-mini {
             background: #632828;
             border: none;
             border-radius: 20px;
-            padding: 0.2rem 0.5rem;
-            font-size: 0.65rem;
+            padding: 0.1rem 0.4rem;
+            font-size: 0.55rem;
             color: #ffdddd;
             cursor: pointer;
             transition: 0.15s;
             font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 3px;
         }
-        .copy-icon-only:hover {
+        .copy-icon-mini:hover {
             background: #c55a5a;
             color: white;
-            box-shadow: 0 0 5px red;
         }
-        .empty-folder {
+        .empty-folder-inner {
             color: #f0adad;
             text-align: center;
-            padding: 1.5rem;
+            padding: 1rem;
             font-style: italic;
+            font-size: 0.7rem;
+        }
+        .view-all-badge {
+            margin-top: 0.5rem;
+            text-align: center;
+            font-size: 0.6rem;
+            background: #42161680;
+            border-radius: 20px;
+            padding: 0.2rem;
+            color: #ffbcbc;
+            cursor: pointer;
         }
 
-        /* MODAL PREVIEW */
+        /* MODAL PREVIEW (sama seperti sebelumnya) */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -391,9 +415,6 @@
             font-weight: bold;
             cursor: pointer;
             font-size: 0.7rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
         }
         .modal-footer {
             padding: 0.8rem;
@@ -430,10 +451,20 @@
             pointer-events: none;
         }
 
-        @media (max-width: 600px) {
-            .image-card { width: 140px; }
-            .image-card img { height: 120px; }
-            .folder-name { font-size: 1rem; }
+        @media (max-width: 1100px) {
+            .folder-grid-wrapper {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        @media (max-width: 800px) {
+            .folder-grid-wrapper {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 500px) {
+            .folder-grid-wrapper {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -442,7 +473,7 @@
     <div class="rrn-header">
         <div class="logo-rrn">🔴🍥 RRN QRIS</div>
         <h1>BADGE · SHARINGAN GALLERY</h1>
-        <p>〘 Klik SUBJUDUL atau klik 📋 = Langsung Tersalin | Klik Gambar = Preview + Copy Gambar 〙</p>
+        <p>〘 Klik SUBJUDUL atau 📋 = Langsung Tersalin | Klik Gambar = Preview + Copy Gambar | 5 FOLDER PER BARIS 〙</p>
     </div>
 
     <div class="badge-row">
@@ -465,7 +496,7 @@
 
     <div class="content-panel">
         <div class="panel-header">
-            <h3><span id="panelTitle">📁 RRN QRIS · DATA SHEET</span></h3>
+            <h3><span id="panelTitle">📁 RRN QRIS · LIST FOLDER (5 KOLOM)</span></h3>
             <button class="refresh-btn" id="refreshSheetBtn">⟳ Refresh Data</button>
         </div>
         <div id="dynamicContent" class="gallery-scroll">
@@ -478,7 +509,7 @@
 <div id="imageModal" class="modal-overlay">
     <div class="modal-box">
         <div class="modal-header">
-            <span>🖼️ PREVIEW GAMBAR RRN QRIS</span>
+            <span>🖼️ PREVIEW QRIS RRN</span>
             <button class="modal-close" id="closeModalBtn">✖</button>
         </div>
         <div class="modal-img-area">
@@ -526,7 +557,6 @@
         setTimeout(() => toast.remove(), duration);
     }
     
-    // Fungsi copy teks ke clipboard
     async function copyToClipboard(text, successMsg = "✅ Tersalin!") {
         if(!text) {
             showToast("⚠️ Teks kosong", 1000);
@@ -591,7 +621,7 @@
             }
             const grouped = Array.from(folderMap.values());
             currentGroupData = grouped;
-            renderGallery(grouped);
+            renderGalleryGrid(grouped);  // menggunakan render grid 5 kolom
             return grouped;
         } catch(err) {
             console.error(err);
@@ -600,8 +630,8 @@
         }
     }
     
-    // Render gallery - TANPA contoh bukti Dana (sudah dihilangkan)
-    function renderGallery(grouped) {
+    // RENDER DENGAN GRID 5 FOLDER PER BARIS (setiap folder-card dalam grid wrapper)
+    function renderGalleryGrid(grouped) {
         const container = document.getElementById('dynamicContent');
         if(!container) return;
         if(!grouped || grouped.length === 0) {
@@ -609,20 +639,22 @@
             return;
         }
         
-        let html = '';
-        // LANGSUNG FOLDER TANPA BUKTI DANA
+        // Buat wrapper grid
+        let html = `<div class="folder-grid-wrapper">`;
         for(const folderObj of grouped) {
             const folderTitle = escapeHtml(folderObj.folder);
-            const items = folderObj.items;
-            html += `<div class="folder-card">
+            const items = folderObj.items.slice(0, 4); // tampilkan max 4 gambar per folder biar rapi, tapi bisa lebih jika diinginkan (tampilkan 4 preview + lihat semua nanti)
+            const totalItems = folderObj.items.length;
+            const hasMore = totalItems > 4;
+            html += `<div class="folder-card" data-folder-name="${escapeAttr(folderTitle)}">
                         <div class="folder-header">
                             <span class="folder-name">📂 ${folderTitle}</span>
-                            <span class="folder-count">${items.length} QRIS Code</span>
+                            <span class="folder-count">${totalItems} item</span>
                         </div>
-                        <div class="image-grid">`;
-            let hasAny = false;
+                        <div class="image-grid-folder">`;
+            
             for(let idx=0; idx<items.length; idx++) {
-                const subRaw = items[idx].sub && items[idx].sub.trim() !== "" ? items[idx].sub : "QRIS Sharingan";
+                const subRaw = items[idx].sub && items[idx].sub.trim() !== "" ? items[idx].sub : "QRIS";
                 const imageUrlRaw = items[idx].imageUrl;
                 let isValidUrl = false;
                 let finalUrl = "";
@@ -633,62 +665,81 @@
                 const safeSub = escapeHtml(subRaw);
                 const safeUrl = escapeAttr(finalUrl);
                 if(isValidUrl) {
-                    hasAny = true;
-                    html += `<div class="image-card" data-img-url="${safeUrl}" data-subtitle="${safeSub}">
+                    html += `<div class="image-card-mini" data-img-url="${safeUrl}" data-subtitle="${safeSub}">
                                 <img src="${safeUrl}" alt="${safeSub}" loading="lazy" 
                                      onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22330000%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffaaaa%22%3Eerror%3C%2Ftext%3E%3C%2Fsvg%3E';">
-                                <div class="image-caption">
-                                    <span class="caption-text" data-copy-text="${safeSub}">🎴 ${safeSub}</span>
-                                    <button class="copy-icon-only" data-copy-text="${safeSub}">📋</button>
+                                <div class="image-caption-mini">
+                                    <span class="caption-text-mini" data-copy-text="${safeSub}">🎴 ${safeSub.length > 18 ? safeSub.substring(0,15)+'..' : safeSub}</span>
+                                    <button class="copy-icon-mini" data-copy-text="${safeSub}">📋</button>
                                 </div>
                               </div>`;
                 } else {
-                    hasAny = true;
-                    html += `<div class="image-card" style="justify-content:center; background:#1e0707;">
-                                <div style="font-size:2rem; text-align:center; padding:0.8rem;">⚠️🖼️</div>
-                                <div class="image-caption">
-                                    <span class="caption-text" data-copy-text="${safeSub}">${safeSub} (URL tidak valid)</span>
-                                    <button class="copy-icon-only" data-copy-text="${safeSub}">📋</button>
+                    html += `<div class="image-card-mini" style="justify-content:center; background:#1e0707;">
+                                <div style="font-size:1.2rem; text-align:center; padding:0.4rem;">⚠️</div>
+                                <div class="image-caption-mini">
+                                    <span class="caption-text-mini" data-copy-text="${safeSub}">${safeSub}</span>
+                                    <button class="copy-icon-mini" data-copy-text="${safeSub}">📋</button>
                                 </div>
                               </div>`;
                 }
             }
-            if(!hasAny) {
-                html += `<div class="empty-folder" style="width:100%;">💀 Tidak ada gambar/URL yang valid pada folder ini.</div>`;
+            if(totalItems === 0) {
+                html += `<div class="empty-folder-inner">✨ Tidak ada QRIS</div>`;
+            }
+            if(hasMore) {
+                html += `<div class="view-all-badge" data-folder-full="${escapeAttr(folderTitle)}">📂 +${totalItems-4} lainnya (klik folder untuk detail)</div>`;
             }
             html += `</div></div>`;
         }
+        html += `</div>`;
         container.innerHTML = html;
         
-        // Event: klik teks subjudul (caption-text) langsung copy
-        document.querySelectorAll('.caption-text').forEach(el => {
+        // Event copy teks
+        document.querySelectorAll('.caption-text-mini').forEach(el => {
             el.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const textToCopy = el.getAttribute('data-copy-text');
-                if(textToCopy) copyToClipboard(textToCopy, "📋 Subjudul tersalin:");
-                else copyToClipboard(el.innerText.replace('🎴', '').trim(), "📋 Subjudul tersalin:");
+                const txt = el.getAttribute('data-copy-text');
+                if(txt) copyToClipboard(txt, "📋 Subjudul tersalin:");
+                else copyToClipboard(el.innerText.replace('🎴', '').trim(), "📋 Tersalin:");
             });
         });
-        
-        // Event: klik tombol ikon copy (📋) juga copy
-        document.querySelectorAll('.copy-icon-only').forEach(btn => {
+        document.querySelectorAll('.copy-icon-mini').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const textToCopy = btn.getAttribute('data-copy-text');
-                if(textToCopy) copyToClipboard(textToCopy, "📋 Subjudul tersalin:");
+                const txt = btn.getAttribute('data-copy-text');
+                if(txt) copyToClipboard(txt, "📋 Subjudul tersalin:");
             });
         });
         
-        // Event klik gambar untuk preview modal
-        document.querySelectorAll('.image-card').forEach(card => {
+        // Klik gambar modal
+        document.querySelectorAll('.image-card-mini').forEach(card => {
             card.addEventListener('click', (e) => {
-                if(e.target.classList.contains('copy-icon-only') || e.target.classList.contains('caption-text')) return;
+                if(e.target.classList.contains('copy-icon-mini') || e.target.classList.contains('caption-text-mini')) return;
                 const imgUrl = card.getAttribute('data-img-url');
                 const subTitle = card.getAttribute('data-subtitle');
                 if(imgUrl && imgUrl.startsWith('http')) {
                     openModal(imgUrl, subTitle);
                 } else {
                     showToast("Gambar tidak valid", 1200);
+                }
+            });
+        });
+        
+        // Klik "lainnya" -> menampilkan seluruh item folder melalui alert/sheet atau bisa render popup? lebih baik tampilkan toast dengan daftar sub.
+        document.querySelectorAll('.view-all-badge').forEach(badge => {
+            badge.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const folderNameRaw = badge.getAttribute('data-folder-full');
+                const folder = currentGroupData.find(f => f.folder === folderNameRaw);
+                if(folder && folder.items.length > 0) {
+                    let listText = `📁 ${folder.folder} (${folder.items.length} item):\n`;
+                    folder.items.forEach((it, idx) => {
+                        listText += `${idx+1}. ${it.sub || "Tanpa Judul"}${it.imageUrl ? " [Gambar]" : ""}\n`;
+                    });
+                    alert(listText);
+                    showToast(`Folder ${folder.folder} memiliki ${folder.items.length} QRIS`, 2000);
+                } else {
+                    showToast("Detail tidak tersedia", 1000);
                 }
             });
         });
@@ -737,26 +788,16 @@
     }
     
     if(closeModalBtn) closeModalBtn.addEventListener('click', closeModalFunc);
-    if(copyImageBtn) {
-        copyImageBtn.addEventListener('click', async () => {
-            if(modalImg.src && modalImg.src.startsWith('http')) {
-                await copyImageToClipboard(modalImg.src);
-            } else {
-                showToast("Gambar tidak valid", 1200);
-            }
-        });
-    }
-    if(copySubModal) {
-        copySubModal.addEventListener('click', () => {
-            if(currentSub) copyToClipboard(currentSub, "📋 Subjudul tersalin:");
-        });
-    }
-    // Klik teks subjudul di modal juga bisa copy
-    if(modalSubTextSpan) {
-        modalSubTextSpan.addEventListener('click', () => {
-            if(currentSub) copyToClipboard(currentSub, "📋 Subjudul tersalin:");
-        });
-    }
+    if(copyImageBtn) copyImageBtn.addEventListener('click', async () => {
+        if(modalImg.src && modalImg.src.startsWith('http')) await copyImageToClipboard(modalImg.src);
+        else showToast("Gambar tidak valid", 1200);
+    });
+    if(copySubModal) copySubModal.addEventListener('click', () => {
+        if(currentSub) copyToClipboard(currentSub, "📋 Subjudul tersalin:");
+    });
+    if(modalSubTextSpan) modalSubTextSpan.addEventListener('click', () => {
+        if(currentSub) copyToClipboard(currentSub, "📋 Subjudul tersalin:");
+    });
     document.addEventListener('keydown', (e) => {
         if(e.key === 'Escape' && modal.classList.contains('active')) closeModalFunc();
     });
@@ -774,7 +815,7 @@
         });
         
         if(tabId === 'rrnGallery') {
-            panelTitle.innerHTML = '📁 RRN QRIS · LIST FOLDER & GAMBAR';
+            panelTitle.innerHTML = '📁 RRN QRIS · 5 FOLDER PER BARIS';
             refreshBtn.style.display = 'inline-flex';
             fetchSheetData();
         } else if(tabId === 'ewalletBank') {
