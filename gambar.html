@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>RRN QRIS · Sharingan Gallery | Ukuran Folder Lebih Besar Lagi</title>
+    <title>RRN QRIS · Sharingan Gallery | Ukuran Gambar 260px</title>
     <style>
         * {
             margin: 0;
@@ -180,11 +180,11 @@
             border-radius: 10px;
         }
 
-        /* GRID 5 KOLOM - ukuran folder card LEBIH BESAR LAGI */
+        /* GRID 5 KOLOM - ukuran folder card LEBIH BESAR */
         .folder-grid-wrapper {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 2rem;
+            gap: 2.2rem;
             width: 100%;
         }
         .folder-card {
@@ -228,11 +228,12 @@
             color: #ffdbdb;
             white-space: nowrap;
         }
+        /* PADDING KONTEN GAMBAR BESAR */
         .image-grid-folder {
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
-            padding: 1.2rem;
+            gap: 1.5rem;
+            padding: 2rem;
             flex: 1;
         }
         .image-card-mini {
@@ -250,10 +251,10 @@
             border-color: #ff9090;
             box-shadow: 0 0 10px #ff6666;
         }
-        /* THUMBNAIL LEBIH BESAR (folder card lebih besar) */
+        /* UKURAN GAMBAR 260px */
         .image-card-mini img {
             width: 100%;
-            height: 170px;
+            height: 260px;
             object-fit: cover;
             display: block;
             background: #200505;
@@ -262,17 +263,17 @@
         .empty-folder-inner {
             color: #f0adad;
             text-align: center;
-            padding: 1.8rem;
+            padding: 2rem;
             font-style: italic;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         .view-all-badge {
-            margin-top: 0.8rem;
+            margin-top: 0.9rem;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             background: #42161680;
             border-radius: 20px;
-            padding: 0.4rem;
+            padding: 0.5rem;
             color: #ffbcbc;
             cursor: pointer;
             transition: 0.2s;
@@ -436,23 +437,29 @@
             pointer-events: none;
         }
 
-        /* RESPONSIVE - ukuran folder card tetap proporsional */
+        /* RESPONSIVE - ukuran gambar tetap proporsional */
         @media (max-width: 1100px) {
             .folder-grid-wrapper {
                 grid-template-columns: repeat(4, 1fr);
-                gap: 1.5rem;
+                gap: 1.8rem;
             }
             .image-card-mini img {
-                height: 150px;
+                height: 210px;
+            }
+            .image-grid-folder {
+                padding: 1.6rem;
             }
         }
         @media (max-width: 800px) {
             .folder-grid-wrapper {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 1.2rem;
+                gap: 1.5rem;
             }
             .image-card-mini img {
-                height: 160px;
+                height: 220px;
+            }
+            .image-grid-folder {
+                padding: 1.5rem;
             }
         }
         @media (max-width: 500px) {
@@ -460,11 +467,14 @@
                 grid-template-columns: 1fr;
             }
             .image-card-mini img {
-                height: 180px;
+                height: 260px;
             }
             .folder-header {
                 flex-direction: column;
                 align-items: center;
+            }
+            .image-grid-folder {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -474,7 +484,7 @@
     <div class="rrn-header">
         <div class="logo-rrn">🔴🍥 RRN QRIS</div>
         <h1>BADGE · SHARINGAN GALLERY</h1>
-        <p>〘 Klik gambar = Preview | Header modal otomatis mengikuti nama folder | Ukuran folder card LEBIH BESAR LAGI 〙</p>
+        <p>〘 Klik gambar = Preview | Header modal otomatis mengikuti nama folder | Ukuran GAMBAR 260px (LEBIH BESAR) 〙</p>
     </div>
 
     <div class="badge-row">
@@ -794,7 +804,7 @@
         });
         
         if(tabId === 'rrnGallery') {
-            panelTitle.innerHTML = '📁 RRN QRIS · 5 FOLDER PER BARIS (Card Lebih Besar)';
+            panelTitle.innerHTML = '📁 RRN QRIS · 5 FOLDER PER BARIS (Gambar 260px)';
             refreshBtn.style.display = 'inline-flex';
             fetchSheetData();
         } else if(tabId === 'ewalletBank') {
