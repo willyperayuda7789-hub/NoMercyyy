@@ -130,32 +130,40 @@
             overflow: hidden;
         }
         
-        /* PANEL HEADER DENGAN PENCARIAN LIVE */
+        /* PANEL HEADER DENGAN PENCARIAN - SEMUA DI TENGAH */
         .panel-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             background: #170505b3;
             border-bottom: 2px solid #bb4a4a;
             flex-wrap: wrap;
             gap: 0.8rem;
         }
+        
+        /* MEMBUAT JUDUL PANEL MENJADI TENGAH/CENTER DENGAN UKURAN LEBIH BESAR LAGI */
         .panel-header h3 {
             color: #ffbfbf;
-            font-weight: 700;
+            font-weight: 800;
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            flex: 1;
+            text-align: center;
+            margin: 0;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
         
-        /* STYLE SEARCH BOX - LIVE SEARCH (tanpa tombol reset) */
+        /* STYLE SEARCH BOX - LIVE SEARCH */
         .search-wrapper {
             display: flex;
             align-items: center;
             background: #2a0a0a;
-            padding: 0.25rem 0.8rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 40px;
             border: 1px solid #bb5555;
         }
@@ -164,9 +172,9 @@
             border: none;
             padding: 0.4rem 0.6rem;
             color: #ffdddd;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             outline: none;
-            width: 220px;
+            width: 240px;
         }
         .search-wrapper input::placeholder {
             color: #b77a7a;
@@ -176,11 +184,11 @@
         }
         
         .search-info {
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             color: #ffaaaa;
             margin-left: 0.5rem;
             background: #2a0a0a80;
-            padding: 0.2rem 0.6rem;
+            padding: 0.2rem 0.7rem;
             border-radius: 20px;
         }
 
@@ -448,25 +456,35 @@
             .folder-grid-wrapper { grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
             .image-card-mini img, .image-card-mini .error-text { height: 220px; }
             .search-wrapper input { width: 180px; }
+            .panel-header h3 { font-size: 1.15rem; }
         }
         @media (max-width: 800px) {
             .folder-grid-wrapper { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
             .image-card-mini img, .image-card-mini .error-text { height: 230px; }
-            .search-wrapper input { width: 150px; font-size: 0.7rem; }
-            .panel-header { flex-direction: column; align-items: stretch; }
+            .search-wrapper input { width: 150px; font-size: 0.75rem; }
+            .panel-header { 
+                flex-direction: column; 
+                align-items: stretch;
+            }
+            .panel-header h3 {
+                justify-content: center;
+                text-align: center;
+                font-size: 1rem;
+            }
             .search-wrapper { justify-content: center; }
         }
         @media (max-width: 500px) {
             .folder-grid-wrapper { grid-template-columns: 1fr; }
             .image-card-mini img, .image-card-mini .error-text { height: 260px; }
             .search-wrapper input { width: 100%; }
+            .panel-header h3 { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 <div class="rrn-master">
     <div class="rrn-header">
-        <div class="logo-rrn">🔴🍥 GAMBAR CS</div>
+        <div class="logo-rrn">🔴🍥 RRN QRIS</div>
         <h1>BADGE · SHARINGAN GALLERY</h1>
         <p>〘 Live Search Otomatis | Ketik langsung untuk mencari folder/gambar 〙</p>
     </div>
@@ -491,7 +509,7 @@
 
     <div class="content-panel">
         <div class="panel-header">
-            <h3><span id="panelTitle">📁 RRN QRIS · Gallery</span></h3>
+            <h3><span id="panelTitle">📁 RRN QRIS · Gallery (Ketik langsung untuk mencari)</span></h3>
             <div class="search-wrapper">
                 <input type="text" id="searchInput" placeholder="🔍 Ketik untuk mencari..." autocomplete="off">
             </div>
@@ -891,7 +909,6 @@
         });
         
         if(tabId === 'rrnGallery') {
-            panelTitle.innerHTML = 'RRN QRIS · Gallery (Ketik langsung untuk mencari)';
             if (currentGroupData.length === 0) {
                 fetchSheetData();
             } else {
@@ -941,12 +958,11 @@
             b.addEventListener('click', () => switchTab(b.getAttribute('data-tab')));
         });
         
-        // LIVE SEARCH - event input (langsung mencari tanpa klik, tanpa tombol reset)
+        // LIVE SEARCH - event input (langsung mencari tanpa klik)
         const searchInput = document.getElementById('searchInput');
         
         if (searchInput) {
             searchInput.addEventListener('input', function() {
-                // debounce sedikit agar tidak terlalu berat (150ms)
                 if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
                 searchDebounceTimer = setTimeout(() => {
                     handleLiveSearch();
