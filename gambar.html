@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>RRN QRIS · Sharingan Gallery | Ukuran Gambar 260px</title>
+    <title>RRN QRIS · Sharingan Gallery | Ukuran Folder Compact</title>
     <style>
         * {
             margin: 0;
@@ -15,7 +15,7 @@
             min-height: 100vh;
             background: radial-gradient(circle at 20% 30%, #0a0202 0%, #050000 100%);
             font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
-            padding: 1.5rem;
+            padding: 1rem;
             position: relative;
             overflow-x: hidden;
         }
@@ -40,18 +40,18 @@
             z-index: 2;
             background: rgba(8, 2, 2, 0.82);
             backdrop-filter: blur(14px);
-            border-radius: 2rem;
+            border-radius: 1.5rem;
             border: 1px solid rgba(220, 70, 70, 0.7);
             box-shadow: 0 25px 40px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255,80,80,0.1);
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         .rrn-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         .logo-rrn {
-            font-size: 2.6rem;
+            font-size: 2rem;
             filter: drop-shadow(0 0 8px #ff4444);
             animation: pulseRed 2s infinite;
             display: inline-block;
@@ -61,67 +61,67 @@
             100% { text-shadow: 0 0 15px #ff5555; transform: scale(1.02);}
         }
         .rrn-header h1 {
-            font-size: 2rem;
+            font-size: 1.6rem;
             background: linear-gradient(135deg, #ff6a6a, #bb2a2a, #ff8e8e);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             font-weight: 800;
-            margin-top: 0.3rem;
+            margin-top: 0.2rem;
         }
         .rrn-header p {
             color: #e0a5a5;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
 
         .badge-row {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
         .badge-item {
             flex: 1;
-            min-width: 170px;
+            min-width: 150px;
             background: linear-gradient(145deg, #1f0909, #0a0101);
-            border-radius: 50px;
-            padding: 1rem 0.6rem;
+            border-radius: 40px;
+            padding: 0.6rem 0.4rem;
             text-align: center;
             cursor: pointer;
-            transition: 0.25s;
+            transition: 0.2s;
             border: 1px solid #aa3a3a;
-            box-shadow: 0 5px 12px black;
+            box-shadow: 0 3px 8px black;
         }
         .badge-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             border-color: #ff7a7a;
             background: linear-gradient(145deg, #341212, #110303);
-            box-shadow: 0 0 18px rgba(255, 70, 70, 0.5);
+            box-shadow: 0 0 12px rgba(255, 70, 70, 0.5);
         }
         .badge-item.active {
             background: linear-gradient(145deg, #b32a2a, #5e0303);
             border: 2px solid #ffa2a2;
-            box-shadow: 0 0 20px #ff4d4d;
+            box-shadow: 0 0 15px #ff4d4d;
         }
         .badge-icon {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
         }
         .badge-title {
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 0.85rem;
             color: #ffc2c2;
             text-transform: uppercase;
         }
         .badge-desc {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: #d9a3a3;
         }
 
         .content-panel {
             background: rgba(5, 1, 1, 0.65);
-            border-radius: 1.5rem;
+            border-radius: 1.2rem;
             border: 1px solid #9f3838;
             overflow: hidden;
         }
@@ -129,7 +129,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.7rem 1.2rem;
+            padding: 0.5rem 1rem;
             background: #170505b3;
             border-bottom: 2px solid #bb4a4a;
             flex-wrap: wrap;
@@ -140,33 +140,33 @@
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 1.1rem;
+            gap: 6px;
+            font-size: 1rem;
         }
         .refresh-btn {
             background: #421616;
             border: none;
-            padding: 0.4rem 1.2rem;
+            padding: 0.3rem 1rem;
             border-radius: 30px;
             color: #ffe0e0;
             font-weight: bold;
             cursor: pointer;
             transition: 0.2s;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
         }
         .refresh-btn:hover {
             background: #c14d4d;
             color: white;
-            box-shadow: 0 0 8px #ff6a6a;
+            box-shadow: 0 0 6px #ff6a6a;
         }
 
         .gallery-scroll {
             max-height: 620px;
             overflow-y: auto;
-            padding: 1.5rem;
+            padding: 1rem;
             display: flex;
             flex-direction: column;
-            gap: 1.8rem;
+            gap: 1.2rem;
         }
         .gallery-scroll::-webkit-scrollbar {
             width: 5px;
@@ -180,78 +180,77 @@
             border-radius: 10px;
         }
 
-        /* GRID 5 KOLOM - ukuran folder card LEBIH BESAR */
+        /* UKURAN FOLDER LEBIH KECIL: padding & gap diperkecil, card lebih ramping */
         .folder-grid-wrapper {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 2.2rem;
+            gap: 1rem;
             width: 100%;
         }
         .folder-card {
             background: #0c0202c9;
-            border-radius: 1.5rem;
+            border-radius: 1rem;
             overflow: hidden;
-            border-left: 6px solid #e86060;
+            border-left: 4px solid #e86060;
             transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
             flex-direction: column;
             height: 100%;
         }
         .folder-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
             border-left-color: #ff9f9f;
         }
+        /* HEADER FOLDER lebih compact */
         .folder-header {
             display: flex;
             align-items: baseline;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
-            padding: 1rem 0.8rem;
+            gap: 6px;
+            padding: 0.6rem 0.4rem;
             background: linear-gradient(90deg, #2b0c0c, #100202);
             text-align: center;
         }
-        /* JUDUL FOLDER UKURAN SEMULA (1rem) */
         .folder-name {
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 800;
             color: #ffcfcf;
             word-break: break-word;
-            display: inline-block;
         }
         .folder-count {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             background: #ab464680;
-            padding: 0.2rem 0.6rem;
+            padding: 0.15rem 0.5rem;
             border-radius: 30px;
             color: #ffdbdb;
             white-space: nowrap;
         }
-        /* PADDING KONTEN GAMBAR BESAR */
+        /* ISI GAMBAR: padding diperkecil agar card tidak terlalu tinggi */
         .image-grid-folder {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-            padding: 2rem;
+            gap: 0.8rem;
+            padding: 0.8rem;
             flex: 1;
         }
         .image-card-mini {
             background: #120202f5;
-            border-radius: 1rem;
+            border-radius: 0.8rem;
             overflow: hidden;
             transition: 0.2s;
             border: 1px solid #c55353;
             cursor: pointer;
-            box-shadow: 0 2px 6px black;
+            box-shadow: 0 2px 4px black;
             position: relative;
         }
         .image-card-mini:hover {
             transform: translateY(-2px);
             border-color: #ff9090;
-            box-shadow: 0 0 10px #ff6666;
+            box-shadow: 0 0 8px #ff6666;
         }
-        /* UKURAN GAMBAR 260px */
+        /* UKURAN GAMBAR TETAP 260px (tinggi) namun untuk menjaga proporsi di card kecil, tetap 260px */
         .image-card-mini img {
             width: 100%;
             height: 260px;
@@ -259,21 +258,20 @@
             display: block;
             background: #200505;
         }
-        /* Tidak ada tombol copy apapun di thumbnail */
         .empty-folder-inner {
             color: #f0adad;
             text-align: center;
-            padding: 2rem;
+            padding: 1rem;
             font-style: italic;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
         }
         .view-all-badge {
-            margin-top: 0.9rem;
+            margin-top: 0.5rem;
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             background: #42161680;
             border-radius: 20px;
-            padding: 0.5rem;
+            padding: 0.3rem;
             color: #ffbcbc;
             cursor: pointer;
             transition: 0.2s;
@@ -284,7 +282,7 @@
             color: white;
         }
 
-        /* MODAL PREVIEW */
+        /* MODAL PREVIEW - tetap sama */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -310,7 +308,7 @@
             max-width: 90vw;
             max-height: 90vh;
             background: #130303e6;
-            border-radius: 2rem;
+            border-radius: 1.5rem;
             border: 2px solid #ff7a7a;
             box-shadow: 0 0 45px rgba(255, 40, 40, 0.6);
             overflow: hidden;
@@ -321,7 +319,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 0.8rem 1.5rem;
+            padding: 0.6rem 1rem;
             background: #2b0a0a;
             border-bottom: 1px solid #db6b6b;
             position: relative;
@@ -329,17 +327,17 @@
         .modal-header span {
             color: #ffcfcf;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-align: center;
         }
         .modal-close {
             background: none;
             border: none;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
             color: #ffbcbc;
             position: absolute;
-            right: 1rem;
+            right: 0.8rem;
             top: 50%;
             transform: translateY(-50%);
         }
@@ -348,7 +346,7 @@
             transform: translateY(-50%) scale(1.1);
         }
         .modal-img-area {
-            padding: 1.2rem;
+            padding: 1rem;
             text-align: center;
         }
         .modal-img-area img {
@@ -359,7 +357,7 @@
             box-shadow: 0 0 15px black;
         }
         .modal-sub-info {
-            padding: 0.7rem 1.2rem;
+            padding: 0.5rem 1rem;
             background: #1f0404cc;
             text-align: center;
             border-top: 1px solid #b55;
@@ -367,19 +365,18 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 0.8rem;
+            gap: 0.5rem;
         }
         .modal-sub-text {
             font-weight: bold;
             color: #ffd6a5;
             cursor: pointer;
-            padding: 8px 15px;
+            padding: 4px 12px;
             border-radius: 30px;
             transition: 0.1s;
-            font-size: 1rem;
+            font-size: 0.85rem;
             background: #2e0a0a;
             display: inline-block;
-            letter-spacing: 0.5px;
         }
         .modal-sub-text:hover {
             background: #8b3a3a;
@@ -388,36 +385,36 @@
         .copy-icon-modal {
             background: #874040;
             border: none;
-            padding: 0.4rem 1rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 30px;
             color: white;
             font-weight: bold;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
         .copy-icon-modal:hover {
             background: #b55a5a;
         }
         .modal-footer {
-            padding: 0.8rem;
+            padding: 0.6rem;
             background: #1c0505cc;
             display: flex;
             justify-content: center;
-            gap: 1.2rem;
+            gap: 1rem;
             border-top: 1px solid #b15d5d;
         }
         .copy-image-btn {
             background: linear-gradient(145deg, #a13d3d, #631212);
             border: none;
-            padding: 0.6rem 1.8rem;
+            padding: 0.4rem 1.2rem;
             border-radius: 40px;
             color: white;
             font-weight: bold;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
+            gap: 6px;
+            font-size: 0.75rem;
         }
         .copy-image-btn:hover {
             background: linear-gradient(145deg, #c54a4a, #8a1a1a);
@@ -429,37 +426,37 @@
             transform: translateX(-50%);
             background: #1c0606e6;
             color: #ffddbb;
-            padding: 0.6rem 1.5rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 40px;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             z-index: 1200;
             border-left: 4px solid #ff5e5e;
             pointer-events: none;
         }
 
-        /* RESPONSIVE - ukuran gambar tetap proporsional */
+        /* RESPONSIVE: tetap sesuaikan kolom tapi ukuran folder lebih kompak */
         @media (max-width: 1100px) {
             .folder-grid-wrapper {
                 grid-template-columns: repeat(4, 1fr);
-                gap: 1.8rem;
-            }
-            .image-card-mini img {
-                height: 210px;
-            }
-            .image-grid-folder {
-                padding: 1.6rem;
-            }
-        }
-        @media (max-width: 800px) {
-            .folder-grid-wrapper {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
+                gap: 0.9rem;
             }
             .image-card-mini img {
                 height: 220px;
             }
             .image-grid-folder {
-                padding: 1.5rem;
+                padding: 0.7rem;
+            }
+        }
+        @media (max-width: 800px) {
+            .folder-grid-wrapper {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            .image-card-mini img {
+                height: 230px;
+            }
+            .image-grid-folder {
+                padding: 0.7rem;
             }
         }
         @media (max-width: 500px) {
@@ -474,7 +471,7 @@
                 align-items: center;
             }
             .image-grid-folder {
-                padding: 1.5rem;
+                padding: 0.8rem;
             }
         }
     </style>
@@ -484,7 +481,7 @@
     <div class="rrn-header">
         <div class="logo-rrn">🔴🍥 RRN QRIS</div>
         <h1>BADGE · SHARINGAN GALLERY</h1>
-        <p>〘 Klik gambar = Preview | Header modal otomatis mengikuti nama folder | Ukuran GAMBAR 260px (LEBIH BESAR) 〙</p>
+        <p>〘 Mode Compact | Folder lebih kecil | Gambar 260px tetap tajam 〙</p>
     </div>
 
     <div class="badge-row">
@@ -507,7 +504,7 @@
 
     <div class="content-panel">
         <div class="panel-header">
-            <h3><span id="panelTitle">RRN QRIS · 5 FOLDER PER BARIS</span></h3>
+            <h3><span id="panelTitle">RRN QRIS · Kompak 5 Kolom</span></h3>
             <button class="refresh-btn" id="refreshSheetBtn">⟳ Refresh Data</button>
         </div>
         <div id="dynamicContent" class="gallery-scroll">
@@ -516,7 +513,7 @@
     </div>
 </div>
 
-<!-- MODAL PREVIEW -->
+<!-- MODAL PREVIEW (tidak berubah) -->
 <div id="imageModal" class="modal-overlay">
     <div class="modal-box">
         <div class="modal-header">
@@ -533,12 +530,12 @@
         <div class="modal-footer">
             <button id="copyImageModalBtn" class="copy-image-btn">📸 SALIN GAMBAR</button>
         </div>
-        <div style="text-align:center; font-size:0.7rem; padding:8px; background:#160202;">Tekan ESC atau ✖ untuk menutup</div>
+        <div style="text-align:center; font-size:0.65rem; padding:6px; background:#160202;">Tekan ESC atau ✖ untuk menutup</div>
     </div>
 </div>
 
 <script>
-    // ==================== KONFIGURASI GOOGLE SHEETS ====================
+    // KONFIGURASI GOOGLE SHEETS
     const SPREADSHEET_ID = '1Yb0qlCugxmz4_X2Ef1k-D1YssPWA8GHax4Eolke-IpY';
     const SHEET_NAME = 'RRN QRIS';
     
@@ -680,7 +677,7 @@
                               </div>`;
                 } else {
                     html += `<div class="image-card-mini" style="justify-content:center; background:#1e0707;" data-subtitle="${safeSub}" data-folder-name="${escapeAttr(folderTitle)}">
-                                <div style="font-size:1rem; text-align:center; padding:1.2rem; color:#ffaaaa;">⚠️ Gambar tidak valid</div>
+                                <div style="font-size:0.8rem; text-align:center; padding:1rem; color:#ffaaaa;">⚠️ Gambar tidak valid</div>
                               </div>`;
                 }
             }
@@ -695,7 +692,7 @@
         html += `</div>`;
         container.innerHTML = html;
         
-        // Klik gambar -> buka modal dengan header mengikuti nama folder
+        // Event klik gambar -> buka modal
         document.querySelectorAll('.image-card-mini').forEach(card => {
             const imgUrl = card.getAttribute('data-img-url');
             const subTitle = card.getAttribute('data-subtitle') || "QRIS RRN";
@@ -730,7 +727,7 @@
         });
     }
     
-    // ==================== MODAL PREVIEW ====================
+    // MODAL LOGIC
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const modalHeaderTextSpan = document.getElementById('modalHeaderText');
@@ -792,7 +789,7 @@
     });
     modal.addEventListener('click', (e) => { if(e.target === modal) closeModalFunc(); });
     
-    // ==================== BADGE NAVIGASI ====================
+    // BADGE NAVIGASI
     function switchTab(tabId) {
         const panelTitle = document.getElementById('panelTitle');
         const refreshBtn = document.getElementById('refreshSheetBtn');
@@ -804,42 +801,42 @@
         });
         
         if(tabId === 'rrnGallery') {
-            panelTitle.innerHTML = ' RRN QRIS · 5 FOLDER PER BARIS (Gambar 260px)';
+            panelTitle.innerHTML = '📁 RRN QRIS · Folder Compact (Gambar 260px)';
             refreshBtn.style.display = 'inline-flex';
             fetchSheetData();
         } else if(tabId === 'ewalletBank') {
             panelTitle.innerHTML = '💳 PROFIL EWALLET / BANK (RRN OFFICIAL)';
             refreshBtn.style.display = 'none';
             contentDiv.innerHTML = `
-                <div style="background:#0a0101; border-radius:1.5rem; padding:1.8rem;">
-                    <div style="border-left:4px solid #ea5a5a; padding-left:14px; margin-bottom:1.2rem;">
-                        <strong style="color:#ffbcbc; font-size:1rem;">🏦 REKENING BANK</strong><br>
+                <div style="background:#0a0101; border-radius:1rem; padding:1.2rem;">
+                    <div style="border-left:3px solid #ea5a5a; padding-left:12px; margin-bottom:1rem;">
+                        <strong style="color:#ffbcbc; font-size:0.9rem;">🏦 REKENING BANK</strong><br>
                         • BCA : 4560 1234 5678 a.n RRN SHARINGAN<br>
                         • MANDIRI : 123-00-1234567 a.n UCHIHA GROUP<br>
                         • BRI : 4213 9876 5432 a.n ITACHI RRN
                     </div>
-                    <div style="border-left:4px solid #ea5a5a; padding-left:14px; margin-bottom:1.2rem;">
-                        <strong style="color:#ffbcbc; font-size:1rem;">📱 E-WALLET & QRIS</strong><br>
+                    <div style="border-left:3px solid #ea5a5a; padding-left:12px; margin-bottom:1rem;">
+                        <strong style="color:#ffbcbc; font-size:0.9rem;">📱 E-WALLET & QRIS</strong><br>
                         • DANA / OVO : 081234567890 (RRN OFFICIAL)<br>
                         • QRIS ALL PAY : rrn.qris.sharingan<br>
                         • Limit : Unlimited Mangekyou
                     </div>
-                    <div class="empty-folder" style="background:#1d0303; padding:0.8rem; font-size:0.85rem;">💎 Minimal deposit 10k Ryo, bonus new member scatter 20%</div>
+                    <div class="empty-folder" style="background:#1d0303; padding:0.6rem; font-size:0.75rem;">💎 Minimal deposit 10k Ryo, bonus new member scatter 20%</div>
                 </div>
             `;
         } else if(tabId === 'tutorialGame') {
             panelTitle.innerHTML = '🎮 CARA BERMAIN TOGEL · SCATTER JP';
             refreshBtn.style.display = 'none';
-            contentDiv.innerHTML = `<div style="background:#0a0101; border-radius:1.5rem; padding:1.8rem;">
-                <h4 style="color:#ffa76e; margin-bottom:0.8rem;">🔥 PANDUAN TOGEL RRN</h4>
-                <ul style="margin-left:1.5rem; color:#ffcfcf; line-height:1.8; font-size:0.9rem;">
+            contentDiv.innerHTML = `<div style="background:#0a0101; border-radius:1rem; padding:1.2rem;">
+                <h4 style="color:#ffa76e; margin-bottom:0.6rem; font-size:1rem;">🔥 PANDUAN TOGEL RRN</h4>
+                <ul style="margin-left:1.2rem; color:#ffcfcf; line-height:1.6; font-size:0.85rem;">
                     <li>1️⃣ Pilih pasaran: SGP, HK, SDY, atau Macau.</li>
                     <li>2️⃣ Tentukan jenis taruhan (4D/3D/2D, Colok Bebas, Scatter Sharingan).</li>
                     <li>3️⃣ Deposit ke PROFIL BANK/EWALLET minimal 10k.</li>
                     <li>4️⃣ Klaim voucher "AMATERASU" untuk freebet jika deposit pertama.</li>
                     <li>5️⃣ Input nomor prediksi & tunggu result. Jackpot x1000 untuk 4D akurat!</li>
                 </ul>
-                <div class="empty-folder" style="background:#240606; margin-top:1.2rem; padding:0.8rem;">✨ BONUS SCATTER: Buy Free Spin / Buy Feature cashback 15% khusus member RRN QRIS</div>
+                <div class="empty-folder" style="background:#240606; margin-top:1rem; padding:0.6rem; font-size:0.75rem;">✨ BONUS SCATTER: Buy Free Spin / Buy Feature cashback 15% khusus member RRN QRIS</div>
             </div>`;
         }
     }
