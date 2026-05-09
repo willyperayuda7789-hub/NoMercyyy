@@ -656,7 +656,7 @@
             const hasMore = totalItems > 4;
             html += `<div class="folder-card" data-folder-name="${escapeAttr(folderTitle)}">
                         <div class="folder-header">
-                            <span class="folder-name">📂 ${folderTitle}</span>
+                            <span class="folder-name">${folderTitle}</span>
                             <span class="folder-count">${totalItems} item</span>
                         </div>
                         <div class="image-grid-folder">`;
@@ -688,7 +688,7 @@
                 html += `<div class="empty-folder-inner">✨ Tidak ada QRIS</div>`;
             }
             if(hasMore) {
-                html += `<div class="view-all-badge" data-folder-full="${escapeAttr(folderTitle)}">📂 +${totalItems-4} lainnya (klik folder untuk detail)</div>`;
+                html += `<div class="view-all-badge" data-folder-full="${escapeAttr(folderTitle)}">+${totalItems-4} lainnya (klik folder untuk detail)</div>`;
             }
             html += `</div></div>`;
         }
