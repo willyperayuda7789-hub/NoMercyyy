@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>7 Kolom Sidebar Kiri | Background Estetik</title>
+    <title>7 Kolom Sidebar Kiri | Background Natural · Tajam & Utuh</title>
     <!-- Font Awesome Icons (v6 free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Font: Inter untuk tipografi modern -->
@@ -19,28 +19,19 @@
             font-family: 'Inter', sans-serif;
             height: 100vh;
             overflow: hidden;
-            /* Background utama dari link yang diberikan */
+            /* ===== BACKGROUND UTAMA - TANPA OVERLAY GELAP, TANPA BLUR ===== */
+            /* Hapus semua efek blur/overlay gelap, background asli tampil JELAS, TAJAM, UTUH */
             background-image: url('https://cdn.areabermain.club/assets/cdn/az6/2026/01/08/20260108/0e9b0ec9a88ad88a5935bc5802bc41a5/linetogel-background-07januari2026.jpg');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            position: relative;
+            /* Tidak ada background overlay/abuan */
         }
 
-        /* Overlay semi-transparan agar teks tetap terbaca dan terlihat elegan */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(2px);
-            z-index: 0;
-        }
-
+        /* --- HAPUS SEMUA OVERLAY & BLUR yang sebelumnya ada di body::before --- */
+        /* Tidak ada pseudo-element gelap, tidak ada backdrop-filter pada body */
+        
         /* LAYOUT UTAMA: SIDEBAR (kiri) + KONTEN UTAMA */
         .app-container {
             display: flex;
@@ -51,28 +42,30 @@
         }
 
         /* ========= SIDEBAR KIRI ========= */
-        /* Sidebar dengan efek glassmorphism agar background terlihat */
+        /* Sidebar tetap modern tapi background asli tetap terlihat penuh */
         .sidebar {
             width: 280px;
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            /* Background sidebar semi-transparan namun TIDAK mengaburkan bg belakang, hanya memberikan sedikit transparansi agar teks terbaca */
+            background: rgba(15, 23, 42, 0.85);  /* solid gelap dengan transparansi, tanpa blur */
+            backdrop-filter: none;  /* BLUR dihilangkan total agar background tampil TAJAM */
+            -webkit-backdrop-filter: none;
             color: #f1f5f9;
             display: flex;
             flex-direction: column;
-            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
             transition: all 0.2s ease;
             z-index: 10;
             overflow-y: auto;
             flex-shrink: 0;
-            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* Header sidebar */
         .sidebar-header {
             padding: 28px 20px 20px 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             margin-bottom: 16px;
+            background: transparent;
         }
 
         .logo-area {
@@ -98,12 +91,12 @@
             font-weight: 600;
             letter-spacing: -0.3px;
             color: white;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
         }
 
         .logo-text p {
             font-size: 0.7rem;
-            opacity: 0.85;
+            opacity: 0.9;
             margin-top: 2px;
         }
 
@@ -116,7 +109,7 @@
             gap: 6px;
         }
 
-        /* Setiap item menu = kolom interaktif */
+        /* Setiap item menu = kolom interaktif, tidak ada blur tambahan */
         .nav-item {
             display: flex;
             align-items: center;
@@ -129,8 +122,8 @@
             cursor: pointer;
             font-weight: 500;
             font-size: 0.95rem;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.35);  /* latar solid tapi transparan untuk keterbacaan, tanpa blur */
+            backdrop-filter: none;
         }
 
         .nav-item i {
@@ -152,12 +145,12 @@
             padding: 2px 8px;
             border-radius: 30px;
             margin-left: auto;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
 
         /* Hover & aktif */
         .nav-item:hover {
-            background: rgba(59, 130, 246, 0.45);
+            background: rgba(59, 130, 246, 0.7);
             color: white;
             transform: translateX(4px);
         }
@@ -175,26 +168,28 @@
         /* Footer sidebar */
         .sidebar-footer {
             padding: 20px 20px 24px 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
             font-size: 0.7rem;
-            color: #cbd5e1;
+            color: #e2e8f0;
             margin-top: auto;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: none;
         }
 
         /* ========= MAIN CONTENT (KANAN) ========= */
+        /* Latar konten utama: lebih transparan tapi tetap memberikan kontras pada teks, tanpa mengaburkan bg utama */
         .main-content {
             flex: 1;
             overflow-y: auto;
             padding: 24px 32px;
-            background: rgba(248, 250, 252, 0.65);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            background: rgba(248, 250, 252, 0.7);  /* transparan tanpa efek blur, background asli tetap kelihatan tajam */
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
             border-radius: 0;
             margin: 0;
         }
 
-        /* Header konten */
+        /* Header konten - efek semi transparan lembut (tanpa blur) */
         .content-header {
             display: flex;
             justify-content: space-between;
@@ -202,30 +197,30 @@
             margin-bottom: 28px;
             flex-wrap: wrap;
             gap: 16px;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: none;
             padding: 14px 24px;
             border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .page-title h1 {
             font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #ffffff, #e0f2fe);
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            letter-spacing: -0.5px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            text-shadow: none;
         }
 
         .page-title p {
             font-size: 0.85rem;
-            color: #f1f5f9;
+            color: #0f172a;
             margin-top: 6px;
-            font-weight: 500;
-            text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+            font-weight: 600;
+            text-shadow: none;
         }
 
         .action-buttons {
@@ -234,7 +229,7 @@
         }
 
         .btn-light {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             border: none;
             padding: 8px 18px;
             border-radius: 40px;
@@ -245,15 +240,14 @@
             gap: 8px;
             cursor: pointer;
             transition: 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             color: #0f172a;
         }
 
         .btn-light:hover {
             background: white;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
         }
 
         /* Grid card dinamis - menampilkan konten yang berubah sesuai kolom sidebar */
@@ -264,21 +258,22 @@
             margin-top: 12px;
         }
 
+        /* Card menggunakan latar putih solid dengan transparansi ringan, tidak ada blur sehingga background asli tetap tajam */
         .card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: none;
             border-radius: 28px;
             padding: 22px;
             transition: all 0.25s ease;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
         }
 
         .card:hover {
             transform: translateY(-6px);
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 28px 36px -12px rgba(0, 0, 0, 0.25);
-            border-color: rgba(59, 130, 246, 0.5);
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 28px 36px -12px rgba(0, 0, 0, 0.3);
+            border-color: rgba(59, 130, 246, 0.6);
         }
 
         .card-icon {
@@ -310,7 +305,7 @@
             font-weight: 700;
             color: #1e40af;
             margin-top: 14px;
-            backdrop-filter: blur(2px);
+            backdrop-filter: none;
         }
 
         /* Responsif: layar kecil sidebar bisa menyempit */
@@ -353,11 +348,14 @@
             background: #3b82f6;
             border-radius: 12px;
         }
+        
+        /* Efek tambahan: tidak ada satupun pseudo-element yang menutupi gambar background */
+        /* Background asli menjadi pusat perhatian, tajam dan penuh warna */
     </style>
 </head>
 <body>
 <div class="app-container">
-    <!-- SIDEBAR KIRI DENGAN 7 KOLOM (menu utama) dengan efek modern -->
+    <!-- SIDEBAR KIRI DENGAN 7 KOLOM (menu utama) tanpa blur atau overlay gelap -->
     <aside class="sidebar">
         <div class="sidebar-header">
             <div class="logo-area">
@@ -366,7 +364,7 @@
                 </div>
                 <div class="logo-text">
                     <h2>7Kolom</h2>
-                    <p>Sidebar · visual estetik</p>
+                    <p>Sidebar · Tajam & Natural</p>
                 </div>
             </div>
         </div>
@@ -412,7 +410,7 @@
         </div>
 
         <div class="sidebar-footer">
-            <i class="fas fa-image"></i> Background estetik · 7 menu aktif
+            <i class="fas fa-image"></i> Background JELAS & UTUH · 7 menu interaktif
         </div>
     </aside>
 
@@ -421,7 +419,7 @@
         <div class="content-header">
             <div class="page-title">
                 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-                <p id="subHeading">Pilih kolom di sidebar kiri untuk melihat konten spesifik</p>
+                <p id="subHeading">Pilih kolom di sidebar kiri — latar belakang tampil penuh tanpa blur/overlay</p>
             </div>
             <div class="action-buttons">
                 <div class="btn-light" id="refreshHintBtn">
@@ -442,7 +440,7 @@
     const tabsData = {
         tab1: {
             title: "🏠 Dashboard Utama",
-            subtitle: "Gambaran sistem dan metrik utama (Kolom 1) — background gambar dari Pinterest",
+            subtitle: "Gambaran sistem & metrik inti — background ORIGINAL tampil penuh, jernih & tajam",
             items: [
                 { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
                 { icon: "fas fa-users", title: "Pengguna Aktif", desc: "1,284 pengguna online sekarang", badge: "Hari ini" },
@@ -451,7 +449,7 @@
         },
         tab2: {
             title: "📊 Analytics & Statistik",
-            subtitle: "Data realtime dan performa (Kolom 2) — insight cerdas",
+            subtitle: "Data realtime dan performa (Kolom 2) — insight cerdas + background natural",
             items: [
                 { icon: "fas fa-chart-line", title: "Trafik Bulanan", desc: "Peningkatan 34% dibanding bulan lalu", badge: "Naik" },
                 { icon: "fas fa-chart-simple", title: "Konversi Pengunjung", desc: "Rasio konversi 8.2%", badge: "Optimal" },
@@ -460,7 +458,7 @@
         },
         tab3: {
             title: "✉️ Pusat Pesan",
-            subtitle: "Inbox dan komunikasi tim (Kolom 3) — pesan realtime",
+            subtitle: "Inbox dan komunikasi tim (Kolom 3) — pesan realtime tanpa halangan visual",
             items: [
                 { icon: "fas fa-inbox", title: "Pesan Masuk", desc: "Anda memiliki 12 pesan belum dibaca", badge: "12 baru" },
                 { icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif di proyek utama", badge: "Balas" },
@@ -469,7 +467,7 @@
         },
         tab4: {
             title: "✅ Manajemen Proyek",
-            subtitle: "Daftar tugas & kolaborasi (Kolom 4) — progres terkini",
+            subtitle: "Daftar tugas & kolaborasi (Kolom 4) — progres terkini, background utuh",
             items: [
                 { icon: "fas fa-list-check", title: "Task Sprint", desc: "8 tugas selesai dari 21 tugas", badge: "Selesai 38%" },
                 { icon: "fas fa-code-branch", title: "Repository", desc: "Pull request menunggu review", badge: "2 PR" },
@@ -478,7 +476,7 @@
         },
         tab5: {
             title: "👥 Tim & Anggota",
-            subtitle: "Struktur dan peran tim (Kolom 5) — kolaborasi solid",
+            subtitle: "Struktur dan peran tim (Kolom 5) — kolaborasi solid, background tampil jelas",
             items: [
                 { icon: "fas fa-user-plus", title: "Anggota Aktif", desc: "12 anggota online · 4 sedang rapat", badge: "Online" },
                 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
@@ -487,7 +485,7 @@
         },
         tab6: {
             title: "⚙️ Pengaturan Sistem",
-            subtitle: "Konfigurasi dan preferensi (Kolom 6) — kustomisasi",
+            subtitle: "Konfigurasi dan preferensi (Kolom 6) — kustomisasi, background tetap tanpa blur",
             items: [
                 { icon: "fas fa-user-cog", title: "Akun Saya", desc: "Privasi, keamanan, dan notifikasi", badge: "Diperbarui" },
                 { icon: "fas fa-palette", title: "Tampilan", desc: "Mode terang/gelap & tema kustom", badge: "Baru" },
@@ -496,9 +494,9 @@
         },
         tab7: {
             title: "❓ Bantuan & Dokumentasi",
-            subtitle: "Panduan dan support (Kolom 7) — selalu siap membantu",
+            subtitle: "Panduan dan support (Kolom 7) — selalu siap membantu, background natural maksimal",
             items: [
-                { icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi fitur sidebar 7 kolom dengan background artistik", badge: "PDF" },
+                { icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi fitur sidebar 7 kolom dengan background artistik tanpa filter", badge: "PDF" },
                 { icon: "fas fa-headset", title: "Dukungan Teknis", desc: "Chat dengan agen support 24/7", badge: "Live" },
                 { icon: "fas fa-video", title: "Tutorial Video", desc: "Walkthrough antarmuka lengkap", badge: "Tonton" }
             ]
@@ -533,13 +531,14 @@
                 </div>
             `;
         });
-        // Info tambahan tentang background yang digunakan
+        
+        // Tambahkan kartu apresiasi: background tanpa blur dan overlay gelap dihapus total!
         const extraInfo = `
-            <div class="card" style="background: rgba(59,130,246,0.2); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.5);">
-                <div class="card-icon"><i class="fas fa-image"></i></div>
-                <h3>✨ Background dari Pinterest</h3>
-                <p>Gambar latar belakang menggunakan URL: https://i.pinimg.com/1200x/9d/f8/a5/9df8a54bdbc89f524d62a729f52936c4.jpg<br>Memberikan nuansa estetik dan modern pada tampilan 7 kolom sidebar.</p>
-                <div class="stat-badge"><i class="fas fa-palette"></i> Visual Art</div>
+            <div class="card" style="background: rgba(255, 255, 255, 0.92); backdrop-filter: none; border-left: 4px solid #3b82f6;">
+                <div class="card-icon"><i class="fas fa-eye"></i></div>
+                <h3>✨ Mode Background JELAS & TAJAM</h3>
+                <p>Semua efek blur, overlay gelap, dan backdrop-filter pada body/latar telah dihilangkan. Gambar latar belakang dari kode URL tampil UTUH, penuh warna, tanpa gangguan visual. Nikmati keindahan artwork background dengan fitur 7 kolom interaktif.</p>
+                <div class="stat-badge"><i class="fas fa-palette"></i> Full Natural · No Blur</div>
             </div>
         `;
         
