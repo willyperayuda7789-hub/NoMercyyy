@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>7 Kolom Sidebar | Folder + Tombol SALIN 0.9rem (Pojok Kanan Bawah)</title>
+    <title>7 Kolom Sidebar | Tanpa Simbol Folder (Kartu & Isi Folder)</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Font: Inter -->
@@ -304,10 +304,22 @@
             transform: translateX(-50%) translateY(0px);
         }
 
+        /* Icon area di dalam card - untuk static tab tetap ada, untuk random tab dihilangkan */
         .card-icon {
             font-size: 2rem;
             margin-bottom: 16px;
             color: #60a5fa;
+        }
+        
+        /* Untuk random tab, kita hilangkan area icon-nya */
+        .card.random-folder .card-icon {
+            display: none;
+        }
+        
+        /* Penyesuaian margin untuk judul ketika icon dihilangkan */
+        .card.random-folder h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
         }
 
         .card h3 {
@@ -357,7 +369,7 @@
             margin-bottom: 8px;
         }
 
-        /* MODAL STYLE */
+        /* MODAL STYLE - tanpa simbol folder */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -416,6 +428,11 @@
             word-break: break-word;
             padding-right: 20px;
         }
+        
+        /* Hilangkan ikon di header modal */
+        .modal-header h2 i {
+            display: none;
+        }
 
         .close-modal {
             background: rgba(255, 255, 255, 0.15);
@@ -447,15 +464,9 @@
             word-break: break-word;
         }
 
-        .modal-body i {
-            color: #60a5fa;
-            margin-right: 8px;
-        }
-
+        /* Hilangkan ikon folder di dalam modal */
         .modal-folder-icon {
-            font-size: 3rem;
-            margin-bottom: 16px;
-            text-align: center;
+            display: none;
         }
 
         .modal-content-text {
@@ -464,6 +475,11 @@
             border-radius: 24px;
             margin-top: 12px;
             border-left: 4px solid #3b82f6;
+        }
+        
+        /* Hilangkan ikon panah di modal content */
+        .modal-content-text i {
+            display: none;
         }
 
         .esc-hint {
@@ -521,7 +537,7 @@
                 <div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
                 <div class="logo-text">
                     <h2>7Kolom</h2>
-                    <p>Background 100% Full</p>
+                    <p>Tanpa Simbol Folder</p>
                 </div>
             </div>
         </div>
@@ -535,7 +551,7 @@
             <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
         </div>
         <div class="sidebar-footer">
-            <i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | ESC tutup | Tombol <strong>"SALIN" (0.9rem)</strong> di pojok kanan bawah → copy isi folder saja
+            <i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | Tanpa simbol folder di mana pun | Tombol <strong>"SALIN" (0.9rem)</strong> di pojok kanan bawah
         </div>
     </aside>
 
@@ -543,7 +559,7 @@
         <div class="content-header">
             <div class="page-title">
                 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-                <p id="subHeading">Background full screen — Tombol "SALIN" ukuran 0.9rem di pojok kanan bawah | Hanya menyalin teks isi folder</p>
+                <p id="subHeading">Background full screen — Semua simbol folder telah dihilangkan (kartu & isi folder)</p>
             </div>
             <div class="action-buttons">
                 <div class="btn-light" id="refreshDataBtn"><i class="fas fa-sync-alt"></i> Muat Ulang</div>
@@ -555,20 +571,19 @@
     </main>
 </div>
 
-<!-- MODAL UNTUK MENAMPILKAN ISI FOLDER -->
+<!-- MODAL UNTUK MENAMPILKAN ISI FOLDER - TANPA SIMBOL -->
 <div id="folderModal" class="modal-overlay">
     <div class="modal-container">
         <div class="modal-header">
-            <h2 id="modalTitle"><i class="fas fa-folder-open"></i> Judul Folder</h2>
+            <h2 id="modalTitle"></h2>
             <button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body" id="modalBody">
-            <div class="modal-folder-icon"><i class="fas fa-folder-tree"></i></div>
             <div class="modal-content-text" id="modalContentText">
                 Isi folder akan ditampilkan di sini...
             </div>
             <div class="esc-hint">
-                <i class="fas fa-keyboard"></i> Tekan tombol <kbd>ESC</kbd> untuk menutup dan kembali
+                <kbd>ESC</kbd> Tekan ESC untuk menutup
             </div>
         </div>
     </div>
@@ -653,7 +668,7 @@
     
     const toast = document.getElementById("copyToast");
     function showCopyToast(message = "Isi folder berhasil disalin! 📋") {
-        toast.textContent = `📄  ${message}`;
+        toast.innerHTML = `<i class="fas fa-copy"></i>  ${message}`;
         toast.classList.add("show");
         setTimeout(() => {
             toast.classList.remove("show");
@@ -664,7 +679,7 @@
         const finalText = textContent || "(Tidak ada konten tertulis)";
         try {
             await navigator.clipboard.writeText(finalText);
-            showCopyToast(`Isi folder "${folderTitleForToast}" berhasil disalin (hanya teks isi)`);
+            showCopyToast(`Isi folder "${folderTitleForToast}" berhasil disalin`);
         } catch (err) {
             const textarea = document.createElement("textarea");
             textarea.value = finalText;
@@ -677,10 +692,12 @@
     }
     
     function openModal(folderTitle, folderContent) {
-        modalTitle.innerHTML = `<i class="fas fa-folder-open"></i> ${escapeHtml(folderTitle)}`;
-        let formattedContent = escapeHtml(folderContent) || "<i class='fas fa-file-alt'></i> <em>Tidak ada konten tertulis dalam folder ini.</em>";
+        // Tampilkan hanya teks judul tanpa ikon
+        modalTitle.textContent = folderTitle;
+        let formattedContent = folderContent || "(Tidak ada konten tertulis dalam folder ini.)";
         formattedContent = formattedContent.replace(/\n/g, '<br>');
-        modalContentText.innerHTML = `<i class="fas fa-caret-right"></i> 📄 Isi Folder:<br><br>${formattedContent}`;
+        // Tampilkan hanya teks isi folder tanpa ikon apapun
+        modalContentText.innerHTML = formattedContent;
         modal.classList.add("active");
         document.body.style.overflow = "hidden";
     }
@@ -778,7 +795,7 @@
     
     async function renderRandomTab() {
         mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
-        subHeading.innerHTML = " Tombol <strong style='color:#a7f3d0'>SALIN (0.9rem)</strong> di pojok kanan bawah folder | Hanya menyalin teks isi folder ✨";
+        subHeading.innerHTML = "✨ Semua simbol folder telah dihilangkan | Tombol <strong style='color:#a7f3d0'>SALIN (0.9rem)</strong> di pojok kanan bawah";
         
         dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse refresh-loader"></i><p>Mengambil data folder...</p></div>`;
         
@@ -789,7 +806,6 @@
             if (!foldersData || foldersData.length === 0) {
                 dynamicArea.innerHTML = `
                     <div class="card error-message" style="grid-column:1/-1;">
-                        <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
                         <h3>Tidak Ada Data Folder</h3>
                         <p>Sheet "PK RANDOM" kosong atau tidak berisi data. Pastikan kolom A (judul folder) dan kolom B (isi folder) terisi.</p>
                         <div class="stat-badge">Periksa kembali spreadsheet Anda</div>
@@ -802,12 +818,12 @@
             for (let idx = 0; idx < foldersData.length; idx++) {
                 const folder = foldersData[idx];
                 const shortContent = folder.content.length > 120 ? folder.content.substring(0, 120) + '...' : folder.content;
+                // Kelas "random-folder" ditambahkan untuk menyembunyikan ikon folder (melalui CSS)
                 cardsHtml += `
-                    <div class="card" data-folder-index="${idx}" data-folder-title="${escapeHtml(folder.title)}">
+                    <div class="card random-folder" data-folder-index="${idx}" data-folder-title="${escapeHtml(folder.title)}">
                         <button class="btn-salin-folder" data-salin-index="${idx}" title="Salin isi folder (teks saja)"><i class="fas fa-copy"></i> SALIN</button>
-                        <div class="card-icon"><i class="fas fa-folder"></i></div>
                         <h3>${escapeHtml(folder.title)}</h3>
-                        <p>${escapeHtml(shortContent) || '<i class="fas fa-box-open"></i> Klik folder atau gunakan tombol SALIN di pojok kanan bawah.'}</p>
+                        <p>${escapeHtml(shortContent) || 'Klik folder untuk melihat isi lengkap.'}</p>
                         <div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk buka folder</div>
                     </div>
                 `;
@@ -816,7 +832,7 @@
                 <div class="card" style="cursor: default;">
                     <div class="card-icon"><i class="fas fa-text-height"></i></div>
                     <h3>📏 Ukuran Tombol 0.9rem</h3>
-                    <p>Tombol <strong>"SALIN"</strong> berukuran <strong>0.9rem</strong> (ukuran yang pas dan proporsional) di sudut kanan bawah setiap kartu folder. Tetap hanya menyalin teks isi folder murni tanpa judul.</p>
+                    <p>Tombol <strong>"SALIN"</strong> berukuran <strong>0.9rem</strong> di sudut kanan bawah setiap kartu folder. Menyalin teks isi folder murni tanpa simbol apapun.</p>
                     <div class="stat-badge"><i class="fas fa-sync-alt"></i> Refresh update data</div>
                 </div>
             `;
@@ -846,7 +862,7 @@
                 });
             });
         } catch (err) {
-            dynamicArea.innerHTML = `<div class="card error-message" style="grid-column:1/-1;"><div class="card-icon"><i class="fas fa-bug"></i></div><h3>Error: Gagal Memuat</h3><p>${err.message}</p><div class="stat-badge">Coba refresh atau periksa koneksi</div></div>`;
+            dynamicArea.innerHTML = `<div class="card error-message" style="grid-column:1/-1;"><h3>Error: Gagal Memuat</h3><p>${err.message}</p><div class="stat-badge">Coba refresh atau periksa koneksi</div></div>`;
         }
     }
     
