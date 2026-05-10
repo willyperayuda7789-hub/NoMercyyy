@@ -589,7 +589,7 @@
         modalTitle.innerHTML = `<i class="fas fa-folder-open"></i> ${escapeHtml(folderTitle)}`;
         let formattedContent = escapeHtml(folderContent) || "<i class='fas fa-file-alt'></i> <em>Tidak ada konten tertulis dalam folder ini.</em>";
         formattedContent = formattedContent.replace(/\n/g, '<br>');
-        modalContentText.innerHTML = `<i class="fas fa-caret-right"></i><br><br>${formattedContent}`;
+        modalContentText.innerHTML = `<i class="fas fa-caret-right"></i> 📄 Isi Folder:<br><br>${formattedContent}`;
         modal.classList.add("active");
         document.body.style.overflow = "hidden";
     }
@@ -695,7 +695,7 @@
     // Render folder (RANDOM tab) dengan kartu yang bisa diklik
     async function renderRandomTab() {
         mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
-        subHeading.innerHTML = " Data diambil dari sheet 'PK RANDOM' (Kolom A = Judul Folder, Kolom B = Isi Folder) | Klik folder untuk lihat isi | Tekan ESC untuk kembali ke folder";
+        subHeading.innerHTML = "📁 Data diambil dari sheet 'PK RANDOM' (Kolom A = Judul Folder, Kolom B = Isi Folder) | Klik folder untuk lihat isi | Tekan ESC untuk kembali ke folder";
         
         dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse refresh-loader"></i><p>Mengambil data folder...</p></div>`;
         
@@ -722,7 +722,7 @@
                 cardsHtml += `
                     <div class="card" data-folder-index="${idx}">
                         <div class="card-icon"><i class="fas fa-folder"></i></div>
-                        <h3> ${escapeHtml(folder.title)}</h3>
+                        <h3>📁 ${escapeHtml(folder.title)}</h3>
                         <p>${escapeHtml(shortContent) || '<i class="fas fa-box-open"></i> Tidak ada deskripsi singkat. Klik untuk melihat isi lengkap.'}</p>
                         <div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk buka folder</div>
                         <div class="click-hint"><i class="fas fa-mouse-pointer"></i> Lihat semua isi folder</div>
