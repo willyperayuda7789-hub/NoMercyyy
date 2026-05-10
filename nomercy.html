@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>7 Kolom Sidebar | Folder Klikable + ESC Close</title>
+    <title>7 Kolom Sidebar | Folder + Tombol SALIN 1rem (Pojok Kanan Bawah)</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Font: Inter -->
@@ -19,8 +19,6 @@
             font-family: 'Inter', sans-serif;
             height: 100vh;
             overflow: hidden;
-            
-            /* BACKGROUND UKURAN 100% (FULL SIZE) - Gambar dari Pinterest */
             background-image: url('https://i.pinimg.com/1200x/9d/f8/a5/9df8a54bdbc89f524d62a729f52936c4.jpg');
             background-size: 100% 100%;
             background-position: center center;
@@ -236,6 +234,7 @@
             display: flex;
             flex-direction: column;
             cursor: pointer;
+            position: relative;
         }
 
         .card:hover {
@@ -243,6 +242,66 @@
             background: rgba(30, 45, 70, 0.95);
             border-color: rgba(59, 130, 246, 0.6);
             box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* TOMBOL SALIN - POJOK KANAN BAWAH, ukuran 1.0rem */
+        .btn-salin-folder {
+            position: absolute;
+            bottom: 16px;
+            right: 18px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 1.0rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 6;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', monospace;
+        }
+        .btn-salin-folder i {
+            font-size: 0.95rem;
+        }
+        .btn-salin-folder:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: scale(1.02);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.4);
+        }
+        .btn-salin-folder:active {
+            transform: scale(0.97);
+        }
+
+        .copy-toast-notif {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            color: #bbf7d0;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.25s ease, transform 0.2s;
+            pointer-events: none;
+            border-left: 4px solid #22c55e;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+            font-family: monospace;
+        }
+        .copy-toast-notif.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0px);
         }
 
         .card-icon {
@@ -257,6 +316,7 @@
             margin-bottom: 12px;
             color: #f0f4fe;
             word-break: break-word;
+            padding-right: 8px;
         }
 
         .card p {
@@ -270,6 +330,7 @@
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
+            margin-bottom: 52px; /* memberikan ruang ekstra karena tombol 1rem lebih besar */
         }
 
         .stat-badge {
@@ -293,6 +354,7 @@
             align-items: center;
             gap: 6px;
             opacity: 0.7;
+            margin-bottom: 8px;
         }
 
         /* MODAL STYLE */
@@ -426,16 +488,13 @@
             border-left: 5px solid #ff8a8a;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         @media (max-width: 768px) {
             .sidebar { width: 240px; }
             .main-content { padding: 16px; }
             .modal-container { width: 95%; }
             .modal-header h2 { font-size: 1.3rem; }
+            .btn-salin-folder { padding: 6px 14px; font-size: 0.9rem; bottom: 12px; right: 14px; }
+            .card p { margin-bottom: 48px; }
         }
 
         .sidebar::-webkit-scrollbar { width: 5px; }
@@ -444,6 +503,14 @@
         .main-content::-webkit-scrollbar { width: 6px; }
         .main-content::-webkit-scrollbar-track { background: #0f172a; }
         .main-content::-webkit-scrollbar-thumb { background: #60a5fa; border-radius: 12px; }
+        
+        kbd {
+            background: #1e293b;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
@@ -460,7 +527,7 @@
         </div>
         <div class="nav-menu">
             <div class="nav-item" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span><div class="badge-new">Full</div></div>
-            <div class="nav-item" data-tab="tab2"><i class="fas fa-chart-line"></i><span>RANDOM</span><div class="badge-new">Folder Klik</div></div>
+            <div class="nav-item" data-tab="tab2"><i class="fas fa-chart-line"></i><span>RANDOM</span><div class="badge-new">Folder + SALIN</div></div>
             <div class="nav-item" data-tab="tab3"><i class="fas fa-envelope"></i><span>EVENT LINETOGEL</span></div>
             <div class="nav-item" data-tab="tab4"><i class="fas fa-tasks"></i><span>GALLERY GAMBAR CS</span></div>
             <div class="nav-item" data-tab="tab5"><i class="fas fa-users"></i><span>ALL ABOUT QRIS</span></div>
@@ -468,7 +535,7 @@
             <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
         </div>
         <div class="sidebar-footer">
-            <i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → Lihat isi | Tekan ESC untuk kembali
+            <i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | ESC tutup | Tombol <strong>"SALIN" (1rem)</strong> di pojok kanan bawah → copy isi folder saja
         </div>
     </aside>
 
@@ -476,7 +543,7 @@
         <div class="content-header">
             <div class="page-title">
                 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-                <p id="subHeading">Background full screen — Folder dari Google Sheets bisa diklik, tekan ESC untuk menutup modal</p>
+                <p id="subHeading">Background full screen — Tombol "SALIN" ukuran 1rem di pojok kanan bawah | Hanya menyalin teks isi folder</p>
             </div>
             <div class="action-buttons">
                 <div class="btn-light" id="refreshDataBtn"><i class="fas fa-sync-alt"></i> Muat Ulang</div>
@@ -501,21 +568,22 @@
                 Isi folder akan ditampilkan di sini...
             </div>
             <div class="esc-hint">
-                <i class="fas fa-keyboard"></i> Tekan tombol <kbd style="background:#1e293b; padding:4px 8px; border-radius:6px; font-weight:bold;">ESC</kbd> untuk menutup dan kembali
+                <i class="fas fa-keyboard"></i> Tekan tombol <kbd>ESC</kbd> untuk menutup dan kembali
             </div>
         </div>
     </div>
 </div>
+
+<!-- Notifikasi Toast untuk copy -->
+<div id="copyToast" class="copy-toast-notif"><i class="fas fa-copy"></i>  Isi folder berhasil disalin! 📄</div>
 
 <script>
     // ======================= KONFIGURASI GOOGLE SHEETS (PK RANDOM) =======================
     const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
     const SHEET_NAME = 'PK RANDOM';
     
-    // Data folder dari Google Sheets: array of { title, content }
     let foldersData = [];
     
-    // Static content untuk 6 tab lainnya (tab1, tab3, tab4, tab5, tab6, tab7)
     const staticTabsData = {
         tab1: {
             title: "🏠 Dashboard Utama",
@@ -578,13 +646,36 @@
     const mainHeading = document.getElementById("mainHeading");
     const subHeading = document.getElementById("subHeading");
     
-    // Modal elements
     const modal = document.getElementById("folderModal");
     const modalTitle = document.getElementById("modalTitle");
     const modalContentText = document.getElementById("modalContentText");
     const closeModalBtn = document.getElementById("closeModalBtn");
     
-    // Fungsi open & close modal dengan animasi
+    const toast = document.getElementById("copyToast");
+    function showCopyToast(message = "Isi folder berhasil disalin! 📋") {
+        toast.textContent = `📄  ${message}`;
+        toast.classList.add("show");
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 2000);
+    }
+    
+    async function copyContentOnly(textContent, folderTitleForToast) {
+        const finalText = textContent || "(Tidak ada konten tertulis)";
+        try {
+            await navigator.clipboard.writeText(finalText);
+            showCopyToast(`Isi folder "${folderTitleForToast}" berhasil disalin (hanya teks isi)`);
+        } catch (err) {
+            const textarea = document.createElement("textarea");
+            textarea.value = finalText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            showCopyToast(`Isi folder "${folderTitleForToast}" disalin`);
+        }
+    }
+    
     function openModal(folderTitle, folderContent) {
         modalTitle.innerHTML = `<i class="fas fa-folder-open"></i> ${escapeHtml(folderTitle)}`;
         let formattedContent = escapeHtml(folderContent) || "<i class='fas fa-file-alt'></i> <em>Tidak ada konten tertulis dalam folder ini.</em>";
@@ -597,29 +688,22 @@
     function closeModal() {
         modal.classList.remove("active");
         document.body.style.overflow = "";
-        // Optional: fokus kembali ke area konten setelah modal tertutup
-        dynamicArea.focus?.();
     }
     
-    // Event: tombol close
     closeModalBtn.addEventListener("click", closeModal);
-    // Event: klik overlay (background modal)
     modal.addEventListener("click", (e) => {
         if (e.target === modal) closeModal();
     });
     
-    // ========== FITUR ESCAPE KEY UNTUK MENUTUP MODAL ==========
     document.addEventListener('keydown', function(event) {
-        // Jika modal aktif dan user menekan tombol ESC (kode 27)
         if (event.key === 'Escape' || event.keyCode === 27) {
             if (modal.classList.contains('active')) {
-                event.preventDefault(); // Mencegah aksi default browser jika perlu
+                event.preventDefault();
                 closeModal();
             }
         }
     });
     
-    // Fetch data dari Google Sheets (CSV)
     async function fetchDataFromGoogleSheets() {
         try {
             const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
@@ -692,10 +776,9 @@
         return result;
     }
     
-    // Render folder (RANDOM tab) dengan kartu yang bisa diklik
     async function renderRandomTab() {
         mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
-        subHeading.innerHTML = "📁 Data diambil dari sheet 'PK RANDOM' (Kolom A = Judul Folder, Kolom B = Isi Folder) | Klik folder untuk lihat isi | Tekan ESC untuk kembali ke folder";
+        subHeading.innerHTML = "📁 Tombol <strong style='color:#a7f3d0'>SALIN (1rem)</strong> di pojok kanan bawah folder | Hanya menyalin teks isi folder (bukan judul) ✨";
         
         dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse refresh-loader"></i><p>Mengambil data folder...</p></div>`;
         
@@ -720,33 +803,45 @@
                 const folder = foldersData[idx];
                 const shortContent = folder.content.length > 120 ? folder.content.substring(0, 120) + '...' : folder.content;
                 cardsHtml += `
-                    <div class="card" data-folder-index="${idx}">
+                    <div class="card" data-folder-index="${idx}" data-folder-title="${escapeHtml(folder.title)}">
+                        <button class="btn-salin-folder" data-salin-index="${idx}" title="Salin isi folder (teks saja)"><i class="fas fa-copy"></i> SALIN</button>
                         <div class="card-icon"><i class="fas fa-folder"></i></div>
                         <h3>📁 ${escapeHtml(folder.title)}</h3>
-                        <p>${escapeHtml(shortContent) || '<i class="fas fa-box-open"></i> Tidak ada deskripsi singkat. Klik untuk melihat isi lengkap.'}</p>
+                        <p>${escapeHtml(shortContent) || '<i class="fas fa-box-open"></i> Klik folder atau gunakan tombol SALIN di pojok kanan bawah.'}</p>
                         <div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk buka folder</div>
-                        <div class="click-hint"><i class="fas fa-mouse-pointer"></i> Lihat semua isi folder</div>
+                        <div class="click-hint"><i class="fas fa-mouse-pointer"></i> Lihat semua isi | <i class="fas fa-copy"></i> Tombol SALIN 1rem = isi saja</div>
                     </div>
                 `;
             }
-            // Kartu informasi
             cardsHtml += `
                 <div class="card" style="cursor: default;">
-                    <div class="card-icon"><i class="fas fa-cloud-download-alt"></i></div>
-                    <h3>📡 Data Real-time + ESC</h3>
-                    <p>Total ${foldersData.length} folder diambil langsung dari Google Sheets. Klik folder untuk isi lengkap, lalu tekan <kbd style="background:#00000070;padding:2px 6px;border-radius:4px;">ESC</kbd> untuk kembali.</p>
-                    <div class="stat-badge"><i class="fas fa-sync-alt"></i> Refresh untuk update</div>
+                    <div class="card-icon"><i class="fas fa-text-height"></i></div>
+                    <h3>📏 Ukuran Tombol 1.0rem</h3>
+                    <p>Tombol <strong>"SALIN"</strong> kini berukuran <strong>1.0rem</strong> (lebih besar dari sebelumnya) dan berada di sudut kanan bawah setiap kartu folder. Tetap hanya menyalin teks isi folder murni.</p>
+                    <div class="stat-badge"><i class="fas fa-sync-alt"></i> Refresh update data</div>
                 </div>
             `;
             dynamicArea.innerHTML = cardsHtml;
             
-            // Event listener klik pada kartu folder
+            document.querySelectorAll('.btn-salin-folder').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const idxAttr = btn.getAttribute('data-salin-index');
+                    if (idxAttr !== null && foldersData[parseInt(idxAttr)]) {
+                        const targetFolder = foldersData[parseInt(idxAttr)];
+                        const contentOnly = targetFolder.content || "";
+                        copyContentOnly(contentOnly, targetFolder.title);
+                    }
+                });
+            });
+            
             document.querySelectorAll('.card[data-folder-index]').forEach(card => {
                 card.addEventListener('click', (e) => {
-                    e.stopPropagation();
+                    if (e.target.classList && e.target.classList.contains('btn-salin-folder')) return;
+                    if (e.target.closest('.btn-salin-folder')) return;
                     const idx = card.getAttribute('data-folder-index');
-                    if (idx !== null && foldersData[idx]) {
-                        const folder = foldersData[idx];
+                    if (idx !== null && foldersData[parseInt(idx)]) {
+                        const folder = foldersData[parseInt(idx)];
                         openModal(folder.title, folder.content);
                     }
                 });
