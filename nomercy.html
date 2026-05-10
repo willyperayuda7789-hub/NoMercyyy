@@ -589,7 +589,7 @@
         modalTitle.innerHTML = `<i class="fas fa-folder-open"></i> ${escapeHtml(folderTitle)}`;
         let formattedContent = escapeHtml(folderContent) || "<i class='fas fa-file-alt'></i> <em>Tidak ada konten tertulis dalam folder ini.</em>";
         formattedContent = formattedContent.replace(/\n/g, '<br>');
-        modalContentText.innerHTML = `<i class="fas fa-caret-right"></i> 📄 Isi Folder:<br><br>${formattedContent}`;
+        modalContentText.innerHTML = `<i class="fas fa-caret-right"></i><br><br>${formattedContent}`;
         modal.classList.add("active");
         document.body.style.overflow = "hidden";
     }
