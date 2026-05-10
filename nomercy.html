@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>7 Kolom Sidebar | Folder + Tombol SALIN 1rem (Pojok Kanan Bawah)</title>
+    <title>7 Kolom Sidebar | Folder + Tombol SALIN 0.9rem (Pojok Kanan Bawah)</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Font: Inter -->
@@ -244,7 +244,7 @@
             box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.4);
         }
 
-        /* TOMBOL SALIN - POJOK KANAN BAWAH, ukuran 1.0rem */
+        /* TOMBOL SALIN - POJOK KANAN BAWAH, ukuran 0.9rem */
         .btn-salin-folder {
             position: absolute;
             bottom: 16px;
@@ -252,9 +252,9 @@
             background: linear-gradient(135deg, #10b981, #059669);
             border: none;
             color: white;
-            padding: 8px 16px;
+            padding: 7px 15px;
             border-radius: 40px;
-            font-size: 1.0rem;
+            font-size: 0.9rem;
             font-weight: 700;
             letter-spacing: 0.3px;
             cursor: pointer;
@@ -264,11 +264,11 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             font-family: 'Inter', monospace;
         }
         .btn-salin-folder i {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
         .btn-salin-folder:hover {
             background: linear-gradient(135deg, #059669, #047857);
@@ -330,7 +330,7 @@
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
-            margin-bottom: 52px; /* memberikan ruang ekstra karena tombol 1rem lebih besar */
+            margin-bottom: 52px;
         }
 
         .stat-badge {
@@ -493,7 +493,7 @@
             .main-content { padding: 16px; }
             .modal-container { width: 95%; }
             .modal-header h2 { font-size: 1.3rem; }
-            .btn-salin-folder { padding: 6px 14px; font-size: 0.9rem; bottom: 12px; right: 14px; }
+            .btn-salin-folder { padding: 5px 12px; font-size: 0.8rem; bottom: 12px; right: 14px; }
             .card p { margin-bottom: 48px; }
         }
 
@@ -535,7 +535,7 @@
             <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
         </div>
         <div class="sidebar-footer">
-            <i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | ESC tutup | Tombol <strong>"SALIN" (1rem)</strong> di pojok kanan bawah → copy isi folder saja
+            <i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | ESC tutup | Tombol <strong>"SALIN" (0.9rem)</strong> di pojok kanan bawah → copy isi folder saja
         </div>
     </aside>
 
@@ -543,7 +543,7 @@
         <div class="content-header">
             <div class="page-title">
                 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-                <p id="subHeading">Background full screen — Tombol "SALIN" ukuran 1rem di pojok kanan bawah | Hanya menyalin teks isi folder</p>
+                <p id="subHeading">Background full screen — Tombol "SALIN" ukuran 0.9rem di pojok kanan bawah | Hanya menyalin teks isi folder</p>
             </div>
             <div class="action-buttons">
                 <div class="btn-light" id="refreshDataBtn"><i class="fas fa-sync-alt"></i> Muat Ulang</div>
@@ -778,7 +778,7 @@
     
     async function renderRandomTab() {
         mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
-        subHeading.innerHTML = "📁 Tombol <strong style='color:#a7f3d0'>SALIN (1rem)</strong> di pojok kanan bawah folder | Hanya menyalin teks isi folder (bukan judul) ✨";
+        subHeading.innerHTML = "📁 Tombol <strong style='color:#a7f3d0'>SALIN (0.9rem)</strong> di pojok kanan bawah folder | Hanya menyalin teks isi folder ✨";
         
         dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse refresh-loader"></i><p>Mengambil data folder...</p></div>`;
         
@@ -809,14 +809,15 @@
                         <h3>📁 ${escapeHtml(folder.title)}</h3>
                         <p>${escapeHtml(shortContent) || '<i class="fas fa-box-open"></i> Klik folder atau gunakan tombol SALIN di pojok kanan bawah.'}</p>
                         <div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk buka folder</div>
+                        <div class="click-hint"><i class="fas fa-mouse-pointer"></i> Lihat semua isi | <i class="fas fa-copy"></i> Tombol SALIN 0.9rem = isi saja</div>
                     </div>
                 `;
             }
             cardsHtml += `
                 <div class="card" style="cursor: default;">
                     <div class="card-icon"><i class="fas fa-text-height"></i></div>
-                    <h3>📏 Ukuran Tombol 1.0rem</h3>
-                    <p>Tombol <strong>"SALIN"</strong> kini berukuran <strong>1.0rem</strong> (lebih besar dari sebelumnya) dan berada di sudut kanan bawah setiap kartu folder. Tetap hanya menyalin teks isi folder murni.</p>
+                    <h3>📏 Ukuran Tombol 0.9rem</h3>
+                    <p>Tombol <strong>"SALIN"</strong> berukuran <strong>0.9rem</strong> (ukuran yang pas dan proporsional) di sudut kanan bawah setiap kartu folder. Tetap hanya menyalin teks isi folder murni tanpa judul.</p>
                     <div class="stat-badge"><i class="fas fa-sync-alt"></i> Refresh update data</div>
                 </div>
             `;
