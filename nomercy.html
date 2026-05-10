@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>7 Kolom Sidebar | Data Random dari Google Sheets</title>
+    <title>7 Kolom Sidebar | Folder Klikable + ESC Close</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Font: Inter -->
@@ -22,13 +22,12 @@
             
             /* BACKGROUND UKURAN 100% (FULL SIZE) - Gambar dari Pinterest */
             background-image: url('https://i.pinimg.com/1200x/9d/f8/a5/9df8a54bdbc89f524d62a729f52936c4.jpg');
-            background-size: 100% 100%; /* Full screen tanpa terpotong */
+            background-size: 100% 100%;
             background-position: center center;
             background-repeat: no-repeat;
             background-color: #0a0e1a;
         }
 
-        /* LAYOUT UTAMA */
         .app-container {
             display: flex;
             height: 100vh;
@@ -91,7 +90,6 @@
             margin-top: 2px;
         }
 
-        /* 7 KOLOM MENU NAVIGASI */
         .nav-menu {
             flex: 1;
             padding: 8px 12px 20px 12px;
@@ -133,7 +131,6 @@
             padding: 2px 8px;
             border-radius: 30px;
             margin-left: auto;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
 
         .nav-item:hover {
@@ -157,7 +154,7 @@
             background: rgba(0, 0, 0, 0.3);
         }
 
-        /* ========= MAIN CONTENT (KANAN) ========= */
+        /* ========= MAIN CONTENT ========= */
         .main-content {
             flex: 1;
             overflow-y: auto;
@@ -219,10 +216,9 @@
         .btn-light:hover {
             background: white;
             transform: translateY(-2px);
-            box-shadow: 0 12px 22px -6px rgba(0, 0, 0, 0.3);
         }
 
-        /* Grid card untuk menampilkan data dari Google Sheets */
+        /* Grid card */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -232,7 +228,6 @@
 
         .card {
             background: rgba(18, 28, 45, 0.85);
-            backdrop-filter: blur(0px);
             border-radius: 28px;
             padding: 22px;
             transition: all 0.3s ease;
@@ -240,6 +235,7 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
+            cursor: pointer;
         }
 
         .card:hover {
@@ -270,6 +266,10 @@
             flex: 1;
             white-space: pre-wrap;
             word-break: break-word;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
         }
 
         .stat-badge {
@@ -285,6 +285,134 @@
             align-self: flex-start;
         }
 
+        .click-hint {
+            margin-top: 12px;
+            font-size: 0.7rem;
+            color: #93c5fd;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.7;
+        }
+
+        /* MODAL STYLE */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background: rgba(15, 25, 45, 0.95);
+            border-radius: 40px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(59, 130, 246, 0.6);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.2s ease;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 24px 28px 16px 28px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #93c5fd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            word-break: break-word;
+            padding-right: 20px;
+        }
+
+        .close-modal {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .close-modal:hover {
+            background: #ef4444;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 24px 28px 32px 28px;
+            overflow-y: auto;
+            color: #e2e8f0;
+            font-size: 1rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .modal-body i {
+            color: #60a5fa;
+            margin-right: 8px;
+        }
+
+        .modal-folder-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .modal-content-text {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 24px;
+            margin-top: 12px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .esc-hint {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 16px;
+        }
+
         .loading-card {
             background: rgba(0,0,0,0.6);
             text-align: center;
@@ -298,242 +426,96 @@
             border-left: 5px solid #ff8a8a;
         }
 
-        .refresh-loader {
-            animation: spin 1s linear infinite;
-            margin-right: 6px;
-        }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        /* Responsif */
         @media (max-width: 768px) {
-            .sidebar {
-                width: 240px;
-            }
-            .main-content {
-                padding: 16px;
-            }
+            .sidebar { width: 240px; }
+            .main-content { padding: 16px; }
+            .modal-container { width: 95%; }
+            .modal-header h2 { font-size: 1.3rem; }
         }
 
-        .sidebar::-webkit-scrollbar {
-            width: 5px;
-        }
-        .sidebar::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-        .sidebar::-webkit-scrollbar-thumb {
-            background: #3b82f6;
-            border-radius: 10px;
-        }
-        .main-content::-webkit-scrollbar {
-            width: 6px;
-        }
-        .main-content::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        .main-content::-webkit-scrollbar-thumb {
-            background: #60a5fa;
-            border-radius: 12px;
-        }
+        .sidebar::-webkit-scrollbar { width: 5px; }
+        .sidebar::-webkit-scrollbar-track { background: #1e293b; }
+        .sidebar::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        .main-content::-webkit-scrollbar { width: 6px; }
+        .main-content::-webkit-scrollbar-track { background: #0f172a; }
+        .main-content::-webkit-scrollbar-thumb { background: #60a5fa; border-radius: 12px; }
     </style>
 </head>
 <body>
 <div class="app-container">
-    <!-- SIDEBAR KIRI DENGAN 7 KOLOM -->
     <aside class="sidebar">
         <div class="sidebar-header">
             <div class="logo-area">
-                <div class="logo-icon">
-                    <i class="fas fa-expand-alt"></i>
-                </div>
+                <div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
                 <div class="logo-text">
                     <h2>7Kolom</h2>
                     <p>Background 100% Full</p>
                 </div>
             </div>
         </div>
-
         <div class="nav-menu">
-            <!-- 7 KOLOM NAVIGASI, dengan tab khusus untuk RANDOM (data Google Sheets) -->
-            <div class="nav-item" data-tab="tab1">
-                <i class="fas fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-                <div class="badge-new">Full</div>
-            </div>
-            <div class="nav-item" data-tab="tab2">
-                <i class="fas fa-chart-line"></i>
-                <span>RANDOM</span>
-                <div class="badge-new">Google Sheets</div>
-            </div>
-            <div class="nav-item" data-tab="tab3">
-                <i class="fas fa-envelope"></i>
-                <span>EVENT LINETOGEL</span>
-            </div>
-            <div class="nav-item" data-tab="tab4">
-                <i class="fas fa-tasks"></i>
-                <span>GALLERY GAMBAR CS</span>
-            </div>
-            <div class="nav-item" data-tab="tab5">
-                <i class="fas fa-users"></i>
-                <span>ALL ABOUT QRIS</span>
-            </div>
-            <div class="nav-item" data-tab="tab6">
-                <i class="fas fa-cog"></i>
-                <span>CARA BERMAIN</span>
-            </div>
-            <div class="nav-item" data-tab="tab7">
-                <i class="fas fa-question-circle"></i>
-                <span>JADWAL TOGEL</span>
-            </div>
+            <div class="nav-item" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span><div class="badge-new">Full</div></div>
+            <div class="nav-item" data-tab="tab2"><i class="fas fa-chart-line"></i><span>RANDOM</span><div class="badge-new">Folder Klik</div></div>
+            <div class="nav-item" data-tab="tab3"><i class="fas fa-envelope"></i><span>EVENT LINETOGEL</span></div>
+            <div class="nav-item" data-tab="tab4"><i class="fas fa-tasks"></i><span>GALLERY GAMBAR CS</span></div>
+            <div class="nav-item" data-tab="tab5"><i class="fas fa-users"></i><span>ALL ABOUT QRIS</span></div>
+            <div class="nav-item" data-tab="tab6"><i class="fas fa-cog"></i><span>CARA BERMAIN</span></div>
+            <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
         </div>
-
         <div class="sidebar-footer">
-            <i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Background Size: 100% · Data Random dari Sheet PK RANDOM
+            <i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → Lihat isi | Tekan ESC untuk kembali
         </div>
     </aside>
 
-    <!-- KONTEN UTAMA DINAMIS -->
     <main class="main-content">
         <div class="content-header">
             <div class="page-title">
                 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-                <p id="subHeading">Background ukuran 100% (full screen) — data random terintegrasi dari Google Sheets</p>
+                <p id="subHeading">Background full screen — Folder dari Google Sheets bisa diklik, tekan ESC untuk menutup modal</p>
             </div>
             <div class="action-buttons">
-                <div class="btn-light" id="refreshDataBtn">
-                    <i class="fas fa-sync-alt"></i> Muat Ulang Data
-                </div>
+                <div class="btn-light" id="refreshDataBtn"><i class="fas fa-sync-alt"></i> Muat Ulang</div>
             </div>
         </div>
-
         <div id="dynamicContentArea" class="dashboard-grid">
-            <!-- Konten akan dimuat oleh JavaScript sesuai tab -->
-            <div class="loading-card">
-                <i class="fas fa-spinner fa-pulse" style="font-size: 2rem; color: #60a5fa;"></i>
-                <p style="margin-top: 16px;">Memuat data dari Google Sheets...</p>
-            </div>
+            <div class="loading-card"><i class="fas fa-spinner fa-pulse" style="font-size: 2rem;"></i><p style="margin-top: 16px;">Memuat data...</p></div>
         </div>
     </main>
 </div>
 
+<!-- MODAL UNTUK MENAMPILKAN ISI FOLDER -->
+<div id="folderModal" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2 id="modalTitle"><i class="fas fa-folder-open"></i> Judul Folder</h2>
+            <button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body" id="modalBody">
+            <div class="modal-folder-icon"><i class="fas fa-folder-tree"></i></div>
+            <div class="modal-content-text" id="modalContentText">
+                Isi folder akan ditampilkan di sini...
+            </div>
+            <div class="esc-hint">
+                <i class="fas fa-keyboard"></i> Tekan tombol <kbd style="background:#1e293b; padding:4px 8px; border-radius:6px; font-weight:bold;">ESC</kbd> untuk menutup dan kembali
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    // ======================= KONFIGURASI GOOGLE SHEETS =======================
-    // Sheet ID: 1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574
-    // Nama sheet: PK RANDOM
-    // Kolom A = judul folder, Kolom B = isi folder
+    // ======================= KONFIGURASI GOOGLE SHEETS (PK RANDOM) =======================
     const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
     const SHEET_NAME = 'PK RANDOM';
     
-    // Fungsi untuk mengambil data dari Google Sheets sebagai JSON menggunakan sheets API v4 (public read)
-    // Membangun URL Google Sheets API (tanpa perlu API key jika sheet dipublikasikan? Namun kita akan gunakan method export CSV terlebih dahulu agar mudah)
-    // Karena kita menginginkan data realtime dan stabil, kita gunakan Google Sheets API endpoint publik dengan format JSON? 
-    // Alternatif: Menggunakan endpoint CSV lalu parse. Lebih sederhana dan tidak perlu API key jika sheet dishare ke publik "Anyone with link can view".
-    // Memastikan sheet bisa diakses public. Kita gunakan URL export CSV: https://docs.google.com/spreadsheets/d/{id}/gviz/tq?tqx=out:csv&sheet={sheet_name}
-    // Atau alternatif menggunakan `https://docs.google.com/spreadsheets/d/e/.../pub?output=csv` tapi kita pakai metode endpoint CSV yang paling sederhana.
-    // Karena Google Sheets bisa diakses public, kita gunakan fetch CSV.
+    // Data folder dari Google Sheets: array of { title, content }
+    let foldersData = [];
     
-    async function fetchDataFromGoogleSheets() {
-        try {
-            // Menggunakan endpoint CSV yang stabil untuk membaca data publik
-            // URL: https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet={SHEET_NAME}
-            const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
-            
-            const response = await fetch(csvUrl, {
-                method: 'GET',
-                cache: 'no-store' // Agar data selalu fresh
-            });
-            
-            if (!response.ok) {
-                throw new Error(`Gagal mengambil data: ${response.status} ${response.statusText}`);
-            }
-            
-            const csvText = await response.text();
-            // Parse CSV menjadi array of objects / rows
-            const rows = parseCSV(csvText);
-            if (!rows || rows.length === 0) {
-                return [];
-            }
-            // rows[0] adalah header (Kolom A, Kolom B) => "Judul Folder", "Isi Folder" atau sesuai
-            // Tapi karena sheet mungkin berisi header atau tidak? Kita asumsikan baris pertama adalah data atau bisa jadi header.
-            // Agar fleksibel: jika baris pertama mengandung kata "judul" atau "folder" maka skip header. Namun lebih aman: kita ambil semua baris non-empty.
-            // Tujuan: kolom A (index 0) = judul folder, kolom B (index 1) = isi folder.
-            let dataRows = [];
-            const startIndex = (rows.length > 0 && (rows[0][0] && (rows[0][0].toLowerCase().includes('judul') || rows[0][0].toLowerCase().includes('folder')))) ? 1 : 0;
-            
-            for (let i = startIndex; i < rows.length; i++) {
-                const row = rows[i];
-                if (row && row.length >= 2) {
-                    const judul = row[0] ? row[0].trim() : '';
-                    const isi = row[1] ? row[1].trim() : '';
-                    // Hanya tambahkan jika judul tidak kosong (biar meaningful)
-                    if (judul !== '') {
-                        dataRows.push({ title: judul, content: isi });
-                    }
-                }
-            }
-            
-            return dataRows;
-        } catch (error) {
-            console.error('Error fetching Google Sheets:', error);
-            throw new Error('Tidak dapat mengambil data dari Google Sheets. Pastikan sheet dipublikasikan dan dapat diakses publik.');
-        }
-    }
-    
-    // Fungsi parser CSV sederhana (mengatasi kutip)
-    function parseCSV(csvText) {
-        const rows = [];
-        const regex = /(?:,|\n|^)(?:"([^"]*(?:""[^"]*)*)"|([^",\n]*))/g;
-        let match;
-        let currentRow = [];
-        let field;
-        let lastIndex = 0;
-        let inQuotes = false;
-        
-        // Alternatif: parse manual sederhana untuk menghindari kompleksitas
-        // Menggunakan pendekatan baris per baris & split yang lebih robust dengan kutip
-        const lines = [];
-        let currentLine = '';
-        let insideQuote = false;
-        for (let i = 0; i < csvText.length; i++) {
-            const ch = csvText[i];
-            if (ch === '"') {
-                insideQuote = !insideQuote;
-            }
-            if (ch === '\n' && !insideQuote) {
-                lines.push(currentLine);
-                currentLine = '';
-            } else {
-                currentLine += ch;
-            }
-        }
-        if (currentLine) lines.push(currentLine);
-        
-        for (let line of lines) {
-            if (line.trim() === '') continue;
-            const row = [];
-            let current = '';
-            let inQuoteField = false;
-            for (let i = 0; i < line.length; i++) {
-                const c = line[i];
-                if (c === '"') {
-                    inQuoteField = !inQuoteField;
-                } else if (c === ',' && !inQuoteField) {
-                    row.push(current.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
-                    current = '';
-                } else {
-                    current += c;
-                }
-            }
-            row.push(current.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
-            rows.push(row);
-        }
-        return rows;
-    }
-    
-    // Data konten untuk 6 kolom lainnya (non-random) + satu kolom RANDOM yang dinamis dari Google Sheets
+    // Static content untuk 6 tab lainnya (tab1, tab3, tab4, tab5, tab6, tab7)
     const staticTabsData = {
         tab1: {
             title: "🏠 Dashboard Utama",
@@ -591,15 +573,189 @@
         }
     };
     
-    // Data untuk kolom RANDOM akan diisi dari Google Sheets
-    let randomSheetData = []; // menyimpan data { title, content }
-    
     let currentActiveTab = "tab1";
     const dynamicArea = document.getElementById("dynamicContentArea");
     const mainHeading = document.getElementById("mainHeading");
     const subHeading = document.getElementById("subHeading");
     
-    // Fungsi render untuk tab selain RANDOM (statis)
+    // Modal elements
+    const modal = document.getElementById("folderModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalContentText = document.getElementById("modalContentText");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    
+    // Fungsi open & close modal dengan animasi
+    function openModal(folderTitle, folderContent) {
+        modalTitle.innerHTML = `<i class="fas fa-folder-open"></i> ${escapeHtml(folderTitle)}`;
+        let formattedContent = escapeHtml(folderContent) || "<i class='fas fa-file-alt'></i> <em>Tidak ada konten tertulis dalam folder ini.</em>";
+        formattedContent = formattedContent.replace(/\n/g, '<br>');
+        modalContentText.innerHTML = `<i class="fas fa-caret-right"></i> 📄 Isi Folder:<br><br>${formattedContent}`;
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+    
+    function closeModal() {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+        // Optional: fokus kembali ke area konten setelah modal tertutup
+        dynamicArea.focus?.();
+    }
+    
+    // Event: tombol close
+    closeModalBtn.addEventListener("click", closeModal);
+    // Event: klik overlay (background modal)
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+    });
+    
+    // ========== FITUR ESCAPE KEY UNTUK MENUTUP MODAL ==========
+    document.addEventListener('keydown', function(event) {
+        // Jika modal aktif dan user menekan tombol ESC (kode 27)
+        if (event.key === 'Escape' || event.keyCode === 27) {
+            if (modal.classList.contains('active')) {
+                event.preventDefault(); // Mencegah aksi default browser jika perlu
+                closeModal();
+            }
+        }
+    });
+    
+    // Fetch data dari Google Sheets (CSV)
+    async function fetchDataFromGoogleSheets() {
+        try {
+            const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
+            const response = await fetch(csvUrl, { cache: 'no-store' });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const csvText = await response.text();
+            const rows = parseCSV(csvText);
+            if (!rows || rows.length === 0) return [];
+            
+            let dataRows = [];
+            const firstRow = rows[0];
+            const isHeader = firstRow && firstRow.length >= 2 && 
+                (firstRow[0].toLowerCase().includes('judul') || firstRow[0].toLowerCase().includes('folder') ||
+                 firstRow[1].toLowerCase().includes('isi') || firstRow[1].toLowerCase().includes('konten'));
+            const startIdx = isHeader ? 1 : 0;
+            
+            for (let i = startIdx; i < rows.length; i++) {
+                const row = rows[i];
+                if (row && row.length >= 2) {
+                    const judul = row[0] ? row[0].trim() : '';
+                    const isi = row[1] ? row[1].trim() : '';
+                    if (judul !== '') {
+                        dataRows.push({ title: judul, content: isi });
+                    }
+                }
+            }
+            return dataRows;
+        } catch (error) {
+            console.error(error);
+            throw new Error('Gagal mengambil data dari Google Sheets. Pastikan sheet dipublikasikan.');
+        }
+    }
+    
+    function parseCSV(csvText) {
+        const lines = [];
+        let currentLine = '';
+        let insideQuote = false;
+        for (let i = 0; i < csvText.length; i++) {
+            const ch = csvText[i];
+            if (ch === '"') insideQuote = !insideQuote;
+            if (ch === '\n' && !insideQuote) {
+                lines.push(currentLine);
+                currentLine = '';
+            } else {
+                currentLine += ch;
+            }
+        }
+        if (currentLine) lines.push(currentLine);
+        
+        const result = [];
+        for (let line of lines) {
+            if (line.trim() === '') continue;
+            const row = [];
+            let current = '';
+            let inQuoteField = false;
+            for (let i = 0; i < line.length; i++) {
+                const c = line[i];
+                if (c === '"') {
+                    inQuoteField = !inQuoteField;
+                } else if (c === ',' && !inQuoteField) {
+                    row.push(current.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
+                    current = '';
+                } else {
+                    current += c;
+                }
+            }
+            row.push(current.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
+            result.push(row);
+        }
+        return result;
+    }
+    
+    // Render folder (RANDOM tab) dengan kartu yang bisa diklik
+    async function renderRandomTab() {
+        mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
+        subHeading.innerHTML = "📁 Data diambil dari sheet 'PK RANDOM' (Kolom A = Judul Folder, Kolom B = Isi Folder) | Klik folder untuk lihat isi | Tekan ESC untuk kembali ke folder";
+        
+        dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse refresh-loader"></i><p>Mengambil data folder...</p></div>`;
+        
+        try {
+            const freshData = await fetchDataFromGoogleSheets();
+            foldersData = freshData;
+            
+            if (!foldersData || foldersData.length === 0) {
+                dynamicArea.innerHTML = `
+                    <div class="card error-message" style="grid-column:1/-1;">
+                        <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h3>Tidak Ada Data Folder</h3>
+                        <p>Sheet "PK RANDOM" kosong atau tidak berisi data. Pastikan kolom A (judul folder) dan kolom B (isi folder) terisi.</p>
+                        <div class="stat-badge">Periksa kembali spreadsheet Anda</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            let cardsHtml = "";
+            for (let idx = 0; idx < foldersData.length; idx++) {
+                const folder = foldersData[idx];
+                const shortContent = folder.content.length > 120 ? folder.content.substring(0, 120) + '...' : folder.content;
+                cardsHtml += `
+                    <div class="card" data-folder-index="${idx}">
+                        <div class="card-icon"><i class="fas fa-folder"></i></div>
+                        <h3>📁 ${escapeHtml(folder.title)}</h3>
+                        <p>${escapeHtml(shortContent) || '<i class="fas fa-box-open"></i> Tidak ada deskripsi singkat. Klik untuk melihat isi lengkap.'}</p>
+                        <div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk buka folder</div>
+                        <div class="click-hint"><i class="fas fa-mouse-pointer"></i> Lihat semua isi folder</div>
+                    </div>
+                `;
+            }
+            // Kartu informasi
+            cardsHtml += `
+                <div class="card" style="cursor: default;">
+                    <div class="card-icon"><i class="fas fa-cloud-download-alt"></i></div>
+                    <h3>📡 Data Real-time + ESC</h3>
+                    <p>Total ${foldersData.length} folder diambil langsung dari Google Sheets. Klik folder untuk isi lengkap, lalu tekan <kbd style="background:#00000070;padding:2px 6px;border-radius:4px;">ESC</kbd> untuk kembali.</p>
+                    <div class="stat-badge"><i class="fas fa-sync-alt"></i> Refresh untuk update</div>
+                </div>
+            `;
+            dynamicArea.innerHTML = cardsHtml;
+            
+            // Event listener klik pada kartu folder
+            document.querySelectorAll('.card[data-folder-index]').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const idx = card.getAttribute('data-folder-index');
+                    if (idx !== null && foldersData[idx]) {
+                        const folder = foldersData[idx];
+                        openModal(folder.title, folder.content);
+                    }
+                });
+            });
+        } catch (err) {
+            dynamicArea.innerHTML = `<div class="card error-message" style="grid-column:1/-1;"><div class="card-icon"><i class="fas fa-bug"></i></div><h3>Error: Gagal Memuat</h3><p>${err.message}</p><div class="stat-badge">Coba refresh atau periksa koneksi</div></div>`;
+        }
+    }
+    
     function renderStaticTab(tabId) {
         const data = staticTabsData[tabId];
         if (!data) return false;
@@ -608,7 +764,7 @@
         let cardsHTML = "";
         data.items.forEach(item => {
             cardsHTML += `
-                <div class="card">
+                <div class="card" style="cursor: default;">
                     <div class="card-icon"><i class="${item.icon}"></i></div>
                     <h3>${item.title}</h3>
                     <p>${item.desc}</p>
@@ -616,90 +772,44 @@
                 </div>
             `;
         });
-        // tambahkan informasi background full screen (opsional)
-        cardsHTML += `
-            <div class="card" style="background: rgba(0, 20, 50, 0.85); border-left: 4px solid #3b82f6;">
-                <div class="card-icon"><i class="fas fa-expand"></i></div>
-                <h3>🖼️ Background FULL SIZE 100%</h3>
-                <p>Gambar background diatur dengan background-size: 100% 100% memenuhi seluruh layar. Tampilan JELAS, TAJAM, tanpa buram.</p>
-                <div class="stat-badge"><i class="fas fa-check-double"></i> Full Screen | Sharp & Clear</div>
-            </div>
-        `;
+        cardsHTML += `<div class="card" style="cursor: default;"><div class="card-icon"><i class="fas fa-expand"></i></div><h3>🖼️ Background FULL SIZE 100%</h3><p>Background tampil full screen tanpa potongan, gambar jernih & tajam.</p><div class="stat-badge">Full Screen | Sharp</div></div>`;
         dynamicArea.innerHTML = cardsHTML;
         return true;
     }
     
-    // Render khusus tab RANDOM (mengambil data dari Google Sheets)
-    async function renderRandomTab() {
-        mainHeading.innerHTML = "🎲 KOLOM RANDOM";
-        subHeading.innerHTML = "Data dari Google Sheets (Sheet: PK RANDOM) — Kolom A: Judul Folder, Kolom B: Isi Folder";
+    async function onTabClick(tabId) {
+        currentActiveTab = tabId;
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if (item.getAttribute('data-tab') === tabId) item.classList.add('active');
+            else item.classList.remove('active');
+        });
         
-        // Tampilkan loading
-        dynamicArea.innerHTML = `
-            <div class="loading-card">
-                <i class="fas fa-spinner fa-pulse refresh-loader" style="font-size: 2rem;"></i>
-                <p style="margin-top: 16px;">Mengambil data dari Google Sheets...</p>
-            </div>
-        `;
-        
-        try {
-            // Fetch data dari Google Sheets jika belum ada atau segarkan selalu
-            const freshData = await fetchDataFromGoogleSheets();
-            randomSheetData = freshData;
-            
-            if (!randomSheetData || randomSheetData.length === 0) {
-                dynamicArea.innerHTML = `
-                    <div class="card error-message" style="grid-column:1/-1; background: rgba(180, 50, 50, 0.9);">
-                        <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
-                        <h3>Tidak Ada Data</h3>
-                        <p>Data dari sheet "PK RANDOM" kosong atau tidak dapat diambil. Pastikan sheet memiliki data di kolom A (judul folder) dan kolom B (isi folder).</p>
-                        <div class="stat-badge"><i class="fas fa-database"></i> Silakan cek kembali sheet Anda</div>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-info-circle"></i></div>
-                        <h3>Informasi URL</h3>
-                        <p>Spreadsheet ID: ${SPREADSHEET_ID}<br>Sheet: ${SHEET_NAME}<br>Kolom A = Judul Folder, Kolom B = Isi Folder</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            // Membangun kartu dari data Google Sheets
-            let cardsHtml = "";
-            for (let item of randomSheetData) {
-                cardsHtml += `
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-folder-open"></i></div>
-                        <h3>📁 ${escapeHtml(item.title)}</h3>
-                        <p>${escapeHtml(item.content) || '<i class="fas fa-file-alt"></i> (Tidak ada konten tambahan)'}</p>
-                        <div class="stat-badge"><i class="fas fa-google"></i> Sumber: Google Sheets · PK RANDOM</div>
-                    </div>
-                `;
-            }
-            // Tambahkan kartu keterangan background
-            cardsHtml += `
-                <div class="card" style="background: rgba(0, 20, 50, 0.85); border-left: 4px solid #10b981;">
-                    <div class="card-icon"><i class="fas fa-cloud-download-alt"></i></div>
-                    <h3>📥 Data Real-time</h3>
-                    <p>Data ini diambil langsung dari Google Sheets publik (Sheet: PK RANDOM). Perubahan pada spreadsheet akan tampil setelah refresh.</p>
-                    <div class="stat-badge"><i class="fas fa-sync"></i> Terintegrasi Langsung</div>
-                </div>
-            `;
-            dynamicArea.innerHTML = cardsHtml;
-        } catch (error) {
-            console.error(error);
-            dynamicArea.innerHTML = `
-                <div class="card error-message" style="grid-column:1/-1; background: rgba(200, 60, 60, 0.9);">
-                    <div class="card-icon"><i class="fas fa-exclamation-circle"></i></div>
-                    <h3>Gagal Memuat Data</h3>
-                    <p>${error.message || 'Terjadi kesalahan saat mengambil data dari Google Sheets. Pastikan spreadsheet telah dipublikasikan atau diizinkan akses publik.'}</p>
-                    <div class="stat-badge"><i class="fas fa-redo-alt"></i> Coba refresh atau periksa link</div>
-                </div>
-            `;
+        if (tabId === 'tab2') {
+            await renderRandomTab();
+        } else {
+            renderStaticTab(tabId);
         }
     }
     
-    // Helper untuk menghindari XSS
+    function bindNavEvents() {
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const tabId = item.getAttribute('data-tab');
+                if (tabId) onTabClick(tabId);
+            });
+        });
+    }
+    
+    document.getElementById("refreshDataBtn").addEventListener("click", async () => {
+        if (currentActiveTab === 'tab2') {
+            await renderRandomTab();
+        } else if (staticTabsData[currentActiveTab]) {
+            renderStaticTab(currentActiveTab);
+        } else {
+            renderStaticTab('tab1');
+        }
+    });
+    
     function escapeHtml(str) {
         if (!str) return '';
         return str.replace(/[&<>]/g, function(m) {
@@ -707,65 +817,11 @@
             if (m === '<') return '&lt;';
             if (m === '>') return '&gt;';
             return m;
-        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-            return c;
-        });
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, c => c);
     }
     
-    // Handler navigasi tab
-    async function onTabClick(tabId) {
-        currentActiveTab = tabId;
-        // Update class active
-        document.querySelectorAll('.nav-item').forEach(item => {
-            const id = item.getAttribute('data-tab');
-            if (id === tabId) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
-        
-        if (tabId === 'tab2') {
-            // Tab RANDOM: ambil data dari Google Sheets
-            await renderRandomTab();
-        } else {
-            renderStaticTab(tabId);
-        }
-    }
-    
-    // Event binding ke nav menu
-    function bindNavEvents() {
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                const tabId = this.getAttribute('data-tab');
-                if (tabId) {
-                    onTabClick(tabId);
-                }
-            });
-        });
-    }
-    
-    // Tombol refresh data di header: untuk tab aktif random, refresh data dari sheets
-    const refreshBtn = document.getElementById("refreshDataBtn");
-    if (refreshBtn) {
-        refreshBtn.addEventListener("click", async () => {
-            if (currentActiveTab === 'tab2') {
-                await renderRandomTab();
-            } else if (currentActiveTab === 'tab1') {
-                renderStaticTab('tab1');
-            } else if (staticTabsData[currentActiveTab]) {
-                renderStaticTab(currentActiveTab);
-            } else {
-                renderStaticTab('tab1');
-            }
-        });
-    }
-    
-    // Inisialisasi awal: tab Dashboard
     (async function init() {
         bindNavEvents();
-        // Default tampilkan tab1
         await onTabClick('tab1');
     })();
 </script>
