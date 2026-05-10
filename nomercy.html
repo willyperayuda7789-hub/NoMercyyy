@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>7 Kolom Sidebar | Tanpa Simbol Folder (Kartu & Isi Folder)</title>
+    <title>7 Kolom Sidebar | Garis Pemisah Sangat Rapat</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Font: Inter -->
@@ -369,7 +369,7 @@
             margin-bottom: 8px;
         }
 
-        /* MODAL STYLE - tanpa simbol folder */
+        /* MODAL STYLE - garis pemisah SANGAT RAPAT */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -411,7 +411,7 @@
         }
 
         .modal-header {
-            padding: 24px 28px 16px 28px;
+            padding: 24px 28px 8px 28px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             display: flex;
             justify-content: space-between;
@@ -455,7 +455,7 @@
         }
 
         .modal-body {
-            padding: 24px 28px 32px 28px;
+            padding: 8px 28px 28px 28px;
             overflow-y: auto;
             color: #e2e8f0;
             font-size: 1rem;
@@ -464,20 +464,36 @@
             word-break: break-word;
         }
 
-        /* Hilangkan ikon folder di dalam modal */
-        .modal-folder-icon {
-            display: none;
+        /* Kontainer judul folder di dalam modal */
+        .modal-folder-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #f0f4fe;
+            margin-bottom: 2px;
+            padding-bottom: 0;
+            letter-spacing: -0.2px;
+        }
+        
+        /* Garis pemisah antara judul dan isi folder - JARAK SANGAT RAPAT */
+        .modal-divider {
+            margin: 2px 0 4px 0;
+            border: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3b82f6, #60a5fa, #3b82f6, transparent);
+            border-radius: 4px;
         }
 
         .modal-content-text {
             background: rgba(0, 0, 0, 0.4);
-            padding: 20px;
+            padding: 16px 18px;
             border-radius: 24px;
-            margin-top: 12px;
+            margin-top: 2px;
             border-left: 4px solid #3b82f6;
+            font-size: 1rem;
+            line-height: 1.65;
         }
         
-        /* Hilangkan ikon panah di modal content */
+        /* Hilangkan ikon di dalam modal content */
         .modal-content-text i {
             display: none;
         }
@@ -488,7 +504,7 @@
             font-size: 0.75rem;
             color: #94a3b8;
             border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 16px;
+            padding-top: 12px;
         }
 
         .loading-card {
@@ -511,6 +527,9 @@
             .modal-header h2 { font-size: 1.3rem; }
             .btn-salin-folder { padding: 5px 12px; font-size: 0.8rem; bottom: 12px; right: 14px; }
             .card p { margin-bottom: 48px; }
+            .modal-folder-title { font-size: 1.2rem; margin-bottom: 1px; }
+            .modal-divider { margin: 1px 0 3px 0; }
+            .modal-content-text { padding: 12px 14px; }
         }
 
         .sidebar::-webkit-scrollbar { width: 5px; }
@@ -537,7 +556,7 @@
                 <div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
                 <div class="logo-text">
                     <h2>7Kolom</h2>
-                    <p>Tanpa Simbol Folder</p>
+                    <p>Garis Sangat Rapat</p>
                 </div>
             </div>
         </div>
@@ -551,7 +570,7 @@
             <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
         </div>
         <div class="sidebar-footer">
-            <i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | Tanpa simbol folder di mana pun | Tombol <strong>"SALIN" (0.9rem)</strong> di pojok kanan bawah
+            <i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → garis pemisah SANGAT RAPAT antara judul dan isi | Tombol <strong>"SALIN" (0.9rem)</strong>
         </div>
     </aside>
 
@@ -559,7 +578,7 @@
         <div class="content-header">
             <div class="page-title">
                 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-                <p id="subHeading">Background full screen — Semua simbol folder telah dihilangkan (kartu & isi folder)</p>
+                <p id="subHeading">Background full screen — Garis pemisah sangat rapat (jarak minimal) antara judul dan isi folder</p>
             </div>
             <div class="action-buttons">
                 <div class="btn-light" id="refreshDataBtn"><i class="fas fa-sync-alt"></i> Muat Ulang</div>
@@ -571,7 +590,7 @@
     </main>
 </div>
 
-<!-- MODAL UNTUK MENAMPILKAN ISI FOLDER - TANPA SIMBOL -->
+<!-- MODAL UNTUK MENAMPILKAN ISI FOLDER - DENGAN GARIS PEMISAH SANGAT RAPAT -->
 <div id="folderModal" class="modal-overlay">
     <div class="modal-container">
         <div class="modal-header">
@@ -579,6 +598,11 @@
             <button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body" id="modalBody">
+            <!-- Judul folder -->
+            <div class="modal-folder-title" id="modalFolderTitle"></div>
+            <!-- Garis pemisah - jarak SANGAT RAPAT -->
+            <hr class="modal-divider">
+            <!-- Isi folder -->
             <div class="modal-content-text" id="modalContentText">
                 Isi folder akan ditampilkan di sini...
             </div>
@@ -662,7 +686,7 @@
     const subHeading = document.getElementById("subHeading");
     
     const modal = document.getElementById("folderModal");
-    const modalTitle = document.getElementById("modalTitle");
+    const modalFolderTitle = document.getElementById("modalFolderTitle");
     const modalContentText = document.getElementById("modalContentText");
     const closeModalBtn = document.getElementById("closeModalBtn");
     
@@ -692,11 +716,9 @@
     }
     
     function openModal(folderTitle, folderContent) {
-        // Tampilkan hanya teks judul tanpa ikon
-        modalTitle.textContent = folderTitle;
+        modalFolderTitle.textContent = folderTitle;
         let formattedContent = folderContent || "(Tidak ada konten tertulis dalam folder ini.)";
         formattedContent = formattedContent.replace(/\n/g, '<br>');
-        // Tampilkan hanya teks isi folder tanpa ikon apapun
         modalContentText.innerHTML = formattedContent;
         modal.classList.add("active");
         document.body.style.overflow = "hidden";
@@ -795,7 +817,7 @@
     
     async function renderRandomTab() {
         mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
-        subHeading.innerHTML = "✨ Semua simbol folder telah dihilangkan | Tombol <strong style='color:#a7f3d0'>SALIN (0.9rem)</strong> di pojok kanan bawah";
+        subHeading.innerHTML = "✨ Garis pemisah SANGAT RAPAT antara judul dan isi folder | Tombol <strong style='color:#a7f3d0'>SALIN (0.9rem)</strong>";
         
         dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse refresh-loader"></i><p>Mengambil data folder...</p></div>`;
         
@@ -818,7 +840,6 @@
             for (let idx = 0; idx < foldersData.length; idx++) {
                 const folder = foldersData[idx];
                 const shortContent = folder.content.length > 120 ? folder.content.substring(0, 120) + '...' : folder.content;
-                // Kelas "random-folder" ditambahkan untuk menyembunyikan ikon folder (melalui CSS)
                 cardsHtml += `
                     <div class="card random-folder" data-folder-index="${idx}" data-folder-title="${escapeHtml(folder.title)}">
                         <button class="btn-salin-folder" data-salin-index="${idx}" title="Salin isi folder (teks saja)"><i class="fas fa-copy"></i> SALIN</button>
@@ -832,7 +853,7 @@
                 <div class="card" style="cursor: default;">
                     <div class="card-icon"><i class="fas fa-text-height"></i></div>
                     <h3>📏 Ukuran Tombol 0.9rem</h3>
-                    <p>Tombol <strong>"SALIN"</strong> berukuran <strong>0.9rem</strong> di sudut kanan bawah setiap kartu folder. Menyalin teks isi folder murni tanpa simbol apapun.</p>
+                    <p>Tombol <strong>"SALIN"</strong> berukuran <strong>0.9rem</strong> di sudut kanan bawah setiap kartu folder.</p>
                     <div class="stat-badge"><i class="fas fa-sync-alt"></i> Refresh update data</div>
                 </div>
             `;
