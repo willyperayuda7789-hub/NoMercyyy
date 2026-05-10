@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>7 Kolom Sidebar | Background Full Size 100% Jelas & Tajam</title>
+    <title>7 Kolom Sidebar | Data Random dari Google Sheets</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Font: Inter -->
@@ -20,24 +20,14 @@
             height: 100vh;
             overflow: hidden;
             
-            /* ============= BACKGROUND UKURAN 100% (FULL SIZE) ============= */
-            /* Menggunakan gambar dari link Pinterest */
+            /* BACKGROUND UKURAN 100% (FULL SIZE) - Gambar dari Pinterest */
             background-image: url('https://i.pinimg.com/1200x/9d/f8/a5/9df8a54bdbc89f524d62a729f52936c4.jpg');
-            
-            /* UKURAN 100% - GAMBAR MEMENUHI SELURUH LAYAR */
-            background-size: 100% 100%; /* Atau bisa juga 'cover' - tapi 100% 100% memastikan full tanpa terpotong */
-            /* Gunakan 'cover' untuk memastikan gambar menutupi seluruh area tanpa distorsi berlebihan */
+            background-size: 100% 100%; /* Full screen tanpa terpotong */
             background-position: center center;
             background-repeat: no-repeat;
-            
-            /* Fallback color solid */
             background-color: #0a0e1a;
-            
-            /* GAMBAR TAMPIL JELAS DAN TAJAM - TANPA BLUR */
         }
 
-        /* TIDAK ADA overlay atau blur yang mengganggu background */
-        
         /* LAYOUT UTAMA */
         .app-container {
             display: flex;
@@ -47,8 +37,7 @@
             z-index: 2;
         }
 
-        /* ========= SIDEBAR KIRI ========= */
-        /* Sidebar dengan latar semi-transparan agar background tetap terlihat */
+        /* ========= SIDEBAR KIRI 7 KOLOM ========= */
         .sidebar {
             width: 280px;
             background: rgba(8, 16, 28, 0.85);
@@ -60,7 +49,6 @@
             overflow-y: auto;
             flex-shrink: 0;
             border-right: 1px solid rgba(255, 255, 255, 0.15);
-            /* Tidak ada backdrop-filter blur */
         }
 
         .sidebar-header {
@@ -103,7 +91,7 @@
             margin-top: 2px;
         }
 
-        /* 7 KOLOM MENU */
+        /* 7 KOLOM MENU NAVIGASI */
         .nav-menu {
             flex: 1;
             padding: 8px 12px 20px 12px;
@@ -185,7 +173,6 @@
             flex-wrap: wrap;
             gap: 16px;
             background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(0px);
             padding: 14px 26px;
             border-radius: 48px;
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -235,27 +222,29 @@
             box-shadow: 0 12px 22px -6px rgba(0, 0, 0, 0.3);
         }
 
-        /* Grid card */
+        /* Grid card untuk menampilkan data dari Google Sheets */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 24px;
             margin-top: 12px;
         }
 
         .card {
-            background: rgba(18, 28, 45, 0.8);
+            background: rgba(18, 28, 45, 0.85);
             backdrop-filter: blur(0px);
             border-radius: 28px;
             padding: 22px;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
             transform: translateY(-6px);
-            background: rgba(30, 45, 70, 0.9);
+            background: rgba(30, 45, 70, 0.95);
             border-color: rgba(59, 130, 246, 0.6);
             box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.4);
         }
@@ -267,28 +256,56 @@
         }
 
         .card h3 {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 700;
             margin-bottom: 12px;
             color: #f0f4fe;
+            word-break: break-word;
         }
 
         .card p {
             color: #cbd5e6;
             line-height: 1.5;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            flex: 1;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
 
         .stat-badge {
             display: inline-block;
             background: rgba(59, 130, 246, 0.4);
-            padding: 5px 14px;
+            padding: 6px 14px;
             border-radius: 40px;
             font-size: 0.7rem;
             font-weight: 600;
             color: #e0f2fe;
-            margin-top: 14px;
+            margin-top: 16px;
             border: 1px solid rgba(255,255,255,0.15);
+            align-self: flex-start;
+        }
+
+        .loading-card {
+            background: rgba(0,0,0,0.6);
+            text-align: center;
+            padding: 40px;
+            border-radius: 32px;
+            grid-column: 1 / -1;
+        }
+
+        .error-message {
+            background: rgba(220, 38, 38, 0.8);
+            border-left: 5px solid #ff8a8a;
+        }
+
+        .refresh-loader {
+            animation: spin 1s linear infinite;
+            margin-right: 6px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Responsif */
@@ -301,7 +318,6 @@
             }
         }
 
-        /* Scrollbar */
         .sidebar::-webkit-scrollbar {
             width: 5px;
         }
@@ -326,7 +342,7 @@
 </head>
 <body>
 <div class="app-container">
-    <!-- SIDEBAR KIRI 7 KOLOM -->
+    <!-- SIDEBAR KIRI DENGAN 7 KOLOM -->
     <aside class="sidebar">
         <div class="sidebar-header">
             <div class="logo-area">
@@ -341,7 +357,7 @@
         </div>
 
         <div class="nav-menu">
-            <!-- 7 KOLOM NAVIGASI -->
+            <!-- 7 KOLOM NAVIGASI, dengan tab khusus untuk RANDOM (data Google Sheets) -->
             <div class="nav-item" data-tab="tab1">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Dashboard</span>
@@ -350,6 +366,7 @@
             <div class="nav-item" data-tab="tab2">
                 <i class="fas fa-chart-line"></i>
                 <span>RANDOM</span>
+                <div class="badge-new">Google Sheets</div>
             </div>
             <div class="nav-item" data-tab="tab3">
                 <i class="fas fa-envelope"></i>
@@ -374,7 +391,7 @@
         </div>
 
         <div class="sidebar-footer">
-            <i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Background Size: 100% · Full Layar · Tajam
+            <i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Background Size: 100% · Data Random dari Sheet PK RANDOM
         </div>
     </aside>
 
@@ -383,45 +400,153 @@
         <div class="content-header">
             <div class="page-title">
                 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-                <p id="subHeading">Background ukuran 100% (full screen) — gambar tampil penuh dan jelas</p>
+                <p id="subHeading">Background ukuran 100% (full screen) — data random terintegrasi dari Google Sheets</p>
             </div>
             <div class="action-buttons">
-                <div class="btn-light" id="refreshHintBtn">
-                    <i class="fas fa-sync-alt"></i> Segarkan
+                <div class="btn-light" id="refreshDataBtn">
+                    <i class="fas fa-sync-alt"></i> Muat Ulang Data
                 </div>
             </div>
         </div>
 
         <div id="dynamicContentArea" class="dashboard-grid">
-            <!-- konten dinamis oleh JS -->
+            <!-- Konten akan dimuat oleh JavaScript sesuai tab -->
+            <div class="loading-card">
+                <i class="fas fa-spinner fa-pulse" style="font-size: 2rem; color: #60a5fa;"></i>
+                <p style="margin-top: 16px;">Memuat data dari Google Sheets...</p>
+            </div>
         </div>
     </main>
 </div>
 
 <script>
-    // Data konten untuk 7 kolom
-    const tabsData = {
+    // ======================= KONFIGURASI GOOGLE SHEETS =======================
+    // Sheet ID: 1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574
+    // Nama sheet: PK RANDOM
+    // Kolom A = judul folder, Kolom B = isi folder
+    const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
+    const SHEET_NAME = 'PK RANDOM';
+    
+    // Fungsi untuk mengambil data dari Google Sheets sebagai JSON menggunakan sheets API v4 (public read)
+    // Membangun URL Google Sheets API (tanpa perlu API key jika sheet dipublikasikan? Namun kita akan gunakan method export CSV terlebih dahulu agar mudah)
+    // Karena kita menginginkan data realtime dan stabil, kita gunakan Google Sheets API endpoint publik dengan format JSON? 
+    // Alternatif: Menggunakan endpoint CSV lalu parse. Lebih sederhana dan tidak perlu API key jika sheet dishare ke publik "Anyone with link can view".
+    // Memastikan sheet bisa diakses public. Kita gunakan URL export CSV: https://docs.google.com/spreadsheets/d/{id}/gviz/tq?tqx=out:csv&sheet={sheet_name}
+    // Atau alternatif menggunakan `https://docs.google.com/spreadsheets/d/e/.../pub?output=csv` tapi kita pakai metode endpoint CSV yang paling sederhana.
+    // Karena Google Sheets bisa diakses public, kita gunakan fetch CSV.
+    
+    async function fetchDataFromGoogleSheets() {
+        try {
+            // Menggunakan endpoint CSV yang stabil untuk membaca data publik
+            // URL: https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet={SHEET_NAME}
+            const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
+            
+            const response = await fetch(csvUrl, {
+                method: 'GET',
+                cache: 'no-store' // Agar data selalu fresh
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Gagal mengambil data: ${response.status} ${response.statusText}`);
+            }
+            
+            const csvText = await response.text();
+            // Parse CSV menjadi array of objects / rows
+            const rows = parseCSV(csvText);
+            if (!rows || rows.length === 0) {
+                return [];
+            }
+            // rows[0] adalah header (Kolom A, Kolom B) => "Judul Folder", "Isi Folder" atau sesuai
+            // Tapi karena sheet mungkin berisi header atau tidak? Kita asumsikan baris pertama adalah data atau bisa jadi header.
+            // Agar fleksibel: jika baris pertama mengandung kata "judul" atau "folder" maka skip header. Namun lebih aman: kita ambil semua baris non-empty.
+            // Tujuan: kolom A (index 0) = judul folder, kolom B (index 1) = isi folder.
+            let dataRows = [];
+            const startIndex = (rows.length > 0 && (rows[0][0] && (rows[0][0].toLowerCase().includes('judul') || rows[0][0].toLowerCase().includes('folder')))) ? 1 : 0;
+            
+            for (let i = startIndex; i < rows.length; i++) {
+                const row = rows[i];
+                if (row && row.length >= 2) {
+                    const judul = row[0] ? row[0].trim() : '';
+                    const isi = row[1] ? row[1].trim() : '';
+                    // Hanya tambahkan jika judul tidak kosong (biar meaningful)
+                    if (judul !== '') {
+                        dataRows.push({ title: judul, content: isi });
+                    }
+                }
+            }
+            
+            return dataRows;
+        } catch (error) {
+            console.error('Error fetching Google Sheets:', error);
+            throw new Error('Tidak dapat mengambil data dari Google Sheets. Pastikan sheet dipublikasikan dan dapat diakses publik.');
+        }
+    }
+    
+    // Fungsi parser CSV sederhana (mengatasi kutip)
+    function parseCSV(csvText) {
+        const rows = [];
+        const regex = /(?:,|\n|^)(?:"([^"]*(?:""[^"]*)*)"|([^",\n]*))/g;
+        let match;
+        let currentRow = [];
+        let field;
+        let lastIndex = 0;
+        let inQuotes = false;
+        
+        // Alternatif: parse manual sederhana untuk menghindari kompleksitas
+        // Menggunakan pendekatan baris per baris & split yang lebih robust dengan kutip
+        const lines = [];
+        let currentLine = '';
+        let insideQuote = false;
+        for (let i = 0; i < csvText.length; i++) {
+            const ch = csvText[i];
+            if (ch === '"') {
+                insideQuote = !insideQuote;
+            }
+            if (ch === '\n' && !insideQuote) {
+                lines.push(currentLine);
+                currentLine = '';
+            } else {
+                currentLine += ch;
+            }
+        }
+        if (currentLine) lines.push(currentLine);
+        
+        for (let line of lines) {
+            if (line.trim() === '') continue;
+            const row = [];
+            let current = '';
+            let inQuoteField = false;
+            for (let i = 0; i < line.length; i++) {
+                const c = line[i];
+                if (c === '"') {
+                    inQuoteField = !inQuoteField;
+                } else if (c === ',' && !inQuoteField) {
+                    row.push(current.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
+                    current = '';
+                } else {
+                    current += c;
+                }
+            }
+            row.push(current.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
+            rows.push(row);
+        }
+        return rows;
+    }
+    
+    // Data konten untuk 6 kolom lainnya (non-random) + satu kolom RANDOM yang dinamis dari Google Sheets
+    const staticTabsData = {
         tab1: {
             title: "🏠 Dashboard Utama",
-            subtitle: "Gambaran sistem & metrik (Kolom 1) — background full size 100%",
+            subtitle: "Gambaran sistem & metrik — background full size 100%",
             items: [
                 { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
                 { icon: "fas fa-users", title: "Pengguna Aktif", desc: "1,284 pengguna online sekarang", badge: "Hari ini" },
                 { icon: "fas fa-calendar-alt", title: "Jadwal Proyek", desc: "3 tenggat mendekati deadline", badge: "Prioritas" }
             ]
         },
-        tab2: {
-            title: "📊 RANDOM",
-            subtitle: "Data performa realtime (Kolom 2) — wawasan mendalam",
-            items: [
-                { icon: "fas fa-chart-line", title: "Trafik Bulanan", desc: "Peningkatan 34% dibanding bulan lalu", badge: "Naik" },
-                { icon: "fas fa-chart-simple", title: "Konversi Pengunjung", desc: "Rasio konversi 8.2%", badge: "Optimal" },
-                { icon: "fas fa-arrow-trend-up", title: "Retensi Pengguna", desc: "Retensi mingguan 76%", badge: "+5%" }
-            ]
-        },
         tab3: {
             title: "✉️ EVENT LINETOGEL",
-            subtitle: "Inbox & komunikasi tim (Kolom 3) — pesan terkini",
+            subtitle: "Inbox & komunikasi tim — pesan terkini",
             items: [
                 { icon: "fas fa-inbox", title: "Pesan Masuk", desc: "Anda memiliki 12 pesan belum dibaca", badge: "12 baru" },
                 { icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif di proyek utama", badge: "Balas" },
@@ -430,7 +555,7 @@
         },
         tab4: {
             title: "✅ GALLERY GAMBAR CS",
-            subtitle: "Daftar tugas & kolaborasi (Kolom 4) — progres terkini",
+            subtitle: "Daftar tugas & kolaborasi — progres terkini",
             items: [
                 { icon: "fas fa-list-check", title: "Task Sprint", desc: "8 tugas selesai dari 21 tugas", badge: "Selesai 38%" },
                 { icon: "fas fa-code-branch", title: "Repository", desc: "Pull request menunggu review", badge: "2 PR" },
@@ -439,7 +564,7 @@
         },
         tab5: {
             title: "👥 ALL ABOUT QRIS",
-            subtitle: "Struktur tim (Kolom 5) — kolaborasi solid",
+            subtitle: "Struktur tim — kolaborasi solid",
             items: [
                 { icon: "fas fa-user-plus", title: "Anggota Aktif", desc: "12 anggota online · 4 sedang rapat", badge: "Online" },
                 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
@@ -448,7 +573,7 @@
         },
         tab6: {
             title: "⚙️ CARA BERMAIN",
-            subtitle: "Konfigurasi & preferensi (Kolom 6) — kustomisasi penuh",
+            subtitle: "Konfigurasi & preferensi — kustomisasi penuh",
             items: [
                 { icon: "fas fa-user-cog", title: "Akun Saya", desc: "Privasi, keamanan, dan notifikasi", badge: "Diperbarui" },
                 { icon: "fas fa-palette", title: "Tampilan", desc: "Mode terang/gelap & tema kustom", badge: "Baru" },
@@ -457,7 +582,7 @@
         },
         tab7: {
             title: "❓ JADWAL TOGEL",
-            subtitle: "Panduan & support (Kolom 7) — selalu siap membantu",
+            subtitle: "Panduan & support — selalu siap membantu",
             items: [
                 { icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi sidebar 7 kolom dengan background 100% full", badge: "PDF" },
                 { icon: "fas fa-headset", title: "Dukungan Teknis", desc: "Chat dengan agen support 24/7", badge: "Live" },
@@ -465,83 +590,184 @@
             ]
         }
     };
-
+    
+    // Data untuk kolom RANDOM akan diisi dari Google Sheets
+    let randomSheetData = []; // menyimpan data { title, content }
+    
     let currentActiveTab = "tab1";
     const dynamicArea = document.getElementById("dynamicContentArea");
     const mainHeading = document.getElementById("mainHeading");
     const subHeading = document.getElementById("subHeading");
-
-    function renderContent(tabId) {
-        const data = tabsData[tabId];
-        if (!data) return;
-
+    
+    // Fungsi render untuk tab selain RANDOM (statis)
+    function renderStaticTab(tabId) {
+        const data = staticTabsData[tabId];
+        if (!data) return false;
         mainHeading.innerHTML = data.title;
         subHeading.innerHTML = data.subtitle;
-
         let cardsHTML = "";
         data.items.forEach(item => {
             cardsHTML += `
                 <div class="card">
-                    <div class="card-icon">
-                        <i class="${item.icon}"></i>
-                    </div>
+                    <div class="card-icon"><i class="${item.icon}"></i></div>
                     <h3>${item.title}</h3>
                     <p>${item.desc}</p>
-                    <div class="stat-badge">
-                        <i class="fas fa-tag"></i> ${item.badge}
-                    </div>
+                    <div class="stat-badge"><i class="fas fa-tag"></i> ${item.badge}</div>
                 </div>
             `;
         });
-        
-        const extraInfo = `
+        // tambahkan informasi background full screen (opsional)
+        cardsHTML += `
             <div class="card" style="background: rgba(0, 20, 50, 0.85); border-left: 4px solid #3b82f6;">
                 <div class="card-icon"><i class="fas fa-expand"></i></div>
-                <h3>🖼️ Background UKURAN 100% (FULL SIZE)</h3>
-                <p>Gambar background diatur dengan <strong>background-size: 100% 100%</strong> sehingga memenuhi seluruh layar. Gambar tampil <strong>JELAS, TAJAM, dan FULLSCREEN</strong> tanpa efek buram atau overlay berlebihan. Nikmati visual maksimal!</p>
+                <h3>🖼️ Background FULL SIZE 100%</h3>
+                <p>Gambar background diatur dengan background-size: 100% 100% memenuhi seluruh layar. Tampilan JELAS, TAJAM, tanpa buram.</p>
                 <div class="stat-badge"><i class="fas fa-check-double"></i> Full Screen | Sharp & Clear</div>
             </div>
         `;
+        dynamicArea.innerHTML = cardsHTML;
+        return true;
+    }
+    
+    // Render khusus tab RANDOM (mengambil data dari Google Sheets)
+    async function renderRandomTab() {
+        mainHeading.innerHTML = "🎲 KOLOM RANDOM";
+        subHeading.innerHTML = "Data dari Google Sheets (Sheet: PK RANDOM) — Kolom A: Judul Folder, Kolom B: Isi Folder";
         
-        dynamicArea.innerHTML = cardsHTML + extraInfo;
-
+        // Tampilkan loading
+        dynamicArea.innerHTML = `
+            <div class="loading-card">
+                <i class="fas fa-spinner fa-pulse refresh-loader" style="font-size: 2rem;"></i>
+                <p style="margin-top: 16px;">Mengambil data dari Google Sheets...</p>
+            </div>
+        `;
+        
+        try {
+            // Fetch data dari Google Sheets jika belum ada atau segarkan selalu
+            const freshData = await fetchDataFromGoogleSheets();
+            randomSheetData = freshData;
+            
+            if (!randomSheetData || randomSheetData.length === 0) {
+                dynamicArea.innerHTML = `
+                    <div class="card error-message" style="grid-column:1/-1; background: rgba(180, 50, 50, 0.9);">
+                        <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h3>Tidak Ada Data</h3>
+                        <p>Data dari sheet "PK RANDOM" kosong atau tidak dapat diambil. Pastikan sheet memiliki data di kolom A (judul folder) dan kolom B (isi folder).</p>
+                        <div class="stat-badge"><i class="fas fa-database"></i> Silakan cek kembali sheet Anda</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-info-circle"></i></div>
+                        <h3>Informasi URL</h3>
+                        <p>Spreadsheet ID: ${SPREADSHEET_ID}<br>Sheet: ${SHEET_NAME}<br>Kolom A = Judul Folder, Kolom B = Isi Folder</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Membangun kartu dari data Google Sheets
+            let cardsHtml = "";
+            for (let item of randomSheetData) {
+                cardsHtml += `
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-folder-open"></i></div>
+                        <h3>📁 ${escapeHtml(item.title)}</h3>
+                        <p>${escapeHtml(item.content) || '<i class="fas fa-file-alt"></i> (Tidak ada konten tambahan)'}</p>
+                        <div class="stat-badge"><i class="fas fa-google"></i> Sumber: Google Sheets · PK RANDOM</div>
+                    </div>
+                `;
+            }
+            // Tambahkan kartu keterangan background
+            cardsHtml += `
+                <div class="card" style="background: rgba(0, 20, 50, 0.85); border-left: 4px solid #10b981;">
+                    <div class="card-icon"><i class="fas fa-cloud-download-alt"></i></div>
+                    <h3>📥 Data Real-time</h3>
+                    <p>Data ini diambil langsung dari Google Sheets publik (Sheet: PK RANDOM). Perubahan pada spreadsheet akan tampil setelah refresh.</p>
+                    <div class="stat-badge"><i class="fas fa-sync"></i> Terintegrasi Langsung</div>
+                </div>
+            `;
+            dynamicArea.innerHTML = cardsHtml;
+        } catch (error) {
+            console.error(error);
+            dynamicArea.innerHTML = `
+                <div class="card error-message" style="grid-column:1/-1; background: rgba(200, 60, 60, 0.9);">
+                    <div class="card-icon"><i class="fas fa-exclamation-circle"></i></div>
+                    <h3>Gagal Memuat Data</h3>
+                    <p>${error.message || 'Terjadi kesalahan saat mengambil data dari Google Sheets. Pastikan spreadsheet telah dipublikasikan atau diizinkan akses publik.'}</p>
+                    <div class="stat-badge"><i class="fas fa-redo-alt"></i> Coba refresh atau periksa link</div>
+                </div>
+            `;
+        }
+    }
+    
+    // Helper untuk menghindari XSS
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+    
+    // Handler navigasi tab
+    async function onTabClick(tabId) {
+        currentActiveTab = tabId;
+        // Update class active
         document.querySelectorAll('.nav-item').forEach(item => {
-            const itemTab = item.getAttribute('data-tab');
-            if (itemTab === tabId) {
+            const id = item.getAttribute('data-tab');
+            if (id === tabId) {
                 item.classList.add('active');
             } else {
                 item.classList.remove('active');
             }
         });
+        
+        if (tabId === 'tab2') {
+            // Tab RANDOM: ambil data dari Google Sheets
+            await renderRandomTab();
+        } else {
+            renderStaticTab(tabId);
+        }
     }
-
+    
+    // Event binding ke nav menu
     function bindNavEvents() {
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function(e) {
                 const tabId = this.getAttribute('data-tab');
-                if (tabId && tabId !== currentActiveTab) {
-                    currentActiveTab = tabId;
-                    renderContent(tabId);
-                    dynamicArea.style.opacity = '0.7';
-                    setTimeout(() => {
-                        dynamicArea.style.opacity = '1';
-                    }, 100);
+                if (tabId) {
+                    onTabClick(tabId);
                 }
             });
         });
     }
-
-    const refreshBtn = document.getElementById("refreshHintBtn");
+    
+    // Tombol refresh data di header: untuk tab aktif random, refresh data dari sheets
+    const refreshBtn = document.getElementById("refreshDataBtn");
     if (refreshBtn) {
-        refreshBtn.addEventListener("click", () => {
-            renderContent("tab1");
-            document.querySelector('.main-content').scrollTop = 0;
+        refreshBtn.addEventListener("click", async () => {
+            if (currentActiveTab === 'tab2') {
+                await renderRandomTab();
+            } else if (currentActiveTab === 'tab1') {
+                renderStaticTab('tab1');
+            } else if (staticTabsData[currentActiveTab]) {
+                renderStaticTab(currentActiveTab);
+            } else {
+                renderStaticTab('tab1');
+            }
         });
     }
-
-    renderContent("tab1");
-    bindNavEvents();
+    
+    // Inisialisasi awal: tab Dashboard
+    (async function init() {
+        bindNavEvents();
+        // Default tampilkan tab1
+        await onTabClick('tab1');
+    })();
 </script>
 </body>
 </html>
