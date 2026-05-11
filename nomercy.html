@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar | Garis Pemisah Judul & Isi Folder</title>
+<title>7 Kolom Sidebar | Live Search (Khusus Folder)</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -193,6 +193,7 @@ font-weight: 500;
 .action-buttons {
 display: flex;
 gap: 12px;
+align-items: center;
 }
 
 .btn-light {
@@ -214,6 +215,71 @@ box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 .btn-light:hover {
 background: white;
 transform: translateY(-2px);
+}
+
+/* SEARCH BOX - LIVE SEARCH (khusus folder) */
+.search-wrapper {
+position: relative;
+}
+.search-input {
+background: rgba(15, 25, 45, 0.9);
+border: 1px solid rgba(59, 130, 246, 0.6);
+border-radius: 40px;
+padding: 8px 18px 8px 42px;
+font-size: 0.85rem;
+color: white;
+font-weight: 500;
+width: 240px;
+transition: all 0.2s;
+backdrop-filter: blur(4px);
+}
+.search-input:focus {
+outline: none;
+border-color: #60a5fa;
+background: rgba(20, 35, 60, 0.95);
+width: 260px;
+box-shadow: 0 0 0 2px rgba(96,165,250,0.3);
+}
+.search-input::placeholder {
+color: #94a3b8;
+font-weight: 400;
+}
+.search-icon {
+position: absolute;
+left: 16px;
+top: 50%;
+transform: translateY(-50%);
+color: #60a5fa;
+font-size: 0.9rem;
+pointer-events: none;
+}
+.search-clear {
+position: absolute;
+right: 12px;
+top: 50%;
+transform: translateY(-50%);
+background: rgba(255,255,255,0.2);
+border: none;
+color: #cbd5e6;
+border-radius: 30px;
+width: 20px;
+height: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 0.7rem;
+cursor: pointer;
+transition: 0.2s;
+opacity: 0;
+visibility: hidden;
+}
+.search-clear.visible {
+opacity: 1;
+visibility: visible;
+}
+.search-clear:hover {
+background: #ef4444;
+color: white;
 }
 
 /* Grid card */
@@ -244,7 +310,7 @@ border-color: rgba(59, 130, 246, 0.6);
 box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.4);
 }
 
-/* ===== GARIS PEMISAH ANTARA JUDUL FOLDER DAN ISI FOLDER ===== */
+/* GARIS PEMISAH ANTARA JUDUL FOLDER DAN ISI FOLDER */
 .card h3 {
 font-size: 1.35rem;
 font-weight: 700;
@@ -259,7 +325,6 @@ display: inline-block;
 width: 100%;
 letter-spacing: -0.2px;
 }
-/* Efek garis pemisah glow */
 .card h3::after {
 content: '';
 position: absolute;
@@ -271,7 +336,6 @@ background: linear-gradient(90deg, #60a5fa, #3b82f6, transparent);
 border-radius: 4px;
 }
 
-/* Untuk static tab card-icon tetap ada, tapi tetap tegas pemisah */
 .card p {
 color: #cbd5e6;
 line-height: 1.5;
@@ -316,7 +380,6 @@ font-size: 0.85rem;
 .btn-salin-folder:hover {
 background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
-box-shadow: 0 8px 18px rgba(0,0,0,0.4);
 }
 .btn-salin-folder:active {
 transform: scale(0.97);
@@ -340,7 +403,6 @@ transition: opacity 0.25s ease, transform 0.2s;
 pointer-events: none;
 border-left: 4px solid #22c55e;
 box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
-font-family: monospace;
 }
 .copy-toast-notif.show {
 opacity: 1;
@@ -357,14 +419,6 @@ color: #60a5fa;
 /* Untuk random tab, kita hilangkan area icon-nya */
 .card.random-folder .card-icon {
 display: none;
-}
-
-/* Penyesuaian margin untuk judul ketika icon dihilangkan (tetap ada garis pemisah dengan style baru) */
-.card.random-folder h3 {
-margin-top: 0;
-margin-bottom: 16px;
-border-bottom: 2px solid rgba(96, 165, 250, 0.7);
-padding-bottom: 12px;
 }
 
 .stat-badge {
@@ -408,12 +462,10 @@ opacity: 0;
 visibility: hidden;
 transition: all 0.3s ease;
 }
-
 .modal-overlay.active {
 opacity: 1;
 visibility: visible;
 }
-
 .modal-container {
 background: rgba(15, 25, 45, 0.95);
 border-radius: 40px;
@@ -423,15 +475,12 @@ max-height: 85vh;
 display: flex;
 flex-direction: column;
 border: 1px solid rgba(59, 130, 246, 0.6);
-box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
 transform: scale(0.9);
 transition: transform 0.2s ease;
 }
-
 .modal-overlay.active .modal-container {
 transform: scale(1);
 }
-
 .modal-header {
 padding: 24px 28px 16px 28px;
 border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -439,7 +488,6 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 }
-
 .modal-header h2 {
 font-size: 1.7rem;
 font-weight: 800;
@@ -448,11 +496,7 @@ background-clip: text;
 -webkit-background-clip: text;
 color: transparent;
 word-break: break-word;
-padding-right: 20px;
-border-bottom: none;
-padding-bottom: 0;
 }
-
 .close-modal {
 background: rgba(255, 255, 255, 0.15);
 border: none;
@@ -467,12 +511,10 @@ align-items: center;
 justify-content: center;
 transition: all 0.2s;
 }
-
 .close-modal:hover {
 background: #ef4444;
 transform: rotate(90deg);
 }
-
 .modal-body {
 padding: 24px 28px 32px 28px;
 overflow-y: auto;
@@ -480,17 +522,13 @@ color: #e2e8f0;
 font-size: 1rem;
 line-height: 1.6;
 white-space: pre-wrap;
-word-break: break-word;
 }
-
 .modal-content-text {
 background: rgba(0, 0, 0, 0.4);
 padding: 20px;
 border-radius: 24px;
-margin-top: 12px;
 border-left: 4px solid #3b82f6;
 }
-
 .esc-hint {
 margin-top: 16px;
 text-align: center;
@@ -499,7 +537,6 @@ color: #94a3b8;
 border-top: 1px solid rgba(255,255,255,0.1);
 padding-top: 16px;
 }
-
 .loading-card {
 background: rgba(0,0,0,0.6);
 text-align: center;
@@ -507,34 +544,22 @@ padding: 40px;
 border-radius: 32px;
 grid-column: 1 / -1;
 }
-
+.no-result-card {
+background: rgba(0,0,0,0.6);
+text-align: center;
+padding: 40px;
+border-radius: 32px;
+grid-column: 1 / -1;
+}
 .error-message {
 background: rgba(220, 38, 38, 0.8);
 border-left: 5px solid #ff8a8a;
 }
-
 @media (max-width: 768px) {
 .sidebar { width: 240px; }
 .main-content { padding: 16px; }
-.modal-container { width: 95%; }
-.modal-header h2 { font-size: 1.3rem; }
-.btn-salin-folder { padding: 5px 12px; font-size: 0.8rem; bottom: 12px; right: 14px; }
-.card p { margin-bottom: 48px; }
-}
-
-.sidebar::-webkit-scrollbar { width: 5px; }
-.sidebar::-webkit-scrollbar-track { background: #1e293b; }
-.sidebar::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
-.main-content::-webkit-scrollbar { width: 6px; }
-.main-content::-webkit-scrollbar-track { background: #0f172a; }
-.main-content::-webkit-scrollbar-thumb { background: #60a5fa; border-radius: 12px; }
-
-kbd {
-background: #1e293b;
-padding: 2px 8px;
-border-radius: 6px;
-font-weight: bold;
-font-family: monospace;
+.search-input { width: 170px; }
+.search-input:focus { width: 190px; }
 }
 </style>
 </head>
@@ -551,7 +576,7 @@ font-family: monospace;
 </div>
 </div>
 <div class="nav-menu">
-<div class="nav-item" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span><div class="badge-new">Full</div></div>
+<div class="nav-item active" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span><div class="badge-new">Full</div></div>
 <div class="nav-item" data-tab="tab2"><i class="fas fa-chart-line"></i><span>RANDOM</span><div class="badge-new">Folder + SALIN</div></div>
 <div class="nav-item" data-tab="tab3"><i class="fas fa-envelope"></i><span>EVENT LINETOGEL</span></div>
 <div class="nav-item" data-tab="tab4"><i class="fas fa-tasks"></i><span>GALLERY GAMBAR CS</span></div>
@@ -560,7 +585,7 @@ font-family: monospace;
 <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
 </div>
 <div class="sidebar-footer">
-<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | <strong>Garis pemisah judul & isi</strong> | Tombol SALIN 0.9rem
+<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | <strong>Garis pemisah judul & isi</strong> | Tombol SALIN 0.9rem | 🔍 Pencarian khusus folder RANDOM
 </div>
 </aside>
 
@@ -568,10 +593,15 @@ font-family: monospace;
 <div class="content-header">
 <div class="page-title">
 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-<p id="subHeading">Garis pemisah antara judul folder dengan isi folder pada setiap kartu (tanpa simbol folder)</p>
+<p id="subHeading">Garis pemisah antara judul folder dengan isi folder | Pencarian HANYA untuk tab RANDOM</p>
 </div>
 <div class="action-buttons">
 <div class="btn-light" id="refreshDataBtn"><i class="fas fa-sync-alt"></i> Muat Ulang</div>
+<div class="search-wrapper">
+<i class="fas fa-search search-icon"></i>
+<input type="text" id="liveSearchInput" class="search-input" placeholder="🔍 Cari folder (RANDOM only)" autocomplete="off">
+<button id="clearSearchBtn" class="search-clear"><i class="fas fa-times"></i></button>
+</div>
 </div>
 </div>
 <div id="dynamicContentArea" class="dashboard-grid">
@@ -607,6 +637,8 @@ const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
 const SHEET_NAME = 'PK RANDOM';
 
 let foldersData = [];
+let currentFilterText = "";
+let currentActiveTab = "tab1";
 
 const staticTabsData = {
 tab1: {
@@ -665,30 +697,28 @@ items: [
 }
 };
 
-let currentActiveTab = "tab1";
 const dynamicArea = document.getElementById("dynamicContentArea");
 const mainHeading = document.getElementById("mainHeading");
 const subHeading = document.getElementById("subHeading");
-
 const modal = document.getElementById("folderModal");
 const modalTitle = document.getElementById("modalTitle");
 const modalContentText = document.getElementById("modalContentText");
 const closeModalBtn = document.getElementById("closeModalBtn");
-
 const toast = document.getElementById("copyToast");
-function showCopyToast(message = "Isi folder berhasil disalin! 📋") {
+const searchInput = document.getElementById("liveSearchInput");
+const clearSearchBtn = document.getElementById("clearSearchBtn");
+
+function showCopyToast(message) {
 toast.innerHTML = `<i class="fas fa-copy"></i>  ${message}`;
 toast.classList.add("show");
-setTimeout(() => {
-toast.classList.remove("show");
-}, 2000);
+setTimeout(() => toast.classList.remove("show"), 2000);
 }
 
-async function copyContentOnly(textContent, folderTitleForToast) {
+async function copyContentOnly(textContent, folderTitle) {
 const finalText = textContent || "(Tidak ada konten tertulis)";
 try {
 await navigator.clipboard.writeText(finalText);
-showCopyToast(`Isi folder "${folderTitleForToast}" berhasil disalin`);
+showCopyToast(`Isi folder "${folderTitle}" berhasil disalin`);
 } catch (err) {
 const textarea = document.createElement("textarea");
 textarea.value = finalText;
@@ -696,7 +726,7 @@ document.body.appendChild(textarea);
 textarea.select();
 document.execCommand("copy");
 document.body.removeChild(textarea);
-showCopyToast(`Isi folder "${folderTitleForToast}" disalin`);
+showCopyToast(`Isi folder "${folderTitle}" disalin`);
 }
 }
 
@@ -715,18 +745,8 @@ document.body.style.overflow = "";
 }
 
 closeModalBtn.addEventListener("click", closeModal);
-modal.addEventListener("click", (e) => {
-if (e.target === modal) closeModal();
-});
-
-document.addEventListener('keydown', function(event) {
-if (event.key === 'Escape' || event.keyCode === 27) {
-if (modal.classList.contains('active')) {
-event.preventDefault();
-closeModal();
-}
-}
-});
+modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
 
 async function fetchDataFromGoogleSheets() {
 try {
@@ -736,63 +756,49 @@ if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 if (!rows || rows.length === 0) return [];
-
 let dataRows = [];
 const firstRow = rows[0];
 const isHeader = firstRow && firstRow.length >= 2 &&
 (firstRow[0].toLowerCase().includes('judul') || firstRow[0].toLowerCase().includes('folder') ||
 firstRow[1].toLowerCase().includes('isi') || firstRow[1].toLowerCase().includes('konten'));
 const startIdx = isHeader ? 1 : 0;
-
 for (let i = startIdx; i < rows.length; i++) {
 const row = rows[i];
 if (row && row.length >= 2) {
 const judul = row[0] ? row[0].trim() : '';
 const isi = row[1] ? row[1].trim() : '';
-if (judul !== '') {
-dataRows.push({ title: judul, content: isi });
-}
+if (judul !== '') dataRows.push({ title: judul, content: isi });
 }
 }
 return dataRows;
 } catch (error) {
 console.error(error);
-throw new Error('Gagal mengambil data dari Google Sheets. Pastikan sheet dipublikasikan.');
+throw new Error('Gagal mengambil data dari Google Sheets.');
 }
 }
 
 function parseCSV(csvText) {
 const lines = [];
-let currentLine = '';
-let insideQuote = false;
+let currentLine = '', insideQuote = false;
 for (let i = 0; i < csvText.length; i++) {
 const ch = csvText[i];
 if (ch === '"') insideQuote = !insideQuote;
-if (ch === '\n' && !insideQuote) {
-lines.push(currentLine);
-currentLine = '';
-} else {
-currentLine += ch;
-}
+if (ch === '\n' && !insideQuote) { lines.push(currentLine); currentLine = ''; }
+else currentLine += ch;
 }
 if (currentLine) lines.push(currentLine);
-
 const result = [];
 for (let line of lines) {
 if (line.trim() === '') continue;
 const row = [];
-let current = '';
-let inQuoteField = false;
+let current = '', inQuoteField = false;
 for (let i = 0; i < line.length; i++) {
 const c = line[i];
-if (c === '"') {
-inQuoteField = !inQuoteField;
-} else if (c === ',' && !inQuoteField) {
+if (c === '"') inQuoteField = !inQuoteField;
+else if (c === ',' && !inQuoteField) {
 row.push(current.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
 current = '';
-} else {
-current += c;
-}
+} else current += c;
 }
 row.push(current.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
 result.push(row);
@@ -800,70 +806,65 @@ result.push(row);
 return result;
 }
 
+// RENDER KHUSUS TAB RANDOM DENGAN FILTER
 async function renderRandomTab() {
+const filter = currentFilterText;
 mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
-subHeading.innerHTML = "✨ Garis pemisah tegas antara judul dan isi folder | Tombol SALIN (0.9rem) di pojok kanan bawah";
+subHeading.innerHTML = filter ? `✨ Pencarian: "${filter}" — menampilkan folder yang cocok` : "✨ Gunakan kotak pencarian di samping untuk mencari folder (berdasarkan judul/isi) | Tombol SALIN 0.9rem";
 
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse refresh-loader"></i><p>Mengambil data folder...</p></div>`;
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Mengambil data folder...</p></div>`;
 
 try {
-const freshData = await fetchDataFromGoogleSheets();
-foldersData = freshData;
-
-if (!foldersData || foldersData.length === 0) {
-dynamicArea.innerHTML = `
-<div class="card error-message" style="grid-column:1/-1;">
-<h3>Tidak Ada Data Folder</h3>
-<p>Sheet "PK RANDOM" kosong atau tidak berisi data. Pastikan kolom A (judul folder) dan kolom B (isi folder) terisi.</p>
-<div class="stat-badge">Periksa kembali spreadsheet Anda</div>
-</div>
-`;
+if (foldersData.length === 0) foldersData = await fetchDataFromGoogleSheets();
+let filteredData = foldersData;
+if (filter.trim() !== "") {
+filteredData = foldersData.filter(f => 
+f.title.toLowerCase().includes(filter.toLowerCase()) || 
+f.content.toLowerCase().includes(filter.toLowerCase())
+);
+}
+if (filteredData.length === 0) {
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3 style="margin-top: 12px;">Tidak ada folder ditemukan</h3><p>Tidak ada folder yang cocok dengan kata kunci <strong>"${escapeHtml(filter)}"</strong></p><div class="stat-badge">Coba kata kunci lain</div></div>`;
 return;
 }
-
 let cardsHtml = "";
-for (let idx = 0; idx < foldersData.length; idx++) {
-const folder = foldersData[idx];
+for (let idx = 0; idx < filteredData.length; idx++) {
+const folder = filteredData[idx];
+const originalIdx = foldersData.findIndex(f => f.title === folder.title && f.content === folder.content);
 const shortContent = folder.content.length > 120 ? folder.content.substring(0, 120) + '...' : folder.content;
 cardsHtml += `
-<div class="card random-folder" data-folder-index="${idx}" data-folder-title="${escapeHtml(folder.title)}">
-<button class="btn-salin-folder" data-salin-index="${idx}" title="Salin isi folder (teks saja)"><i class="fas fa-copy"></i> SALIN</button>
+<div class="card random-folder" data-folder-original-idx="${originalIdx}" data-folder-title="${escapeHtml(folder.title)}">
+<button class="btn-salin-folder" data-salin-idx="${originalIdx}" title="Salin isi folder (teks saja)"><i class="fas fa-copy"></i> SALIN</button>
 <h3>${escapeHtml(folder.title)}</h3>
 <p>${escapeHtml(shortContent) || 'Klik folder untuk melihat isi lengkap.'}</p>
 <div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk buka folder</div>
 </div>
 `;
 }
-cardsHtml += `
-<div class="card" style="cursor: default;">
-<div class="card-icon"><i class="fas fa-text-height"></i></div>
-<h3>📏 Ukuran Tombol 0.9rem</h3>
-<p>Tombol <strong>"SALIN"</strong> berukuran <strong>0.9rem</strong> di sudut kanan bawah. Garis pemisah antara judul folder dan isi membuat UI lebih terstruktur.</p>
-<div class="stat-badge"><i class="fas fa-sync-alt"></i> Refresh update data</div>
-</div>
-`;
+if (filter && filteredData.length > 0) {
+cardsHtml += `<div class="card" style="cursor: default;"><div class="card-icon"><i class="fas fa-search"></i></div><h3>🔍 Hasil Pencarian</h3><p>Ditemukan ${filteredData.length} folder yang cocok dengan "${escapeHtml(filter)}"</p><div class="stat-badge">Live Search</div></div>`;
+} else {
+cardsHtml += `<div class="card" style="cursor: default;"><div class="card-icon"><i class="fas fa-text-height"></i></div><h3>📏 Ukuran Tombol 0.9rem</h3><p>Tombol <strong>SALIN</strong> berukuran 0.9rem di sudut kanan bawah. Garis pemisah antara judul folder dan isi.</p><div class="stat-badge">Folder dinamis dari Google Sheets</div></div>`;
+}
 dynamicArea.innerHTML = cardsHtml;
 
 document.querySelectorAll('.btn-salin-folder').forEach(btn => {
 btn.addEventListener('click', (e) => {
 e.stopPropagation();
-const idxAttr = btn.getAttribute('data-salin-index');
-if (idxAttr !== null && foldersData[parseInt(idxAttr)]) {
-const targetFolder = foldersData[parseInt(idxAttr)];
-const contentOnly = targetFolder.content || "";
-copyContentOnly(contentOnly, targetFolder.title);
+const idx = btn.getAttribute('data-salin-idx');
+if (idx !== null && foldersData[parseInt(idx)]) {
+const target = foldersData[parseInt(idx)];
+copyContentOnly(target.content || "", target.title);
 }
 });
 });
-
-document.querySelectorAll('.card[data-folder-index]').forEach(card => {
+document.querySelectorAll('.card[data-folder-original-idx]').forEach(card => {
 card.addEventListener('click', (e) => {
-if (e.target.classList && e.target.classList.contains('btn-salin-folder')) return;
 if (e.target.closest('.btn-salin-folder')) return;
-const idx = card.getAttribute('data-folder-index');
+const idx = card.getAttribute('data-folder-original-idx');
 if (idx !== null && foldersData[parseInt(idx)]) {
-const folder = foldersData[parseInt(idx)];
-openModal(folder.title, folder.content);
+const f = foldersData[parseInt(idx)];
+openModal(f.title, f.content);
 }
 });
 });
@@ -893,17 +894,37 @@ dynamicArea.innerHTML = cardsHTML;
 return true;
 }
 
+// Handler untuk live search (hanya berpengaruh di tab RANDOM)
+function handleSearchInput() {
+currentFilterText = searchInput.value;
+if (currentActiveTab === 'tab2') {
+renderRandomTab();
+}
+if (currentFilterText.length > 0) clearSearchBtn.classList.add('visible');
+else clearSearchBtn.classList.remove('visible');
+}
+
+function clearSearch() {
+searchInput.value = '';
+currentFilterText = '';
+clearSearchBtn.classList.remove('visible');
+if (currentActiveTab === 'tab2') {
+renderRandomTab();
+}
+}
+
 async function onTabClick(tabId) {
 currentActiveTab = tabId;
 document.querySelectorAll('.nav-item').forEach(item => {
 if (item.getAttribute('data-tab') === tabId) item.classList.add('active');
 else item.classList.remove('active');
 });
-
-if (tabId === 'tab2') {
-await renderRandomTab();
-} else {
+// Reset filter hanya secara visual, tetap pertahankan input tapi tidak mempengaruhi tab statis
+if (tabId !== 'tab2') {
+// Sembunyikan atau biarkan saja pencarian tidak aktif, tidak mempengaruhi render
 renderStaticTab(tabId);
+} else {
+await renderRandomTab();
 }
 }
 
@@ -918,11 +939,10 @@ if (tabId) onTabClick(tabId);
 
 document.getElementById("refreshDataBtn").addEventListener("click", async () => {
 if (currentActiveTab === 'tab2') {
+foldersData = await fetchDataFromGoogleSheets();
 await renderRandomTab();
-} else if (staticTabsData[currentActiveTab]) {
-renderStaticTab(currentActiveTab);
 } else {
-renderStaticTab('tab1');
+renderStaticTab(currentActiveTab);
 }
 });
 
@@ -933,8 +953,12 @@ if (m === '&') return '&amp;';
 if (m === '<') return '&lt;';
 if (m === '>') return '&gt;';
 return m;
-}).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, c => c);
+});
 }
+
+// Event listener untuk search
+searchInput.addEventListener('input', handleSearchInput);
+clearSearchBtn.addEventListener('click', clearSearch);
 
 (async function init() {
 bindNavEvents();
