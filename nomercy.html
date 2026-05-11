@@ -521,6 +521,240 @@ grid-column: 1 / -1;
 background: rgba(220, 38, 38, 0.8);
 border-left: 5px solid #ff8a8a;
 }
+
+/* ========= STYLE KHUSUS UNTUK KOLOM BONUS - 4 BADGE ========= */
+.bonus-badge-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bonus-nav-badges {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.bonus-badge-btn {
+  flex: 1;
+  min-width: 180px;
+  background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(239,68,68,0.15));
+  border: 1px solid rgba(245,158,11,0.4);
+  border-radius: 20px;
+  padding: 18px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bonus-badge-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, rgba(245,158,11,0.3), rgba(239,68,68,0.3));
+  border-color: #f59e0b;
+}
+
+.bonus-badge-btn.active-bonus {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  border-color: #fff;
+}
+
+.bonus-badge-btn.active-bonus .bonus-badge-icon,
+.bonus-badge-btn.active-bonus .bonus-badge-title,
+.bonus-badge-btn.active-bonus .bonus-badge-sub {
+  color: white;
+}
+
+.bonus-badge-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.bonus-badge-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fbbf24;
+}
+
+.bonus-badge-sub {
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.bonus-page-content {
+  background: rgba(0,0,0,0.3);
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 20px;
+  min-height: 400px;
+}
+
+.bonus-page {
+  display: none;
+  animation: fadeInBonus 0.4s ease;
+}
+
+.bonus-page.active-bonus-page {
+  display: block;
+}
+
+@keyframes fadeInBonus {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bonus-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(245,158,11,0.5);
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.bonus-page-header h3 {
+  font-size: 1.4rem;
+  color: #fbbf24;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bonus-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.bonus-btn-edit, .bonus-btn-save, .bonus-btn-reset {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bonus-btn-edit {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.bonus-btn-save {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.bonus-btn-reset {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+  color: white;
+}
+
+.bonus-btn-reset:hover {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.bonus-content-display {
+  line-height: 1.8;
+  color: #e2e8f0;
+}
+
+.bonus-content-display h4 {
+  color: #fbbf24;
+  margin: 20px 0 10px 0;
+  font-size: 1.1rem;
+}
+
+.bonus-content-display p {
+  margin-bottom: 12px;
+}
+
+.bonus-content-display ul, .bonus-content-display ol {
+  margin-left: 25px;
+  margin-bottom: 15px;
+}
+
+.bonus-content-display li {
+  margin: 8px 0;
+}
+
+.bonus-highlight {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: bold;
+}
+
+.bonus-edit-area {
+  display: none;
+}
+
+.bonus-edit-area textarea {
+  width: 100%;
+  min-height: 350px;
+  padding: 15px;
+  background: rgba(0,0,0,0.5);
+  border: 2px solid #f59e0b;
+  border-radius: 16px;
+  color: white;
+  font-family: 'Inter', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.bonus-edit-area textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.bonus-edit-mode .bonus-content-display {
+  display: none;
+}
+
+.bonus-edit-mode .bonus-edit-area {
+  display: block;
+}
+
+.bonus-info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.bonus-info-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.bonus-info-card i {
+  font-size: 1.5rem;
+  color: #f59e0b;
+  margin-bottom: 8px;
+}
+
+.bonus-info-card h5 {
+  color: white;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+.bonus-info-card p {
+  color: #94a3b8;
+  font-size: 0.75rem;
+}
+
 @media (max-width: 768px) {
 .sidebar { width: 240px; }
 .main-content { padding: 16px; }
@@ -528,6 +762,8 @@ border-left: 5px solid #ff8a8a;
 .search-input:focus { width: 220px; }
 .page-title h1 { font-size: 1.4rem; }
 .page-title p { font-size: 0.75rem; }
+.bonus-nav-badges { flex-direction: column; }
+.bonus-badge-btn { min-width: auto; }
 }
 </style>
 </head>
@@ -544,12 +780,12 @@ border-left: 5px solid #ff8a8a;
 </div>
 </div>
 <div class="nav-menu">
-<div class="nav-item active" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span><div class="badge-new">Full</div></div>
+<div class="nav-item" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span><div class="badge-new">Full</div></div>
 <div class="nav-item" data-tab="tab2"><i class="fas fa-chart-line"></i><span>RANDOM</span><div class="badge-new">Folder + SALIN</div></div>
 <div class="nav-item" data-tab="tab3"><i class="fas fa-envelope"></i><span>EVENT LINETOGEL</span></div>
 <div class="nav-item" data-tab="tab4"><i class="fas fa-tasks"></i><span>GALLERY GAMBAR CS</span></div>
 <div class="nav-item" data-tab="tab5"><i class="fas fa-users"></i><span>ALL ABOUT QRIS</span></div>
-<div class="nav-item" data-tab="tab6"><i class="fas fa-cog"></i><span>BONUS</span></div>
+<div class="nav-item active" data-tab="tab6"><i class="fas fa-cog"></i><span>BONUS</span><div class="badge-new">4 Badge</div></div>
 <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
 </div>
 <div class="sidebar-footer">
@@ -604,9 +840,9 @@ const SHEET_NAME = 'PK RANDOM';
 
 let foldersData = [];
 let currentFilterText = "";
-let currentActiveTab = "tab1";
+let currentActiveTab = "tab6";
 
-// Data statis untuk semua tab
+// Data statis untuk semua tab (TIDAK DIRUBAH)
 const staticTabsData = {
 tab1: {
 title: "🏠 Dashboard Utama",
@@ -644,15 +880,6 @@ items: [
 { icon: "fas fa-handshake", title: "Kolaborasi", desc: "Integrasi dengan tim desain", badge: "Sinergi" }
 ]
 },
-tab6: {
-title: "⚙️ BONUS",
-subtitle: "Konfigurasi & preferensi — kustomisasi penuh",
-items: [
-{ icon: "fas fa-user-cog", title: "Akun Saya", desc: "Privasi, keamanan, dan notifikasi", badge: "Diperbarui" },
-{ icon: "fas fa-palette", title: "Tampilan", desc: "Mode terang/gelap & tema kustom", badge: "Baru" },
-{ icon: "fas fa-shield-alt", title: "Keamanan", desc: "2FA aktif · Log aktivitas", badge: "Aman" }
-]
-},
 tab7: {
 title: "❓ JADWAL TOGEL",
 subtitle: "Panduan & support — selalu siap membantu",
@@ -664,6 +891,254 @@ items: [
 }
 };
 
+// ======================= DATA UNTUK KOLOM BONUS (4 BADGE) =======================
+const bonusPages = {
+  scatter: {
+    name: "SCATTER",
+    icon: "fas fa-star-of-life",
+    defaultContent: `<h4>🎯 Event Scatter Spesial</h4>
+<p>Dapatkan <span class="bonus-highlight">SCATTER LEGEND</span> dengan mengumpulkan 3 simbol scatter pada permainan slot favorit Anda!</p>
+<h4>✨ Bonus yang Didapat:</h4>
+<ul>
+<li><strong>3 Scatter</strong> → 15 Free Spin + Bonus 50k</li>
+<li><strong>4 Scatter</strong> → 30 Free Spin + 2x Multiplier + Bonus 100k</li>
+<li><strong>5 Scatter</strong> → 100 Free Spin + Jackpot Progresif + Bonus 500k</li>
+</ul>
+<h4>📅 Periode Event</h4>
+<p>1 - 30 November 2026 | Claim bonus maksimal 3x sehari</p>
+<div class="bonus-info-cards">
+<div class="bonus-info-card"><i class="fas fa-chart-line"></i><h5>Total Hadiah</h5><p>Rp 500 Juta+</p></div>
+<div class="bonus-info-card"><i class="fas fa-users"></i><h5>Peserta</h5><p>12,384 aktif</p></div>
+<div class="bonus-info-card"><i class="fas fa-clock"></i><h5>Sisa Waktu</h5><p>19 hari</p></div>
+</div>`
+  },
+  event: {
+    name: "EVENT SCATTER",
+    icon: "fas fa-bullhorn",
+    defaultContent: `<h4>🎪 Event Scatter Mega Jackpot</h4>
+<p>Event spesial akhir tahun dengan total hadiah <span class="bonus-highlight">MILYARAN RUPIAH</span>! Setiap scatter yang Anda dapatkan akan dikumpulkan menjadi poin.</p>
+<h4>🏆 Turnamen Scatter</h4>
+<ul>
+<li>Peringkat 1: Mobil + 1 Milyar</li>
+<li>Peringkat 2: Motor + 500 Juta</li>
+<li>Peringkat 3: iPhone 15 + 250 Juta</li>
+<li>Peringkat 4-10: 100 Juta + Free Spin 200x</li>
+</ul>
+<div class="bonus-info-cards">
+<div class="bonus-info-card"><i class="fas fa-trophy"></i><h5>Juara Terkini</h5><p>User123: 450</p></div>
+<div class="bonus-info-card"><i class="fas fa-fire"></i><h5>Heat Level</h5><p>Extreme 🔥</p></div>
+<div class="bonus-info-card"><i class="fas fa-gem"></i><h5>Jackpot</h5><p>Rp 2.5 M</p></div>
+</div>`
+  },
+  buyfree: {
+    name: "BUY & FREE",
+    icon: "fas fa-ticket-alt",
+    defaultContent: `<h4>🛒 BUY 1 GET 1 FREE</h4>
+<p>Promosi <span class="bonus-highlight">BUY & FREE SHEET</span> spesial untuk member setia! Beli 1 tiket event, gratis 1 tiket untuk putaran berikutnya.</p>
+<h4>💎 Paket Promo:</h4>
+<ul>
+<li><strong>Paket Silver</strong> (50k) → Free 1 tiket + Bonus 10k</li>
+<li><strong>Paket Gold</strong> (100k) → Free 2 tiket + Bonus 30k + 5 Free Spin</li>
+<li><strong>Paket Platinum</strong> (250k) → Free 5 tiket + Bonus 100k + 20 Free Spin</li>
+</ul>
+<div class="bonus-info-cards">
+<div class="bonus-info-card"><i class="fas fa-percent"></i><h5>Diskon</h5><p>Up to 70%</p></div>
+<div class="bonus-info-card"><i class="fas fa-box-open"></i><h5>Terjual</h5><p>8,742 paket</p></div>
+<div class="bonus-info-card"><i class="fas fa-infinity"></i><h5>Stok</h5><p>Terbatas!</p></div>
+</div>`
+  },
+  super: {
+    name: "SUPER SCATTER",
+    icon: "fas fa-bolt",
+    defaultContent: `<h4>⚡ SUPER SCATTER BONUS 200%</h4>
+<p>Event eksklusif untuk member VIP! <span class="bonus-highlight">SUPER SCATTER</span> memberikan multiplier tanpa batas dan bonus deposit harian 200%.</p>
+<h4>🌟 Keuntungan Super Scatter:</h4>
+<ul>
+<li>Bonus deposit 200% setiap hari (min 50rb - max 2jt)</li>
+<li>Cashback 10% tanpa syarat TO</li>
+<li>Rollingan 1% setiap minggu</li>
+<li>Free Spin 50x untuk setiap 3 scatter yang terkumpul</li>
+</ul>
+<div class="bonus-info-cards">
+<div class="bonus-info-card"><i class="fas fa-crown"></i><h5>VIP Only</h5><p>Level 5+</p></div>
+<div class="bonus-info-card"><i class="fas fa-chart-simple"></i><h5>Multiplier</h5><p>Up to 50x</p></div>
+<div class="bonus-info-card"><i class="fas fa-gift"></i><h5>Bonus Aktif</h5><p>24/7</p></div>
+</div>`
+  }
+};
+
+let currentBonusPage = "scatter";
+
+// Simpan default konten
+const bonusDefaultContents = {};
+for (let key in bonusPages) {
+  bonusDefaultContents[key] = bonusPages[key].defaultContent;
+}
+
+// Load saved content dari localStorage
+function loadBonusSavedContents() {
+  for (let key in bonusPages) {
+    const saved = localStorage.getItem(`bonus_content_${key}`);
+    if (saved) {
+      const displayDiv = document.querySelector(`#bonus-page-${key} .bonus-content-display`);
+      if (displayDiv) displayDiv.innerHTML = saved;
+    }
+  }
+}
+
+// Fungsi untuk render KOLOM BONUS (tab6)
+function renderBonusTab() {
+  mainHeading.innerHTML = "🎁 KOLOM BONUS";
+  subHeading.innerHTML = "4 Badge Event Spesial - SCATTER | EVENT SCATTER | BUY & FREE | SUPER SCATTER";
+  
+  let html = `
+  <div class="bonus-badge-container">
+    <div class="bonus-nav-badges">
+      <div class="bonus-badge-btn ${currentBonusPage === 'scatter' ? 'active-bonus' : ''}" data-bonus-page="scatter">
+        <i class="${bonusPages.scatter.icon} bonus-badge-icon"></i>
+        <div class="bonus-badge-title">${bonusPages.scatter.name}</div>
+        <div class="bonus-badge-sub">Event Scatter Wild</div>
+      </div>
+      <div class="bonus-badge-btn ${currentBonusPage === 'event' ? 'active-bonus' : ''}" data-bonus-page="event">
+        <i class="${bonusPages.event.icon} bonus-badge-icon"></i>
+        <div class="bonus-badge-title">${bonusPages.event.name}</div>
+        <div class="bonus-badge-sub">Event Scatter Spesial</div>
+      </div>
+      <div class="bonus-badge-btn ${currentBonusPage === 'buyfree' ? 'active-bonus' : ''}" data-bonus-page="buyfree">
+        <i class="${bonusPages.buyfree.icon} bonus-badge-icon"></i>
+        <div class="bonus-badge-title">${bonusPages.buyfree.name}</div>
+        <div class="bonus-badge-sub">Buy Free Sheet</div>
+      </div>
+      <div class="bonus-badge-btn ${currentBonusPage === 'super' ? 'active-bonus' : ''}" data-bonus-page="super">
+        <i class="${bonusPages.super.icon} bonus-badge-icon"></i>
+        <div class="bonus-badge-title">${bonusPages.super.name}</div>
+        <div class="bonus-badge-sub">Super Scatter Bonus</div>
+      </div>
+    </div>
+    <div class="bonus-page-content">
+  `;
+  
+  for (let key in bonusPages) {
+    const page = bonusPages[key];
+    const savedContent = localStorage.getItem(`bonus_content_${key}`) || page.defaultContent;
+    html += `
+      <div id="bonus-page-${key}" class="bonus-page ${currentBonusPage === key ? 'active-bonus-page' : ''}">
+        <div class="bonus-page-header">
+          <h3><i class="${page.icon}"></i> ${page.name}</h3>
+          <div class="bonus-actions">
+            <button class="bonus-btn-edit" onclick="enableBonusEdit('${key}')"><i class="fas fa-edit"></i> Edit</button>
+            <button class="bonus-btn-save" onclick="saveBonusContent('${key}')" style="display:none;"><i class="fas fa-save"></i> Simpan</button>
+            <button class="bonus-btn-reset" onclick="resetBonusContent('${key}')" style="display:none;"><i class="fas fa-undo"></i> Batal</button>
+          </div>
+        </div>
+        <div id="bonus-content-${key}" class="bonus-editable-content">
+          <div class="bonus-content-display">${savedContent}</div>
+          <div class="bonus-edit-area">
+            <textarea id="bonus-edit-${key}" placeholder="Tulis konten halaman ${page.name} di sini...&#10;&#10;Gunakan format HTML:&#10;&lt;h4&gt;Judul&lt;/h4&gt;&#10;&lt;p&gt;Paragraf&lt;/p&gt;&#10;&lt;ul&gt;&lt;li&gt;List&lt;/li&gt;&lt;/ul&gt;"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  html += `</div></div>`;
+  dynamicArea.innerHTML = html;
+  
+  // Event listener untuk badge
+  document.querySelectorAll('.bonus-badge-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const page = btn.getAttribute('data-bonus-page');
+      switchBonusPage(page);
+    });
+  });
+}
+
+function switchBonusPage(page) {
+  currentBonusPage = page;
+  
+  // Update active badge
+  document.querySelectorAll('.bonus-badge-btn').forEach(btn => {
+    btn.classList.remove('active-bonus');
+    if (btn.getAttribute('data-bonus-page') === page) {
+      btn.classList.add('active-bonus');
+    }
+  });
+  
+  // Update active page content
+  document.querySelectorAll('.bonus-page').forEach(p => {
+    p.classList.remove('active-bonus-page');
+  });
+  const activePage = document.getElementById(`bonus-page-${page}`);
+  if (activePage) activePage.classList.add('active-bonus-page');
+  
+  // Exit edit mode untuk semua page
+  for (let key in bonusPages) {
+    const container = document.getElementById(`bonus-content-${key}`);
+    if (container && container.classList.contains('bonus-edit-mode')) {
+      exitBonusEditMode(key);
+    }
+  }
+}
+
+function enableBonusEdit(page) {
+  const container = document.getElementById(`bonus-content-${page}`);
+  const displayDiv = container.querySelector('.bonus-content-display');
+  const textarea = document.getElementById(`bonus-edit-${page}`);
+  const editBtn = document.querySelector(`#bonus-page-${page} .bonus-btn-edit`);
+  const saveBtn = document.querySelector(`#bonus-page-${page} .bonus-btn-save`);
+  const resetBtn = document.querySelector(`#bonus-page-${page} .bonus-btn-reset`);
+  
+  textarea.value = displayDiv.innerHTML;
+  container.classList.add('bonus-edit-mode');
+  editBtn.style.display = 'none';
+  saveBtn.style.display = 'flex';
+  resetBtn.style.display = 'flex';
+}
+
+function exitBonusEditMode(page) {
+  const container = document.getElementById(`bonus-content-${page}`);
+  const editBtn = document.querySelector(`#bonus-page-${page} .bonus-btn-edit`);
+  const saveBtn = document.querySelector(`#bonus-page-${page} .bonus-btn-save`);
+  const resetBtn = document.querySelector(`#bonus-page-${page} .bonus-btn-reset`);
+  
+  container.classList.remove('bonus-edit-mode');
+  editBtn.style.display = 'flex';
+  saveBtn.style.display = 'none';
+  resetBtn.style.display = 'none';
+}
+
+function saveBonusContent(page) {
+  const container = document.getElementById(`bonus-content-${page}`);
+  const displayDiv = container.querySelector('.bonus-content-display');
+  const textarea = document.getElementById(`bonus-edit-${page}`);
+  const newContent = textarea.value;
+  
+  displayDiv.innerHTML = newContent;
+  localStorage.setItem(`bonus_content_${page}`, newContent);
+  exitBonusEditMode(page);
+  showToastBonus(`Konten ${bonusPages[page].name} berhasil disimpan!`);
+}
+
+function resetBonusContent(page) {
+  const container = document.getElementById(`bonus-content-${page}`);
+  const displayDiv = container.querySelector('.bonus-content-display');
+  const textarea = document.getElementById(`bonus-edit-${page}`);
+  
+  displayDiv.innerHTML = bonusDefaultContents[page];
+  textarea.value = bonusDefaultContents[page];
+  localStorage.removeItem(`bonus_content_${page}`);
+  exitBonusEditMode(page);
+  showToastBonus(`Konten ${bonusPages[page].name} direset ke default`);
+}
+
+function showToastBonus(message) {
+  const toast = document.getElementById("copyToast");
+  toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2000);
+}
+
+// ======================= FUNGSI DASHBOARD YANG SUDAH ADA (TIDAK DIRUBAH) =======================
 const dynamicArea = document.getElementById("dynamicContentArea");
 const mainHeading = document.getElementById("mainHeading");
 const subHeading = document.getElementById("subHeading");
@@ -675,12 +1150,12 @@ const toast = document.getElementById("copyToast");
 const searchInput = document.getElementById("liveSearchInput");
 const clearSearchBtn = document.getElementById("clearSearchBtn");
 
-// Toast & copy functions
 function showCopyToast(message) {
 toast.innerHTML = `<i class="fas fa-copy"></i>  ${message}`;
 toast.classList.add("show");
 setTimeout(() => toast.classList.remove("show"), 2000);
 }
+
 async function copyContentOnly(textContent, folderTitle) {
 const finalText = textContent || "(Tidak ada konten)";
 try {
@@ -696,18 +1171,19 @@ document.body.removeChild(textarea);
 showCopyToast(`"${folderTitle}" disalin`);
 }
 }
+
 function openModal(title, content) {
 modalTitle.textContent = title;
 modalContentText.innerHTML = (content || "(Kosong)").replace(/\n/g, '<br>');
 modal.classList.add("active");
 document.body.style.overflow = "hidden";
 }
+
 function closeModal() { modal.classList.remove("active"); document.body.style.overflow = ""; }
 closeModalBtn.onclick = closeModal;
 modal.onclick = e => { if(e.target === modal) closeModal(); };
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
 
-// Fetch data from Google Sheets
 async function fetchDataFromGoogleSheets() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
@@ -728,6 +1204,7 @@ dataRows.push({ title: rows[i][0].trim(), content: rows[i][1] ? rows[i][1].trim(
 return dataRows;
 } catch(e) { console.error(e); throw new Error('Gagal ambil data dari Google Sheets'); }
 }
+
 function parseCSV(csvText) {
 const lines = []; let cur = '', inQ = false;
 for(let i=0; i<csvText.length; i++) {
@@ -750,7 +1227,6 @@ return row;
 });
 }
 
-// RENDER UNTUK TAB STATIS (dengan filter)
 function renderStaticTabWithFilter(tabId, filter = "") {
 const data = staticTabsData[tabId];
 if(!data) return false;
@@ -781,7 +1257,6 @@ dynamicArea.innerHTML = cardsHTML;
 return true;
 }
 
-// RENDER TAB RANDOM (dengan filter)
 async function renderRandomTabWithFilter(filter = "") {
 mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
 const filterText = filter ? ` | 🔍 Mencari: "${filter}"` : " | Gunakan kotak pencarian untuk filter folder";
@@ -837,33 +1312,41 @@ dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.
 }
 }
 
-// Fungsi utama apply search
 async function applyLiveSearch() {
 const filter = currentFilterText;
 if(currentActiveTab === 'tab2') {
 await renderRandomTabWithFilter(filter);
+} else if(currentActiveTab === 'tab6') {
+// Untuk tab BONUS, filter tidak berpengaruh karena bukan grid biasa
+if(filter) {
+subHeading.innerHTML = `✨ 4 Badge Event Spesial | Hasil pencarian: "${filter}" ✨`;
+} else {
+subHeading.innerHTML = "✨ 4 Badge Event Spesial - SCATTER | EVENT SCATTER | BUY & FREE | SUPER SCATTER ✨";
+}
+// Tetap render bonus tab
+renderBonusTab();
 } else {
 renderStaticTabWithFilter(currentActiveTab, filter);
 }
 }
 
-// Event handlers untuk search
 function handleSearchInput() {
 currentFilterText = searchInput.value;
 if(currentFilterText.length > 0) clearSearchBtn.classList.add('visible');
 else clearSearchBtn.classList.remove('visible');
 applyLiveSearch();
 }
+
 function clearSearch() {
 searchInput.value = '';
 currentFilterText = '';
 clearSearchBtn.classList.remove('visible');
 applyLiveSearch();
 }
+
 searchInput.addEventListener('input', handleSearchInput);
 clearSearchBtn.addEventListener('click', clearSearch);
 
-// Navigasi tab
 async function onTabClick(tabId) {
 currentActiveTab = tabId;
 document.querySelectorAll('.nav-item').forEach(item => {
@@ -873,10 +1356,13 @@ else item.classList.remove('active');
 if(tabId === 'tab2') {
 if(foldersData.length === 0) foldersData = await fetchDataFromGoogleSheets().catch(e=>[]);
 await renderRandomTabWithFilter(currentFilterText);
+} else if(tabId === 'tab6') {
+renderBonusTab();
 } else {
 renderStaticTabWithFilter(tabId, currentFilterText);
 }
 }
+
 function bindNavEvents() {
 document.querySelectorAll('.nav-item').forEach(item => {
 item.addEventListener('click', () => {
@@ -885,12 +1371,13 @@ if(tid) onTabClick(tid);
 });
 });
 }
+
 function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
 
 // Inisialisasi
 (async function init() {
 bindNavEvents();
-await onTabClick('tab1');
+await onTabClick('tab6');
 })();
 </script>
 </body>
