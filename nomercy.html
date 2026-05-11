@@ -522,27 +522,27 @@ background: rgba(220, 38, 38, 0.8);
 border-left: 5px solid #ff8a8a;
 }
 
-/* ========= STYLE KHUSUS UNTUK KOLOM BONUS - BADGE VERTIKAL ========= */
+/* ========= STYLE KHUSUS UNTUK KOLOM BONUS - BADGE HORIZONTAL ========= */
 .bonus-container {
   display: flex;
+  flex-direction: column;
   gap: 20px;
-  flex-wrap: wrap;
 }
 
-/* BADGE VERTIKAL DI SISI KIRI */
-.bonus-badge-vertical {
-  width: 220px;
-  flex-shrink: 0;
+/* BADGE HORIZONTAL DI ATAS */
+.bonus-badge-horizontal {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
   background: rgba(0, 0, 0, 0.4);
   border-radius: 20px;
-  padding: 15px 10px;
+  padding: 15px;
   backdrop-filter: blur(5px);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
 
 .bonus-badge-item {
+  flex: 1;
+  min-width: 160px;
   background: rgba(20, 30, 50, 0.8);
   border-radius: 14px;
   padding: 15px 12px;
@@ -553,7 +553,7 @@ border-left: 5px solid #ff8a8a;
 }
 
 .bonus-badge-item:hover {
-  transform: translateX(5px);
+  transform: translateY(-3px);
   background: rgba(245, 158, 11, 0.2);
   border-color: #f59e0b;
 }
@@ -586,9 +586,8 @@ border-left: 5px solid #ff8a8a;
   margin-top: 4px;
 }
 
-/* AREA KONTEN HALAMAN DI SISI KANAN */
+/* AREA KONTEN HALAMAN DI BAWAH */
 .bonus-page-area {
-  flex: 1;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
   padding: 20px;
@@ -769,9 +768,8 @@ border-left: 5px solid #ff8a8a;
   .search-input:focus { width: 220px; }
   .page-title h1 { font-size: 1.4rem; }
   .page-title p { font-size: 0.75rem; }
-  .bonus-container { flex-direction: column; }
-  .bonus-badge-vertical { width: 100%; flex-direction: row; flex-wrap: wrap; }
-  .bonus-badge-item { flex: 1; min-width: 120px; }
+  .bonus-badge-horizontal { flex-direction: column; }
+  .bonus-badge-item { min-width: auto; }
 }
 </style>
 </head>
@@ -899,11 +897,12 @@ items: [
 }
 };
 
-// ======================= DATA UNTUK 4 BADGE VERTIKAL DI KOLOM BONUS =======================
+// ======================= DATA UNTUK 4 BADGE HORIZONTAL DI KOLOM BONUS =======================
 const bonusPagesData = {
   scatter: {
     name: "SCATTER",
     icon: "fas fa-star-of-life",
+    sub: "Event Scatter",
     defaultContent: `<h3>🎯 EVENT SCATTER MAHJONG WAYS 1 & 2</h3>
 <p>Event Scatter untuk permainan Mahjong Ways 1 dan Mahjong Ways 2 dari PG Soft.</p>
 
@@ -945,6 +944,7 @@ const bonusPagesData = {
   buyfree: {
     name: "BUY & FREE",
     icon: "fas fa-ticket-alt",
+    sub: "Buy Free Sheet",
     defaultContent: `<h3>💰 BUY & FREE SHEET</h3>
 <p>Promo spesial Buy 1 Get 1 Free untuk semua member setia!</p>
 
@@ -975,6 +975,7 @@ const bonusPagesData = {
   super: {
     name: "SUPER SCATTER",
     icon: "fas fa-bolt",
+    sub: "Super Bonus",
     defaultContent: `<h3>⚡ SUPER SCATTER EVENT</h3>
 <p>Event eksklusif dengan bonus SUPER untuk member yang beruntung mendapatkan scatter beruntun!</p>
 
@@ -1006,6 +1007,7 @@ const bonusPagesData = {
   gallery: {
     name: "GAMBAR EVENT",
     icon: "fas fa-images",
+    sub: "Gallery Event",
     defaultContent: `<h3>🖼️ GALLERY EVENT - SCREENSHOT KEMENANGAN</h3>
 <p>Kumpulkan screenshot kemenangan scatter terbaik anda dan dapatkan hadiah menarik!</p>
 
@@ -1051,15 +1053,15 @@ function loadBonusSavedContents() {
   }
 }
 
-// Fungsi untuk render KOLOM BONUS dengan BADGE VERTIKAL
+// Fungsi untuk render KOLOM BONUS dengan BADGE HORIZONTAL
 function renderBonusTab() {
   mainHeading.innerHTML = "🎁 KOLOM BONUS";
-  subHeading.innerHTML = "4 Badge Event Vertikal - SCATTER | BUY & FREE | SUPER SCATTER | GAMBAR EVENT";
+  subHeading.innerHTML = "4 Badge Event Horizontal - SCATTER | BUY & FREE | SUPER SCATTER | GAMBAR EVENT";
   
   let html = `
   <div class="bonus-container">
-    <!-- BADGE VERTIKAL DI SISI KIRI -->
-    <div class="bonus-badge-vertical">
+    <!-- BADGE HORIZONTAL DI ATAS -->
+    <div class="bonus-badge-horizontal">
   `;
   
   for (let key in bonusPagesData) {
@@ -1068,7 +1070,7 @@ function renderBonusTab() {
       <div class="bonus-badge-item ${currentBonusPage === key ? 'active-bonus' : ''}" data-bonus-page="${key}">
         <div class="bonus-badge-icon"><i class="${page.icon}"></i></div>
         <div class="bonus-badge-title">${page.name}</div>
-        <div class="bonus-badge-sub">Klik untuk lihat</div>
+        <div class="bonus-badge-sub">${page.sub}</div>
       </div>
     `;
   }
@@ -1104,7 +1106,7 @@ function renderBonusTab() {
   html += `</div></div>`;
   dynamicArea.innerHTML = html;
   
-  // Event listener untuk badge vertikal
+  // Event listener untuk badge horizontal
   document.querySelectorAll('.bonus-badge-item').forEach(btn => {
     btn.addEventListener('click', () => {
       const page = btn.getAttribute('data-bonus-page');
@@ -1378,9 +1380,9 @@ if(currentActiveTab === 'tab2') {
 await renderRandomTabWithFilter(filter);
 } else if(currentActiveTab === 'tab6') {
 if(filter) {
-subHeading.innerHTML = `✨ 4 Badge Event Vertikal | Hasil pencarian: "${filter}" ✨`;
+subHeading.innerHTML = `✨ 4 Badge Event Horizontal | Hasil pencarian: "${filter}" ✨`;
 } else {
-subHeading.innerHTML = "✨ 4 Badge Event Vertikal - SCATTER | BUY & FREE | SUPER SCATTER | GAMBAR EVENT ✨";
+subHeading.innerHTML = "✨ 4 Badge Event Horizontal - SCATTER | BUY & FREE | SUPER SCATTER | GAMBAR EVENT ✨";
 }
 renderBonusTab();
 } else {
