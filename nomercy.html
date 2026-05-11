@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom | Bonus Badge Sejajar + Halaman Kategori</title>
+<title>7 Kolom | Halaman Bonus + Badge Sejajar (Horizontal)</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -34,7 +34,7 @@ body {
     z-index: 2;
 }
 
-/* ========= SIDEBAR KIRI 7 KOLOM (TIDAK DIUBAH) ========= */
+/* ========= SIDEBAR KIRI 7 KOLOM (TIDAK BERUBAH SAMA SEKALI) ========= */
 .sidebar {
     width: 280px;
     background: rgba(8, 16, 28, 0.85);
@@ -239,20 +239,20 @@ body {
 }
 .search-clear.visible { opacity: 1; visibility: visible; }
 
-/* ========= BADGE BONUS: SEJAJAR KE SAMPING (FLEX ROW) ========= */
-.bonus-badge-container {
+/* ========= BADGE BONUS: SEJAJAR KE SAMPING (HORIZONTAL) DI HALAMAN BONUS ========= */
+.bonus-badge-horizontal {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    margin: 20px 0 28px 0;
+    margin: 16px 0 32px 0;
     padding: 8px 12px;
 }
-.bonus-badge-item {
+.bonus-badge {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(8px);
     border-radius: 60px;
-    padding: 12px 32px;
+    padding: 12px 34px;
     font-weight: 800;
     font-size: 1.1rem;
     cursor: pointer;
@@ -264,37 +264,34 @@ body {
     gap: 12px;
     color: #ffde9c;
 }
-.bonus-badge-item i {
+.bonus-badge i {
     font-size: 1.3rem;
     color: #fbbf24;
 }
-.bonus-badge-item span {
+.bonus-badge span {
     letter-spacing: 0.5px;
 }
-.bonus-badge-item.active-bonus {
+.bonus-badge.active-bonus {
     background: linear-gradient(135deg, #f59e0b, #d97706);
     color: white;
     border-color: #ffedb0;
     box-shadow: 0 0 18px rgba(245,158,11,0.7);
 }
-.bonus-badge-item.active-bonus i {
+.bonus-badge.active-bonus i {
     color: white;
 }
-.bonus-badge-item:hover {
+.bonus-badge:hover {
     transform: translateY(-4px);
     background: rgba(245,158,11,0.85);
     color: white;
 }
-.bonus-badge-item:hover i {
-    color: white;
-}
 
-/* Grid untuk konten bonus (halaman masing-masing kategori) */
+/* Grid konten untuk setiap kategori bonus */
 .bonus-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 24px;
-    margin-top: 16px;
+    margin-top: 12px;
 }
 .bonus-card {
     background: rgba(18, 28, 45, 0.92);
@@ -317,15 +314,13 @@ body {
     color: #fff0c0;
     border-bottom: 2px solid #fbbf24;
     padding-bottom: 12px;
-    display: inline-block;
-    width: 100%;
 }
 .bonus-card p {
     color: #e2e8f0;
     line-height: 1.5;
     margin: 12px 0 50px 0;
 }
-.bonus-badge-tag {
+.bonus-tag {
     background: rgba(245, 158, 11, 0.35);
     display: inline-block;
     padding: 6px 14px;
@@ -334,7 +329,7 @@ body {
     font-weight: 600;
     color: #ffe4a3;
 }
-.btn-salin-bonus-card {
+.btn-salin-bonus {
     position: absolute;
     bottom: 16px;
     right: 18px;
@@ -351,12 +346,12 @@ body {
     cursor: pointer;
     transition: 0.2s;
 }
-.btn-salin-bonus-card:hover {
+.btn-salin-bonus:hover {
     background: #b45309;
     transform: scale(1.02);
 }
 
-/* ========= KOMPONEN LAIN (TIDAK BERUBAH) ========= */
+/* ========= GAYA UNTUK TAB LAIN (TIDAK BERUBAH) ========= */
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -378,7 +373,10 @@ body {
     display: flex; align-items: center; gap: 7px;
 }
 .stat-badge { background: rgba(59,130,246,0.4); padding: 6px 14px; border-radius: 40px; font-size:0.7rem; display:inline-block; }
+.card-icon { font-size: 2rem; margin-bottom: 16px; color: #60a5fa; }
 .loading-card, .no-result-card { background: rgba(0,0,0,0.6); text-align:center; padding:40px; border-radius:32px; grid-column:1/-1; }
+
+/* MODAL */
 .modal-overlay {
     position:fixed; top:0; left:0; width:100%; height:100%;
     background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); z-index:1000;
@@ -402,8 +400,9 @@ body {
     pointer-events:none; border-left:4px solid #22c55e;
 }
 .copy-toast-notif.show { opacity:1; transform:translateX(-50%) translateY(0px); }
+
 @media (max-width: 720px) {
-    .bonus-badge-item { padding: 8px 20px; font-size: 0.9rem; }
+    .bonus-badge { padding: 8px 20px; font-size: 0.9rem; }
     .sidebar { width: 240px; }
 }
 </style>
@@ -414,7 +413,7 @@ body {
         <div class="sidebar-header">
             <div class="logo-area">
                 <div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
-                <div class="logo-text"><h2>7Kolom</h2><p>Bonus 4 Badge Sejajar</p></div>
+                <div class="logo-text"><h2>7Kolom</h2><p>Bonus Badge Horizontal</p></div>
             </div>
         </div>
         <div class="nav-menu">
@@ -427,17 +426,17 @@ body {
             <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
         </div>
         <div class="sidebar-footer">
-            <i class="fas fa-arrows-alt"></i> Badge bonus SEJAJAR | Klik badge ganti halaman
+            <i class="fas fa-arrows-alt"></i> Klik BONUS → badge sejajar (ALL, MINGGUAN, DONE BAGI, LAIN-LAIN)
         </div>
     </aside>
 
     <main class="main-content">
         <div class="content-header">
-            <div class="page-title"><h1 id="mainHeading">Dashboard 7 Kolom</h1><p id="subHeading">Live search + Bonus kategori horizontal (sejajar)</p></div>
+            <div class="page-title"><h1 id="mainHeading">Dashboard 7 Kolom</h1><p id="subHeading">Live search tersedia di semua kolom | Teks center</p></div>
             <div class="action-buttons">
                 <div class="search-wrapper">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" id="liveSearchInput" class="search-input" placeholder="Cari konten / bonus...">
+                    <input type="text" id="liveSearchInput" class="search-input" placeholder="Cari folder / konten...">
                     <button id="clearSearchBtn" class="search-clear"><i class="fas fa-times"></i></button>
                 </div>
             </div>
@@ -452,45 +451,45 @@ body {
 <div id="copyToast" class="copy-toast-notif"><i class="fas fa-copy"></i> Disalin!</div>
 
 <script>
-    // ======================= KONFIGURASI TIDAK MENGUBAHI KOLOM LAIN =======================
+    // ======================= KONFIGURASI GOOGLE SHEETS (RANDOM TAB) TIDAK BERUBAH =======================
     const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
     const SHEET_NAME = 'PK RANDOM';
     let foldersData = [];
     let currentFilterText = "";
     let currentActiveTab = "tab1";
     let currentBonusCategory = "ALL"; // ALL, MINGGUAN, DONE BAGI, LAIN-LAIN
-    
-    // ========== DATA BONUS 4 KATEGORI (SETIAP HALAMAN DAPAT DIISI) ==========
-    const bonusCategories = {
+
+    // ========== DATA BONUS UNTUK 4 KATEGORI (SETIAP HALAMAN DAPAT DIISI) ==========
+    const bonusDataMap = {
         "ALL": [
-            { title: "🎁 BONUS ALL MEMBER", desc: "Cashback 10% tanpa minimal turnover. Berlaku untuk semua permainan.", badge: "Unlimited", contentDetail: "Bonus all: Cashback 10% setiap Senin, auto kredit ke akun." },
-            { title: "🏆 Rollingan 0.8%", desc: "Bonus rollingan untuk semua provider slot & live casino.", badge: "Mingguan", contentDetail: "Turnover dihitung Senin-Minggu, dibagikan setiap Senin siang." },
-            { title: "✨ Welcome Bonus 100%", desc: "New member dapat bonus 100% maksimal 200rb (TO kecil).", badge: "Syarat Mudah", contentDetail: "Minimal deposit 50rb, maks bonus 200rb, TO 8x." },
-            { title: "🔄 Referral Seumur Hidup", desc: "Dapatkan 5% dari total downline, bonus langsung masuk.", badge: "Pasif Income", contentDetail: "Bonus referral tanpa batas, berlaku seumur hidup." }
+            { title: "🎁 BONUS ALL MEMBER", desc: "Cashback 10% tanpa minimal turnover. Berlaku untuk semua permainan.", tag: "Unlimited", detail: "Bonus all: Cashback 10% setiap Senin, auto kredit ke akun. Minimal kekalahan 100rb." },
+            { title: "🏆 Rollingan 0.8%", desc: "Bonus rollingan untuk semua provider slot & live casino.", tag: "Mingguan", detail: "Turnover dihitung Senin-Minggu, dibagikan setiap Senin siang." },
+            { title: "✨ Welcome Bonus 100%", desc: "New member dapat bonus 100% maksimal 200rb (TO kecil).", tag: "Syarat Mudah", detail: "Minimal deposit 50rb, maks bonus 200rb, TO 8x." },
+            { title: "🔄 Referral Seumur Hidup", desc: "Dapatkan 5% dari total downline, bonus langsung masuk.", tag: "Pasif Income", detail: "Bonus referral tanpa batas, berlaku seumur hidup." }
         ],
         "MINGGUAN": [
-            { title: "📆 BONUS MINGGUAN SLOT", desc: "Bonus kekalahan 5% khusus slot games (minimal kalah 300rb).", badge: "Setiap Selasa", contentDetail: "Periode Senin-Minggu, dibagikan hari Selasa jam 15:00 WIB." },
-            { title: "💰 Cashback Sport 7%", desc: "Cashback mingguan untuk taruhan olahraga.", badge: "Mingguan", contentDetail: "Maksimal cashback 1.5 juta, minimal kekalahan 500rb." },
-            { title: "🎰 Rollingan Casino 0.5%", desc: "Bonus turnover live casino tanpa batas maks.", badge: "Auto Kredit", contentDetail: "Dibagikan otomatis setiap hari Selasa sore." },
-            { title: "⚡ Bonus Komisi Referral", desc: "Bonus referral mingguan 3% dari member aktif.", badge: "Bonus Rutin", contentDetail: "Referral bermain aktif 10x spin langsung dapat." }
+            { title: "📆 BONUS MINGGUAN SLOT", desc: "Bonus kekalahan 5% khusus slot games (minimal kalah 300rb).", tag: "Setiap Selasa", detail: "Periode Senin-Minggu, dibagikan hari Selasa jam 15:00 WIB." },
+            { title: "💰 Cashback Sport 7%", desc: "Cashback mingguan untuk taruhan olahraga.", tag: "Mingguan", detail: "Maksimal cashback 1.5 juta, minimal kekalahan 500rb." },
+            { title: "🎰 Rollingan Casino 0.5%", desc: "Bonus turnover live casino tanpa batas maks.", tag: "Auto Kredit", detail: "Dibagikan otomatis setiap hari Selasa sore." },
+            { title: "⚡ Bonus Komisi Referral", desc: "Bonus referral mingguan 3% dari member aktif.", tag: "Bonus Rutin", detail: "Referral bermain aktif 10x spin langsung dapat." }
         ],
         "DONE BAGI": [
-            { title: "✅ EVENT LUNAR DONE", desc: "Event Imlek 2025 telah berakhir, bonus sudah dibagikan ke semua pemenang.", badge: "Selesai", contentDetail: "Event periode 25 Jan - 10 Feb 2025. Pemenang sudah dihubungi CS." },
-            { title: "🏁 Kompetisi Togel Tutup", desc: "Turnamen togel 4D periode Maret telah closed dan reward diberikan.", badge: "Tuntas", contentDetail: "Pemenang utama mendapatkan bonus 10jt. Done bagi." },
-            { title: "🎯 Bonus Staking Berakhir", desc: "Program staking bulan April 2025 sudah selesai, pembagian hadiah rampung.", badge: "Finished", contentDetail: "Peserta yang qualify mendapatkan bonus di wallet masing2." },
-            { title: "📦 Freebet 50k Expired", desc: "Promo freebet untuk member lama sudah tidak tersedia.", badge: "Expired", contentDetail: "Bonus sudah tidak dapat diklaim lagi sejak 1 Mei 2025." }
+            { title: "✅ EVENT LUNAR DONE", desc: "Event Imlek 2025 telah berakhir, bonus sudah dibagikan ke semua pemenang.", tag: "Selesai", detail: "Event periode 25 Jan - 10 Feb 2025. Pemenang sudah dihubungi CS." },
+            { title: "🏁 Kompetisi Togel Tutup", desc: "Turnamen togel 4D periode Maret telah closed dan reward diberikan.", tag: "Tuntas", detail: "Pemenang utama mendapatkan bonus 10jt. Done bagi." },
+            { title: "🎯 Bonus Staking Berakhir", desc: "Program staking bulan April 2025 sudah selesai, pembagian hadiah rampung.", tag: "Finished", detail: "Peserta yang qualify mendapatkan bonus di wallet masing2." },
+            { title: "📦 Freebet 50k Expired", desc: "Promo freebet untuk member lama sudah tidak tersedia.", tag: "Expired", detail: "Bonus sudah tidak dapat diklaim lagi sejak 1 Mei 2025." }
         ],
         "LAIN-LAIN": [
-            { title: "🎂 Bonus Ulang Tahun", desc: "Bonus spesial 50k untuk member yang berulang tahun.", badge: "Spesial", contentDetail: "Syarat: sudah terdaftar 3 bulan & pernah deposit. Klaim via CS." },
-            { title: "📱 Bonus Download App", desc: "Install aplikasi mobile & dapatkan chip gratis 25rb.", badge: "New App", contentDetail: "Unduh dari official site, lalu klaim bonus 1x24 jam." },
-            { title: "🎲 Event Rollingan Harian", desc: "Bonus rollingan khusus hari libur nasional.", badge: "Terbatas", contentDetail: "Hanya berlaku saat long weekend. Cek jadwal." },
-            { title: "🃏 Turnamen Blackjack", desc: "Ikut turnamen blackjack online hadiah puluhan juta.", badge: "Live Event", contentDetail: "Pendaftaran gratis, periode 20-30 Mei 2025." }
+            { title: "🎂 Bonus Ulang Tahun", desc: "Bonus spesial 50k untuk member yang berulang tahun.", tag: "Spesial", detail: "Syarat: sudah terdaftar 3 bulan & pernah deposit. Klaim via CS." },
+            { title: "📱 Bonus Download App", desc: "Install aplikasi mobile & dapatkan chip gratis 25rb.", tag: "New App", detail: "Unduh dari official site, lalu klaim bonus 1x24 jam." },
+            { title: "🎲 Event Rollingan Harian", desc: "Bonus rollingan khusus hari libur nasional.", tag: "Terbatas", detail: "Hanya berlaku saat long weekend. Cek jadwal." },
+            { title: "🃏 Turnamen Blackjack", desc: "Ikut turnamen blackjack online hadiah puluhan juta.", tag: "Live Event", detail: "Pendaftaran gratis, periode 20-30 Mei 2025." }
         ]
     };
-    
-    // Data tab lain, tidak mengubah isi kolom existing
+
+    // ========== DATA UNTUK TAB LAIN (TIDAK ADA PERUBAHAN, TETAP UTUH) ==========
     const staticTabsData = {
-        tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik background full 100%", items: [
+        tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik — background full 100%", items: [
             { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
             { icon: "fas fa-users", title: "Pengguna Aktif", desc: "1,284 pengguna online sekarang", badge: "Hari ini" },
             { icon: "fas fa-calendar-alt", title: "Jadwal Proyek", desc: "3 tenggat mendekati deadline", badge: "Prioritas" }
@@ -516,7 +515,8 @@ body {
             { icon: "fas fa-globe", title: "Hongkong & Macau", desc: "Jadwal resmi terlampir", badge: "Lengkap" }
         ]}
     };
-    
+
+    // DOM elements
     const dynamicArea = document.getElementById("dynamicContentArea");
     const mainHeading = document.getElementById("mainHeading");
     const subHeading = document.getElementById("subHeading");
@@ -527,18 +527,19 @@ body {
     const toast = document.getElementById("copyToast");
     const searchInput = document.getElementById("liveSearchInput");
     const clearSearchBtn = document.getElementById("clearSearchBtn");
-    
-    function showToast(msg) { toast.innerHTML = `<i class="fas fa-copy"></i> ${msg}`; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2000); }
-    async function copyContent(text, title) {
+
+    // Helper functions
+    function showToastMessage(msg) { toast.innerHTML = `<i class="fas fa-copy"></i> ${msg}`; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2000); }
+    async function copyToClipboard(text, title) {
         const copyStr = text || "(Kosong)";
-        try { await navigator.clipboard.writeText(copyStr); showToast(`"${title}" disalin`); } catch { const ta=document.createElement("textarea"); ta.value=copyStr; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); showToast(`"${title}" disalin`); }
+        try { await navigator.clipboard.writeText(copyStr); showToastMessage(`"${title}" disalin`); } catch { const ta=document.createElement("textarea"); ta.value=copyStr; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); showToastMessage(`"${title}" disalin`); }
     }
-    function openModalContent(title, detail) { modalTitle.textContent = title; modalContentText.innerHTML = (detail || "Tidak ada detail").replace(/\n/g,'<br>'); modal.classList.add("active"); document.body.style.overflow="hidden"; }
+    function openModalDetail(title, detail) { modalTitle.textContent = title; modalContentText.innerHTML = (detail || "Tidak ada detail").replace(/\n/g,'<br>'); modal.classList.add("active"); document.body.style.overflow="hidden"; }
     function closeModalFunc() { modal.classList.remove("active"); document.body.style.overflow = ""; }
     closeModalBtn.onclick = closeModalFunc; modal.onclick = e => { if(e.target === modal) closeModalFunc(); };
     document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('active')) closeModalFunc(); });
-    
-    // Fetch sheets (Random Tab)
+
+    // Fetch Google Sheets untuk tab RANDOM
     async function fetchSheetsData() {
         try {
             const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
@@ -551,84 +552,90 @@ body {
             return rows.slice(start).filter(r=>r[0]?.trim()).map(r=> ({ title: r[0].trim(), content: r[1] ? r[1].trim() : "" }));
         } catch(e) { console.warn(e); return []; }
     }
-    
-    // Render Bonus Tab dengan BADGE SEJAJAR (horizontal flex) & halaman masing2 kategori
-    function renderBonusTab(filter = "", category = currentBonusCategory) {
-        mainHeading.innerHTML = "🎁 BONUS & PROMOSI SPESIAL";
-        subHeading.innerHTML = `Pilih kategori bonus sejajar di bawah — ${filter ? `🔍 filter: "${filter}"` : "semua promo tersedia"}`;
-        let bonusList = bonusCategories[category] || bonusCategories["ALL"];
-        let filtered = filter.trim() === "" ? bonusList : bonusList.filter(b => b.title.toLowerCase().includes(filter.toLowerCase()) || b.desc.toLowerCase().includes(filter.toLowerCase()));
+
+    // RENDER HALAMAN BONUS dengan BADGE SEJAJAR (horizontal) dan konten sesuai kategori
+    function renderBonusPage(filter = "", category = currentBonusCategory) {
+        mainHeading.innerHTML = "🎁 BONUS & PROMOSI";
+        subHeading.innerHTML = `Pilih kategori bonus di bawah (sejajar) — ${filter ? `🔍 filter: "${filter}"` : "semua promo menarik"}`;
         
-        // Badge sejajar (horizontal)
-        const badgeRowHtml = `
-            <div class="bonus-badge-container">
-                <div class="bonus-badge-item ${category === 'ALL' ? 'active-bonus' : ''}" data-bonus-cat="ALL"><i class="fas fa-star"></i><span>ALL</span></div>
-                <div class="bonus-badge-item ${category === 'MINGGUAN' ? 'active-bonus' : ''}" data-bonus-cat="MINGGUAN"><i class="fas fa-calendar-week"></i><span>MINGGUAN</span></div>
-                <div class="bonus-badge-item ${category === 'DONE BAGI' ? 'active-bonus' : ''}" data-bonus-cat="DONE BAGI"><i class="fas fa-check-circle"></i><span>DONE BAGI</span></div>
-                <div class="bonus-badge-item ${category === 'LAIN-LAIN' ? 'active-bonus' : ''}" data-bonus-cat="LAIN-LAIN"><i class="fas fa-ellipsis-h"></i><span>LAIN-LAIN</span></div>
+        const bonusList = bonusDataMap[category] || bonusDataMap["ALL"];
+        const filteredList = filter.trim() === "" ? bonusList : bonusList.filter(b => b.title.toLowerCase().includes(filter.toLowerCase()) || b.desc.toLowerCase().includes(filter.toLowerCase()));
+        
+        // Badge horizontal (sejajar kesamping)
+        const badgeRow = `
+            <div class="bonus-badge-horizontal">
+                <div class="bonus-badge ${category === 'ALL' ? 'active-bonus' : ''}" data-bonus-cat="ALL"><i class="fas fa-star"></i><span>ALL</span></div>
+                <div class="bonus-badge ${category === 'MINGGUAN' ? 'active-bonus' : ''}" data-bonus-cat="MINGGUAN"><i class="fas fa-calendar-week"></i><span>MINGGUAN</span></div>
+                <div class="bonus-badge ${category === 'DONE BAGI' ? 'active-bonus' : ''}" data-bonus-cat="DONE BAGI"><i class="fas fa-check-circle"></i><span>DONE BAGI</span></div>
+                <div class="bonus-badge ${category === 'LAIN-LAIN' ? 'active-bonus' : ''}" data-bonus-cat="LAIN-LAIN"><i class="fas fa-ellipsis-h"></i><span>LAIN-LAIN</span></div>
             </div>
         `;
-        if(filtered.length === 0) {
-            dynamicArea.innerHTML = badgeRowHtml + `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ada bonus dalam kategori ini</h3><p>Coba kata kunci lain</p></div>`;
-            attachBadgeEvents();
+        
+        if(filteredList.length === 0) {
+            dynamicArea.innerHTML = badgeRow + `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ada bonus dalam kategori ini</h3><p>Coba kata kunci lain</p></div>`;
+            attachBonusBadgeEvents();
             return;
         }
+        
         let gridHtml = `<div class="bonus-grid">`;
-        filtered.forEach((item, idx) => {
+        filteredList.forEach((item, idx) => {
             gridHtml += `
                 <div class="bonus-card" data-bonus-idx="${idx}" data-bonus-category="${category}">
-                    <button class="btn-salin-bonus-card" data-bonus-salin="${idx}" data-salincat="${category}"><i class="fas fa-copy"></i> SALIN</button>
+                    <button class="btn-salin-bonus" data-bonus-salin="${idx}" data-salincat="${category}"><i class="fas fa-copy"></i> SALIN</button>
                     <h3>${escapeHtml(item.title)}</h3>
                     <p>${escapeHtml(item.desc)}</p>
-                    <div class="bonus-badge-tag"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div>
+                    <div class="bonus-tag"><i class="fas fa-tag"></i> ${escapeHtml(item.tag)}</div>
                 </div>
             `;
         });
         gridHtml += `</div>`;
-        dynamicArea.innerHTML = badgeRowHtml + gridHtml;
-        attachBadgeEvents();
-        // event salin & modal detail
-        document.querySelectorAll('.btn-salin-bonus-card').forEach(btn => {
+        dynamicArea.innerHTML = badgeRow + gridHtml;
+        attachBonusBadgeEvents();
+        
+        // Event untuk tombol salin di dalam card bonus
+        document.querySelectorAll('.btn-salin-bonus').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const cat = btn.getAttribute('data-salincat');
                 const idx = parseInt(btn.getAttribute('data-bonus-salin'));
-                const list = bonusCategories[cat] || bonusCategories["ALL"];
+                const list = bonusDataMap[cat] || bonusDataMap["ALL"];
                 if(list && list[idx]) {
-                    const detailSalin = `${list[idx].title}\n${list[idx].desc}\nBadge: ${list[idx].badge}\nDetail: ${list[idx].contentDetail || ''}`;
-                    copyContent(detailSalin, list[idx].title);
+                    const copyText = `${list[idx].title}\n${list[idx].desc}\nTag: ${list[idx].tag}\nDetail: ${list[idx].detail || ''}`;
+                    copyToClipboard(copyText, list[idx].title);
                 }
             });
         });
+        
+        // Event klik card untuk melihat detail
         document.querySelectorAll('.bonus-card').forEach(card => {
             card.addEventListener('click', (e) => {
-                if(e.target.closest('.btn-salin-bonus-card')) return;
+                if(e.target.closest('.btn-salin-bonus')) return;
                 const cat = card.getAttribute('data-bonus-category');
                 const idx = parseInt(card.getAttribute('data-bonus-idx'));
-                const chosenList = bonusCategories[cat] || bonusCategories["ALL"];
-                if(chosenList && chosenList[idx]) {
-                    const fullInfo = `${chosenList[idx].title}\n${chosenList[idx].desc}\n${chosenList[idx].contentDetail || 'Tidak ada detail tambahan'}`;
-                    openModalContent(chosenList[idx].title, fullInfo);
+                const list = bonusDataMap[cat] || bonusDataMap["ALL"];
+                if(list && list[idx]) {
+                    const fullDetail = `${list[idx].title}\n${list[idx].desc}\n${list[idx].detail || 'Tidak ada detail tambahan'}`;
+                    openModalDetail(list[idx].title, fullDetail);
                 }
             });
         });
     }
     
-    function attachBadgeEvents() {
-        document.querySelectorAll('.bonus-badge-item').forEach(badge => {
-            badge.removeEventListener('click', badgeClickHandler);
-            badge.addEventListener('click', badgeClickHandler);
+    function attachBonusBadgeEvents() {
+        document.querySelectorAll('.bonus-badge').forEach(badge => {
+            badge.removeEventListener('click', bonusClickHandler);
+            badge.addEventListener('click', bonusClickHandler);
         });
     }
-    function badgeClickHandler(e) {
-        const category = e.currentTarget.getAttribute('data-bonus-cat');
-        if(category) {
-            currentBonusCategory = category;
-            renderBonusTab(currentFilterText, category);
+    function bonusClickHandler(e) {
+        const cat = e.currentTarget.getAttribute('data-bonus-cat');
+        if(cat) {
+            currentBonusCategory = cat;
+            renderBonusPage(currentFilterText, cat);
         }
     }
-    
-    // Render Tab Lain & Random (semua tidak mengubah struktur)
+
+    // Render tab statis (tidak berubah)
     function renderStaticTab(tabId, filter = "") {
         const data = staticTabsData[tabId];
         if(!data) return false;
@@ -646,9 +653,11 @@ body {
         dynamicArea.innerHTML = html;
         return true;
     }
+    
+    // Render tab RANDOM dari Google Sheets
     async function renderRandomTab(filter = "") {
-        mainHeading.innerHTML = "🎲 RANDOM | Google Sheets Folder";
-        subHeading.innerHTML = `Folder dinamis ${filter ? `🔍 "${filter}"` : ""} | Tombol salin`;
+        mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
+        subHeading.innerHTML = `Folder dinamis ${filter ? `🔍 "${filter}"` : ""} | Tombol SALIN 0.9rem`;
         dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i> Memuat folder...</div>`;
         try {
             if(foldersData.length === 0) foldersData = await fetchSheetsData();
@@ -660,31 +669,52 @@ body {
             });
             html += `</div>`;
             dynamicArea.innerHTML = html;
-            document.querySelectorAll('.btn-salin-folder').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const i=parseInt(btn.getAttribute('data-salin-idx')); if(foldersData[i]) copyContent(foldersData[i].content, foldersData[i].title); }); });
-            document.querySelectorAll('.card[data-folder-idx]').forEach(card => { card.addEventListener('click', (e) => { if(e.target.closest('.btn-salin-folder')) return; const i=parseInt(card.getAttribute('data-folder-idx')); if(foldersData[i]) openModalContent(foldersData[i].title, foldersData[i].content); }); });
+            document.querySelectorAll('.btn-salin-folder').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const i=parseInt(btn.getAttribute('data-salin-idx')); if(foldersData[i]) copyToClipboard(foldersData[i].content, foldersData[i].title); }); });
+            document.querySelectorAll('.card[data-folder-idx]').forEach(card => { card.addEventListener('click', (e) => { if(e.target.closest('.btn-salin-folder')) return; const i=parseInt(card.getAttribute('data-folder-idx')); if(foldersData[i]) openModalDetail(foldersData[i].title, foldersData[i].content); }); });
         } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>Error sheets</h3><p>${e.message}</p></div>`; }
     }
     
-    async function applySearch() {
+    // Search & filter global
+    async function applyLiveSearch() {
         if(currentActiveTab === 'tab2') await renderRandomTab(currentFilterText);
-        else if(currentActiveTab === 'tab6') renderBonusTab(currentFilterText, currentBonusCategory);
+        else if(currentActiveTab === 'tab6') renderBonusPage(currentFilterText, currentBonusCategory);
         else renderStaticTab(currentActiveTab, currentFilterText);
     }
-    function handleSearch() { currentFilterText = searchInput.value; clearSearchBtn.classList.toggle('visible', currentFilterText.length>0); applySearch(); }
-    function clearAllSearch() { searchInput.value = ''; currentFilterText = ''; clearSearchBtn.classList.remove('visible'); applySearch(); }
-    searchInput.addEventListener('input', handleSearch); clearSearchBtn.addEventListener('click', clearAllSearch);
+    function handleSearchInput() { currentFilterText = searchInput.value; clearSearchBtn.classList.toggle('visible', currentFilterText.length>0); applyLiveSearch(); }
+    function clearSearch() { searchInput.value = ''; currentFilterText = ''; clearSearchBtn.classList.remove('visible'); applyLiveSearch(); }
+    searchInput.addEventListener('input', handleSearchInput);
+    clearSearchBtn.addEventListener('click', clearSearch);
     
-    async function switchTab(tabId) {
+    // Tab navigasi (tidak mengubah apapun pada kolom lain)
+    async function switchToTab(tabId) {
         currentActiveTab = tabId;
-        document.querySelectorAll('.nav-item').forEach(item => { if(item.getAttribute('data-tab')===tabId) item.classList.add('active'); else item.classList.remove('active'); });
-        if(tabId === 'tab2') { if(foldersData.length===0) foldersData = await fetchSheetsData(); await renderRandomTab(currentFilterText); }
-        else if(tabId === 'tab6') renderBonusTab(currentFilterText, currentBonusCategory);
-        else renderStaticTab(tabId, currentFilterText);
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if(item.getAttribute('data-tab') === tabId) item.classList.add('active');
+            else item.classList.remove('active');
+        });
+        if(tabId === 'tab2') {
+            if(foldersData.length === 0) foldersData = await fetchSheetsData();
+            await renderRandomTab(currentFilterText);
+        } else if(tabId === 'tab6') {
+            renderBonusPage(currentFilterText, currentBonusCategory);
+        } else {
+            renderStaticTab(tabId, currentFilterText);
+        }
     }
-    document.querySelectorAll('.nav-item').forEach(item => { item.addEventListener('click', () => { const tid = item.getAttribute('data-tab'); if(tid) switchTab(tid); }); });
+    
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const tid = item.getAttribute('data-tab');
+            if(tid) switchToTab(tid);
+        });
+    });
+    
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
     
-    (async function init() { await switchTab('tab1'); })();
+    // Inisialisasi pertama
+    (async function init() {
+        await switchToTab('tab1');
+    })();
 </script>
 </body>
 </html>
