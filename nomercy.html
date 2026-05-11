@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar | Live Search Semua Kolom + Garis Pemisah</title>
+<title>7 Kolom Sidebar | Live Search Semua Kolom + Teks Center</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -173,6 +173,12 @@ border-radius: 48px;
 border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* MEMBUAT TEKS JUDUL DAN SUBHEADING MENJADI CENTER */
+.page-title {
+flex: 1;
+text-align: center;
+}
+
 .page-title h1 {
 font-size: 1.8rem;
 font-weight: 800;
@@ -181,6 +187,7 @@ background-clip: text;
 -webkit-background-clip: text;
 color: transparent;
 letter-spacing: -0.3px;
+text-align: center;
 }
 
 .page-title p {
@@ -188,15 +195,17 @@ font-size: 0.85rem;
 color: #e2e8f0;
 margin-top: 6px;
 font-weight: 500;
+text-align: center;
 }
 
 .action-buttons {
 display: flex;
 gap: 12px;
 align-items: center;
+flex-shrink: 0;
 }
 
-/* SEARCH BOX - LIVE SEARCH (berfungsi di semua kolom) */
+/* SEARCH BOX - LIVE SEARCH */
 .search-wrapper {
 position: relative;
 }
@@ -330,7 +339,7 @@ margin-bottom: 52px;
 margin-top: 8px;
 }
 
-/* TOMBOL SALIN - POJOK KANAN BAWAH */
+/* TOMBOL SALIN */
 .btn-salin-folder {
 position: absolute;
 bottom: 16px;
@@ -388,7 +397,6 @@ opacity: 1;
 transform: translateX(-50%) translateY(0px);
 }
 
-/* Icon area di dalam card - untuk static tab tetap ada, untuk random tab dihilangkan */
 .card-icon {
 font-size: 2rem;
 margin-bottom: 16px;
@@ -397,7 +405,6 @@ color: #60a5fa;
 .card.random-folder .card-icon {
 display: none;
 }
-
 .stat-badge {
 display: inline-block;
 background: rgba(59, 130, 246, 0.4);
@@ -519,6 +526,8 @@ border-left: 5px solid #ff8a8a;
 .main-content { padding: 16px; }
 .search-input { width: 200px; }
 .search-input:focus { width: 220px; }
+.page-title h1 { font-size: 1.4rem; }
+.page-title p { font-size: 0.75rem; }
 }
 </style>
 </head>
@@ -552,7 +561,7 @@ border-left: 5px solid #ff8a8a;
 <div class="content-header">
 <div class="page-title">
 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-<p id="subHeading">Live search tersedia di semua kolom | Garis pemisah judul & isi folder</p>
+<p id="subHeading">Live search tersedia di semua kolom | Teks berada di posisi tengah</p>
 </div>
 <div class="action-buttons">
 <div class="search-wrapper">
@@ -775,7 +784,7 @@ return true;
 // RENDER TAB RANDOM (dengan filter)
 async function renderRandomTabWithFilter(filter = "") {
 mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
-const filterText = filter ? ` | Mencari: "${filter}"` : " | Gunakan kotak pencarian untuk filter folder";
+const filterText = filter ? ` | 🔍 Mencari: "${filter}"` : " | Gunakan kotak pencarian untuk filter folder";
 subHeading.innerHTML = `✨ Folder dinamis dari Google Sheets${filterText} | Tombol SALIN 0.9rem`;
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat folder...</p></div>`;
 try {
@@ -828,7 +837,7 @@ dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.
 }
 }
 
-// Fungsi utama apply search (berlaku untuk semua kolom)
+// Fungsi utama apply search
 async function applyLiveSearch() {
 const filter = currentFilterText;
 if(currentActiveTab === 'tab2') {
