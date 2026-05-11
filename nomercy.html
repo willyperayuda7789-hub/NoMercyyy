@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar | Live Search (Khusus Folder)</title>
+<title>7 Kolom Sidebar | Live Search Semua Kolom + Garis Pemisah</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -196,28 +196,7 @@ gap: 12px;
 align-items: center;
 }
 
-.btn-light {
-background: rgba(255, 255, 255, 0.95);
-border: none;
-padding: 8px 22px;
-border-radius: 40px;
-font-weight: 700;
-font-size: 0.85rem;
-display: flex;
-align-items: center;
-gap: 8px;
-cursor: pointer;
-transition: 0.2s;
-color: #0f172a;
-box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.btn-light:hover {
-background: white;
-transform: translateY(-2px);
-}
-
-/* SEARCH BOX - LIVE SEARCH (khusus folder) */
+/* SEARCH BOX - LIVE SEARCH (berfungsi di semua kolom) */
 .search-wrapper {
 position: relative;
 }
@@ -229,7 +208,7 @@ padding: 8px 18px 8px 42px;
 font-size: 0.85rem;
 color: white;
 font-weight: 500;
-width: 240px;
+width: 260px;
 transition: all 0.2s;
 backdrop-filter: blur(4px);
 }
@@ -237,7 +216,7 @@ backdrop-filter: blur(4px);
 outline: none;
 border-color: #60a5fa;
 background: rgba(20, 35, 60, 0.95);
-width: 260px;
+width: 280px;
 box-shadow: 0 0 0 2px rgba(96,165,250,0.3);
 }
 .search-input::placeholder {
@@ -351,7 +330,7 @@ margin-bottom: 52px;
 margin-top: 8px;
 }
 
-/* TOMBOL SALIN - POJOK KANAN BAWAH, ukuran 0.9rem */
+/* TOMBOL SALIN - POJOK KANAN BAWAH */
 .btn-salin-folder {
 position: absolute;
 bottom: 16px;
@@ -415,8 +394,6 @@ font-size: 2rem;
 margin-bottom: 16px;
 color: #60a5fa;
 }
-
-/* Untuk random tab, kita hilangkan area icon-nya */
 .card.random-folder .card-icon {
 display: none;
 }
@@ -434,18 +411,7 @@ border: 1px solid rgba(255,255,255,0.15);
 align-self: flex-start;
 }
 
-.click-hint {
-margin-top: 12px;
-font-size: 0.7rem;
-color: #93c5fd;
-display: flex;
-align-items: center;
-gap: 6px;
-opacity: 0.7;
-margin-bottom: 8px;
-}
-
-/* MODAL STYLE - tanpa simbol folder */
+/* MODAL */
 .modal-overlay {
 position: fixed;
 top: 0;
@@ -537,14 +503,7 @@ color: #94a3b8;
 border-top: 1px solid rgba(255,255,255,0.1);
 padding-top: 16px;
 }
-.loading-card {
-background: rgba(0,0,0,0.6);
-text-align: center;
-padding: 40px;
-border-radius: 32px;
-grid-column: 1 / -1;
-}
-.no-result-card {
+.loading-card, .no-result-card {
 background: rgba(0,0,0,0.6);
 text-align: center;
 padding: 40px;
@@ -558,8 +517,8 @@ border-left: 5px solid #ff8a8a;
 @media (max-width: 768px) {
 .sidebar { width: 240px; }
 .main-content { padding: 16px; }
-.search-input { width: 170px; }
-.search-input:focus { width: 190px; }
+.search-input { width: 200px; }
+.search-input:focus { width: 220px; }
 }
 </style>
 </head>
@@ -571,7 +530,7 @@ border-left: 5px solid #ff8a8a;
 <div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
 <div class="logo-text">
 <h2>7Kolom</h2>
-<p>Garis pemisah folder</p>
+<p>Live Search Semua Kolom</p>
 </div>
 </div>
 </div>
@@ -585,7 +544,7 @@ border-left: 5px solid #ff8a8a;
 <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
 </div>
 <div class="sidebar-footer">
-<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | <strong>Garis pemisah judul & isi</strong> | Tombol SALIN 0.9rem | 🔍 Pencarian khusus folder RANDOM
+<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | <strong>Garis pemisah</strong> | Tombol SALIN 0.9rem | 🔍 Pencarian untuk SEMUA kolom
 </div>
 </aside>
 
@@ -593,13 +552,12 @@ border-left: 5px solid #ff8a8a;
 <div class="content-header">
 <div class="page-title">
 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-<p id="subHeading">Garis pemisah antara judul folder dengan isi folder | Pencarian HANYA untuk tab RANDOM</p>
+<p id="subHeading">Live search tersedia di semua kolom | Garis pemisah judul & isi folder</p>
 </div>
 <div class="action-buttons">
-<div class="btn-light" id="refreshDataBtn"><i class="fas fa-sync-alt"></i> Muat Ulang</div>
 <div class="search-wrapper">
 <i class="fas fa-search search-icon"></i>
-<input type="text" id="liveSearchInput" class="search-input" placeholder="🔍 Cari folder (RANDOM only)" autocomplete="off">
+<input type="text" id="liveSearchInput" class="search-input" placeholder="Cari folder / konten..." autocomplete="off">
 <button id="clearSearchBtn" class="search-clear"><i class="fas fa-times"></i></button>
 </div>
 </div>
@@ -610,7 +568,7 @@ border-left: 5px solid #ff8a8a;
 </main>
 </div>
 
-<!-- MODAL UNTUK MENAMPILKAN ISI FOLDER - TANPA SIMBOL -->
+<!-- MODAL UNTUK MENAMPILKAN ISI FOLDER -->
 <div id="folderModal" class="modal-overlay">
 <div class="modal-container">
 <div class="modal-header">
@@ -628,11 +586,10 @@ Isi folder akan ditampilkan di sini...
 </div>
 </div>
 
-<!-- Notifikasi Toast untuk copy -->
-<div id="copyToast" class="copy-toast-notif"><i class="fas fa-copy"></i>  Isi folder berhasil disalin! 📄</div>
+<div id="copyToast" class="copy-toast-notif"><i class="fas fa-copy"></i> Isi folder berhasil disalin! 📄</div>
 
 <script>
-// ======================= KONFIGURASI GOOGLE SHEETS (PK RANDOM) =======================
+// ======================= KONFIGURASI GOOGLE SHEETS =======================
 const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
 const SHEET_NAME = 'PK RANDOM';
 
@@ -640,10 +597,11 @@ let foldersData = [];
 let currentFilterText = "";
 let currentActiveTab = "tab1";
 
+// Data statis untuk semua tab
 const staticTabsData = {
 tab1: {
 title: "🏠 Dashboard Utama",
-subtitle: "Gambaran sistem & metrik — background full size 100% | garis pemisah eksplisit",
+subtitle: "Gambaran sistem & metrik — background full size 100%",
 items: [
 { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
 { icon: "fas fa-users", title: "Pengguna Aktif", desc: "1,284 pengguna online sekarang", badge: "Hari ini" },
@@ -708,46 +666,39 @@ const toast = document.getElementById("copyToast");
 const searchInput = document.getElementById("liveSearchInput");
 const clearSearchBtn = document.getElementById("clearSearchBtn");
 
+// Toast & copy functions
 function showCopyToast(message) {
 toast.innerHTML = `<i class="fas fa-copy"></i>  ${message}`;
 toast.classList.add("show");
 setTimeout(() => toast.classList.remove("show"), 2000);
 }
-
 async function copyContentOnly(textContent, folderTitle) {
-const finalText = textContent || "(Tidak ada konten tertulis)";
+const finalText = textContent || "(Tidak ada konten)";
 try {
 await navigator.clipboard.writeText(finalText);
-showCopyToast(`Isi folder "${folderTitle}" berhasil disalin`);
-} catch (err) {
+showCopyToast(`"${folderTitle}" berhasil disalin`);
+} catch {
 const textarea = document.createElement("textarea");
 textarea.value = finalText;
 document.body.appendChild(textarea);
 textarea.select();
 document.execCommand("copy");
 document.body.removeChild(textarea);
-showCopyToast(`Isi folder "${folderTitle}" disalin`);
+showCopyToast(`"${folderTitle}" disalin`);
 }
 }
-
-function openModal(folderTitle, folderContent) {
-modalTitle.textContent = folderTitle;
-let formattedContent = folderContent || "(Tidak ada konten tertulis dalam folder ini.)";
-formattedContent = formattedContent.replace(/\n/g, '<br>');
-modalContentText.innerHTML = formattedContent;
+function openModal(title, content) {
+modalTitle.textContent = title;
+modalContentText.innerHTML = (content || "(Kosong)").replace(/\n/g, '<br>');
 modal.classList.add("active");
 document.body.style.overflow = "hidden";
 }
+function closeModal() { modal.classList.remove("active"); document.body.style.overflow = ""; }
+closeModalBtn.onclick = closeModal;
+modal.onclick = e => { if(e.target === modal) closeModal(); };
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
 
-function closeModal() {
-modal.classList.remove("active");
-document.body.style.overflow = "";
-}
-
-closeModalBtn.addEventListener("click", closeModal);
-modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
-
+// Fetch data from Google Sheets
 async function fetchDataFromGoogleSheets() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
@@ -755,211 +706,179 @@ const response = await fetch(csvUrl, { cache: 'no-store' });
 if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
-if (!rows || rows.length === 0) return [];
-let dataRows = [];
+if (!rows.length) return [];
 const firstRow = rows[0];
-const isHeader = firstRow && firstRow.length >= 2 &&
-(firstRow[0].toLowerCase().includes('judul') || firstRow[0].toLowerCase().includes('folder') ||
-firstRow[1].toLowerCase().includes('isi') || firstRow[1].toLowerCase().includes('konten'));
+const isHeader = firstRow && firstRow.length >= 2 && (firstRow[0].toLowerCase().includes('judul') || firstRow[0].toLowerCase().includes('folder'));
 const startIdx = isHeader ? 1 : 0;
+let dataRows = [];
 for (let i = startIdx; i < rows.length; i++) {
-const row = rows[i];
-if (row && row.length >= 2) {
-const judul = row[0] ? row[0].trim() : '';
-const isi = row[1] ? row[1].trim() : '';
-if (judul !== '') dataRows.push({ title: judul, content: isi });
+if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+dataRows.push({ title: rows[i][0].trim(), content: rows[i][1] ? rows[i][1].trim() : "" });
 }
 }
 return dataRows;
-} catch (error) {
-console.error(error);
-throw new Error('Gagal mengambil data dari Google Sheets.');
+} catch(e) { console.error(e); throw new Error('Gagal ambil data dari Google Sheets'); }
 }
-}
-
 function parseCSV(csvText) {
-const lines = [];
-let currentLine = '', insideQuote = false;
-for (let i = 0; i < csvText.length; i++) {
+const lines = []; let cur = '', inQ = false;
+for(let i=0; i<csvText.length; i++) {
 const ch = csvText[i];
-if (ch === '"') insideQuote = !insideQuote;
-if (ch === '\n' && !insideQuote) { lines.push(currentLine); currentLine = ''; }
-else currentLine += ch;
+if(ch === '"') inQ = !inQ;
+if(ch === '\n' && !inQ) { lines.push(cur); cur = ''; } else cur += ch;
 }
-if (currentLine) lines.push(currentLine);
-const result = [];
-for (let line of lines) {
-if (line.trim() === '') continue;
-const row = [];
-let current = '', inQuoteField = false;
-for (let i = 0; i < line.length; i++) {
-const c = line[i];
-if (c === '"') inQuoteField = !inQuoteField;
-else if (c === ',' && !inQuoteField) {
-row.push(current.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
-current = '';
-} else current += c;
+if(cur) lines.push(cur);
+return lines.map(line => {
+if(!line.trim()) return [];
+const row = []; let c = '', inQ2 = false;
+for(let i=0; i<line.length; i++) {
+const x = line[i];
+if(x === '"') inQ2 = !inQ2;
+else if(x === ',' && !inQ2) { row.push(c.trim().replace(/^"|"$/g, '').replace(/""/g, '"')); c = ''; }
+else c += x;
 }
-row.push(current.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
-result.push(row);
-}
-return result;
+row.push(c.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
+return row;
+});
 }
 
-// RENDER KHUSUS TAB RANDOM DENGAN FILTER
-async function renderRandomTab() {
-const filter = currentFilterText;
-mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
-subHeading.innerHTML = filter ? `✨ Pencarian: "${filter}" — menampilkan folder yang cocok` : "✨ Gunakan kotak pencarian di samping untuk mencari folder (berdasarkan judul/isi) | Tombol SALIN 0.9rem";
-
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Mengambil data folder...</p></div>`;
-
-try {
-if (foldersData.length === 0) foldersData = await fetchDataFromGoogleSheets();
-let filteredData = foldersData;
-if (filter.trim() !== "") {
-filteredData = foldersData.filter(f => 
-f.title.toLowerCase().includes(filter.toLowerCase()) || 
-f.content.toLowerCase().includes(filter.toLowerCase())
+// RENDER UNTUK TAB STATIS (dengan filter)
+function renderStaticTabWithFilter(tabId, filter = "") {
+const data = staticTabsData[tabId];
+if(!data) return false;
+mainHeading.innerHTML = data.title;
+const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : "";
+subHeading.innerHTML = data.subtitle + filterInfo;
+let filteredItems = data.items;
+if(filter.trim() !== "") {
+filteredItems = data.items.filter(item => 
+item.title.toLowerCase().includes(filter.toLowerCase()) || 
+item.desc.toLowerCase().includes(filter.toLowerCase())
 );
 }
-if (filteredData.length === 0) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3 style="margin-top: 12px;">Tidak ada folder ditemukan</h3><p>Tidak ada folder yang cocok dengan kata kunci <strong>"${escapeHtml(filter)}"</strong></p><div class="stat-badge">Coba kata kunci lain</div></div>`;
-return;
+if(filteredItems.length === 0 && filter) {
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}"</p><div class="stat-badge">Coba kata kunci lain</div></div>`;
+return true;
 }
-let cardsHtml = "";
-for (let idx = 0; idx < filteredData.length; idx++) {
-const folder = filteredData[idx];
-const originalIdx = foldersData.findIndex(f => f.title === folder.title && f.content === folder.content);
-const shortContent = folder.content.length > 120 ? folder.content.substring(0, 120) + '...' : folder.content;
-cardsHtml += `
-<div class="card random-folder" data-folder-original-idx="${originalIdx}" data-folder-title="${escapeHtml(folder.title)}">
-<button class="btn-salin-folder" data-salin-idx="${originalIdx}" title="Salin isi folder (teks saja)"><i class="fas fa-copy"></i> SALIN</button>
-<h3>${escapeHtml(folder.title)}</h3>
-<p>${escapeHtml(shortContent) || 'Klik folder untuk melihat isi lengkap.'}</p>
-<div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk buka folder</div>
-</div>
-`;
-}
-if (filter && filteredData.length > 0) {
-cardsHtml += `<div class="card" style="cursor: default;"><div class="card-icon"><i class="fas fa-search"></i></div><h3>🔍 Hasil Pencarian</h3><p>Ditemukan ${filteredData.length} folder yang cocok dengan "${escapeHtml(filter)}"</p><div class="stat-badge">Live Search</div></div>`;
-} else {
-cardsHtml += `<div class="card" style="cursor: default;"><div class="card-icon"><i class="fas fa-text-height"></i></div><h3>📏 Ukuran Tombol 0.9rem</h3><p>Tombol <strong>SALIN</strong> berukuran 0.9rem di sudut kanan bawah. Garis pemisah antara judul folder dan isi.</p><div class="stat-badge">Folder dinamis dari Google Sheets</div></div>`;
-}
-dynamicArea.innerHTML = cardsHtml;
-
-document.querySelectorAll('.btn-salin-folder').forEach(btn => {
-btn.addEventListener('click', (e) => {
-e.stopPropagation();
-const idx = btn.getAttribute('data-salin-idx');
-if (idx !== null && foldersData[parseInt(idx)]) {
-const target = foldersData[parseInt(idx)];
-copyContentOnly(target.content || "", target.title);
-}
-});
-});
-document.querySelectorAll('.card[data-folder-original-idx]').forEach(card => {
-card.addEventListener('click', (e) => {
-if (e.target.closest('.btn-salin-folder')) return;
-const idx = card.getAttribute('data-folder-original-idx');
-if (idx !== null && foldersData[parseInt(idx)]) {
-const f = foldersData[parseInt(idx)];
-openModal(f.title, f.content);
-}
-});
-});
-} catch (err) {
-dynamicArea.innerHTML = `<div class="card error-message" style="grid-column:1/-1;"><h3>Error: Gagal Memuat</h3><p>${err.message}</p><div class="stat-badge">Coba refresh atau periksa koneksi</div></div>`;
-}
-}
-
-function renderStaticTab(tabId) {
-const data = staticTabsData[tabId];
-if (!data) return false;
-mainHeading.innerHTML = data.title;
-subHeading.innerHTML = data.subtitle;
 let cardsHTML = "";
-data.items.forEach(item => {
-cardsHTML += `
-<div class="card" style="cursor: default;">
-<div class="card-icon"><i class="${item.icon}"></i></div>
-<h3>${item.title}</h3>
-<p>${item.desc}</p>
-<div class="stat-badge"><i class="fas fa-tag"></i> ${item.badge}</div>
-</div>
-`;
+filteredItems.forEach(item => {
+cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`;
 });
-cardsHTML += `<div class="card" style="cursor: default;"><div class="card-icon"><i class="fas fa-expand"></i></div><h3>🖼️ Background FULL SIZE 100%</h3><p>Garis pemisah menunjukkan batasan jelas antara judul folder dan isi folder pada setiap kartu.</p><div class="stat-badge">Full Screen | Sharp</div></div>`;
+if(filter && filteredItems.length < data.items.length) {
+cardsHTML += `<div class="card"><div class="card-icon"><i class="fas fa-filter"></i></div><h3>🔍 ${filteredItems.length} hasil ditemukan</h3><p>Pencarian: "${escapeHtml(filter)}"</p><div class="stat-badge">Live Search</div></div>`;
+} else {
+cardsHTML += `<div class="card"><div class="card-icon"><i class="fas fa-expand"></i></div><h3>🖼️ Background FULL</h3><p>Garis pemisah judul & isi folder di setiap kartu</p><div class="stat-badge">Full Screen</div></div>`;
+}
 dynamicArea.innerHTML = cardsHTML;
 return true;
 }
 
-// Handler untuk live search (hanya berpengaruh di tab RANDOM)
-function handleSearchInput() {
-currentFilterText = searchInput.value;
-if (currentActiveTab === 'tab2') {
-renderRandomTab();
+// RENDER TAB RANDOM (dengan filter)
+async function renderRandomTabWithFilter(filter = "") {
+mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
+const filterText = filter ? ` | Mencari: "${filter}"` : " | Gunakan kotak pencarian untuk filter folder";
+subHeading.innerHTML = `✨ Folder dinamis dari Google Sheets${filterText} | Tombol SALIN 0.9rem`;
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat folder...</p></div>`;
+try {
+if(foldersData.length === 0) foldersData = await fetchDataFromGoogleSheets();
+let filtered = foldersData;
+if(filter.trim() !== "") {
+filtered = foldersData.filter(f => 
+f.title.toLowerCase().includes(filter.toLowerCase()) || 
+f.content.toLowerCase().includes(filter.toLowerCase())
+);
 }
-if (currentFilterText.length > 0) clearSearchBtn.classList.add('visible');
-else clearSearchBtn.classList.remove('visible');
+if(filtered.length === 0) {
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada folder dengan kata kunci "${escapeHtml(filter)}"</p><div class="stat-badge">Coba kata lain</div></div>`;
+return;
+}
+let cardsHtml = "";
+for(let i=0; i<filtered.length; i++) {
+const f = filtered[i];
+const originalIdx = foldersData.findIndex(orig => orig.title === f.title && orig.content === f.content);
+const short = f.content.length > 120 ? f.content.substring(0,120)+'...' : f.content;
+cardsHtml += `<div class="card random-folder" data-folder-idx="${originalIdx}">
+<button class="btn-salin-folder" data-salin-idx="${originalIdx}"><i class="fas fa-copy"></i> SALIN</button>
+<h3>${escapeHtml(f.title)}</h3>
+<p>${escapeHtml(short) || 'Klik untuk isi lengkap'}</p>
+<div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik buka folder</div>
+</div>`;
+}
+if(filter && filtered.length) {
+cardsHtml += `<div class="card"><div class="card-icon"><i class="fas fa-search"></i></div><h3>🔍 ${filtered.length} folder ditemukan</h3><p>Pencarian: "${escapeHtml(filter)}"</p><div class="stat-badge">Live Search</div></div>`;
+} else {
+cardsHtml += `<div class="card"><div class="card-icon"><i class="fas fa-text-height"></i></div><h3>📏 Tombol SALIN 0.9rem</h3><p>Garis pemisah antara judul folder dan isi</p><div class="stat-badge">Folder dari Google Sheets</div></div>`;
+}
+dynamicArea.innerHTML = cardsHtml;
+document.querySelectorAll('.btn-salin-folder').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+const idx = btn.getAttribute('data-salin-idx');
+if(idx && foldersData[parseInt(idx)]) copyContentOnly(foldersData[parseInt(idx)].content || "", foldersData[parseInt(idx)].title);
+});
+});
+document.querySelectorAll('.card[data-folder-idx]').forEach(card => {
+card.addEventListener('click', (e) => {
+if(e.target.closest('.btn-salin-folder')) return;
+const idx = card.getAttribute('data-folder-idx');
+if(idx && foldersData[parseInt(idx)]) openModal(foldersData[parseInt(idx)].title, foldersData[parseInt(idx)].content);
+});
+});
+} catch(err) {
+dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.message}</p></div>`;
+}
 }
 
+// Fungsi utama apply search (berlaku untuk semua kolom)
+async function applyLiveSearch() {
+const filter = currentFilterText;
+if(currentActiveTab === 'tab2') {
+await renderRandomTabWithFilter(filter);
+} else {
+renderStaticTabWithFilter(currentActiveTab, filter);
+}
+}
+
+// Event handlers untuk search
+function handleSearchInput() {
+currentFilterText = searchInput.value;
+if(currentFilterText.length > 0) clearSearchBtn.classList.add('visible');
+else clearSearchBtn.classList.remove('visible');
+applyLiveSearch();
+}
 function clearSearch() {
 searchInput.value = '';
 currentFilterText = '';
 clearSearchBtn.classList.remove('visible');
-if (currentActiveTab === 'tab2') {
-renderRandomTab();
+applyLiveSearch();
 }
-}
-
-async function onTabClick(tabId) {
-currentActiveTab = tabId;
-document.querySelectorAll('.nav-item').forEach(item => {
-if (item.getAttribute('data-tab') === tabId) item.classList.add('active');
-else item.classList.remove('active');
-});
-// Reset filter hanya secara visual, tetap pertahankan input tapi tidak mempengaruhi tab statis
-if (tabId !== 'tab2') {
-// Sembunyikan atau biarkan saja pencarian tidak aktif, tidak mempengaruhi render
-renderStaticTab(tabId);
-} else {
-await renderRandomTab();
-}
-}
-
-function bindNavEvents() {
-document.querySelectorAll('.nav-item').forEach(item => {
-item.addEventListener('click', () => {
-const tabId = item.getAttribute('data-tab');
-if (tabId) onTabClick(tabId);
-});
-});
-}
-
-document.getElementById("refreshDataBtn").addEventListener("click", async () => {
-if (currentActiveTab === 'tab2') {
-foldersData = await fetchDataFromGoogleSheets();
-await renderRandomTab();
-} else {
-renderStaticTab(currentActiveTab);
-}
-});
-
-function escapeHtml(str) {
-if (!str) return '';
-return str.replace(/[&<>]/g, function(m) {
-if (m === '&') return '&amp;';
-if (m === '<') return '&lt;';
-if (m === '>') return '&gt;';
-return m;
-});
-}
-
-// Event listener untuk search
 searchInput.addEventListener('input', handleSearchInput);
 clearSearchBtn.addEventListener('click', clearSearch);
 
+// Navigasi tab
+async function onTabClick(tabId) {
+currentActiveTab = tabId;
+document.querySelectorAll('.nav-item').forEach(item => {
+if(item.getAttribute('data-tab') === tabId) item.classList.add('active');
+else item.classList.remove('active');
+});
+if(tabId === 'tab2') {
+if(foldersData.length === 0) foldersData = await fetchDataFromGoogleSheets().catch(e=>[]);
+await renderRandomTabWithFilter(currentFilterText);
+} else {
+renderStaticTabWithFilter(tabId, currentFilterText);
+}
+}
+function bindNavEvents() {
+document.querySelectorAll('.nav-item').forEach(item => {
+item.addEventListener('click', () => {
+const tid = item.getAttribute('data-tab');
+if(tid) onTabClick(tid);
+});
+});
+}
+function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+
+// Inisialisasi
 (async function init() {
 bindNavEvents();
 await onTabClick('tab1');
