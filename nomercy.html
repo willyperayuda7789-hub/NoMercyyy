@@ -522,26 +522,26 @@ background: rgba(220, 38, 38, 0.8);
 border-left: 5px solid #ff8a8a;
 }
 
-/* ========= STYLE KHUSUS UNTUK KOLOM BONUS - BADGE SEJAJAR KE SAMPING ========= */
+/* ========= STYLE KHUSUS UNTUK KOLOM BONUS - BADGE SEJAJAR HORIZONTAL ========= */
 .bonus-section {
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 
-/* Badge container - sejajar horizontal */
-.badge-container {
+/* 5 Badge sejajar horizontal seperti gambar */
+.badge-row {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.badge-card {
+.badge-item {
   flex: 1;
-  min-width: 180px;
-  background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
-  border-radius: 16px;
+  min-width: 170px;
+  background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5));
+  border-radius: 20px;
   padding: 20px 12px;
   text-align: center;
   cursor: pointer;
@@ -550,45 +550,45 @@ border-left: 5px solid #ff8a8a;
   backdrop-filter: blur(10px);
 }
 
-.badge-card:hover {
+.badge-item:hover {
   transform: translateY(-5px);
   background: linear-gradient(135deg, rgba(245,158,11,0.3), rgba(239,68,68,0.3));
   border-color: #f59e0b;
   box-shadow: 0 10px 25px rgba(245,158,11,0.2);
 }
 
-.badge-card.active {
+.badge-item.active {
   background: linear-gradient(135deg, #f59e0b, #ef4444);
   border-color: white;
 }
 
-.badge-card.active .badge-name {
+.badge-item.active .badge-title {
   color: white;
 }
 
-.badge-card.active .badge-desc {
+.badge-item.active .badge-subtitle {
   color: rgba(255,255,255,0.9);
 }
 
 .badge-icon {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   margin-bottom: 10px;
 }
 
-.badge-name {
+.badge-title {
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #fbbf24;
   margin-bottom: 5px;
 }
 
-.badge-desc {
+.badge-subtitle {
   font-size: 0.7rem;
   color: #94a3b8;
 }
 
 /* Area konten halaman */
-.content-container {
+.content-area {
   background: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
   padding: 25px;
@@ -611,7 +611,7 @@ border-left: 5px solid #ff8a8a;
 }
 
 /* Header halaman dengan tombol edit */
-.page-header {
+.page-header-bonus {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -622,7 +622,7 @@ border-left: 5px solid #ff8a8a;
   gap: 15px;
 }
 
-.page-header h3 {
+.page-header-bonus h3 {
   font-size: 1.3rem;
   color: #fbbf24;
   display: flex;
@@ -754,9 +754,9 @@ border-left: 5px solid #ff8a8a;
   .search-input:focus { width: 220px; }
   .page-title h1 { font-size: 1.4rem; }
   .page-title p { font-size: 0.75rem; }
-  .badge-card { min-width: 140px; }
+  .badge-item { min-width: 140px; padding: 15px 8px; }
   .badge-icon { font-size: 1.8rem; }
-  .badge-name { font-size: 0.9rem; }
+  .badge-title { font-size: 0.85rem; }
 }
 </style>
 </head>
@@ -884,12 +884,12 @@ items: [
 }
 };
 
-// ======================= DATA UNTUK 4 BADGE DI KOLOM BONUS =======================
+// ======================= DATA UNTUK 4 BADGE SEJAJAR HORIZONTAL =======================
 const bonusData = {
   scatter: {
-    name: "SCATTER",
+    title: "SCATTER",
+    subtitle: "EVENT SCATTER",
     icon: "fas fa-star-of-life",
-    desc: "Event Scatter Wild",
     content: `<h2>🎯 EVENT SCATTER MAHJONG WAYS 1 & 2</h2>
 <h3>📌 CARA CEK HISTORY SCATTER MAHJONG WAYS 1 & MAHJONG WAYS 2</h3>
 <p>Cara melihat history transaksi Kemenangan pada permainan Pg Soft Mahjong Ways I dan Mahjong Ways II :</p>
@@ -920,9 +920,9 @@ const bonusData = {
 </div>`
   },
   buyfree: {
-    name: "BUY & FREE",
+    title: "BUY & FREE",
+    subtitle: "BUYFREE SHEET",
     icon: "fas fa-ticket-alt",
-    desc: "Buy Free Sheet",
     content: `<h2>💰 BUY & FREE SHEET</h2>
 <h3>🎫 PROMO BUY 1 GET 1 FREE</h3>
 <p>Dapatkan tiket gratis setiap melakukan pembelian tiket event!</p>
@@ -944,9 +944,9 @@ const bonusData = {
 </div>`
   },
   super: {
-    name: "SUPER SCATTER",
+    title: "SUPER",
+    subtitle: "SUPER SCATTER",
     icon: "fas fa-bolt",
-    desc: "Super Bonus",
     content: `<h2>⚡ SUPER SCATTER EVENT</h2>
 <h3>🌟 BONUS SUPER SCATTER</h3>
 <p>Event spesial dengan hadiah super untuk member yang beruntung!</p>
@@ -967,9 +967,9 @@ const bonusData = {
 </div>`
   },
   gallery: {
-    name: "GAMBAR EVENT",
+    title: "GAMBAR EVENT",
+    subtitle: "GALLERY EVENT",
     icon: "fas fa-images",
-    desc: "Gallery Event",
     content: `<h2>🖼️ GALLERY EVENT SCATTER</h2>
 <h3>📸 Kumpulan Screenshot Terbaik</h3>
 <p>Setiap minggu kami akan memilih 10 screenshot scatter terbaik untuk mendapatkan hadiah!</p>
@@ -999,29 +999,29 @@ let currentEditMode = false;
 // Render KOLOM BONUS
 function renderBonusTab() {
   mainHeading.innerHTML = "🎁 KOLOM BONUS";
-  subHeading.innerHTML = "SCATTER | BUY & FREE | SUPER SCATTER | GAMBAR EVENT";
+  subHeading.innerHTML = "SCATTER | BUY & FREE | SUPER | GAMBAR EVENT";
   
   let html = `<div class="bonus-section">
-    <div class="badge-container">`;
+    <div class="badge-row">`;
   
   for (let key in bonusData) {
     html += `
-      <div class="badge-card ${currentPage === key ? 'active' : ''}" data-page="${key}">
+      <div class="badge-item ${currentPage === key ? 'active' : ''}" data-page="${key}">
         <div class="badge-icon"><i class="${bonusData[key].icon}"></i></div>
-        <div class="badge-name">${bonusData[key].name}</div>
-        <div class="badge-desc">${bonusData[key].desc}</div>
+        <div class="badge-title">${bonusData[key].title}</div>
+        <div class="badge-subtitle">${bonusData[key].subtitle}</div>
       </div>
     `;
   }
   
-  html += `</div><div class="content-container">`;
+  html += `</div><div class="content-area">`;
   
   for (let key in bonusData) {
     const savedContent = localStorage.getItem(`bonus_page_${key}`) || bonusData[key].content;
     html += `
       <div id="page-${key}" class="bonus-page ${currentPage === key ? 'active-page' : ''}">
-        <div class="page-header">
-          <h3><i class="${bonusData[key].icon}"></i> ${bonusData[key].name}</h3>
+        <div class="page-header-bonus">
+          <h3><i class="${bonusData[key].icon}"></i> ${bonusData[key].title} - ${bonusData[key].subtitle}</h3>
           <div class="edit-actions">
             <button class="btn-edit" onclick="enableEdit('${key}')"><i class="fas fa-edit"></i> Edit Konten</button>
             <button class="btn-save" onclick="saveContent('${key}')" style="display:none;"><i class="fas fa-save"></i> Simpan</button>
@@ -1029,7 +1029,7 @@ function renderBonusTab() {
           </div>
         </div>
         <div id="display-${key}" class="content-display">${savedContent}</div>
-        <textarea id="edit-${key}" class="edit-textarea" placeholder="Tulis konten halaman ${bonusData[key].name} di sini..."></textarea>
+        <textarea id="edit-${key}" class="edit-textarea" placeholder="Tulis konten halaman ${bonusData[key].title} di sini..."></textarea>
         <div class="footer-note">
           <i class="fas fa-edit"></i> Klik Edit Konten untuk mengubah isi halaman ini | Perubahan akan tersimpan otomatis
         </div>
@@ -1041,7 +1041,7 @@ function renderBonusTab() {
   dynamicArea.innerHTML = html;
   
   // Event listener untuk badge
-  document.querySelectorAll('.badge-card').forEach(btn => {
+  document.querySelectorAll('.badge-item').forEach(btn => {
     btn.addEventListener('click', () => {
       const page = btn.getAttribute('data-page');
       switchPage(page);
@@ -1053,7 +1053,7 @@ function switchPage(page) {
   currentPage = page;
   
   // Update active badge
-  document.querySelectorAll('.badge-card').forEach(btn => {
+  document.querySelectorAll('.badge-item').forEach(btn => {
     btn.classList.remove('active');
     if (btn.getAttribute('data-page') === page) {
       btn.classList.add('active');
@@ -1110,7 +1110,7 @@ function saveContent(page) {
   displayDiv.innerHTML = newContent;
   localStorage.setItem(`bonus_page_${page}`, newContent);
   exitEditMode(page);
-  showToastBonus(`Konten ${bonusData[page].name} berhasil disimpan!`);
+  showToastBonus(`Konten ${bonusData[page].title} berhasil disimpan!`);
 }
 
 function resetContent(page) {
@@ -1121,7 +1121,7 @@ function resetContent(page) {
   textarea.value = bonusData[page].content;
   localStorage.removeItem(`bonus_page_${page}`);
   exitEditMode(page);
-  showToastBonus(`Konten ${bonusData[page].name} direset ke default`);
+  showToastBonus(`Konten ${bonusData[page].title} direset ke default`);
 }
 
 function showToastBonus(message) {
@@ -1313,7 +1313,7 @@ await renderRandomTabWithFilter(filter);
 if(filter) {
 subHeading.innerHTML = `✨ 4 Badge Event | Hasil pencarian: "${filter}" ✨`;
 } else {
-subHeading.innerHTML = "✨ 4 Badge Event - SCATTER | BUY & FREE | SUPER SCATTER | GAMBAR EVENT ✨";
+subHeading.innerHTML = "✨ 4 Badge Event - SCATTER | BUY & FREE | SUPER | GAMBAR EVENT ✨";
 }
 renderBonusTab();
 } else {
