@@ -522,27 +522,27 @@ background: rgba(220, 38, 38, 0.8);
 border-left: 5px solid #ff8a8a;
 }
 
-/* ========= STYLE KHUSUS UNTUK KOLOM BONUS - BADGE SEJAJAR HORIZONTAL ========= */
-.bonus-section {
+/* ========= STYLE KHUSUS UNTUK KOLOM BONUS - BADGE SEJAJAR KE SAMPING ========= */
+.bonus-container {
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 
-/* 5 Badge sejajar horizontal seperti gambar */
-.badge-row {
+/* Badge row - horizontal sejajar ke samping */
+.bonus-badge-row {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
 }
 
-.badge-item {
+.bonus-badge {
   flex: 1;
-  min-width: 170px;
+  min-width: 180px;
   background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5));
-  border-radius: 20px;
-  padding: 20px 12px;
+  border-radius: 16px;
+  padding: 18px 12px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -550,23 +550,23 @@ border-left: 5px solid #ff8a8a;
   backdrop-filter: blur(10px);
 }
 
-.badge-item:hover {
+.bonus-badge:hover {
   transform: translateY(-5px);
   background: linear-gradient(135deg, rgba(245,158,11,0.3), rgba(239,68,68,0.3));
   border-color: #f59e0b;
   box-shadow: 0 10px 25px rgba(245,158,11,0.2);
 }
 
-.badge-item.active {
+.bonus-badge.active {
   background: linear-gradient(135deg, #f59e0b, #ef4444);
   border-color: white;
 }
 
-.badge-item.active .badge-title {
+.bonus-badge.active .badge-main-title {
   color: white;
 }
 
-.badge-item.active .badge-subtitle {
+.bonus-badge.active .badge-sub-title {
   color: rgba(255,255,255,0.9);
 }
 
@@ -575,20 +575,20 @@ border-left: 5px solid #ff8a8a;
   margin-bottom: 10px;
 }
 
-.badge-title {
+.badge-main-title {
   font-weight: 800;
   font-size: 1rem;
   color: #fbbf24;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
 
-.badge-subtitle {
+.badge-sub-title {
   font-size: 0.7rem;
   color: #94a3b8;
 }
 
 /* Area konten halaman */
-.content-area {
+.bonus-content-area {
   background: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
   padding: 25px;
@@ -596,12 +596,12 @@ border-left: 5px solid #ff8a8a;
   backdrop-filter: blur(5px);
 }
 
-.bonus-page {
+.bonus-page-content {
   display: none;
   animation: fadeIn 0.3s ease;
 }
 
-.bonus-page.active-page {
+.bonus-page-content.active-bonus-page {
   display: block;
 }
 
@@ -611,7 +611,7 @@ border-left: 5px solid #ff8a8a;
 }
 
 /* Header halaman dengan tombol edit */
-.page-header-bonus {
+.bonus-page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -622,7 +622,7 @@ border-left: 5px solid #ff8a8a;
   gap: 15px;
 }
 
-.page-header-bonus h3 {
+.bonus-page-header h3 {
   font-size: 1.3rem;
   color: #fbbf24;
   display: flex;
@@ -630,12 +630,12 @@ border-left: 5px solid #ff8a8a;
   gap: 10px;
 }
 
-.edit-actions {
+.bonus-edit-buttons {
   display: flex;
   gap: 10px;
 }
 
-.btn-edit, .btn-save, .btn-reset {
+.btn-bonus-edit, .btn-bonus-save, .btn-bonus-reset {
   padding: 8px 16px;
   border: none;
   border-radius: 10px;
@@ -647,57 +647,57 @@ border-left: 5px solid #ff8a8a;
   gap: 6px;
 }
 
-.btn-edit {
+.btn-bonus-edit {
   background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   color: white;
 }
 
-.btn-save {
+.btn-bonus-save {
   background: linear-gradient(135deg, #10b981, #059669);
   color: white;
 }
 
-.btn-reset {
+.btn-bonus-reset {
   background: linear-gradient(135deg, #6b7280, #4b5563);
   color: white;
 }
 
-.btn-reset:hover {
+.btn-bonus-reset:hover {
   background: linear-gradient(135deg, #ef4444, #dc2626);
 }
 
 /* Area konten yang bisa diedit */
-.content-display {
+.bonus-content-display {
   line-height: 1.8;
   color: #e2e8f0;
 }
 
-.content-display h2 {
+.bonus-content-display h2 {
   color: #fbbf24;
   font-size: 1.2rem;
   margin: 20px 0 10px 0;
 }
 
-.content-display h3 {
+.bonus-content-display h3 {
   color: #f59e0b;
   font-size: 1rem;
   margin: 15px 0 8px 0;
 }
 
-.content-display p {
+.bonus-content-display p {
   margin-bottom: 12px;
 }
 
-.content-display ol, .content-display ul {
+.bonus-content-display ol, .bonus-content-display ul {
   margin-left: 25px;
   margin-bottom: 15px;
 }
 
-.content-display li {
+.bonus-content-display li {
   margin: 8px 0;
 }
 
-.content-display .warning-box {
+.bonus-content-display .warning-box {
   background: rgba(239,68,68,0.15);
   border-left: 3px solid #ef4444;
   padding: 12px 15px;
@@ -705,12 +705,12 @@ border-left: 5px solid #ff8a8a;
   border-radius: 8px;
 }
 
-.content-display .link-example {
+.bonus-content-display .link-example {
   color: #60a5fa;
   word-break: break-all;
 }
 
-.edit-textarea {
+.bonus-edit-textarea {
   display: none;
   width: 100%;
   min-height: 350px;
@@ -725,20 +725,20 @@ border-left: 5px solid #ff8a8a;
   resize: vertical;
 }
 
-.edit-textarea:focus {
+.bonus-edit-textarea:focus {
   outline: none;
   border-color: #3b82f6;
 }
 
-.edit-mode .content-display {
+.bonus-edit-mode .bonus-content-display {
   display: none;
 }
 
-.edit-mode .edit-textarea {
+.bonus-edit-mode .bonus-edit-textarea {
   display: block;
 }
 
-.footer-note {
+.bonus-footer-note {
   margin-top: 20px;
   padding-top: 15px;
   border-top: 1px solid rgba(255,255,255,0.1);
@@ -754,9 +754,9 @@ border-left: 5px solid #ff8a8a;
   .search-input:focus { width: 220px; }
   .page-title h1 { font-size: 1.4rem; }
   .page-title p { font-size: 0.75rem; }
-  .badge-item { min-width: 140px; padding: 15px 8px; }
+  .bonus-badge { min-width: 150px; padding: 12px 8px; }
   .badge-icon { font-size: 1.8rem; }
-  .badge-title { font-size: 0.85rem; }
+  .badge-main-title { font-size: 0.85rem; }
 }
 </style>
 </head>
@@ -884,11 +884,11 @@ items: [
 }
 };
 
-// ======================= DATA UNTUK 4 BADGE SEJAJAR HORIZONTAL =======================
-const bonusData = {
+// ======================= DATA UNTUK 4 BADGE SEJAJAR KE SAMPING =======================
+const bonusBadges = {
   scatter: {
-    title: "SCATTER",
-    subtitle: "EVENT SCATTER",
+    mainTitle: "SCATTER",
+    subTitle: "EVENT SCATTER",
     icon: "fas fa-star-of-life",
     content: `<h2>🎯 EVENT SCATTER MAHJONG WAYS 1 & 2</h2>
 <h3>📌 CARA CEK HISTORY SCATTER MAHJONG WAYS 1 & MAHJONG WAYS 2</h3>
@@ -920,8 +920,8 @@ const bonusData = {
 </div>`
   },
   buyfree: {
-    title: "BUY & FREE",
-    subtitle: "BUYFREE SHEET",
+    mainTitle: "BUY & FREE",
+    subTitle: "BUYFREE SHEET",
     icon: "fas fa-ticket-alt",
     content: `<h2>💰 BUY & FREE SHEET</h2>
 <h3>🎫 PROMO BUY 1 GET 1 FREE</h3>
@@ -944,8 +944,8 @@ const bonusData = {
 </div>`
   },
   super: {
-    title: "SUPER",
-    subtitle: "SUPER SCATTER",
+    mainTitle: "SUPER",
+    subTitle: "SUPER SCATTER",
     icon: "fas fa-bolt",
     content: `<h2>⚡ SUPER SCATTER EVENT</h2>
 <h3>🌟 BONUS SUPER SCATTER</h3>
@@ -967,8 +967,8 @@ const bonusData = {
 </div>`
   },
   gallery: {
-    title: "GAMBAR EVENT",
-    subtitle: "GALLERY EVENT",
+    mainTitle: "GAMBAR EVENT",
+    subTitle: "GALLERY EVENT",
     icon: "fas fa-images",
     content: `<h2>🖼️ GALLERY EVENT SCATTER</h2>
 <h3>📸 Kumpulan Screenshot Terbaik</h3>
@@ -993,44 +993,44 @@ const bonusData = {
   }
 };
 
-let currentPage = "scatter";
-let currentEditMode = false;
+let currentBonusPage = "scatter";
+let isBonusEditMode = false;
 
 // Render KOLOM BONUS
 function renderBonusTab() {
   mainHeading.innerHTML = "🎁 KOLOM BONUS";
   subHeading.innerHTML = "SCATTER | BUY & FREE | SUPER | GAMBAR EVENT";
   
-  let html = `<div class="bonus-section">
-    <div class="badge-row">`;
+  let html = `<div class="bonus-container">
+    <div class="bonus-badge-row">`;
   
-  for (let key in bonusData) {
+  for (let key in bonusBadges) {
     html += `
-      <div class="badge-item ${currentPage === key ? 'active' : ''}" data-page="${key}">
-        <div class="badge-icon"><i class="${bonusData[key].icon}"></i></div>
-        <div class="badge-title">${bonusData[key].title}</div>
-        <div class="badge-subtitle">${bonusData[key].subtitle}</div>
+      <div class="bonus-badge ${currentBonusPage === key ? 'active' : ''}" data-bonus-page="${key}">
+        <div class="badge-icon"><i class="${bonusBadges[key].icon}"></i></div>
+        <div class="badge-main-title">${bonusBadges[key].mainTitle}</div>
+        <div class="badge-sub-title">${bonusBadges[key].subTitle}</div>
       </div>
     `;
   }
   
-  html += `</div><div class="content-area">`;
+  html += `</div><div class="bonus-content-area">`;
   
-  for (let key in bonusData) {
-    const savedContent = localStorage.getItem(`bonus_page_${key}`) || bonusData[key].content;
+  for (let key in bonusBadges) {
+    const savedContent = localStorage.getItem(`bonus_page_${key}`) || bonusBadges[key].content;
     html += `
-      <div id="page-${key}" class="bonus-page ${currentPage === key ? 'active-page' : ''}">
-        <div class="page-header-bonus">
-          <h3><i class="${bonusData[key].icon}"></i> ${bonusData[key].title} - ${bonusData[key].subtitle}</h3>
-          <div class="edit-actions">
-            <button class="btn-edit" onclick="enableEdit('${key}')"><i class="fas fa-edit"></i> Edit Konten</button>
-            <button class="btn-save" onclick="saveContent('${key}')" style="display:none;"><i class="fas fa-save"></i> Simpan</button>
-            <button class="btn-reset" onclick="resetContent('${key}')" style="display:none;"><i class="fas fa-undo"></i> Batal</button>
+      <div id="bonus-page-${key}" class="bonus-page-content ${currentBonusPage === key ? 'active-bonus-page' : ''}">
+        <div class="bonus-page-header">
+          <h3><i class="${bonusBadges[key].icon}"></i> ${bonusBadges[key].mainTitle} - ${bonusBadges[key].subTitle}</h3>
+          <div class="bonus-edit-buttons">
+            <button class="btn-bonus-edit" onclick="enableBonusEdit('${key}')"><i class="fas fa-edit"></i> Edit Konten</button>
+            <button class="btn-bonus-save" onclick="saveBonusContent('${key}')" style="display:none;"><i class="fas fa-save"></i> Simpan</button>
+            <button class="btn-bonus-reset" onclick="resetBonusContent('${key}')" style="display:none;"><i class="fas fa-undo"></i> Batal</button>
           </div>
         </div>
-        <div id="display-${key}" class="content-display">${savedContent}</div>
-        <textarea id="edit-${key}" class="edit-textarea" placeholder="Tulis konten halaman ${bonusData[key].title} di sini..."></textarea>
-        <div class="footer-note">
+        <div id="bonus-display-${key}" class="bonus-content-display">${savedContent}</div>
+        <textarea id="bonus-edit-${key}" class="bonus-edit-textarea" placeholder="Tulis konten halaman ${bonusBadges[key].mainTitle} di sini..."></textarea>
+        <div class="bonus-footer-note">
           <i class="fas fa-edit"></i> Klik Edit Konten untuk mengubah isi halaman ini | Perubahan akan tersimpan otomatis
         </div>
       </div>
@@ -1041,87 +1041,87 @@ function renderBonusTab() {
   dynamicArea.innerHTML = html;
   
   // Event listener untuk badge
-  document.querySelectorAll('.badge-item').forEach(btn => {
+  document.querySelectorAll('.bonus-badge').forEach(btn => {
     btn.addEventListener('click', () => {
-      const page = btn.getAttribute('data-page');
-      switchPage(page);
+      const page = btn.getAttribute('data-bonus-page');
+      switchBonusPage(page);
     });
   });
 }
 
-function switchPage(page) {
-  currentPage = page;
+function switchBonusPage(page) {
+  currentBonusPage = page;
   
   // Update active badge
-  document.querySelectorAll('.badge-item').forEach(btn => {
+  document.querySelectorAll('.bonus-badge').forEach(btn => {
     btn.classList.remove('active');
-    if (btn.getAttribute('data-page') === page) {
+    if (btn.getAttribute('data-bonus-page') === page) {
       btn.classList.add('active');
     }
   });
   
   // Update active page
-  document.querySelectorAll('.bonus-page').forEach(p => {
-    p.classList.remove('active-page');
+  document.querySelectorAll('.bonus-page-content').forEach(p => {
+    p.classList.remove('active-bonus-page');
   });
-  document.getElementById(`page-${page}`).classList.add('active-page');
+  document.getElementById(`bonus-page-${page}`).classList.add('active-bonus-page');
   
   // Exit edit mode jika sedang edit
-  if (currentEditMode) {
-    exitEditMode(page);
+  if (isBonusEditMode) {
+    exitBonusEditMode(page);
   }
 }
 
-function enableEdit(page) {
-  const container = document.getElementById(`page-${page}`);
-  const displayDiv = document.getElementById(`display-${page}`);
-  const textarea = document.getElementById(`edit-${page}`);
-  const editBtn = container.querySelector('.btn-edit');
-  const saveBtn = container.querySelector('.btn-save');
-  const resetBtn = container.querySelector('.btn-reset');
+function enableBonusEdit(page) {
+  const container = document.getElementById(`bonus-page-${page}`);
+  const displayDiv = document.getElementById(`bonus-display-${page}`);
+  const textarea = document.getElementById(`bonus-edit-${page}`);
+  const editBtn = container.querySelector('.btn-bonus-edit');
+  const saveBtn = container.querySelector('.btn-bonus-save');
+  const resetBtn = container.querySelector('.btn-bonus-reset');
   
   textarea.value = displayDiv.innerHTML;
-  container.classList.add('edit-mode');
+  container.classList.add('bonus-edit-mode');
   editBtn.style.display = 'none';
   saveBtn.style.display = 'flex';
   resetBtn.style.display = 'flex';
-  currentEditMode = true;
+  isBonusEditMode = true;
 }
 
-function exitEditMode(page) {
-  const container = document.getElementById(`page-${page}`);
-  const editBtn = container.querySelector('.btn-edit');
-  const saveBtn = container.querySelector('.btn-save');
-  const resetBtn = container.querySelector('.btn-reset');
+function exitBonusEditMode(page) {
+  const container = document.getElementById(`bonus-page-${page}`);
+  const editBtn = container.querySelector('.btn-bonus-edit');
+  const saveBtn = container.querySelector('.btn-bonus-save');
+  const resetBtn = container.querySelector('.btn-bonus-reset');
   
-  container.classList.remove('edit-mode');
+  container.classList.remove('bonus-edit-mode');
   editBtn.style.display = 'flex';
   saveBtn.style.display = 'none';
   resetBtn.style.display = 'none';
-  currentEditMode = false;
+  isBonusEditMode = false;
 }
 
-function saveContent(page) {
-  const container = document.getElementById(`page-${page}`);
-  const displayDiv = document.getElementById(`display-${page}`);
-  const textarea = document.getElementById(`edit-${page}`);
+function saveBonusContent(page) {
+  const container = document.getElementById(`bonus-page-${page}`);
+  const displayDiv = document.getElementById(`bonus-display-${page}`);
+  const textarea = document.getElementById(`bonus-edit-${page}`);
   const newContent = textarea.value;
   
   displayDiv.innerHTML = newContent;
   localStorage.setItem(`bonus_page_${page}`, newContent);
-  exitEditMode(page);
-  showToastBonus(`Konten ${bonusData[page].title} berhasil disimpan!`);
+  exitBonusEditMode(page);
+  showToastBonus(`Konten ${bonusBadges[page].mainTitle} berhasil disimpan!`);
 }
 
-function resetContent(page) {
-  const displayDiv = document.getElementById(`display-${page}`);
-  const textarea = document.getElementById(`edit-${page}`);
+function resetBonusContent(page) {
+  const displayDiv = document.getElementById(`bonus-display-${page}`);
+  const textarea = document.getElementById(`bonus-edit-${page}`);
   
-  displayDiv.innerHTML = bonusData[page].content;
-  textarea.value = bonusData[page].content;
+  displayDiv.innerHTML = bonusBadges[page].content;
+  textarea.value = bonusBadges[page].content;
   localStorage.removeItem(`bonus_page_${page}`);
-  exitEditMode(page);
-  showToastBonus(`Konten ${bonusData[page].title} direset ke default`);
+  exitBonusEditMode(page);
+  showToastBonus(`Konten ${bonusBadges[page].mainTitle} direset ke default`);
 }
 
 function showToastBonus(message) {
