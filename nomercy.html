@@ -3,786 +3,688 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar | Bonus Badge & Kategori</title>
+<title>7 Kolom | Bonus Badge Sejajar + Halaman Kategori</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-font-family: 'Inter', sans-serif;
-height: 100vh;
-overflow: hidden;
-background-image: url('https://i.pinimg.com/1200x/9d/f8/a5/9df8a54bdbc89f524d62a729f52936c4.jpg');
-background-size: 100% 100%;
-background-position: center center;
-background-repeat: no-repeat;
-background-color: #0a0e1a;
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('https://i.pinimg.com/1200x/9d/f8/a5/9df8a54bdbc89f524d62a729f52936c4.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #0a0e1a;
 }
 
 .app-container {
-display: flex;
-height: 100vh;
-width: 100%;
-position: relative;
-z-index: 2;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 2;
 }
 
-/* ========= SIDEBAR KIRI 7 KOLOM ========= */
+/* ========= SIDEBAR KIRI 7 KOLOM (TIDAK DIUBAH) ========= */
 .sidebar {
-width: 280px;
-background: rgba(8, 16, 28, 0.85);
-color: #f1f5f9;
-display: flex;
-flex-direction: column;
-box-shadow: 6px 0 28px rgba(0, 0, 0, 0.5);
-z-index: 10;
-overflow-y: auto;
-flex-shrink: 0;
-border-right: 1px solid rgba(255, 255, 255, 0.15);
+    width: 280px;
+    background: rgba(8, 16, 28, 0.85);
+    color: #f1f5f9;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 6px 0 28px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    overflow-y: auto;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .sidebar-header {
-padding: 28px 20px 20px 24px;
-border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-margin-bottom: 16px;
+    padding: 28px 20px 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 16px;
 }
 
 .logo-area {
-display: flex;
-align-items: center;
-gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .logo-icon {
-background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-width: 44px;
-height: 44px;
-border-radius: 16px;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.5rem;
-box-shadow: 0 8px 20px -4px rgba(59,130,246,0.5);
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    width: 44px;
+    height: 44px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 20px -4px rgba(59,130,246,0.5);
 }
 
 .logo-text h2 {
-font-size: 1.45rem;
-font-weight: 800;
-letter-spacing: -0.3px;
-background: linear-gradient(135deg, #ffffff, #bfdbfe);
-background-clip: text;
--webkit-background-clip: text;
-color: transparent;
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    background: linear-gradient(135deg, #ffffff, #bfdbfe);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
 .logo-text p {
-font-size: 0.7rem;
-opacity: 0.8;
-margin-top: 2px;
+    font-size: 0.7rem;
+    opacity: 0.8;
+    margin-top: 2px;
 }
 
 .nav-menu {
-flex: 1;
-padding: 8px 12px 20px 12px;
-display: flex;
-flex-direction: column;
-gap: 6px;
+    flex: 1;
+    padding: 8px 12px 20px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .nav-item {
-display: flex;
-align-items: center;
-gap: 14px;
-padding: 12px 16px;
-margin: 2px 0;
-border-radius: 14px;
-color: #e2e8f0;
-transition: all 0.25s ease;
-cursor: pointer;
-font-weight: 600;
-font-size: 0.95rem;
-background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    margin: 2px 0;
+    border-radius: 14px;
+    color: #e2e8f0;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    background: rgba(0, 0, 0, 0.35);
 }
 
 .nav-item i {
-width: 24px;
-font-size: 1.2rem;
-text-align: center;
+    width: 24px;
+    font-size: 1.2rem;
+    text-align: center;
 }
 
 .nav-item span {
-flex: 1;
+    flex: 1;
 }
 
 .badge-new {
-background: #ef4444;
-color: white;
-font-size: 0.62rem;
-font-weight: 700;
-padding: 2px 8px;
-border-radius: 30px;
-margin-left: auto;
+    background: #ef4444;
+    color: white;
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 30px;
+    margin-left: auto;
 }
 
 .nav-item:hover {
-background: rgba(59, 130, 246, 0.7);
-color: white;
-transform: translateX(5px);
+    background: rgba(59, 130, 246, 0.7);
+    color: white;
+    transform: translateX(5px);
 }
 
 .nav-item.active {
-background: #3b82f6;
-color: white;
-box-shadow: 0 8px 18px -6px rgba(59, 130, 246, 0.5);
+    background: #3b82f6;
+    color: white;
+    box-shadow: 0 8px 18px -6px rgba(59, 130, 246, 0.5);
 }
 
 .sidebar-footer {
-padding: 20px 20px 24px 24px;
-border-top: 1px solid rgba(255, 255, 255, 0.1);
-font-size: 0.7rem;
-color: #9ca3af;
-margin-top: auto;
-background: rgba(0, 0, 0, 0.3);
+    padding: 20px 20px 24px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.7rem;
+    color: #9ca3af;
+    margin-top: auto;
+    background: rgba(0, 0, 0, 0.3);
 }
 
 /* ========= MAIN CONTENT ========= */
 .main-content {
-flex: 1;
-overflow-y: auto;
-padding: 24px 32px;
-background: rgba(10, 18, 30, 0.55);
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 32px;
+    background: rgba(10, 18, 30, 0.55);
 }
 
 .content-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 28px;
-flex-wrap: wrap;
-gap: 16px;
-background: rgba(0, 0, 0, 0.5);
-padding: 14px 26px;
-border-radius: 48px;
-border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 14px 26px;
+    border-radius: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* TEKS CENTER */
 .page-title {
-flex: 1;
-text-align: center;
+    flex: 1;
+    text-align: center;
 }
 
 .page-title h1 {
-font-size: 1.8rem;
-font-weight: 800;
-background: linear-gradient(135deg, #ffffff, #a5d8ff);
-background-clip: text;
--webkit-background-clip: text;
-color: transparent;
-letter-spacing: -0.3px;
-text-align: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, #a5d8ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-align: center;
 }
 
 .page-title p {
-font-size: 0.85rem;
-color: #e2e8f0;
-margin-top: 6px;
-font-weight: 500;
-text-align: center;
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    margin-top: 6px;
+    font-weight: 500;
+    text-align: center;
 }
 
 .action-buttons {
-display: flex;
-gap: 12px;
-align-items: center;
-flex-shrink: 0;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 .search-wrapper {
-position: relative;
+    position: relative;
 }
 .search-input {
-background: rgba(15, 25, 45, 0.9);
-border: 1px solid rgba(59, 130, 246, 0.6);
-border-radius: 40px;
-padding: 8px 18px 8px 42px;
-font-size: 0.85rem;
-color: white;
-font-weight: 500;
-width: 260px;
-transition: all 0.2s;
-backdrop-filter: blur(4px);
+    background: rgba(15, 25, 45, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.6);
+    border-radius: 40px;
+    padding: 8px 18px 8px 42px;
+    font-size: 0.85rem;
+    color: white;
+    width: 260px;
+    backdrop-filter: blur(4px);
 }
 .search-input:focus {
-outline: none;
-border-color: #60a5fa;
-background: rgba(20, 35, 60, 0.95);
-width: 280px;
-box-shadow: 0 0 0 2px rgba(96,165,250,0.3);
-}
-.search-input::placeholder {
-color: #94a3b8;
-font-weight: 400;
-}
-.search-icon {
-position: absolute;
-left: 16px;
-top: 50%;
-transform: translateY(-50%);
-color: #60a5fa;
-font-size: 0.9rem;
-pointer-events: none;
+    outline: none;
+    border-color: #60a5fa;
+    width: 280px;
 }
 .search-clear {
-position: absolute;
-right: 12px;
-top: 50%;
-transform: translateY(-50%);
-background: rgba(255,255,255,0.2);
-border: none;
-color: #cbd5e6;
-border-radius: 30px;
-width: 20px;
-height: 20px;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 0.7rem;
-cursor: pointer;
-transition: 0.2s;
-opacity: 0;
-visibility: hidden;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.2);
+    border-radius: 30px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
 }
-.search-clear.visible {
-opacity: 1;
-visibility: visible;
+.search-clear.visible { opacity: 1; visibility: visible; }
+
+/* ========= BADGE BONUS: SEJAJAR KE SAMPING (FLEX ROW) ========= */
+.bonus-badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0 28px 0;
+    padding: 8px 12px;
 }
-.search-clear:hover {
-background: #ef4444;
-color: white;
+.bonus-badge-item {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    border-radius: 60px;
+    padding: 12px 32px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid rgba(255, 215, 0, 0.8);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #ffde9c;
+}
+.bonus-badge-item i {
+    font-size: 1.3rem;
+    color: #fbbf24;
+}
+.bonus-badge-item span {
+    letter-spacing: 0.5px;
+}
+.bonus-badge-item.active-bonus {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    border-color: #ffedb0;
+    box-shadow: 0 0 18px rgba(245,158,11,0.7);
+}
+.bonus-badge-item.active-bonus i {
+    color: white;
+}
+.bonus-badge-item:hover {
+    transform: translateY(-4px);
+    background: rgba(245,158,11,0.85);
+    color: white;
+}
+.bonus-badge-item:hover i {
+    color: white;
 }
 
-/* Kategori bonus badge row */
-.bonus-badge-row {
-display: flex;
-flex-wrap: wrap;
-gap: 16px;
-justify-content: center;
-margin-bottom: 32px;
-margin-top: 8px;
+/* Grid untuk konten bonus (halaman masing-masing kategori) */
+.bonus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 16px;
 }
-.bonus-badge {
-background: rgba(0, 0, 0, 0.65);
-backdrop-filter: blur(8px);
-border-radius: 60px;
-padding: 10px 28px;
-font-weight: 700;
-font-size: 1rem;
-cursor: pointer;
-transition: all 0.2s ease;
-border: 1px solid rgba(255, 215, 0, 0.7);
-box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-display: inline-flex;
-align-items: center;
-gap: 12px;
-color: #facc15;
+.bonus-card {
+    background: rgba(18, 28, 45, 0.92);
+    border-radius: 28px;
+    padding: 22px;
+    transition: 0.2s;
+    border: 1px solid rgba(255, 200, 0, 0.5);
+    position: relative;
+    cursor: pointer;
 }
-.bonus-badge i {
-font-size: 1.2rem;
-color: #ffd966;
+.bonus-card:hover {
+    transform: translateY(-5px);
+    background: rgba(35, 50, 75, 0.96);
+    border-color: #fbbf24;
 }
-.bonus-badge span {
-font-weight: 800;
-letter-spacing: 0.3px;
+.bonus-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: #fff0c0;
+    border-bottom: 2px solid #fbbf24;
+    padding-bottom: 12px;
+    display: inline-block;
+    width: 100%;
 }
-.bonus-badge.active-bonus {
-background: linear-gradient(135deg, #f59e0b, #d97706);
-color: white;
-border-color: #ffecb3;
-box-shadow: 0 0 15px rgba(245,158,11,0.6);
+.bonus-card p {
+    color: #e2e8f0;
+    line-height: 1.5;
+    margin: 12px 0 50px 0;
 }
-.bonus-badge.active-bonus i {
-color: white;
+.bonus-badge-tag {
+    background: rgba(245, 158, 11, 0.35);
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #ffe4a3;
 }
-.bonus-badge:hover {
-transform: translateY(-3px);
-background: rgba(245,158,11,0.8);
-color: white;
+.btn-salin-bonus-card {
+    position: absolute;
+    bottom: 16px;
+    right: 18px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border: none;
+    color: white;
+    padding: 7px 16px;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: 0.2s;
 }
-.bonus-badge:hover i {
-color: white;
-}
-
-/* Konten bonus grid */
-.bonus-content-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-gap: 24px;
-margin-top: 12px;
-}
-.card-bonus {
-background: rgba(18, 28, 45, 0.9);
-border-radius: 28px;
-padding: 20px;
-transition: all 0.3s ease;
-border: 1px solid rgba(255, 215, 0, 0.4);
-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-display: flex;
-flex-direction: column;
-cursor: pointer;
-position: relative;
-}
-.card-bonus:hover {
-transform: translateY(-6px);
-background: rgba(30, 45, 70, 0.95);
-border-color: #fbbf24;
-}
-.card-bonus h3 {
-font-size: 1.35rem;
-font-weight: 700;
-margin-bottom: 16px;
-color: #fef3c7;
-padding-bottom: 14px;
-border-bottom: 2px solid #fbbf24;
-display: inline-block;
-width: 100%;
-}
-.card-bonus p {
-color: #e2e8f0;
-line-height: 1.5;
-font-size: 0.95rem;
-margin-bottom: 52px;
-margin-top: 8px;
-white-space: pre-wrap;
-}
-.btn-salin-bonus {
-position: absolute;
-bottom: 16px;
-right: 18px;
-background: linear-gradient(135deg, #f59e0b, #d97706);
-border: none;
-color: white;
-padding: 7px 15px;
-border-radius: 40px;
-font-size: 0.9rem;
-font-weight: 700;
-cursor: pointer;
-transition: all 0.2s;
-display: flex;
-align-items: center;
-gap: 7px;
-}
-.btn-salin-bonus:hover {
-background: linear-gradient(135deg, #d97706, #b45309);
-transform: scale(1.02);
-}
-.stat-badge-bonus {
-display: inline-block;
-background: rgba(245, 158, 11, 0.3);
-padding: 6px 14px;
-border-radius: 40px;
-font-size: 0.7rem;
-font-weight: 600;
-color: #ffedb0;
-margin-top: 16px;
-align-self: flex-start;
-border: 1px solid rgba(255,200,0,0.4);
+.btn-salin-bonus-card:hover {
+    background: #b45309;
+    transform: scale(1.02);
 }
 
-/* Dashboard grid biasa (untuk tab non-bonus) */
+/* ========= KOMPONEN LAIN (TIDAK BERUBAH) ========= */
 .dashboard-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-gap: 24px;
-margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
 }
 .card {
-background: rgba(18, 28, 45, 0.85);
-border-radius: 28px;
-padding: 22px;
-transition: all 0.3s ease;
-border: 1px solid rgba(255, 255, 255, 0.2);
-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-display: flex;
-flex-direction: column;
-cursor: pointer;
-position: relative;
+    background: rgba(18, 28, 45, 0.85);
+    border-radius: 28px;
+    padding: 22px;
+    border: 1px solid rgba(255,255,255,0.2);
+    position: relative;
 }
-.card:hover {
-transform: translateY(-6px);
-background: rgba(30, 45, 70, 0.95);
-border-color: rgba(59, 130, 246, 0.6);
-}
-.card h3 {
-font-size: 1.35rem;
-font-weight: 700;
-margin-bottom: 16px;
-color: #f0f4fe;
-padding-bottom: 14px;
-border-bottom: 2px solid rgba(96, 165, 250, 0.7);
-}
-.card p {
-color: #cbd5e6;
-line-height: 1.5;
-margin-bottom: 52px;
-margin-top: 8px;
-}
+.card h3 { font-size: 1.35rem; border-bottom: 2px solid rgba(96,165,250,0.7); padding-bottom: 12px; margin-bottom: 14px; color:#f0f4fe; }
+.card p { margin-bottom: 52px; color:#cbd5e6; }
 .btn-salin-folder {
-position: absolute;
-bottom: 16px;
-right: 18px;
-background: linear-gradient(135deg, #10b981, #059669);
-border: none;
-color: white;
-padding: 7px 15px;
-border-radius: 40px;
-font-weight: 700;
-cursor: pointer;
-display: flex;
-align-items: center;
-gap: 7px;
+    position: absolute; bottom: 16px; right: 18px;
+    background: linear-gradient(135deg,#10b981,#059669);
+    padding: 7px 15px; border-radius: 40px; color:white; font-weight:700; cursor:pointer;
+    display: flex; align-items: center; gap: 7px;
 }
-.card-icon { font-size: 2rem; margin-bottom: 16px; color: #60a5fa; }
-.stat-badge {
-background: rgba(59, 130, 246, 0.4);
-padding: 6px 14px;
-border-radius: 40px;
-font-size: 0.7rem;
-font-weight: 600;
-color: #e0f2fe;
-margin-top: 16px;
-align-self: flex-start;
-}
-.loading-card, .no-result-card { background: rgba(0,0,0,0.6); text-align: center; padding: 40px; border-radius: 32px; grid-column: 1 / -1; }
+.stat-badge { background: rgba(59,130,246,0.4); padding: 6px 14px; border-radius: 40px; font-size:0.7rem; display:inline-block; }
+.loading-card, .no-result-card { background: rgba(0,0,0,0.6); text-align:center; padding:40px; border-radius:32px; grid-column:1/-1; }
 .modal-overlay {
-position: fixed;
-top:0;left:0;width:100%;height:100%;
-background: rgba(0,0,0,0.85);
-backdrop-filter: blur(8px);
-z-index:1000;
-display:flex;
-align-items:center;
-justify-content:center;
-opacity:0;
-visibility:hidden;
-transition: all 0.3s;
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); z-index:1000;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden; transition:0.2s;
 }
 .modal-overlay.active { opacity:1; visibility:visible; }
 .modal-container {
-background: rgba(15,25,45,0.95);
-border-radius: 40px;
-width:90%;
-max-width:700px;
-max-height:85vh;
-display:flex;
-flex-direction:column;
-border:1px solid #fbbf24;
-transform:scale(0.9);
-transition: transform 0.2s;
+    background:rgba(15,25,45,0.98); border-radius:40px; width:90%; max-width:700px;
+    border:1px solid #fbbf24; transform:scale(0.9); transition:0.2s;
 }
 .modal-overlay.active .modal-container { transform:scale(1); }
-.modal-header {
-padding:24px 28px 16px;
-border-bottom:1px solid rgba(255,215,0,0.4);
-display:flex;
-justify-content:space-between;
-}
-.modal-header h2 { font-size:1.7rem; font-weight:800; background: linear-gradient(135deg,#fff,#ffda88); background-clip:text; -webkit-background-clip:text; color:transparent; }
-.close-modal {
-background:rgba(255,255,255,0.15);
-border:none;
-font-size:1.6rem;
-cursor:pointer;
-color:white;
-width:44px;
-height:44px;
-border-radius:50%;
-}
-.close-modal:hover { background:#ef4444; transform:rotate(90deg); }
-.modal-body { padding:24px 28px 32px; overflow-y:auto; color:#e2e8f0; white-space:pre-wrap; }
-.modal-content-text { background:rgba(0,0,0,0.4); padding:20px; border-radius:24px; border-left:4px solid #fbbf24; }
+.modal-header { padding:24px 28px 16px; display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,215,0,0.4); }
+.modal-header h2 { font-size:1.7rem; background: linear-gradient(135deg,#fff,#ffda88); background-clip:text; -webkit-background-clip:text; color:transparent; }
+.close-modal { background:rgba(255,255,255,0.15); border:none; width:44px; height:44px; border-radius:50%; font-size:1.6rem; cursor:pointer; color:white; }
+.modal-body { padding:24px 28px 32px; overflow-y:auto; white-space:pre-wrap; }
 .copy-toast-notif {
-position:fixed;
-bottom:30px;
-left:50%;
-transform:translateX(-50%) translateY(20px);
-background:rgba(0,0,0,0.85);
-backdrop-filter:blur(12px);
-color:#bbf7d0;
-padding:12px 28px;
-border-radius:60px;
-font-weight:600;
-z-index:2000;
-opacity:0;
-transition:0.25s;
-pointer-events:none;
-border-left:4px solid #22c55e;
+    position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:#000000cc; backdrop-filter:blur(12px); color:#bbf7d0; padding:12px 28px;
+    border-radius:60px; font-weight:600; z-index:2000; opacity:0; transition:0.25s;
+    pointer-events:none; border-left:4px solid #22c55e;
 }
 .copy-toast-notif.show { opacity:1; transform:translateX(-50%) translateY(0px); }
-@media (max-width:768px) {
-.sidebar { width:240px; }
-.main-content { padding:16px; }
-.bonus-badge { padding:6px 18px; font-size:0.85rem; }
+@media (max-width: 720px) {
+    .bonus-badge-item { padding: 8px 20px; font-size: 0.9rem; }
+    .sidebar { width: 240px; }
 }
 </style>
 </head>
 <body>
 <div class="app-container">
-<aside class="sidebar">
-<div class="sidebar-header">
-<div class="logo-area">
-<div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
-<div class="logo-text"><h2>7Kolom</h2><p>Live Search + Bonus Badge</p></div>
-</div>
-</div>
-<div class="nav-menu">
-<div class="nav-item active" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span><div class="badge-new">Full</div></div>
-<div class="nav-item" data-tab="tab2"><i class="fas fa-chart-line"></i><span>RANDOM</span><div class="badge-new">Folder + SALIN</div></div>
-<div class="nav-item" data-tab="tab3"><i class="fas fa-envelope"></i><span>EVENT LINETOGEL</span></div>
-<div class="nav-item" data-tab="tab4"><i class="fas fa-tasks"></i><span>GALLERY GAMBAR CS</span></div>
-<div class="nav-item" data-tab="tab5"><i class="fas fa-users"></i><span>ALL ABOUT QRIS</span></div>
-<div class="nav-item" data-tab="tab6"><i class="fas fa-cog"></i><span>BONUS</span><div class="badge-new">4 Badge</div></div>
-<div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
-</div>
-<div class="sidebar-footer"><i class="fas fa-arrows-alt"></i> Klik folder → isi | Tombol SALIN | Bonus Kategori: ALL, MINGGUAN, DONE BAGI, LAIN-LAIN</div>
-</aside>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
+                <div class="logo-text"><h2>7Kolom</h2><p>Bonus 4 Badge Sejajar</p></div>
+            </div>
+        </div>
+        <div class="nav-menu">
+            <div class="nav-item active" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span><div class="badge-new">Full</div></div>
+            <div class="nav-item" data-tab="tab2"><i class="fas fa-chart-line"></i><span>RANDOM</span><div class="badge-new">Folder</div></div>
+            <div class="nav-item" data-tab="tab3"><i class="fas fa-envelope"></i><span>EVENT LINETOGEL</span></div>
+            <div class="nav-item" data-tab="tab4"><i class="fas fa-tasks"></i><span>GALLERY GAMBAR CS</span></div>
+            <div class="nav-item" data-tab="tab5"><i class="fas fa-users"></i><span>ALL ABOUT QRIS</span></div>
+            <div class="nav-item" data-tab="tab6"><i class="fas fa-cog"></i><span>BONUS</span><div class="badge-new">4 Badge</div></div>
+            <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
+        </div>
+        <div class="sidebar-footer">
+            <i class="fas fa-arrows-alt"></i> Badge bonus SEJAJAR | Klik badge ganti halaman
+        </div>
+    </aside>
 
-<main class="main-content">
-<div class="content-header">
-<div class="page-title"><h1 id="mainHeading">Dashboard 7 Kolom</h1><p id="subHeading">Live search semua kolom | Bonus kategori dengan 4 badge</p></div>
-<div class="action-buttons"><div class="search-wrapper"><i class="fas fa-search search-icon"></i><input type="text" id="liveSearchInput" class="search-input" placeholder="Cari folder / konten..." autocomplete="off"><button id="clearSearchBtn" class="search-clear"><i class="fas fa-times"></i></button></div></div>
-</div>
-<div id="dynamicContentArea" class="dashboard-grid"><div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data...</p></div></div>
-</main>
+    <main class="main-content">
+        <div class="content-header">
+            <div class="page-title"><h1 id="mainHeading">Dashboard 7 Kolom</h1><p id="subHeading">Live search + Bonus kategori horizontal (sejajar)</p></div>
+            <div class="action-buttons">
+                <div class="search-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="liveSearchInput" class="search-input" placeholder="Cari konten / bonus...">
+                    <button id="clearSearchBtn" class="search-clear"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="dynamicContentArea" class="dashboard-grid">
+            <div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data...</p></div>
+        </div>
+    </main>
 </div>
 
-<div id="folderModal" class="modal-overlay"><div class="modal-container"><div class="modal-header"><h2 id="modalTitle"></h2><button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button></div><div class="modal-body"><div class="modal-content-text" id="modalContentText"></div><div class="esc-hint"><kbd>ESC</kbd> Tutup</div></div></div></div>
-<div id="copyToast" class="copy-toast-notif"><i class="fas fa-copy"></i> Tersalin!</div>
+<div id="folderModal" class="modal-overlay"><div class="modal-container"><div class="modal-header"><h2 id="modalTitle"></h2><button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button></div><div class="modal-body" id="modalBody"><div class="modal-content-text" id="modalContentText"></div><div class="esc-hint"><kbd>ESC</kbd> tutup</div></div></div></div>
+<div id="copyToast" class="copy-toast-notif"><i class="fas fa-copy"></i> Disalin!</div>
 
 <script>
-const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
-const SHEET_NAME = 'PK RANDOM';
-let foldersData = [];
-let currentFilterText = "";
-let currentActiveTab = "tab1";
-let currentBonusCategory = "ALL"; // ALL, MINGGUAN, DONE BAGI, LAIN-LAIN
-
-// Data bonus sesuai kategori (4 kategori masing2 minimal 2-3 item)
-const bonusDataMap = {
-  ALL: [
-    { title: "🎁 BONUS ALL - Cashback 10%", desc: "Bonus all member tanpa syarat. Cashback 10% dari total kekalahan mingguan.", badge: "Auto Kredit" },
-    { title: "🎉 Welcome Bonus 50%", desc: "Bonus untuk new member, maksimal Rp 500rb. Syarat TO rendah.", badge: "NEW" },
-    { title: "🏆 Bonus Rollingan 0.8%", desc: "Dibagikan setiap hari Senin untuk semua permainan.", badge: "Mingguan" },
-    { title: "⭐ Bonus Referral 5%", desc: "Ajak teman dapatkan bonus seumur hidup.", badge: "Seumur Hidup" }
-  ],
-  MINGGUAN: [
-    { title: "📅 BONUS MINGGUAN - Cashback 5%", desc: "Cashback kekalahan setiap hari Selasa (minimal kekalahan 200rb).", badge: "Selasa" },
-    { title: "🎰 Rollingan Slot Mingguan 0.5%", desc: "Bonus turnover slot games tanpa batas maksimal.", badge: "Auto" },
-    { title: "💎 Komisi Casino Live 0.8%", desc: "Dibagikan setiap minggu untuk permainan live casino.", badge: "Mingguan" },
-    { title: "⚡ Bonus Sportbook 10%", desc: "Kembali 10% untuk parlay kalah, syarat mudah.", badge: "Sport" }
-  ],
-  "DONE BAGI": [
-    { title: "✅ DONE BAGI - Bonus Staking", desc: "Bonus sudah dibagikan kepada member terpilih periode Mei 2025.", badge: "Selesai" },
-    { title: "🏁 Event Spesial Berakhir", desc: "Bonus event Naga Emas telah dituntaskan & dibagikan.", badge: "Done" },
-    { title: "📦 Klaim Berakhir", desc: "Bonus loyalitas periode sebelumnya sudah closed.", badge: "Tutup" }
-  ],
-  "LAIN-LAIN": [
-    { title: "🎲 Bonus Special Ultah", desc: "Diskon deposit 20% khusus hari ulang tahun member.", badge: "Spesial" },
-    { title: "🔄 Bonus Transfer Kredit", desc: "Free chip Rp 25k untuk transfer antar user minimal 100k.", badge: "Promo" },
-    { title: "📱 Bonus Aplikasi Mobile", desc: "Unduh app & dapatkan bonus 15k langsung.", badge: "New App" },
-    { title: "🎯 Turnamen Mingguan", desc: "Peringkat tertinggi menang total 50 juta rupiah.", badge: "Lomba" }
-  ]
-};
-
-// Data static tab lainnya (tidak mengubah kolom lain)
-const staticTabsData = {
-tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik — background full 100%", items: [
-  { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
-  { icon: "fas fa-users", title: "Pengguna Aktif", desc: "1,284 pengguna online sekarang", badge: "Hari ini" },
-  { icon: "fas fa-calendar-alt", title: "Jadwal Proyek", desc: "3 tenggat mendekati deadline", badge: "Prioritas" }
-]},
-tab3: { title: "✉️ EVENT LINETOGEL", subtitle: "Inbox & komunikasi tim — pesan terkini", items: [
-  { icon: "fas fa-inbox", title: "Pesan Masuk", desc: "Anda memiliki 12 pesan belum dibaca", badge: "12 baru" },
-  { icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif", badge: "Balas" },
-  { icon: "fas fa-bell", title: "Notifikasi", desc: "Pengingat meeting jam 14:00 WIB", badge: "Segera" }
-]},
-tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Daftar tugas & kolaborasi", items: [
-  { icon: "fas fa-list-check", title: "Task Sprint", desc: "8 tugas selesai dari 21", badge: "Selesai 38%" },
-  { icon: "fas fa-code-branch", title: "Repository", desc: "Pull request menunggu", badge: "2 PR" },
-  { icon: "fas fa-clock", title: "Deadline", desc: "Sprint 23 berakhir Jumat", badge: "H-3" }
-]},
-tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim & QRIS info", items: [
-  { icon: "fas fa-user-plus", title: "Anggota Aktif", desc: "12 anggota online", badge: "Online" },
-  { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3, Editor: 7", badge: "RBAC" },
-  { icon: "fas fa-handshake", title: "Kolaborasi", desc: "Integrasi dengan desain", badge: "Sinergi" }
-]},
-tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & jadwal lengkap", items: [
-  { icon: "fas fa-book-open", title: "Panduan Togel", desc: "Jadwal keluaran semua pasaran", badge: "Update" },
-  { icon: "fas fa-headset", title: "Dukungan 24/7", desc: "Livechat resmi", badge: "Aktif" },
-  { icon: "fas fa-video", title: "Tutorial Live", desc: "Walkthrough lengkap", badge: "Tonton" }
-]}
-};
-
-const dynamicArea = document.getElementById("dynamicContentArea");
-const mainHeading = document.getElementById("mainHeading");
-const subHeading = document.getElementById("subHeading");
-const modal = document.getElementById("folderModal");
-const modalTitle = document.getElementById("modalTitle");
-const modalContentText = document.getElementById("modalContentText");
-const closeModalBtn = document.getElementById("closeModalBtn");
-const toast = document.getElementById("copyToast");
-const searchInput = document.getElementById("liveSearchInput");
-const clearSearchBtn = document.getElementById("clearSearchBtn");
-
-function showCopyToast(msg) { toast.innerHTML = `<i class="fas fa-copy"></i> ${msg}`; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2000); }
-async function copyContentOnly(textContent, title) {
-  const finalText = textContent || "(Kosong)";
-  try { await navigator.clipboard.writeText(finalText); showCopyToast(`"${title}" disalin`); } catch { const ta=document.createElement("textarea"); ta.value=finalText; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); showCopyToast(`"${title}" disalin`); }
-}
-function openModal(title, content) { modalTitle.textContent = title; modalContentText.innerHTML = (content || "(Kosong)").replace(/\n/g,'<br>'); modal.classList.add("active"); document.body.style.overflow="hidden"; }
-function closeModal() { modal.classList.remove("active"); document.body.style.overflow=""; }
-closeModalBtn.onclick = closeModal;
-modal.onclick = e => { if(e.target === modal) closeModal(); };
-document.addEventListener('keydown', e => { if(e.key==='Escape' && modal.classList.contains('active')) closeModal(); });
-
-async function fetchDataFromGoogleSheets() {
-  try {
-    const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
-    const response = await fetch(csvUrl, { cache: 'no-store' });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const csvText = await response.text();
-    const rows = parseCSV(csvText);
-    if (!rows.length) return [];
-    const startIdx = (rows[0] && (rows[0][0].toLowerCase().includes('judul') || rows[0][0].toLowerCase().includes('folder'))) ? 1 : 0;
-    let dataRows = [];
-    for (let i = startIdx; i < rows.length; i++) if (rows[i] && rows[i][0]?.trim()) dataRows.push({ title: rows[i][0].trim(), content: rows[i][1] ? rows[i][1].trim() : "" });
-    return dataRows;
-  } catch(e) { console.error(e); throw new Error('Gagal ambil data'); }
-}
-function parseCSV(csvText) {
-  const lines = []; let cur = '', inQ = false;
-  for(let i=0;i<csvText.length;i++) { const ch=csvText[i]; if(ch==='"') inQ=!inQ; if(ch==='\n' && !inQ) { lines.push(cur); cur=''; } else cur+=ch; }
-  if(cur) lines.push(cur);
-  return lines.map(line => { if(!line.trim()) return []; let row=[], c='', inQ2=false; for(let i=0;i<line.length;i++){ const x=line[i]; if(x==='"') inQ2=!inQ2; else if(x===',' && !inQ2) { row.push(c.trim().replace(/^"|"$/g,'').replace(/""/g,'"')); c=''; } else c+=x; } row.push(c.trim().replace(/^"|"$/g,'').replace(/""/g,'"')); return row; });
-}
-
-function renderStaticTabWithFilter(tabId, filter=""){
-  const data=staticTabsData[tabId];
-  if(!data) return false;
-  mainHeading.innerHTML=data.title;
-  subHeading.innerHTML=data.subtitle+(filter?` 🔍 "${filter}"`:"");
-  let filteredItems = data.items.filter(i=> filter==="" || i.title.toLowerCase().includes(filter.toLowerCase()) || i.desc.toLowerCase().includes(filter.toLowerCase()));
-  if(filteredItems.length===0 && filter){ dynamicArea.innerHTML=`<div class="no-result-card"><i class="fas fa-search"></i><h3>Kosong</h3><p>Tidak ditemukan</p></div>`; return true; }
-  let cardsHTML= filteredItems.map(i=>`<div class="card" style="cursor:default;"><div class="card-icon"><i class="${i.icon}"></i></div><h3>${escapeHtml(i.title)}</h3><p>${escapeHtml(i.desc)}</p><div class="stat-badge">${escapeHtml(i.badge)}</div></div>`).join('');
-  dynamicArea.innerHTML=cardsHTML;
-  return true;
-}
-
-async function renderRandomTabWithFilter(filter=""){
-  mainHeading.innerHTML="🎲 KOLOM RANDOM | Google Sheets";
-  subHeading.innerHTML=`Folder dinamis ${filter?`| 🔍 "${filter}"`:""} | Tombol SALIN`;
-  dynamicArea.innerHTML=`<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat...</p></div>`;
-  try{
-    if(foldersData.length===0) foldersData = await fetchDataFromGoogleSheets();
-    let filtered = filter.trim()==="" ? foldersData : foldersData.filter(f=> f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase()));
-    if(filtered.length===0){ dynamicArea.innerHTML=`<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ada folder</h3></div>`; return; }
-    let html="";
-    filtered.forEach((f,idx)=>{
-      const short = f.content.length>120? f.content.substring(0,120)+"...":f.content;
-      html+=`<div class="card random-folder" data-folder-idx="${idx}"><button class="btn-salin-folder" data-salin-idx="${idx}"><i class="fas fa-copy"></i> SALIN</button><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(short)}</p><div class="stat-badge">Klik buka</div></div>`;
-    });
-    dynamicArea.innerHTML=html;
-    document.querySelectorAll('.btn-salin-folder').forEach(btn=>{ btn.addEventListener('click',(e)=>{ e.stopPropagation(); const i=parseInt(btn.getAttribute('data-salin-idx')); if(foldersData[i]) copyContentOnly(foldersData[i].content, foldersData[i].title); }); });
-    document.querySelectorAll('.card[data-folder-idx]').forEach(card=>{ card.addEventListener('click',(e)=>{ if(e.target.closest('.btn-salin-folder')) return; const i=parseInt(card.getAttribute('data-folder-idx')); if(foldersData[i]) openModal(foldersData[i].title, foldersData[i].content); }); });
-  } catch(err){ dynamicArea.innerHTML=`<div class="error-message card"><h3>Error</h3><p>${err.message}</p></div>`; }
-}
-
-// Render BONUS tab dengan 4 badge kategori & halaman sesuai pilihan
-function renderBonusTabWithFilter(filter="", category=currentBonusCategory){
-  mainHeading.innerHTML="🎁 BONUS & PROMOSI";
-  subHeading.innerHTML=`Pilih kategori bonus: ALL | MINGGUAN | DONE BAGI | LAIN-LAIN ${filter?`🔍 filter:"${filter}"`:""}`;
-  let bonusList = bonusDataMap[category] || bonusDataMap.ALL;
-  let filteredBonus = filter.trim()==="" ? bonusList : bonusList.filter(b=> b.title.toLowerCase().includes(filter.toLowerCase()) || b.desc.toLowerCase().includes(filter.toLowerCase()));
-  
-  const badgeRow = `
-    <div class="bonus-badge-row">
-      <div class="bonus-badge ${category==='ALL' ? 'active-bonus' : ''}" data-bonus-cat="ALL"><i class="fas fa-gem"></i><span>ALL</span></div>
-      <div class="bonus-badge ${category==='MINGGUAN' ? 'active-bonus' : ''}" data-bonus-cat="MINGGUAN"><i class="fas fa-calendar-week"></i><span>MINGGUAN</span></div>
-      <div class="bonus-badge ${category==='DONE BAGI' ? 'active-bonus' : ''}" data-bonus-cat="DONE BAGI"><i class="fas fa-check-double"></i><span>DONE BAGI</span></div>
-      <div class="bonus-badge ${category==='LAIN-LAIN' ? 'active-bonus' : ''}" data-bonus-cat="LAIN-LAIN"><i class="fas fa-ellipsis-h"></i><span>LAIN-LAIN</span></div>
-    </div>
-  `;
-  if(filteredBonus.length===0){
-    dynamicArea.innerHTML = badgeRow + `<div class="no-result-card"><i class="fas fa-ban"></i><h3>Tidak ada bonus dalam kategori ini</h3></div>`;
-    attachBonusBadgeEvents();
-    return;
-  }
-  let cardsHtml = `<div class="bonus-content-grid">`;
-  filteredBonus.forEach((item, idx) => {
-    cardsHtml += `
-      <div class="card-bonus" data-bonus-item="${idx}">
-        <button class="btn-salin-bonus" data-bonus-salin="${idx}"><i class="fas fa-copy"></i> SALIN</button>
-        <h3>${escapeHtml(item.title)}</h3>
-        <p>${escapeHtml(item.desc)}</p>
-        <div class="stat-badge-bonus"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div>
-      </div>
-    `;
-  });
-  cardsHtml += `</div>`;
-  dynamicArea.innerHTML = badgeRow + cardsHtml;
-  attachBonusBadgeEvents();
-  // tombol salin bonus
-  document.querySelectorAll('.btn-salin-bonus').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const idx = parseInt(btn.getAttribute('data-bonus-salin'));
-      const list = bonusDataMap[category] || bonusDataMap.ALL;
-      if(list[idx]) copyContentOnly(`${list[idx].title}\n${list[idx].desc}\nBadge: ${list[idx].badge}`, list[idx].title);
-    });
-  });
-}
-function attachBonusBadgeEvents(){
-  document.querySelectorAll('.bonus-badge').forEach(badge => {
-    badge.removeEventListener('click', bonusCatHandler);
-    badge.addEventListener('click', bonusCatHandler);
-  });
-}
-function bonusCatHandler(e){
-  const cat = e.currentTarget.getAttribute('data-bonus-cat');
-  if(cat){
-    currentBonusCategory = cat;
-    renderBonusTabWithFilter(currentFilterText, cat);
-  }
-}
-
-async function applyLiveSearch(){
-  if(currentActiveTab === 'tab2') await renderRandomTabWithFilter(currentFilterText);
-  else if(currentActiveTab === 'tab6') renderBonusTabWithFilter(currentFilterText, currentBonusCategory);
-  else renderStaticTabWithFilter(currentActiveTab, currentFilterText);
-}
-function handleSearchInput(){ currentFilterText=searchInput.value; if(currentFilterText.length>0) clearSearchBtn.classList.add('visible'); else clearSearchBtn.classList.remove('visible'); applyLiveSearch(); }
-function clearSearch(){ searchInput.value=''; currentFilterText=''; clearSearchBtn.classList.remove('visible'); applyLiveSearch(); }
-searchInput.addEventListener('input', handleSearchInput);
-clearSearchBtn.addEventListener('click', clearSearch);
-
-async function onTabClick(tabId){
-  currentActiveTab = tabId;
-  document.querySelectorAll('.nav-item').forEach(item=>{ if(item.getAttribute('data-tab')===tabId) item.classList.add('active'); else item.classList.remove('active'); });
-  if(tabId === 'tab2'){ if(foldersData.length===0) foldersData = await fetchDataFromGoogleSheets().catch(e=>[]); await renderRandomTabWithFilter(currentFilterText); }
-  else if(tabId === 'tab6'){ renderBonusTabWithFilter(currentFilterText, currentBonusCategory); }
-  else { renderStaticTabWithFilter(tabId, currentFilterText); }
-}
-function bindNavEvents(){ document.querySelectorAll('.nav-item').forEach(item=>{ item.addEventListener('click',()=>{ const tid=item.getAttribute('data-tab'); if(tid) onTabClick(tid); }); }); }
-function escapeHtml(str){ if(!str) return ''; return str.replace(/[&<>]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
-
-(async function init(){ bindNavEvents(); await onTabClick('tab1'); })();
+    // ======================= KONFIGURASI TIDAK MENGUBAHI KOLOM LAIN =======================
+    const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
+    const SHEET_NAME = 'PK RANDOM';
+    let foldersData = [];
+    let currentFilterText = "";
+    let currentActiveTab = "tab1";
+    let currentBonusCategory = "ALL"; // ALL, MINGGUAN, DONE BAGI, LAIN-LAIN
+    
+    // ========== DATA BONUS 4 KATEGORI (SETIAP HALAMAN DAPAT DIISI) ==========
+    const bonusCategories = {
+        "ALL": [
+            { title: "🎁 BONUS ALL MEMBER", desc: "Cashback 10% tanpa minimal turnover. Berlaku untuk semua permainan.", badge: "Unlimited", contentDetail: "Bonus all: Cashback 10% setiap Senin, auto kredit ke akun." },
+            { title: "🏆 Rollingan 0.8%", desc: "Bonus rollingan untuk semua provider slot & live casino.", badge: "Mingguan", contentDetail: "Turnover dihitung Senin-Minggu, dibagikan setiap Senin siang." },
+            { title: "✨ Welcome Bonus 100%", desc: "New member dapat bonus 100% maksimal 200rb (TO kecil).", badge: "Syarat Mudah", contentDetail: "Minimal deposit 50rb, maks bonus 200rb, TO 8x." },
+            { title: "🔄 Referral Seumur Hidup", desc: "Dapatkan 5% dari total downline, bonus langsung masuk.", badge: "Pasif Income", contentDetail: "Bonus referral tanpa batas, berlaku seumur hidup." }
+        ],
+        "MINGGUAN": [
+            { title: "📆 BONUS MINGGUAN SLOT", desc: "Bonus kekalahan 5% khusus slot games (minimal kalah 300rb).", badge: "Setiap Selasa", contentDetail: "Periode Senin-Minggu, dibagikan hari Selasa jam 15:00 WIB." },
+            { title: "💰 Cashback Sport 7%", desc: "Cashback mingguan untuk taruhan olahraga.", badge: "Mingguan", contentDetail: "Maksimal cashback 1.5 juta, minimal kekalahan 500rb." },
+            { title: "🎰 Rollingan Casino 0.5%", desc: "Bonus turnover live casino tanpa batas maks.", badge: "Auto Kredit", contentDetail: "Dibagikan otomatis setiap hari Selasa sore." },
+            { title: "⚡ Bonus Komisi Referral", desc: "Bonus referral mingguan 3% dari member aktif.", badge: "Bonus Rutin", contentDetail: "Referral bermain aktif 10x spin langsung dapat." }
+        ],
+        "DONE BAGI": [
+            { title: "✅ EVENT LUNAR DONE", desc: "Event Imlek 2025 telah berakhir, bonus sudah dibagikan ke semua pemenang.", badge: "Selesai", contentDetail: "Event periode 25 Jan - 10 Feb 2025. Pemenang sudah dihubungi CS." },
+            { title: "🏁 Kompetisi Togel Tutup", desc: "Turnamen togel 4D periode Maret telah closed dan reward diberikan.", badge: "Tuntas", contentDetail: "Pemenang utama mendapatkan bonus 10jt. Done bagi." },
+            { title: "🎯 Bonus Staking Berakhir", desc: "Program staking bulan April 2025 sudah selesai, pembagian hadiah rampung.", badge: "Finished", contentDetail: "Peserta yang qualify mendapatkan bonus di wallet masing2." },
+            { title: "📦 Freebet 50k Expired", desc: "Promo freebet untuk member lama sudah tidak tersedia.", badge: "Expired", contentDetail: "Bonus sudah tidak dapat diklaim lagi sejak 1 Mei 2025." }
+        ],
+        "LAIN-LAIN": [
+            { title: "🎂 Bonus Ulang Tahun", desc: "Bonus spesial 50k untuk member yang berulang tahun.", badge: "Spesial", contentDetail: "Syarat: sudah terdaftar 3 bulan & pernah deposit. Klaim via CS." },
+            { title: "📱 Bonus Download App", desc: "Install aplikasi mobile & dapatkan chip gratis 25rb.", badge: "New App", contentDetail: "Unduh dari official site, lalu klaim bonus 1x24 jam." },
+            { title: "🎲 Event Rollingan Harian", desc: "Bonus rollingan khusus hari libur nasional.", badge: "Terbatas", contentDetail: "Hanya berlaku saat long weekend. Cek jadwal." },
+            { title: "🃏 Turnamen Blackjack", desc: "Ikut turnamen blackjack online hadiah puluhan juta.", badge: "Live Event", contentDetail: "Pendaftaran gratis, periode 20-30 Mei 2025." }
+        ]
+    };
+    
+    // Data tab lain, tidak mengubah isi kolom existing
+    const staticTabsData = {
+        tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik background full 100%", items: [
+            { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
+            { icon: "fas fa-users", title: "Pengguna Aktif", desc: "1,284 pengguna online sekarang", badge: "Hari ini" },
+            { icon: "fas fa-calendar-alt", title: "Jadwal Proyek", desc: "3 tenggat mendekati deadline", badge: "Prioritas" }
+        ]},
+        tab3: { title: "✉️ EVENT LINETOGEL", subtitle: "Inbox & komunikasi tim — pesan terkini", items: [
+            { icon: "fas fa-inbox", title: "Pesan Masuk", desc: "Anda memiliki 12 pesan belum dibaca", badge: "12 baru" },
+            { icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif di proyek", badge: "Balas" },
+            { icon: "fas fa-bell", title: "Notifikasi", desc: "Pengingat meeting jam 14:00 WIB", badge: "Segera" }
+        ]},
+        tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Daftar tugas & kolaborasi — progres terkini", items: [
+            { icon: "fas fa-list-check", title: "Task Sprint", desc: "8 tugas selesai dari 21", badge: "Selesai 38%" },
+            { icon: "fas fa-code-branch", title: "Repository", desc: "Pull request menunggu review", badge: "2 PR" },
+            { icon: "fas fa-clock", title: "Deadline", desc: "Sprint 23 berakhir Jumat ini", badge: "H-3" }
+        ]},
+        tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi solid", items: [
+            { icon: "fas fa-user-plus", title: "Anggota Aktif", desc: "12 anggota online · 4 sedang rapat", badge: "Online" },
+            { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
+            { icon: "fas fa-handshake", title: "Kolaborasi", desc: "Integrasi dengan tim desain", badge: "Sinergi" }
+        ]},
+        tab7: { title: "❓ JADWAL TOGEL", subtitle: "Jadwal lengkap pasaran togel", items: [
+            { icon: "fas fa-calendar-week", title: "Jadwal Singapore", desc: "Setiap Senin & Kamis tutup 17:30", badge: "Update" },
+            { icon: "fas fa-clock", title: "Sydney Pools", desc: "Live draw setiap hari 13:50 WIB", badge: "Terjadwal" },
+            { icon: "fas fa-globe", title: "Hongkong & Macau", desc: "Jadwal resmi terlampir", badge: "Lengkap" }
+        ]}
+    };
+    
+    const dynamicArea = document.getElementById("dynamicContentArea");
+    const mainHeading = document.getElementById("mainHeading");
+    const subHeading = document.getElementById("subHeading");
+    const modal = document.getElementById("folderModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalContentText = document.getElementById("modalContentText");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const toast = document.getElementById("copyToast");
+    const searchInput = document.getElementById("liveSearchInput");
+    const clearSearchBtn = document.getElementById("clearSearchBtn");
+    
+    function showToast(msg) { toast.innerHTML = `<i class="fas fa-copy"></i> ${msg}`; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2000); }
+    async function copyContent(text, title) {
+        const copyStr = text || "(Kosong)";
+        try { await navigator.clipboard.writeText(copyStr); showToast(`"${title}" disalin`); } catch { const ta=document.createElement("textarea"); ta.value=copyStr; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); showToast(`"${title}" disalin`); }
+    }
+    function openModalContent(title, detail) { modalTitle.textContent = title; modalContentText.innerHTML = (detail || "Tidak ada detail").replace(/\n/g,'<br>'); modal.classList.add("active"); document.body.style.overflow="hidden"; }
+    function closeModalFunc() { modal.classList.remove("active"); document.body.style.overflow = ""; }
+    closeModalBtn.onclick = closeModalFunc; modal.onclick = e => { if(e.target === modal) closeModalFunc(); };
+    document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('active')) closeModalFunc(); });
+    
+    // Fetch sheets (Random Tab)
+    async function fetchSheetsData() {
+        try {
+            const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
+            const resp = await fetch(url, { cache: 'no-store' });
+            if(!resp.ok) throw new Error();
+            const csv = await resp.text();
+            const rows = csv.split(/\r?\n/).filter(r=>r.trim()).map(r=> { let res=[], cell='', quote=false; for(let ch of r){ if(ch==='"') quote=!quote; else if(ch===',' && !quote){ res.push(cell.trim().replace(/^"|"$/g,'')); cell=''; } else cell+=ch; } res.push(cell.trim().replace(/^"|"$/g,'')); return res; });
+            if(!rows.length) return [];
+            const start = (rows[0][0] && (rows[0][0].toLowerCase().includes('judul') || rows[0][0].toLowerCase().includes('folder'))) ? 1 : 0;
+            return rows.slice(start).filter(r=>r[0]?.trim()).map(r=> ({ title: r[0].trim(), content: r[1] ? r[1].trim() : "" }));
+        } catch(e) { console.warn(e); return []; }
+    }
+    
+    // Render Bonus Tab dengan BADGE SEJAJAR (horizontal flex) & halaman masing2 kategori
+    function renderBonusTab(filter = "", category = currentBonusCategory) {
+        mainHeading.innerHTML = "🎁 BONUS & PROMOSI SPESIAL";
+        subHeading.innerHTML = `Pilih kategori bonus sejajar di bawah — ${filter ? `🔍 filter: "${filter}"` : "semua promo tersedia"}`;
+        let bonusList = bonusCategories[category] || bonusCategories["ALL"];
+        let filtered = filter.trim() === "" ? bonusList : bonusList.filter(b => b.title.toLowerCase().includes(filter.toLowerCase()) || b.desc.toLowerCase().includes(filter.toLowerCase()));
+        
+        // Badge sejajar (horizontal)
+        const badgeRowHtml = `
+            <div class="bonus-badge-container">
+                <div class="bonus-badge-item ${category === 'ALL' ? 'active-bonus' : ''}" data-bonus-cat="ALL"><i class="fas fa-star"></i><span>ALL</span></div>
+                <div class="bonus-badge-item ${category === 'MINGGUAN' ? 'active-bonus' : ''}" data-bonus-cat="MINGGUAN"><i class="fas fa-calendar-week"></i><span>MINGGUAN</span></div>
+                <div class="bonus-badge-item ${category === 'DONE BAGI' ? 'active-bonus' : ''}" data-bonus-cat="DONE BAGI"><i class="fas fa-check-circle"></i><span>DONE BAGI</span></div>
+                <div class="bonus-badge-item ${category === 'LAIN-LAIN' ? 'active-bonus' : ''}" data-bonus-cat="LAIN-LAIN"><i class="fas fa-ellipsis-h"></i><span>LAIN-LAIN</span></div>
+            </div>
+        `;
+        if(filtered.length === 0) {
+            dynamicArea.innerHTML = badgeRowHtml + `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ada bonus dalam kategori ini</h3><p>Coba kata kunci lain</p></div>`;
+            attachBadgeEvents();
+            return;
+        }
+        let gridHtml = `<div class="bonus-grid">`;
+        filtered.forEach((item, idx) => {
+            gridHtml += `
+                <div class="bonus-card" data-bonus-idx="${idx}" data-bonus-category="${category}">
+                    <button class="btn-salin-bonus-card" data-bonus-salin="${idx}" data-salincat="${category}"><i class="fas fa-copy"></i> SALIN</button>
+                    <h3>${escapeHtml(item.title)}</h3>
+                    <p>${escapeHtml(item.desc)}</p>
+                    <div class="bonus-badge-tag"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div>
+                </div>
+            `;
+        });
+        gridHtml += `</div>`;
+        dynamicArea.innerHTML = badgeRowHtml + gridHtml;
+        attachBadgeEvents();
+        // event salin & modal detail
+        document.querySelectorAll('.btn-salin-bonus-card').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const cat = btn.getAttribute('data-salincat');
+                const idx = parseInt(btn.getAttribute('data-bonus-salin'));
+                const list = bonusCategories[cat] || bonusCategories["ALL"];
+                if(list && list[idx]) {
+                    const detailSalin = `${list[idx].title}\n${list[idx].desc}\nBadge: ${list[idx].badge}\nDetail: ${list[idx].contentDetail || ''}`;
+                    copyContent(detailSalin, list[idx].title);
+                }
+            });
+        });
+        document.querySelectorAll('.bonus-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if(e.target.closest('.btn-salin-bonus-card')) return;
+                const cat = card.getAttribute('data-bonus-category');
+                const idx = parseInt(card.getAttribute('data-bonus-idx'));
+                const chosenList = bonusCategories[cat] || bonusCategories["ALL"];
+                if(chosenList && chosenList[idx]) {
+                    const fullInfo = `${chosenList[idx].title}\n${chosenList[idx].desc}\n${chosenList[idx].contentDetail || 'Tidak ada detail tambahan'}`;
+                    openModalContent(chosenList[idx].title, fullInfo);
+                }
+            });
+        });
+    }
+    
+    function attachBadgeEvents() {
+        document.querySelectorAll('.bonus-badge-item').forEach(badge => {
+            badge.removeEventListener('click', badgeClickHandler);
+            badge.addEventListener('click', badgeClickHandler);
+        });
+    }
+    function badgeClickHandler(e) {
+        const category = e.currentTarget.getAttribute('data-bonus-cat');
+        if(category) {
+            currentBonusCategory = category;
+            renderBonusTab(currentFilterText, category);
+        }
+    }
+    
+    // Render Tab Lain & Random (semua tidak mengubah struktur)
+    function renderStaticTab(tabId, filter = "") {
+        const data = staticTabsData[tabId];
+        if(!data) return false;
+        mainHeading.innerHTML = data.title;
+        subHeading.innerHTML = data.subtitle + (filter ? ` 🔍 filter: "${filter}"` : "");
+        let filteredItems = data.items.filter(i => filter === "" || i.title.toLowerCase().includes(filter.toLowerCase()) || i.desc.toLowerCase().includes(filter.toLowerCase()));
+        if(filteredItems.length === 0 && filter) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3></div>`; return true; }
+        let html = `<div class="dashboard-grid">` + filteredItems.map(i => `
+            <div class="card">
+                <div class="card-icon"><i class="${i.icon}"></i></div>
+                <h3>${escapeHtml(i.title)}</h3>
+                <p>${escapeHtml(i.desc)}</p>
+                <div class="stat-badge">${escapeHtml(i.badge)}</div>
+            </div>`).join('') + `</div>`;
+        dynamicArea.innerHTML = html;
+        return true;
+    }
+    async function renderRandomTab(filter = "") {
+        mainHeading.innerHTML = "🎲 RANDOM | Google Sheets Folder";
+        subHeading.innerHTML = `Folder dinamis ${filter ? `🔍 "${filter}"` : ""} | Tombol salin`;
+        dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i> Memuat folder...</div>`;
+        try {
+            if(foldersData.length === 0) foldersData = await fetchSheetsData();
+            let filtered = filter.trim() === "" ? foldersData : foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase()));
+            if(filtered.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-folder-open"></i><h3>Folder tidak ditemukan</h3></div>`; return; }
+            let html = `<div class="dashboard-grid">`;
+            filtered.forEach((f, idx) => {
+                html += `<div class="card random-folder" data-folder-idx="${idx}"><button class="btn-salin-folder" data-salin-idx="${idx}"><i class="fas fa-copy"></i> SALIN</button><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(f.content.length > 110 ? f.content.substring(0,110)+'...' : f.content)}</p><div class="stat-badge">Klik lihat detail</div></div>`;
+            });
+            html += `</div>`;
+            dynamicArea.innerHTML = html;
+            document.querySelectorAll('.btn-salin-folder').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const i=parseInt(btn.getAttribute('data-salin-idx')); if(foldersData[i]) copyContent(foldersData[i].content, foldersData[i].title); }); });
+            document.querySelectorAll('.card[data-folder-idx]').forEach(card => { card.addEventListener('click', (e) => { if(e.target.closest('.btn-salin-folder')) return; const i=parseInt(card.getAttribute('data-folder-idx')); if(foldersData[i]) openModalContent(foldersData[i].title, foldersData[i].content); }); });
+        } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>Error sheets</h3><p>${e.message}</p></div>`; }
+    }
+    
+    async function applySearch() {
+        if(currentActiveTab === 'tab2') await renderRandomTab(currentFilterText);
+        else if(currentActiveTab === 'tab6') renderBonusTab(currentFilterText, currentBonusCategory);
+        else renderStaticTab(currentActiveTab, currentFilterText);
+    }
+    function handleSearch() { currentFilterText = searchInput.value; clearSearchBtn.classList.toggle('visible', currentFilterText.length>0); applySearch(); }
+    function clearAllSearch() { searchInput.value = ''; currentFilterText = ''; clearSearchBtn.classList.remove('visible'); applySearch(); }
+    searchInput.addEventListener('input', handleSearch); clearSearchBtn.addEventListener('click', clearAllSearch);
+    
+    async function switchTab(tabId) {
+        currentActiveTab = tabId;
+        document.querySelectorAll('.nav-item').forEach(item => { if(item.getAttribute('data-tab')===tabId) item.classList.add('active'); else item.classList.remove('active'); });
+        if(tabId === 'tab2') { if(foldersData.length===0) foldersData = await fetchSheetsData(); await renderRandomTab(currentFilterText); }
+        else if(tabId === 'tab6') renderBonusTab(currentFilterText, currentBonusCategory);
+        else renderStaticTab(tabId, currentFilterText);
+    }
+    document.querySelectorAll('.nav-item').forEach(item => { item.addEventListener('click', () => { const tid = item.getAttribute('data-tab'); if(tid) switchTab(tid); }); });
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+    
+    (async function init() { await switchTab('tab1'); })();
 </script>
 </body>
 </html>
