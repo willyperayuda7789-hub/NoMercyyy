@@ -516,19 +516,22 @@ body {
   border-left: 5px solid #ff8a8a;
 }
 
-/* ========= STYLE KHUSUS UNTUK KOLOM BONUS - 3 BADGE HORIZONTAL ========= */
+/* ========= STYLE KHUSUS UNTUK KOLOM BONUS - BADGE KE SAMPING (HORIZONTAL) ========= */
 .bonus-wrapper {
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 
-/* 3 BADGE SEJAJAR HORIZONTAL */
+/* BADGE ROW - DIPAKSA KE SAMPING, TIDAK TURUN KE BAWAH */
 .bonus-badge-row {
   display: flex;
+  flex-direction: row;  /* BARIS/KE SAMPING */
   gap: 20px;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: stretch;
+  flex-wrap: nowrap;  /* JANGAN TURUN KE BAWAH */
+  overflow-x: auto;   /* SCROLL HORIZONTAL JIKA TERLALU BANYAK */
 }
 
 .bonus-badge {
@@ -566,7 +569,7 @@ body {
   color: rgba(255,255,255,0.95);
 }
 
-/* Style teks badge 2 baris seperti gambar */
+/* Style teks badge 2 baris */
 .badge-line-1 {
   font-weight: 800;
   font-size: 1.2rem;
@@ -603,7 +606,6 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Header halaman */
 .bonus-page-header {
   display: flex;
   justify-content: space-between;
@@ -659,7 +661,6 @@ body {
   background: linear-gradient(135deg, #ef4444, #dc2626);
 }
 
-/* Konten yang bisa diedit */
 .bonus-content-display {
   line-height: 1.8;
   color: #e2e8f0;
@@ -740,6 +741,7 @@ body {
   text-align: center;
 }
 
+/* RESPONSIVE - TETAP KE SAMPING, GUNAKAN SCROLL */
 @media (max-width: 768px) {
   .sidebar { width: 240px; }
   .main-content { padding: 16px; }
@@ -747,9 +749,14 @@ body {
   .search-input:focus { width: 220px; }
   .page-title h1 { font-size: 1.4rem; }
   .page-title p { font-size: 0.75rem; }
-  .bonus-badge { min-width: 150px; padding: 15px 10px; }
-  .badge-line-1 { font-size: 1rem; }
-  .badge-line-2 { font-size: 0.7rem; }
+  .bonus-badge-row {
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  .bonus-badge {
+    min-width: 180px;
+    flex: none;
+  }
 }
 </style>
 </head>
@@ -963,7 +970,7 @@ let isEditModeActive = false;
 
 function renderBonusTab() {
   mainHeading.innerHTML = "🎁 KOLOM BONUS";
-  subHeading.innerHTML = "SCATTER | BUY & FREE | SUPER SCATTER";
+  subHeading.innerHTML = "3 BADGE EVENT - SCATTER | BUY & FREE | SUPER SCATTER";
   
   let html = `<div class="bonus-wrapper">
     <div class="bonus-badge-row">`;
@@ -1153,7 +1160,7 @@ async function fetchDataFromGoogleSheets() {
       }
     }
     return dataRows;
-  } catch(e) { console.error(e); throw new Error('Gagal ambil data dari Google Sheets'); }
+  } catch(e) { console.error(e); return []; }
 }
 
 function parseCSV(csvText) {
