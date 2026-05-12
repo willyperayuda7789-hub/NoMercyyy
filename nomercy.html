@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar + 4 Badge Bonus | Live Search Semua Kolom</title>
+<title>7 Kolom Sidebar + Bonus All dari Google Sheets (Fix Klik)</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -269,7 +269,7 @@ background: #ef4444;
 color: white;
 }
 
-/* Grid card */
+/* Grid card untuk tab random dan dashboard */
 .dashboard-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -516,7 +516,7 @@ background: rgba(220, 38, 38, 0.8);
 border-left: 5px solid #ff8a8a;
 }
 
-/* ========= 4 BADGE BONUS KHUSUS DI TAB BONUS ========= */
+/* ========= 4 BADGE BONUS (khusus tab BONUS) ========= */
 .bonus-badge-container {
 margin-bottom: 24px;
 display: none;
@@ -570,7 +570,7 @@ background: linear-gradient(135deg, #2c3e66, #1e2a47);
 color: white;
 }
 
-/* Grid bonus 4 kolom */
+/* Grid bonus untuk konten dari Google Sheets (BONUS ALL) */
 .bonus-grid {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
@@ -682,7 +682,7 @@ font-weight: 600;
 <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
 </div>
 <div class="sidebar-footer">
-<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | <strong>Garis pemisah</strong> | Tombol SALIN 0.9rem | 🔍 Pencarian untuk SEMUA kolom | <i class="fas fa-gift"></i> Tab BONUS punya 4 badge (ALL, MINGGUAN, DONE BAGI, LAIN-LAIN)
+<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | Tombol SALIN berfungsi | Bonus ALL dari Google Sheets
 </div>
 </aside>
 
@@ -690,7 +690,7 @@ font-weight: 600;
 <div class="content-header">
 <div class="page-title">
 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-<p id="subHeading">Live search tersedia di semua kolom | Teks berada di posisi tengah</p>
+<p id="subHeading">Live search tersedia di semua kolom</p>
 </div>
 <div class="action-buttons">
 <div class="search-wrapper">
@@ -701,7 +701,7 @@ font-weight: 600;
 </div>
 </div>
 
-<!-- Container untuk 4 badge bonus (hanya muncul di tab BONUS) -->
+<!-- Container untuk badge bonus khusus tab BONUS -->
 <div id="bonusBadgeContainer" class="bonus-badge-container">
 <div class="bonus-badge-bar">
 <div class="bonus-badge active-bonus" data-bonus-tab="all"><i class="fas fa-layer-group"></i> BONUS ALL</div>
@@ -717,7 +717,7 @@ font-weight: 600;
 </main>
 </div>
 
-<!-- MODAL UNTUK MENAMPILKAN ISI FOLDER -->
+<!-- MODAL -->
 <div id="folderModal" class="modal-overlay">
 <div class="modal-container">
 <div class="modal-header">
@@ -726,7 +726,7 @@ font-weight: 600;
 </div>
 <div class="modal-body" id="modalBody">
 <div class="modal-content-text" id="modalContentText">
-Isi folder akan ditampilkan di sini...
+Isi folder / detail bonus akan ditampilkan di sini...
 </div>
 <div class="esc-hint">
 <kbd>ESC</kbd> Tekan ESC untuk menutup
@@ -740,124 +740,326 @@ Isi folder akan ditampilkan di sini...
 <script>
 // ======================= KONFIGURASI GOOGLE SHEETS =======================
 const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
-const SHEET_NAME = 'PK RANDOM';
+const SHEET_BONUS_ALL = 'BONUS ALL';
+const SHEET_RANDOM = 'PK RANDOM';
 
 let foldersData = [];
+let bonusAllData = [];
 let currentFilterText = "";
 let currentActiveTab = "tab1";
-let currentBonusSubTab = "all"; // all, mingguan, done, lain
+let currentBonusSubTab = "all";
 
-// Data statis untuk semua tab (SESUAI ASLINYA, TIDAK DIRUBAH)
+// Data statis untuk tab lain
 const staticTabsData = {
-tab1: {
-title: "🏠 Dashboard Utama",
-subtitle: "Gambaran sistem & metrik — background full size 100%",
-items: [
+tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik — background full size 100%", items: [
 { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
 { icon: "fas fa-users", title: "Pengguna Aktif", desc: "1,284 pengguna online sekarang", badge: "Hari ini" },
 { icon: "fas fa-calendar-alt", title: "Jadwal Proyek", desc: "3 tenggat mendekati deadline", badge: "Prioritas" }
-]
-},
-tab3: {
-title: "✉️ EVENT LINETOGEL",
-subtitle: "Inbox & komunikasi tim — pesan terkini",
-items: [
+] },
+tab3: { title: "✉️ EVENT LINETOGEL", subtitle: "Inbox & komunikasi tim — pesan terkini", items: [
 { icon: "fas fa-inbox", title: "Pesan Masuk", desc: "Anda memiliki 12 pesan belum dibaca", badge: "12 baru" },
 { icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif di proyek utama", badge: "Balas" },
 { icon: "fas fa-bell", title: "Notifikasi", desc: "Pengingat meeting jam 14:00 WIB", badge: "Segera" }
-]
-},
-tab4: {
-title: "✅ GALLERY GAMBAR CS",
-subtitle: "Daftar tugas & kolaborasi — progres terkini",
-items: [
+] },
+tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Daftar tugas & kolaborasi — progres terkini", items: [
 { icon: "fas fa-list-check", title: "Task Sprint", desc: "8 tugas selesai dari 21 tugas", badge: "Selesai 38%" },
 { icon: "fas fa-code-branch", title: "Repository", desc: "Pull request menunggu review", badge: "2 PR" },
 { icon: "fas fa-clock", title: "Deadline", desc: "Sprint 23 berakhir Jumat ini", badge: "H-3" }
-]
-},
-tab5: {
-title: "👥 ALL ABOUT QRIS",
-subtitle: "Struktur tim — kolaborasi solid",
-items: [
+] },
+tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi solid", items: [
 { icon: "fas fa-user-plus", title: "Anggota Aktif", desc: "12 anggota online · 4 sedang rapat", badge: "Online" },
 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
 { icon: "fas fa-handshake", title: "Kolaborasi", desc: "Integrasi dengan tim desain", badge: "Sinergi" }
-]
-},
-tab6: {
-title: "⚙️ BONUS",
-subtitle: "Pilih kategori bonus melalui badge di atas | 4 kolom bonus setiap halaman",
-items: [] // tidak dipakai karena khusus render bonus dengan grid sendiri
-},
-tab7: {
-title: "❓ JADWAL TOGEL",
-subtitle: "Panduan & support — selalu siap membantu",
-items: [
-{ icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi sidebar 7 kolom dengan background 100% full", badge: "PDF" },
+] },
+tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge | BONUS ALL dari Google Sheets", items: [] },
+tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap membantu", items: [
+{ icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi sidebar 7 kolom", badge: "PDF" },
 { icon: "fas fa-headset", title: "Dukungan Teknis", desc: "Chat dengan agen support 24/7", badge: "Live" },
 { icon: "fas fa-video", title: "Tutorial Video", desc: "Walkthrough antarmuka lengkap", badge: "Tonton" }
-]
-}
+] }
 };
 
-// Data BONUS untuk 4 badge (BONUS ALL, MINGGUAN, DONE BAGI, LAIN-LAIN) masing-masing 4 kolom
-const bonusDataMap = {
-all: {
-title: "🎯 BONUS ALL",
-subtitle: "Semua bonus terbaik yang bisa diklaim",
-columns: [
-{ icon: "fas fa-gem", name: "WELCOME BONUS", value: "100% + 200K", detail: "Bonus member baru hingga 100% maksimal 200K. Syarat TO 15x.", extra: "Minimal deposit 50K" },
-{ icon: "fas fa-chart-line", name: "DEPO HARIAN", value: "20% EXTRA", detail: "Bonus deposit harian 20% setiap hari. Maksimal 100K.", extra: "Kode: EXTRA20" },
-{ icon: "fas fa-rocket", name: "CASHBACK MINGGUAN", value: "5% - 10%", detail: "Cashback kekalahan 5% (minimal kekalahan 500K) hingga 10% (VIP).", extra: "Dibagikan setiap Senin" },
-{ icon: "fas fa-trophy", name: "BONUS REFERRAL", value: "3% SEUMUR HIDUP", detail: "Dapatkan 3% dari total deposit downline aktif.", extra: "Tidak ada batasan maksimal" }
-]
-},
-mingguan: {
-title: "📆 BONUS MINGGUAN",
-subtitle: "Klaim special tiap pekan, jangan sampai terlewat",
-columns: [
-{ icon: "fas fa-percent", name: "TURNOVER MINGGUAN", value: "0.7% TANPA BATAS", detail: "Bonus rollingan mingguan 0.7% dari total turnover.", extra: "Otomatis masuk akun" },
-{ icon: "fas fa-gift", name: "BONUS SABTU-MINGGU", value: "EXTRA 10%", detail: "Deposit weekend dapat bonus 10% (max 150K).", extra: "Minimal deposit 100K" },
-{ icon: "fas fa-chart-simple", name: "TOP WINNER", value: "2 JUTA", detail: "Pemain dengan winrate tertinggi setiap minggu mendapat bonus 2 Juta.", extra: "Event live" },
-{ icon: "fas fa-arrow-trend-up", name: "STREAK BONUS", value: "NAIK KELAS", detail: "Main 7 hari berturut-turut, dapat free chip 50K.", extra: "Tidak perlu klaim" }
-]
-},
-done: {
-title: "✅ DONE BAGI",
-subtitle: "Bonus instan untuk penyelesaian misi & share",
-columns: [
-{ icon: "fas fa-check-double", name: "SHARE MEDSOS", value: "25K FREE", detail: "Share postingan bonus & tag teman, langsung dapat 25K.", extra: "Wajib screenshot" },
-{ icon: "fas fa-star", name: "MISI HARIAN DONE", value: "UP TO 50K", detail: "Selesaikan 5 misi harian, dapat bonus bertahap hingga 50K.", extra: "Reset 00:00" },
-{ icon: "fas fa-users", name: "AJAK TEMAN DONE", value: "BONUS 75K", detail: "Setiap teman yang deposit pertama, Anda dan teman dapat 75K masing-masing.", extra: "Max 5 teman" },
-{ icon: "fas fa-check-circle", name: "VERIFIKASI DONE", value: "20K INSTAN", detail: "Verifikasi email & nomor telepon → bonus 20K langsung masuk.", extra: "One time only" }
-]
-},
-lain: {
-title: "✨ LAIN-LAIN",
-subtitle: "Bonus spesial event, promo terbatas & extra menarik",
-columns: [
-{ icon: "fas fa-calendar-day", name: "BONUS ULANG TAHUN", value: "200K + KUE", detail: "Bonus spesial user yang berulang tahun pada bulan ini. Minimal pernah deposit.", extra: "Kirim KTP ke CS" },
-{ icon: "fas fa-gamepad", name: "EVENT SCATTER", value: "FREE SPIN 50x", detail: "Dapatkan scatter & kumpulkan untuk free spin bonus hingga 50x.", extra: "Event berlangsung 1 bulan" },
-{ icon: "fas fa-dice-d6", name: "LUCKY DRAW MINGGUAN", value: "JACKPOT 1JT", detail: "Setiap 50k deposit dapat 1 kupon lucky draw, undian setiap minggu.", extra: "Hadiah utama 1 Juta" },
-{ icon: "fas fa-hourglass-half", name: "JAM JACKPOT", value: "DOUBLE BONUS", detail: "Pada jam 19:00-21:00, bonus cashback & rollingan jadi double.", extra: "Periode terbatas" }
-]
-}
+const bonusStaticMap = {
+mingguan: { title: "📆 BONUS MINGGUAN", subtitle: "Klaim special tiap pekan", columns: [
+{ icon: "fas fa-percent", name: "TURNOVER MINGGUAN", value: "0.7% TANPA BATAS", detail: "Bonus rollingan mingguan 0.7%", extra: "Otomatis masuk" },
+{ icon: "fas fa-gift", name: "BONUS SABTU-MINGGU", value: "EXTRA 10%", detail: "Deposit weekend dpt 10%", extra: "Minimal 100K" }
+] },
+done: { title: "✅ DONE BAGI", subtitle: "Bonus instan", columns: [
+{ icon: "fas fa-check-double", name: "SHARE MEDSOS", value: "25K FREE", detail: "Share & tag teman", extra: "Screenshot" },
+{ icon: "fas fa-star", name: "MISI HARIAN", value: "UP TO 50K", detail: "Selesaikan 5 misi", extra: "Reset 00:00" }
+] },
+lain: { title: "✨ LAIN-LAIN", subtitle: "Bonus spesial", columns: [
+{ icon: "fas fa-calendar-day", name: "BONUS ULANG TAHUN", value: "200K", detail: "Bonus ulang tahun", extra: "Kirim KTP" },
+{ icon: "fas fa-gamepad", name: "EVENT SCATTER", value: "FREE SPIN", detail: "Kumpulkan scatter", extra: "Event terbatas" }
+] }
 };
 
-const dynamicArea = document.getElementById("dynamicContentArea");
-const mainHeading = document.getElementById("mainHeading");
-const subHeading = document.getElementById("subHeading");
-const modal = document.getElementById("folderModal");
-const modalTitle = document.getElementById("modalTitle");
-const modalContentText = document.getElementById("modalContentText");
-const closeModalBtn = document.getElementById("closeModalBtn");
-const toast = document.getElementById("copyToast");
-const searchInput = document.getElementById("liveSearchInput");
-const clearSearchBtn = document.getElementById("clearSearchBtn");
-const bonusBadgeContainer = document.getElementById("bonusBadgeContainer");
+// Fungsi fetch data dari sheet
+async function fetchSheetData(sheetName) {
+try {
+const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
+const response = await fetch(csvUrl, { cache: 'no-store' });
+if (!response.ok) throw new Error(`HTTP ${response.status}`);
+const csvText = await response.text();
+const rows = parseCSV(csvText);
+let dataRows = [];
+for (let i = 0; i < rows.length; i++) {
+if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+dataRows.push({ title: rows[i][0].trim(), content: rows[i][1] ? rows[i][1].trim() : "" });
+}
+}
+return dataRows;
+} catch(e) { console.error(`Error fetch ${sheetName}:`, e); throw new Error(`Gagal ambil data dari sheet ${sheetName}`); }
+}
 
-// Toast & copy functions
+function parseCSV(csvText) {
+const lines = []; let cur = '', inQ = false;
+for(let i=0; i<csvText.length; i++) {
+const ch = csvText[i];
+if(ch === '"') inQ = !inQ;
+if(ch === '\n' && !inQ) { lines.push(cur); cur = ''; } else cur += ch;
+}
+if(cur) lines.push(cur);
+return lines.map(line => {
+if(!line.trim()) return [];
+const row = []; let c = '', inQ2 = false;
+for(let i=0; i<line.length; i++) {
+const x = line[i];
+if(x === '"') inQ2 = !inQ2;
+else if(x === ',' && !inQ2) { row.push(c.trim().replace(/^"|"$/g, '').replace(/""/g, '"')); c = ''; }
+else c += x;
+}
+row.push(c.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
+return row;
+});
+}
+
+async function renderBonusAllFromSheet() {
+if (bonusAllData.length === 0) {
+try {
+bonusAllData = await fetchSheetData(SHEET_BONUS_ALL);
+} catch(e) {
+dynamicArea.innerHTML = `<div class="error-message card"><h3>Gagal memuat BONUS ALL</h3><p>${e.message}</p><p>Pastikan sheet bernama "BONUS ALL" ada dan berisi data.</p></div>`;
+return;
+}
+}
+const items = bonusAllData.slice(0, 4);
+if (items.length === 0) {
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-database"></i><h3>Belum ada data</h3><p>Sheet BONUS ALL kosong. Isi kolom A (judul) dan B (deskripsi).</p></div>`;
+return;
+}
+let columnsHtml = `<div class="bonus-grid">`;
+items.forEach((item, idx) => {
+columnsHtml += `
+<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
+<div class="bonus-card-header"><div class="bonus-icon"><i class="fas fa-gift"></i></div><h3>${escapeHtml(item.title)}</h3></div>
+<div class="bonus-value">✨ ${escapeHtml(item.title.length > 30 ? item.title.substring(0,28)+'..' : item.title)}</div>
+<div class="bonus-desc">${escapeHtml(item.content.length > 100 ? item.content.substring(0,100)+'...' : item.content)}</div>
+<div class="bonus-status"><i class="fas fa-info-circle"></i> Klik untuk detail</div>
+</div>`;
+});
+columnsHtml += `</div>`;
+dynamicArea.innerHTML = columnsHtml;
+attachBonusCardEvents();
+}
+
+function attachBonusCardEvents() {
+document.querySelectorAll('.bonus-card').forEach(card => {
+card.removeEventListener('click', bonusCardHandler);
+card.addEventListener('click', bonusCardHandler);
+});
+}
+function bonusCardHandler(e) {
+const title = this.getAttribute('data-bonus-title') || 'Detail Bonus';
+const content = this.getAttribute('data-bonus-content') || 'Tidak ada deskripsi tambahan.';
+openModal(title, content);
+}
+
+function renderBonusStaticSubTab(subTab) {
+const data = bonusStaticMap[subTab];
+if (!data) return;
+mainHeading.innerHTML = data.title;
+subHeading.innerHTML = data.subtitle + " | 4 kolom promo (statis)";
+let columnsHtml = `<div class="bonus-grid">`;
+data.columns.forEach(col => {
+columnsHtml += `
+<div class="bonus-card-static" data-bonus-detail='${JSON.stringify(col)}'>
+<div class="bonus-card-header"><div class="bonus-icon"><i class="${col.icon}"></i></div><h3>${escapeHtml(col.name)}</h3></div>
+<div class="bonus-value">${escapeHtml(col.value)}</div>
+<div class="bonus-desc">${escapeHtml(col.detail)}</div>
+<div class="bonus-status">${escapeHtml(col.extra)}</div>
+</div>`;
+});
+columnsHtml += `</div>`;
+dynamicArea.innerHTML = columnsHtml;
+attachStaticBonusEvents();
+}
+function attachStaticBonusEvents() {
+document.querySelectorAll('.bonus-card-static').forEach(card => {
+card.removeEventListener('click', staticBonusHandler);
+card.addEventListener('click', staticBonusHandler);
+});
+}
+function staticBonusHandler(e) {
+const raw = this.getAttribute('data-bonus-detail');
+if(raw) try {
+const obj = JSON.parse(raw);
+openModal(obj.name, `🎁 ${obj.name}\n💰 Nilai: ${obj.value}\n📌 Detail: ${obj.detail}\n✨ Catatan: ${obj.extra}`);
+} catch(e) {}
+}
+
+async function renderBonusPage() {
+mainHeading.innerHTML = "⚙️ BONUS";
+subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()} | ${currentBonusSubTab === 'all' ? 'Data BONUS ALL dari Google Sheets (4 kolom)' : 'Promo statis'}`;
+bonusBadgeContainer.classList.add("visible");
+if (currentBonusSubTab === 'all') {
+await renderBonusAllFromSheet();
+} else {
+renderBonusStaticSubTab(currentBonusSubTab);
+}
+}
+
+async function renderRandomTabWithFilter(filter = "") {
+mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
+subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN`;
+bonusBadgeContainer.classList.remove("visible");
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat folder...</p></div>`;
+try {
+if(foldersData.length === 0) foldersData = await fetchSheetData(SHEET_RANDOM);
+let filtered = foldersData;
+if(filter.trim() !== "") {
+filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase()));
+}
+if(filtered.length === 0) {
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada folder dengan kata kunci "${escapeHtml(filter)}"</p></div>`;
+return;
+}
+let cardsHtml = "";
+filtered.forEach((f, idx) => {
+const short = f.content.length > 120 ? f.content.substring(0,120)+'...' : f.content;
+// Gunakan idx dari filtered sebagai identifier sementara, tapi kita simpan original index jika perlu
+cardsHtml += `<div class="card random-folder" data-folder-title="${escapeHtml(f.title)}" data-folder-content="${escapeHtml(f.content)}">
+<button class="btn-salin-folder" data-salin-title="${escapeHtml(f.title)}" data-salin-content="${escapeHtml(f.content)}"><i class="fas fa-copy"></i> SALIN</button>
+<h3>${escapeHtml(f.title)}</h3>
+<p>${escapeHtml(short) || 'Klik untuk isi lengkap'}</p>
+<div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik buka folder</div>
+</div>`;
+});
+dynamicArea.innerHTML = cardsHtml;
+// Event untuk tombol SALIN
+document.querySelectorAll('.btn-salin-folder').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+const title = btn.getAttribute('data-salin-title') || 'Folder';
+const content = btn.getAttribute('data-salin-content') || '';
+copyContentOnly(content, title);
+});
+});
+// Event untuk membuka modal (klik kartu)
+document.querySelectorAll('.card.random-folder').forEach(card => {
+card.addEventListener('click', (e) => {
+if(e.target.closest('.btn-salin-folder')) return;
+const title = card.getAttribute('data-folder-title') || 'Folder';
+const content = card.getAttribute('data-folder-content') || '';
+openModal(title, content);
+});
+});
+} catch(err) {
+dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.message}</p></div>`;
+}
+}
+
+function renderStaticTabWithFilter(tabId, filter = "") {
+const data = staticTabsData[tabId];
+if(!data) return false;
+mainHeading.innerHTML = data.title;
+const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : "";
+subHeading.innerHTML = data.subtitle + filterInfo;
+bonusBadgeContainer.classList.remove("visible");
+let filteredItems = data.items;
+if(filter.trim() !== "") {
+filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase()));
+}
+if(filteredItems.length === 0 && filter) {
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}"</p></div>`;
+return true;
+}
+let cardsHTML = "";
+filteredItems.forEach(item => {
+cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`;
+});
+dynamicArea.innerHTML = cardsHTML;
+return true;
+}
+
+async function applyLiveSearch() {
+const filter = currentFilterText;
+if(currentActiveTab === 'tab2') {
+await renderRandomTabWithFilter(filter);
+} else if(currentActiveTab === 'tab6') {
+await renderBonusPage();
+} else {
+renderStaticTabWithFilter(currentActiveTab, filter);
+}
+}
+
+function handleSearchInput() {
+currentFilterText = searchInput.value;
+if(currentFilterText.length > 0) clearSearchBtn.classList.add('visible');
+else clearSearchBtn.classList.remove('visible');
+applyLiveSearch();
+}
+function clearSearch() {
+searchInput.value = '';
+currentFilterText = '';
+clearSearchBtn.classList.remove('visible');
+applyLiveSearch();
+}
+
+function bindBonusBadgeEvents() {
+document.querySelectorAll('.bonus-badge').forEach(badge => {
+badge.removeEventListener('click', bonusClickHandler);
+badge.addEventListener('click', bonusClickHandler);
+});
+}
+async function bonusClickHandler(e) {
+const tabValue = this.getAttribute('data-bonus-tab');
+if(tabValue) {
+currentBonusSubTab = tabValue;
+document.querySelectorAll('.bonus-badge').forEach(b => b.classList.remove('active-bonus'));
+this.classList.add('active-bonus');
+if(currentActiveTab === 'tab6') {
+await renderBonusPage();
+}
+}
+}
+
+async function onTabClick(tabId) {
+currentActiveTab = tabId;
+document.querySelectorAll('.nav-item').forEach(item => {
+if(item.getAttribute('data-tab') === tabId) item.classList.add('active');
+else item.classList.remove('active');
+});
+if(tabId === 'tab2') {
+if(foldersData.length === 0) foldersData = await fetchSheetData(SHEET_RANDOM).catch(e=>[]);
+await renderRandomTabWithFilter(currentFilterText);
+} else if(tabId === 'tab6') {
+await renderBonusPage();
+bindBonusBadgeEvents();
+} else {
+renderStaticTabWithFilter(tabId, currentFilterText);
+}
+}
+
+function bindNavEvents() {
+document.querySelectorAll('.nav-item').forEach(item => {
+item.addEventListener('click', () => {
+const tid = item.getAttribute('data-tab');
+if(tid) onTabClick(tid);
+});
+});
+}
+function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
 function showCopyToast(message) {
 toast.innerHTML = `<i class="fas fa-copy"></i>  ${message}`;
 toast.classList.add("show");
@@ -885,252 +1087,26 @@ modal.classList.add("active");
 document.body.style.overflow = "hidden";
 }
 function closeModal() { modal.classList.remove("active"); document.body.style.overflow = ""; }
+
+// DOM Elements
+const searchInput = document.getElementById("liveSearchInput");
+const clearSearchBtn = document.getElementById("clearSearchBtn");
+const dynamicArea = document.getElementById("dynamicContentArea");
+const mainHeading = document.getElementById("mainHeading");
+const subHeading = document.getElementById("subHeading");
+const modal = document.getElementById("folderModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalContentText = document.getElementById("modalContentText");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const toast = document.getElementById("copyToast");
+const bonusBadgeContainer = document.getElementById("bonusBadgeContainer");
+
 closeModalBtn.onclick = closeModal;
 modal.onclick = e => { if(e.target === modal) closeModal(); };
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
-
-// Fetch data from Google Sheets
-async function fetchDataFromGoogleSheets() {
-try {
-const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
-const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
-const csvText = await response.text();
-const rows = parseCSV(csvText);
-if (!rows.length) return [];
-const firstRow = rows[0];
-const isHeader = firstRow && firstRow.length >= 2 && (firstRow[0].toLowerCase().includes('judul') || firstRow[0].toLowerCase().includes('folder'));
-const startIdx = isHeader ? 1 : 0;
-let dataRows = [];
-for (let i = startIdx; i < rows.length; i++) {
-if (rows[i] && rows[i][0] && rows[i][0].trim()) {
-dataRows.push({ title: rows[i][0].trim(), content: rows[i][1] ? rows[i][1].trim() : "" });
-}
-}
-return dataRows;
-} catch(e) { console.error(e); throw new Error('Gagal ambil data dari Google Sheets'); }
-}
-function parseCSV(csvText) {
-const lines = []; let cur = '', inQ = false;
-for(let i=0; i<csvText.length; i++) {
-const ch = csvText[i];
-if(ch === '"') inQ = !inQ;
-if(ch === '\n' && !inQ) { lines.push(cur); cur = ''; } else cur += ch;
-}
-if(cur) lines.push(cur);
-return lines.map(line => {
-if(!line.trim()) return [];
-const row = []; let c = '', inQ2 = false;
-for(let i=0; i<line.length; i++) {
-const x = line[i];
-if(x === '"') inQ2 = !inQ2;
-else if(x === ',' && !inQ2) { row.push(c.trim().replace(/^"|"$/g, '').replace(/""/g, '"')); c = ''; }
-else c += x;
-}
-row.push(c.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
-return row;
-});
-}
-
-// RENDER BONUS PAGE dengan 4 badge dan 4 kolom
-function renderBonusPage() {
-const data = bonusDataMap[currentBonusSubTab];
-if (!data) return;
-mainHeading.innerHTML = data.title;
-subHeading.innerHTML = data.subtitle + " | 4 kolom bonus | Klik kartu untuk detail";
-bonusBadgeContainer.classList.add("visible");
-let columnsHtml = `<div class="bonus-grid">`;
-data.columns.forEach((col, idx) => {
-columnsHtml += `
-<div class="bonus-card" data-bonus-item='${JSON.stringify(col)}'>
-<div class="bonus-card-header">
-<div class="bonus-icon"><i class="${col.icon}"></i></div>
-<h3>${escapeHtml(col.name)}</h3>
-</div>
-<div class="bonus-value">${escapeHtml(col.value)}</div>
-<div class="bonus-desc">${escapeHtml(col.detail)}</div>
-<div class="bonus-status"><i class="fas fa-info-circle"></i> ${escapeHtml(col.extra)}</div>
-</div>`;
-});
-columnsHtml += `</div>`;
-dynamicArea.innerHTML = columnsHtml;
-document.querySelectorAll('.bonus-card').forEach(card => {
-card.addEventListener('click', (e) => {
-const raw = card.getAttribute('data-bonus-item');
-if (raw) {
-try {
-const bonus = JSON.parse(raw);
-const fullDetail = `🎁 ${bonus.name}\n💰 Nilai: ${bonus.value}\n📌 Detail: ${bonus.detail}\n✨ Catatan: ${bonus.extra}`;
-openModal(`${bonus.name} - Detail Bonus`, fullDetail);
-} catch(e) {}
-}
-});
-});
-}
-
-// RENDER UNTUK TAB STATIS (selain tab2 dan tab6)
-function renderStaticTabWithFilter(tabId, filter = "") {
-const data = staticTabsData[tabId];
-if(!data) return false;
-mainHeading.innerHTML = data.title;
-const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : "";
-subHeading.innerHTML = data.subtitle + filterInfo;
-bonusBadgeContainer.classList.remove("visible");
-let filteredItems = data.items;
-if(filter.trim() !== "") {
-filteredItems = data.items.filter(item =>
-item.title.toLowerCase().includes(filter.toLowerCase()) ||
-item.desc.toLowerCase().includes(filter.toLowerCase())
-);
-}
-if(filteredItems.length === 0 && filter) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}"</p><div class="stat-badge">Coba kata kunci lain</div></div>`;
-return true;
-}
-let cardsHTML = "";
-filteredItems.forEach(item => {
-cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`;
-});
-if(filter && filteredItems.length < data.items.length) {
-cardsHTML += `<div class="card"><div class="card-icon"><i class="fas fa-filter"></i></div><h3>🔍 ${filteredItems.length} hasil ditemukan</h3><p>Pencarian: "${escapeHtml(filter)}"</p><div class="stat-badge">Live Search</div></div>`;
-} else {
-cardsHTML += `<div class="card"><div class="card-icon"><i class="fas fa-expand"></i></div><h3>🖼️ Background FULL</h3><p>Garis pemisah judul & isi folder di setiap kartu</p><div class="stat-badge">Full Screen</div></div>`;
-}
-dynamicArea.innerHTML = cardsHTML;
-return true;
-}
-
-// RENDER TAB RANDOM (Google Sheets)
-async function renderRandomTabWithFilter(filter = "") {
-mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
-const filterText = filter ? ` | 🔍 Mencari: "${filter}"` : " | Gunakan kotak pencarian untuk filter folder";
-subHeading.innerHTML = `✨ Folder dinamis dari Google Sheets${filterText} | Tombol SALIN 0.9rem`;
-bonusBadgeContainer.classList.remove("visible");
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat folder...</p></div>`;
-try {
-if(foldersData.length === 0) foldersData = await fetchDataFromGoogleSheets();
-let filtered = foldersData;
-if(filter.trim() !== "") {
-filtered = foldersData.filter(f =>
-f.title.toLowerCase().includes(filter.toLowerCase()) ||
-f.content.toLowerCase().includes(filter.toLowerCase())
-);
-}
-if(filtered.length === 0) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada folder dengan kata kunci "${escapeHtml(filter)}"</p><div class="stat-badge">Coba kata lain</div></div>`;
-return;
-}
-let cardsHtml = "";
-for(let i=0; i<filtered.length; i++) {
-const f = filtered[i];
-const originalIdx = foldersData.findIndex(orig => orig.title === f.title && orig.content === f.content);
-const short = f.content.length > 120 ? f.content.substring(0,120)+'...' : f.content;
-cardsHtml += `<div class="card random-folder" data-folder-idx="${originalIdx}">
-<button class="btn-salin-folder" data-salin-idx="${originalIdx}"><i class="fas fa-copy"></i> SALIN</button>
-<h3>${escapeHtml(f.title)}</h3>
-<p>${escapeHtml(short) || 'Klik untuk isi lengkap'}</p>
-<div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik buka folder</div>
-</div>`;
-}
-if(filter && filtered.length) {
-cardsHtml += `<div class="card"><div class="card-icon"><i class="fas fa-search"></i></div><h3>🔍 ${filtered.length} folder ditemukan</h3><p>Pencarian: "${escapeHtml(filter)}"</p><div class="stat-badge">Live Search</div></div>`;
-} else {
-cardsHtml += `<div class="card"><div class="card-icon"><i class="fas fa-text-height"></i></div><h3>📏 Tombol SALIN 0.9rem</h3><p>Garis pemisah antara judul folder dan isi</p><div class="stat-badge">Folder dari Google Sheets</div></div>`;
-}
-dynamicArea.innerHTML = cardsHtml;
-document.querySelectorAll('.btn-salin-folder').forEach(btn => {
-btn.addEventListener('click', (e) => {
-e.stopPropagation();
-const idx = btn.getAttribute('data-salin-idx');
-if(idx && foldersData[parseInt(idx)]) copyContentOnly(foldersData[parseInt(idx)].content || "", foldersData[parseInt(idx)].title);
-});
-});
-document.querySelectorAll('.card[data-folder-idx]').forEach(card => {
-card.addEventListener('click', (e) => {
-if(e.target.closest('.btn-salin-folder')) return;
-const idx = card.getAttribute('data-folder-idx');
-if(idx && foldersData[parseInt(idx)]) openModal(foldersData[parseInt(idx)].title, foldersData[parseInt(idx)].content);
-});
-});
-} catch(err) {
-dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.message}</p></div>`;
-}
-}
-
-// Fungsi utama apply search
-async function applyLiveSearch() {
-const filter = currentFilterText;
-if(currentActiveTab === 'tab2') {
-await renderRandomTabWithFilter(filter);
-} else if(currentActiveTab === 'tab6') {
-renderBonusPage(); // bonus sudah punya filter? bonus tidak perlu filter bawaan, tapi tetap live search bisa diabaikan karena sudah punya badge
-} else {
-renderStaticTabWithFilter(currentActiveTab, filter);
-}
-}
-
-function handleSearchInput() {
-currentFilterText = searchInput.value;
-if(currentFilterText.length > 0) clearSearchBtn.classList.add('visible');
-else clearSearchBtn.classList.remove('visible');
-applyLiveSearch();
-}
-function clearSearch() {
-searchInput.value = '';
-currentFilterText = '';
-clearSearchBtn.classList.remove('visible');
-applyLiveSearch();
-}
 searchInput.addEventListener('input', handleSearchInput);
 clearSearchBtn.addEventListener('click', clearSearch);
 
-// Bonus badge handlers
-function bindBonusBadgeEvents() {
-document.querySelectorAll('.bonus-badge').forEach(badge => {
-badge.removeEventListener('click', bonusClickHandler);
-badge.addEventListener('click', bonusClickHandler);
-});
-}
-function bonusClickHandler(e) {
-const tabValue = this.getAttribute('data-bonus-tab');
-if(tabValue) {
-currentBonusSubTab = tabValue;
-document.querySelectorAll('.bonus-badge').forEach(b => b.classList.remove('active-bonus'));
-this.classList.add('active-bonus');
-if(currentActiveTab === 'tab6') {
-renderBonusPage();
-}
-}
-}
-
-// Navigasi tab
-async function onTabClick(tabId) {
-currentActiveTab = tabId;
-document.querySelectorAll('.nav-item').forEach(item => {
-if(item.getAttribute('data-tab') === tabId) item.classList.add('active');
-else item.classList.remove('active');
-});
-if(tabId === 'tab2') {
-if(foldersData.length === 0) foldersData = await fetchDataFromGoogleSheets().catch(e=>[]);
-await renderRandomTabWithFilter(currentFilterText);
-} else if(tabId === 'tab6') {
-renderBonusPage();
-bindBonusBadgeEvents();
-} else {
-renderStaticTabWithFilter(tabId, currentFilterText);
-}
-}
-function bindNavEvents() {
-document.querySelectorAll('.nav-item').forEach(item => {
-item.addEventListener('click', () => {
-const tid = item.getAttribute('data-tab');
-if(tid) onTabClick(tid);
-});
-});
-}
-function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
-
-// Inisialisasi
 (async function init() {
 bindNavEvents();
 await onTabClick('tab1');
