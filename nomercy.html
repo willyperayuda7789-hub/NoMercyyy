@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar + Bonus All (Card Bonus Seperti Gambar)</title>
+<title>7 Kolom Sidebar - Card Bonus Seperti Gambar (Tombol Sejajar)</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -34,7 +34,7 @@ position: relative;
 z-index: 2;
 }
 
-/* ========= SIDEBAR KIRI 7 KOLOM ========= */
+/* ========= SIDEBAR KIRI ========= */
 .sidebar {
 width: 280px;
 background: rgba(8, 16, 28, 0.85);
@@ -204,7 +204,7 @@ align-items: center;
 flex-shrink: 0;
 }
 
-/* SEARCH BOX - LIVE SEARCH */
+/* SEARCH BOX */
 .search-wrapper {
 position: relative;
 }
@@ -269,7 +269,7 @@ background: #ef4444;
 color: white;
 }
 
-/* Grid card untuk tab selain BONUS (ukuran normal - TIDAK BERUBAH) */
+/* Grid card untuk tab selain BONUS (TIDAK BERUBAH) */
 .dashboard-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -277,7 +277,7 @@ gap: 24px;
 margin-top: 12px;
 }
 
-/* Card Style untuk tab selain BONUS (ukuran normal - TIDAK BERUBAH) */
+/* Card Style untuk tab selain BONUS (TIDAK BERUBAH) */
 .card {
 background: rgba(18, 28, 45, 0.85);
 border-radius: 28px;
@@ -571,62 +571,55 @@ background: linear-gradient(135deg, #2c3e66, #1e2a47);
 color: white;
 }
 
-/* ========= KHUSUS BONUS - SEPERTI GAMBAR (UKURAN BESAR, 4 KOLOM, JARAK LEGA) ========= */
+/* ========= KHUSUS BONUS - SEPERTI GAMBAR (UKURAN BESAR, 4 KOLOM, TOMBOL SEJAJAR KIRI-KANAN) ========= */
 .bonus-grid {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
-gap: 32px;
+gap: 28px;
 margin-top: 20px;
 }
 
 /* Card bonus UKURAN BESAR seperti gambar */
 .bonus-card, .bonus-card-static {
 background: rgba(18, 28, 45, 0.92);
-border-radius: 28px;
-padding: 28px;
+border-radius: 24px;
+padding: 24px;
 transition: all 0.3s ease;
 border: 1px solid rgba(255, 255, 255, 0.2);
-box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
+box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
 display: flex;
 flex-direction: column;
 cursor: pointer;
-min-height: 360px;
+min-height: 320px;
+position: relative;
 }
 
 .bonus-card:hover, .bonus-card-static:hover {
-transform: translateY(-8px);
+transform: translateY(-6px);
 background: rgba(30, 45, 70, 0.97);
 border-color: rgba(59, 130, 246, 0.6);
-box-shadow: 0 30px 45px -12px rgba(0, 0, 0, 0.5);
+box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.45);
 }
 
-/* Judul card - BESAR dan TEBAL seperti gambar */
+/* Judul card - dengan border-bottom seperti gambar */
 .bonus-card h3, .bonus-card-static h3 {
-font-size: 1.45rem;
+font-size: 1.35rem;
 font-weight: 800;
 margin-bottom: 16px;
 color: #f0f4fe;
 word-break: break-word;
 letter-spacing: -0.3px;
 line-height: 1.4;
-border-bottom: 2px solid rgba(96, 165, 250, 0.5);
+border-bottom: 2px dashed rgba(96, 165, 250, 0.6);
 padding-bottom: 14px;
 }
 
-/* Garis pemisah */
-.bonus-divider {
-height: 1px;
-background: rgba(255, 255, 255, 0.1);
-margin: 0 0 16px 0;
-width: 100%;
-}
-
-/* Deskripsi isi - UKURAN BESAR */
+/* Deskripsi isi */
 .bonus-desc-full {
 color: #cbd5e6;
 line-height: 1.6;
 font-size: 0.95rem;
-margin: 12px 0 24px 0;
+margin: 12px 0 20px 0;
 flex: 1;
 white-space: pre-wrap;
 word-break: break-word;
@@ -636,27 +629,34 @@ display: -webkit-box;
 -webkit-box-orient: vertical;
 }
 
-/* Tombol "Klik untuk membuka folder" seperti gambar - di bawah sendiri */
+/* Container untuk tombol - FLEX ROW (SEJAJAR KIRI DAN KANAN) */
+.bonus-actions-row {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-top: auto;
+padding-top: 16px;
+border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Tombol "Klik untuk membuka folder" - di KIRI */
 .btn-open-folder {
 background: transparent;
 border: 1px solid rgba(59, 130, 246, 0.5);
-border-radius: 40px;
+border-radius: 30px;
 color: #60a5fa;
-font-size: 0.85rem;
+font-size: 0.75rem;
 font-weight: 600;
 cursor: pointer;
 transition: all 0.2s;
 display: inline-flex;
 align-items: center;
-justify-content: center;
-gap: 8px;
-padding: 10px 0;
-width: 100%;
-margin-bottom: 12px;
+gap: 6px;
+padding: 8px 14px;
 }
 
 .btn-open-folder i {
-font-size: 0.85rem;
+font-size: 0.7rem;
 }
 
 .btn-open-folder:hover {
@@ -665,37 +665,35 @@ color: #93c5fd;
 border-color: #60a5fa;
 }
 
-/* Tombol SALIN - di bawah tombol buka folder */
+/* Tombol SALIN - di KANAN */
 .btn-salin-bonus {
 background: linear-gradient(135deg, #10b981, #059669);
 border: none;
 color: white;
-padding: 10px 0;
-border-radius: 40px;
-font-size: 0.85rem;
+padding: 8px 18px;
+border-radius: 30px;
+font-size: 0.75rem;
 font-weight: 700;
 cursor: pointer;
 transition: all 0.2s ease;
-display: flex;
+display: inline-flex;
 align-items: center;
-justify-content: center;
-gap: 8px;
-width: 100%;
+gap: 6px;
 font-family: 'Inter', monospace;
 }
 
 .btn-salin-bonus i {
-font-size: 0.85rem;
+font-size: 0.7rem;
 }
 
 .btn-salin-bonus:hover {
 background: linear-gradient(135deg, #059669, #047857);
-transform: scale(1.01);
+transform: scale(1.02);
 }
 
-/* Responsive untuk bonus grid */
+/* Responsive */
 @media (max-width: 1300px) {
-.bonus-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+.bonus-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
 }
 @media (max-width: 768px) {
 .sidebar { width: 240px; }
@@ -716,7 +714,7 @@ transform: scale(1.01);
 <div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
 <div class="logo-text">
 <h2>7Kolom</h2>
-<p>Card Bonus Besar 4 Kolom</p>
+<p>Card Bonus Seperti Gambar</p>
 </div>
 </div>
 </div>
@@ -730,7 +728,7 @@ transform: scale(1.01);
 <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
 </div>
 <div class="sidebar-footer">
-<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | 🎯 Card BONUS: UKURAN BESAR, 4 KOLOM, JARAK LEGA seperti gambar!
+<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | 🎯 Card BONUS: 4 KOLOM, TOMBOL SEJAJAR KIRI-KANAN seperti gambar!
 </div>
 </aside>
 
@@ -738,7 +736,7 @@ transform: scale(1.01);
 <div class="content-header">
 <div class="page-title">
 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-<p id="subHeading">Live search tersedia di semua kolom | Card BONUS: Ukuran besar, 4 kolom, jarak lega seperti gambar</p>
+<p id="subHeading">Live search tersedia di semua kolom | Card BONUS: 4 kolom, tombol "Klik Folder" (kiri) dan "SALIN" (kanan) SEJAJAR</p>
 </div>
 <div class="action-buttons">
 <div class="search-wrapper">
@@ -797,7 +795,7 @@ let currentFilterText = "";
 let currentActiveTab = "tab1";
 let currentBonusSubTab = "all";
 
-// Data statis untuk tab lain (TIDAK BERUBAH)
+// Data statis untuk tab lain
 const staticTabsData = {
 tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik — background full size 100%", items: [
 { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
@@ -819,7 +817,7 @@ tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi sol
 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
 { icon: "fas fa-handshake", title: "Kolaborasi", desc: "Integrasi dengan tim desain", badge: "Sinergi" }
 ] },
-tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge di atas | UKURAN BESAR, 4 kolom, jarak lega seperti gambar", items: [] },
+tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge di atas | 4 kolom, tombol SEJAJAR KIRI-KANAN seperti gambar", items: [] },
 tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap membantu", items: [
 { icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi sidebar 7 kolom dengan background 100% full", badge: "PDF" },
 { icon: "fas fa-headset", title: "Dukungan Teknis", desc: "Chat dengan agen support 24/7", badge: "Live" },
@@ -888,7 +886,7 @@ return row;
 });
 }
 
-// Render BONUS ALL dari Google Sheet
+// Render BONUS ALL
 async function renderBonusAllFromSheet() {
 if (bonusAllData.length === 0) {
 try {
@@ -909,10 +907,11 @@ const shortContent = item.content.length > 150 ? item.content.substring(0,150)+'
 columnsHtml += `
 <div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
 <h3>${escapeHtml(item.title)}</h3>
-<div class="bonus-divider"></div>
 <div class="bonus-desc-full">${escapeHtml(shortContent)}</div>
+<div class="bonus-actions-row">
 <button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
 <button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button>
+</div>
 </div>`;
 });
 columnsHtml += `</div>`;
@@ -969,16 +968,17 @@ function renderBonusStaticSubTab(subTab) {
 const data = bonusStaticMap[subTab];
 if (!data) return;
 mainHeading.innerHTML = data.title;
-subHeading.innerHTML = data.subtitle + " | UKURAN BESAR, 4 kolom, jarak lega seperti gambar";
+subHeading.innerHTML = data.subtitle + " | 4 kolom, tombol SEJAJAR KIRI-KANAN seperti gambar";
 let columnsHtml = `<div class="bonus-grid">`;
 data.columns.forEach((col) => {
 columnsHtml += `
 <div class="bonus-card-static" data-bonus-name="${escapeHtml(col.name)}" data-bonus-detail="${escapeHtml(col.detail)}" data-bonus-value="${escapeHtml(col.value)}">
 <h3>${escapeHtml(col.name)}</h3>
-<div class="bonus-divider"></div>
 <div class="bonus-desc-full">${escapeHtml(col.detail)}</div>
+<div class="bonus-actions-row">
 <button class="btn-open-folder-static"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
 <button class="btn-salin-bonus" data-salin-title="${escapeHtml(col.name)}" data-salin-content="${escapeHtml(col.detail + '\\n\\n💎 ' + col.value)}"><i class="fas fa-copy"></i> SALIN</button>
+</div>
 </div>`;
 });
 columnsHtml += `</div>`;
@@ -1032,7 +1032,7 @@ copyContentOnly(content, title);
 // Render halaman BONUS utama
 async function renderBonusPage() {
 mainHeading.innerHTML = "⚙️ BONUS ✨";
-subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()} | ${currentBonusSubTab === 'all' ? 'Data BONUS ALL dari Google Sheets' : 'Promo statis'} | 📋 UKURAN BESAR, 4 KOLOM, JARAK LEGA`;
+subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()} | ${currentBonusSubTab === 'all' ? 'Data BONUS ALL dari Google Sheets' : 'Promo statis'} | 📋 4 KOLOM, TOMBOL SEJAJAR KIRI-KANAN`;
 bonusBadgeContainer.classList.add("visible");
 if (currentBonusSubTab === 'all') {
 await renderBonusAllFromSheet();
@@ -1041,7 +1041,7 @@ renderBonusStaticSubTab(currentBonusSubTab);
 }
 }
 
-// RENDER RANDOM TAB (TIDAK BERUBAH)
+// RENDER RANDOM TAB (tidak berubah)
 async function renderRandomTabWithFilter(filter = "") {
 mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
 subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN`;
@@ -1089,7 +1089,6 @@ dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.
 }
 }
 
-// Render statis tab (TIDAK BERUBAH)
 function renderStaticTabWithFilter(tabId, filter = "") {
 const data = staticTabsData[tabId];
 if(!data) return false;
