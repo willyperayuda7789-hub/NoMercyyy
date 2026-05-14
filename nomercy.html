@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar - Card Bonus (Tombol Sejajar 1 Baris)</title>
+<title>7 Kolom Sidebar - Bonus Live (Mingguan, Done Bagi, Lain-Lain)</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -269,7 +269,7 @@ background: #ef4444;
 color: white;
 }
 
-/* Grid card untuk tab selain BONUS (TIDAK BERUBAH) */
+/* Grid card untuk tab selain BONUS */
 .dashboard-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -277,7 +277,7 @@ gap: 24px;
 margin-top: 12px;
 }
 
-/* Card Style untuk tab selain BONUS (TIDAK BERUBAH) */
+/* Card Style untuk tab selain BONUS */
 .card {
 background: rgba(18, 28, 45, 0.85);
 border-radius: 28px;
@@ -571,7 +571,7 @@ background: linear-gradient(135deg, #2c3e66, #1e2a47);
 color: white;
 }
 
-/* ========= KHUSUS BONUS - SEPERTI GAMBAR 1 (TOMBOL SEJAJAR DALAM 1 BARIS) ========= */
+/* ========= KHUSUS BONUS - TOMBOL SEJAJAR DALAM 1 BARIS ========= */
 .bonus-grid {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
@@ -580,7 +580,7 @@ margin-top: 20px;
 }
 
 /* Card bonus */
-.bonus-card, .bonus-card-static {
+.bonus-card {
 background: rgba(18, 28, 45, 0.92);
 border-radius: 24px;
 padding: 24px;
@@ -593,7 +593,7 @@ cursor: pointer;
 min-height: 300px;
 }
 
-.bonus-card:hover, .bonus-card-static:hover {
+.bonus-card:hover {
 transform: translateY(-6px);
 background: rgba(30, 45, 70, 0.97);
 border-color: rgba(59, 130, 246, 0.6);
@@ -601,7 +601,7 @@ box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.45);
 }
 
 /* Judul card */
-.bonus-card h3, .bonus-card-static h3 {
+.bonus-card h3 {
 font-size: 1.3rem;
 font-weight: 800;
 margin-bottom: 14px;
@@ -628,8 +628,7 @@ display: -webkit-box;
 -webkit-box-orient: vertical;
 }
 
-/* ========= INI YANG PALING PENTING - TOMBOL SEJAJAR DALAM 1 BARIS ========= */
-/* Container tombol menggunakan FLEX ROW (sejajar ke samping) */
+/* TOMBOL SEJAJAR DALAM 1 BARIS */
 .bonus-actions-row {
 display: flex;
 flex-direction: row;
@@ -641,7 +640,6 @@ padding-top: 16px;
 border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Tombol "Klik untuk membuka folder" - di KIRI */
 .btn-open-folder {
 flex: 1;
 background: transparent;
@@ -670,7 +668,6 @@ color: #93c5fd;
 border-color: #60a5fa;
 }
 
-/* Tombol SALIN - di KANAN */
 .btn-salin-bonus {
 background: linear-gradient(135deg, #10b981, #059669);
 border: none;
@@ -721,7 +718,7 @@ transform: scale(1.02);
 <div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
 <div class="logo-text">
 <h2>7Kolom</h2>
-<p>Card Bonus - Tombol Sejajar</p>
+<p>Card Bonus - Live Data</p>
 </div>
 </div>
 </div>
@@ -735,7 +732,7 @@ transform: scale(1.02);
 <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
 </div>
 <div class="sidebar-footer">
-<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | ✅ Card BONUS: Tombol "Klik Folder" dan "SALIN" SEJAJAR dalam 1 BARIS!
+<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> BONUS MINGGUAN, DONE BAGI, & LAIN-LAIN mengambil data LIVE dari Google Sheets
 </div>
 </aside>
 
@@ -743,7 +740,7 @@ transform: scale(1.02);
 <div class="content-header">
 <div class="page-title">
 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-<p id="subHeading">Live search tersedia di semua kolom | Card BONUS: Tombol sejajar dalam 1 baris (seperti gambar 1)</p>
+<p id="subHeading">Live search tersedia di semua kolom | Bonus: MINGGUAN, DONE BAGI, LAIN-LAIN data realtime dari Spreadsheet</p>
 </div>
 <div class="action-buttons">
 <div class="search-wrapper">
@@ -757,10 +754,10 @@ transform: scale(1.02);
 <!-- Container untuk badge bonus khusus tab BONUS -->
 <div id="bonusBadgeContainer" class="bonus-badge-container">
 <div class="bonus-badge-bar">
-<div class="bonus-badge active-bonus" data-bonus-tab="all"><i class="fas fa-layer-group"></i> BONUS ALL</div>
+<div class="bonus-badge" data-bonus-tab="all"><i class="fas fa-layer-group"></i> BONUS ALL</div>
 <div class="bonus-badge" data-bonus-tab="mingguan"><i class="fas fa-calendar-alt"></i> MINGGUAN</div>
 <div class="bonus-badge" data-bonus-tab="done"><i class="fas fa-check-circle"></i> DONE BAGI</div>
-<div class="bonus-badge" data-bonus-tab="lain"><i class="fas fa-ellipsis-h"></i> LAIN-LAIN</div>
+<div class="bonus-badge active-bonus" data-bonus-tab="lain"><i class="fas fa-ellipsis-h"></i> LAIN-LAIN</div>
 </div>
 </div>
 
@@ -794,15 +791,21 @@ Isi folder / detail bonus akan ditampilkan di sini...
 // ======================= KONFIGURASI GOOGLE SHEETS =======================
 const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
 const SHEET_BONUS_ALL = 'BONUS ALL';
+const SHEET_BONUS_MINGGUAN = 'BONUS MINGGUAN';
+const SHEET_DONE_BAGI = 'DONEBAGI';
+const SHEET_BONUS_LAIN_LAIN = 'BONUS LAIN-LAIN';  // <-- Sheet untuk badge LAIN-LAIN
 const SHEET_RANDOM = 'PK RANDOM';
 
 let foldersData = [];
 let bonusAllData = [];
+let bonusMingguanData = [];
+let bonusDoneBagiData = [];
+let bonusLainLainData = [];    // Data untuk badge LAIN-LAIN
 let currentFilterText = "";
 let currentActiveTab = "tab1";
-let currentBonusSubTab = "all";
+let currentBonusSubTab = "lain"; // Default ke LAIN-LAIN (active-bonus)
 
-// Data statis untuk tab lain
+// Data statis untuk tab lain (tidak berubah)
 const staticTabsData = {
 tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik — background full size 100%", items: [
 { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
@@ -824,7 +827,7 @@ tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi sol
 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
 { icon: "fas fa-handshake", title: "Kolaborasi", desc: "Integrasi dengan tim desain", badge: "Sinergi" }
 ] },
-tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge di atas | Tombol SEJAJAR dalam 1 BARIS seperti gambar", items: [] },
+tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge di atas | Data MINGGUAN, DONE BAGI & LAIN-LAIN LIVE dari Spreadsheet", items: [] },
 tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap membantu", items: [
 { icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi sidebar 7 kolom dengan background 100% full", badge: "PDF" },
 { icon: "fas fa-headset", title: "Dukungan Teknis", desc: "Chat dengan agen support 24/7", badge: "Live" },
@@ -832,28 +835,7 @@ tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap 
 ] }
 };
 
-const bonusStaticMap = {
-mingguan: { title: "📆 BONUS MINGGUAN", subtitle: "Klaim special tiap pekan", columns: [
-{ name: "BONUS CASHBACK", value: "5% - 10%", detail: "Untuk bonus cashback kekalahan yang kami miliki saat ini : Bonus Cashback 5% ( Slot Games )" },
-{ name: "BONUS ROLLINGAN", value: "0.5% - 0.7%", detail: "Untuk bonus rollingan saat ini kami memiliki : Bonus Rollingan turnover 0.5% ( Live Games )" },
-{ name: "BONUS SLOT", value: "CASHBACK 5%", detail: "Untuk bonus slot yang kami miliki saat ini : Bonus Cashback 5% ( Slot Games )" },
-{ name: "BONUS LIVE GAMES", value: "CASHBACK UP TO 5%", detail: "Untuk bonus live games yang kami miliki saat ini : Bonus Cashback up to 5% ( Live Games )" }
-] },
-done: { title: "✅ DONE BAGI", subtitle: "Bonus instan", columns: [
-{ name: "SHARE MEDSOS", value: "25K FREE", detail: "Share postingan bonus & tag 3 teman, langsung dapat 25K. Wajib screenshot ke CS." },
-{ name: "MISI HARIAN", value: "UP TO 50K", detail: "Selesaikan 5 misi harian dapat bonus bertahap hingga 50K. Reset setiap jam 00:00 WIB." },
-{ name: "AJAK TEMAN", value: "BONUS 75K", detail: "Setiap teman yang deposit pertama, Anda dan teman dapat 75K masing-masing. Max 5 teman." },
-{ name: "VERIFIKASI DONE", value: "20K INSTAN", detail: "Verifikasi email & nomor telepon → bonus 20K langsung masuk. One time only." }
-] },
-lain: { title: "✨ LAIN-LAIN", subtitle: "Bonus spesial event", columns: [
-{ name: "BONUS ULANG TAHUN", value: "200K + KUE", detail: "Bonus spesial untuk member yang berulang tahun pada bulan ini. Minimal pernah deposit 100K." },
-{ name: "EVENT SCATTER", value: "FREE SPIN 50x", detail: "Kumpulkan scatter terbanyak setiap minggu, dapat free spin bonus hingga 50x." },
-{ name: "LUCKY DRAW", value: "JACKPOT 1JT", detail: "Setiap 50k deposit dapat 1 kupon lucky draw, undian setiap minggu. Hadiah utama 1 Juta." },
-{ name: "JAM JACKPOT", value: "DOUBLE BONUS", detail: "Pada jam 19:00-21:00, bonus cashback & rollingan jadi double. Periode terbatas." }
-] }
-};
-
-// Fungsi fetch data dari sheet
+// Fungsi fetch data dari sheet (sama persis)
 async function fetchSheetData(sheetName) {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
@@ -893,6 +875,102 @@ return row;
 });
 }
 
+// ======================= RENDER BONUS LAIN-LAIN (LIVE DARI SHEET BONUS LAIN-LAIN) =======================
+async function renderBonusLainLainFromSheet() {
+try {
+bonusLainLainData = await fetchSheetData(SHEET_BONUS_LAIN_LAIN);
+} catch(e) {
+dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS LAIN-LAIN</h3><p>${e.message}</p><p>Pastikan sheet dengan nama persis "BONUS LAIN-LAIN" ada dan dapat diakses (kolom A = judul, kolom B = isi).</p></div>`;
+return;
+}
+if (bonusLainLainData.length === 0) {
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-database"></i><h3>Data Kosong</h3><p>Sheet BONUS LAIN-LAIN belum memiliki data. Isi kolom A (judul folder) dan kolom B (isi folder).</p></div>`;
+return;
+}
+let columnsHtml = `<div class="bonus-grid">`;
+bonusLainLainData.forEach((item) => {
+const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content;
+columnsHtml += `
+<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
+<h3><i class="fas fa-tags"></i> ${escapeHtml(item.title)}</h3>
+<div class="bonus-desc-full">${escapeHtml(shortContent)}</div>
+<div class="bonus-actions-row">
+<button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
+<button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button>
+</div>
+</div>`;
+});
+columnsHtml += `</div>`;
+dynamicArea.innerHTML = columnsHtml;
+attachBonusCardEvents();
+attachOpenFolderEvents();
+attachBonusSalinEvents();
+}
+
+// ======================= RENDER BONUS DONE BAGI (LIVE DARI SHEET DONEBAGI) =======================
+async function renderBonusDoneBagiFromSheet() {
+try {
+bonusDoneBagiData = await fetchSheetData(SHEET_DONE_BAGI);
+} catch(e) {
+dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat DONE BAGI</h3><p>${e.message}</p><p>Pastikan sheet dengan nama persis "DONEBAGI" ada dan dapat diakses.</p></div>`;
+return;
+}
+if (bonusDoneBagiData.length === 0) {
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-database"></i><h3>Data Kosong</h3><p>Sheet DONEBAGI belum memiliki data.</p></div>`;
+return;
+}
+let columnsHtml = `<div class="bonus-grid">`;
+bonusDoneBagiData.forEach((item) => {
+const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content;
+columnsHtml += `
+<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
+<h3><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</h3>
+<div class="bonus-desc-full">${escapeHtml(shortContent)}</div>
+<div class="bonus-actions-row">
+<button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
+<button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button>
+</div>
+</div>`;
+});
+columnsHtml += `</div>`;
+dynamicArea.innerHTML = columnsHtml;
+attachBonusCardEvents();
+attachOpenFolderEvents();
+attachBonusSalinEvents();
+}
+
+// ======================= RENDER BONUS MINGGUAN (LIVE DARI SHEET BONUS MINGGUAN) =======================
+async function renderBonusMingguanFromSheet() {
+try {
+bonusMingguanData = await fetchSheetData(SHEET_BONUS_MINGGUAN);
+} catch(e) {
+dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS MINGGUAN</h3><p>${e.message}</p><p>Pastikan sheet dengan nama persis "BONUS MINGGUAN" ada dan berisi data.</p></div>`;
+return;
+}
+if (bonusMingguanData.length === 0) {
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-database"></i><h3>Data Kosong</h3><p>Sheet BONUS MINGGUAN belum memiliki data.</p></div>`;
+return;
+}
+let columnsHtml = `<div class="bonus-grid">`;
+bonusMingguanData.forEach((item) => {
+const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content;
+columnsHtml += `
+<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
+<h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.title)}</h3>
+<div class="bonus-desc-full">${escapeHtml(shortContent)}</div>
+<div class="bonus-actions-row">
+<button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
+<button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button>
+</div>
+</div>`;
+});
+columnsHtml += `</div>`;
+dynamicArea.innerHTML = columnsHtml;
+attachBonusCardEvents();
+attachOpenFolderEvents();
+attachBonusSalinEvents();
+}
+
 // Render BONUS ALL
 async function renderBonusAllFromSheet() {
 if (bonusAllData.length === 0) {
@@ -928,6 +1006,7 @@ attachOpenFolderEvents();
 attachBonusSalinEvents();
 }
 
+// Fungsi event untuk semua card bonus (seragam)
 function attachBonusCardEvents() {
 document.querySelectorAll('.bonus-card').forEach(card => {
 card.removeEventListener('click', bonusCardHandler);
@@ -970,72 +1049,6 @@ const content = this.getAttribute('data-salin-content') || '';
 copyContentOnly(content, title);
 }
 
-// Render bonus static
-function renderBonusStaticSubTab(subTab) {
-const data = bonusStaticMap[subTab];
-if (!data) return;
-mainHeading.innerHTML = data.title;
-subHeading.innerHTML = data.subtitle + " | Tombol SEJAJAR dalam 1 BARIS seperti gambar";
-let columnsHtml = `<div class="bonus-grid">`;
-data.columns.forEach((col) => {
-columnsHtml += `
-<div class="bonus-card-static" data-bonus-name="${escapeHtml(col.name)}" data-bonus-detail="${escapeHtml(col.detail)}" data-bonus-value="${escapeHtml(col.value)}">
-<h3>${escapeHtml(col.name)}</h3>
-<div class="bonus-desc-full">${escapeHtml(col.detail)}</div>
-<div class="bonus-actions-row">
-<button class="btn-open-folder-static"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
-<button class="btn-salin-bonus" data-salin-title="${escapeHtml(col.name)}" data-salin-content="${escapeHtml(col.detail + '\\n\\n💎 ' + col.value)}"><i class="fas fa-copy"></i> SALIN</button>
-</div>
-</div>`;
-});
-columnsHtml += `</div>`;
-dynamicArea.innerHTML = columnsHtml;
-attachStaticBonusEvents();
-attachStaticOpenFolderEvents();
-attachBonusSalinEventsStatic();
-}
-function attachStaticBonusEvents() {
-document.querySelectorAll('.bonus-card-static').forEach(card => {
-card.removeEventListener('click', staticBonusHandler);
-card.addEventListener('click', staticBonusHandler);
-});
-}
-function staticBonusHandler(e) {
-if(e.target.closest('.btn-salin-bonus') || e.target.closest('.btn-open-folder-static')) return;
-const name = this.getAttribute('data-bonus-name') || 'Detail Bonus';
-const detail = this.getAttribute('data-bonus-detail') || '';
-const value = this.getAttribute('data-bonus-value') || '';
-openModal(name, `${detail}\n\n💎 Nilai: ${value}`);
-}
-function attachStaticOpenFolderEvents() {
-document.querySelectorAll('.btn-open-folder-static').forEach(btn => {
-btn.removeEventListener('click', staticOpenFolderHandler);
-btn.addEventListener('click', staticOpenFolderHandler);
-});
-}
-function staticOpenFolderHandler(e) {
-e.stopPropagation();
-const card = this.closest('.bonus-card-static');
-if(card) {
-const name = card.getAttribute('data-bonus-name') || 'Detail Bonus';
-const detail = card.getAttribute('data-bonus-detail') || '';
-const value = card.getAttribute('data-bonus-value') || '';
-openModal(name, `${detail}\n\n💎 Nilai: ${value}`);
-}
-}
-function attachBonusSalinEventsStatic() {
-document.querySelectorAll('.btn-salin-bonus').forEach(btn => {
-btn.removeEventListener('click', bonusSalinHandlerStatic);
-btn.addEventListener('click', bonusSalinHandlerStatic);
-});
-}
-function bonusSalinHandlerStatic(e) {
-e.stopPropagation();
-const title = this.getAttribute('data-salin-title') || 'Folder';
-const content = this.getAttribute('data-salin-content') || '';
-copyContentOnly(content, title);
-}
-
 // Render halaman BONUS utama
 async function renderBonusPage() {
 mainHeading.innerHTML = "⚙️ BONUS ✨";
@@ -1043,8 +1056,12 @@ subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()} | Tombol S
 bonusBadgeContainer.classList.add("visible");
 if (currentBonusSubTab === 'all') {
 await renderBonusAllFromSheet();
-} else {
-renderBonusStaticSubTab(currentBonusSubTab);
+} else if (currentBonusSubTab === 'mingguan') {
+await renderBonusMingguanFromSheet();
+} else if (currentBonusSubTab === 'done') {
+await renderBonusDoneBagiFromSheet();
+} else if (currentBonusSubTab === 'lain') {
+await renderBonusLainLainFromSheet();   // <-- BADGE LAIN-LAIN mengambil data live dari sheet BONUS LAIN-LAIN
 }
 }
 
