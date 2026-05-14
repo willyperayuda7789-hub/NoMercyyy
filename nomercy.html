@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar + Bonus All (Card Bonus Lebih Besar)</title>
+<title>7 Kolom Sidebar + Bonus All (Card Bonus Full Width)</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -269,7 +269,7 @@ background: #ef4444;
 color: white;
 }
 
-/* Grid card untuk tab selain BONUS (ukuran normal) */
+/* Grid card untuk tab selain BONUS (ukuran normal grid) */
 .dashboard-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -571,96 +571,140 @@ background: linear-gradient(135deg, #2c3e66, #1e2a47);
 color: white;
 }
 
-/* ========= KHUSUS BONUS GRID - UKURAN LEBIH BESAR ========= */
-.bonus-grid {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 32px;
-margin-top: 20px;
+/* ========= KHUSUS BONUS - FULL WIDTH STACKED CARD (seperti gambar FAQ) ========= */
+/* Area khusus untuk bonus - menggunakan container sendiri */
+.bonus-fullwidth-container {
+display: flex;
+flex-direction: column;
+gap: 20px;
+margin-top: 16px;
 }
-.bonus-card, .bonus-card-static {
+
+/* Card bonus full width - lebar penuh seperti gambar */
+.bonus-card-full, .bonus-card-static-full {
 background: rgba(18, 28, 45, 0.88);
-border-radius: 36px;
-padding: 28px;
+border-radius: 24px;
+padding: 24px 28px;
 transition: all 0.3s ease;
 border: 1px solid rgba(255, 255, 255, 0.2);
 backdrop-filter: blur(6px);
-box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4);
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 display: flex;
 flex-direction: column;
 cursor: pointer;
-min-height: 300px;
+width: 100%;
 }
-.bonus-card:hover, .bonus-card-static:hover {
-transform: translateY(-8px);
+
+.bonus-card-full:hover, .bonus-card-static-full:hover {
+transform: translateX(6px);
 background: rgba(30, 45, 70, 0.96);
 border-color: rgba(59, 130, 246, 0.7);
-box-shadow: 0 30px 45px -12px rgba(0, 0, 0, 0.5);
+box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.4);
 }
-.bonus-card-header {
+
+/* Header card bonus full width */
+.bonus-card-header-full {
 display: flex;
 align-items: center;
-gap: 18px;
-margin-bottom: 20px;
-border-bottom: 2px solid rgba(96, 165, 250, 0.5);
-padding-bottom: 16px;
+gap: 16px;
+margin-bottom: 16px;
+border-bottom: 2px solid rgba(96, 165, 250, 0.4);
+padding-bottom: 14px;
 }
-.bonus-icon {
-background: rgba(59, 130, 246, 0.25);
-width: 60px;
-height: 60px;
-border-radius: 35px;
+
+.bonus-icon-full {
+background: rgba(59, 130, 246, 0.2);
+width: 52px;
+height: 52px;
+border-radius: 30px;
 display: flex;
 align-items: center;
 justify-content: center;
-font-size: 1.8rem;
+font-size: 1.6rem;
 color: #60a5fa;
+flex-shrink: 0;
 }
-.bonus-card-header h3 {
-font-size: 1.35rem;
+
+.bonus-card-header-full h3 {
+font-size: 1.3rem;
 font-weight: 800;
 color: #f0f4fe;
 margin: 0;
+letter-spacing: -0.3px;
 }
-.bonus-value {
-font-size: 1.9rem;
+
+/* Value / harga bonus */
+.bonus-value-full {
+font-size: 1.4rem;
 font-weight: 800;
 background: linear-gradient(135deg, #fbbf24, #f59e0b);
 background-clip: text;
 -webkit-background-clip: text;
 color: transparent;
-margin: 12px 0;
-}
-.bonus-desc {
-color: #cbd5e6;
-font-size: 1rem;
-line-height: 1.5;
-margin: 10px 0;
-flex: 1;
-}
-.bonus-status {
-margin-top: 16px;
-font-size: 0.75rem;
-background: rgba(0,0,0,0.5);
-display: inline-block;
-padding: 8px 14px;
-border-radius: 40px;
-align-self: flex-start;
-color: #9ca3af;
-font-weight: 600;
+margin: 8px 0 6px 0;
 }
 
-@media (max-width: 1200px) {
-.bonus-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+/* Deskripsi bonus */
+.bonus-desc-full {
+color: #cbd5e6;
+font-size: 0.95rem;
+line-height: 1.55;
+margin: 8px 0;
 }
+
+/* Status / info tambahan */
+.bonus-status-full {
+margin-top: 12px;
+font-size: 0.75rem;
+background: rgba(0, 0, 0, 0.4);
+display: inline-block;
+padding: 6px 14px;
+border-radius: 30px;
+align-self: flex-start;
+color: #9ca3af;
+font-weight: 500;
+}
+
+/* Tombol tambahan (opsional) */
+.bonus-btn-full {
+margin-top: 16px;
+background: rgba(59, 130, 246, 0.3);
+border: 1px solid rgba(59, 130, 246, 0.5);
+color: #93c5fd;
+padding: 8px 18px;
+border-radius: 40px;
+font-size: 0.8rem;
+font-weight: 600;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+align-self: flex-start;
+cursor: pointer;
+transition: all 0.2s;
+}
+
+.bonus-btn-full:hover {
+background: #3b82f6;
+color: white;
+border-color: white;
+}
+
+/* Responsive untuk bonus full width */
 @media (max-width: 768px) {
-.sidebar { width: 240px; }
-.main-content { padding: 16px; }
-.search-input { width: 200px; }
-.search-input:focus { width: 220px; }
-.page-title h1 { font-size: 1.4rem; }
-.bonus-grid { grid-template-columns: 1fr; }
-.dashboard-grid { grid-template-columns: 1fr; }
+.bonus-card-full, .bonus-card-static-full {
+padding: 18px 20px;
+}
+.bonus-card-header-full h3 {
+font-size: 1.1rem;
+}
+.bonus-icon-full {
+width: 44px;
+height: 44px;
+font-size: 1.3rem;
+}
+.bonus-value-full {
+font-size: 1.2rem;
+}
 }
 </style>
 </head>
@@ -672,7 +716,7 @@ font-weight: 600;
 <div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
 <div class="logo-text">
 <h2>7Kolom</h2>
-<p>Card Bonus Lebih Besar</p>
+<p>Card Bonus Full Width</p>
 </div>
 </div>
 </div>
@@ -686,7 +730,7 @@ font-weight: 600;
 <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
 </div>
 <div class="sidebar-footer">
-<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | Tombol SALIN | 🌟 Card BONUS lebih besar dari kolom lain!
+<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | Tombol SALIN | 🌟 Card BONUS FULL WIDTH seperti gambar FAQ!
 </div>
 </aside>
 
@@ -694,7 +738,7 @@ font-weight: 600;
 <div class="content-header">
 <div class="page-title">
 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-<p id="subHeading">Live search tersedia di semua kolom | Card BONUS memiliki ukuran lebih besar</p>
+<p id="subHeading">Live search tersedia di semua kolom | Card BONUS tampil FULL WIDTH (stacked)</p>
 </div>
 <div class="action-buttons">
 <div class="search-wrapper">
@@ -775,7 +819,7 @@ tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi sol
 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
 { icon: "fas fa-handshake", title: "Kolaborasi", desc: "Integrasi dengan tim desain", badge: "Sinergi" }
 ] },
-tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge | BONUS ALL dari Google Sheets - Card lebih besar", items: [] },
+tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge di atas | Tampilan FULL WIDTH seperti gambar FAQ", items: [] },
 tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap membantu", items: [
 { icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi sidebar 7 kolom dengan background 100% full", badge: "PDF" },
 { icon: "fas fa-headset", title: "Dukungan Teknis", desc: "Chat dengan agen support 24/7", badge: "Live" },
@@ -784,17 +828,17 @@ tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap 
 };
 
 const bonusStaticMap = {
-mingguan: { title: "📆 BONUS MINGGUAN", subtitle: "Klaim special tiap pekan - Card lebih besar", columns: [
-{ icon: "fas fa-percent", name: "TURNOVER MINGGUAN", value: "0.7% TANPA BATAS", detail: "Bonus rollingan mingguan 0.7% dari total turnover", extra: "Otomatis masuk setiap Senin" },
-{ icon: "fas fa-gift", name: "BONUS SABTU-MINGGU", value: "EXTRA 10%", detail: "Deposit weekend dapat bonus 10% maksimal 150K", extra: "Minimal deposit 100K" }
+mingguan: { title: "📆 BONUS MINGGUAN", subtitle: "Klaim special tiap pekan - tampilan full width", items: [
+{ icon: "fas fa-percent", name: "TURNOVER MINGGUAN", value: "0.7% TANPA BATAS", detail: "Bonus rollingan mingguan 0.7% dari total turnover tanpa batas maksimal.", extra: "✅ Otomatis masuk setiap hari Senin" },
+{ icon: "fas fa-gift", name: "BONUS SABTU-MINGGU", value: "EXTRA 10%", detail: "Deposit weekend dapat bonus 10% maksimal 150K. Minimal deposit 100K.", extra: "🎁 Kode: WEEKEND10" }
 ] },
-done: { title: "✅ DONE BAGI", subtitle: "Bonus instan - Card lebih besar", columns: [
-{ icon: "fas fa-check-double", name: "SHARE MEDSOS", value: "25K FREE", detail: "Share postingan bonus & tag teman langsung dapat 25K", extra: "Wajib screenshot ke CS" },
-{ icon: "fas fa-star", name: "MISI HARIAN", value: "UP TO 50K", detail: "Selesaikan 5 misi harian dapat bonus bertahap hingga 50K", extra: "Reset setiap jam 00:00" }
+done: { title: "✅ DONE BAGI", subtitle: "Bonus instan - tampilan full width", items: [
+{ icon: "fas fa-check-double", name: "SHARE MEDSOS", value: "25K FREE", detail: "Share postingan bonus & tag 3 teman, langsung dapat 25K. Wajib screenshot ke CS.", extra: "📱 Berlaku untuk semua member" },
+{ icon: "fas fa-star", name: "MISI HARIAN", value: "UP TO 50K", detail: "Selesaikan 5 misi harian dapat bonus bertahap hingga 50K. Reset setiap jam 00:00 WIB.", extra: "⭐ Claim di menu Misi" }
 ] },
-lain: { title: "✨ LAIN-LAIN", subtitle: "Bonus spesial event - Card lebih besar", columns: [
-{ icon: "fas fa-calendar-day", name: "BONUS ULANG TAHUN", value: "200K + KUE", detail: "Bonus spesial untuk member yang berulang tahun", extra: "Kirim KTP ke CS" },
-{ icon: "fas fa-gamepad", name: "EVENT SCATTER", value: "FREE SPIN 50x", detail: "Kumpulkan scatter untuk free spin bonus hingga 50x", extra: "Event berlangsung 1 bulan" }
+lain: { title: "✨ LAIN-LAIN", subtitle: "Bonus spesial event - tampilan full width", items: [
+{ icon: "fas fa-calendar-day", name: "BONUS ULANG TAHUN", value: "200K + KUE", detail: "Bonus spesial untuk member yang berulang tahun pada bulan ini. Minimal pernah deposit 100K.", extra: "🎂 Kirim KTP ke CS" },
+{ icon: "fas fa-gamepad", name: "EVENT SCATTER", value: "FREE SPIN 50x", detail: "Kumpulkan scatter terbanyak setiap minggu, dapat free spin bonus hingga 50x.", extra: "🎰 Event berlangsung 1 bulan" }
 ] }
 };
 
@@ -838,6 +882,7 @@ return row;
 });
 }
 
+// Render BONUS ALL dari Google Sheet dengan format FULL WIDTH (stacked)
 async function renderBonusAllFromSheet() {
 if (bonusAllData.length === 0) {
 try {
@@ -847,19 +892,23 @@ dynamicArea.innerHTML = `<div class="error-message card"><h3>Gagal memuat BONUS 
 return;
 }
 }
-const items = bonusAllData.slice(0, 4);
-if (items.length === 0) {
+if (bonusAllData.length === 0) {
 dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-database"></i><h3>Belum ada data</h3><p>Sheet BONUS ALL kosong. Isi kolom A (judul) dan B (deskripsi).</p></div>`;
 return;
 }
-let columnsHtml = `<div class="bonus-grid">`;
-items.forEach((item) => {
+let columnsHtml = `<div class="bonus-fullwidth-container">`;
+bonusAllData.forEach((item, index) => {
+const shortContent = item.content.length > 150 ? item.content.substring(0,150)+'...' : item.content;
 columnsHtml += `
-<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
-<div class="bonus-card-header"><div class="bonus-icon"><i class="fas fa-gift"></i></div><h3>${escapeHtml(item.title)}</h3></div>
-<div class="bonus-value">🎁 PROMO SPESIAL</div>
-<div class="bonus-desc">${escapeHtml(item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content)}</div>
-<div class="bonus-status"><i class="fas fa-info-circle"></i> Klik untuk detail lengkap</div>
+<div class="bonus-card-full" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
+<div class="bonus-card-header-full">
+<div class="bonus-icon-full"><i class="fas fa-gift"></i></div>
+<h3>${escapeHtml(item.title)}</h3>
+</div>
+<div class="bonus-value-full">🎁 PROMO BONUS ${index+1}</div>
+<div class="bonus-desc-full">${escapeHtml(shortContent)}</div>
+<div class="bonus-status-full"><i class="fas fa-info-circle"></i> Klik untuk detail lengkap</div>
+<div class="bonus-btn-full"><i class="fas fa-hand-pointer"></i> Lihat Detail</div>
 </div>`;
 });
 columnsHtml += `</div>`;
@@ -868,7 +917,7 @@ attachBonusCardEvents();
 }
 
 function attachBonusCardEvents() {
-document.querySelectorAll('.bonus-card').forEach(card => {
+document.querySelectorAll('.bonus-card-full').forEach(card => {
 card.removeEventListener('click', bonusCardHandler);
 card.addEventListener('click', bonusCardHandler);
 });
@@ -879,27 +928,32 @@ const content = this.getAttribute('data-bonus-content') || 'Tidak ada deskripsi 
 openModal(title, content);
 }
 
+// Render bonus static dengan format FULL WIDTH
 function renderBonusStaticSubTab(subTab) {
 const data = bonusStaticMap[subTab];
 if (!data) return;
 mainHeading.innerHTML = data.title;
-subHeading.innerHTML = data.subtitle + " | Card bonus 4 kolom ukuran lebih besar";
-let columnsHtml = `<div class="bonus-grid">`;
-data.columns.forEach(col => {
-columnsHtml += `
-<div class="bonus-card-static" data-bonus-detail='${JSON.stringify(col)}'>
-<div class="bonus-card-header"><div class="bonus-icon"><i class="${col.icon}"></i></div><h3>${escapeHtml(col.name)}</h3></div>
-<div class="bonus-value">${escapeHtml(col.value)}</div>
-<div class="bonus-desc">${escapeHtml(col.detail)}</div>
-<div class="bonus-status">✨ ${escapeHtml(col.extra)}</div>
+subHeading.innerHTML = data.subtitle + " | Tampilan FULL WIDTH (stacked card)";
+let itemsHtml = `<div class="bonus-fullwidth-container">`;
+data.items.forEach((item, idx) => {
+itemsHtml += `
+<div class="bonus-card-static-full" data-bonus-detail='${JSON.stringify(item)}'>
+<div class="bonus-card-header-full">
+<div class="bonus-icon-full"><i class="${item.icon}"></i></div>
+<h3>${escapeHtml(item.name)}</h3>
+</div>
+<div class="bonus-value-full">💰 ${escapeHtml(item.value)}</div>
+<div class="bonus-desc-full">${escapeHtml(item.detail)}</div>
+<div class="bonus-status-full"><i class="fas fa-tag"></i> ${escapeHtml(item.extra)}</div>
+<div class="bonus-btn-full"><i class="fas fa-hand-pointer"></i> Klik untuk detail</div>
 </div>`;
 });
-columnsHtml += `</div>`;
-dynamicArea.innerHTML = columnsHtml;
+itemsHtml += `</div>`;
+dynamicArea.innerHTML = itemsHtml;
 attachStaticBonusEvents();
 }
 function attachStaticBonusEvents() {
-document.querySelectorAll('.bonus-card-static').forEach(card => {
+document.querySelectorAll('.bonus-card-static-full').forEach(card => {
 card.removeEventListener('click', staticBonusHandler);
 card.addEventListener('click', staticBonusHandler);
 });
@@ -912,9 +966,10 @@ openModal(obj.name, `🎁 ${obj.name}\n💰 Nilai: ${obj.value}\n📌 Detail: ${
 } catch(e) {}
 }
 
+// Render halaman BONUS utama
 async function renderBonusPage() {
 mainHeading.innerHTML = "⚙️ BONUS ✨";
-subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()} | ${currentBonusSubTab === 'all' ? 'Data BONUS ALL dari Google Sheets' : 'Promo statis'} | 🎯 CARD UKURAN LEBIH BESAR`;
+subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()} | ${currentBonusSubTab === 'all' ? 'Data BONUS ALL dari Google Sheets' : 'Promo statis'} | 📋 Tampilan FULL WIDTH (stacked card)`;
 bonusBadgeContainer.classList.add("visible");
 if (currentBonusSubTab === 'all') {
 await renderBonusAllFromSheet();
@@ -923,9 +978,10 @@ renderBonusStaticSubTab(currentBonusSubTab);
 }
 }
 
+// RENDER RANDOM TAB (tetap grid normal)
 async function renderRandomTabWithFilter(filter = "") {
 mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
-subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN (ukuran card normal)`;
+subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN (tampilan grid normal)`;
 bonusBadgeContainer.classList.remove("visible");
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat folder...</p></div>`;
 try {
@@ -970,12 +1026,13 @@ dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.
 }
 }
 
+// Render statis tab (grid normal)
 function renderStaticTabWithFilter(tabId, filter = "") {
 const data = staticTabsData[tabId];
 if(!data) return false;
 mainHeading.innerHTML = data.title;
 const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : "";
-subHeading.innerHTML = data.subtitle + filterInfo + " | Ukuran card normal";
+subHeading.innerHTML = data.subtitle + filterInfo + " | Tampilan grid normal";
 bonusBadgeContainer.classList.remove("visible");
 let filteredItems = data.items;
 if(filter.trim() !== "") {
