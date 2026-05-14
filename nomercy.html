@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar - Card Bonus Seperti Gambar (Tombol Sejajar)</title>
+<title>7 Kolom Sidebar - Card Bonus (Tombol Sejajar 1 Baris)</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -571,7 +571,7 @@ background: linear-gradient(135deg, #2c3e66, #1e2a47);
 color: white;
 }
 
-/* ========= KHUSUS BONUS - SEPERTI GAMBAR (UKURAN BESAR, 4 KOLOM, TOMBOL SEJAJAR KIRI-KANAN) ========= */
+/* ========= KHUSUS BONUS - SEPERTI GAMBAR 1 (TOMBOL SEJAJAR DALAM 1 BARIS) ========= */
 .bonus-grid {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
@@ -579,7 +579,7 @@ gap: 28px;
 margin-top: 20px;
 }
 
-/* Card bonus UKURAN BESAR seperti gambar */
+/* Card bonus */
 .bonus-card, .bonus-card-static {
 background: rgba(18, 28, 45, 0.92);
 border-radius: 24px;
@@ -590,8 +590,7 @@ box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
 display: flex;
 flex-direction: column;
 cursor: pointer;
-min-height: 320px;
-position: relative;
+min-height: 300px;
 }
 
 .bonus-card:hover, .bonus-card-static:hover {
@@ -601,39 +600,42 @@ border-color: rgba(59, 130, 246, 0.6);
 box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.45);
 }
 
-/* Judul card - dengan border-bottom seperti gambar */
+/* Judul card */
 .bonus-card h3, .bonus-card-static h3 {
-font-size: 1.35rem;
+font-size: 1.3rem;
 font-weight: 800;
-margin-bottom: 16px;
+margin-bottom: 14px;
 color: #f0f4fe;
 word-break: break-word;
 letter-spacing: -0.3px;
 line-height: 1.4;
-border-bottom: 2px dashed rgba(96, 165, 250, 0.6);
-padding-bottom: 14px;
+border-bottom: 2px solid rgba(96, 165, 250, 0.5);
+padding-bottom: 12px;
 }
 
 /* Deskripsi isi */
 .bonus-desc-full {
 color: #cbd5e6;
-line-height: 1.6;
-font-size: 0.95rem;
+line-height: 1.55;
+font-size: 0.9rem;
 margin: 12px 0 20px 0;
 flex: 1;
 white-space: pre-wrap;
 word-break: break-word;
 overflow: hidden;
 display: -webkit-box;
--webkit-line-clamp: 4;
+-webkit-line-clamp: 3;
 -webkit-box-orient: vertical;
 }
 
-/* Container untuk tombol - FLEX ROW (SEJAJAR KIRI DAN KANAN) */
+/* ========= INI YANG PALING PENTING - TOMBOL SEJAJAR DALAM 1 BARIS ========= */
+/* Container tombol menggunakan FLEX ROW (sejajar ke samping) */
 .bonus-actions-row {
 display: flex;
+flex-direction: row;
 align-items: center;
 justify-content: space-between;
+gap: 12px;
 margin-top: auto;
 padding-top: 16px;
 border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -641,18 +643,21 @@ border-top: 1px solid rgba(255, 255, 255, 0.1);
 
 /* Tombol "Klik untuk membuka folder" - di KIRI */
 .btn-open-folder {
+flex: 1;
 background: transparent;
 border: 1px solid rgba(59, 130, 246, 0.5);
 border-radius: 30px;
 color: #60a5fa;
-font-size: 0.75rem;
+font-size: 0.7rem;
 font-weight: 600;
 cursor: pointer;
 transition: all 0.2s;
 display: inline-flex;
 align-items: center;
+justify-content: center;
 gap: 6px;
-padding: 8px 14px;
+padding: 8px 10px;
+white-space: nowrap;
 }
 
 .btn-open-folder i {
@@ -670,16 +675,18 @@ border-color: #60a5fa;
 background: linear-gradient(135deg, #10b981, #059669);
 border: none;
 color: white;
-padding: 8px 18px;
+padding: 8px 16px;
 border-radius: 30px;
-font-size: 0.75rem;
+font-size: 0.7rem;
 font-weight: 700;
 cursor: pointer;
 transition: all 0.2s ease;
 display: inline-flex;
 align-items: center;
+justify-content: center;
 gap: 6px;
 font-family: 'Inter', monospace;
+white-space: nowrap;
 }
 
 .btn-salin-bonus i {
@@ -714,7 +721,7 @@ transform: scale(1.02);
 <div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
 <div class="logo-text">
 <h2>7Kolom</h2>
-<p>Card Bonus Seperti Gambar</p>
+<p>Card Bonus - Tombol Sejajar</p>
 </div>
 </div>
 </div>
@@ -728,7 +735,7 @@ transform: scale(1.02);
 <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
 </div>
 <div class="sidebar-footer">
-<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | 🎯 Card BONUS: 4 KOLOM, TOMBOL SEJAJAR KIRI-KANAN seperti gambar!
+<i class="fas fa-arrows-alt" style="color:#3b82f6"></i> Klik folder → lihat isi | ✅ Card BONUS: Tombol "Klik Folder" dan "SALIN" SEJAJAR dalam 1 BARIS!
 </div>
 </aside>
 
@@ -736,7 +743,7 @@ transform: scale(1.02);
 <div class="content-header">
 <div class="page-title">
 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-<p id="subHeading">Live search tersedia di semua kolom | Card BONUS: 4 kolom, tombol "Klik Folder" (kiri) dan "SALIN" (kanan) SEJAJAR</p>
+<p id="subHeading">Live search tersedia di semua kolom | Card BONUS: Tombol sejajar dalam 1 baris (seperti gambar 1)</p>
 </div>
 <div class="action-buttons">
 <div class="search-wrapper">
@@ -817,7 +824,7 @@ tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi sol
 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
 { icon: "fas fa-handshake", title: "Kolaborasi", desc: "Integrasi dengan tim desain", badge: "Sinergi" }
 ] },
-tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge di atas | 4 kolom, tombol SEJAJAR KIRI-KANAN seperti gambar", items: [] },
+tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge di atas | Tombol SEJAJAR dalam 1 BARIS seperti gambar", items: [] },
 tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap membantu", items: [
 { icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi sidebar 7 kolom dengan background 100% full", badge: "PDF" },
 { icon: "fas fa-headset", title: "Dukungan Teknis", desc: "Chat dengan agen support 24/7", badge: "Live" },
@@ -827,20 +834,20 @@ tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap 
 
 const bonusStaticMap = {
 mingguan: { title: "📆 BONUS MINGGUAN", subtitle: "Klaim special tiap pekan", columns: [
-{ name: "TURNOVER MINGGUAN", value: "0.7% TANPA BATAS", detail: "Bonus rollingan mingguan 0.7% dari total turnover tanpa batas maksimal. Otomatis masuk setiap hari Senin." },
-{ name: "BONUS SABTU-MINGGU", value: "EXTRA 10%", detail: "Deposit weekend dapat bonus 10% maksimal 150K. Minimal deposit 100K. Kode: WEEKEND10" },
-{ name: "TOP WINNER", value: "2 JUTA", detail: "Pemain dengan winrate tertinggi setiap minggu mendapat bonus 2 Juta. Event live setiap minggu." },
-{ name: "STREAK BONUS", value: "NAIK KELAS", detail: "Main 7 hari berturut-turut, dapat free chip 50K. Tidak perlu klaim." }
+{ name: "BONUS CASHBACK", value: "5% - 10%", detail: "Untuk bonus cashback kekalahan yang kami miliki saat ini : Bonus Cashback 5% ( Slot Games )" },
+{ name: "BONUS ROLLINGAN", value: "0.5% - 0.7%", detail: "Untuk bonus rollingan saat ini kami memiliki : Bonus Rollingan turnover 0.5% ( Live Games )" },
+{ name: "BONUS SLOT", value: "CASHBACK 5%", detail: "Untuk bonus slot yang kami miliki saat ini : Bonus Cashback 5% ( Slot Games )" },
+{ name: "BONUS LIVE GAMES", value: "CASHBACK UP TO 5%", detail: "Untuk bonus live games yang kami miliki saat ini : Bonus Cashback up to 5% ( Live Games )" }
 ] },
 done: { title: "✅ DONE BAGI", subtitle: "Bonus instan", columns: [
-{ name: "SHARE MEDSOS", value: "25K FREE", detail: "Share postingan bonus & tag 3 teman, langsung dapat 25K. Wajib screenshot ke CS. Berlaku untuk semua member." },
-{ name: "MISI HARIAN", value: "UP TO 50K", detail: "Selesaikan 5 misi harian dapat bonus bertahap hingga 50K. Reset setiap jam 00:00 WIB. Claim di menu Misi." },
+{ name: "SHARE MEDSOS", value: "25K FREE", detail: "Share postingan bonus & tag 3 teman, langsung dapat 25K. Wajib screenshot ke CS." },
+{ name: "MISI HARIAN", value: "UP TO 50K", detail: "Selesaikan 5 misi harian dapat bonus bertahap hingga 50K. Reset setiap jam 00:00 WIB." },
 { name: "AJAK TEMAN", value: "BONUS 75K", detail: "Setiap teman yang deposit pertama, Anda dan teman dapat 75K masing-masing. Max 5 teman." },
 { name: "VERIFIKASI DONE", value: "20K INSTAN", detail: "Verifikasi email & nomor telepon → bonus 20K langsung masuk. One time only." }
 ] },
 lain: { title: "✨ LAIN-LAIN", subtitle: "Bonus spesial event", columns: [
-{ name: "BONUS ULANG TAHUN", value: "200K + KUE", detail: "Bonus spesial untuk member yang berulang tahun pada bulan ini. Minimal pernah deposit 100K. Kirim KTP ke CS." },
-{ name: "EVENT SCATTER", value: "FREE SPIN 50x", detail: "Kumpulkan scatter terbanyak setiap minggu, dapat free spin bonus hingga 50x. Event berlangsung 1 bulan." },
+{ name: "BONUS ULANG TAHUN", value: "200K + KUE", detail: "Bonus spesial untuk member yang berulang tahun pada bulan ini. Minimal pernah deposit 100K." },
+{ name: "EVENT SCATTER", value: "FREE SPIN 50x", detail: "Kumpulkan scatter terbanyak setiap minggu, dapat free spin bonus hingga 50x." },
 { name: "LUCKY DRAW", value: "JACKPOT 1JT", detail: "Setiap 50k deposit dapat 1 kupon lucky draw, undian setiap minggu. Hadiah utama 1 Juta." },
 { name: "JAM JACKPOT", value: "DOUBLE BONUS", detail: "Pada jam 19:00-21:00, bonus cashback & rollingan jadi double. Periode terbatas." }
 ] }
@@ -903,7 +910,7 @@ return;
 let columnsHtml = `<div class="bonus-grid">`;
 const itemsToShow = bonusAllData.slice(0, 4);
 itemsToShow.forEach((item) => {
-const shortContent = item.content.length > 150 ? item.content.substring(0,150)+'...' : item.content;
+const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content;
 columnsHtml += `
 <div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
 <h3>${escapeHtml(item.title)}</h3>
@@ -968,7 +975,7 @@ function renderBonusStaticSubTab(subTab) {
 const data = bonusStaticMap[subTab];
 if (!data) return;
 mainHeading.innerHTML = data.title;
-subHeading.innerHTML = data.subtitle + " | 4 kolom, tombol SEJAJAR KIRI-KANAN seperti gambar";
+subHeading.innerHTML = data.subtitle + " | Tombol SEJAJAR dalam 1 BARIS seperti gambar";
 let columnsHtml = `<div class="bonus-grid">`;
 data.columns.forEach((col) => {
 columnsHtml += `
@@ -1032,7 +1039,7 @@ copyContentOnly(content, title);
 // Render halaman BONUS utama
 async function renderBonusPage() {
 mainHeading.innerHTML = "⚙️ BONUS ✨";
-subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()} | ${currentBonusSubTab === 'all' ? 'Data BONUS ALL dari Google Sheets' : 'Promo statis'} | 📋 4 KOLOM, TOMBOL SEJAJAR KIRI-KANAN`;
+subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()} | Tombol SEJAJAR dalam 1 BARIS (Klik Folder di kiri, SALIN di kanan)`;
 bonusBadgeContainer.classList.add("visible");
 if (currentBonusSubTab === 'all') {
 await renderBonusAllFromSheet();
