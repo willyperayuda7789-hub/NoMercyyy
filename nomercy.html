@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar - Live Search Semua Tab</title>
+<title>7 Kolom Sidebar - Live Search Per Kolom</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -718,7 +718,7 @@ transform: scale(1.02);
 <div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
 <div class="logo-text">
 <h2>7Kolom</h2>
-<p>Live Search Semua Tab</p>
+<p>Live Search Per Kolom</p>
 </div>
 </div>
 </div>
@@ -732,7 +732,7 @@ transform: scale(1.02);
 <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
 </div>
 <div class="sidebar-footer">
-<i class="fas fa-search" style="color:#3b82f6"></i> Live Search berfungsi di SEMUA tab (cari judul/isi folder)
+<i class="fas fa-search" style="color:#3b82f6"></i> Pencarian berfungsi pada masing-masing kolom secara independen
 </div>
 </aside>
 
@@ -740,12 +740,12 @@ transform: scale(1.02);
 <div class="content-header">
 <div class="page-title">
 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-<p id="subHeading">Live search berfungsi di semua tab | Ketik kata kunci untuk mencari folder atau konten</p>
+<p id="subHeading">Live search bekerja pada setiap kolom/tab secara terpisah | Ketik untuk mencari di kolom yang aktif</p>
 </div>
 <div class="action-buttons">
 <div class="search-wrapper">
 <i class="fas fa-search search-icon"></i>
-<input type="text" id="liveSearchInput" class="search-input" placeholder="Cari judul atau isi folder..." autocomplete="off">
+<input type="text" id="liveSearchInput" class="search-input" placeholder="Cari di kolom ini..." autocomplete="off">
 <button id="clearSearchBtn" class="search-clear"><i class="fas fa-times"></i></button>
 </div>
 </div>
@@ -829,7 +829,7 @@ tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi sol
 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
 { icon: "fas fa-handshake", title: "Kolaborasi", desc: "Integrasi dengan tim desain", badge: "Sinergi" }
 ] },
-tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge di atas | Live Search bisa cari judul/isi", items: [] },
+tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge di atas | Live Search mencari di kategori yang aktif", items: [] },
 tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap membantu", items: [
 { icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi sidebar 7 kolom dengan background 100% full", badge: "PDF" },
 { icon: "fas fa-headset", title: "Dukungan Teknis", desc: "Chat dengan agen support 24/7", badge: "Live" },
@@ -877,7 +877,7 @@ return row;
 });
 }
 
-// ======================= RENDER FUNGSI DENGAN FILTER =======================
+// ======================= RENDER FUNGSI DENGAN FILTER PER KOLOM =======================
 async function renderBonusLainLainWithFilter(filter = "") {
 let data = bonusLainLainData;
 if (data.length === 0) {
@@ -892,7 +892,7 @@ item.content.toLowerCase().includes(filter.toLowerCase())
 );
 }
 if (filteredData.length === 0) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}"</p></div>`;
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori LAIN-LAIN</p></div>`;
 return;
 }
 let columnsHtml = `<div class="bonus-grid">`;
@@ -929,7 +929,7 @@ item.content.toLowerCase().includes(filter.toLowerCase())
 );
 }
 if (filteredData.length === 0) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}"</p></div>`;
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori DONE BAGI</p></div>`;
 return;
 }
 let columnsHtml = `<div class="bonus-grid">`;
@@ -966,7 +966,7 @@ item.content.toLowerCase().includes(filter.toLowerCase())
 );
 }
 if (filteredData.length === 0) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}"</p></div>`;
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori MINGGUAN</p></div>`;
 return;
 }
 let columnsHtml = `<div class="bonus-grid">`;
@@ -1003,7 +1003,7 @@ item.content.toLowerCase().includes(filter.toLowerCase())
 );
 }
 if (filteredData.length === 0) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}"</p></div>`;
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori BONUS ALL</p></div>`;
 return;
 }
 let columnsHtml = `<div class="bonus-grid">`;
@@ -1069,7 +1069,7 @@ const content = this.getAttribute('data-salin-content') || '';
 copyContentOnly(content, title);
 }
 
-// Render halaman BONUS utama dengan filter
+// Render halaman BONUS utama dengan filter (berfungsi per sub-badge yang aktif)
 async function renderBonusPage() {
 mainHeading.innerHTML = "⚙️ BONUS ✨";
 const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : "";
@@ -1086,7 +1086,7 @@ await renderBonusLainLainWithFilter(currentFilterText);
 }
 }
 
-// RENDER RANDOM TAB dengan filter
+// RENDER RANDOM TAB dengan filter (berfungsi per kolom random)
 async function renderRandomTabWithFilter(filter = "") {
 mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
 subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN`;
@@ -1099,7 +1099,7 @@ if(filter.trim() !== "") {
 filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase()));
 }
 if(filtered.length === 0) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada folder dengan kata kunci "${escapeHtml(filter)}"</p></div>`;
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada folder dengan kata kunci "${escapeHtml(filter)}" di kolom RANDOM</p></div>`;
 return;
 }
 let cardsHtml = "";
@@ -1134,7 +1134,7 @@ dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.
 }
 }
 
-// Render static tab dengan filter
+// Render static tab dengan filter (berfungsi per kolom statis)
 function renderStaticTabWithFilter(tabId, filter = "") {
 const data = staticTabsData[tabId];
 if(!data) return false;
@@ -1150,7 +1150,7 @@ item.desc.toLowerCase().includes(filter.toLowerCase())
 );
 }
 if(filteredItems.length === 0 && filter) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}"</p></div>`;
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`;
 return true;
 }
 let cardsHTML = "";
@@ -1161,7 +1161,7 @@ dynamicArea.innerHTML = cardsHTML;
 return true;
 }
 
-// Live search handler
+// Live search handler - pencarian hanya pada kolom yang sedang aktif
 async function applyLiveSearch() {
 const filter = currentFilterText;
 if(currentActiveTab === 'tab2') {
@@ -1201,6 +1201,10 @@ currentBonusSubTab = tabValue;
 document.querySelectorAll('.bonus-badge').forEach(b => b.classList.remove('active-bonus'));
 this.classList.add('active-bonus');
 if(currentActiveTab === 'tab6') {
+// Reset search saat ganti sub-badge bonus
+currentFilterText = "";
+searchInput.value = "";
+clearSearchBtn.classList.remove('visible');
 await renderBonusPage();
 }
 }
@@ -1212,6 +1216,10 @@ document.querySelectorAll('.nav-item').forEach(item => {
 if(item.getAttribute('data-tab') === tabId) item.classList.add('active');
 else item.classList.remove('active');
 });
+// Reset search saat ganti tab
+currentFilterText = "";
+searchInput.value = "";
+clearSearchBtn.classList.remove('visible');
 if(tabId === 'tab2') {
 if(foldersData.length === 0) foldersData = await fetchSheetData(SHEET_RANDOM).catch(e=>[]);
 await renderRandomTabWithFilter(currentFilterText);
