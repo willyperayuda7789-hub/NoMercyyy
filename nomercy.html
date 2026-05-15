@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar - Live Search Per Kolom</title>
+<title>7 Kolom Sidebar - Gallery 4 Sejajar (Data Original)</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -517,7 +517,7 @@ background: rgba(220, 38, 38, 0.8);
 border-left: 5px solid #ff8a8a;
 }
 
-/* ========= 4 BADGE BONUS (TIDAK DIUBAH) ========= */
+/* ========= BADGE BONUS ========= */
 .bonus-badge-container {
 margin-bottom: 24px;
 display: none;
@@ -571,7 +571,7 @@ background: linear-gradient(135deg, #2c3e66, #1e2a47);
 color: white;
 }
 
-/* ========= KHUSUS BONUS - TOMBOL SEJAJAR DALAM 1 BARIS (TIDAK DIUBAH) ========= */
+/* ========= BONUS GRID ========= */
 .bonus-grid {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
@@ -687,7 +687,7 @@ background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
 }
 
-/* ========= BADGE NAVIGASI UNTUK GALLERY GAMBAR CS ========= */
+/* ========= GALLERY BADGE NAVIGASI ========= */
 .gallery-badge-bar {
 display: flex;
 gap: 16px;
@@ -734,10 +734,10 @@ background: linear-gradient(135deg, #2c4e3e, #1e3a2f);
 color: white;
 }
 
-/* ========= GALLERY CARD - UKURAN AWAL (AUTO-FILL) ========= */
+/* ========= GALLERY GRID - 4 KOLOM SEJAJAR ========= */
 .gallery-grid {
 display: grid;
-grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+grid-template-columns: repeat(4, 1fr);
 gap: 24px;
 margin-top: 10px;
 }
@@ -844,6 +844,7 @@ transform: scale(1.01);
 /* Responsive */
 @media (max-width: 1300px) {
 .bonus-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.gallery-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
 .sidebar { width: 240px; }
@@ -898,7 +899,7 @@ transform: scale(1.01);
 </div>
 </div>
 
-<!-- Container untuk badge bonus khusus tab BONUS (tidak diubah) -->
+<!-- Container untuk badge bonus khusus tab BONUS -->
 <div id="bonusBadgeContainer" class="bonus-badge-container">
 <div class="bonus-badge-bar">
 <div class="bonus-badge" data-bonus-tab="all"><i class="fas fa-layer-group"></i> BONUS ALL</div>
@@ -944,7 +945,7 @@ Isi folder akan ditampilkan di sini...
 <div id="copyToast" class="copy-toast-notif"><i class="fas fa-copy"></i> Berhasil disalin! 📄</div>
 
 <script>
-// ======================= KONFIGURASI GOOGLE SHEETS (TIDAK DIUBAH) =======================
+// ======================= KONFIGURASI GOOGLE SHEETS =======================
 const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
 const SHEET_BONUS_ALL = 'BONUS ALL';
 const SHEET_BONUS_MINGGUAN = 'BONUS MINGGUAN';
@@ -963,7 +964,7 @@ let currentActiveTab = "tab1";
 let currentBonusSubTab = "lain";
 let currentGallerySubTab = "bonus";
 
-// Data statis untuk tab lain (TIDAK DIUBAH)
+// Data statis untuk tab lain
 const staticTabsData = {
 tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik — background full size 100%", items: [
 { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
@@ -987,7 +988,7 @@ tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap 
 ] }
 };
 
-// Data GALLERY GAMBAR CS - PERSIS SEPERTI GAMBAR ANDA
+// Data GALLERY GAMBAR CS - DATA ORIGINAL TIDAK DIUBAH
 const GALLERY_CS_DATA = {
     bonus: [
         { 
@@ -1027,7 +1028,7 @@ const GALLERY_CS_DATA = {
     ]
 };
 
-// Fungsi fetch data dari sheet (TIDAK DIUBAH)
+// Fungsi fetch data dari sheet
 async function fetchSheetData(sheetName) {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
@@ -1067,7 +1068,7 @@ return row;
 });
 }
 
-// ======================= FUNGSI BONUS (TIDAK DIUBAH) =======================
+// ======================= FUNGSI BONUS =======================
 async function renderBonusLainLainWithFilter(filter = "") {
 let data = bonusLainLainData;
 if (data.length === 0) {
@@ -1223,7 +1224,7 @@ else if (currentBonusSubTab === 'done') await renderBonusDoneBagiWithFilter(curr
 else if (currentBonusSubTab === 'lain') await renderBonusLainLainWithFilter(currentFilterText);
 }
 
-// RENDER RANDOM TAB (TIDAK DIUBAH)
+// RENDER RANDOM TAB
 async function renderRandomTabWithFilter(filter = "") {
 mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
 subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN`;
@@ -1265,7 +1266,7 @@ dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.
 }
 }
 
-// Render static tab (TIDAK DIUBAH)
+// Render static tab
 function renderStaticTabWithFilter(tabId, filter = "") {
 const data = staticTabsData[tabId];
 if(!data) return false;
@@ -1288,7 +1289,7 @@ dynamicArea.innerHTML = cardsHTML;
 return true;
 }
 
-// ======================= FUNGSI GALLERY GAMBAR CS =======================
+// ======================= FUNGSI GALLERY GAMBAR CS (DATA ORIGINAL, LAYOUT 4 KOLOM SEJAJAR) =======================
 function renderGalleryCSWithFilter(filter = "") {
     const dataGroup = GALLERY_CS_DATA[currentGallerySubTab] || [];
     let filtered = dataGroup;
@@ -1355,7 +1356,7 @@ function renderGalleryCSWithFilter(filter = "") {
 
 function renderGalleryTab() {
     mainHeading.innerHTML = "🖼️ GALLERY GAMBAR CS";
-    subHeading.innerHTML = `Kategori: ${currentGallerySubTab.toUpperCase()} | Klik kartu untuk lihat detail lengkap. ${currentFilterText ? `🔍 filter: "${currentFilterText}"` : ''}`;
+    subHeading.innerHTML = `Kategori: ${currentGallerySubTab.toUpperCase()} | 4 Folder Sejajar dalam 1 Baris ${currentFilterText ? `🔍 filter: "${currentFilterText}"` : ''}`;
     bonusBadgeContainer.classList.remove("visible");
     const galleryContainerDiv = document.getElementById("galleryBadgeContainer");
     if(galleryContainerDiv) galleryContainerDiv.style.display = "block";
