@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar - Live Search Per Kolom</title>
+<title>7 Kolom Sidebar - Gallery Gambar CS</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -277,7 +277,7 @@ gap: 24px;
 margin-top: 12px;
 }
 
-/* Card Style */
+/* Card Style untuk tab lain */
 .card {
 background: rgba(18, 28, 45, 0.85);
 border-radius: 28px;
@@ -687,7 +687,7 @@ background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
 }
 
-/* ========= BADGE NAVIGASI UNTUK GALLERY GAMBAR CS (TAMBAHAN BARU) ========= */
+/* ========= BADGE NAVIGASI UNTUK GALLERY GAMBAR CS ========= */
 .gallery-badge-bar {
 display: flex;
 gap: 16px;
@@ -734,15 +734,14 @@ background: linear-gradient(135deg, #2c4e3e, #1e3a2f);
 color: white;
 }
 
-/* Grid khusus untuk Gallery - card ukuran 260px */
+/* ========= GALLERY CARD - SEPERTI PADA GAMBAR ========= */
 .gallery-grid {
 display: grid;
-grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+grid-template-columns: repeat(4, 1fr);
 gap: 24px;
 margin-top: 10px;
 }
 
-/* Card Gallery - ukuran 260px */
 .gallery-card {
 background: rgba(18, 28, 45, 0.92);
 border-radius: 20px;
@@ -754,64 +753,86 @@ display: flex;
 flex-direction: column;
 position: relative;
 }
+
 .gallery-card:hover {
 transform: translateY(-5px);
-border-color: #10b981;
+border-color: #3b82f6;
 box-shadow: 0 20px 30px -12px rgba(0,0,0,0.5);
 }
+
 .gallery-card-header {
-padding: 16px 16px 10px 16px;
+padding: 18px 18px 8px 18px;
 border-bottom: 1px solid rgba(255,255,255,0.1);
 }
+
 .gallery-card-header h3 {
-font-size: 1rem;
+font-size: 1.2rem;
 font-weight: 800;
 color: #f0fdf4;
 margin: 0;
 display: flex;
 align-items: center;
-gap: 8px;
-line-height: 1.3;
+gap: 10px;
 }
+
 .gallery-card-header h3 i {
-color: #34d399;
-font-size: 0.95rem;
+color: #f59e0b;
+font-size: 1.1rem;
 }
+
+.gallery-card-number {
+background: rgba(245, 158, 11, 0.2);
+color: #fbbf24;
+padding: 2px 8px;
+border-radius: 20px;
+font-size: 0.7rem;
+font-weight: 600;
+margin-left: 8px;
+}
+
 .gallery-card-body {
-padding: 12px 16px;
+padding: 14px 18px;
 flex: 1;
 min-height: 80px;
 }
+
 .gallery-card-body p {
 color: #cbd5e6;
-font-size: 0.75rem;
-line-height: 1.45;
+font-size: 0.8rem;
+line-height: 1.5;
 margin: 0;
 display: -webkit-box;
 -webkit-line-clamp: 3;
 -webkit-box-orient: vertical;
 overflow: hidden;
 }
+
 .gallery-card-footer {
-padding: 10px 16px 16px 16px;
+padding: 12px 18px 18px 18px;
 border-top: 1px solid rgba(255,255,255,0.08);
 }
+
 .btn-open-gallery {
 width: 100%;
 background: linear-gradient(135deg, #3b82f6, #1d4ed8);
 border: none;
 color: white;
-padding: 8px 12px;
+padding: 10px 14px;
 border-radius: 40px;
-font-size: 0.7rem;
+font-size: 0.8rem;
 font-weight: 600;
 cursor: pointer;
 transition: all 0.2s ease;
 display: flex;
 align-items: center;
 justify-content: center;
-gap: 6px;
+gap: 8px;
 }
+
+.btn-open-gallery i {
+font-size: 0.8rem;
+}
+
 .btn-open-gallery:hover {
 background: linear-gradient(135deg, #2563eb, #1e40af);
 transform: scale(1.01);
@@ -819,8 +840,8 @@ transform: scale(1.01);
 
 /* Responsive */
 @media (max-width: 1300px) {
-.bonus-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-.gallery-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.bonus-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
 .sidebar { width: 240px; }
@@ -828,9 +849,9 @@ transform: scale(1.01);
 .search-input { width: 200px; }
 .search-input:focus { width: 220px; }
 .page-title h1 { font-size: 1.4rem; }
+.gallery-grid { grid-template-columns: 1fr; }
 .bonus-grid { grid-template-columns: 1fr; }
 .dashboard-grid { grid-template-columns: 1fr; }
-.gallery-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -885,7 +906,7 @@ transform: scale(1.01);
 </div>
 </div>
 
-<!-- Container untuk badge navigasi GALLERY GAMBAR CS (HANYA UNTUK TAB INI) -->
+<!-- Container untuk badge navigasi GALLERY GAMBAR CS -->
 <div id="galleryBadgeContainer" style="display: none;">
 <div class="gallery-badge-bar">
 <div class="gallery-badge active-gallery-badge" data-gallery-tab="bonus"><i class="fas fa-gift"></i> BONUS</div>
@@ -909,7 +930,7 @@ transform: scale(1.01);
 </div>
 <div class="modal-body" id="modalBody">
 <div class="modal-content-text" id="modalContentText">
-Isi folder / detail akan ditampilkan di sini...
+Isi folder akan ditampilkan di sini...
 </div>
 <div class="esc-hint">
 <kbd>ESC</kbd> Tekan ESC untuk menutup
@@ -929,7 +950,6 @@ const SHEET_DONE_BAGI = 'DONEBAGI';
 const SHEET_BONUS_LAIN_LAIN = 'BONUS LAIN-LAIN';
 const SHEET_RANDOM = 'PK RANDOM';
 
-// Data cache untuk semua sheet
 let foldersData = [];
 let bonusAllData = [];
 let bonusMingguanData = [];
@@ -965,23 +985,23 @@ tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap 
 ] }
 };
 
-// Data khusus untuk GALLERY GAMBAR CS
+// Data GALLERY GAMBAR CS - Format seperti gambar yang diminta
 const GALLERY_CS_DATA = {
     bonus: [
-        { title: "BONUS CASHBACK", icon: "fas fa-percent", desc: "Bonus Cashback up to 5% (Live Games) = Bonus Kekalahan 5% hanya berlaku untuk permainan Live Games", content: "DETAIL BONUS CASHBACK\n\nPersyaratan:\n• Minimal kekalahan: Rp 500.000\n• Maksimal bonus: Rp 5.000.000\n• Bonus dibagikan setiap hari Senin" },
-        { title: "BONUS ROLLINGAN", icon: "fas fa-sync-alt", desc: "Bonus Rollingan turnover LIVE GAMES sebesar 0,5% dari total bettingan", content: "DETAIL BONUS ROLLINGAN\n\nKomisi Rollingan:\n• Live Games: 0.5%\n• Slot Games: 0.7%\n• Sportsbook: 0.5%" },
-        { title: "BONUS SLOT", icon: "fas fa-gamepad", desc: "Bonus Cashback 5% (Slot Games) = Bonus Kekalahan 5% hanya berlaku untuk permainan Slot Games", content: "DETAIL BONUS SLOT\n\nBonus Cashback Slot 5%:\n• Minimal kekalahan: Rp 200.000\n• Maksimal bonus: Rp 2.000.000" },
-        { title: "BONUS LIVE GAMES", icon: "fas fa-dice", desc: "Bonus Cashback up to 5% (Live Games) = Bonus Kekalahan 5% hanya berlaku untuk permainan Live Games", content: "DETAIL BONUS LIVE GAMES\n\nBonus Cashback:\n• Kekalahan Rp 500.000 - 50jt: 3%\n• Kekalahan > 200jt: 5%" }
+        { title: "TIDAK DAPAT BONUS", number: "1", desc: "Apabila anda tidak mendapatkan bonus tersebut, berarti anda tidak memenuhi syarat dan ketentuan untuk mendapatkan bonus yang sudah berlaku...", content: "📋 PENJELASAN LENGKAP\n\nApabila anda tidak mendapatkan bonus tersebut, berarti anda tidak memenuhi syarat dan ketentuan untuk mendapatkan bonus yang sudah berlaku.\n\nSyarat dan ketentuan:\n• Minimal turnover belum terpenuhi\n• Periode bonus sudah berakhir\n• Akun tidak memenuhi kriteria\n\nHubungi CS untuk info lebih lanjut." },
+        { title: "TIDAK DAPAT BONUS", number: "2", desc: "Perihal bonus akan otomatis masuk jika anda memenuhi syarat untuk mendapatkan nya ya boskuu...", content: "📋 PENJELASAN LENGKAP\n\nPerihal bonus akan otomatis masuk jika anda memenuhi syarat untuk mendapatkan nya ya boskuu.\n\nSistem kami sudah terotomatisasi:\n• Bonus masuk dalam waktu 1x24 jam\n• Tidak perlu klaim\n• Cek secara berkala pada menu bonus" },
+        { title: "TIDAK DAPAT BONUS", number: "3", desc: "Semua bonus yang di bagikan oleh sistem kami sudah sesuai prosedur serta syarat dan ketentuan tanpa perlu di claim dan j...", content: "📋 PENJELASAN LENGKAP\n\nSemua bonus yang di bagikan oleh sistem kami sudah sesuai prosedur serta syarat dan ketentuan tanpa perlu di claim dan akan otomatis masuk ke akun anda.\n\nProsedur:\n• Validasi otomatis oleh sistem\n• Transparan dan fair play\n• Bisa dicek pada history bonus" },
+        { title: "BONUS SEDIKIT", number: "3", desc: "Jika bosku ingin mendapatkan bonus lebih kami sarankan untuk tingkatkan bettingan dalam periode permainan LIVEGAMES / SLOT...", content: "📋 PENJELASAN LENGKAP\n\nJika bosku ingin mendapatkan bonus lebih kami sarankan untuk tingkatkan bettingan dalam periode permainan LIVEGAMES / SLOT GAMES.\n\nTips mendapatkan bonus lebih:\n• Tingkatkan volume bettingan\n• Main secara konsisten\n• Ikuti event-event spesial\n• Jangan lewatkan promo harian" }
     ],
     poster: [
-        { title: "POSTER CS 24 JAM", icon: "fas fa-clock", desc: "Layanan Customer Service 24 jam non-stop. Siap membantu kapanpun anda membutuhkan.", content: "POSTER CS 24 JAM\n\nDeskripsi: Poster promosi layanan CS yang tersedia 24 jam penuh." },
-        { title: "POSTER PRIORITAS CS", icon: "fas fa-star", desc: "Layanan prioritas untuk member VIP. Respon lebih cepat, solusi lebih tepat.", content: "POSTER PRIORITAS CS\n\nFitur Layanan Prioritas: Respon dalam 30 detik" },
-        { title: "POSTER EVENT CS DAY", icon: "fas fa-calendar-alt", desc: "Rayakan Hari Customer Service bersama kami. Dapatkan bonus spesial.", content: "POSTER EVENT CS DAY\n\nEvent Bulanan: Periode 1-30 setiap bulan" }
+        { title: "POSTER CS 24 JAM", number: "1", desc: "Layanan Customer Service 24 jam non-stop. Siap membantu kapanpun anda membutuhkan.", content: "POSTER CS 24 JAM - Layanan customer service tersedia 24 jam non stop" },
+        { title: "POSTER PRIORITAS CS", number: "2", desc: "Layanan prioritas untuk member VIP. Respon lebih cepat, solusi lebih tepat.", content: "POSTER PRIORITAS CS - Layanan khusus untuk member VIP" },
+        { title: "POSTER EVENT CS DAY", number: "3", desc: "Rayakan Hari Customer Service bersama kami. Dapatkan bonus spesial.", content: "POSTER EVENT CS DAY - Event spesial bulanan" }
     ],
     screenshot: [
-        { title: "DASHBOARD CS TOOLS", icon: "fas fa-desktop", desc: "Tampilan dashboard tools CS versi terbaru dengan fitur live chat monitoring.", content: "DASHBOARD CS TOOLS\n\nFitur: Jumlah antrian chat, waktu respon rata-rata" },
-        { title: "GRAFIK RESPON CS", icon: "fas fa-chart-line", desc: "Statistik peningkatan kecepatan respon CS dari bulan ke bulan.", content: "GRAFIK RESPON CS\n\nData Q1 2025: Target 30 detik" },
-        { title: "UI APLIKASI MOBILE CS", icon: "fas fa-mobile-alt", desc: "Tampilan antarmuka aplikasi CS di perangkat mobile.", content: "UI APLIKASI MOBILE CS\n\nTersedia untuk iOS dan Android" }
+        { title: "DASHBOARD CS TOOLS", number: "1", desc: "Tampilan dashboard tools CS versi terbaru dengan fitur live chat monitoring.", content: "DASHBOARD CS TOOLS - Tampilan antarmuka CS versi terbaru" },
+        { title: "GRAFIK RESPON CS", number: "2", desc: "Statistik peningkatan kecepatan respon CS dari bulan ke bulan.", content: "GRAFIK RESPON CS - Data statistik respon time" },
+        { title: "UI APLIKASI MOBILE CS", number: "3", desc: "Tampilan antarmuka aplikasi CS di perangkat mobile.", content: "UI APLIKASI MOBILE CS - Tampilan mobile friendly" }
     ]
 };
 
@@ -1034,10 +1054,7 @@ catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gaga
 }
 let filteredData = data;
 if (filter.trim()) {
-filteredData = data.filter(item => 
-item.title.toLowerCase().includes(filter.toLowerCase()) || 
-item.content.toLowerCase().includes(filter.toLowerCase())
-);
+filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase()));
 }
 if (filteredData.length === 0) {
 dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori LAIN-LAIN</p></div>`;
@@ -1046,15 +1063,7 @@ return;
 let columnsHtml = `<div class="bonus-grid">`;
 filteredData.forEach((item) => {
 const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content;
-columnsHtml += `
-<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
-<h3><i class="fas fa-tags"></i> ${escapeHtml(item.title)}</h3>
-<div class="bonus-desc-full">${escapeHtml(shortContent)}</div>
-<div class="bonus-actions-row">
-<button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
-<button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button>
-</div>
-</div>`;
+columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-tags"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`;
 });
 columnsHtml += `</div>`;
 dynamicArea.innerHTML = columnsHtml;
@@ -1071,10 +1080,7 @@ catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gaga
 }
 let filteredData = data;
 if (filter.trim()) {
-filteredData = data.filter(item => 
-item.title.toLowerCase().includes(filter.toLowerCase()) || 
-item.content.toLowerCase().includes(filter.toLowerCase())
-);
+filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase()));
 }
 if (filteredData.length === 0) {
 dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori DONE BAGI</p></div>`;
@@ -1083,15 +1089,7 @@ return;
 let columnsHtml = `<div class="bonus-grid">`;
 filteredData.forEach((item) => {
 const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content;
-columnsHtml += `
-<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
-<h3><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</h3>
-<div class="bonus-desc-full">${escapeHtml(shortContent)}</div>
-<div class="bonus-actions-row">
-<button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
-<button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button>
-</div>
-</div>`;
+columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`;
 });
 columnsHtml += `</div>`;
 dynamicArea.innerHTML = columnsHtml;
@@ -1108,10 +1106,7 @@ catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gaga
 }
 let filteredData = data;
 if (filter.trim()) {
-filteredData = data.filter(item => 
-item.title.toLowerCase().includes(filter.toLowerCase()) || 
-item.content.toLowerCase().includes(filter.toLowerCase())
-);
+filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase()));
 }
 if (filteredData.length === 0) {
 dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori MINGGUAN</p></div>`;
@@ -1120,15 +1115,7 @@ return;
 let columnsHtml = `<div class="bonus-grid">`;
 filteredData.forEach((item) => {
 const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content;
-columnsHtml += `
-<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
-<h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.title)}</h3>
-<div class="bonus-desc-full">${escapeHtml(shortContent)}</div>
-<div class="bonus-actions-row">
-<button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
-<button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button>
-</div>
-</div>`;
+columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`;
 });
 columnsHtml += `</div>`;
 dynamicArea.innerHTML = columnsHtml;
@@ -1145,10 +1132,7 @@ catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>Gagal me
 }
 let filteredData = data;
 if (filter.trim()) {
-filteredData = data.filter(item => 
-item.title.toLowerCase().includes(filter.toLowerCase()) || 
-item.content.toLowerCase().includes(filter.toLowerCase())
-);
+filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase()));
 }
 if (filteredData.length === 0) {
 dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori BONUS ALL</p></div>`;
@@ -1157,15 +1141,7 @@ return;
 let columnsHtml = `<div class="bonus-grid">`;
 filteredData.slice(0, 8).forEach((item) => {
 const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content;
-columnsHtml += `
-<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
-<h3>${escapeHtml(item.title)}</h3>
-<div class="bonus-desc-full">${escapeHtml(shortContent)}</div>
-<div class="bonus-actions-row">
-<button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
-<button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button>
-</div>
-</div>`;
+columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3>${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`;
 });
 columnsHtml += `</div>`;
 dynamicArea.innerHTML = columnsHtml;
@@ -1219,15 +1195,10 @@ const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"`
 subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()}${filterInfo} | Tombol SEJAJAR dalam 1 BARIS`;
 bonusBadgeContainer.classList.add("visible");
 document.getElementById("galleryBadgeContainer").style.display = "none";
-if (currentBonusSubTab === 'all') {
-await renderBonusAllWithFilter(currentFilterText);
-} else if (currentBonusSubTab === 'mingguan') {
-await renderBonusMingguanWithFilter(currentFilterText);
-} else if (currentBonusSubTab === 'done') {
-await renderBonusDoneBagiWithFilter(currentFilterText);
-} else if (currentBonusSubTab === 'lain') {
-await renderBonusLainLainWithFilter(currentFilterText);
-}
+if (currentBonusSubTab === 'all') await renderBonusAllWithFilter(currentFilterText);
+else if (currentBonusSubTab === 'mingguan') await renderBonusMingguanWithFilter(currentFilterText);
+else if (currentBonusSubTab === 'done') await renderBonusDoneBagiWithFilter(currentFilterText);
+else if (currentBonusSubTab === 'lain') await renderBonusLainLainWithFilter(currentFilterText);
 }
 
 // RENDER RANDOM TAB (TIDAK DIUBAH)
@@ -1240,9 +1211,7 @@ dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-p
 try {
 if(foldersData.length === 0) foldersData = await fetchSheetData(SHEET_RANDOM);
 let filtered = foldersData;
-if(filter.trim() !== "") {
-filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase()));
-}
+if(filter.trim() !== "") filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase()));
 if(filtered.length === 0) {
 dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada folder dengan kata kunci "${escapeHtml(filter)}" di kolom RANDOM</p></div>`;
 return;
@@ -1250,12 +1219,7 @@ return;
 let cardsHtml = "";
 filtered.forEach((f) => {
 const short = f.content.length > 120 ? f.content.substring(0,120)+'...' : f.content;
-cardsHtml += `<div class="card random-folder" data-folder-title="${escapeHtml(f.title)}" data-folder-content="${escapeHtml(f.content)}">
-<button class="btn-salin-folder" data-salin-title="${escapeHtml(f.title)}" data-salin-content="${escapeHtml(f.content)}"><i class="fas fa-copy"></i> SALIN</button>
-<h3>${escapeHtml(f.title)}</h3>
-<p>${escapeHtml(short) || 'Klik untuk melihat isi lengkap folder ini'}</p>
-<div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk membuka folder</div>
-</div>`;
+cardsHtml += `<div class="card random-folder" data-folder-title="${escapeHtml(f.title)}" data-folder-content="${escapeHtml(f.content)}"><button class="btn-salin-folder" data-salin-title="${escapeHtml(f.title)}" data-salin-content="${escapeHtml(f.content)}"><i class="fas fa-copy"></i> SALIN</button><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(short) || 'Klik untuk melihat isi lengkap folder ini'}</p><div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk membuka folder</div></div>`;
 });
 dynamicArea.innerHTML = cardsHtml;
 document.querySelectorAll('.btn-salin-folder').forEach(btn => {
@@ -1289,12 +1253,7 @@ subHeading.innerHTML = data.subtitle + filterInfo;
 bonusBadgeContainer.classList.remove("visible");
 document.getElementById("galleryBadgeContainer").style.display = "none";
 let filteredItems = data.items;
-if(filter.trim() !== "") {
-filteredItems = data.items.filter(item => 
-item.title.toLowerCase().includes(filter.toLowerCase()) || 
-item.desc.toLowerCase().includes(filter.toLowerCase())
-);
-}
+if(filter.trim() !== "") filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase()));
 if(filteredItems.length === 0 && filter) {
 dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`;
 return true;
@@ -1314,8 +1273,8 @@ function renderGalleryCSWithFilter(filter = "") {
     if(filter.trim() !== "") {
         filtered = dataGroup.filter(item => 
             item.title.toLowerCase().includes(filter.toLowerCase()) || 
-            item.desc.toLowerCase().includes(filter.toLowerCase()) ||
-            item.content.toLowerCase().includes(filter.toLowerCase())
+            (item.desc && item.desc.toLowerCase().includes(filter.toLowerCase())) ||
+            (item.content && item.content.toLowerCase().includes(filter.toLowerCase()))
         );
     }
     if(filtered.length === 0) {
@@ -1324,13 +1283,12 @@ function renderGalleryCSWithFilter(filter = "") {
     }
     let html = `<div class="gallery-grid">`;
     filtered.forEach((item) => {
-        const shortDesc = item.desc.length > 80 ? item.desc.substring(0,80)+'...' : item.desc;
-        html += `<div class="gallery-card" data-full-content="${escapeHtml(item.content)}" data-title="${escapeHtml(item.title)}">
+        html += `<div class="gallery-card" data-full-content="${escapeHtml(item.content)}" data-title="${escapeHtml(item.title)} ${item.number ? item.number : ''}">
                     <div class="gallery-card-header">
-                        <h3><i class="${item.icon}"></i> ${escapeHtml(item.title)}</h3>
+                        <h3><i class="fas fa-exclamation-triangle"></i> ${escapeHtml(item.title)} ${item.number ? '<span class="gallery-card-number">'+escapeHtml(item.number)+'</span>' : ''}</h3>
                     </div>
                     <div class="gallery-card-body">
-                        <p>${escapeHtml(shortDesc)}</p>
+                        <p>${escapeHtml(item.desc)}</p>
                     </div>
                     <div class="gallery-card-footer">
                         <button class="btn-open-gallery"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
@@ -1400,15 +1358,10 @@ function galleryHandler(e) {
 // Live search handler
 async function applyLiveSearch() {
 const filter = currentFilterText;
-if(currentActiveTab === 'tab2') {
-await renderRandomTabWithFilter(filter);
-} else if(currentActiveTab === 'tab6') {
-await renderBonusPage();
-} else if(currentActiveTab === 'tab4') {
-renderGalleryTab();
-} else {
-renderStaticTabWithFilter(currentActiveTab, filter);
-}
+if(currentActiveTab === 'tab2') await renderRandomTabWithFilter(filter);
+else if(currentActiveTab === 'tab6') await renderBonusPage();
+else if(currentActiveTab === 'tab4') renderGalleryTab();
+else renderStaticTabWithFilter(currentActiveTab, filter);
 }
 
 function handleSearchInput() {
