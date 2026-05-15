@@ -19,7 +19,7 @@ body {
 font-family: 'Inter', sans-serif;
 height: 100vh;
 overflow: hidden;
-background-image: url('');
+background-image: url('https://i.pinimg.com/1200x/9d/f8/a5/9df8a54bdbc89f524d62a729f52936c4.jpg');
 background-size: 100% 100%;
 background-position: center center;
 background-repeat: no-repeat;
@@ -269,7 +269,7 @@ background: #ef4444;
 color: white;
 }
 
-/* Grid card untuk tab selain BONUS */
+/* Grid card untuk tab selain BONUS & GALLERY */
 .dashboard-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -692,7 +692,7 @@ background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
 }
 
-/* ========= GALLERY GAMBAR CS - TERSUSUN KE SAMPING (HORIZONTAL SCROLL) ========= */
+/* ========= GALLERY GAMBAR CS - 1 BARIS 4 FOLDER (TANPA SCROLL) ========= */
 .gallery-badge-container {
 margin-bottom: 24px;
 display: none;
@@ -746,50 +746,25 @@ background: linear-gradient(135deg, #2c3e66, #1e2a47);
 color: white;
 }
 
-/* FOLDER TERSUSUN KE SAMPING - HORIZONTAL SCROLL */
-.gallery-horizontal-wrapper {
-width: 100%;
-overflow-x: auto;
-overflow-y: hidden;
-padding-bottom: 16px;
-margin-top: 12px;
-scrollbar-width: thin;
-scrollbar-color: #3b82f6 rgba(255,255,255,0.2);
-}
-.gallery-horizontal-wrapper::-webkit-scrollbar {
-height: 8px;
-}
-.gallery-horizontal-wrapper::-webkit-scrollbar-track {
-background: rgba(255,255,255,0.1);
-border-radius: 10px;
-}
-.gallery-horizontal-wrapper::-webkit-scrollbar-thumb {
-background: #3b82f6;
-border-radius: 10px;
-}
-.gallery-horizontal-scroll {
-display: flex;
-flex-direction: row;
+/* FOLDER 1 BARIS 4 KOLOM - TANPA SCROLL, MENYESUAIKAN LEBAR */
+.gallery-grid-4 {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
 gap: 24px;
-padding-right: 16px;
-min-width: min-content;
+margin-top: 12px;
 }
-.gallery-card-horizontal {
-flex-shrink: 0;
-width: 320px;
+.gallery-card {
 background: rgba(20, 30, 50, 0.92);
 border-radius: 28px;
-padding: 24px;
+padding: 22px;
 backdrop-filter: blur(8px);
 border: 1px solid rgba(255, 255, 255, 0.2);
 transition: all 0.3s ease;
 cursor: pointer;
 display: flex;
 flex-direction: column;
-height: 100%;
-min-height: 280px;
 }
-.gallery-card-horizontal:hover {
+.gallery-card:hover {
 transform: translateY(-8px);
 background: rgba(30, 48, 74, 0.97);
 border-color: #3b82f6;
@@ -800,56 +775,62 @@ font-size: 2rem;
 margin-bottom: 16px;
 color: #60a5fa;
 }
-.gallery-card-horizontal h4 {
-font-size: 1.3rem;
+.gallery-card h4 {
+font-size: 1.25rem;
 font-weight: 700;
-margin: 12px 0 8px;
+margin: 8px 0;
 color: #f1f5f9;
 }
 .gallery-desc {
 color: #cbd5e6;
 line-height: 1.5;
 margin: 12px 0;
-font-size: 0.9rem;
+font-size: 0.85rem;
 flex: 1;
 }
 .gallery-detail-btn {
 display: inline-block;
 background: rgba(59,130,246,0.2);
 border-radius: 40px;
-padding: 8px 18px;
+padding: 6px 16px;
 font-weight: 600;
-font-size: 0.75rem;
+font-size: 0.7rem;
 color: #bfdbfe;
 margin-top: 12px;
 text-align: center;
 transition: 0.2s;
 width: fit-content;
 }
-.gallery-card-horizontal:hover .gallery-detail-btn {
+.gallery-card:hover .gallery-detail-btn {
 background: #3b82f6;
 color: white;
 }
-.empty-gallery-horizontal {
+.empty-gallery {
 text-align: center;
 padding: 48px;
 background: rgba(0,0,0,0.5);
 border-radius: 40px;
-width: 100%;
+grid-column: 1 / -1;
 }
 
-/* Responsive */
-@media (max-width: 1300px) {
-.bonus-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+/* Responsive: jika layar kecil, tetap tampil 4 kolom dengan ukuran mengecil */
+@media (max-width: 1200px) {
+.gallery-grid-4 { gap: 20px; }
+.gallery-card { padding: 18px; }
+.gallery-card h4 { font-size: 1.1rem; }
+}
+@media (max-width: 992px) {
+.gallery-grid-4 { gap: 16px; }
+.gallery-card { padding: 16px; }
+.gallery-desc { font-size: 0.8rem; }
 }
 @media (max-width: 768px) {
 .sidebar { width: 240px; }
 .main-content { padding: 16px; }
-.search-input { width: 200px; }
-.search-input:focus { width: 220px; }
-.page-title h1 { font-size: 1.4rem; }
-.bonus-grid { grid-template-columns: 1fr; }
-.gallery-card-horizontal { width: 280px; }
+.gallery-grid-4 { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 480px) {
+.gallery-grid-4 { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -970,7 +951,7 @@ tab3: { title: "✉️ EVENT LINETOGEL", subtitle: "Inbox & komunikasi tim — p
 { icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif di proyek utama", badge: "Balas" },
 { icon: "fas fa-bell", title: "Notifikasi", desc: "Pengingat meeting jam 14:00 WIB", badge: "Segera" }
 ] },
-tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Klik badge di atas untuk memilih kategori | Folder tersusun ke samping", items: [] },
+tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Klik badge di atas untuk memilih kategori | 1 baris 4 folder", items: [] },
 tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi solid", items: [
 { icon: "fas fa-user-plus", title: "Anggota Aktif", desc: "12 anggota online · 4 sedang rapat", badge: "Online" },
 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
@@ -984,7 +965,7 @@ tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap 
 ] }
 };
 
-// DATA UNTUK 3 BADGE GALLERY GAMBAR CS (DAPAT DIISI)
+// DATA UNTUK 3 BADGE GALLERY GAMBAR CS (SETIAP KATEGORI ISI 4 FOLDER)
 const galleryData = {
 rrn_qris: { 
     title: "📱 RRN QRIS", 
@@ -992,7 +973,8 @@ rrn_qris: {
     items: [
         { icon: "fas fa-exchange-alt", judul: "Apa itu RRN?", deskripsiSingkat: "Nomor Referensi Transaksi untuk pelacakan QRIS.", isiLengkap: "RRN (Retrieval Reference Number) adalah nomor unik yang diterbitkan setiap transaksi QRIS. Digunakan untuk komplain dan pengecekan status.\n\nContoh RRN: 123456789012345.\nSimpan baik-baik untuk keperluan klaim." },
         { icon: "fas fa-search", judul: "Cek Status Transaksi", deskripsiSingkat: "Cara verifikasi menggunakan RRN.", isiLengkap: "Masukkan RRN di aplikasi bank/e-wallet pada menu histori. Jika gagal, hubungi CS dengan menyertakan RRN, nominal, dan waktu transaksi." },
-        { icon: "fas fa-file-invoice", judul: "Contoh Penggunaan", deskripsiSingkat: "Studi kasus pelacakan transaksi.", isiLengkap: "Misal transaksi gagal tetapi saldo terpotong, segera berikan RRN ke CS untuk proses refund dalam 1x24 jam." }
+        { icon: "fas fa-file-invoice", judul: "Contoh Penggunaan", deskripsiSingkat: "Studi kasus pelacakan transaksi.", isiLengkap: "Misal transaksi gagal tetapi saldo terpotong, segera berikan RRN ke CS untuk proses refund dalam 1x24 jam." },
+        { icon: "fas fa-clock", judul: "Waktu Expired", deskripsiSingkat: "Masa berlaku RRN.", isiLengkap: "RRN umumnya berlaku 30 hari. Setelah itu data transaksi mungkin tidak dapat dilacak. Segera klaim jika ada kendala." }
     ] 
 },
 profile_ewallet: { 
@@ -1001,7 +983,8 @@ profile_ewallet: {
     items: [
         { icon: "fas fa-university", judul: "Rekening Bank Resmi", deskripsiSingkat: "Daftar bank yang terintegrasi.", isiLengkap: "BCA: 1234567890 a.n PT MAJU TOGEL\nMandiri: 1112223333 a.n CS GALLERY\nBRI: 8887776665 a.n Official Partner" },
         { icon: "fas fa-mobile-alt", judul: "Dompet Digital", deskripsiSingkat: "E-wallet: OVO, DANA, GoPay.", isiLengkap: "OVO: 081234567890\nDANA: 085712345678\nGoPay: gopay@csgallery" },
-        { icon: "fas fa-shield-alt", judul: "Keamanan Transaksi", deskripsiSingkat: "Tips menjaga keamanan akun.", isiLengkap: "Jangan berikan OTP ke siapapun. Selalu transfer ke rekening resmi yang tertera. Konfirmasi ke CS setelah transfer." }
+        { icon: "fas fa-shield-alt", judul: "Keamanan Transaksi", deskripsiSingkat: "Tips menjaga keamanan akun.", isiLengkap: "Jangan berikan OTP ke siapapun. Selalu transfer ke rekening resmi yang tertera. Konfirmasi ke CS setelah transfer." },
+        { icon: "fas fa-credit-card", judul: "Limit Transaksi", deskripsiSingkat: "Batas minimum dan maksimum.", isiLengkap: "Minimal deposit: Rp20.000\nMaksimal transfer: Rp50.000.000/hari untuk bank, Rp10.000.000/hari untuk e-wallet." }
     ] 
 },
 cara_bermain: { 
@@ -1010,7 +993,8 @@ cara_bermain: {
     items: [
         { icon: "fas fa-user-plus", judul: "Registrasi Akun", deskripsiSingkat: "Daftar dengan mudah.", isiLengkap: "1. Klik Daftar\n2. Isi data diri\n3. Verifikasi OTP\n4. Login dan lengkapi profil" },
         { icon: "fas fa-hand-holding-usd", judul: "Deposit & Withdraw", deskripsiSingkat: "Tata cara transaksi.", isiLengkap: "Deposit: Transfer ke rekening resmi, kirim bukti via CS.\nWithdraw: Proses cepat 2-5 menit, minimal 50.000." },
-        { icon: "fas fa-dice-d6", judul: "Panduan Permainan", deskripsiSingkat: "Cara bermain togel & slot.", isiLengkap: "Pilih pasaran favorit. Pasang angka 2D/3D/4D. Untuk slot, pilih provider, atur bet, dan spin. Baca syarat bonus." }
+        { icon: "fas fa-dice-d6", judul: "Panduan Togel", deskripsiSingkat: "Cara bermain togel.", isiLengkap: "Pilih pasaran favorit (SGP, HKG, SDY). Pasang angka 2D/3D/4D. Cek jadwal result di menu JADWAL TOGEL." },
+        { icon: "fas fa-gamepad", judul: "Panduan Slot", deskripsiSingkat: "Cara bermain slot online.", isiLengkap: "Pilih provider (Pragmatic, Habanero). Atur nilai bet, tekan spin. Baca syarat bonus dan ketentuan withdraw." }
     ] 
 }
 };
@@ -1075,12 +1059,12 @@ async function renderRandomTabWithFilter(filter = "") { mainHeading.innerHTML = 
 
 function renderStaticTabWithFilter(tabId, filter = "") { const data = staticTabsData[tabId]; if(!data) return false; mainHeading.innerHTML = data.title; const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : ""; subHeading.innerHTML = data.subtitle + filterInfo; bonusBadgeContainer.classList.remove("visible"); galleryBadgeContainer.classList.remove("visible"); let filteredItems = data.items; if(filter.trim() !== "") { filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase())); } if(filteredItems.length === 0 && filter) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`; return true; } let cardsHTML = ""; filteredItems.forEach(item => { cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`; }); dynamicArea.innerHTML = cardsHTML; return true; }
 
-// RENDER GALLERY GAMBAR CS - TERSUSUN KE SAMPING (HORIZONTAL SCROLL)
+// RENDER GALLERY GAMBAR CS - 1 BARIS 4 FOLDER (TANPA SCROLL)
 function renderGalleryCS() { 
     const cat = galleryData[currentGalleryTab]; 
     mainHeading.innerHTML = cat.title; 
     const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; 
-    subHeading.innerHTML = `${cat.subtitle}${filterInfo} | Folder tersusun ke samping — scroll horizontal`; 
+    subHeading.innerHTML = `${cat.subtitle}${filterInfo} | 1 baris 4 folder — tanpa scroll`; 
     bonusBadgeContainer.classList.remove("visible"); 
     galleryBadgeContainer.classList.add("visible"); 
     
@@ -1095,14 +1079,14 @@ function renderGalleryCS() {
     } 
     
     if (itemsToShow.length === 0) { 
-        dynamicArea.innerHTML = `<div class="empty-gallery-horizontal"><i class="fas fa-search" style="font-size:3rem;opacity:0.5"></i><h3 style="margin-top:16px;">Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(currentFilterText)}" di kategori ini</p></div>`; 
+        dynamicArea.innerHTML = `<div class="empty-gallery"><i class="fas fa-search" style="font-size:3rem;opacity:0.5"></i><h3 style="margin-top:16px;">Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(currentFilterText)}" di kategori ini</p></div>`; 
         return; 
     }
     
-    let html = `<div class="gallery-horizontal-wrapper"><div class="gallery-horizontal-scroll">`;
-    itemsToShow.forEach((item, idx) => { 
+    let html = `<div class="gallery-grid-4">`;
+    itemsToShow.slice(0, 4).forEach((item, idx) => { 
         html += `
-            <div class="gallery-card-horizontal" data-gallery-idx="${idx}" data-gallery-cat="${currentGalleryTab}">
+            <div class="gallery-card" data-gallery-idx="${idx}" data-gallery-cat="${currentGalleryTab}">
                 <div class="gallery-icon"><i class="${item.icon}"></i></div>
                 <h4>${escapeHtml(item.judul)}</h4>
                 <div class="gallery-desc">${escapeHtml(item.deskripsiSingkat)}</div>
@@ -1110,10 +1094,10 @@ function renderGalleryCS() {
             </div>
         `; 
     }); 
-    html += `</div></div>`; 
+    html += `</div>`; 
     dynamicArea.innerHTML = html; 
     
-    document.querySelectorAll('.gallery-card-horizontal').forEach(card => { 
+    document.querySelectorAll('.gallery-card').forEach(card => { 
         card.addEventListener('click', (e) => { 
             const catKey = card.getAttribute('data-gallery-cat'); 
             const idx = parseInt(card.getAttribute('data-gallery-idx')); 
