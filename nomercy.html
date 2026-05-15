@@ -692,7 +692,7 @@ background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
 }
 
-/* ========= GALLERY GAMBAR CS - 1 BARIS 4 FOLDER (TANPA SCROLL) ========= */
+/* ========= GALLERY GAMBAR CS - 1 BARIS 4 FOLDER UKURAN LEBIH BESAR ========= */
 .gallery-badge-container {
 margin-bottom: 24px;
 display: none;
@@ -746,64 +746,73 @@ background: linear-gradient(135deg, #2c3e66, #1e2a47);
 color: white;
 }
 
-/* FOLDER 1 BARIS 4 KOLOM - TANPA SCROLL, MENYESUAIKAN LEBAR */
+/* FOLDER UKURAN LEBIH BESAR - 1 BARIS 4 KOLOM */
 .gallery-grid-4 {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
-gap: 24px;
+gap: 28px;
 margin-top: 12px;
 }
 .gallery-card {
-background: rgba(20, 30, 50, 0.92);
-border-radius: 28px;
-padding: 22px;
+background: rgba(20, 30, 50, 0.95);
+border-radius: 32px;
+padding: 28px;
 backdrop-filter: blur(8px);
-border: 1px solid rgba(255, 255, 255, 0.2);
+border: 1px solid rgba(255, 255, 255, 0.25);
 transition: all 0.3s ease;
 cursor: pointer;
 display: flex;
 flex-direction: column;
+min-height: 320px;
 }
 .gallery-card:hover {
 transform: translateY(-8px);
-background: rgba(30, 48, 74, 0.97);
+background: rgba(30, 48, 74, 0.98);
 border-color: #3b82f6;
-box-shadow: 0 20px 30px -10px rgba(0,0,0,0.4);
+box-shadow: 0 25px 35px -12px rgba(0,0,0,0.5);
 }
 .gallery-icon {
-font-size: 2rem;
-margin-bottom: 16px;
+font-size: 2.8rem;
+margin-bottom: 20px;
 color: #60a5fa;
 }
 .gallery-card h4 {
-font-size: 1.25rem;
-font-weight: 700;
-margin: 8px 0;
+font-size: 1.5rem;
+font-weight: 800;
+margin: 12px 0 10px;
 color: #f1f5f9;
+line-height: 1.3;
 }
 .gallery-desc {
 color: #cbd5e6;
-line-height: 1.5;
-margin: 12px 0;
-font-size: 0.85rem;
+line-height: 1.6;
+margin: 14px 0 20px;
+font-size: 0.95rem;
 flex: 1;
 }
 .gallery-detail-btn {
-display: inline-block;
-background: rgba(59,130,246,0.2);
+display: inline-flex;
+align-items: center;
+gap: 8px;
+background: rgba(59,130,246,0.25);
 border-radius: 40px;
-padding: 6px 16px;
-font-weight: 600;
-font-size: 0.7rem;
+padding: 10px 20px;
+font-weight: 700;
+font-size: 0.85rem;
 color: #bfdbfe;
 margin-top: 12px;
 text-align: center;
 transition: 0.2s;
 width: fit-content;
+border: 1px solid rgba(96,165,250,0.3);
+}
+.gallery-detail-btn i {
+font-size: 0.85rem;
 }
 .gallery-card:hover .gallery-detail-btn {
 background: #3b82f6;
 color: white;
+border-color: white;
 }
 .empty-gallery {
 text-align: center;
@@ -813,24 +822,28 @@ border-radius: 40px;
 grid-column: 1 / -1;
 }
 
-/* Responsive: jika layar kecil, tetap tampil 4 kolom dengan ukuran mengecil */
-@media (max-width: 1200px) {
-.gallery-grid-4 { gap: 20px; }
-.gallery-card { padding: 18px; }
-.gallery-card h4 { font-size: 1.1rem; }
+/* Responsive: layar lebih kecil tetap tampil rapi */
+@media (max-width: 1300px) {
+.gallery-grid-4 { gap: 24px; }
+.gallery-card { padding: 24px; min-height: 300px; }
+.gallery-card h4 { font-size: 1.35rem; }
+.gallery-icon { font-size: 2.5rem; }
 }
-@media (max-width: 992px) {
-.gallery-grid-4 { gap: 16px; }
-.gallery-card { padding: 16px; }
-.gallery-desc { font-size: 0.8rem; }
+@media (max-width: 1100px) {
+.gallery-grid-4 { gap: 20px; }
+.gallery-card { padding: 20px; }
+.gallery-card h4 { font-size: 1.25rem; }
+.gallery-desc { font-size: 0.85rem; }
+}
+@media (max-width: 900px) {
+.gallery-grid-4 { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+}
+@media (max-width: 600px) {
+.gallery-grid-4 { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
 .sidebar { width: 240px; }
 .main-content { padding: 16px; }
-.gallery-grid-4 { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-}
-@media (max-width: 480px) {
-.gallery-grid-4 { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -951,7 +964,7 @@ tab3: { title: "✉️ EVENT LINETOGEL", subtitle: "Inbox & komunikasi tim — p
 { icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif di proyek utama", badge: "Balas" },
 { icon: "fas fa-bell", title: "Notifikasi", desc: "Pengingat meeting jam 14:00 WIB", badge: "Segera" }
 ] },
-tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Klik badge di atas untuk memilih kategori | 1 baris 4 folder", items: [] },
+tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Klik badge di atas untuk memilih kategori | 1 baris 4 folder ukuran besar", items: [] },
 tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi solid", items: [
 { icon: "fas fa-user-plus", title: "Anggota Aktif", desc: "12 anggota online · 4 sedang rapat", badge: "Online" },
 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
@@ -965,7 +978,7 @@ tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap 
 ] }
 };
 
-// DATA UNTUK 3 BADGE GALLERY GAMBAR CS (SETIAP KATEGORI ISI 4 FOLDER)
+// DATA UNTUK 3 BADGE GALLERY GAMBAR CS (SETIAP KATEGORI 4 FOLDER)
 const galleryData = {
 rrn_qris: { 
     title: "📱 RRN QRIS", 
@@ -1059,12 +1072,12 @@ async function renderRandomTabWithFilter(filter = "") { mainHeading.innerHTML = 
 
 function renderStaticTabWithFilter(tabId, filter = "") { const data = staticTabsData[tabId]; if(!data) return false; mainHeading.innerHTML = data.title; const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : ""; subHeading.innerHTML = data.subtitle + filterInfo; bonusBadgeContainer.classList.remove("visible"); galleryBadgeContainer.classList.remove("visible"); let filteredItems = data.items; if(filter.trim() !== "") { filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase())); } if(filteredItems.length === 0 && filter) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`; return true; } let cardsHTML = ""; filteredItems.forEach(item => { cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`; }); dynamicArea.innerHTML = cardsHTML; return true; }
 
-// RENDER GALLERY GAMBAR CS - 1 BARIS 4 FOLDER (TANPA SCROLL)
+// RENDER GALLERY GAMBAR CS - 1 BARIS 4 FOLDER UKURAN BESAR
 function renderGalleryCS() { 
     const cat = galleryData[currentGalleryTab]; 
     mainHeading.innerHTML = cat.title; 
     const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; 
-    subHeading.innerHTML = `${cat.subtitle}${filterInfo} | 1 baris 4 folder — tanpa scroll`; 
+    subHeading.innerHTML = `${cat.subtitle}${filterInfo} | 1 baris 4 folder ukuran besar`; 
     bonusBadgeContainer.classList.remove("visible"); 
     galleryBadgeContainer.classList.add("visible"); 
     
