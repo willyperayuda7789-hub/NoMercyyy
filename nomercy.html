@@ -752,6 +752,7 @@ cursor: pointer;
 display: flex;
 flex-direction: column;
 position: relative;
+min-height: 280px;
 }
 
 .gallery-card:hover {
@@ -768,11 +769,11 @@ border-bottom: 1px solid rgba(255,255,255,0.1);
 .gallery-card-header h3 {
 font-size: 1.2rem;
 font-weight: 800;
-color: #f0fdf4;
+color: #fbbf24;
 margin: 0;
 display: flex;
 align-items: center;
-gap: 10px;
+gap: 8px;
 }
 
 .gallery-card-header h3 i {
@@ -780,20 +781,9 @@ color: #f59e0b;
 font-size: 1.1rem;
 }
 
-.gallery-card-number {
-background: rgba(245, 158, 11, 0.2);
-color: #fbbf24;
-padding: 2px 8px;
-border-radius: 20px;
-font-size: 0.7rem;
-font-weight: 600;
-margin-left: 8px;
-}
-
 .gallery-card-body {
 padding: 14px 18px;
 flex: 1;
-min-height: 80px;
 }
 
 .gallery-card-body p {
@@ -801,15 +791,35 @@ color: #cbd5e6;
 font-size: 0.8rem;
 line-height: 1.5;
 margin: 0;
-display: -webkit-box;
--webkit-line-clamp: 3;
--webkit-box-orient: vertical;
-overflow: hidden;
+white-space: pre-wrap;
+}
+
+.gallery-card-body ul, .gallery-card-body .bonus-list {
+margin: 0;
+padding-left: 18px;
+list-style: none;
+}
+
+.gallery-card-body li {
+color: #cbd5e6;
+font-size: 0.75rem;
+line-height: 1.5;
+margin-bottom: 6px;
+position: relative;
+padding-left: 12px;
+}
+
+.gallery-card-body li:before {
+content: "•";
+color: #f59e0b;
+position: absolute;
+left: 0;
 }
 
 .gallery-card-footer {
 padding: 12px 18px 18px 18px;
 border-top: 1px solid rgba(255,255,255,0.08);
+margin-top: auto;
 }
 
 .btn-open-gallery {
@@ -985,23 +995,51 @@ tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap 
 ] }
 };
 
-// Data GALLERY GAMBAR CS - Format seperti gambar yang diminta
+// Data GALLERY GAMBAR CS - PERSIS SEPERTI GAMBAR
 const GALLERY_CS_DATA = {
     bonus: [
-        { title: "TIDAK DAPAT BONUS", number: "1", desc: "Apabila anda tidak mendapatkan bonus tersebut, berarti anda tidak memenuhi syarat dan ketentuan untuk mendapatkan bonus yang sudah berlaku...", content: "📋 PENJELASAN LENGKAP\n\nApabila anda tidak mendapatkan bonus tersebut, berarti anda tidak memenuhi syarat dan ketentuan untuk mendapatkan bonus yang sudah berlaku.\n\nSyarat dan ketentuan:\n• Minimal turnover belum terpenuhi\n• Periode bonus sudah berakhir\n• Akun tidak memenuhi kriteria\n\nHubungi CS untuk info lebih lanjut." },
-        { title: "TIDAK DAPAT BONUS", number: "2", desc: "Perihal bonus akan otomatis masuk jika anda memenuhi syarat untuk mendapatkan nya ya boskuu...", content: "📋 PENJELASAN LENGKAP\n\nPerihal bonus akan otomatis masuk jika anda memenuhi syarat untuk mendapatkan nya ya boskuu.\n\nSistem kami sudah terotomatisasi:\n• Bonus masuk dalam waktu 1x24 jam\n• Tidak perlu klaim\n• Cek secara berkala pada menu bonus" },
-        { title: "TIDAK DAPAT BONUS", number: "3", desc: "Semua bonus yang di bagikan oleh sistem kami sudah sesuai prosedur serta syarat dan ketentuan tanpa perlu di claim dan j...", content: "📋 PENJELASAN LENGKAP\n\nSemua bonus yang di bagikan oleh sistem kami sudah sesuai prosedur serta syarat dan ketentuan tanpa perlu di claim dan akan otomatis masuk ke akun anda.\n\nProsedur:\n• Validasi otomatis oleh sistem\n• Transparan dan fair play\n• Bisa dicek pada history bonus" },
-        { title: "BONUS SEDIKIT", number: "3", desc: "Jika bosku ingin mendapatkan bonus lebih kami sarankan untuk tingkatkan bettingan dalam periode permainan LIVEGAMES / SLOT...", content: "📋 PENJELASAN LENGKAP\n\nJika bosku ingin mendapatkan bonus lebih kami sarankan untuk tingkatkan bettingan dalam periode permainan LIVEGAMES / SLOT GAMES.\n\nTips mendapatkan bonus lebih:\n• Tingkatkan volume bettingan\n• Main secara konsisten\n• Ikuti event-event spesial\n• Jangan lewatkan promo harian" }
+        { 
+            title: "BONUS SENIN", 
+            items: [
+                "- Bonus Cashback up to 5% (Live Games) = Bonus Kekalahan 5% hanya berlaku untuk permainan Live Games...",
+                "Minimal kekalahan Rp 500.000"
+            ],
+            fullContent: "📋 BONUS SENIN\n\n• Bonus Cashback up to 5% (Live Games) = Bonus Kekalahan 5% hanya berlaku untuk permainan Live Games\n• Minimal kekalahan Rp 500.000\n• Maksimal bonus Rp 5.000.000\n• Dibagikan setiap hari Senin\n\nSyarat dan ketentuan berlaku." 
+        },
+        { 
+            title: "BONUS SELASA", 
+            items: [
+                "- Bonus Cashback 5% (Slot Games) = Bonus Kekalahan 5% hanya berlaku untuk permainan Slot Games...",
+                "Minimal kekalahan Rp 1.000.000"
+            ],
+            fullContent: "📋 BONUS SELASA\n\n• Bonus Cashback 5% (Slot Games) = Bonus Kekalahan 5% hanya berlaku untuk permainan Slot Games\n• Minimal kekalahan Rp 1.000.000\n• Maksimal bonus Rp 3.000.000\n• Dibagikan setiap hari Selasa\n\nSyarat dan ketentuan berlaku." 
+        },
+        { 
+            title: "BONUS KAMIS", 
+            items: [
+                "- Bonus Rollingan turnover LIVE GAMES sebesar 0,5% dari total bettingan",
+                "- Bonus Rollingan turnover PRAGMATIC PLAY sebesar 0,7%"
+            ],
+            fullContent: "📋 BONUS KAMIS\n\n• Bonus Rollingan turnover LIVE GAMES sebesar 0,5% dari total bettingan\n• Bonus Rollingan turnover PRAGMATIC PLAY sebesar 0,7%\n• Minimal turnover Rp 1.000.000\n• Dibagikan setiap hari Kamis\n\nSyarat dan ketentuan berlaku." 
+        },
+        { 
+            title: "BONUS MINGGUAN", 
+            items: [
+                "- Bonus Rollingan turnover LIVE GAMES sebesar 0,5% dari total bettingan",
+                "Untuk promo bonus Mingguan saat ini kami sediakan untuk semua member setia"
+            ],
+            fullContent: "📋 BONUS MINGGUAN\n\n• Bonus Rollingan turnover LIVE GAMES sebesar 0,5% dari total bettingan\n• Untuk promo bonus Mingguan saat ini kami sediakan untuk semua member setia\n• Dibagikan setiap hari Minggu\n• Minimal turnover Rp 500.000\n\nSyarat dan ketentuan berlaku." 
+        }
     ],
     poster: [
-        { title: "POSTER CS 24 JAM", number: "1", desc: "Layanan Customer Service 24 jam non-stop. Siap membantu kapanpun anda membutuhkan.", content: "POSTER CS 24 JAM - Layanan customer service tersedia 24 jam non stop" },
-        { title: "POSTER PRIORITAS CS", number: "2", desc: "Layanan prioritas untuk member VIP. Respon lebih cepat, solusi lebih tepat.", content: "POSTER PRIORITAS CS - Layanan khusus untuk member VIP" },
-        { title: "POSTER EVENT CS DAY", number: "3", desc: "Rayakan Hari Customer Service bersama kami. Dapatkan bonus spesial.", content: "POSTER EVENT CS DAY - Event spesial bulanan" }
+        { title: "POSTER CS 24 JAM", items: ["- Layanan Customer Service 24 jam non-stop", "- Siap membantu kapanpun"], fullContent: "POSTER CS 24 JAM - Layanan 24 jam" },
+        { title: "POSTER PRIORITAS CS", items: ["- Layanan prioritas untuk member VIP", "- Respon lebih cepat"], fullContent: "POSTER PRIORITAS CS - Layanan VIP" },
+        { title: "POSTER EVENT CS DAY", items: ["- Rayakan Hari Customer Service", "- Dapatkan bonus spesial"], fullContent: "POSTER EVENT CS DAY" }
     ],
     screenshot: [
-        { title: "DASHBOARD CS TOOLS", number: "1", desc: "Tampilan dashboard tools CS versi terbaru dengan fitur live chat monitoring.", content: "DASHBOARD CS TOOLS - Tampilan antarmuka CS versi terbaru" },
-        { title: "GRAFIK RESPON CS", number: "2", desc: "Statistik peningkatan kecepatan respon CS dari bulan ke bulan.", content: "GRAFIK RESPON CS - Data statistik respon time" },
-        { title: "UI APLIKASI MOBILE CS", number: "3", desc: "Tampilan antarmuka aplikasi CS di perangkat mobile.", content: "UI APLIKASI MOBILE CS - Tampilan mobile friendly" }
+        { title: "DASHBOARD CS TOOLS", items: ["- Tampilan dashboard CS versi terbaru", "- Fitur live chat monitoring"], fullContent: "DASHBOARD CS TOOLS" },
+        { title: "GRAFIK RESPON CS", items: ["- Statistik kecepatan respon CS", "- Target 30 detik"], fullContent: "GRAFIK RESPON CS" },
+        { title: "UI APLIKASI MOBILE CS", items: ["- Tampilan antarmuka mobile", "- Mudah diakses"], fullContent: "UI APLIKASI MOBILE CS" }
     ]
 };
 
@@ -1272,9 +1310,7 @@ function renderGalleryCSWithFilter(filter = "") {
     let filtered = dataGroup;
     if(filter.trim() !== "") {
         filtered = dataGroup.filter(item => 
-            item.title.toLowerCase().includes(filter.toLowerCase()) || 
-            (item.desc && item.desc.toLowerCase().includes(filter.toLowerCase())) ||
-            (item.content && item.content.toLowerCase().includes(filter.toLowerCase()))
+            item.title.toLowerCase().includes(filter.toLowerCase())
         );
     }
     if(filtered.length === 0) {
@@ -1283,12 +1319,20 @@ function renderGalleryCSWithFilter(filter = "") {
     }
     let html = `<div class="gallery-grid">`;
     filtered.forEach((item) => {
-        html += `<div class="gallery-card" data-full-content="${escapeHtml(item.content)}" data-title="${escapeHtml(item.title)} ${item.number ? item.number : ''}">
+        let itemsHtml = '';
+        if(item.items && item.items.length > 0) {
+            itemsHtml = '<div class="bonus-list">';
+            item.items.forEach(line => {
+                itemsHtml += `<div style="color: #cbd5e6; font-size: 0.75rem; line-height: 1.5; margin-bottom: 6px;">${escapeHtml(line)}</div>`;
+            });
+            itemsHtml += '</div>';
+        }
+        html += `<div class="gallery-card" data-full-content="${escapeHtml(item.fullContent)}" data-title="${escapeHtml(item.title)}">
                     <div class="gallery-card-header">
-                        <h3><i class="fas fa-exclamation-triangle"></i> ${escapeHtml(item.title)} ${item.number ? '<span class="gallery-card-number">'+escapeHtml(item.number)+'</span>' : ''}</h3>
+                        <h3><i class="fas fa-calendar-alt"></i> ${escapeHtml(item.title)}</h3>
                     </div>
                     <div class="gallery-card-body">
-                        <p>${escapeHtml(item.desc)}</p>
+                        ${itemsHtml}
                     </div>
                     <div class="gallery-card-footer">
                         <button class="btn-open-gallery"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
