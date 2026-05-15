@@ -695,6 +695,119 @@ background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
 }
 
+/* ========= BADGE NAVIGASI UNTUK GALLERY GAMBAR CS (HANYA DI TAB INI) ========= */
+.gallery-badge-bar {
+display: flex;
+gap: 16px;
+flex-wrap: wrap;
+margin-bottom: 28px;
+padding: 8px 12px;
+background: rgba(0, 0, 0, 0.45);
+border-radius: 60px;
+justify-content: center;
+backdrop-filter: blur(4px);
+border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.gallery-badge {
+background: linear-gradient(145deg, #1e2a3a, #0f1722);
+border-radius: 60px;
+padding: 8px 28px;
+font-weight: 800;
+font-size: 0.95rem;
+color: #cbd5e6;
+cursor: pointer;
+transition: all 0.2s ease;
+display: inline-flex;
+align-items: center;
+gap: 12px;
+border: 1px solid rgba(16, 185, 129, 0.5);
+letter-spacing: 0.3px;
+}
+.gallery-badge i {
+font-size: 1rem;
+color: #34d399;
+}
+.gallery-badge.active-gallery-badge {
+background: linear-gradient(135deg, #10b981, #059669);
+color: white;
+border-color: white;
+box-shadow: 0 6px 18px -4px #047857;
+}
+.gallery-badge.active-gallery-badge i {
+color: white;
+}
+.gallery-badge:hover {
+transform: translateY(-3px);
+background: linear-gradient(135deg, #2c4e3e, #1e3a2f);
+color: white;
+}
+.gallery-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+gap: 26px;
+margin-top: 10px;
+}
+.gallery-card {
+background: rgba(0, 0, 0, 0.65);
+backdrop-filter: blur(8px);
+border-radius: 28px;
+overflow: hidden;
+border: 1px solid rgba(255, 255, 255, 0.25);
+transition: all 0.3s ease;
+cursor: pointer;
+display: flex;
+flex-direction: column;
+}
+.gallery-card:hover {
+transform: translateY(-6px);
+border-color: #10b981;
+box-shadow: 0 20px 30px -12px black;
+}
+.gallery-img-placeholder {
+height: 180px;
+background: linear-gradient(145deg, #1f2c3c, #0e1725);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 4rem;
+color: #34d399;
+border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.gallery-info {
+padding: 20px;
+}
+.gallery-info h4 {
+font-size: 1.25rem;
+font-weight: 800;
+margin-bottom: 10px;
+color: #f0fdf4;
+}
+.gallery-info p {
+color: #cbd5e6;
+font-size: 0.85rem;
+line-height: 1.5;
+margin-bottom: 16px;
+}
+.gallery-btn-row {
+display: flex;
+gap: 12px;
+margin-top: 8px;
+}
+.btn-gallery-salin {
+background: #10b981;
+border: none;
+border-radius: 30px;
+padding: 7px 14px;
+font-size: 0.7rem;
+font-weight: bold;
+color: white;
+cursor: pointer;
+transition: 0.2s;
+}
+.btn-gallery-salin:hover {
+background: #059669;
+}
+
 /* Responsive */
 @media (max-width: 1300px) {
 .bonus-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
@@ -707,6 +820,7 @@ transform: scale(1.02);
 .page-title h1 { font-size: 1.4rem; }
 .bonus-grid { grid-template-columns: 1fr; }
 .dashboard-grid { grid-template-columns: 1fr; }
+.gallery-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -761,6 +875,15 @@ transform: scale(1.02);
 </div>
 </div>
 
+<!-- Container untuk badge navigasi GALLERY GAMBAR CS (HANYA MUNCUL SAAT TAB GALLERY DIKLIK) -->
+<div id="galleryBadgeContainer" style="display: none;">
+<div class="gallery-badge-bar">
+<div class="gallery-badge active-gallery-badge" data-gallery-tab="poster"><i class="fas fa-images"></i> POSTER CS</div>
+<div class="gallery-badge" data-gallery-tab="screenshot"><i class="fas fa-camera-retro"></i> SCREENSHOT</div>
+<div class="gallery-badge" data-gallery-tab="meme"><i class="fas fa-smile-wink"></i> MEME TEAM</div>
+</div>
+</div>
+
 <div id="dynamicContentArea" class="dashboard-grid">
 <div class="loading-card"><i class="fas fa-spinner fa-pulse" style="font-size: 2rem;"></i><p style="margin-top: 16px;">Memuat data...</p></div>
 </div>
@@ -806,6 +929,7 @@ let bonusLainLainData = [];
 let currentFilterText = "";
 let currentActiveTab = "tab1";
 let currentBonusSubTab = "lain";
+let currentGallerySubTab = "poster";
 
 // Data statis untuk tab lain
 const staticTabsData = {
@@ -819,22 +943,35 @@ tab3: { title: "✉️ EVENT LINETOGEL", subtitle: "Inbox & komunikasi tim — p
 { icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif di proyek utama", badge: "Balas" },
 { icon: "fas fa-bell", title: "Notifikasi", desc: "Pengingat meeting jam 14:00 WIB", badge: "Segera" }
 ] },
-tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Daftar tugas & kolaborasi — progres terkini", items: [
-{ icon: "fas fa-list-check", title: "Task Sprint", desc: "8 tugas selesai dari 21 tugas", badge: "Selesai 38%" },
-{ icon: "fas fa-code-branch", title: "Repository", desc: "Pull request menunggu review", badge: "2 PR" },
-{ icon: "fas fa-clock", title: "Deadline", desc: "Sprint 23 berakhir Jumat ini", badge: "H-3" }
-] },
 tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi solid", items: [
 { icon: "fas fa-user-plus", title: "Anggota Aktif", desc: "12 anggota online · 4 sedang rapat", badge: "Online" },
 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
 { icon: "fas fa-handshake", title: "Kolaborasi", desc: "Integrasi dengan tim desain", badge: "Sinergi" }
 ] },
-tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge di atas | Live Search mencari di kategori yang aktif", items: [] },
 tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap membantu", items: [
 { icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi sidebar 7 kolom dengan background 100% full", badge: "PDF" },
 { icon: "fas fa-headset", title: "Dukungan Teknis", desc: "Chat dengan agen support 24/7", badge: "Live" },
 { icon: "fas fa-video", title: "Tutorial Video", desc: "Walkthrough antarmuka lengkap", badge: "Tonton" }
 ] }
+};
+
+// Data khusus untuk GALLERY GAMBAR CS
+const GALLERY_CS_DATA = {
+    poster: [
+        { title: "Poster Layanan CS 24 Jam", desc: "Banner promosi layanan customer service yang siap membantu kapan saja.", imgIcon: "fas fa-scroll", content: "🎨 DESKRIPSI LENGKAP: Poster bertema dukungan pelanggan dengan warna biru kehijauan. Teks utama: 'CS SIAP MEMBANTU 24/7'. Format: PNG, JPG, PSD. Cocok untuk media sosial dan spanduk digital." },
+        { title: "Infografis Alur CS Prioritas", desc: "Poster petunjuk cepat untuk layanan prioritas dan jalur eskalasi.", imgIcon: "fas fa-chart-simple", content: "📊 Infografis menunjukkan alur tiket prioritas dari awal hingga selesai. Dapat dicetak ukuran A3. File AI dan PNG tersedia. Kontak tim desain untuk akses penuh." },
+        { title: "Poster Event Customer Service Day", desc: "Spanduk perayaan Hari Customer Service, hasil kolaborasi tim.", imgIcon: "fas fa-calendar-star", content: "🎉 Desain spesial untuk acara tahunan CS Day. Berisi ucapan terima kasih untuk seluruh agent. Format PSD + JPG + AI. Ukuran 1080x1350 pixel." }
+    ],
+    screenshot: [
+        { title: "Dashboard CS Tools Terbaru", desc: "Tampilan antarmuka tools CS dengan fitur live chat dan antrian.", imgIcon: "fas fa-desktop", content: "🖥️ Screenshot dari dashboard internal CS versi 2.1. Menampilkan statistik antrian, respon time, dan kepuasan pelanggan. Diambil tanggal 15 Maret 2025." },
+        { title: "Grafik Kecepatan Respon CS", desc: "Statistik peningkatan kecepatan respon per jam hingga 20%.", imgIcon: "fas fa-chart-line", content: "📈 Grafik performa respon CS dalam sebulan terakhir. Rata-rata respon turun dari 45 detik menjadi 36 detik. Sumber: laporan internal Q1 2025." },
+        { title: "UI Aplikasi Mobile CS", desc: "Tampilan aplikasi CS di perangkat mobile (iOS & Android)", imgIcon: "fas fa-mobile-alt", content: "📱 Screenshot dari aplikasi CS versi beta 2.0. Fitur notifikasi push dan quick reply template. Feedback dapat dikirimkan ke tim produk." }
+    ],
+    meme: [
+        { title: "Guyon CS: Overload", desc: "Meme tentang padatnya antrian CS di jam sibuk.", imgIcon: "fas fa-laugh-squint", content: "😂 Meme klasik CS: 'Ketika 3 chat masuk sekaligus + telepon berdering + email masuk bersamaan'. Bisa dipakai untuk ice breaking tim." },
+        { title: "Stiker CS Kocak", desc: "Koleksi stiker WhatsApp lucu untuk komunikasi internal CS.", imgIcon: "fas fa-sticky-note", content: "😆 Paket stiker 'CS HERO' berisi 12 stiker lucu dengan berbagai ekspresi. Cocok untuk grup tim CS. Format WebP, siap pakai di WhatsApp." },
+        { title: "Epic Fail Helpdesk", desc: "Komik singkat tentang trik sederhana yang jadi rumit.", imgIcon: "fas fa-dizzy", content: "🤣 Komik 4 panel: CS: 'Coba restart dulu ya' - Customer: 'Restart apa?' - CS: 'Komputer dan semangat kerjanya' - Customer: '🤯'. Selamat tertawa bersama tim." }
+    ]
 };
 
 // Fungsi fetch data dari sheet
@@ -877,7 +1014,7 @@ return row;
 });
 }
 
-// ======================= RENDER FUNGSI DENGAN FILTER PER KOLOM =======================
+// ======================= FUNGSI BONUS =======================
 async function renderBonusLainLainWithFilter(filter = "") {
 let data = bonusLainLainData;
 if (data.length === 0) {
@@ -1026,7 +1163,6 @@ attachOpenFolderEvents();
 attachBonusSalinEvents();
 }
 
-// Fungsi event untuk semua card bonus
 function attachBonusCardEvents() {
 document.querySelectorAll('.bonus-card').forEach(card => {
 card.removeEventListener('click', bonusCardHandler);
@@ -1039,7 +1175,6 @@ const title = this.getAttribute('data-bonus-title') || 'Detail Bonus';
 const content = this.getAttribute('data-bonus-content') || 'Tidak ada deskripsi tambahan.';
 openModal(title, content);
 }
-
 function attachOpenFolderEvents() {
 document.querySelectorAll('.btn-open-folder').forEach(btn => {
 btn.removeEventListener('click', openFolderHandler);
@@ -1055,7 +1190,6 @@ const content = card.getAttribute('data-bonus-content') || 'Tidak ada deskripsi 
 openModal(title, content);
 }
 }
-
 function attachBonusSalinEvents() {
 document.querySelectorAll('.btn-salin-bonus').forEach(btn => {
 btn.removeEventListener('click', bonusSalinHandler);
@@ -1068,13 +1202,13 @@ const title = this.getAttribute('data-salin-title') || 'Folder';
 const content = this.getAttribute('data-salin-content') || '';
 copyContentOnly(content, title);
 }
-
-// Render halaman BONUS utama dengan filter (berfungsi per sub-badge yang aktif)
 async function renderBonusPage() {
 mainHeading.innerHTML = "⚙️ BONUS ✨";
 const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : "";
 subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()}${filterInfo} | Tombol SEJAJAR dalam 1 BARIS`;
 bonusBadgeContainer.classList.add("visible");
+// Sembunyikan gallery badge container
+document.getElementById("galleryBadgeContainer").style.display = "none";
 if (currentBonusSubTab === 'all') {
 await renderBonusAllWithFilter(currentFilterText);
 } else if (currentBonusSubTab === 'mingguan') {
@@ -1086,11 +1220,12 @@ await renderBonusLainLainWithFilter(currentFilterText);
 }
 }
 
-// RENDER RANDOM TAB dengan filter (berfungsi per kolom random)
+// RENDER RANDOM TAB
 async function renderRandomTabWithFilter(filter = "") {
 mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
 subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN`;
 bonusBadgeContainer.classList.remove("visible");
+document.getElementById("galleryBadgeContainer").style.display = "none";
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat folder...</p></div>`;
 try {
 if(foldersData.length === 0) foldersData = await fetchSheetData(SHEET_RANDOM);
@@ -1134,7 +1269,7 @@ dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.
 }
 }
 
-// Render static tab dengan filter (berfungsi per kolom statis)
+// Render static tab
 function renderStaticTabWithFilter(tabId, filter = "") {
 const data = staticTabsData[tabId];
 if(!data) return false;
@@ -1142,6 +1277,7 @@ mainHeading.innerHTML = data.title;
 const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : "";
 subHeading.innerHTML = data.subtitle + filterInfo;
 bonusBadgeContainer.classList.remove("visible");
+document.getElementById("galleryBadgeContainer").style.display = "none";
 let filteredItems = data.items;
 if(filter.trim() !== "") {
 filteredItems = data.items.filter(item => 
@@ -1161,13 +1297,92 @@ dynamicArea.innerHTML = cardsHTML;
 return true;
 }
 
-// Live search handler - pencarian hanya pada kolom yang sedang aktif
+// ======================= FUNGSI GALLERY GAMBAR CS =======================
+function renderGalleryCSWithFilter(filter = "") {
+    const dataGroup = GALLERY_CS_DATA[currentGallerySubTab] || [];
+    let filtered = dataGroup;
+    if(filter.trim() !== "") {
+        filtered = dataGroup.filter(item => 
+            item.title.toLowerCase().includes(filter.toLowerCase()) || 
+            item.desc.toLowerCase().includes(filter.toLowerCase()) ||
+            item.content.toLowerCase().includes(filter.toLowerCase())
+        );
+    }
+    if(filtered.length === 0) {
+        dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di Gallery ${currentGallerySubTab.toUpperCase()}</p></div>`;
+        return;
+    }
+    let html = `<div class="gallery-grid">`;
+    filtered.forEach((item) => {
+        html += `<div class="gallery-card" data-full-content="${escapeHtml(item.content)}" data-title="${escapeHtml(item.title)}">
+                    <div class="gallery-img-placeholder"><i class="${item.imgIcon}"></i></div>
+                    <div class="gallery-info">
+                        <h4>${escapeHtml(item.title)}</h4>
+                        <p>${escapeHtml(item.desc)}</p>
+                        <div class="gallery-btn-row">
+                            <button class="btn-gallery-salin salin-gallery-btn" data-copy="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN KONTEN</button>
+                        </div>
+                    </div>
+                </div>`;
+    });
+    html += `</div>`;
+    dynamicArea.innerHTML = html;
+    
+    document.querySelectorAll('.gallery-card').forEach(card => {
+        card.addEventListener('click', (e) => { 
+            if(e.target.closest('.salin-gallery-btn')) return; 
+            const title = card.getAttribute('data-title') || 'Detail'; 
+            const content = card.getAttribute('data-full-content') || ''; 
+            openModal(title, content); 
+        });
+    });
+    document.querySelectorAll('.salin-gallery-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => { 
+            e.stopPropagation(); 
+            const text = btn.getAttribute('data-copy') || ''; 
+            copyContentOnly(text, 'Konten Gallery'); 
+        });
+    });
+}
+
+function renderGalleryTab() {
+    mainHeading.innerHTML = "🖼️ GALLERY GAMBAR CS";
+    subHeading.innerHTML = `Kategori: ${currentGallerySubTab.toUpperCase()} | Klik kartu untuk lihat detail, SALIN untuk ambil konten. ${currentFilterText ? `🔍 filter: "${currentFilterText}"` : ''}`;
+    bonusBadgeContainer.classList.remove("visible");
+    // TAMPILKAN GALLERY BADGE CONTAINER
+    const galleryContainerDiv = document.getElementById("galleryBadgeContainer");
+    if(galleryContainerDiv) galleryContainerDiv.style.display = "block";
+    renderGalleryCSWithFilter(currentFilterText);
+}
+
+function bindGalleryBadgeEvents() {
+    document.querySelectorAll('.gallery-badge').forEach(b => { 
+        b.removeEventListener('click', galleryHandler);
+        b.addEventListener('click', galleryHandler); 
+    });
+}
+
+function galleryHandler(e) {
+    const val = this.getAttribute('data-gallery-tab');
+    if(val){
+        currentGallerySubTab = val;
+        document.querySelectorAll('.gallery-badge').forEach(b => b.classList.remove('active-gallery-badge'));
+        this.classList.add('active-gallery-badge');
+        if(currentActiveTab === 'tab4') {
+            renderGalleryTab();
+        }
+    }
+}
+
+// Live search handler
 async function applyLiveSearch() {
 const filter = currentFilterText;
 if(currentActiveTab === 'tab2') {
 await renderRandomTabWithFilter(filter);
 } else if(currentActiveTab === 'tab6') {
 await renderBonusPage();
+} else if(currentActiveTab === 'tab4') {
+renderGalleryTab();
 } else {
 renderStaticTabWithFilter(currentActiveTab, filter);
 }
@@ -1201,7 +1416,6 @@ currentBonusSubTab = tabValue;
 document.querySelectorAll('.bonus-badge').forEach(b => b.classList.remove('active-bonus'));
 this.classList.add('active-bonus');
 if(currentActiveTab === 'tab6') {
-// Reset search saat ganti sub-badge bonus
 currentFilterText = "";
 searchInput.value = "";
 clearSearchBtn.classList.remove('visible');
@@ -1216,7 +1430,6 @@ document.querySelectorAll('.nav-item').forEach(item => {
 if(item.getAttribute('data-tab') === tabId) item.classList.add('active');
 else item.classList.remove('active');
 });
-// Reset search saat ganti tab
 currentFilterText = "";
 searchInput.value = "";
 clearSearchBtn.classList.remove('visible');
@@ -1226,6 +1439,9 @@ await renderRandomTabWithFilter(currentFilterText);
 } else if(tabId === 'tab6') {
 await renderBonusPage();
 bindBonusBadgeEvents();
+} else if(tabId === 'tab4') {
+renderGalleryTab();
+bindGalleryBadgeEvents();
 } else {
 renderStaticTabWithFilter(tabId, currentFilterText);
 }
@@ -1280,7 +1496,6 @@ const modalTitle = document.getElementById("modalTitle");
 const modalContentText = document.getElementById("modalContentText");
 const closeModalBtn = document.getElementById("closeModalBtn");
 const toast = document.getElementById("copyToast");
-const bonusBadgeContainer = document.getElementById("bonusBadgeContainer");
 
 closeModalBtn.onclick = closeModal;
 modal.onclick = e => { if(e.target === modal) closeModal(); };
