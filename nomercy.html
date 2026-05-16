@@ -692,7 +692,7 @@ background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
 }
 
-/* ========= GALLERY GAMBAR CS - 1 BARIS 4 FOLDER UKURAN LEBIH BESAR ========= */
+/* ========= GALLERY GAMBAR CS - UKURAN SEPERTI GAMBAR ========= */
 .gallery-badge-container {
 margin-bottom: 24px;
 display: none;
@@ -746,73 +746,106 @@ background: linear-gradient(135deg, #2c3e66, #1e2a47);
 color: white;
 }
 
-/* FOLDER UKURAN LEBIH BESAR - 1 BARIS 4 KOLOM */
+/* FOLDER UKURAN SEPERTI GAMBAR - RAPI DAN PROPORIONAL */
 .gallery-grid-4 {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
-gap: 28px;
+gap: 24px;
 margin-top: 12px;
 }
 .gallery-card {
-background: rgba(20, 30, 50, 0.95);
-border-radius: 32px;
-padding: 28px;
+background: rgba(20, 30, 50, 0.92);
+border-radius: 24px;
+padding: 20px;
 backdrop-filter: blur(8px);
-border: 1px solid rgba(255, 255, 255, 0.25);
+border: 1px solid rgba(255, 255, 255, 0.2);
 transition: all 0.3s ease;
 cursor: pointer;
 display: flex;
 flex-direction: column;
-min-height: 320px;
 }
 .gallery-card:hover {
-transform: translateY(-8px);
-background: rgba(30, 48, 74, 0.98);
+transform: translateY(-5px);
+background: rgba(30, 48, 74, 0.97);
 border-color: #3b82f6;
-box-shadow: 0 25px 35px -12px rgba(0,0,0,0.5);
+box-shadow: 0 20px 30px -10px rgba(0,0,0,0.4);
 }
 .gallery-icon {
-font-size: 2.8rem;
-margin-bottom: 20px;
+font-size: 2rem;
+margin-bottom: 12px;
 color: #60a5fa;
 }
 .gallery-card h4 {
-font-size: 1.5rem;
-font-weight: 800;
-margin: 12px 0 10px;
+font-size: 1.2rem;
+font-weight: 700;
+margin: 8px 0 6px;
 color: #f1f5f9;
-line-height: 1.3;
 }
 .gallery-desc {
 color: #cbd5e6;
-line-height: 1.6;
-margin: 14px 0 20px;
-font-size: 0.95rem;
+line-height: 1.45;
+margin: 8px 0 16px;
+font-size: 0.85rem;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
 flex: 1;
 }
-.gallery-detail-btn {
+.gallery-buttons-row {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+margin-top: 8px;
+}
+.btn-gallery-open {
+flex: 1;
+background: rgba(59,130,246,0.2);
+border: 1px solid rgba(96,165,250,0.4);
+border-radius: 30px;
+color: #bfdbfe;
+font-size: 0.7rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s;
 display: inline-flex;
 align-items: center;
-gap: 8px;
-background: rgba(59,130,246,0.25);
-border-radius: 40px;
-padding: 10px 20px;
-font-weight: 700;
-font-size: 0.85rem;
-color: #bfdbfe;
-margin-top: 12px;
-text-align: center;
-transition: 0.2s;
-width: fit-content;
-border: 1px solid rgba(96,165,250,0.3);
+justify-content: center;
+gap: 6px;
+padding: 8px 12px;
 }
-.gallery-detail-btn i {
-font-size: 0.85rem;
+.btn-gallery-open i {
+font-size: 0.7rem;
 }
-.gallery-card:hover .gallery-detail-btn {
+.btn-gallery-open:hover {
 background: #3b82f6;
 color: white;
 border-color: white;
+}
+.btn-gallery-salin {
+background: linear-gradient(135deg, #10b981, #059669);
+border: none;
+color: white;
+padding: 8px 16px;
+border-radius: 30px;
+font-size: 0.7rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s ease;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+font-family: 'Inter', monospace;
+}
+.btn-gallery-salin i {
+font-size: 0.7rem;
+}
+.btn-gallery-salin:hover {
+background: linear-gradient(135deg, #059669, #047857);
+transform: scale(1.02);
 }
 .empty-gallery {
 text-align: center;
@@ -822,20 +855,13 @@ border-radius: 40px;
 grid-column: 1 / -1;
 }
 
-/* Responsive: layar lebih kecil tetap tampil rapi */
-@media (max-width: 1300px) {
-.gallery-grid-4 { gap: 24px; }
-.gallery-card { padding: 24px; min-height: 300px; }
-.gallery-card h4 { font-size: 1.35rem; }
-.gallery-icon { font-size: 2.5rem; }
-}
-@media (max-width: 1100px) {
+/* Responsive */
+@media (max-width: 1200px) {
 .gallery-grid-4 { gap: 20px; }
-.gallery-card { padding: 20px; }
-.gallery-card h4 { font-size: 1.25rem; }
-.gallery-desc { font-size: 0.85rem; }
+.gallery-card { padding: 18px; }
+.gallery-card h4 { font-size: 1.1rem; }
 }
-@media (max-width: 900px) {
+@media (max-width: 992px) {
 .gallery-grid-4 { grid-template-columns: repeat(2, 1fr); gap: 20px; }
 }
 @media (max-width: 600px) {
@@ -964,7 +990,7 @@ tab3: { title: "✉️ EVENT LINETOGEL", subtitle: "Inbox & komunikasi tim — p
 { icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif di proyek utama", badge: "Balas" },
 { icon: "fas fa-bell", title: "Notifikasi", desc: "Pengingat meeting jam 14:00 WIB", badge: "Segera" }
 ] },
-tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Klik badge di atas untuk memilih kategori | 1 baris 4 folder ukuran besar", items: [] },
+tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Klik badge di atas untuk memilih kategori", items: [] },
 tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi solid", items: [
 { icon: "fas fa-user-plus", title: "Anggota Aktif", desc: "12 anggota online · 4 sedang rapat", badge: "Online" },
 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
@@ -1072,12 +1098,12 @@ async function renderRandomTabWithFilter(filter = "") { mainHeading.innerHTML = 
 
 function renderStaticTabWithFilter(tabId, filter = "") { const data = staticTabsData[tabId]; if(!data) return false; mainHeading.innerHTML = data.title; const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : ""; subHeading.innerHTML = data.subtitle + filterInfo; bonusBadgeContainer.classList.remove("visible"); galleryBadgeContainer.classList.remove("visible"); let filteredItems = data.items; if(filter.trim() !== "") { filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase())); } if(filteredItems.length === 0 && filter) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`; return true; } let cardsHTML = ""; filteredItems.forEach(item => { cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`; }); dynamicArea.innerHTML = cardsHTML; return true; }
 
-// RENDER GALLERY GAMBAR CS - 1 BARIS 4 FOLDER UKURAN BESAR
+// RENDER GALLERY GAMBAR CS - UKURAN SEPERTI GAMBAR (ADA TOMBOL BUKA FOLDER DAN SALIN)
 function renderGalleryCS() { 
     const cat = galleryData[currentGalleryTab]; 
     mainHeading.innerHTML = cat.title; 
     const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; 
-    subHeading.innerHTML = `${cat.subtitle}${filterInfo} | 1 baris 4 folder ukuran besar`; 
+    subHeading.innerHTML = `${cat.subtitle}${filterInfo} | 1 baris 4 folder`; 
     bonusBadgeContainer.classList.remove("visible"); 
     galleryBadgeContainer.classList.add("visible"); 
     
@@ -1099,24 +1125,44 @@ function renderGalleryCS() {
     let html = `<div class="gallery-grid-4">`;
     itemsToShow.slice(0, 4).forEach((item, idx) => { 
         html += `
-            <div class="gallery-card" data-gallery-idx="${idx}" data-gallery-cat="${currentGalleryTab}">
+            <div class="gallery-card" data-gallery-idx="${idx}" data-gallery-cat="${currentGalleryTab}" data-gallery-title="${escapeHtml(item.judul)}" data-gallery-content="${escapeHtml(item.isiLengkap)}">
                 <div class="gallery-icon"><i class="${item.icon}"></i></div>
                 <h4>${escapeHtml(item.judul)}</h4>
                 <div class="gallery-desc">${escapeHtml(item.deskripsiSingkat)}</div>
-                <div class="gallery-detail-btn"><i class="fas fa-folder-open"></i> Buka folder</div>
+                <div class="gallery-buttons-row">
+                    <button class="btn-gallery-open"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
+                    <button class="btn-gallery-salin"><i class="fas fa-copy"></i> SALIN</button>
+                </div>
             </div>
         `; 
     }); 
     html += `</div>`; 
     dynamicArea.innerHTML = html; 
     
-    document.querySelectorAll('.gallery-card').forEach(card => { 
-        card.addEventListener('click', (e) => { 
-            const catKey = card.getAttribute('data-gallery-cat'); 
-            const idx = parseInt(card.getAttribute('data-gallery-idx')); 
-            const selected = galleryData[catKey].items[idx]; 
-            if(selected) openModal(selected.judul, selected.isiLengkap); 
-        }); 
+    // Event untuk tombol buka folder dan salin
+    document.querySelectorAll('.gallery-card').forEach(card => {
+        const openBtn = card.querySelector('.btn-gallery-open');
+        const salinBtn = card.querySelector('.btn-gallery-salin');
+        const title = card.getAttribute('data-gallery-title');
+        const content = card.getAttribute('data-gallery-content');
+        
+        if (openBtn) {
+            openBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModal(title, content);
+            });
+        }
+        if (salinBtn) {
+            salinBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                copyContentOnly(content, title);
+            });
+        }
+        // Klik pada card juga membuka modal
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('.btn-gallery-open') || e.target.closest('.btn-gallery-salin')) return;
+            openModal(title, content);
+        });
     }); 
 }
 
