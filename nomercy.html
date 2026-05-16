@@ -692,7 +692,7 @@ background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
 }
 
-/* ========= GALLERY GAMBAR CS - 1 BARIS 6 FOLDER ========= */
+/* ========= GALLERY GAMBAR CS - 1 BARIS 5 FOLDER UKURAN DIPERBESAR ========= */
 .gallery-badge-container {
 margin-bottom: 24px;
 display: none;
@@ -746,40 +746,40 @@ background: linear-gradient(135deg, #2c3e66, #1e2a47);
 color: white;
 }
 
-/* FOLDER 1 BARIS 6 KOLOM - MENGGUNAKAN GRID DENGAN 6 KOLOM */
-.gallery-grid-6 {
+/* FOLDER 1 BARIS 5 KOLOM - UKURAN DIPERBESAR */
+.gallery-grid-5 {
 display: grid;
-grid-template-columns: repeat(6, 1fr);
-gap: 20px;
+grid-template-columns: repeat(5, 1fr);
+gap: 24px;
 margin-top: 12px;
 }
 .gallery-card {
-background: rgba(20, 30, 50, 0.92);
-border-radius: 20px;
-padding: 16px;
+background: rgba(20, 30, 50, 0.95);
+border-radius: 24px;
+padding: 22px 18px;
 backdrop-filter: blur(8px);
-border: 1px solid rgba(255, 255, 255, 0.2);
+border: 1px solid rgba(255, 255, 255, 0.25);
 transition: all 0.3s ease;
 cursor: pointer;
 display: flex;
 flex-direction: column;
 }
 .gallery-card:hover {
-transform: translateY(-5px);
-background: rgba(30, 48, 74, 0.97);
+transform: translateY(-6px);
+background: rgba(30, 48, 74, 0.98);
 border-color: #3b82f6;
-box-shadow: 0 20px 30px -10px rgba(0,0,0,0.4);
+box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5);
 }
 .gallery-icon {
-font-size: 1.8rem;
-margin-bottom: 10px;
+font-size: 2.2rem;
+margin-bottom: 14px;
 color: #60a5fa;
 text-align: center;
 }
 .gallery-card h4 {
-font-size: 1rem;
+font-size: 1.15rem;
 font-weight: 700;
-margin: 6px 0 4px;
+margin: 8px 0 6px;
 color: #f1f5f9;
 text-align: center;
 white-space: nowrap;
@@ -788,40 +788,40 @@ text-overflow: ellipsis;
 }
 .gallery-desc {
 color: #cbd5e6;
-line-height: 1.4;
-margin: 6px 0 12px;
-font-size: 0.75rem;
+line-height: 1.45;
+margin: 8px 0 16px;
+font-size: 0.8rem;
 display: -webkit-box;
 -webkit-line-clamp: 2;
 -webkit-box-orient: vertical;
 overflow: hidden;
 text-align: center;
-min-height: 34px;
+min-height: 36px;
 }
 .gallery-buttons-row {
 display: flex;
 flex-direction: column;
-gap: 8px;
-margin-top: 4px;
+gap: 10px;
+margin-top: 6px;
 }
 .btn-gallery-open {
 width: 100%;
-background: rgba(59,130,246,0.2);
+background: rgba(59,130,246,0.25);
 border: 1px solid rgba(96,165,250,0.4);
-border-radius: 30px;
+border-radius: 40px;
 color: #bfdbfe;
-font-size: 0.65rem;
+font-size: 0.7rem;
 font-weight: 600;
 cursor: pointer;
 transition: all 0.2s;
 display: inline-flex;
 align-items: center;
 justify-content: center;
-gap: 5px;
-padding: 6px 8px;
+gap: 6px;
+padding: 8px 10px;
 }
 .btn-gallery-open i {
-font-size: 0.65rem;
+font-size: 0.7rem;
 }
 .btn-gallery-open:hover {
 background: #3b82f6;
@@ -833,20 +833,20 @@ width: 100%;
 background: linear-gradient(135deg, #10b981, #059669);
 border: none;
 color: white;
-padding: 6px 8px;
-border-radius: 30px;
-font-size: 0.65rem;
+padding: 8px 10px;
+border-radius: 40px;
+font-size: 0.7rem;
 font-weight: 700;
 cursor: pointer;
 transition: all 0.2s ease;
 display: inline-flex;
 align-items: center;
 justify-content: center;
-gap: 5px;
+gap: 6px;
 font-family: 'Inter', monospace;
 }
 .btn-gallery-salin i {
-font-size: 0.65rem;
+font-size: 0.7rem;
 }
 .btn-gallery-salin:hover {
 background: linear-gradient(135deg, #059669, #047857);
@@ -860,24 +860,24 @@ border-radius: 40px;
 grid-column: 1 / -1;
 }
 
-/* Responsive: jika layar kecil, kurangi jumlah kolom */
-@media (max-width: 1400px) {
-.gallery-grid-6 { gap: 16px; }
-.gallery-card { padding: 14px; }
-.gallery-icon { font-size: 1.6rem; }
-.gallery-card h4 { font-size: 0.9rem; }
+/* Responsive: layar lebih kecil */
+@media (max-width: 1300px) {
+.gallery-grid-5 { gap: 20px; }
+.gallery-card { padding: 18px 14px; }
+.gallery-icon { font-size: 2rem; }
+.gallery-card h4 { font-size: 1rem; }
 }
-@media (max-width: 1200px) {
-.gallery-grid-6 { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 1100px) {
+.gallery-grid-5 { grid-template-columns: repeat(4, 1fr); gap: 18px; }
 }
 @media (max-width: 900px) {
-.gallery-grid-6 { grid-template-columns: repeat(3, 1fr); }
+.gallery-grid-5 { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 700px) {
-.gallery-grid-6 { grid-template-columns: repeat(2, 1fr); }
+.gallery-grid-5 { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 500px) {
-.gallery-grid-6 { grid-template-columns: 1fr; }
+.gallery-grid-5 { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
 .sidebar { width: 240px; }
@@ -1002,7 +1002,7 @@ tab3: { title: "✉️ EVENT LINETOGEL", subtitle: "Inbox & komunikasi tim — p
 { icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif di proyek utama", badge: "Balas" },
 { icon: "fas fa-bell", title: "Notifikasi", desc: "Pengingat meeting jam 14:00 WIB", badge: "Segera" }
 ] },
-tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Klik badge di atas untuk memilih kategori | 1 baris 6 folder", items: [] },
+tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Klik badge di atas untuk memilih kategori | 1 baris 5 folder ukuran besar", items: [] },
 tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi solid", items: [
 { icon: "fas fa-user-plus", title: "Anggota Aktif", desc: "12 anggota online · 4 sedang rapat", badge: "Online" },
 { icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
@@ -1016,30 +1016,28 @@ tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap 
 ] }
 };
 
-// DATA UNTUK 3 BADGE GALLERY GAMBAR CS (SETIAP KATEGORI 6 FOLDER)
+// DATA UNTUK 3 BADGE GALLERY GAMBAR CS (SETIAP KATEGORI 5 FOLDER)
 const galleryData = {
 rrn_qris: { 
     title: "📱 RRN QRIS", 
     subtitle: "Informasi lengkap seputar RRN dan QRIS",
     items: [
-        { icon: "fas fa-exchange-alt", judul: "Apa itu RRN?", deskripsiSingkat: "Nomor Referensi Transaksi untuk pelacakan QRIS.", isiLengkap: "RRN (Retrieval Reference Number) adalah nomor unik yang diterbitkan setiap transaksi QRIS. Digunakan untuk komplain dan pengecekan status." },
-        { icon: "fas fa-search", judul: "Cek Status Transaksi", deskripsiSingkat: "Cara verifikasi menggunakan RRN.", isiLengkap: "Masukkan RRN di aplikasi bank/e-wallet pada menu histori. Jika gagal, hubungi CS dengan menyertakan RRN." },
-        { icon: "fas fa-file-invoice", judul: "Contoh Penggunaan", deskripsiSingkat: "Studi kasus pelacakan transaksi.", isiLengkap: "Transaksi gagal tetapi saldo terpotong, segera berikan RRN ke CS untuk proses refund." },
-        { icon: "fas fa-clock", judul: "Waktu Expired", deskripsiSingkat: "Masa berlaku RRN.", isiLengkap: "RRN umumnya berlaku 30 hari. Setelah itu data transaksi mungkin tidak dapat dilacak." },
-        { icon: "fas fa-database", judul: "Penyimpanan RRN", deskripsiSingkat: "Cara menyimpan RRN dengan aman.", isiLengkap: "Screenshot bukti transaksi dan simpan di cloud atau galeri ponsel." },
-        { icon: "fas fa-headset", judul: "Bantuan RRN", deskripsiSingkat: "Hubungi CS jika ada masalah.", isiLengkap: "WhatsApp: 081234567890 | Email: cs@rrngallery.com" }
+        { icon: "fas fa-exchange-alt", judul: "Apa itu RRN?", deskripsiSingkat: "Nomor Referensi Transaksi untuk pelacakan QRIS.", isiLengkap: "RRN (Retrieval Reference Number) adalah nomor unik yang diterbitkan setiap transaksi QRIS. Digunakan untuk komplain dan pengecekan status.\n\nContoh RRN: 123456789012345." },
+        { icon: "fas fa-search", judul: "Cek Status Transaksi", deskripsiSingkat: "Cara verifikasi menggunakan RRN.", isiLengkap: "Masukkan RRN di aplikasi bank/e-wallet pada menu histori. Jika gagal, hubungi CS dengan menyertakan RRN, nominal, dan waktu transaksi." },
+        { icon: "fas fa-file-invoice", judul: "Contoh Penggunaan", deskripsiSingkat: "Studi kasus pelacakan transaksi.", isiLengkap: "Transaksi gagal tetapi saldo terpotong, segera berikan RRN ke CS untuk proses refund dalam 1x24 jam." },
+        { icon: "fas fa-clock", judul: "Waktu Expired", deskripsiSingkat: "Masa berlaku RRN.", isiLengkap: "RRN umumnya berlaku 30 hari. Setelah itu data transaksi mungkin tidak dapat dilacak. Segera klaim jika ada kendala." },
+        { icon: "fas fa-database", judul: "Penyimpanan RRN", deskripsiSingkat: "Cara menyimpan RRN dengan aman.", isiLengkap: "Screenshot bukti transaksi dan simpan di cloud atau galeri ponsel untuk arsip." }
     ] 
 },
 profile_ewallet: { 
     title: "💳 PROFIL E-WALLET / BANK", 
     subtitle: "Data lengkap metode pembayaran digital dan perbankan",
     items: [
-        { icon: "fas fa-university", judul: "Rekening Bank Resmi", deskripsiSingkat: "Daftar bank yang terintegrasi.", isiLengkap: "BCA: 1234567890 a.n PT MAJU TOGEL\nMandiri: 1112223333" },
+        { icon: "fas fa-university", judul: "Rekening Bank Resmi", deskripsiSingkat: "Daftar bank yang terintegrasi.", isiLengkap: "BCA: 1234567890 a.n PT MAJU TOGEL\nMandiri: 1112223333 a.n CS GALLERY\nBRI: 8887776665 a.n Official Partner" },
         { icon: "fas fa-mobile-alt", judul: "Dompet Digital", deskripsiSingkat: "E-wallet: OVO, DANA, GoPay.", isiLengkap: "OVO: 081234567890\nDANA: 085712345678\nGoPay: gopay@csgallery" },
-        { icon: "fas fa-shield-alt", judul: "Keamanan Transaksi", deskripsiSingkat: "Tips menjaga keamanan akun.", isiLengkap: "Jangan berikan OTP ke siapapun. Selalu transfer ke rekening resmi." },
-        { icon: "fas fa-credit-card", judul: "Limit Transaksi", deskripsiSingkat: "Batas minimum dan maksimum.", isiLengkap: "Minimal deposit: Rp20.000\nMaksimal: Rp50.000.000/hari" },
-        { icon: "fas fa-history", judul: "Riwayat Transaksi", deskripsiSingkat: "Cek histori deposit/withdraw.", isiLengkap: "Masuk ke akun, klik menu Riwayat untuk melihat semua transaksi." },
-        { icon: "fas fa-question-circle", judul: "FAQ Payment", deskripsiSingkat: "Pertanyaan umum seputar payment.", isiLengkap: "Q: Berapa lama proses deposit? A: 2-5 menit setelah konfirmasi." }
+        { icon: "fas fa-shield-alt", judul: "Keamanan Transaksi", deskripsiSingkat: "Tips menjaga keamanan akun.", isiLengkap: "Jangan berikan OTP ke siapapun. Selalu transfer ke rekening resmi yang tertera. Konfirmasi ke CS setelah transfer." },
+        { icon: "fas fa-credit-card", judul: "Limit Transaksi", deskripsiSingkat: "Batas minimum dan maksimum.", isiLengkap: "Minimal deposit: Rp20.000\nMaksimal transfer: Rp50.000.000/hari untuk bank, Rp10.000.000/hari untuk e-wallet." },
+        { icon: "fas fa-history", judul: "Riwayat Transaksi", deskripsiSingkat: "Cek histori deposit/withdraw.", isiLengkap: "Masuk ke akun, klik menu Riwayat untuk melihat semua transaksi yang pernah dilakukan." }
     ] 
 },
 cara_bermain: { 
@@ -1047,11 +1045,10 @@ cara_bermain: {
     subtitle: "Panduan step-by-step bermain",
     items: [
         { icon: "fas fa-user-plus", judul: "Registrasi Akun", deskripsiSingkat: "Daftar dengan mudah.", isiLengkap: "1. Klik Daftar\n2. Isi data diri\n3. Verifikasi OTP\n4. Login dan lengkapi profil" },
-        { icon: "fas fa-hand-holding-usd", judul: "Deposit & Withdraw", deskripsiSingkat: "Tata cara transaksi.", isiLengkap: "Deposit: Transfer ke rekening resmi, kirim bukti via CS.\nWithdraw: Proses cepat 2-5 menit" },
-        { icon: "fas fa-dice-d6", judul: "Panduan Togel", deskripsiSingkat: "Cara bermain togel.", isiLengkap: "Pilih pasaran favorit (SGP, HKG, SDY). Pasang angka 2D/3D/4D." },
-        { icon: "fas fa-gamepad", judul: "Panduan Slot", deskripsiSingkat: "Cara bermain slot online.", isiLengkap: "Pilih provider (Pragmatic, Habanero). Atur nilai bet, tekan spin." },
-        { icon: "fas fa-trophy", judul: "Bonus & Promo", deskripsiSingkat: "Daftar bonus yang tersedia.", isiLengkap: "New member 20%, Deposit harian 10%, Cashback 5% mingguan." },
-        { icon: "fas fa-chart-line", judul: "Strategi Menang", deskripsiSingkat: "Tips meningkatkan peluang.", isiLengkap: "Kelola modal dengan baik, pilih permainan dengan RTP tinggi." }
+        { icon: "fas fa-hand-holding-usd", judul: "Deposit & Withdraw", deskripsiSingkat: "Tata cara transaksi.", isiLengkap: "Deposit: Transfer ke rekening resmi, kirim bukti via CS.\nWithdraw: Proses cepat 2-5 menit, minimal 50.000." },
+        { icon: "fas fa-dice-d6", judul: "Panduan Togel", deskripsiSingkat: "Cara bermain togel.", isiLengkap: "Pilih pasaran favorit (SGP, HKG, SDY). Pasang angka 2D/3D/4D. Cek jadwal result di menu JADWAL TOGEL." },
+        { icon: "fas fa-gamepad", judul: "Panduan Slot", deskripsiSingkat: "Cara bermain slot online.", isiLengkap: "Pilih provider (Pragmatic, Habanero). Atur nilai bet, tekan spin. Baca syarat bonus dan ketentuan withdraw." },
+        { icon: "fas fa-trophy", judul: "Bonus & Promo", deskripsiSingkat: "Daftar bonus yang tersedia.", isiLengkap: "New member 20%, Deposit harian 10%, Cashback 5% mingguan, Referral 3% seumur hidup." }
     ] 
 }
 };
@@ -1116,12 +1113,12 @@ async function renderRandomTabWithFilter(filter = "") { mainHeading.innerHTML = 
 
 function renderStaticTabWithFilter(tabId, filter = "") { const data = staticTabsData[tabId]; if(!data) return false; mainHeading.innerHTML = data.title; const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : ""; subHeading.innerHTML = data.subtitle + filterInfo; bonusBadgeContainer.classList.remove("visible"); galleryBadgeContainer.classList.remove("visible"); let filteredItems = data.items; if(filter.trim() !== "") { filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase())); } if(filteredItems.length === 0 && filter) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`; return true; } let cardsHTML = ""; filteredItems.forEach(item => { cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`; }); dynamicArea.innerHTML = cardsHTML; return true; }
 
-// RENDER GALLERY GAMBAR CS - 1 BARIS 6 FOLDER
+// RENDER GALLERY GAMBAR CS - 1 BARIS 5 FOLDER UKURAN DIPERBESAR
 function renderGalleryCS() { 
     const cat = galleryData[currentGalleryTab]; 
     mainHeading.innerHTML = cat.title; 
     const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; 
-    subHeading.innerHTML = `${cat.subtitle}${filterInfo} | 1 baris 6 folder`; 
+    subHeading.innerHTML = `${cat.subtitle}${filterInfo} | 1 baris 5 folder ukuran diperbesar`; 
     bonusBadgeContainer.classList.remove("visible"); 
     galleryBadgeContainer.classList.add("visible"); 
     
@@ -1140,8 +1137,8 @@ function renderGalleryCS() {
         return; 
     }
     
-    let html = `<div class="gallery-grid-6">`;
-    itemsToShow.slice(0, 6).forEach((item, idx) => { 
+    let html = `<div class="gallery-grid-5">`;
+    itemsToShow.slice(0, 5).forEach((item, idx) => { 
         html += `
             <div class="gallery-card" data-gallery-idx="${idx}" data-gallery-cat="${currentGalleryTab}" data-gallery-title="${escapeHtml(item.judul)}" data-gallery-content="${escapeHtml(item.isiLengkap)}">
                 <div class="gallery-icon"><i class="${item.icon}"></i></div>
