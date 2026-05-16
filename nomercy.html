@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7 Kolom Sidebar - Live Search Per Kolom</title>
+<title>7 Kolom Sidebar - 1 Baris 4 Folder Semua Kolom</title>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Google Font: Inter -->
@@ -269,148 +269,149 @@ background: #ef4444;
 color: white;
 }
 
-/* Grid card untuk tab selain BONUS & GALLERY */
-.dashboard-grid {
+/* ========= GLOBAL 1 BARIS 4 FOLDER UNTUK SEMUA KOLOM ========= */
+/* Container utama untuk semua konten - full width tanpa batasan grid */
+.content-fullwidth {
+display: block !important;
+width: 100%;
+}
+
+/* Grid 4 kolom untuk semua folder di setiap kolom */
+.grid-4-cols {
 display: grid;
-grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+grid-template-columns: repeat(4, 1fr);
 gap: 24px;
 margin-top: 12px;
+width: 100%;
 }
 
-/* Card Style untuk tab selain BONUS */
-.card {
-background: rgba(18, 28, 45, 0.85);
-border-radius: 28px;
-padding: 22px;
+/* Style folder/card universal untuk semua kolom */
+.folder-card {
+background: rgba(20, 30, 50, 0.95);
+border-radius: 24px;
+padding: 22px 18px;
+backdrop-filter: blur(8px);
+border: 1px solid rgba(255, 255, 255, 0.25);
 transition: all 0.3s ease;
-border: 1px solid rgba(255, 255, 255, 0.2);
-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+cursor: pointer;
 display: flex;
 flex-direction: column;
-cursor: pointer;
-position: relative;
+height: 100%;
 }
 
-.card:hover {
+.folder-card:hover {
 transform: translateY(-6px);
-background: rgba(30, 45, 70, 0.95);
-border-color: rgba(59, 130, 246, 0.6);
-box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.4);
+background: rgba(30, 48, 74, 0.98);
+border-color: #3b82f6;
+box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5);
 }
 
-.card h3 {
-font-size: 1.35rem;
-font-weight: 700;
-margin-bottom: 16px;
-color: #f0f4fe;
-word-break: break-word;
-padding-right: 8px;
-position: relative;
-padding-bottom: 14px;
-border-bottom: 2px solid rgba(96, 165, 250, 0.7);
+.folder-icon {
+font-size: 2rem;
+margin-bottom: 14px;
+color: #60a5fa;
+text-align: center;
+}
+
+.folder-card h3 {
+font-size: 1.2rem;
+font-weight: 800;
+margin-bottom: 12px;
+color: #f1f5f9;
+border-left: 4px solid #3b82f6;
+padding-left: 12px;
+}
+
+.folder-badge-number {
 display: inline-block;
-width: 100%;
-letter-spacing: -0.2px;
-}
-.card h3::after {
-content: '';
-position: absolute;
-bottom: -2px;
-left: 0;
-width: 60px;
-height: 2px;
-background: linear-gradient(90deg, #60a5fa, #3b82f6, transparent);
-border-radius: 4px;
+background: rgba(59,130,246,0.3);
+border-radius: 30px;
+padding: 2px 10px;
+font-size: 0.7rem;
+font-weight: 600;
+color: #93c5fd;
+margin-left: 8px;
 }
 
-.card p {
+.folder-desc {
 color: #cbd5e6;
-line-height: 1.5;
-font-size: 0.95rem;
-flex: 1;
-white-space: pre-wrap;
-word-break: break-word;
-overflow: hidden;
+line-height: 1.55;
+margin: 10px 0 18px;
+font-size: 0.85rem;
 display: -webkit-box;
 -webkit-line-clamp: 3;
 -webkit-box-orient: vertical;
-margin-bottom: 52px;
+overflow: hidden;
+min-height: 60px;
+}
+
+.folder-buttons-row {
+display: flex;
+flex-direction: row;
+gap: 12px;
 margin-top: 8px;
 }
 
-.btn-salin-folder {
-position: absolute;
-bottom: 16px;
-right: 18px;
+.btn-folder-open {
+flex: 1;
+background: rgba(59,130,246,0.25);
+border: 1px solid rgba(96,165,250,0.4);
+border-radius: 40px;
+color: #bfdbfe;
+font-size: 0.72rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+padding: 10px 8px;
+}
+
+.btn-folder-open i {
+font-size: 0.7rem;
+}
+
+.btn-folder-open:hover {
+background: #3b82f6;
+color: white;
+border-color: white;
+}
+
+.btn-folder-salin {
+flex: 1;
 background: linear-gradient(135deg, #10b981, #059669);
 border: none;
 color: white;
-padding: 7px 15px;
+padding: 10px 8px;
 border-radius: 40px;
-font-size: 0.9rem;
+font-size: 0.72rem;
 font-weight: 700;
-letter-spacing: 0.3px;
 cursor: pointer;
 transition: all 0.2s ease;
-z-index: 6;
-backdrop-filter: blur(4px);
-box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-display: flex;
+display: inline-flex;
 align-items: center;
-gap: 7px;
+justify-content: center;
+gap: 6px;
 font-family: 'Inter', monospace;
 }
-.btn-salin-folder i {
-font-size: 0.85rem;
+
+.btn-folder-salin i {
+font-size: 0.7rem;
 }
-.btn-salin-folder:hover {
+
+.btn-folder-salin:hover {
 background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
 }
-.btn-salin-folder:active {
-transform: scale(0.97);
-}
 
-.copy-toast-notif {
-position: fixed;
-bottom: 30px;
-left: 50%;
-transform: translateX(-50%) translateY(20px);
-background: rgba(0,0,0,0.85);
-backdrop-filter: blur(12px);
-color: #bbf7d0;
-padding: 12px 28px;
-border-radius: 60px;
-font-weight: 600;
-font-size: 0.9rem;
-z-index: 2000;
-opacity: 0;
-transition: opacity 0.25s ease, transform 0.2s;
-pointer-events: none;
-border-left: 4px solid #22c55e;
-box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
-}
-.copy-toast-notif.show {
-opacity: 1;
-transform: translateX(-50%) translateY(0px);
-}
-
-.card-icon {
-font-size: 2rem;
-margin-bottom: 16px;
-color: #60a5fa;
-}
-.stat-badge {
-display: inline-block;
-background: rgba(59, 130, 246, 0.4);
-padding: 6px 14px;
+.empty-folder {
+text-align: center;
+padding: 48px;
+background: rgba(0,0,0,0.5);
 border-radius: 40px;
-font-size: 0.7rem;
-font-weight: 600;
-color: #e0f2fe;
-margin-top: 16px;
-border: 1px solid rgba(255,255,255,0.15);
-align-self: flex-start;
+grid-column: 1 / -1;
 }
 
 /* MODAL */
@@ -505,19 +506,14 @@ color: #94a3b8;
 border-top: 1px solid rgba(255,255,255,0.1);
 padding-top: 16px;
 }
-.loading-card, .no-result-card {
+.loading-card {
 background: rgba(0,0,0,0.6);
 text-align: center;
 padding: 40px;
 border-radius: 32px;
-grid-column: 1 / -1;
-}
-.error-message {
-background: rgba(220, 38, 38, 0.8);
-border-left: 5px solid #ff8a8a;
 }
 
-/* ========= 4 BADGE BONUS ========= */
+/* Bonus badge container (tetap seperti semula) */
 .bonus-badge-container {
 margin-bottom: 24px;
 display: none;
@@ -552,147 +548,92 @@ gap: 10px;
 border: 1px solid rgba(59, 130, 246, 0.4);
 box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
-.bonus-badge i {
-font-size: 1rem;
-color: #60a5fa;
-}
+.bonus-badge i { font-size: 1rem; color: #60a5fa; }
 .bonus-badge.active-bonus {
 background: linear-gradient(135deg, #3b82f6, #2563eb);
 color: white;
 border-color: white;
-box-shadow: 0 8px 20px -8px #1e40af;
 }
-.bonus-badge.active-bonus i {
-color: white;
-}
+.bonus-badge.active-bonus i { color: white; }
 .bonus-badge:hover {
 transform: translateY(-3px);
 background: linear-gradient(135deg, #2c3e66, #1e2a47);
 color: white;
 }
 
-/* ========= KHUSUS BONUS - TOMBOL SEJAJAR DALAM 1 BARIS ========= */
+/* Bonus grid khusus bonus (tetap 4 kolom) */
 .bonus-grid {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 gap: 28px;
 margin-top: 20px;
 }
-
-/* Card bonus */
 .bonus-card {
 background: rgba(18, 28, 45, 0.92);
 border-radius: 24px;
 padding: 24px;
 transition: all 0.3s ease;
 border: 1px solid rgba(255, 255, 255, 0.2);
-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+cursor: pointer;
 display: flex;
 flex-direction: column;
-cursor: pointer;
-min-height: 300px;
 }
-
 .bonus-card:hover {
 transform: translateY(-6px);
 background: rgba(30, 45, 70, 0.97);
 border-color: rgba(59, 130, 246, 0.6);
-box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.45);
 }
-
 .bonus-card h3 {
 font-size: 1.3rem;
 font-weight: 800;
 margin-bottom: 14px;
 color: #f0f4fe;
-word-break: break-word;
-letter-spacing: -0.3px;
-line-height: 1.4;
 border-bottom: 2px solid rgba(96, 165, 250, 0.5);
 padding-bottom: 12px;
 }
-
 .bonus-desc-full {
 color: #cbd5e6;
 line-height: 1.55;
 font-size: 0.9rem;
 margin: 12px 0 20px 0;
 flex: 1;
-white-space: pre-wrap;
-word-break: break-word;
-overflow: hidden;
 display: -webkit-box;
 -webkit-line-clamp: 3;
 -webkit-box-orient: vertical;
+overflow: hidden;
 }
-
 .bonus-actions-row {
 display: flex;
 flex-direction: row;
-align-items: center;
-justify-content: space-between;
 gap: 12px;
 margin-top: auto;
 padding-top: 16px;
-border-top: 1px solid rgba(255, 255, 255, 0.1);
+border-top: 1px solid rgba(255,255,255,0.1);
 }
-
 .btn-open-folder {
 flex: 1;
 background: transparent;
-border: 1px solid rgba(59, 130, 246, 0.5);
+border: 1px solid rgba(59,130,246,0.5);
 border-radius: 30px;
 color: #60a5fa;
 font-size: 0.7rem;
 font-weight: 600;
 cursor: pointer;
-transition: all 0.2s;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 6px;
 padding: 8px 10px;
-white-space: nowrap;
 }
-
-.btn-open-folder i {
-font-size: 0.7rem;
-}
-
-.btn-open-folder:hover {
-background: rgba(59, 130, 246, 0.2);
-color: #93c5fd;
-border-color: #60a5fa;
-}
-
 .btn-salin-bonus {
+flex: 1;
 background: linear-gradient(135deg, #10b981, #059669);
 border: none;
 color: white;
-padding: 8px 16px;
+padding: 8px 10px;
 border-radius: 30px;
 font-size: 0.7rem;
 font-weight: 700;
 cursor: pointer;
-transition: all 0.2s ease;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 6px;
-font-family: 'Inter', monospace;
-white-space: nowrap;
 }
 
-.btn-salin-bonus i {
-font-size: 0.7rem;
-}
-
-.btn-salin-bonus:hover {
-background: linear-gradient(135deg, #059669, #047857);
-transform: scale(1.02);
-}
-
-/* ========= GALLERY GAMBAR CS - 1 BARIS 4 FOLDER FULL WIDTH ========= */
+/* Gallery badge container */
 .gallery-badge-container {
 margin-bottom: 24px;
 display: none;
@@ -707,7 +648,6 @@ flex-wrap: wrap;
 background: rgba(0, 0, 0, 0.4);
 padding: 12px 20px;
 border-radius: 60px;
-backdrop-filter: blur(4px);
 justify-content: center;
 border: 1px solid rgba(255,255,255,0.2);
 }
@@ -719,171 +659,52 @@ font-weight: 800;
 font-size: 1rem;
 color: #cbd5e6;
 cursor: pointer;
-transition: all 0.2s ease;
-letter-spacing: 0.5px;
 display: inline-flex;
 align-items: center;
 gap: 10px;
-border: 1px solid rgba(59, 130, 246, 0.4);
-box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-.gallery-badge i {
-font-size: 1rem;
-color: #60a5fa;
+border: 1px solid rgba(59,130,246,0.4);
 }
 .gallery-badge.active-gallery {
 background: linear-gradient(135deg, #3b82f6, #2563eb);
-color: white;
-border-color: white;
-box-shadow: 0 8px 20px -8px #1e40af;
-}
-.gallery-badge.active-gallery i {
 color: white;
 }
 .gallery-badge:hover {
 transform: translateY(-3px);
 background: linear-gradient(135deg, #2c3e66, #1e2a47);
-color: white;
 }
 
-/* GALLERY CONTAINER - OVERRIDE dashboard-grid agar full width */
-#dynamicContentArea.gallery-fullwidth {
-display: block !important;
-}
-
-/* FOLDER 1 BARIS 4 KOLOM - FULL WIDTH TANPA RUANG KOSONG */
-.gallery-grid-4 {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 24px;
-margin-top: 12px;
-width: 100%;
-}
-.gallery-card {
-background: rgba(20, 30, 50, 0.95);
-border-radius: 24px;
-padding: 24px 20px;
-backdrop-filter: blur(8px);
-border: 1px solid rgba(255, 255, 255, 0.25);
-transition: all 0.3s ease;
-cursor: pointer;
-display: flex;
-flex-direction: column;
-height: 100%;
-}
-.gallery-card:hover {
-transform: translateY(-6px);
-background: rgba(30, 48, 74, 0.98);
-border-color: #3b82f6;
-box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5);
-}
-.gallery-card h3 {
-font-size: 1.2rem;
-font-weight: 800;
-margin-bottom: 12px;
-color: #f1f5f9;
-border-left: 4px solid #3b82f6;
-padding-left: 12px;
-display: flex;
-align-items: center;
-flex-wrap: wrap;
-gap: 8px;
-}
-.gallery-badge-number {
-display: inline-block;
-background: rgba(59,130,246,0.3);
-border-radius: 30px;
-padding: 2px 10px;
-font-size: 0.7rem;
+.copy-toast-notif {
+position: fixed;
+bottom: 30px;
+left: 50%;
+transform: translateX(-50%) translateY(20px);
+background: rgba(0,0,0,0.85);
+backdrop-filter: blur(12px);
+color: #bbf7d0;
+padding: 12px 28px;
+border-radius: 60px;
 font-weight: 600;
-color: #93c5fd;
+z-index: 2000;
+opacity: 0;
+transition: 0.25s;
+pointer-events: none;
+border-left: 4px solid #22c55e;
 }
-.gallery-desc {
-color: #cbd5e6;
-line-height: 1.55;
-margin: 12px 0 20px;
-font-size: 0.85rem;
-display: -webkit-box;
--webkit-line-clamp: 3;
--webkit-box-orient: vertical;
-overflow: hidden;
-min-height: 60px;
-}
-.gallery-buttons-row {
-display: flex;
-flex-direction: row;
-gap: 12px;
-margin-top: 8px;
-}
-.btn-gallery-open {
-flex: 1;
-background: rgba(59,130,246,0.25);
-border: 1px solid rgba(96,165,250,0.4);
-border-radius: 40px;
-color: #bfdbfe;
-font-size: 0.75rem;
-font-weight: 600;
-cursor: pointer;
-transition: all 0.2s;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-padding: 10px 12px;
-}
-.btn-gallery-open i {
-font-size: 0.75rem;
-}
-.btn-gallery-open:hover {
-background: #3b82f6;
-color: white;
-border-color: white;
-}
-.btn-gallery-salin {
-flex: 1;
-background: linear-gradient(135deg, #10b981, #059669);
-border: none;
-color: white;
-padding: 10px 12px;
-border-radius: 40px;
-font-size: 0.75rem;
-font-weight: 700;
-cursor: pointer;
-transition: all 0.2s ease;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-font-family: 'Inter', monospace;
-}
-.btn-gallery-salin i {
-font-size: 0.75rem;
-}
-.btn-gallery-salin:hover {
-background: linear-gradient(135deg, #059669, #047857);
-transform: scale(1.02);
-}
-.empty-gallery {
-text-align: center;
-padding: 48px;
-background: rgba(0,0,0,0.5);
-border-radius: 40px;
-grid-column: 1 / -1;
-}
+.copy-toast-notif.show { opacity: 1; transform: translateX(-50%) translateY(0px); }
 
-/* Responsive - tetap pertahankan 4 kolom sampai batas tertentu */
+/* Responsive */
 @media (max-width: 1200px) {
-.gallery-grid-4 { gap: 20px; }
-.gallery-card { padding: 20px 16px; }
-.gallery-card h3 { font-size: 1.05rem; }
-.gallery-desc { font-size: 0.8rem; }
-.btn-gallery-open, .btn-gallery-salin { font-size: 0.7rem; padding: 8px 10px; }
+.grid-4-cols { gap: 20px; }
+.folder-card { padding: 18px 14px; }
+.folder-card h3 { font-size: 1rem; }
 }
 @media (max-width: 1000px) {
-.gallery-grid-4 { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.grid-4-cols { grid-template-columns: repeat(2, 1fr); }
+.bonus-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
-.gallery-grid-4 { grid-template-columns: 1fr; }
+.grid-4-cols { grid-template-columns: 1fr; }
+.bonus-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
 .sidebar { width: 240px; }
@@ -899,13 +720,13 @@ grid-column: 1 / -1;
 <div class="logo-icon"><i class="fas fa-expand-alt"></i></div>
 <div class="logo-text">
 <h2>7Kolom</h2>
-<p>Live Search Per Kolom</p>
+<p>1 Baris 4 Folder Semua Kolom</p>
 </div>
 </div>
 </div>
 <div class="nav-menu">
-<div class="nav-item active" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span><div class="badge-new">Full</div></div>
-<div class="nav-item" data-tab="tab2"><i class="fas fa-chart-line"></i><span>RANDOM</span><div class="badge-new">Folder + SALIN</div></div>
+<div class="nav-item active" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></div>
+<div class="nav-item" data-tab="tab2"><i class="fas fa-chart-line"></i><span>RANDOM</span><div class="badge-new">Folder+Salin</div></div>
 <div class="nav-item" data-tab="tab3"><i class="fas fa-envelope"></i><span>EVENT LINETOGEL</span></div>
 <div class="nav-item" data-tab="tab4"><i class="fas fa-tasks"></i><span>GALLERY GAMBAR CS</span></div>
 <div class="nav-item" data-tab="tab5"><i class="fas fa-users"></i><span>ALL ABOUT QRIS</span></div>
@@ -913,7 +734,7 @@ grid-column: 1 / -1;
 <div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
 </div>
 <div class="sidebar-footer">
-<i class="fas fa-search" style="color:#3b82f6"></i> Pencarian berfungsi pada masing-masing kolom secara independen
+<i class="fas fa-layer-group"></i> Semua kolom menggunakan 1 baris 4 folder full width
 </div>
 </aside>
 
@@ -921,7 +742,7 @@ grid-column: 1 / -1;
 <div class="content-header">
 <div class="page-title">
 <h1 id="mainHeading">Dashboard 7 Kolom</h1>
-<p id="subHeading">Live search bekerja pada setiap kolom/tab secara terpisah | Ketik untuk mencari di kolom yang aktif</p>
+<p id="subHeading">Semua kolom menampilkan 1 baris 4 folder | Klik folder untuk lihat detail | Tombol SALIN</p>
 </div>
 <div class="action-buttons">
 <div class="search-wrapper">
@@ -932,7 +753,6 @@ grid-column: 1 / -1;
 </div>
 </div>
 
-<!-- Container untuk badge bonus khusus tab BONUS -->
 <div id="bonusBadgeContainer" class="bonus-badge-container">
 <div class="bonus-badge-bar">
 <div class="bonus-badge" data-bonus-tab="all"><i class="fas fa-layer-group"></i> BONUS ALL</div>
@@ -942,7 +762,6 @@ grid-column: 1 / -1;
 </div>
 </div>
 
-<!-- Container untuk 3 badge GALLERY GAMBAR CS -->
 <div id="galleryBadgeContainer" class="gallery-badge-container">
 <div class="gallery-badge-bar">
 <div class="gallery-badge" data-gallery-tab="rrn_qris"><i class="fas fa-qrcode"></i> RRN QRIS</div>
@@ -951,13 +770,12 @@ grid-column: 1 / -1;
 </div>
 </div>
 
-<div id="dynamicContentArea" class="dashboard-grid">
+<div id="dynamicContentArea" class="content-fullwidth">
 <div class="loading-card"><i class="fas fa-spinner fa-pulse" style="font-size: 2rem;"></i><p style="margin-top: 16px;">Memuat data...</p></div>
 </div>
 </main>
 </div>
 
-<!-- MODAL -->
 <div id="folderModal" class="modal-overlay">
 <div class="modal-container">
 <div class="modal-header">
@@ -965,20 +783,16 @@ grid-column: 1 / -1;
 <button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button>
 </div>
 <div class="modal-body" id="modalBody">
-<div class="modal-content-text" id="modalContentText">
-Isi folder / detail bonus akan ditampilkan di sini...
-</div>
-<div class="esc-hint">
-<kbd>ESC</kbd> Tekan ESC untuk menutup
-</div>
+<div class="modal-content-text" id="modalContentText">Isi folder akan ditampilkan di sini...</div>
+<div class="esc-hint"><kbd>ESC</kbd> Tekan ESC untuk menutup</div>
 </div>
 </div>
 </div>
 
-<div id="copyToast" class="copy-toast-notif"><i class="fas fa-copy"></i> Isi folder berhasil disalin! 📄</div>
+<div id="copyToast" class="copy-toast-notif"><i class="fas fa-copy"></i> Berhasil disalin! 📄</div>
 
 <script>
-// ======================= KONFIGURASI GOOGLE SHEETS (TIDAK BERUBAH) =======================
+// ======================= KONFIGURASI =======================
 const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
 const SHEET_BONUS_ALL = 'BONUS ALL';
 const SHEET_BONUS_MINGGUAN = 'BONUS MINGGUAN';
@@ -987,77 +801,64 @@ const SHEET_BONUS_LAIN_LAIN = 'BONUS LAIN-LAIN';
 const SHEET_RANDOM = 'PK RANDOM';
 
 let foldersData = [];
-let bonusAllData = [];
-let bonusMingguanData = [];
-let bonusDoneBagiData = [];
-let bonusLainLainData = [];
+let bonusAllData = [], bonusMingguanData = [], bonusDoneBagiData = [], bonusLainLainData = [];
+let currentFilterText = "", currentActiveTab = "tab1", currentBonusSubTab = "lain";
 
-let currentFilterText = "";
-let currentActiveTab = "tab1";
-let currentBonusSubTab = "lain";
-
-// Data statis untuk tab lain (TIDAK BERUBAH)
+// Data statis untuk semua kolom (masing-masing 4 folder)
 const staticTabsData = {
-tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik — background full size 100%", items: [
-{ icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
-{ icon: "fas fa-users", title: "Pengguna Aktif", desc: "1,284 pengguna online sekarang", badge: "Hari ini" },
-{ icon: "fas fa-calendar-alt", title: "Jadwal Proyek", desc: "3 tenggat mendekati deadline", badge: "Prioritas" }
+tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik", items: [
+{ icon: "fas fa-chart-pie", judul: "RINGKASAN AKTIVITAS", nomor: "1", deskripsi: "Total kunjungan +2.5% minggu ini.", isiLengkap: "Total kunjungan meningkat 2.5% dibanding minggu lalu. Pengunjung aktif: 1,284 orang hari ini." },
+{ icon: "fas fa-users", judul: "PENGGUNA AKTIF", nomor: "2", deskripsi: "1,284 pengguna online sekarang.", isiLengkap: "Pengguna yang sedang online: 1,284 orang. Tertinggi dalam 7 hari terakhir." },
+{ icon: "fas fa-calendar-alt", judul: "JADWAL PROYEK", nomor: "3", deskripsi: "3 tenggat mendekati deadline.", isiLengkap: "Proyek A: 2 hari lagi, Proyek B: 3 hari lagi, Proyek C: 5 hari lagi." },
+{ icon: "fas fa-chart-line", judul: "PERFORMA SISTEM", nomor: "4", deskripsi: "Uptime 99.9% dalam sebulan.", isiLengkap: "Sistem berjalan stabil dengan uptime 99.9%. Tidak ada gangguan berarti." }
 ] },
-tab3: { title: "✉️ EVENT LINETOGEL", subtitle: "Inbox & komunikasi tim — pesan terkini", items: [
-{ icon: "fas fa-inbox", title: "Pesan Masuk", desc: "Anda memiliki 12 pesan belum dibaca", badge: "12 baru" },
-{ icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif di proyek utama", badge: "Balas" },
-{ icon: "fas fa-bell", title: "Notifikasi", desc: "Pengingat meeting jam 14:00 WIB", badge: "Segera" }
+tab2: { title: "🎲 KOLOM RANDOM", subtitle: "Folder dari Google Sheets", items: [], isDynamic: true },
+tab3: { title: "✉️ EVENT LINETOGEL", subtitle: "Event dan informasi terbaru", items: [
+{ icon: "fas fa-gift", judul: "BONUS NEW MEMBER", nomor: "1", deskripsi: "Bonus 20% untuk pendaftar baru.", isiLengkap: "New member mendapatkan bonus deposit 20% maksimal Rp200.000. Syarat TO 5x." },
+{ icon: "fas fa-trophy", judul: "TURNAMEN SLOT", nomor: "2", deskripsi: "Total hadiah Rp500.000.000.", isiLengkap: "Turnamen slot berlangsung 1-30 Juni. Peringkat 1 dapat Rp100.000.000." },
+{ icon: "fas fa-calendar-week", judul: "EVENT MINGGUAN", nomor: "3", deskripsi: "Cashback 10% setiap Senin.", isiLengkap: "Cashback 10% untuk kekalahan bersih. Dibagikan setiap hari Senin." },
+{ icon: "fas fa-percent", judul: "DEPOSIT HARIAN", nomor: "4", deskripsi: "Bonus deposit 5% setiap hari.", isiLengkap: "Bonus deposit harian 5% maksimal Rp50.000. Minimal deposit Rp50.000." }
 ] },
-tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Klik badge di atas untuk memilih kategori | 1 baris 4 folder full width", items: [] },
-tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Struktur tim — kolaborasi solid", items: [
-{ icon: "fas fa-user-plus", title: "Anggota Aktif", desc: "12 anggota online · 4 sedang rapat", badge: "Online" },
-{ icon: "fas fa-user-tie", title: "Peran & Izin", desc: "Admin: 3 orang, Editor: 7 orang", badge: "RBAC" },
-{ icon: "fas fa-handshake", title: "Kolaborasi", desc: "Integrasi dengan tim desain", badge: "Sinergi" }
+tab4: { title: "✅ GALLERY GAMBAR CS", subtitle: "Klik badge untuk pilih kategori", items: [], isGallery: true },
+tab5: { title: "👥 ALL ABOUT QRIS", subtitle: "Informasi QRIS terkini", items: [
+{ icon: "fas fa-qrcode", judul: "QRIS ADOPSI", nomor: "1", deskripsi: "Merchant QRIS +200% di 2024.", isiLengkap: "Jumlah merchant QRIS meningkat 200% dibanding tahun sebelumnya." },
+{ icon: "fas fa-charging-station", judul: "TRANSAKSI QRIS", nomor: "2", deskripsi: "Volume transaksi naik 150%.", isiLengkap: "Volume transaksi QRIS mencapai Rp50 triliun per bulan." },
+{ icon: "fas fa-shield-alt", judul: "KEAMANAN QRIS", nomor: "3", deskripsi: "Sertifikasi PCI DSS Level 1.", isiLengkap: "Sistem QRIS telah bersertifikasi keamanan tingkat internasional." },
+{ icon: "fas fa-globe", judul: "QRIS INTERNASIONAL", nomor: "4", deskripsi: "Terintegrasi dengan 5 negara.", isiLengkap: "QRIS bisa digunakan di Thailand, Malaysia, Singapura, Filipina, Jepang." }
 ] },
-tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus melalui badge di atas | Live Search mencari di kategori yang aktif", items: [] },
-tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap membantu", items: [
-{ icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi sidebar 7 kolom dengan background 100% full", badge: "PDF" },
-{ icon: "fas fa-headset", title: "Dukungan Teknis", desc: "Chat dengan agen support 24/7", badge: "Live" },
-{ icon: "fas fa-video", title: "Tutorial Video", desc: "Walkthrough antarmuka lengkap", badge: "Tonton" }
+tab6: { title: "⚙️ BONUS", subtitle: "Pilih kategori bonus via badge di atas", items: [], isBonus: true },
+tab7: { title: "❓ JADWAL TOGEL", subtitle: "Jadwal lengkap pasaran togel", items: [
+{ icon: "fas fa-flag-checkered", judul: "SINGAPORE", nomor: "1", deskripsi: "Buka Senin-Minggu jam 17:30 WIB.", isiLengkap: "Result SGP: Senin-Minggu pukul 17:30 WIB. Tutup betting 17:20 WIB." },
+{ icon: "fas fa-flag-checkered", judul: "HONGKONG", nomor: "2", deskripsi: "Buka Senin-Minggu jam 23:00 WIB.", isiLengkap: "Result HK: Senin-Minggu pukul 23:00 WIB. Tutup betting 22:50 WIB." },
+{ icon: "fas fa-flag-checkered", judul: "SYDNEY", nomor: "3", deskripsi: "Buka Senin-Minggu jam 13:50 WIB.", isiLengkap: "Result SDY: Senin-Minggu pukul 13:50 WIB. Tutup betting 13:40 WIB." },
+{ icon: "fas fa-calendar-alt", judul: "LIVE GAMES", nomor: "4", deskripsi: "24 jam nonstop setiap hari.", isiLengkap: "Live games tersedia 24 jam penuh tanpa jeda. Semua provider tersedia." }
 ] }
 };
 
-// DATA UNTUK 3 BADGE GALLERY GAMBAR CS (SETIAP KATEGORI 4 FOLDER - SEPERTI GAMBAR)
+// Data khusus gallery
 const galleryData = {
-rrn_qris: { 
-    title: "📱 RRN QRIS", 
-    subtitle: "Informasi lengkap seputar RRN dan QRIS",
-    items: [
-        { judul: "TIDAK DAPAT BONUS", nomor: "1", deskripsi: "Apabila anda tidak mendapatkan bonus tersebut, berarti anda tidak memenuhi syarat dan ketentuan untuk mendapatkan bonus ...", isiLengkap: "Apabila anda tidak mendapatkan bonus tersebut, berarti anda tidak memenuhi syarat dan ketentuan untuk mendapatkan bonus yang telah ditentukan. Silakan baca kembali syarat dan ketentuan promo di halaman BONUS." },
-        { judul: "TIDAK DAPAT BONUS", nomor: "2", deskripsi: "Perhati bonus akan otomatis masuk jika anda memenuhi syarat untuk mendapatkan nya ya bosku ...", isiLengkap: "Perhatian! Bonus akan otomatis masuk ke akun Anda jika memenuhi semua persyaratan yang telah ditentukan. Tidak perlu melakukan klaim manual." },
-        { judul: "TIDAK DAPAT BONUS", nomor: "3", deskripsi: "Semua bonus yang di bagikan oleh sistem kami sudah sesuai prosedur serta syarat dan ketentuan tanpa perlu di claim dan j...", isiLengkap: "Semua bonus yang dibagikan oleh sistem kami sudah sesuai prosedur serta syarat dan ketentuan tanpa perlu di claim. Sistem akan mendeteksi secara otomatis." },
-        { judul: "BONUS SEDIKIT", nomor: "3", deskripsi: "Jika bosku ingin mendapatkan bonus lebih kami sarankan untuk tingkatkan betingan dalam periode permainan LIVEGAMES /... SL...", isiLengkap: "Jika bosku ingin mendapatkan bonus lebih, kami sarankan untuk tingkatkan bettingan dalam periode permainan LIVEGAMES / SLOT. Semakin tinggi bet, semakin besar bonus yang didapat." }
-    ] 
-},
-profile_ewallet: { 
-    title: "💳 PROFIL E-WALLET / BANK", 
-    subtitle: "Data lengkap metode pembayaran digital dan perbankan",
-    items: [
-        { judul: "REKENING BANK", nomor: "1", deskripsi: "Daftar rekening bank resmi yang terintegrasi dengan sistem.", isiLengkap: "BCA: 1234567890 a.n PT MAJU TOGEL\nMandiri: 1112223333 a.n CS GALLERY\nBRI: 8887776665 a.n Official Partner" },
-        { judul: "E-WALLET", nomor: "2", deskripsi: "Dompet digital yang tersedia: OVO, DANA, GoPay.", isiLengkap: "OVO: 081234567890\nDANA: 085712345678\nGoPay: gopay@csgallery" },
-        { judul: "KEAMANAN", nomor: "3", deskripsi: "Tips menjaga keamanan transaksi Anda.", isiLengkap: "Jangan berikan OTP ke siapapun. Selalu transfer ke rekening resmi yang tertera. Konfirmasi ke CS setelah transfer." },
-        { judul: "LIMIT TRANSAKSI", nomor: "4", deskripsi: "Batas minimum dan maksimum transaksi.", isiLengkap: "Minimal deposit: Rp20.000\nMaksimal transfer: Rp50.000.000/hari untuk bank, Rp10.000.000/hari untuk e-wallet." }
-    ] 
-},
-cara_bermain: { 
-    title: "🎮 CARA BERMAIN", 
-    subtitle: "Panduan step-by-step bermain",
-    items: [
-        { judul: "REGISTRASI", nomor: "1", deskripsi: "Cara mendaftar akun baru dengan mudah.", isiLengkap: "1. Klik Daftar\n2. Isi data diri\n3. Verifikasi OTP\n4. Login dan lengkapi profil" },
-        { judul: "DEPOSIT", nomor: "2", deskripsi: "Tata cara melakukan deposit.", isiLengkap: "Transfer ke rekening resmi, kirim bukti via CS. Proses 2-5 menit." },
-        { judul: "WITHDRAW", nomor: "3", deskripsi: "Tata cara menarik dana.", isiLengkap: "Minimal withdraw Rp50.000. Proses cepat 2-5 menit tanpa potongan." },
-        { judul: "PANDUAN TOGEL", nomor: "4", deskripsi: "Cara bermain togel online.", isiLengkap: "Pilih pasaran favorit (SGP, HKG, SDY). Pasang angka 2D/3D/4D. Cek jadwal result." }
-    ] 
-}
+rrn_qris: { title: "📱 RRN QRIS", subtitle: "Informasi RRN dan QRIS", items: [
+{ icon: "fas fa-exchange-alt", judul: "TIDAK DAPAT BONUS", nomor: "1", deskripsi: "Apabila anda tidak mendapatkan bonus tersebut, berarti anda tidak memenuhi syarat...", isiLengkap: "Apabila anda tidak mendapatkan bonus tersebut, berarti anda tidak memenuhi syarat dan ketentuan yang telah ditentukan." },
+{ icon: "fas fa-search", judul: "TIDAK DAPAT BONUS", nomor: "2", deskripsi: "Perhati bonus akan otomatis masuk jika anda memenuhi syarat...", isiLengkap: "Bonus akan otomatis masuk ke akun Anda jika memenuhi semua persyaratan. Tidak perlu klaim manual." },
+{ icon: "fas fa-file-invoice", judul: "TIDAK DAPAT BONUS", nomor: "3", deskripsi: "Semua bonus yang di bagikan oleh sistem kami sudah sesuai prosedur...", isiLengkap: "Semua bonus dibagikan sesuai prosedur dan syarat ketentuan tanpa perlu di claim." },
+{ icon: "fas fa-coins", judul: "BONUS SEDIKIT", nomor: "3", deskripsi: "Jika bosku ingin mendapatkan bonus lebih kami sarankan untuk tingkatkan bettingan...", isiLengkap: "Tingkatkan bettingan dalam periode permainan LIVEGAMES/SLOT untuk bonus lebih besar." }
+] },
+profile_ewallet: { title: "💳 PROFIL E-WALLET / BANK", subtitle: "Metode pembayaran", items: [
+{ icon: "fas fa-university", judul: "REKENING BANK", nomor: "1", deskripsi: "BCA, Mandiri, BRI resmi.", isiLengkap: "BCA: 1234567890 a.n PT MAJU TOGEL\nMandiri: 1112223333" },
+{ icon: "fas fa-mobile-alt", judul: "E-WALLET", nomor: "2", deskripsi: "OVO, DANA, GoPay tersedia.", isiLengkap: "OVO: 081234567890\nDANA: 085712345678\nGoPay: gopay@csgallery" },
+{ icon: "fas fa-shield-alt", judul: "KEAMANAN", nomor: "3", deskripsi: "Tips keamanan transaksi.", isiLengkap: "Jangan berikan OTP ke siapapun. Transfer ke rekening resmi." },
+{ icon: "fas fa-credit-card", judul: "LIMIT", nomor: "4", deskripsi: "Minimal deposit Rp20.000.", isiLengkap: "Minimal deposit Rp20.000. Maksimal transfer Rp50.000.000/hari." }
+] },
+cara_bermain: { title: "🎮 CARA BERMAIN", subtitle: "Panduan bermain", items: [
+{ icon: "fas fa-user-plus", judul: "REGISTRASI", nomor: "1", deskripsi: "Daftar akun baru.", isiLengkap: "1. Klik Daftar\n2. Isi data diri\n3. Verifikasi OTP\n4. Login" },
+{ icon: "fas fa-hand-holding-usd", judul: "DEPOSIT", nomor: "2", deskripsi: "Cara deposit dana.", isiLengkap: "Transfer ke rekening resmi, kirim bukti via CS. Proses 2-5 menit." },
+{ icon: "fas fa-dice-d6", judul: "PANDUAN TOGEL", nomor: "3", deskripsi: "Cara main togel.", isiLengkap: "Pilih pasaran, pasang angka 2D/3D/4D. Cek jadwal result." },
+{ icon: "fas fa-gamepad", judul: "PANDUAN SLOT", nomor: "4", deskripsi: "Cara main slot.", isiLengkap: "Pilih provider, atur bet, tekan spin. Baca syarat bonus." }
+] }
 };
 let currentGalleryTab = "profile_ewallet";
 
-// Fungsi fetch data dari sheet (TIDAK BERUBAH)
+// Fungsi fetch data
 async function fetchSheetData(sheetName) {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
@@ -1072,9 +873,8 @@ dataRows.push({ title: rows[i][0].trim(), content: rows[i][1] ? rows[i][1].trim(
 }
 }
 return dataRows;
-} catch(e) { console.error(`Error fetch ${sheetName}:`, e); throw new Error(`Gagal ambil data dari sheet ${sheetName}`); }
+} catch(e) { return []; }
 }
-
 function parseCSV(csvText) {
 const lines = []; let cur = '', inQ = false;
 for(let i=0; i<csvText.length; i++) {
@@ -1097,126 +897,162 @@ return row;
 });
 }
 
-// ======================= RENDER FUNGSI ASLI (TIDAK BERUBAH) =======================
-async function renderBonusLainLainWithFilter(filter = "") { let data = bonusLainLainData; if (data.length === 0) { try { data = await fetchSheetData(SHEET_BONUS_LAIN_LAIN); bonusLainLainData = data; } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS LAIN-LAIN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori LAIN-LAIN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-tags"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; dynamicArea.innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-async function renderBonusDoneBagiWithFilter(filter = "") { let data = bonusDoneBagiData; if (data.length === 0) { try { data = await fetchSheetData(SHEET_DONE_BAGI); bonusDoneBagiData = data; } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat DONE BAGI</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori DONE BAGI</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; dynamicArea.innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-async function renderBonusMingguanWithFilter(filter = "") { let data = bonusMingguanData; if (data.length === 0) { try { data = await fetchSheetData(SHEET_BONUS_MINGGUAN); bonusMingguanData = data; } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS MINGGUAN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori MINGGUAN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; dynamicArea.innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-async function renderBonusAllWithFilter(filter = "") { let data = bonusAllData; if (data.length === 0) { try { data = await fetchSheetData(SHEET_BONUS_ALL); bonusAllData = data; } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>Gagal memuat BONUS ALL</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori BONUS ALL</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.slice(0, 8).forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3>${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; dynamicArea.innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-
-function attachBonusCardEvents() { document.querySelectorAll('.bonus-card').forEach(card => { card.removeEventListener('click', bonusCardHandler); card.addEventListener('click', bonusCardHandler); }); }
-function bonusCardHandler(e) { if(e.target.closest('.btn-salin-bonus') || e.target.closest('.btn-open-folder')) return; const title = this.getAttribute('data-bonus-title') || 'Detail Bonus'; const content = this.getAttribute('data-bonus-content') || 'Tidak ada deskripsi tambahan.'; openModal(title, content); }
-function attachOpenFolderEvents() { document.querySelectorAll('.btn-open-folder').forEach(btn => { btn.removeEventListener('click', openFolderHandler); btn.addEventListener('click', openFolderHandler); }); }
-function openFolderHandler(e) { e.stopPropagation(); const card = this.closest('.bonus-card'); if(card) { const title = card.getAttribute('data-bonus-title') || 'Detail Bonus'; const content = card.getAttribute('data-bonus-content') || 'Tidak ada deskripsi tambahan.'; openModal(title, content); } }
-function attachBonusSalinEvents() { document.querySelectorAll('.btn-salin-bonus').forEach(btn => { btn.removeEventListener('click', bonusSalinHandler); btn.addEventListener('click', bonusSalinHandler); }); }
-function bonusSalinHandler(e) { e.stopPropagation(); const title = this.getAttribute('data-salin-title') || 'Folder'; const content = this.getAttribute('data-salin-content') || ''; copyContentOnly(content, title); }
-
-async function renderBonusPage() { mainHeading.innerHTML = "⚙️ BONUS ✨"; const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()}${filterInfo} | Tombol SEJAJAR dalam 1 BARIS`; bonusBadgeContainer.classList.add("visible"); galleryBadgeContainer.classList.remove("visible"); if (currentBonusSubTab === 'all') { await renderBonusAllWithFilter(currentFilterText); } else if (currentBonusSubTab === 'mingguan') { await renderBonusMingguanWithFilter(currentFilterText); } else if (currentBonusSubTab === 'done') { await renderBonusDoneBagiWithFilter(currentFilterText); } else if (currentBonusSubTab === 'lain') { await renderBonusLainLainWithFilter(currentFilterText); } }
-
-async function renderRandomTabWithFilter(filter = "") { mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets"; subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN`; bonusBadgeContainer.classList.remove("visible"); galleryBadgeContainer.classList.remove("visible"); dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat folder...</p></div>`; try { if(foldersData.length === 0) foldersData = await fetchSheetData(SHEET_RANDOM); let filtered = foldersData; if(filter.trim() !== "") { filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase())); } if(filtered.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada folder dengan kata kunci "${escapeHtml(filter)}" di kolom RANDOM</p></div>`; return; } let cardsHtml = ""; filtered.forEach((f) => { const short = f.content.length > 120 ? f.content.substring(0,120)+'...' : f.content; cardsHtml += `<div class="card random-folder" data-folder-title="${escapeHtml(f.title)}" data-folder-content="${escapeHtml(f.content)}"><button class="btn-salin-folder" data-salin-title="${escapeHtml(f.title)}" data-salin-content="${escapeHtml(f.content)}"><i class="fas fa-copy"></i> SALIN</button><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(short) || 'Klik untuk melihat isi lengkap folder ini'}</p><div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk membuka folder</div></div>`; }); dynamicArea.innerHTML = cardsHtml; document.querySelectorAll('.btn-salin-folder').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const title = btn.getAttribute('data-salin-title') || 'Folder'; const content = btn.getAttribute('data-salin-content') || ''; copyContentOnly(content, title); }); }); document.querySelectorAll('.card.random-folder').forEach(card => { card.addEventListener('click', (e) => { if(e.target.closest('.btn-salin-folder')) return; const title = card.getAttribute('data-folder-title') || 'Folder'; const content = card.getAttribute('data-folder-content') || ''; openModal(title, content); }); }); } catch(err) { dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.message}</p></div>`; } }
-
-function renderStaticTabWithFilter(tabId, filter = "") { const data = staticTabsData[tabId]; if(!data) return false; mainHeading.innerHTML = data.title; const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : ""; subHeading.innerHTML = data.subtitle + filterInfo; bonusBadgeContainer.classList.remove("visible"); galleryBadgeContainer.classList.remove("visible"); let filteredItems = data.items; if(filter.trim() !== "") { filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase())); } if(filteredItems.length === 0 && filter) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`; return true; } let cardsHTML = ""; filteredItems.forEach(item => { cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`; }); dynamicArea.innerHTML = cardsHTML; return true; }
-
-// RENDER GALLERY GAMBAR CS - 1 BARIS 4 FOLDER FULL WIDTH
-function renderGalleryCS() { 
-    const cat = galleryData[currentGalleryTab]; 
-    mainHeading.innerHTML = cat.title; 
-    const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; 
-    subHeading.innerHTML = `${cat.subtitle}${filterInfo} | 1 baris 4 folder full width`; 
-    bonusBadgeContainer.classList.remove("visible"); 
-    galleryBadgeContainer.classList.add("visible"); 
-    
-    // Ubah dynamicArea menjadi block agar grid bisa full width
-    dynamicArea.style.display = "block";
-    dynamicArea.classList.add("gallery-fullwidth");
-    
-    let itemsToShow = cat.items; 
-    if (currentFilterText.trim() !== "") { 
-        const keyword = currentFilterText.toLowerCase(); 
-        itemsToShow = itemsToShow.filter(item => 
-            item.judul.toLowerCase().includes(keyword) || 
-            item.deskripsi.toLowerCase().includes(keyword) || 
-            (item.isiLengkap && item.isiLengkap.toLowerCase().includes(keyword))
-        ); 
-    } 
-    
-    if (itemsToShow.length === 0) { 
-        dynamicArea.innerHTML = `<div class="empty-gallery"><i class="fas fa-search" style="font-size:3rem;opacity:0.5"></i><h3 style="margin-top:16px;">Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(currentFilterText)}" di kategori ini</p></div>`; 
-        return; 
-    }
-    
-    let html = `<div class="gallery-grid-4">`;
-    itemsToShow.slice(0, 4).forEach((item, idx) => { 
-        html += `
-            <div class="gallery-card" data-gallery-idx="${idx}" data-gallery-cat="${currentGalleryTab}" data-gallery-title="${escapeHtml(item.judul)} #${item.nomor}" data-gallery-content="${escapeHtml(item.isiLengkap)}">
-                <h3>${escapeHtml(item.judul)} <span class="gallery-badge-number">#${item.nomor || '1'}</span></h3>
-                <div class="gallery-desc">${escapeHtml(item.deskripsi)}</div>
-                <div class="gallery-buttons-row">
-                    <button class="btn-gallery-open"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
-                    <button class="btn-gallery-salin"><i class="fas fa-copy"></i> SALIN</button>
-                </div>
-            </div>
-        `; 
-    }); 
-    html += `</div>`; 
-    dynamicArea.innerHTML = html; 
-    
-    // Event untuk tombol buka folder dan salin
-    document.querySelectorAll('.gallery-card').forEach(card => {
-        const openBtn = card.querySelector('.btn-gallery-open');
-        const salinBtn = card.querySelector('.btn-gallery-salin');
-        const title = card.getAttribute('data-gallery-title');
-        const content = card.getAttribute('data-gallery-content');
-        
-        if (openBtn) {
-            openBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                openModal(title, content);
-            });
-        }
-        if (salinBtn) {
-            salinBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                copyContentOnly(content, title);
-            });
-        }
-        // Klik pada card juga membuka modal
-        card.addEventListener('click', (e) => {
-            if (e.target.closest('.btn-gallery-open') || e.target.closest('.btn-gallery-salin')) return;
-            openModal(title, content);
-        });
-    }); 
+// Render fungsi untuk semua kolom dengan 1 baris 4 folder
+function renderFolderGrid(title, subtitle, items, filter = "") {
+mainHeading.innerHTML = title;
+const filterInfo = filter ? ` | 🔍 Mencari: "${filter}"` : "";
+subHeading.innerHTML = subtitle + filterInfo;
+let filteredItems = items;
+if (filter.trim()) {
+filteredItems = items.filter(item => 
+item.judul.toLowerCase().includes(filter.toLowerCase()) || 
+item.deskripsi.toLowerCase().includes(filter.toLowerCase())
+);
+}
+if (filteredItems.length === 0) {
+dynamicArea.innerHTML = `<div class="empty-folder"><i class="fas fa-search" style="font-size:3rem;opacity:0.5"></i><h3 style="margin-top:16px;">Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}"</p></div>`;
+return;
+}
+let html = `<div class="grid-4-cols">`;
+filteredItems.slice(0, 4).forEach((item, idx) => {
+html += `
+<div class="folder-card" data-folder-title="${escapeHtml(item.judul)} #${item.nomor}" data-folder-content="${escapeHtml(item.isiLengkap)}">
+<div class="folder-icon"><i class="${item.icon || 'fas fa-folder'}"></i></div>
+<h3>${escapeHtml(item.judul)} <span class="folder-badge-number">#${item.nomor}</span></h3>
+<div class="folder-desc">${escapeHtml(item.deskripsi)}</div>
+<div class="folder-buttons-row">
+<button class="btn-folder-open"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
+<button class="btn-folder-salin"><i class="fas fa-copy"></i> SALIN</button>
+</div>
+</div>`;
+});
+html += `</div>`;
+dynamicArea.innerHTML = html;
+attachFolderEvents();
 }
 
+function attachFolderEvents() {
+document.querySelectorAll('.folder-card').forEach(card => {
+const openBtn = card.querySelector('.btn-folder-open');
+const salinBtn = card.querySelector('.btn-folder-salin');
+const title = card.getAttribute('data-folder-title');
+const content = card.getAttribute('data-folder-content');
+if (openBtn) {
+openBtn.addEventListener('click', (e) => { e.stopPropagation(); openModal(title, content); });
+}
+if (salinBtn) {
+salinBtn.addEventListener('click', (e) => { e.stopPropagation(); copyContentOnly(content, title); });
+}
+card.addEventListener('click', (e) => {
+if (e.target.closest('.btn-folder-open') || e.target.closest('.btn-folder-salin')) return;
+openModal(title, content);
+});
+});
+}
+
+// RENDER BONUS (tetap dengan struktur bonus asli)
+async function renderBonusPage() {
+mainHeading.innerHTML = "⚙️ BONUS ✨";
+subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()} | 1 baris 4 folder`;
+bonusBadgeContainer.classList.add("visible");
+galleryBadgeContainer.classList.remove("visible");
+dynamicArea.classList.add("content-fullwidth");
+if (currentBonusSubTab === 'all') await renderBonusAllWithFilter(currentFilterText);
+else if (currentBonusSubTab === 'mingguan') await renderBonusMingguanWithFilter(currentFilterText);
+else if (currentBonusSubTab === 'done') await renderBonusDoneBagiWithFilter(currentFilterText);
+else await renderBonusLainLainWithFilter(currentFilterText);
+}
+async function renderBonusLainLainWithFilter(f) { let data = bonusLainLainData; if (!data.length) { try { data = await fetchSheetData(SHEET_BONUS_LAIN_LAIN); bonusLainLainData = data; } catch(e) {} } let filtered = data; if (f.trim()) filtered = data.filter(i => i.title.toLowerCase().includes(f.toLowerCase())); if (!filtered.length) { dynamicArea.innerHTML = `<div class="empty-folder">Tidak ditemukan</div>`; return; } let html = `<div class="bonus-grid">`; filtered.slice(0,4).forEach(i => { html += `<div class="bonus-card" data-bonus-title="${escapeHtml(i.title)}" data-bonus-content="${escapeHtml(i.content)}"><h3>${escapeHtml(i.title)}</h3><div class="bonus-desc-full">${escapeHtml(i.content.substring(0,100))}...</div><div class="bonus-actions-row"><button class="btn-open-folder">Buka</button><button class="btn-salin-bonus">SALIN</button></div></div>`; }); html += `</div>`; dynamicArea.innerHTML = html; attachBonusEvents(); }
+async function renderBonusDoneBagiWithFilter(f) { let data = bonusDoneBagiData; if (!data.length) { try { data = await fetchSheetData(SHEET_DONE_BAGI); bonusDoneBagiData = data; } catch(e) {} } let filtered = data; if (f.trim()) filtered = data.filter(i => i.title.toLowerCase().includes(f.toLowerCase())); if (!filtered.length) { dynamicArea.innerHTML = `<div class="empty-folder">Tidak ditemukan</div>`; return; } let html = `<div class="bonus-grid">`; filtered.slice(0,4).forEach(i => { html += `<div class="bonus-card" data-bonus-title="${escapeHtml(i.title)}" data-bonus-content="${escapeHtml(i.content)}"><h3>${escapeHtml(i.title)}</h3><div class="bonus-desc-full">${escapeHtml(i.content.substring(0,100))}...</div><div class="bonus-actions-row"><button class="btn-open-folder">Buka</button><button class="btn-salin-bonus">SALIN</button></div></div>`; }); html += `</div>`; dynamicArea.innerHTML = html; attachBonusEvents(); }
+async function renderBonusMingguanWithFilter(f) { let data = bonusMingguanData; if (!data.length) { try { data = await fetchSheetData(SHEET_BONUS_MINGGUAN); bonusMingguanData = data; } catch(e) {} } let filtered = data; if (f.trim()) filtered = data.filter(i => i.title.toLowerCase().includes(f.toLowerCase())); if (!filtered.length) { dynamicArea.innerHTML = `<div class="empty-folder">Tidak ditemukan</div>`; return; } let html = `<div class="bonus-grid">`; filtered.slice(0,4).forEach(i => { html += `<div class="bonus-card" data-bonus-title="${escapeHtml(i.title)}" data-bonus-content="${escapeHtml(i.content)}"><h3>${escapeHtml(i.title)}</h3><div class="bonus-desc-full">${escapeHtml(i.content.substring(0,100))}...</div><div class="bonus-actions-row"><button class="btn-open-folder">Buka</button><button class="btn-salin-bonus">SALIN</button></div></div>`; }); html += `</div>`; dynamicArea.innerHTML = html; attachBonusEvents(); }
+async function renderBonusAllWithFilter(f) { let data = bonusAllData; if (!data.length) { try { data = await fetchSheetData(SHEET_BONUS_ALL); bonusAllData = data; } catch(e) {} } let filtered = data; if (f.trim()) filtered = data.filter(i => i.title.toLowerCase().includes(f.toLowerCase())); if (!filtered.length) { dynamicArea.innerHTML = `<div class="empty-folder">Tidak ditemukan</div>`; return; } let html = `<div class="bonus-grid">`; filtered.slice(0,4).forEach(i => { html += `<div class="bonus-card" data-bonus-title="${escapeHtml(i.title)}" data-bonus-content="${escapeHtml(i.content)}"><h3>${escapeHtml(i.title)}</h3><div class="bonus-desc-full">${escapeHtml(i.content.substring(0,100))}...</div><div class="bonus-actions-row"><button class="btn-open-folder">Buka</button><button class="btn-salin-bonus">SALIN</button></div></div>`; }); html += `</div>`; dynamicArea.innerHTML = html; attachBonusEvents(); }
+function attachBonusEvents() { document.querySelectorAll('.bonus-card').forEach(card => { const title = card.getAttribute('data-bonus-title'); const content = card.getAttribute('data-bonus-content'); card.querySelector('.btn-open-folder')?.addEventListener('click', (e) => { e.stopPropagation(); openModal(title, content); }); card.querySelector('.btn-salin-bonus')?.addEventListener('click', (e) => { e.stopPropagation(); copyContentOnly(content, title); }); card.addEventListener('click', (e) => { if(e.target.closest('button')) return; openModal(title, content); }); }); }
+
+// RENDER GALLERY
+function renderGalleryCS() {
+const cat = galleryData[currentGalleryTab];
+bonusBadgeContainer.classList.remove("visible");
+galleryBadgeContainer.classList.add("visible");
+dynamicArea.classList.add("content-fullwidth");
+renderFolderGrid(cat.title, cat.subtitle + " | 1 baris 4 folder", cat.items, currentFilterText);
+}
 function bindGalleryBadges() { document.querySelectorAll('.gallery-badge').forEach(b => { b.removeEventListener('click', galleryClick); b.addEventListener('click', galleryClick); }); }
-function galleryClick(e) { const val = this.getAttribute('data-gallery-tab'); if(val && galleryData[val]) { currentGalleryTab = val; document.querySelectorAll('.gallery-badge').forEach(b => b.classList.remove('active-gallery')); this.classList.add('active-gallery'); currentFilterText = ""; document.getElementById("liveSearchInput").value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); renderGalleryCS(); } }
+function galleryClick(e) { const val = this.getAttribute('data-gallery-tab'); if(val && galleryData[val]) { currentGalleryTab = val; document.querySelectorAll('.gallery-badge').forEach(b => b.classList.remove('active-gallery')); this.classList.add('active-gallery'); currentFilterText = ""; searchInput.value = ""; clearSearchBtn.classList.remove('visible'); renderGalleryCS(); } }
 
-// Live search handler
-async function applyLiveSearch() { const filter = currentFilterText; if(currentActiveTab === 'tab2') { await renderRandomTabWithFilter(filter); } else if(currentActiveTab === 'tab4') { renderGalleryCS(); } else if(currentActiveTab === 'tab6') { await renderBonusPage(); } else { renderStaticTabWithFilter(currentActiveTab, filter); } }
+// RENDER RANDOM
+async function renderRandomTabWithFilter(filter = "") {
+mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
+subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | 1 baris 4 folder`;
+bonusBadgeContainer.classList.remove("visible");
+galleryBadgeContainer.classList.remove("visible");
+dynamicArea.classList.add("content-fullwidth");
+try {
+if(foldersData.length === 0) foldersData = await fetchSheetData(SHEET_RANDOM);
+let filtered = foldersData;
+if(filter.trim()) filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()));
+if(filtered.length === 0) { dynamicArea.innerHTML = `<div class="empty-folder">Tidak ada folder</div>`; return; }
+let html = `<div class="grid-4-cols">`;
+filtered.slice(0, 4).forEach((f, idx) => {
+const short = f.content.length > 100 ? f.content.substring(0,100)+'...' : f.content;
+html += `<div class="folder-card" data-folder-title="${escapeHtml(f.title)}" data-folder-content="${escapeHtml(f.content)}"><div class="folder-icon"><i class="fas fa-folder"></i></div><h3>${escapeHtml(f.title)}</h3><div class="folder-desc">${escapeHtml(short) || 'Klik untuk melihat isi lengkap'}</div><div class="folder-buttons-row"><button class="btn-folder-open"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-folder-salin"><i class="fas fa-copy"></i> SALIN</button></div></div>`;
+});
+html += `</div>`;
+dynamicArea.innerHTML = html;
+attachFolderEvents();
+} catch(err) { dynamicArea.innerHTML = `<div class="empty-folder">Error: ${err.message}</div>`; }
+}
 
-function handleSearchInput() { currentFilterText = searchInput.value; if(currentFilterText.length > 0) clearSearchBtn.classList.add('visible'); else clearSearchBtn.classList.remove('visible'); applyLiveSearch(); }
+// RENDER STATIC TAB
+function renderStaticTab(tabId, filter = "") {
+const data = staticTabsData[tabId];
+if(!data) return;
+bonusBadgeContainer.classList.remove("visible");
+galleryBadgeContainer.classList.remove("visible");
+dynamicArea.classList.add("content-fullwidth");
+if(data.isBonus) { renderBonusPage(); return; }
+if(data.isGallery) { renderGalleryCS(); bindGalleryBadges(); return; }
+if(data.isDynamic) { renderRandomTabWithFilter(filter); return; }
+renderFolderGrid(data.title, data.subtitle + " | 1 baris 4 folder", data.items, filter);
+}
+
+// UTILITY
+function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+function showCopyToast(msg) { toast.innerHTML = `<i class="fas fa-copy"></i> ${msg}`; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2000); }
+async function copyContentOnly(text, title) { const finalText = text || "(Tidak ada konten)"; try { await navigator.clipboard.writeText(finalText); showCopyToast(`"${title}" berhasil disalin`); } catch { const ta = document.createElement("textarea"); ta.value = finalText; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); showCopyToast(`"${title}" disalin`); } }
+function openModal(title, content) { modalTitle.textContent = title; modalContentText.innerHTML = (content || "(Kosong)").replace(/\n/g, '<br>'); modal.classList.add("active"); document.body.style.overflow = "hidden"; }
+function closeModal() { modal.classList.remove("active"); document.body.style.overflow = ""; }
+
+// SEARCH & NAVIGATION
+async function applyLiveSearch() {
+const filter = currentFilterText;
+if(currentActiveTab === 'tab2') await renderRandomTabWithFilter(filter);
+else if(currentActiveTab === 'tab4') renderGalleryCS();
+else if(currentActiveTab === 'tab6') await renderBonusPage();
+else renderStaticTab(currentActiveTab, filter);
+}
+function handleSearchInput() { currentFilterText = searchInput.value; clearSearchBtn.classList.toggle('visible', currentFilterText.length > 0); applyLiveSearch(); }
 function clearSearch() { searchInput.value = ''; currentFilterText = ''; clearSearchBtn.classList.remove('visible'); applyLiveSearch(); }
 
 function bindBonusBadgeEvents() { document.querySelectorAll('.bonus-badge').forEach(badge => { badge.removeEventListener('click', bonusClickHandler); badge.addEventListener('click', bonusClickHandler); }); }
 async function bonusClickHandler(e) { const tabValue = this.getAttribute('data-bonus-tab'); if(tabValue) { currentBonusSubTab = tabValue; document.querySelectorAll('.bonus-badge').forEach(b => b.classList.remove('active-bonus')); this.classList.add('active-bonus'); if(currentActiveTab === 'tab6') { currentFilterText = ""; searchInput.value = ""; clearSearchBtn.classList.remove('visible'); await renderBonusPage(); } } }
 
-async function onTabClick(tabId) { currentActiveTab = tabId; document.querySelectorAll('.nav-item').forEach(item => { if(item.getAttribute('data-tab') === tabId) item.classList.add('active'); else item.classList.remove('active'); }); currentFilterText = ""; searchInput.value = ""; clearSearchBtn.classList.remove('visible'); 
-    // Reset display style
-    dynamicArea.style.display = "";
-    dynamicArea.classList.remove("gallery-fullwidth");
-    if(tabId === 'tab2') { if(foldersData.length === 0) foldersData = await fetchSheetData(SHEET_RANDOM).catch(e=>[]); await renderRandomTabWithFilter(currentFilterText); } 
-    else if(tabId === 'tab4') { renderGalleryCS(); bindGalleryBadges(); } 
-    else if(tabId === 'tab6') { await renderBonusPage(); bindBonusBadgeEvents(); } 
-    else { renderStaticTabWithFilter(tabId, currentFilterText); } }
+async function onTabClick(tabId) {
+currentActiveTab = tabId;
+document.querySelectorAll('.nav-item').forEach(item => {
+if(item.getAttribute('data-tab') === tabId) item.classList.add('active');
+else item.classList.remove('active');
+});
+currentFilterText = "";
+searchInput.value = "";
+clearSearchBtn.classList.remove('visible');
+dynamicArea.classList.add("content-fullwidth");
+if(tabId === 'tab2') { if(foldersData.length === 0) foldersData = await fetchSheetData(SHEET_RANDOM); await renderRandomTabWithFilter(""); }
+else if(tabId === 'tab4') { renderGalleryCS(); bindGalleryBadges(); }
+else if(tabId === 'tab6') { await renderBonusPage(); bindBonusBadgeEvents(); }
+else { renderStaticTab(tabId, ""); }
+}
 
-function bindNavEvents() { document.querySelectorAll('.nav-item').forEach(item => { item.addEventListener('click', () => { const tid = item.getAttribute('data-tab'); if(tid) onTabClick(tid); }); }); }
-
-function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
-function showCopyToast(message) { toast.innerHTML = `<i class="fas fa-copy"></i>  ${message}`; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2000); }
-async function copyContentOnly(textContent, folderTitle) { const finalText = textContent || "(Tidak ada konten)"; try { await navigator.clipboard.writeText(finalText); showCopyToast(`"${folderTitle}" berhasil disalin`); } catch { const textarea = document.createElement("textarea"); textarea.value = finalText; document.body.appendChild(textarea); textarea.select(); document.execCommand("copy"); document.body.removeChild(textarea); showCopyToast(`"${folderTitle}" disalin`); } }
-function openModal(title, content) { modalTitle.textContent = title; modalContentText.innerHTML = (content || "(Kosong)").replace(/\n/g, '<br>'); modal.classList.add("active"); document.body.style.overflow = "hidden"; }
-function closeModal() { modal.classList.remove("active"); document.body.style.overflow = ""; }
-
-// DOM Elements
+// INIT
 const searchInput = document.getElementById("liveSearchInput");
 const clearSearchBtn = document.getElementById("clearSearchBtn");
 const dynamicArea = document.getElementById("dynamicContentArea");
@@ -1235,8 +1071,10 @@ modal.onclick = e => { if(e.target === modal) closeModal(); };
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
 searchInput.addEventListener('input', handleSearchInput);
 clearSearchBtn.addEventListener('click', clearSearch);
-
-(async function init() { bindNavEvents(); await onTabClick('tab1'); })();
+document.querySelectorAll('.nav-item').forEach(item => {
+item.addEventListener('click', () => { const tid = item.getAttribute('data-tab'); if(tid) onTabClick(tid); });
+});
+(async function init() { await onTabClick('tab1'); })();
 </script>
 </body>
 </html>
