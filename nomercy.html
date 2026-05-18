@@ -270,7 +270,7 @@ color: white;
 }
 
 /* Grid card untuk tab selain BONUS & GALLERY */
-.dashboard-grid {
+.-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 gap: 24px;
@@ -746,7 +746,7 @@ background: linear-gradient(135deg, #2c3e66, #1e2a47);
 color: white;
 }
 
-/* GALLERY CONTAINER - OVERRIDE dashboard-grid agar full width */
+/* GALLERY CONTAINER - OVERRIDE -grid agar full width */
 #dynamicContentArea.gallery-fullwidth {
 display: block !important;
 }
@@ -903,7 +903,7 @@ grid-column: 1 / -1;
 </div>
 </div>
 <div class="nav-menu">
-<div class="nav-item active" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span><div class="badge-new">Full</div></div>
+<div class="nav-item active" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span></span><div class="badge-new">Full</div></div>
 <div class="nav-item" data-tab="tab2"><i class="fas fa-chart-line"></i><span>RANDOM</span><div class="badge-new">Folder + SALIN</div></div>
 <div class="nav-item" data-tab="tab3"><i class="fas fa-envelope"></i><span>EVENT LINETOGEL</span></div>
 <div class="nav-item" data-tab="tab4"><i class="fas fa-tasks"></i><span>GALLERY GAMBAR CS</span></div>
@@ -919,7 +919,7 @@ grid-column: 1 / -1;
 <main class="main-content">
 <div class="content-header">
 <div class="page-title">
-<h1 id="mainHeading">Dashboard 7 Kolom</h1>
+<h1 id="mainHeading"> 7 Kolom</h1>
 <p id="subHeading">Live search bekerja pada setiap kolom/tab secara terpisah | Ketik untuk mencari di kolom yang aktif</p>
 </div>
 <div class="action-buttons">
@@ -997,7 +997,7 @@ let currentBonusSubTab = "lain";
 
 // Data statis untuk tab lain (TIDAK BERUBAH)
 const staticTabsData = {
-tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik — background full size 100%", items: [
+tab1: { title: "🏠 DASHBOARD UTAMA 🏠", subtitle: "Gambaran sistem & metrik — background full size 100%", items: [
 { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
 { icon: "fas fa-users", title: "Pengguna Aktif", desc: "1,284 pengguna online sekarang", badge: "Hari ini" },
 { icon: "fas fa-calendar-alt", title: "Jadwal Proyek", desc: "3 tenggat mendekati deadline", badge: "Prioritas" }
