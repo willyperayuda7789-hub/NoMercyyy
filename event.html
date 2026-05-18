@@ -11,25 +11,48 @@ padding: 0;
 box-sizing: border-box;
 }
 
+/* GLOBAL BACKGROUND DENGAN GAMBAR DARI LINK */
 body {
-background: linear-gradient(145deg, #0b0f1c 0%, #0a0e1a 100%);
+/* Background image dari link yang diberikan */
+background-image: url('https://i.pinimg.com/736x/df/64/16/df6416b6af5058e36c5d11f457e3282a.jpg');
+background-size: cover;
+background-position: center center;
+background-attachment: fixed;
+background-repeat: no-repeat;
 font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
 min-height: 100vh;
 display: flex;
 justify-content: center;
 align-items: center;
 padding: 24px 16px;
+/* Overlay gelap di atas background agar teks mudah dibaca (opsional, namun menambah readability) */
+position: relative;
+}
+
+/* Menambahkan overlay semi-transparan di atas background gambar agar kontras */
+body::before {
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.55); /* gelap transparan untuk memperjelas teks */
+backdrop-filter: blur(1.5px);
+z-index: -1;
+pointer-events: none;
 }
 
 .app-container {
 max-width: 1400px;
 width: 100%;
-background: rgba(18, 25, 45, 0.65);
-backdrop-filter: blur(2px);
+background: rgba(18, 25, 45, 0.75);
+backdrop-filter: blur(8px);
 border-radius: 2.5rem;
 padding: 1.5rem;
 box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.08);
-border: 1px solid rgba(255, 215, 0, 0.2);
+border: 1px solid rgba(255, 215, 0, 0.25);
+transition: all 0.2s ease;
 }
 
 .badges-panel {
@@ -42,7 +65,7 @@ position: relative;
 }
 
 .badge {
-background: rgba(12, 20, 35, 0.9);
+background: rgba(12, 20, 35, 0.85);
 backdrop-filter: blur(4px);
 border-radius: 60px;
 padding: 0.7rem 1.5rem;
@@ -50,7 +73,7 @@ cursor: pointer;
 transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 text-align: center;
 min-width: 150px;
-border: 1px solid rgba(255, 220, 100, 0.25);
+border: 1px solid rgba(255, 220, 100, 0.3);
 box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 position: relative;
 }
@@ -101,10 +124,10 @@ box-shadow: 0 0 6px gold;
 }
 
 .page-container {
-background: rgba(8, 14, 26, 0.7);
-backdrop-filter: blur(8px);
+background: rgba(8, 14, 26, 0.65);
+backdrop-filter: blur(10px);
 border-radius: 2rem;
-border: 1px solid rgba(255, 200, 100, 0.35);
+border: 1px solid rgba(255, 200, 100, 0.4);
 padding: 2rem 1.8rem;
 margin-top: 0.8rem;
 transition: all 0.25s ease;
@@ -137,7 +160,7 @@ align-items: center;
 gap: 1rem;
 flex-wrap: wrap;
 justify-content: space-between;
-border-bottom: 2px dashed rgba(255, 200, 120, 0.4);
+border-bottom: 2px dashed rgba(255, 200, 120, 0.5);
 padding-bottom: 0.8rem;
 margin-bottom: 1.8rem;
 }
@@ -626,8 +649,8 @@ font-size: 1rem;
 text-align: center;
 margin-top: 20px;
 font-size: 11px;
-opacity: 0.5;
-color: #aaa;
+opacity: 0.6;
+color: #e0cba0;
 }
 
 .toast-msg {
@@ -743,7 +766,7 @@ white-space: nowrap;
 
 <script>
 // ============================================================
-// KONFIGURASI GOOGLE SHEETS
+// KONFIGURASI GOOGLE SHEETS (tetap menggunakan data asli)
 // ============================================================
 const GOOGLE_SHEETS_CSV_URL_SCATTER = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=0";
 const GOOGLE_SHEETS_CSV_URL_BUYFREE = "https://docs.google.com/spreadsheets/d/1pl2QYrtBByIF6MdKcS7mUo1w88-QjnkfIx9G0omYQrs/export?format=csv&gid=1728740039";
