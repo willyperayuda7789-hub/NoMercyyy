@@ -756,8 +756,8 @@ color: white;
 display: block !important;
 }
 
-/* FOLDER 1 BARIS 4 KOLOM - FULL WIDTH TANPA RUANG KOSONG */
-.gallery-grid-4 {
+/* FOLDER MENGGUNAKAN GRID RESPONSIF - BISA LEBIH DARI 4 */
+.gallery-grid-container {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 gap: 24px;
@@ -810,6 +810,11 @@ border-radius: 16px;
 margin: 12px 0;
 background: rgba(0,0,0,0.5);
 border: 1px solid rgba(255,255,255,0.2);
+cursor: pointer;
+}
+.gallery-image-preview:hover {
+transform: scale(1.02);
+transition: transform 0.2s;
 }
 .gallery-desc {
 color: #cbd5e6;
@@ -824,80 +829,59 @@ overflow: hidden;
 .gallery-buttons-row {
 display: flex;
 flex-direction: row;
-gap: 8px;
+gap: 12px;
 margin-top: 12px;
-flex-wrap: wrap;
 }
-.btn-gallery-view {
-flex: 1;
-background: rgba(59,130,246,0.25);
-border: 1px solid rgba(96,165,250,0.4);
-border-radius: 40px;
-color: #bfdbfe;
-font-size: 0.7rem;
-font-weight: 600;
-cursor: pointer;
-transition: all 0.2s;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 6px;
-padding: 8px 8px;
-}
-.btn-gallery-view i {
-font-size: 0.7rem;
-}
-.btn-gallery-view:hover {
-background: #3b82f6;
-color: white;
-border-color: white;
-}
-.btn-gallery-salin-gambar {
-flex: 1;
-background: linear-gradient(135deg, #f59e0b, #d97706);
-border: none;
-color: white;
-padding: 8px 8px;
-border-radius: 40px;
-font-size: 0.7rem;
-font-weight: 700;
-cursor: pointer;
-transition: all 0.2s ease;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 6px;
-font-family: 'Inter', monospace;
-}
-.btn-gallery-salin-gambar i {
-font-size: 0.7rem;
-}
-.btn-gallery-salin-gambar:hover {
-background: linear-gradient(135deg, #d97706, #b45309);
-transform: scale(1.02);
-}
+/* Tombol Salin Subjudul di KIRI */
 .btn-gallery-salin-subjudul {
 flex: 1;
 background: linear-gradient(135deg, #8b5cf6, #7c3aed);
 border: none;
 color: white;
-padding: 8px 8px;
+padding: 10px 8px;
 border-radius: 40px;
-font-size: 0.7rem;
+font-size: 0.75rem;
 font-weight: 700;
 cursor: pointer;
 transition: all 0.2s ease;
 display: inline-flex;
 align-items: center;
 justify-content: center;
-gap: 6px;
+gap: 8px;
 font-family: 'Inter', monospace;
+order: 1;
 }
 .btn-gallery-salin-subjudul i {
-font-size: 0.7rem;
+font-size: 0.75rem;
 }
 .btn-gallery-salin-subjudul:hover {
 background: linear-gradient(135deg, #7c3aed, #6d28d9);
+transform: scale(1.02);
+}
+/* Tombol Salin Gambar di KANAN */
+.btn-gallery-salin-gambar {
+flex: 1;
+background: linear-gradient(135deg, #f59e0b, #d97706);
+border: none;
+color: white;
+padding: 10px 8px;
+border-radius: 40px;
+font-size: 0.75rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s ease;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+font-family: 'Inter', monospace;
+order: 2;
+}
+.btn-gallery-salin-gambar i {
+font-size: 0.75rem;
+}
+.btn-gallery-salin-gambar:hover {
+background: linear-gradient(135deg, #d97706, #b45309);
 transform: scale(1.02);
 }
 .empty-gallery {
@@ -910,16 +894,18 @@ grid-column: 1 / -1;
 
 /* Responsive */
 @media (max-width: 1200px) {
-.gallery-grid-4 { gap: 20px; }
+.gallery-grid-container { gap: 20px; }
 .gallery-card { padding: 16px; }
 .gallery-card h3 { font-size: 1rem; }
 }
 @media (max-width: 1000px) {
-.gallery-grid-4 { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.gallery-grid-container { grid-template-columns: repeat(2, 1fr); gap: 20px; }
 }
 @media (max-width: 600px) {
-.gallery-grid-4 { grid-template-columns: 1fr; }
+.gallery-grid-container { grid-template-columns: 1fr; }
 .gallery-buttons-row { flex-direction: column; }
+.btn-gallery-salin-gambar { order: 1; }
+.btn-gallery-salin-subjudul { order: 2; }
 }
 @media (max-width: 768px) {
 .sidebar { width: 240px; }
@@ -1172,13 +1158,12 @@ async function renderRandomTabWithFilter(filter = "") { mainHeading.innerHTML = 
 
 function renderStaticTabWithFilter(tabId, filter = "") { const data = staticTabsData[tabId]; if(!data) return false; mainHeading.innerHTML = data.title; const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : ""; subHeading.innerHTML = data.subtitle + filterInfo; bonusBadgeContainer.classList.remove("visible"); galleryBadgeContainer.classList.remove("visible"); let filteredItems = data.items; if(filter.trim() !== "") { filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase())); } if(filteredItems.length === 0 && filter) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`; return true; } let cardsHTML = ""; filteredItems.forEach(item => { cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`; }); dynamicArea.innerHTML = cardsHTML; return true; }
 
-// ======================= RENDER GALLERY GAMBAR CS (MENAMPILKAN GAMBAR & SALIN GAMBAR & SALIN SUBJUDUL) =======================
+// ======================= RENDER GALLERY GAMBAR CS (SEMUA FOLDER) =======================
 async function renderGalleryCS() {
 const isRrn = (currentGalleryTab === 'rrn_qris');
 let catTitle, catSub, itemsToShow = [];
 
 if (isRrn) {
-// Ambil dari Google Sheets RRN QRIS ALL (kolom C sebagai URL GAMBAR)
 if (rrnQrisData.length === 0) {
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat gambar RRN QRIS dari Google Sheets...</p></div>`;
 try {
@@ -1201,7 +1186,8 @@ itemsToShow = [...staticData.items];
 
 mainHeading.innerHTML = catTitle;
 const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : "";
-subHeading.innerHTML = `${catSub}${filterInfo} | 1 baris 4 folder - TAMPILAN GAMBAR | Klik "SALIN GAMBAR" utk menyalin gambar | "SALIN SUBJUDUL" utk teks`;
+const totalItems = itemsToShow.length;
+subHeading.innerHTML = `${catSub}${filterInfo} | Menampilkan ${totalItems} folder (grid 4 kolom responsif) | KIRI: Salin Subjudul | KANAN: Salin Gambar`;
 bonusBadgeContainer.classList.remove("visible");
 galleryBadgeContainer.classList.add("visible");
 
@@ -1221,17 +1207,17 @@ dynamicArea.innerHTML = `<div class="empty-gallery"><i class="fas fa-search" sty
 return;
 }
 
-let html = `<div class="gallery-grid-4">`;
-itemsToShow.slice(0, 4).forEach((item, idx) => {
+// MENAMPILKAN SEMUA FOLDER (tanpa batasan 4)
+let html = `<div class="gallery-grid-container">`;
+itemsToShow.forEach((item, idx) => {
 html += `
 <div class="gallery-card" data-gallery-imgurl="${escapeHtml(item.imageUrl)}" data-gallery-title="${escapeHtml(item.judul)} #${item.nomor}" data-gallery-desc="${escapeHtml(item.deskripsi)}">
 <h3>${escapeHtml(item.judul)} <span class="gallery-badge-number">#${item.nomor || '1'}</span></h3>
 <img class="gallery-image-preview" id="previewImg_${idx}" src="${escapeHtml(item.imageUrl)}" loading="lazy" crossorigin="anonymous" onerror="this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load'">
 <div class="gallery-desc">${escapeHtml(item.deskripsi.length > 80 ? item.deskripsi.substring(0,80)+'...' : item.deskripsi)}</div>
 <div class="gallery-buttons-row">
-<button class="btn-gallery-view"><i class="fas fa-eye"></i> Lihat</button>
-<button class="btn-gallery-salin-gambar" data-imgurl="${escapeHtml(item.imageUrl)}" data-imgtitle="${escapeHtml(item.judul)}"><i class="fas fa-image"></i> Salin Gambar</button>
 <button class="btn-gallery-salin-subjudul" data-subjudul="${escapeHtml(item.deskripsi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button>
+<button class="btn-gallery-salin-gambar" data-imgurl="${escapeHtml(item.imageUrl)}" data-imgtitle="${escapeHtml(item.judul)}"><i class="fas fa-image"></i> Salin Gambar</button>
 </div>
 </div>
 `;
@@ -1244,16 +1230,10 @@ document.querySelectorAll('.gallery-card').forEach(card => {
 const imgUrl = card.getAttribute('data-gallery-imgurl');
 const title = card.getAttribute('data-gallery-title');
 const desc = card.getAttribute('data-gallery-desc');
-const viewBtn = card.querySelector('.btn-gallery-view');
 const salinGambarBtn = card.querySelector('.btn-gallery-salin-gambar');
 const salinSubjudulBtn = card.querySelector('.btn-gallery-salin-subjudul');
+const previewImg = card.querySelector('.gallery-image-preview');
 
-if (viewBtn) {
-viewBtn.addEventListener('click', (e) => {
-e.stopPropagation();
-openImageModal(title, imgUrl, desc);
-});
-}
 if (salinGambarBtn) {
 salinGambarBtn.addEventListener('click', async (e) => {
 e.stopPropagation();
@@ -1270,14 +1250,22 @@ const judul = salinSubjudulBtn.getAttribute('data-judul');
 copyContentOnly(subjudul, `Subjudul: ${judul}`);
 });
 }
+// Klik pada gambar untuk melihat modal
+if (previewImg) {
+previewImg.addEventListener('click', (e) => {
+e.stopPropagation();
+openImageModal(title, imgUrl, desc);
+});
+}
+// Klik pada card (selain tombol) juga untuk melihat modal
 card.addEventListener('click', (e) => {
-if (e.target.closest('.btn-gallery-view') || e.target.closest('.btn-gallery-salin-gambar') || e.target.closest('.btn-gallery-salin-subjudul')) return;
+if (e.target.closest('.btn-gallery-salin-gambar') || e.target.closest('.btn-gallery-salin-subjudul')) return;
 openImageModal(title, imgUrl, desc);
 });
 });
 }
 
-// Fungsi untuk menyalin gambar (bukan URL) ke clipboard
+// Fungsi untuk menyalin gambar ke clipboard
 async function copyImageToClipboard(imageUrl, imageTitle) {
 try {
 showToast(`⏳ Mengambil gambar "${imageTitle}"...`);
@@ -1345,8 +1333,8 @@ modalContentText.innerHTML = `
 <img src="${escapeHtml(imageUrl)}" class="modal-image-view" style="max-width:100%; max-height:60vh; border-radius:16px;" crossorigin="anonymous" onerror="this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load'">
 <p style="margin-top:16px;">${escapeHtml(description)}</p>
 <div style="margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-<button id="modalCopyImageBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-image"></i> Salin Gambar</button>
 <button id="modalCopySubjudulBtn" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-copy"></i> Salin Subjudul</button>
+<button id="modalCopyImageBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-image"></i> Salin Gambar</button>
 </div>
 <small><i class="fas fa-link"></i> URL: ${escapeHtml(imageUrl)}</small>
 </div>
