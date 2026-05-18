@@ -20,7 +20,7 @@ font-family: 'Inter', sans-serif;
 height: 100vh;
 overflow: hidden;
 background-image: url('https://i.pinimg.com/1200x/9d/f8/a5/9df8a54bdbc89f524d62a729f52936c4.jpg');
-background-size: 100% 110%;
+background-size: 100% 100%;
 background-position: center center;
 background-repeat: no-repeat;
 background-color: #0a0e1a;
@@ -824,8 +824,9 @@ overflow: hidden;
 .gallery-buttons-row {
 display: flex;
 flex-direction: row;
-gap: 12px;
+gap: 8px;
 margin-top: 12px;
+flex-wrap: wrap;
 }
 .btn-gallery-view {
 flex: 1;
@@ -840,8 +841,8 @@ transition: all 0.2s;
 display: inline-flex;
 align-items: center;
 justify-content: center;
-gap: 8px;
-padding: 8px 12px;
+gap: 6px;
+padding: 8px 8px;
 }
 .btn-gallery-view i {
 font-size: 0.7rem;
@@ -856,7 +857,7 @@ flex: 1;
 background: linear-gradient(135deg, #f59e0b, #d97706);
 border: none;
 color: white;
-padding: 8px 12px;
+padding: 8px 8px;
 border-radius: 40px;
 font-size: 0.7rem;
 font-weight: 700;
@@ -865,7 +866,7 @@ transition: all 0.2s ease;
 display: inline-flex;
 align-items: center;
 justify-content: center;
-gap: 8px;
+gap: 6px;
 font-family: 'Inter', monospace;
 }
 .btn-gallery-salin-gambar i {
@@ -873,6 +874,30 @@ font-size: 0.7rem;
 }
 .btn-gallery-salin-gambar:hover {
 background: linear-gradient(135deg, #d97706, #b45309);
+transform: scale(1.02);
+}
+.btn-gallery-salin-subjudul {
+flex: 1;
+background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+border: none;
+color: white;
+padding: 8px 8px;
+border-radius: 40px;
+font-size: 0.7rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s ease;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+font-family: 'Inter', monospace;
+}
+.btn-gallery-salin-subjudul i {
+font-size: 0.7rem;
+}
+.btn-gallery-salin-subjudul:hover {
+background: linear-gradient(135deg, #7c3aed, #6d28d9);
 transform: scale(1.02);
 }
 .empty-gallery {
@@ -894,6 +919,7 @@ grid-column: 1 / -1;
 }
 @media (max-width: 600px) {
 .gallery-grid-4 { grid-template-columns: 1fr; }
+.gallery-buttons-row { flex-direction: column; }
 }
 @media (max-width: 768px) {
 .sidebar { width: 240px; }
@@ -1146,7 +1172,7 @@ async function renderRandomTabWithFilter(filter = "") { mainHeading.innerHTML = 
 
 function renderStaticTabWithFilter(tabId, filter = "") { const data = staticTabsData[tabId]; if(!data) return false; mainHeading.innerHTML = data.title; const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : ""; subHeading.innerHTML = data.subtitle + filterInfo; bonusBadgeContainer.classList.remove("visible"); galleryBadgeContainer.classList.remove("visible"); let filteredItems = data.items; if(filter.trim() !== "") { filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase())); } if(filteredItems.length === 0 && filter) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`; return true; } let cardsHTML = ""; filteredItems.forEach(item => { cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`; }); dynamicArea.innerHTML = cardsHTML; return true; }
 
-// ======================= RENDER GALLERY GAMBAR CS (MENAMPILKAN GAMBAR & SALIN GAMBAR) =======================
+// ======================= RENDER GALLERY GAMBAR CS (MENAMPILKAN GAMBAR & SALIN GAMBAR & SALIN SUBJUDUL) =======================
 async function renderGalleryCS() {
 const isRrn = (currentGalleryTab === 'rrn_qris');
 let catTitle, catSub, itemsToShow = [];
@@ -1163,7 +1189,7 @@ return;
 }
 }
 catTitle = "📸 RRN QRIS - GALLERY GAMBAR";
-catSub = "Data dari sheet RRN QRIS ALL: kolom A = judul folder, B = deskripsi, C = URL GAMBAR";
+catSub = "Data dari sheet RRN QRIS ALL: kolom A = judul folder, B = subjudul, C = URL GAMBAR";
 itemsToShow = [...rrnQrisData];
 } else {
 const staticData = galleryStaticData[currentGalleryTab];
@@ -1175,7 +1201,7 @@ itemsToShow = [...staticData.items];
 
 mainHeading.innerHTML = catTitle;
 const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : "";
-subHeading.innerHTML = `${catSub}${filterInfo} | 1 baris 4 folder - TAMPILAN GAMBAR | Klik "SALIN GAMBAR" untuk menyalin gambar langsung`;
+subHeading.innerHTML = `${catSub}${filterInfo} | 1 baris 4 folder - TAMPILAN GAMBAR | Klik "SALIN GAMBAR" utk menyalin gambar | "SALIN SUBJUDUL" utk teks`;
 bonusBadgeContainer.classList.remove("visible");
 galleryBadgeContainer.classList.add("visible");
 
@@ -1203,8 +1229,9 @@ html += `
 <img class="gallery-image-preview" id="previewImg_${idx}" src="${escapeHtml(item.imageUrl)}" loading="lazy" crossorigin="anonymous" onerror="this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load'">
 <div class="gallery-desc">${escapeHtml(item.deskripsi.length > 80 ? item.deskripsi.substring(0,80)+'...' : item.deskripsi)}</div>
 <div class="gallery-buttons-row">
-<button class="btn-gallery-view"><i class="fas fa-eye"></i> Lihat Gambar</button>
-<button class="btn-gallery-salin-gambar" data-imgurl="${escapeHtml(item.imageUrl)}" data-imgtitle="${escapeHtml(item.judul)}"><i class="fas fa-image"></i> SALIN GAMBAR</button>
+<button class="btn-gallery-view"><i class="fas fa-eye"></i> Lihat</button>
+<button class="btn-gallery-salin-gambar" data-imgurl="${escapeHtml(item.imageUrl)}" data-imgtitle="${escapeHtml(item.judul)}"><i class="fas fa-image"></i> Salin Gambar</button>
+<button class="btn-gallery-salin-subjudul" data-subjudul="${escapeHtml(item.deskripsi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button>
 </div>
 </div>
 `;
@@ -1219,6 +1246,7 @@ const title = card.getAttribute('data-gallery-title');
 const desc = card.getAttribute('data-gallery-desc');
 const viewBtn = card.querySelector('.btn-gallery-view');
 const salinGambarBtn = card.querySelector('.btn-gallery-salin-gambar');
+const salinSubjudulBtn = card.querySelector('.btn-gallery-salin-subjudul');
 
 if (viewBtn) {
 viewBtn.addEventListener('click', (e) => {
@@ -1234,8 +1262,16 @@ const imgTitle = salinGambarBtn.getAttribute('data-imgtitle');
 await copyImageToClipboard(imgUrlSalin, imgTitle);
 });
 }
+if (salinSubjudulBtn) {
+salinSubjudulBtn.addEventListener('click', (e) => {
+e.stopPropagation();
+const subjudul = salinSubjudulBtn.getAttribute('data-subjudul');
+const judul = salinSubjudulBtn.getAttribute('data-judul');
+copyContentOnly(subjudul, `Subjudul: ${judul}`);
+});
+}
 card.addEventListener('click', (e) => {
-if (e.target.closest('.btn-gallery-view') || e.target.closest('.btn-gallery-salin-gambar')) return;
+if (e.target.closest('.btn-gallery-view') || e.target.closest('.btn-gallery-salin-gambar') || e.target.closest('.btn-gallery-salin-subjudul')) return;
 openImageModal(title, imgUrl, desc);
 });
 });
@@ -1244,21 +1280,17 @@ openImageModal(title, imgUrl, desc);
 // Fungsi untuk menyalin gambar (bukan URL) ke clipboard
 async function copyImageToClipboard(imageUrl, imageTitle) {
 try {
-// Tampilkan loading toast
 showToast(`⏳ Mengambil gambar "${imageTitle}"...`);
  
-// Fetch gambar dari URL
 const response = await fetch(imageUrl, { mode: 'cors' });
 if (!response.ok) throw new Error('Gagal mengambil gambar');
  
 const blob = await response.blob();
  
-// Cek apakah format gambar didukung
 if (!blob.type.startsWith('image/')) {
 throw new Error('Format bukan gambar');
 }
  
-// Coba menggunakan Clipboard API untuk menyalin gambar
 try {
 await navigator.clipboard.write([
 new ClipboardItem({
@@ -1267,10 +1299,6 @@ new ClipboardItem({
 ]);
 showToast(`✅ Gambar "${imageTitle}" berhasil disalin! 📸`);
 } catch (clipboardError) {
-// Fallback: buat canvas dan coba lagi
-console.warn('Clipboard API gagal, mencoba metode alternatif:', clipboardError);
- 
-// Buat elemen canvas untuk mengkonversi blob ke gambar
 const img = new Image();
 const objectUrl = URL.createObjectURL(blob);
  
@@ -1281,7 +1309,6 @@ canvas.height = img.height;
 const ctx = canvas.getContext('2d');
 ctx.drawImage(img, 0, 0);
  
-// Konversi ke blob lagi
 canvas.toBlob(async (canvasBlob) => {
 try {
 await navigator.clipboard.write([
@@ -1317,8 +1344,9 @@ modalContentText.innerHTML = `
 <div style="text-align:center">
 <img src="${escapeHtml(imageUrl)}" class="modal-image-view" style="max-width:100%; max-height:60vh; border-radius:16px;" crossorigin="anonymous" onerror="this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load'">
 <p style="margin-top:16px;">${escapeHtml(description)}</p>
-<div style="margin-top:16px;">
-<button id="modalCopyImageBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-image"></i> Salin Gambar Ini</button>
+<div style="margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+<button id="modalCopyImageBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-image"></i> Salin Gambar</button>
+<button id="modalCopySubjudulBtn" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-copy"></i> Salin Subjudul</button>
 </div>
 <small><i class="fas fa-link"></i> URL: ${escapeHtml(imageUrl)}</small>
 </div>
@@ -1326,12 +1354,17 @@ modalContentText.innerHTML = `
 modal.classList.add("active");
 document.body.style.overflow = "hidden";
 
-// Tambahkan event listener untuk tombol salin gambar di modal
 setTimeout(() => {
-const modalCopyBtn = document.getElementById('modalCopyImageBtn');
-if (modalCopyBtn) {
-modalCopyBtn.addEventListener('click', async () => {
+const modalCopyImageBtn = document.getElementById('modalCopyImageBtn');
+const modalCopySubjudulBtn = document.getElementById('modalCopySubjudulBtn');
+if (modalCopyImageBtn) {
+modalCopyImageBtn.addEventListener('click', async () => {
 await copyImageToClipboard(imageUrl, title);
+});
+}
+if (modalCopySubjudulBtn) {
+modalCopySubjudulBtn.addEventListener('click', () => {
+copyContentOnly(description, `Subjudul: ${title}`);
 });
 }
 }, 100);
@@ -1361,7 +1394,7 @@ function bindNavEvents() { document.querySelectorAll('.nav-item').forEach(item =
 
 function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
 function showToast(message) { toast.innerHTML = `<i class="fas fa-copy"></i> ${message}`; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2500); }
-async function copyContentOnly(textContent, folderTitle) { const finalText = textContent || "(Tidak ada konten)"; try { await navigator.clipboard.writeText(finalText); showToast(`"${folderTitle}" berhasil disalin`); } catch { const textarea = document.createElement("textarea"); textarea.value = finalText; document.body.appendChild(textarea); textarea.select(); document.execCommand("copy"); document.body.removeChild(textarea); showToast(`"${folderTitle}" disalin`); } }
+async function copyContentOnly(textContent, folderTitle) { const finalText = textContent || "(Tidak ada konten)"; try { await navigator.clipboard.writeText(finalText); showToast(`"${folderTitle}" berhasil disalin 📝`); } catch { const textarea = document.createElement("textarea"); textarea.value = finalText; document.body.appendChild(textarea); textarea.select(); document.execCommand("copy"); document.body.removeChild(textarea); showToast(`"${folderTitle}" disalin 📝`); } }
 function openModal(title, content) { modalTitle.textContent = title; modalContentText.innerHTML = (content || "(Kosong)").replace(/\n/g, '<br>'); modal.classList.add("active"); document.body.style.overflow = "hidden"; }
 function closeModal() { modal.classList.remove("active"); document.body.style.overflow = ""; }
 
