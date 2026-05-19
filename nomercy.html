@@ -697,7 +697,7 @@ background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
 }
 
-/* ========= GALLERY GAMBAR CS - BADGE 3 KATEGORI (DENGAN TAMBAHAN PROFIL E-WALLET/BANK) ========= */
+/* ========= GALLERY GAMBAR CS - BADGE 3 KATEGORI ========= */
 .gallery-badge-container {
 margin-bottom: 24px;
 display: none;
@@ -922,10 +922,10 @@ grid-column: 1 / -1;
 <div id="bonusBadgeContainer" class="bonus-badge-container"><div class="bonus-badge-bar"><div class="bonus-badge" data-bonus-tab="all"><i class="fas fa-layer-group"></i> BONUS ALL</div><div class="bonus-badge" data-bonus-tab="mingguan"><i class="fas fa-calendar-alt"></i> MINGGUAN</div><div class="bonus-badge" data-bonus-tab="done"><i class="fas fa-check-circle"></i> DONE BAGI</div><div class="bonus-badge active-bonus" data-bonus-tab="lain"><i class="fas fa-ellipsis-h"></i> LAIN-LAIN</div></div></div>
 <div id="galleryBadgeContainer" class="gallery-badge-container"><div class="gallery-badge-bar">
 <div class="gallery-badge" data-gallery-tab="rrn_qris"><i class="fas fa-qrcode"></i> RRN QRIS</div>
-<div class="gallery-badge active-gallery" data-gallery-tab="profile_ewallet"><i class="fas fa-wallet"></i> PROFIL E-WALLET / BANK</div>
-<div class="gallery-badge" data-gallery-tab="cara_bermain"><i class="fas fa-gamepad"></i> CARA BERMAIN</div>
+<div class="gallery-badge" data-gallery-tab="profile_ewallet"><i class="fas fa-wallet"></i> PROFIL E-WALLET / BANK</div>
+<div class="gallery-badge active-gallery" data-gallery-tab="cara_bermain"><i class="fas fa-gamepad"></i> CARA BERMAIN</div>
 </div></div>
-<div id="dynamicContentArea" class="dashboard-grid"><div class="loading-card"><i class="fas fa-spinner fa-pulse" style="font-size: 2rem;"></i><p>Memuat data PROFIL E-WALLET / BANK dari Google Sheets...</p></div></div>
+<div id="dynamicContentArea" class="dashboard-grid"><div class="loading-card"><i class="fas fa-spinner fa-pulse" style="font-size: 2rem;"></i><p>Memuat data CARA BERMAIN dari Google Sheets...</p></div></div>
 </main>
 </div>
 
@@ -934,10 +934,10 @@ grid-column: 1 / -1;
 
 <script>
 // ======================= KONFIGURASI GOOGLE SHEETS =======================
-// SEMUA KONFIGURASI SEBELUMNYA TETAP UTUH, HANYA MENAMBAH SHEET BARU
 const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
 const SHEET_RRN_QRIS_ALL = 'RRN QRIS ALL';
-const SHEET_EWALLET_BANK = 'SS EWALLET BANK';  // SHEET BARU UNTUK PROFIL E-WALLET / BANK
+const SHEET_EWALLET_BANK = 'SS EWALLET BANK';
+const SHEET_CARA_BERMAIN_ALL = 'CARA BERMAIN ALL';  // SHEET BARU UNTUK CARA BERMAIN
 
 let foldersData = [];
 let bonusAllData = [];
@@ -945,14 +945,15 @@ let bonusMingguanData = [];
 let bonusDoneBagiData = [];
 let bonusLainLainData = [];
 let rrnQrisData = [];
-let ewalletBankData = [];  // DATA BARU UNTUK PROFIL E-WALLET/BANK
+let ewalletBankData = [];
+let caraBermainAllData = [];  // DATA BARU UNTUK CARA BERMAIN ALL
 
 let currentFilterText = "";
 let currentActiveTab = "tab4";
 let currentBonusSubTab = "lain";
-let currentGalleryTab = "profile_ewallet";  // DEFAULT KE PROFIL E-WALLET/BANK
+let currentGalleryTab = "cara_bermain";  // DEFAULT KE CARA BERMAIN
 
-// DATA STATIS UNTUK TAB LAIN (SAMA PERSIS SEPERTI SEBELUMNYA)
+// DATA STATIS UNTUK TAB LAIN
 const staticTabsData = {
 tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik — background full size 100%", items: [
 { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
@@ -977,15 +978,7 @@ tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap 
 ] }
 };
 
-// DATA CARA BERMAIN (TIDAK DIUBAH)
-const caraBermainData = [
-{ judul: "REGISTRASI", nomor: "1", deskripsi: "Cara mendaftar akun baru dengan mudah.", imageUrl: "https://placehold.co/600x400/1e293b/8b5cf6?text=Registrasi" },
-{ judul: "DEPOSIT", nomor: "2", deskripsi: "Tata cara melakukan deposit.", imageUrl: "https://placehold.co/600x400/1e293b/06b6d4?text=Deposit" },
-{ judul: "WITHDRAW", nomor: "3", deskripsi: "Tata cara menarik dana.", imageUrl: "https://placehold.co/600x400/1e293b/ec4899?text=Withdraw" },
-{ judul: "PANDUAN TOGEL", nomor: "4", deskripsi: "Cara bermain togel online.", imageUrl: "https://placehold.co/600x400/1e293b/f97316?text=Panduan+Togel" }
-];
-
-// ======================= FUNGSI FETCH DATA (SEMUA FUNGSI SEBELUMNYA TETAP ADA) =======================
+// ======================= FUNGSI FETCH DATA =======================
 async function fetchSheetData(sheetName) {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
@@ -1024,12 +1017,33 @@ return items;
 } catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet RRN QRIS ALL: ${e.message}`); }
 }
 
-// FUNGSI BARU UNTUK FETCH DATA SS EWALLET BANK (kolom A=judul, B=subjudul, C=isi/gambar)
 async function fetchEwalletBankData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_EWALLET_BANK)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
 if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_EWALLET_BANK}' tidak ditemukan`);
+const csvText = await response.text();
+const rows = parseCSV(csvText);
+const items = [];
+for (let i = 0; i < rows.length; i++) {
+if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+const judul = rows[i][0].trim();
+const subjudul = (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "";
+let imageUrl = (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : "https://placehold.co/600x400/1e293b/3b82f6?text=Gambar+Tidak+Tersedia";
+if (!imageUrl.startsWith("http")) imageUrl = "https://placehold.co/600x400/1e293b/ef4444?text=URL+Invalid";
+items.push({ judul: judul, nomor: (i+1).toString(), deskripsi: subjudul || `Informasi ${judul}`, imageUrl: imageUrl });
+}
+}
+return items;
+} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_EWALLET_BANK}': ${e.message}`); }
+}
+
+// FUNGSI BARU UNTUK FETCH DATA CARA BERMAIN ALL (kolom A=judul, B=subjudul, C=URL gambar)
+async function fetchCaraBermainAllData() {
+try {
+const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_CARA_BERMAIN_ALL)}`;
+const response = await fetch(csvUrl, { cache: 'no-store' });
+if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_CARA_BERMAIN_ALL}' tidak ditemukan`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
@@ -1042,13 +1056,13 @@ if (!imageUrl.startsWith("http")) imageUrl = "https://placehold.co/600x400/1e293
 items.push({ 
 judul: judul, 
 nomor: (i+1).toString(), 
-deskripsi: subjudul || `Informasi ${judul}`, 
+deskripsi: subjudul || `Panduan ${judul}`, 
 imageUrl: imageUrl 
 });
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_EWALLET_BANK}': ${e.message}. Pastikan sheet dengan nama tersebut ada dan memiliki kolom A (judul), B (subjudul), C (URL gambar).`); }
+} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_CARA_BERMAIN_ALL}': ${e.message}. Pastikan sheet dengan nama tersebut ada dan memiliki kolom A (judul), B (subjudul), C (URL gambar).`); }
 }
 
 function parseCSV(csvText) {
@@ -1094,7 +1108,7 @@ async function renderRandomTabWithFilter(filter = "") { mainHeading.innerHTML = 
 // ======================= FUNGSI RENDER STATIC TAB (TIDAK DIUBAH) =======================
 function renderStaticTabWithFilter(tabId, filter = "") { const data = staticTabsData[tabId]; if(!data) return false; mainHeading.innerHTML = data.title; const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : ""; subHeading.innerHTML = data.subtitle + filterInfo; bonusBadgeContainer.classList.remove("visible"); galleryBadgeContainer.classList.remove("visible"); dynamicArea.classList.remove("gallery-fullwidth"); let filteredItems = data.items; if(filter.trim() !== "") { filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase())); } if(filteredItems.length === 0 && filter) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`; return true; } let cardsHTML = ""; filteredItems.forEach(item => { cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`; }); dynamicArea.innerHTML = cardsHTML; return true; }
 
-// ======================= RENDER GALLERY GAMBAR CS (DENGAN TAMBAHAN PROFIL E-WALLET/BANK) =======================
+// ======================= RENDER GALLERY GAMBAR CS =======================
 async function renderGalleryCS() {
 let catTitle, catSub, itemsToShow = [];
 
@@ -1117,9 +1131,13 @@ catSub = "Data dari sheet 'SS EWALLET BANK': kolom A = Judul Folder, kolom B = S
 itemsToShow = [...ewalletBankData];
 } 
 else if (currentGalleryTab === 'cara_bermain') {
+if (caraBermainAllData.length === 0) {
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data CARA BERMAIN dari Google Sheets...</p></div>`;
+try { caraBermainAllData = await fetchCaraBermainAllData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat CARA BERMAIN</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet bernama 'CARA BERMAIN ALL' ada dengan kolom A (judul folder), B (subjudul), C (URL GAMBAR).</p></div>`; return; }
+}
 catTitle = "🎮 CARA BERMAIN";
-catSub = "Panduan step-by-step bermain";
-itemsToShow = [...caraBermainData];
+catSub = "Data dari sheet 'CARA BERMAIN ALL': kolom A = Judul Folder, kolom B = Subjudul, kolom C = URL Gambar";
+itemsToShow = [...caraBermainAllData];
 } 
 else { return; }
 
@@ -1162,14 +1180,12 @@ html += `
 html += `</div>`;
 dynamicArea.innerHTML = html;
 
-// Event listeners untuk tombol salin
 document.querySelectorAll('.btn-gallery-salin-subjudul').forEach(btn => {
 btn.addEventListener('click', (e) => { e.stopPropagation(); const sub = btn.getAttribute('data-subjudul') || ''; copyContentOnly(sub, "Subjudul"); });
 });
 document.querySelectorAll('.btn-gallery-salin-gambar').forEach(btn => {
 btn.addEventListener('click', async (e) => { e.stopPropagation(); const url = btn.getAttribute('data-imgurl'); const title = btn.getAttribute('data-imgtitle'); await copyImageToClipboard(url, title); });
 });
-// Event klik card
 document.querySelectorAll('.gallery-card').forEach(card => {
 const imgUrl = card.getAttribute('data-gallery-imgurl');
 const title = card.getAttribute('data-gallery-title');
@@ -1213,7 +1229,6 @@ img.src = objectUrl;
 } catch (error) { console.error('Error copying image:', error); showToast(`❌ Gagal menyalin gambar "${imageTitle}". Pastikan gambar dapat diakses.`); }
 }
 
-// Fungsi untuk modal gambar
 function openImageModal(title, imageUrl, description) {
 modalTitle.textContent = title;
 modalContentText.innerHTML = `
