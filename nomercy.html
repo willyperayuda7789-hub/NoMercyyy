@@ -1076,6 +1076,7 @@ const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
 const SHEET_RRN_QRIS_ALL = 'RRN QRIS ALL';
 const SHEET_EWALLET_BANK = 'SS EWALLET BANK';
 const SHEET_CARA_BERMAIN_ALL = 'CARA BERMAIN ALL';
+const SHEET_EWALLET_NAIK_QRIS = 'EWALLET NAIK QRIS'; // SHEET UNTUK EWALLET NAIK QRIS
 
 let foldersData = [];
 let bonusAllData = [];
@@ -1085,6 +1086,7 @@ let bonusLainLainData = [];
 let rrnQrisData = [];
 let ewalletBankData = [];
 let caraBermainAllData = [];
+let ewalletNaikQrisData = []; // DATA DARI SHEET EWALLET NAIK QRIS
 
 let currentFilterText = "";
 let currentActiveTab = "tab4";
@@ -1111,20 +1113,16 @@ tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap 
 ] }
 };
 
-// DATA STATIS UNTUK 4 BADGE QRIS
-const qrisData = {
-bank_qris: [
+// DATA STATIS UNTUK BADGE BANK >>> QRIS (TETAP STATIS SEPERTI SEMULA)
+const bankQrisStaticData = [
 { judul: "BCA QRIS", deskripsi: "Scan QRIS BCA untuk transaksi cepat. Limit harian Rp10.000.000.", konten: "BCA QRIS: Bisa melalui mobile banking BCA. Kode merchant: 1234567890. Rate 0% biaya admin." },
 { judul: "MANDIRI QRIS", deskripsi: "QRIS Livin' Mandiri. Support semua merchant.", konten: "Livin' Mandiri QRIS: Transaksi aman, cashback mingguan. Batas transaksi hingga 15jt." },
 { judul: "BRI QRIS", deskripsi: "QRIS BRI luncurkan promo double point.", konten: "BRI QRIS: integrasi dengan BRImo, banyak diskon." },
 { judul: "BNI QRIS", deskripsi: "QRIS BNI tap & go, mudah untuk bisnis.", konten: "BNI QRIS: Dukungan penuh untuk usaha mikro." }
-],
-ewallet_qris: [
-{ judul: "OVO QRIS", deskripsi: "Bayar pakai OVO via QRIS, dapat cashback.", konten: "OVO QRIS: Link ke semua merchant. Saldo minimum Rp5.000." },
-{ judul: "DANA QRIS", deskripsi: "DANA QRIS semakin praktis, gratis biaya admin.", konten: "DANA QRIS: Promo spesial weekend, transfer QRIS mudah." },
-{ judul: "GoPay QRIS", deskripsi: "GoPay QRIS terintegrasi Gojek, banyak promo.", konten: "GoPay QRIS: Tanpa biaya tambahan, limit harian 2jt." },
-{ judul: "ShopeePay QRIS", deskripsi: "ShopeePay QRIS plus cashback coin.", konten: "ShopeePay QRIS: Klik QRIS di aplikasi, transaksi cepat." }
-],
+];
+
+// DATA STATIS UNTUK BADGE LAINNYA (REFUND, LAIN-LAIN)
+const qrisStaticData = {
 refund: [
 { judul: "Proses Refund QRIS", deskripsi: "Mekanisme refund gagal transaksi QRIS.", konten: "Refund QRIS: Waktu 1x24 jam, saldo kembali ke rekening asal." },
 { judul: "Refund Ganda", deskripsi: "Jika terjadi double charge, silahkan hubungi CS.", konten: "Hubungi call center 1500xxx dengan bukti transaksi." },
@@ -1155,6 +1153,28 @@ dataRows.push({ title: rows[i][0].trim(), content: rows[i][1] ? rows[i][1].trim(
 }
 return dataRows;
 } catch(e) { console.error(`Error fetch ${sheetName}:`, e); throw new Error(`Gagal ambil data dari sheet ${sheetName}`); }
+}
+
+// FUNGSI KHUSUS UNTUK EWALLET NAIK QRIS (digunakan untuk badge EWALLET >>> QRIS)
+async function fetchEwalletNaikQrisData() {
+try {
+const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_EWALLET_NAIK_QRIS)}`;
+const response = await fetch(csvUrl, { cache: 'no-store' });
+if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_EWALLET_NAIK_QRIS}' tidak ditemukan`);
+const csvText = await response.text();
+const rows = parseCSV(csvText);
+const items = [];
+for (let i = 0; i < rows.length; i++) {
+if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+items.push({ 
+judul: rows[i][0].trim(), 
+deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Klik untuk melihat detail",
+konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada informasi tambahan."
+});
+}
+}
+return items;
+} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_EWALLET_NAIK_QRIS}': ${e.message}. Pastikan sheet dengan nama tersebut ada.`); }
 }
 
 async function fetchRRNQrisData() {
@@ -1450,15 +1470,45 @@ await renderBonusPage();
 }
 
 // ======================= RENDER ALL ABOUT QRIS DENGAN 4 BADGE =======================
-function renderAllAboutQris() {
+async function renderAllAboutQris() {
 mainHeading.innerHTML = "👥 ALL ABOUT QRIS";
 let filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : "";
 let categoryName = "";
-if (currentQrisTab === "bank_qris") categoryName = "BANK >>> QRIS";
-else if (currentQrisTab === "ewallet_qris") categoryName = "EWALLET >>> QRIS";
-else if (currentQrisTab === "refund") categoryName = "REFUND";
-else categoryName = "LAIN-LAIN";
-subHeading.innerHTML = `Kategori: ${categoryName}${filterInfo} | Klik kartu untuk detail, tombol salin di pojok kanan bawah`;
+let dataItems = [];
+let isFromSheet = false;
+
+if (currentQrisTab === "bank_qris") {
+categoryName = "BANK >>> QRIS";
+dataItems = bankQrisStaticData; // TETAP STATIS SEPERTI SEMULA
+isFromSheet = false;
+} 
+else if (currentQrisTab === "ewallet_qris") {
+categoryName = "EWALLET >>> QRIS";
+isFromSheet = true;
+// Ambil data dari Google Sheets untuk EWALLET NAIK QRIS
+if (ewalletNaikQrisData.length === 0) {
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data EWALLET NAIK QRIS dari Google Sheets...</p></div>`;
+try { 
+ewalletNaikQrisData = await fetchEwalletNaikQrisData(); 
+} catch(e) { 
+dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat EWALLET NAIK QRIS</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet 'EWALLET NAIK QRIS' ada dengan kolom A (judul) dan B (isi).</p></div>`;
+return; 
+}
+}
+dataItems = [...ewalletNaikQrisData];
+} 
+else if (currentQrisTab === "refund") {
+categoryName = "REFUND";
+dataItems = qrisStaticData.refund;
+isFromSheet = false;
+} 
+else {
+categoryName = "LAIN-LAIN";
+dataItems = qrisStaticData.lain_lain;
+isFromSheet = false;
+}
+
+subHeading.innerHTML = `Kategori: ${categoryName}${filterInfo} | Data ${isFromSheet ? 'dari Google Sheets (EWALLET NAIK QRIS)' : 'statis'} | Klik kartu untuk detail, tombol salin di pojok kanan bawah`;
 
 bonusBadgeContainer.classList.remove("visible");
 galleryBadgeContainer.classList.remove("visible");
@@ -1468,14 +1518,13 @@ dynamicArea.style.display = "grid";
 dynamicArea.classList.remove("dashboard-grid");
 dynamicArea.classList.add("qris-grid-container");
 
-let dataItems = qrisData[currentQrisTab] || qrisData.lain_lain;
 let filtered = dataItems;
 if (currentFilterText.trim() !== "") {
 const keyword = currentFilterText.toLowerCase();
 filtered = dataItems.filter(item => 
 item.judul.toLowerCase().includes(keyword) || 
-item.deskripsi.toLowerCase().includes(keyword) ||
-item.konten.toLowerCase().includes(keyword)
+(item.deskripsi && item.deskripsi.toLowerCase().includes(keyword)) ||
+(item.konten && item.konten.toLowerCase().includes(keyword))
 );
 }
 
@@ -1488,10 +1537,10 @@ return;
 let html = ``;
 filtered.forEach((item) => {
 html += `
-<div class="qris-card" data-judul="${escapeHtml(item.judul)}" data-konten="${escapeHtml(item.konten)}">
+<div class="qris-card" data-judul="${escapeHtml(item.judul)}" data-konten="${escapeHtml(item.konten || item.deskripsi || 'Tidak ada informasi')}">
 <h3><i class="fas fa-qrcode"></i> ${escapeHtml(item.judul)}</h3>
-<div class="qris-desc">${escapeHtml(item.deskripsi)}</div>
-<button class="btn-qris-salin" data-salin="${escapeHtml(item.konten)}" data-label="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> SALIN</button>
+<div class="qris-desc">${escapeHtml(item.deskripsi && item.deskripsi.length > 120 ? item.deskripsi.substring(0,120)+'...' : (item.deskripsi || 'Klik untuk melihat detail'))}</div>
+<button class="btn-qris-salin" data-salin="${escapeHtml(item.konten || item.deskripsi || '')}" data-label="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> SALIN</button>
 </div>
 `;
 });
@@ -1553,7 +1602,7 @@ if(tabId === 'tab2') { await renderRandomTabWithFilter(currentFilterText); }
 else if(tabId === 'tab4') { await renderGalleryCS(); bindGalleryBadges(); }
 else if(tabId === 'tab5') { renderAllAboutQris(); bindQrisBadges(); }
 else if(tabId === 'tab6') { await renderBonusPage(); bindBonusBadgeEvents(); }
-else { renderStaticTabWithFilter(tabId, currentFilterText); }
+else { renderStaticTabWithFilter(currentActiveTab, currentFilterText); }
 }
 
 function bindNavEvents() {
