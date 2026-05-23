@@ -1071,12 +1071,15 @@ transform: scale(1.02);
 <div id="copyToast" class="copy-toast-notif"><i class="fas fa-copy"></i> Berhasil disalin!</div>
 
 <script>
-// ======================= KONFIGURASI GOOGLE SHEETS (TIDAK DIUBAH) =======================
+// ======================= KONFIGURASI GOOGLE SHEETS =======================
 const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
 const SHEET_RRN_QRIS_ALL = 'RRN QRIS ALL';
 const SHEET_EWALLET_BANK = 'SS EWALLET BANK';
 const SHEET_CARA_BERMAIN_ALL = 'CARA BERMAIN ALL';
-const SHEET_EWALLET_NAIK_QRIS = 'EWALLET NAIK QRIS'; // SHEET UNTUK EWALLET NAIK QRIS
+const SHEET_BANK_NAIK_QRIS = 'BANK NAIK QRIS';
+const SHEET_EWALLET_NAIK_QRIS = 'EWALLET NAIK QRIS';
+const SHEET_REFUND_QRIS = 'REFUND QRIS';
+const SHEET_QRIS_LAIN_LAIN = 'QRIS LAIN-LAIN'; // SHEET UNTUK QRIS LAIN-LAIN
 
 let foldersData = [];
 let bonusAllData = [];
@@ -1086,7 +1089,10 @@ let bonusLainLainData = [];
 let rrnQrisData = [];
 let ewalletBankData = [];
 let caraBermainAllData = [];
-let ewalletNaikQrisData = []; // DATA DARI SHEET EWALLET NAIK QRIS
+let bankNaikQrisData = [];
+let ewalletNaikQrisData = [];
+let refundQrisData = [];
+let qrisLainLainData = []; // DATA DARI SHEET QRIS LAIN-LAIN
 
 let currentFilterText = "";
 let currentActiveTab = "tab4";
@@ -1113,31 +1119,7 @@ tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap 
 ] }
 };
 
-// DATA STATIS UNTUK BADGE BANK >>> QRIS (TETAP STATIS SEPERTI SEMULA)
-const bankQrisStaticData = [
-{ judul: "BCA QRIS", deskripsi: "Scan QRIS BCA untuk transaksi cepat. Limit harian Rp10.000.000.", konten: "BCA QRIS: Bisa melalui mobile banking BCA. Kode merchant: 1234567890. Rate 0% biaya admin." },
-{ judul: "MANDIRI QRIS", deskripsi: "QRIS Livin' Mandiri. Support semua merchant.", konten: "Livin' Mandiri QRIS: Transaksi aman, cashback mingguan. Batas transaksi hingga 15jt." },
-{ judul: "BRI QRIS", deskripsi: "QRIS BRI luncurkan promo double point.", konten: "BRI QRIS: integrasi dengan BRImo, banyak diskon." },
-{ judul: "BNI QRIS", deskripsi: "QRIS BNI tap & go, mudah untuk bisnis.", konten: "BNI QRIS: Dukungan penuh untuk usaha mikro." }
-];
-
-// DATA STATIS UNTUK BADGE LAINNYA (REFUND, LAIN-LAIN)
-const qrisStaticData = {
-refund: [
-{ judul: "Proses Refund QRIS", deskripsi: "Mekanisme refund gagal transaksi QRIS.", konten: "Refund QRIS: Waktu 1x24 jam, saldo kembali ke rekening asal." },
-{ judul: "Refund Ganda", deskripsi: "Jika terjadi double charge, silahkan hubungi CS.", konten: "Hubungi call center 1500xxx dengan bukti transaksi." },
-{ judul: "Refund E-wallet", deskripsi: "Refund ke e-wallet perlu konfirmasi.", konten: "Proses refund e-wallet maksimal 2 hari kerja." },
-{ judul: "Syarat Refund", deskripsi: "Minimal nominal refund Rp10.000.", konten: "Refund berlaku jika terjadi kesalahan sistem / duplikasi." }
-],
-lain_lain: [
-{ judul: "Biaya Admin QRIS", deskripsi: "Standard merchant rate 0.7% untuk QRIS.", konten: "Biaya admin bervariasi tergantung bank dan volume transaksi." },
-{ judul: "Keamanan QRIS", deskripsi: "Gunakan QRIS resmi dari aplikasi terpercaya.", konten: "Jangan scan QRIS yang mencurigakan, pastikan merchant resmi." },
-{ judul: "Limit Transaksi QRIS", deskripsi: "Limit harian per user hingga 20jt.", konten: "Untuk transaksi diatas limit perlu verifikasi tambahan." },
-{ judul: "Integrasi QRIS Antar Bank", deskripsi: "QRIS cross-bank tanpa potongan berlebihan.", konten: "Semua bank anggota Asosiasi Sistem Pembayaran Indonesia." }
-]
-};
-
-// ======================= FUNGSI FETCH DATA (TIDAK DIUBAH) =======================
+// ======================= FUNGSI FETCH DATA =======================
 async function fetchSheetData(sheetName) {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
@@ -1155,7 +1137,29 @@ return dataRows;
 } catch(e) { console.error(`Error fetch ${sheetName}:`, e); throw new Error(`Gagal ambil data dari sheet ${sheetName}`); }
 }
 
-// FUNGSI KHUSUS UNTUK EWALLET NAIK QRIS (digunakan untuk badge EWALLET >>> QRIS)
+// FUNGSI UNTUK BANK NAIK QRIS
+async function fetchBankNaikQrisData() {
+try {
+const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_BANK_NAIK_QRIS)}`;
+const response = await fetch(csvUrl, { cache: 'no-store' });
+if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_BANK_NAIK_QRIS}' tidak ditemukan`);
+const csvText = await response.text();
+const rows = parseCSV(csvText);
+const items = [];
+for (let i = 0; i < rows.length; i++) {
+if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+items.push({ 
+judul: rows[i][0].trim(), 
+deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Klik untuk melihat detail",
+konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada informasi tambahan."
+});
+}
+}
+return items;
+} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_BANK_NAIK_QRIS}': ${e.message}`); }
+}
+
+// FUNGSI UNTUK EWALLET NAIK QRIS
 async function fetchEwalletNaikQrisData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_EWALLET_NAIK_QRIS)}`;
@@ -1174,7 +1178,51 @@ konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada infor
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_EWALLET_NAIK_QRIS}': ${e.message}. Pastikan sheet dengan nama tersebut ada.`); }
+} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_EWALLET_NAIK_QRIS}': ${e.message}`); }
+}
+
+// FUNGSI UNTUK REFUND QRIS
+async function fetchRefundQrisData() {
+try {
+const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_REFUND_QRIS)}`;
+const response = await fetch(csvUrl, { cache: 'no-store' });
+if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_REFUND_QRIS}' tidak ditemukan`);
+const csvText = await response.text();
+const rows = parseCSV(csvText);
+const items = [];
+for (let i = 0; i < rows.length; i++) {
+if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+items.push({ 
+judul: rows[i][0].trim(), 
+deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Klik untuk melihat detail refund",
+konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada informasi tambahan."
+});
+}
+}
+return items;
+} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_REFUND_QRIS}': ${e.message}`); }
+}
+
+// FUNGSI UNTUK QRIS LAIN-LAIN
+async function fetchQrisLainLainData() {
+try {
+const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_QRIS_LAIN_LAIN)}`;
+const response = await fetch(csvUrl, { cache: 'no-store' });
+if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_QRIS_LAIN_LAIN}' tidak ditemukan`);
+const csvText = await response.text();
+const rows = parseCSV(csvText);
+const items = [];
+for (let i = 0; i < rows.length; i++) {
+if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+items.push({ 
+judul: rows[i][0].trim(), 
+deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Klik untuk melihat detail",
+konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada informasi tambahan."
+});
+}
+}
+return items;
+} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_QRIS_LAIN_LAIN}': ${e.message}. Pastikan sheet dengan nama tersebut ada.`); }
 }
 
 async function fetchRRNQrisData() {
@@ -1479,19 +1527,27 @@ let isFromSheet = false;
 
 if (currentQrisTab === "bank_qris") {
 categoryName = "BANK >>> QRIS";
-dataItems = bankQrisStaticData; // TETAP STATIS SEPERTI SEMULA
-isFromSheet = false;
+isFromSheet = true;
+if (bankNaikQrisData.length === 0) {
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data BANK NAIK QRIS dari Google Sheets...</p></div>`;
+try { 
+bankNaikQrisData = await fetchBankNaikQrisData(); 
+} catch(e) { 
+dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BANK NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`;
+return; 
+}
+}
+dataItems = [...bankNaikQrisData];
 } 
 else if (currentQrisTab === "ewallet_qris") {
 categoryName = "EWALLET >>> QRIS";
 isFromSheet = true;
-// Ambil data dari Google Sheets untuk EWALLET NAIK QRIS
 if (ewalletNaikQrisData.length === 0) {
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data EWALLET NAIK QRIS dari Google Sheets...</p></div>`;
 try { 
 ewalletNaikQrisData = await fetchEwalletNaikQrisData(); 
 } catch(e) { 
-dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat EWALLET NAIK QRIS</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet 'EWALLET NAIK QRIS' ada dengan kolom A (judul) dan B (isi).</p></div>`;
+dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat EWALLET NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`;
 return; 
 }
 }
@@ -1499,16 +1555,34 @@ dataItems = [...ewalletNaikQrisData];
 } 
 else if (currentQrisTab === "refund") {
 categoryName = "REFUND";
-dataItems = qrisStaticData.refund;
-isFromSheet = false;
+isFromSheet = true;
+if (refundQrisData.length === 0) {
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data REFUND QRIS dari Google Sheets...</p></div>`;
+try { 
+refundQrisData = await fetchRefundQrisData(); 
+} catch(e) { 
+dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat REFUND QRIS</h3><p>${escapeHtml(e.message)}</p></div>`;
+return; 
+}
+}
+dataItems = [...refundQrisData];
 } 
 else {
 categoryName = "LAIN-LAIN";
-dataItems = qrisStaticData.lain_lain;
-isFromSheet = false;
+isFromSheet = true;
+if (qrisLainLainData.length === 0) {
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data QRIS LAIN-LAIN dari Google Sheets...</p></div>`;
+try { 
+qrisLainLainData = await fetchQrisLainLainData(); 
+} catch(e) { 
+dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat QRIS LAIN-LAIN</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet 'QRIS LAIN-LAIN' ada dengan kolom A (judul) dan B (isi).</p></div>`;
+return; 
+}
+}
+dataItems = [...qrisLainLainData];
 }
 
-subHeading.innerHTML = `Kategori: ${categoryName}${filterInfo} | Data ${isFromSheet ? 'dari Google Sheets (EWALLET NAIK QRIS)' : 'statis'} | Klik kartu untuk detail, tombol salin di pojok kanan bawah`;
+subHeading.innerHTML = `Kategori: ${categoryName}${filterInfo} | Data dari Google Sheets | Klik kartu untuk detail, tombol salin di pojok kanan bawah`;
 
 bonusBadgeContainer.classList.remove("visible");
 galleryBadgeContainer.classList.remove("visible");
