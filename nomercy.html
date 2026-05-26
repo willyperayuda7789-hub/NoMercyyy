@@ -1023,6 +1023,150 @@ transform: scale(1.02);
 @media (max-width: 700px) {
 .qris-grid-container { grid-template-columns: 1fr; }
 }
+
+/* ========= JADWAL TOGEL - CARD KHUSUS (TAMBAHAN) ========= */
+.schedule-card {
+background: rgba(18, 28, 45, 0.85);
+border-radius: 28px;
+padding: 22px;
+transition: all 0.3s ease;
+border: 1px solid rgba(255, 255, 255, 0.2);
+box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+display: flex;
+flex-direction: column;
+cursor: pointer;
+position: relative;
+}
+
+.schedule-card:hover {
+transform: translateY(-6px);
+background: rgba(30, 45, 70, 0.95);
+border-color: rgba(59, 130, 246, 0.6);
+box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.4);
+}
+
+.schedule-card h3 {
+font-size: 1.35rem;
+font-weight: 700;
+margin-bottom: 12px;
+color: #f0f4fe;
+word-break: break-word;
+border-left: 4px solid #3b82f6;
+padding-left: 14px;
+}
+
+.schedule-subjudul {
+display: inline-block;
+background: rgba(59, 130, 246, 0.35);
+padding: 5px 12px;
+border-radius: 30px;
+font-size: 0.7rem;
+font-weight: 600;
+color: #bfdbfe;
+margin-bottom: 12px;
+width: fit-content;
+word-break: break-all;
+}
+
+.schedule-preview {
+color: #cbd5e6;
+line-height: 1.5;
+font-size: 0.9rem;
+flex: 1;
+white-space: pre-wrap;
+word-break: break-word;
+overflow: hidden;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+margin-bottom: 16px;
+margin-top: 8px;
+}
+
+.schedule-buttons-row {
+display: flex;
+flex-direction: row;
+gap: 12px;
+margin-top: 8px;
+margin-bottom: 8px;
+}
+
+.btn-salin-subjudul-jadwal {
+flex: 1;
+background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+border: none;
+color: white;
+padding: 10px 8px;
+border-radius: 40px;
+font-size: 0.75rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s ease;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+font-family: 'Inter', monospace;
+}
+
+.btn-salin-subjudul-jadwal:hover {
+background: linear-gradient(135deg, #7c3aed, #6d28d9);
+transform: scale(1.02);
+}
+
+.btn-salin-isi-jadwal {
+flex: 1;
+background: linear-gradient(135deg, #f59e0b, #d97706);
+border: none;
+color: white;
+padding: 10px 8px;
+border-radius: 40px;
+font-size: 0.75rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s ease;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+font-family: 'Inter', monospace;
+}
+
+.btn-salin-isi-jadwal:hover {
+background: linear-gradient(135deg, #d97706, #b45309);
+transform: scale(1.02);
+}
+
+/* TOMBOL KUNJUNGI WEBSITE - SEPERTI GAMBAR */
+.btn-kunjungi-website {
+width: 100%;
+background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+border: none;
+color: white;
+padding: 12px 8px;
+border-radius: 40px;
+font-size: 0.85rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+font-family: 'Inter', monospace;
+margin-top: 12px;
+box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+}
+
+.btn-kunjungi-website:hover {
+background: linear-gradient(135deg, #2563eb, #1e40af);
+transform: scale(1.02);
+box-shadow: 0 6px 16px rgba(59,130,246,0.4);
+}
+
+.btn-kunjungi-website i {
+font-size: 0.9rem;
+}
 </style>
 </head>
 <body>
@@ -1034,9 +1178,9 @@ transform: scale(1.02);
 <div class="nav-item" data-tab="tab2"><i class="fas fa-chart-line"></i><span>RANDOM</span></div>
 <div class="nav-item" data-tab="tab3"><i class="fas fa-envelope"></i><span>EVENT LINETOGEL</span></div>
 <div class="nav-item" data-tab="tab4"><i class="fas fa-tasks"></i><span>GALLERY GAMBAR CS</span></div>
-<div class="nav-item active" data-tab="tab5"><i class="fas fa-users"></i><span>ALL ABOUT QRIS</span></div>
+<div class="nav-item" data-tab="tab5"><i class="fas fa-users"></i><span>ALL ABOUT QRIS</span></div>
 <div class="nav-item" data-tab="tab6"><i class="fas fa-cog"></i><span>BONUS</span></div>
-<div class="nav-item" data-tab="tab7"><i class="fas fa-question-circle"></i><span>JADWAL TOGEL</span></div>
+<div class="nav-item" data-tab="tab7"><i class="fas fa-calendar-alt"></i><span>JADWAL TOGEL</span></div>
 </div>
 <div class="sidebar-footer"><i class="fas fa-search" style="color:#3b82f6"></i> Pencarian berfungsi pada masing-masing kolom secara independen</div>
 </aside>
@@ -1079,7 +1223,8 @@ const SHEET_CARA_BERMAIN_ALL = 'CARA BERMAIN ALL';
 const SHEET_BANK_NAIK_QRIS = 'BANK NAIK QRIS';
 const SHEET_EWALLET_NAIK_QRIS = 'EWALLET NAIK QRIS';
 const SHEET_REFUND_QRIS = 'REFUND QRIS';
-const SHEET_QRIS_LAIN_LAIN = 'QRIS LAIN-LAIN'; // SHEET UNTUK QRIS LAIN-LAIN
+const SHEET_QRIS_LAIN_LAIN = 'QRIS LAIN-LAIN';
+const SHEET_JADWAL_PASARAN = 'JADWALPASARAN'; // TAMBAHAN UNTUK JADWAL TOGEL
 
 let foldersData = [];
 let bonusAllData = [];
@@ -1092,10 +1237,11 @@ let caraBermainAllData = [];
 let bankNaikQrisData = [];
 let ewalletNaikQrisData = [];
 let refundQrisData = [];
-let qrisLainLainData = []; // DATA DARI SHEET QRIS LAIN-LAIN
+let qrisLainLainData = [];
+let jadwalTogelData = []; // TAMBAHAN
 
 let currentFilterText = "";
-let currentActiveTab = "tab4";
+let currentActiveTab = "tab5";
 let currentBonusSubTab = "lain";
 let currentGalleryTab = "cara_bermain";
 let currentQrisTab = "lain_lain";
@@ -1111,11 +1257,6 @@ tab3: { title: "✉️ EVENT LINETOGEL", subtitle: "Inbox & komunikasi tim — p
 { icon: "fas fa-inbox", title: "Pesan Masuk", desc: "Anda memiliki 12 pesan belum dibaca", badge: "12 baru" },
 { icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif di proyek utama", badge: "Balas" },
 { icon: "fas fa-bell", title: "Notifikasi", desc: "Pengingat meeting jam 14:00 WIB", badge: "Segera" }
-] },
-tab7: { title: "❓ JADWAL TOGEL", subtitle: "Panduan & support — selalu siap membantu", items: [
-{ icon: "fas fa-book-open", title: "Panduan Pengguna", desc: "Dokumentasi sidebar 7 kolom dengan background 100% full", badge: "PDF" },
-{ icon: "fas fa-headset", title: "Dukungan Teknis", desc: "Chat dengan agen support 24/7", badge: "Live" },
-{ icon: "fas fa-video", title: "Tutorial Video", desc: "Walkthrough antarmuka lengkap", badge: "Tonton" }
 ] }
 };
 
@@ -1135,6 +1276,28 @@ dataRows.push({ title: rows[i][0].trim(), content: rows[i][1] ? rows[i][1].trim(
 }
 return dataRows;
 } catch(e) { console.error(`Error fetch ${sheetName}:`, e); throw new Error(`Gagal ambil data dari sheet ${sheetName}`); }
+}
+
+// TAMBAHAN: FETCH JADWAL PASARAN (kolom A=judul, B=subjudul/URL, C=isi)
+async function fetchJadwalPasaran() {
+try {
+const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_JADWAL_PASARAN)}`;
+const response = await fetch(csvUrl, { cache: 'no-store' });
+if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_JADWAL_PASARAN}' tidak ditemukan`);
+const csvText = await response.text();
+const rows = parseCSV(csvText);
+const items = [];
+for (let i = 0; i < rows.length; i++) {
+if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+items.push({
+judul: rows[i][0].trim(),
+subjudul: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "",
+isi: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : ""
+});
+}
+}
+return items;
+} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_JADWAL_PASARAN}': ${e.message}`); }
 }
 
 // FUNGSI UNTUK BANK NAIK QRIS
@@ -1159,7 +1322,6 @@ return items;
 } catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_BANK_NAIK_QRIS}': ${e.message}`); }
 }
 
-// FUNGSI UNTUK EWALLET NAIK QRIS
 async function fetchEwalletNaikQrisData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_EWALLET_NAIK_QRIS)}`;
@@ -1181,7 +1343,6 @@ return items;
 } catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_EWALLET_NAIK_QRIS}': ${e.message}`); }
 }
 
-// FUNGSI UNTUK REFUND QRIS
 async function fetchRefundQrisData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_REFUND_QRIS)}`;
@@ -1203,7 +1364,6 @@ return items;
 } catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_REFUND_QRIS}': ${e.message}`); }
 }
 
-// FUNGSI UNTUK QRIS LAIN-LAIN
 async function fetchQrisLainLainData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_QRIS_LAIN_LAIN)}`;
@@ -1222,7 +1382,7 @@ konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada infor
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_QRIS_LAIN_LAIN}': ${e.message}. Pastikan sheet dengan nama tersebut ada.`); }
+} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_QRIS_LAIN_LAIN}': ${e.message}`); }
 }
 
 async function fetchRRNQrisData() {
@@ -1310,6 +1470,107 @@ return row;
 });
 }
 
+// ======================= RENDER JADWAL TOGEL (TAMBAHAN BARU) =======================
+async function renderJadwalTogelWithFilter(filter = "") {
+const mainHeading = document.getElementById("mainHeading");
+const subHeading = document.getElementById("subHeading");
+const dynamicArea = document.getElementById("dynamicContentArea");
+
+mainHeading.innerHTML = "📅 JADWAL TOGEL | Data Pasaran";
+subHeading.innerHTML = `Sheet: JADWALPASARAN (Kolom A=Judul, B=URL Website, C=Isi Folder)${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol KUNJUNGI WEBSITE mengambil URL dari Kolom B`;
+
+bonusBadgeContainer.classList.remove("visible");
+galleryBadgeContainer.classList.remove("visible");
+qrisBadgeContainer.style.display = "none";
+dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container");
+dynamicArea.classList.add("dashboard-grid");
+
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat jadwal pasaran...</p></div>`;
+
+try {
+if(jadwalTogelData.length === 0) {
+jadwalTogelData = await fetchJadwalPasaran();
+}
+let filtered = jadwalTogelData;
+if(filter.trim() !== "") {
+filtered = jadwalTogelData.filter(item => 
+item.judul.toLowerCase().includes(filter.toLowerCase()) || 
+item.subjudul.toLowerCase().includes(filter.toLowerCase()) ||
+item.isi.toLowerCase().includes(filter.toLowerCase())
+);
+}
+if(filtered.length === 0) {
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Jadwal tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di JADWAL TOGEL</p></div>`;
+return;
+}
+let cardsHtml = "";
+filtered.forEach((item) => {
+const preview = item.isi.length > 120 ? item.isi.substring(0,120)+'...' : (item.isi || '(Tidak ada konten)');
+cardsHtml += `
+<div class="schedule-card" data-judul="${escapeHtml(item.judul)}" data-subjudul="${escapeHtml(item.subjudul)}" data-isi="${escapeHtml(item.isi)}">
+<h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.judul)}</h3>
+<div class="schedule-subjudul"><i class="fas fa-tag"></i> ${escapeHtml(item.subjudul) || '(Tidak ada subjudul)'}</div>
+<div class="schedule-preview">${escapeHtml(preview)}</div>
+<div class="schedule-buttons-row">
+<button class="btn-salin-subjudul-jadwal" data-subjudul="${escapeHtml(item.subjudul)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button>
+<button class="btn-salin-isi-jadwal" data-isi="${escapeHtml(item.isi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Isi</button>
+</div>
+<button class="btn-kunjungi-website" data-url="${escapeHtml(item.subjudul)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-external-link-alt"></i> KUNJUNGI WEBSITE</button>
+</div>
+`;
+});
+dynamicArea.innerHTML = cardsHtml;
+
+document.querySelectorAll('.btn-salin-subjudul-jadwal').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+const subjudul = btn.getAttribute('data-subjudul') || "";
+const judul = btn.getAttribute('data-judul') || "Folder";
+copyContentOnly(subjudul, `Subjudul: ${judul}`);
+});
+});
+
+document.querySelectorAll('.btn-salin-isi-jadwal').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+const isi = btn.getAttribute('data-isi') || "";
+const judul = btn.getAttribute('data-judul') || "Folder";
+copyContentOnly(isi, `Isi: ${judul}`);
+});
+});
+
+document.querySelectorAll('.btn-kunjungi-website').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+let url = btn.getAttribute('data-url') || "";
+const judul = btn.getAttribute('data-judul') || "Website";
+if(url && url.trim() !== "") {
+if (!url.startsWith('http://') && !url.startsWith('https://')) {
+url = 'https://' + url;
+}
+window.open(url, '_blank', 'noopener,noreferrer');
+showToast(`Membuka ${judul}...`);
+} else {
+showToast(`Tidak ada URL website untuk ${judul}`);
+}
+});
+});
+
+document.querySelectorAll('.schedule-card').forEach(card => {
+card.addEventListener('click', (e) => {
+if(e.target.closest('.btn-salin-subjudul-jadwal') || e.target.closest('.btn-salin-isi-jadwal') || e.target.closest('.btn-kunjungi-website')) return;
+const judul = card.getAttribute('data-judul') || "Detail";
+const subjudul = card.getAttribute('data-subjudul') || "";
+const isi = card.getAttribute('data-isi') || "";
+let fullContent = `📌 SUBJUDUL (URL):\n${subjudul || '(Tidak ada)'}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📄 ISI FOLDER:\n${isi || '(Tidak ada konten)'}`;
+openModal(judul, fullContent);
+});
+});
+} catch(err) {
+dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat JADWAL TOGEL</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'JADWALPASARAN' ada dan memiliki izin akses publik.</p></div>`;
+}
+}
+
 // ======================= FUNGSI RENDER BONUS (TIDAK DIUBAH) =======================
 async function renderBonusLainLainWithFilter(filter = "") { let data = bonusLainLainData; if (data.length === 0) { try { data = await fetchSheetData('BONUS LAIN-LAIN'); bonusLainLainData = data; } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS LAIN-LAIN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori LAIN-LAIN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-tags"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; dynamicArea.innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
 async function renderBonusDoneBagiWithFilter(filter = "") { let data = bonusDoneBagiData; if (data.length === 0) { try { data = await fetchSheetData('DONEBAGI'); bonusDoneBagiData = data; } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat DONE BAGI</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori DONE BAGI</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; dynamicArea.innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
@@ -1322,7 +1583,6 @@ function attachOpenFolderEvents() { document.querySelectorAll('.btn-open-folder'
 function openFolderHandler(e) { e.stopPropagation(); const card = this.closest('.bonus-card'); if(card) { const title = card.getAttribute('data-bonus-title') || 'Detail Bonus'; const content = card.getAttribute('data-bonus-content') || 'Tidak ada deskripsi tambahan.'; openModal(title, content); } }
 function attachBonusSalinEvents() { document.querySelectorAll('.btn-salin-bonus').forEach(btn => { btn.removeEventListener('click', bonusSalinHandler); btn.addEventListener('click', bonusSalinHandler); }); }
 function bonusSalinHandler(e) { e.stopPropagation(); const title = this.getAttribute('data-salin-title') || 'Folder'; const content = this.getAttribute('data-salin-content') || ''; copyContentOnly(content, title); }
-
 async function renderBonusPage() { mainHeading.innerHTML = "⚙️ BONUS ✨"; const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()}${filterInfo} | Tombol SEJAJAR dalam 1 BARIS`; bonusBadgeContainer.classList.add("visible"); galleryBadgeContainer.classList.remove("visible"); qrisBadgeContainer.style.display = "none"; if (currentBonusSubTab === 'all') { await renderBonusAllWithFilter(currentFilterText); } else if (currentBonusSubTab === 'mingguan') { await renderBonusMingguanWithFilter(currentFilterText); } else if (currentBonusSubTab === 'done') { await renderBonusDoneBagiWithFilter(currentFilterText); } else if (currentBonusSubTab === 'lain') { await renderBonusLainLainWithFilter(currentFilterText); } }
 
 // ======================= FUNGSI RENDER RANDOM (TIDAK DIUBAH) =======================
@@ -1517,67 +1777,42 @@ await renderBonusPage();
 }
 }
 
-// ======================= RENDER ALL ABOUT QRIS DENGAN 4 BADGE =======================
+// ======================= RENDER ALL ABOUT QRIS (TIDAK DIUBAH) =======================
 async function renderAllAboutQris() {
 mainHeading.innerHTML = "👥 ALL ABOUT QRIS";
 let filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : "";
 let categoryName = "";
 let dataItems = [];
-let isFromSheet = false;
 
 if (currentQrisTab === "bank_qris") {
 categoryName = "BANK >>> QRIS";
-isFromSheet = true;
 if (bankNaikQrisData.length === 0) {
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data BANK NAIK QRIS dari Google Sheets...</p></div>`;
-try { 
-bankNaikQrisData = await fetchBankNaikQrisData(); 
-} catch(e) { 
-dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BANK NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`;
-return; 
-}
+try { bankNaikQrisData = await fetchBankNaikQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BANK NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; }
 }
 dataItems = [...bankNaikQrisData];
 } 
 else if (currentQrisTab === "ewallet_qris") {
 categoryName = "EWALLET >>> QRIS";
-isFromSheet = true;
 if (ewalletNaikQrisData.length === 0) {
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data EWALLET NAIK QRIS dari Google Sheets...</p></div>`;
-try { 
-ewalletNaikQrisData = await fetchEwalletNaikQrisData(); 
-} catch(e) { 
-dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat EWALLET NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`;
-return; 
-}
+try { ewalletNaikQrisData = await fetchEwalletNaikQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat EWALLET NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; }
 }
 dataItems = [...ewalletNaikQrisData];
 } 
 else if (currentQrisTab === "refund") {
 categoryName = "REFUND";
-isFromSheet = true;
 if (refundQrisData.length === 0) {
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data REFUND QRIS dari Google Sheets...</p></div>`;
-try { 
-refundQrisData = await fetchRefundQrisData(); 
-} catch(e) { 
-dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat REFUND QRIS</h3><p>${escapeHtml(e.message)}</p></div>`;
-return; 
-}
+try { refundQrisData = await fetchRefundQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat REFUND QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; }
 }
 dataItems = [...refundQrisData];
 } 
 else {
 categoryName = "LAIN-LAIN";
-isFromSheet = true;
 if (qrisLainLainData.length === 0) {
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data QRIS LAIN-LAIN dari Google Sheets...</p></div>`;
-try { 
-qrisLainLainData = await fetchQrisLainLainData(); 
-} catch(e) { 
-dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat QRIS LAIN-LAIN</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet 'QRIS LAIN-LAIN' ada dengan kolom A (judul) dan B (isi).</p></div>`;
-return; 
-}
+try { qrisLainLainData = await fetchQrisLainLainData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat QRIS LAIN-LAIN</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet 'QRIS LAIN-LAIN' ada dengan kolom A (judul) dan B (isi).</p></div>`; return; }
 }
 dataItems = [...qrisLainLainData];
 }
@@ -1668,14 +1903,14 @@ currentFilterText = "";
 searchInput.value = "";
 clearSearchBtn.classList.remove('visible');
 dynamicArea.style.display = "";
-dynamicArea.classList.remove("gallery-fullwidth");
-dynamicArea.classList.remove("qris-grid-container");
+dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container");
 dynamicArea.classList.add("dashboard-grid");
 
 if(tabId === 'tab2') { await renderRandomTabWithFilter(currentFilterText); }
 else if(tabId === 'tab4') { await renderGalleryCS(); bindGalleryBadges(); }
 else if(tabId === 'tab5') { renderAllAboutQris(); bindQrisBadges(); }
 else if(tabId === 'tab6') { await renderBonusPage(); bindBonusBadgeEvents(); }
+else if(tabId === 'tab7') { await renderJadwalTogelWithFilter(currentFilterText); }
 else { renderStaticTabWithFilter(currentActiveTab, currentFilterText); }
 }
 
@@ -1694,6 +1929,7 @@ if(currentActiveTab === 'tab2') { await renderRandomTabWithFilter(filter); }
 else if(currentActiveTab === 'tab4') { await renderGalleryCS(); }
 else if(currentActiveTab === 'tab5') { renderAllAboutQris(); }
 else if(currentActiveTab === 'tab6') { await renderBonusPage(); }
+else if(currentActiveTab === 'tab7') { await renderJadwalTogelWithFilter(filter); }
 else { renderStaticTabWithFilter(currentActiveTab, filter); }
 }
 
