@@ -1024,7 +1024,7 @@ transform: scale(1.02);
 .qris-grid-container { grid-template-columns: 1fr; }
 }
 
-/* ========= JADWAL TOGEL - CARD KHUSUS (TAMBAHAN) ========= */
+/* ========= JADWAL TOGEL - CARD KHUSUS ========= */
 .schedule-card {
 background: rgba(18, 28, 45, 0.85);
 border-radius: 28px;
@@ -1137,7 +1137,7 @@ background: linear-gradient(135deg, #d97706, #b45309);
 transform: scale(1.02);
 }
 
-/* TOMBOL KUNJUNGI WEBSITE */
+/* TOMBOL KUNJUNGI WEBSITE - MENGAMBIL URL DARI KOLOM D */
 .btn-kunjungi-website {
 width: 100%;
 background: linear-gradient(135deg, #3b82f6, #1d4ed8);
@@ -1289,6 +1289,7 @@ return dataRows;
 } catch(e) { console.error(`Error fetch ${sheetName}:`, e); throw new Error(`Gagal ambil data dari sheet ${sheetName}`); }
 }
 
+// FETCH JADWAL PASARAN - Kolom A=Judul, B=Subjudul, C=Isi, D=URL Website
 async function fetchJadwalPasaran() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_JADWAL_PASARAN)}`;
@@ -1300,16 +1301,19 @@ const items = [];
 for (let i = 0; i < rows.length; i++) {
 if (rows[i] && rows[i][0] && rows[i][0].trim()) {
 items.push({
-judul: rows[i][0].trim(),
-subjudul: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "",
-isi: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : ""
+judul: rows[i][0].trim(),                    // Kolom A
+subjudul: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "", // Kolom B
+isi: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : "",       // Kolom C
+url: (rows[i][3] && rows[i][3].trim()) ? rows[i][3].trim() : ""        // Kolom D - URL Website
 });
 }
 }
+console.log("Data JADWALPASARAN:", items);
 return items;
 } catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_JADWAL_PASARAN}': ${e.message}`); }
 }
 
+// FUNGSI UNTUK BANK NAIK QRIS
 async function fetchBankNaikQrisData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_BANK_NAIK_QRIS)}`;
@@ -1479,14 +1483,15 @@ return row;
 });
 }
 
-// ======================= RENDER JADWAL TOGEL (DIPERBAIKI) =======================
+// ======================= RENDER JADWAL TOGEL =======================
+// TOMBOL KUNJUNGI WEBSITE MENGAMBIL URL DARI KOLOM D
 async function renderJadwalTogelWithFilter(filter = "") {
 const mainHeading = document.getElementById("mainHeading");
 const subHeading = document.getElementById("subHeading");
 const dynamicArea = document.getElementById("dynamicContentArea");
 
 mainHeading.innerHTML = "📅 JADWAL TOGEL | Data Pasaran";
-subHeading.innerHTML = `Sheet: JADWALPASARAN (Kolom A=Judul, B=URL Website, C=Isi Folder)${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol KUNJUNGI WEBSITE akan membuka URL dari Kolom B`;
+subHeading.innerHTML = `Sheet: JADWALPASARAN (Kolom A=Judul, B=Subjudul, C=Isi Folder, D=URL Website)${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol KUNJUNGI WEBSITE mengambil URL dari Kolom D`;
 
 bonusBadgeContainer.classList.remove("visible");
 galleryBadgeContainer.classList.remove("visible");
@@ -1505,7 +1510,8 @@ if(filter.trim() !== "") {
 filtered = jadwalTogelData.filter(item => 
 item.judul.toLowerCase().includes(filter.toLowerCase()) || 
 item.subjudul.toLowerCase().includes(filter.toLowerCase()) ||
-item.isi.toLowerCase().includes(filter.toLowerCase())
+item.isi.toLowerCase().includes(filter.toLowerCase()) ||
+item.url.toLowerCase().includes(filter.toLowerCase())
 );
 }
 if(filtered.length === 0) {
@@ -1525,11 +1531,11 @@ return clean;
 let cardsHtml = "";
 filtered.forEach((item) => {
 const preview = item.isi.length > 120 ? item.isi.substring(0,120)+'...' : (item.isi || '(Tidak ada konten)');
-const websiteUrl = cleanUrl(item.subjudul);
-const hasUrl = item.subjudul && item.subjudul.trim() !== "";
+const websiteUrl = cleanUrl(item.url);
+const hasUrl = item.url && item.url.trim() !== "";
 
 cardsHtml += `
-<div class="schedule-card" data-judul="${escapeHtml(item.judul)}" data-subjudul="${escapeHtml(item.subjudul)}" data-isi="${escapeHtml(item.isi)}">
+<div class="schedule-card" data-judul="${escapeHtml(item.judul)}" data-subjudul="${escapeHtml(item.subjudul)}" data-isi="${escapeHtml(item.isi)}" data-url="${escapeHtml(websiteUrl)}">
 <h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.judul)}</h3>
 <div class="schedule-subjudul"><i class="fas fa-tag"></i> ${escapeHtml(item.subjudul) || '(Tidak ada subjudul)'}</div>
 <div class="schedule-preview">${escapeHtml(preview)}</div>
@@ -1563,7 +1569,7 @@ copyContentOnly(isi, `Isi: ${judul}`);
 });
 });
 
-// Event KUNJUNGI WEBSITE - DIPERBAIKI dengan stopPropagation yang benar
+// Event KUNJUNGI WEBSITE - MEMBUKA URL DARI KOLOM D
 document.querySelectorAll('.btn-kunjungi-website:not([disabled])').forEach(btn => {
 btn.addEventListener('click', (e) => {
 e.stopPropagation();
@@ -1571,7 +1577,7 @@ e.preventDefault();
 const url = btn.getAttribute('data-url') || "";
 const judul = btn.getAttribute('data-judul') || "Website";
 if(url && url.trim() !== "") {
-console.log("Membuka URL:", url);
+console.log("Membuka URL dari Kolom D:", url);
 window.open(url, '_blank');
 showToast(`Membuka ${judul}...`);
 } else {
@@ -1587,12 +1593,13 @@ if(e.target.closest('.btn-salin-subjudul-jadwal') || e.target.closest('.btn-sali
 const judul = card.getAttribute('data-judul') || "Detail";
 const subjudul = card.getAttribute('data-subjudul') || "";
 const isi = card.getAttribute('data-isi') || "";
-let fullContent = `📌 SUBJUDUL (URL):\n${subjudul || '(Tidak ada)'}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📄 ISI FOLDER:\n${isi || '(Tidak ada konten)'}`;
+const url = card.getAttribute('data-url') || "";
+let fullContent = `📌 SUBJUDUL:\n${subjudul || '(Tidak ada)'}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📄 ISI FOLDER:\n${isi || '(Tidak ada konten)'}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🌐 URL WEBSITE:\n${url || '(Tidak ada URL)'}`;
 openModal(judul, fullContent);
 });
 });
 } catch(err) {
-dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat JADWAL TOGEL</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'JADWALPASARAN' ada dan memiliki izin akses publik.</p></div>`;
+dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat JADWAL TOGEL</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'JADWALPASARAN' ada dengan kolom A, B, C, D.</p></div>`;
 }
 }
 
