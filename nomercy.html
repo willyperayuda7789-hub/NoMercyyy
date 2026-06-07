@@ -269,12 +269,27 @@ background: #ef4444;
 color: white;
 }
 
-/* Grid card untuk tab selain BONUS & GALLERY */
+/* Grid card untuk tab selain BONUS & GALLERY (default auto-fill) */
 .dashboard-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 gap: 24px;
 margin-top: 12px;
+}
+
+/* Grid khusus untuk LINK LAIN-LAIN - 2 kolom */
+.dashboard-grid.link-lain-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 24px;
+margin-top: 12px;
+}
+
+/* Responsive untuk layar kecil */
+@media (max-width: 768px) {
+.dashboard-grid.link-lain-grid {
+grid-template-columns: 1fr;
+}
 }
 
 /* Card Style untuk tab selain BONUS */
@@ -287,7 +302,6 @@ border: 1px solid rgba(255, 255, 255, 0.2);
 box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 display: flex;
 flex-direction: column;
-cursor: pointer;
 position: relative;
 }
 
@@ -334,8 +348,47 @@ overflow: hidden;
 display: -webkit-box;
 -webkit-line-clamp: 3;
 -webkit-box-orient: vertical;
-margin-bottom: 52px;
+margin-bottom: 16px;
 margin-top: 8px;
+}
+
+/* Tombol BUKA LINK - full width */
+.btn-buka-link-full {
+width: 100%;
+background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+border: none;
+color: white;
+padding: 12px 8px;
+border-radius: 40px;
+font-size: 0.85rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+font-family: 'Inter', monospace;
+margin-top: 12px;
+box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+}
+
+.btn-buka-link-full:hover {
+background: linear-gradient(135deg, #2563eb, #1e40af);
+transform: scale(1.02);
+box-shadow: 0 6px 16px rgba(59,130,246,0.4);
+}
+
+.btn-buka-link-full i {
+font-size: 0.9rem;
+}
+
+.btn-buka-link-full:disabled {
+background: linear-gradient(135deg, #6b7280, #4b5563);
+cursor: not-allowed;
+opacity: 0.6;
+transform: none;
+box-shadow: none;
 }
 
 .btn-salin-folder {
@@ -1170,7 +1223,6 @@ box-shadow: 0 6px 16px rgba(59,130,246,0.4);
 font-size: 0.9rem;
 }
 
-/* Tombol disabled */
 .btn-kunjungi-website:disabled {
 background: linear-gradient(135deg, #6b7280, #4b5563);
 cursor: not-allowed;
@@ -1218,7 +1270,7 @@ box-shadow: none;
 </div>
 </div>
 
-<div id="dynamicContentArea" class="dashboard-grid"><div class="loading-card"><i class="fas fa-spinner fa-pulse" style="font-size: 2rem;"></i><p>Memuat data CARA BERMAIN dari Google Sheets...</p></div></div>
+<div id="dynamicContentArea" class="dashboard-grid"><div class="loading-card"><i class="fas fa-spinner fa-pulse" style="font-size: 2rem;"></i><p>Memuat data...</p></div></div>
 </main>
 </div>
 
@@ -1236,6 +1288,7 @@ const SHEET_EWALLET_NAIK_QRIS = 'EWALLET NAIK QRIS';
 const SHEET_REFUND_QRIS = 'REFUND QRIS';
 const SHEET_QRIS_LAIN_LAIN = 'QRIS LAIN-LAIN';
 const SHEET_JADWAL_PASARAN = 'JADWALPASARAN';
+const SHEET_LINK_LAIN = 'LINK LAIN LAIN';
 
 let foldersData = [];
 let bonusAllData = [];
@@ -1250,14 +1303,14 @@ let ewalletNaikQrisData = [];
 let refundQrisData = [];
 let qrisLainLainData = [];
 let jadwalTogelData = [];
+let linkLainData = [];
 
 let currentFilterText = "";
-let currentActiveTab = "tab5";
+let currentActiveTab = "tab3";
 let currentBonusSubTab = "lain";
 let currentGalleryTab = "cara_bermain";
 let currentQrisTab = "lain_lain";
 
-// DATA STATIS UNTUK TAB LAIN
 const staticTabsData = {
 tab1: { title: "🏠 Dashboard Utama", subtitle: "Gambaran sistem & metrik — background full size 100%", items: [
 { icon: "fas fa-chart-pie", title: "Ringkasan Aktivitas", desc: "Total kunjungan +2.5% minggu ini", badge: "+12% 🔥" },
@@ -1289,46 +1342,39 @@ return dataRows;
 } catch(e) { console.error(`Error fetch ${sheetName}:`, e); throw new Error(`Gagal ambil data dari sheet ${sheetName}`); }
 }
 
-// FETCH JADWAL PASARAN - Kolom A=Judul, B=Subjudul, C=Isi, D=URL Website
 async function fetchJadwalPasaran() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_JADWAL_PASARAN)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_JADWAL_PASARAN}' tidak ditemukan`);
+if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
 for (let i = 0; i < rows.length; i++) {
 if (rows[i] && rows[i][0] && rows[i][0].trim()) {
 items.push({
-judul: rows[i][0].trim(),                    // Kolom A
-subjudul: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "", // Kolom B
-isi: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : "",       // Kolom C
-url: (rows[i][3] && rows[i][3].trim()) ? rows[i][3].trim() : ""        // Kolom D - URL Website
+judul: rows[i][0].trim(),
+subjudul: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "",
+isi: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : "",
+url: (rows[i][3] && rows[i][3].trim()) ? rows[i][3].trim() : ""
 });
 }
 }
-console.log("Data JADWALPASARAN:", items);
 return items;
 } catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_JADWAL_PASARAN}': ${e.message}`); }
 }
 
-// FUNGSI UNTUK BANK NAIK QRIS
 async function fetchBankNaikQrisData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_BANK_NAIK_QRIS)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_BANK_NAIK_QRIS}' tidak ditemukan`);
+if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
 for (let i = 0; i < rows.length; i++) {
 if (rows[i] && rows[i][0] && rows[i][0].trim()) {
-items.push({ 
-judul: rows[i][0].trim(), 
-deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Klik untuk melihat detail",
-konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada informasi tambahan."
-});
+items.push({ judul: rows[i][0].trim(), deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Klik untuk melihat detail", konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada informasi tambahan." });
 }
 }
 return items;
@@ -1339,17 +1385,13 @@ async function fetchEwalletNaikQrisData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_EWALLET_NAIK_QRIS)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_EWALLET_NAIK_QRIS}' tidak ditemukan`);
+if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
 for (let i = 0; i < rows.length; i++) {
 if (rows[i] && rows[i][0] && rows[i][0].trim()) {
-items.push({ 
-judul: rows[i][0].trim(), 
-deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Klik untuk melihat detail",
-konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada informasi tambahan."
-});
+items.push({ judul: rows[i][0].trim(), deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Klik untuk melihat detail", konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada informasi tambahan." });
 }
 }
 return items;
@@ -1360,17 +1402,13 @@ async function fetchRefundQrisData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_REFUND_QRIS)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_REFUND_QRIS}' tidak ditemukan`);
+if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
 for (let i = 0; i < rows.length; i++) {
 if (rows[i] && rows[i][0] && rows[i][0].trim()) {
-items.push({ 
-judul: rows[i][0].trim(), 
-deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Klik untuk melihat detail refund",
-konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada informasi tambahan."
-});
+items.push({ judul: rows[i][0].trim(), deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Klik untuk melihat detail refund", konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada informasi tambahan." });
 }
 }
 return items;
@@ -1381,17 +1419,13 @@ async function fetchQrisLainLainData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_QRIS_LAIN_LAIN)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_QRIS_LAIN_LAIN}' tidak ditemukan`);
+if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
 for (let i = 0; i < rows.length; i++) {
 if (rows[i] && rows[i][0] && rows[i][0].trim()) {
-items.push({ 
-judul: rows[i][0].trim(), 
-deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Klik untuk melihat detail",
-konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada informasi tambahan."
-});
+items.push({ judul: rows[i][0].trim(), deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Klik untuk melihat detail", konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "Tidak ada informasi tambahan." });
 }
 }
 return items;
@@ -1423,7 +1457,7 @@ async function fetchEwalletBankData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_EWALLET_BANK)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_EWALLET_BANK}' tidak ditemukan`);
+if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
@@ -1444,7 +1478,7 @@ async function fetchCaraBermainAllData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_CARA_BERMAIN_ALL)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status} - Sheet '${SHEET_CARA_BERMAIN_ALL}' tidak ditemukan`);
+if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
@@ -1459,6 +1493,27 @@ items.push({ judul: judul, nomor: (i+1).toString(), deskripsi: subjudul || `Pand
 }
 return items;
 } catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_CARA_BERMAIN_ALL}': ${e.message}`); }
+}
+
+async function fetchLinkLainData() {
+try {
+const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_LINK_LAIN)}`;
+const response = await fetch(csvUrl, { cache: 'no-store' });
+if (!response.ok) throw new Error(`HTTP ${response.status}`);
+const csvText = await response.text();
+const rows = parseCSV(csvText);
+const items = [];
+for (let i = 0; i < rows.length; i++) {
+if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+items.push({
+title: rows[i][0].trim(),
+content: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "",
+url: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : ""
+});
+}
+}
+return items;
+} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_LINK_LAIN}': ${e.message}`); }
 }
 
 function parseCSV(csvText) {
@@ -1483,39 +1538,33 @@ return row;
 });
 }
 
-// ======================= RENDER JADWAL TOGEL =======================
-// TOMBOL KUNJUNGI WEBSITE MENGAMBIL URL DARI KOLOM D
-async function renderJadwalTogelWithFilter(filter = "") {
+// ======================= RENDER LINK LAIN-LAIN (2 KOLOM PER BARIS) =======================
+async function renderLinkLainWithFilter(filter = "") {
 const mainHeading = document.getElementById("mainHeading");
 const subHeading = document.getElementById("subHeading");
 const dynamicArea = document.getElementById("dynamicContentArea");
 
-mainHeading.innerHTML = "📅 JADWAL TOGEL | Data Pasaran";
-subHeading.innerHTML = `Sheet: JADWALPASARAN (Kolom A=Judul, B=Subjudul, C=Isi Folder, D=URL Website)${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol KUNJUNGI WEBSITE mengambil URL dari Kolom D`;
+mainHeading.innerHTML = "📎 LINK LAIN-LAIN";
+subHeading.innerHTML = `Data dari Google Sheets → Sheet "LINK LAIN LAIN" (Kolom A=Judul, Kolom B=Deskripsi, Kolom C=URL)${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Klik tombol BUKA LINK untuk mengunjungi website | Tampilan 2 kolom`;
 
-bonusBadgeContainer.classList.remove("visible");
-galleryBadgeContainer.classList.remove("visible");
-qrisBadgeContainer.style.display = "none";
-dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container");
-dynamicArea.classList.add("dashboard-grid");
-
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat jadwal pasaran...</p></div>`;
+// Tambahkan class khusus untuk grid 2 kolom
+dynamicArea.classList.add("link-lain-grid");
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data LINK LAIN-LAIN...</p></div>`;
 
 try {
-if(jadwalTogelData.length === 0) {
-jadwalTogelData = await fetchJadwalPasaran();
+if(linkLainData.length === 0) {
+linkLainData = await fetchLinkLainData();
 }
-let filtered = jadwalTogelData;
+let filtered = linkLainData;
 if(filter.trim() !== "") {
-filtered = jadwalTogelData.filter(item => 
-item.judul.toLowerCase().includes(filter.toLowerCase()) || 
-item.subjudul.toLowerCase().includes(filter.toLowerCase()) ||
-item.isi.toLowerCase().includes(filter.toLowerCase()) ||
-item.url.toLowerCase().includes(filter.toLowerCase())
+filtered = linkLainData.filter(item => 
+item.title.toLowerCase().includes(filter.toLowerCase()) || 
+(item.content && item.content.toLowerCase().includes(filter.toLowerCase())) ||
+(item.url && item.url.toLowerCase().includes(filter.toLowerCase()))
 );
 }
 if(filtered.length === 0) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Jadwal tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di JADWAL TOGEL</p></div>`;
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Link tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di LINK LAIN-LAIN</p></div>`;
 return;
 }
 
@@ -1530,84 +1579,83 @@ return clean;
 
 let cardsHtml = "";
 filtered.forEach((item) => {
-const preview = item.isi.length > 120 ? item.isi.substring(0,120)+'...' : (item.isi || '(Tidak ada konten)');
-const websiteUrl = cleanUrl(item.url);
+const previewDesc = item.content && item.content.length > 100 ? item.content.substring(0,100)+'...' : (item.content || 'Tidak ada deskripsi');
+const targetUrl = cleanUrl(item.url);
 const hasUrl = item.url && item.url.trim() !== "";
 
 cardsHtml += `
-<div class="schedule-card" data-judul="${escapeHtml(item.judul)}" data-subjudul="${escapeHtml(item.subjudul)}" data-isi="${escapeHtml(item.isi)}" data-url="${escapeHtml(websiteUrl)}">
-<h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.judul)}</h3>
-<div class="schedule-subjudul"><i class="fas fa-tag"></i> ${escapeHtml(item.subjudul) || '(Tidak ada subjudul)'}</div>
-<div class="schedule-preview">${escapeHtml(preview)}</div>
-<div class="schedule-buttons-row">
-<button class="btn-salin-subjudul-jadwal" data-subjudul="${escapeHtml(item.subjudul)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button>
-<button class="btn-salin-isi-jadwal" data-isi="${escapeHtml(item.isi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Isi</button>
-</div>
-${hasUrl ? `<button class="btn-kunjungi-website" data-url="${escapeHtml(websiteUrl)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-external-link-alt"></i> KUNJUNGI WEBSITE</button>` : `<button class="btn-kunjungi-website" disabled><i class="fas fa-external-link-alt"></i> TIDAK ADA URL</button>`}
+<div class="card link-folder-card">
+<h3><i class="fas fa-link"></i> ${escapeHtml(item.title)}</h3>
+<p>${escapeHtml(previewDesc)}</p>
+${hasUrl ? `<button class="btn-buka-link-full" data-url="${escapeHtml(targetUrl)}" data-title="${escapeHtml(item.title)}"><i class="fas fa-external-link-alt"></i> BUKA LINK</button>` : `<button class="btn-buka-link-full" disabled><i class="fas fa-external-link-alt"></i> TIDAK ADA URL</button>`}
 </div>
 `;
 });
 dynamicArea.innerHTML = cardsHtml;
 
-// Event Salin Subjudul
-document.querySelectorAll('.btn-salin-subjudul-jadwal').forEach(btn => {
+// Event untuk tombol BUKA LINK
+document.querySelectorAll('.btn-buka-link-full:not([disabled])').forEach(btn => {
 btn.addEventListener('click', (e) => {
 e.stopPropagation();
-const subjudul = btn.getAttribute('data-subjudul') || "";
-const judul = btn.getAttribute('data-judul') || "Folder";
-copyContentOnly(subjudul, `Subjudul: ${judul}`);
-});
-});
-
-// Event Salin Isi
-document.querySelectorAll('.btn-salin-isi-jadwal').forEach(btn => {
-btn.addEventListener('click', (e) => {
-e.stopPropagation();
-const isi = btn.getAttribute('data-isi') || "";
-const judul = btn.getAttribute('data-judul') || "Folder";
-copyContentOnly(isi, `Isi: ${judul}`);
-});
-});
-
-// Event KUNJUNGI WEBSITE - MEMBUKA URL DARI KOLOM D
-document.querySelectorAll('.btn-kunjungi-website:not([disabled])').forEach(btn => {
-btn.addEventListener('click', (e) => {
-e.stopPropagation();
-e.preventDefault();
 const url = btn.getAttribute('data-url') || "";
-const judul = btn.getAttribute('data-judul') || "Website";
+const title = btn.getAttribute('data-title') || "Link";
 if(url && url.trim() !== "") {
-console.log("Membuka URL dari Kolom D:", url);
 window.open(url, '_blank');
-showToast(`Membuka ${judul}...`);
+showToast(`Membuka ${title}...`);
 } else {
-showToast(`Tidak ada URL untuk ${judul}`);
+showToast(`Tidak ada URL untuk ${title}`);
 }
 });
 });
 
-// Event klik card untuk detail
-document.querySelectorAll('.schedule-card').forEach(card => {
-card.addEventListener('click', (e) => {
-if(e.target.closest('.btn-salin-subjudul-jadwal') || e.target.closest('.btn-salin-isi-jadwal') || e.target.closest('.btn-kunjungi-website')) return;
-const judul = card.getAttribute('data-judul') || "Detail";
-const subjudul = card.getAttribute('data-subjudul') || "";
-const isi = card.getAttribute('data-isi') || "";
-const url = card.getAttribute('data-url') || "";
-let fullContent = `📌 SUBJUDUL:\n${subjudul || '(Tidak ada)'}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📄 ISI FOLDER:\n${isi || '(Tidak ada konten)'}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🌐 URL WEBSITE:\n${url || '(Tidak ada URL)'}`;
-openModal(judul, fullContent);
-});
-});
 } catch(err) {
-dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat JADWAL TOGEL</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'JADWALPASARAN' ada dengan kolom A, B, C, D.</p></div>`;
+dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat LINK LAIN-LAIN</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'LINK LAIN LAIN' ada dengan kolom A (Judul), B (Deskripsi), C (URL).</p></div>`;
 }
+}
+
+// ======================= RENDER JADWAL TOGEL =======================
+async function renderJadwalTogelWithFilter(filter = "") {
+const mainHeading = document.getElementById("mainHeading");
+const subHeading = document.getElementById("subHeading");
+const dynamicArea = document.getElementById("dynamicContentArea");
+// Hapus class link-lain-grid jika ada
+dynamicArea.classList.remove("link-lain-grid");
+mainHeading.innerHTML = "📅 JADWAL TOGEL | Data Pasaran";
+subHeading.innerHTML = `Sheet: JADWALPASARAN (Kolom A=Judul, B=Subjudul, C=Isi Folder, D=URL Website)${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol KUNJUNGI WEBSITE mengambil URL dari Kolom D`;
+bonusBadgeContainer.classList.remove("visible");
+galleryBadgeContainer.classList.remove("visible");
+qrisBadgeContainer.style.display = "none";
+dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container");
+dynamicArea.classList.add("dashboard-grid");
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat jadwal pasaran...</p></div>`;
+try {
+if(jadwalTogelData.length === 0) { jadwalTogelData = await fetchJadwalPasaran(); }
+let filtered = jadwalTogelData;
+if(filter.trim() !== "") {
+filtered = jadwalTogelData.filter(item => item.judul.toLowerCase().includes(filter.toLowerCase()) || item.subjudul.toLowerCase().includes(filter.toLowerCase()) || item.isi.toLowerCase().includes(filter.toLowerCase()) || item.url.toLowerCase().includes(filter.toLowerCase()));
+}
+if(filtered.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Jadwal tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di JADWAL TOGEL</p></div>`; return; }
+function cleanUrl(url) { if (!url) return ""; let clean = url.trim(); if (!clean.startsWith('http://') && !clean.startsWith('https://')) { clean = 'https://' + clean; } return clean; }
+let cardsHtml = "";
+filtered.forEach((item) => {
+const preview = item.isi.length > 120 ? item.isi.substring(0,120)+'...' : (item.isi || '(Tidak ada konten)');
+const websiteUrl = cleanUrl(item.url);
+const hasUrl = item.url && item.url.trim() !== "";
+cardsHtml += `<div class="schedule-card" data-judul="${escapeHtml(item.judul)}" data-subjudul="${escapeHtml(item.subjudul)}" data-isi="${escapeHtml(item.isi)}" data-url="${escapeHtml(websiteUrl)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.judul)}</h3><div class="schedule-subjudul"><i class="fas fa-tag"></i> ${escapeHtml(item.subjudul) || '(Tidak ada subjudul)'}</div><div class="schedule-preview">${escapeHtml(preview)}</div><div class="schedule-buttons-row"><button class="btn-salin-subjudul-jadwal" data-subjudul="${escapeHtml(item.subjudul)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button><button class="btn-salin-isi-jadwal" data-isi="${escapeHtml(item.isi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Isi</button></div>${hasUrl ? `<button class="btn-kunjungi-website" data-url="${escapeHtml(websiteUrl)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-external-link-alt"></i> KUNJUNGI WEBSITE</button>` : `<button class="btn-kunjungi-website" disabled><i class="fas fa-external-link-alt"></i> TIDAK ADA URL</button>`}</div>`;
+});
+dynamicArea.innerHTML = cardsHtml;
+document.querySelectorAll('.btn-salin-subjudul-jadwal').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const subjudul = btn.getAttribute('data-subjudul') || ""; const judul = btn.getAttribute('data-judul') || "Folder"; copyContentOnly(subjudul, `Subjudul: ${judul}`); }); });
+document.querySelectorAll('.btn-salin-isi-jadwal').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const isi = btn.getAttribute('data-isi') || ""; const judul = btn.getAttribute('data-judul') || "Folder"; copyContentOnly(isi, `Isi: ${judul}`); }); });
+document.querySelectorAll('.btn-kunjungi-website:not([disabled])').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); e.preventDefault(); const url = btn.getAttribute('data-url') || ""; const judul = btn.getAttribute('data-judul') || "Website"; if(url && url.trim() !== "") { window.open(url, '_blank'); showToast(`Membuka ${judul}...`); } else { showToast(`Tidak ada URL untuk ${judul}`); } }); });
+document.querySelectorAll('.schedule-card').forEach(card => { card.addEventListener('click', (e) => { if(e.target.closest('.btn-salin-subjudul-jadwal') || e.target.closest('.btn-salin-isi-jadwal') || e.target.closest('.btn-kunjungi-website')) return; const judul = card.getAttribute('data-judul') || "Detail"; const subjudul = card.getAttribute('data-subjudul') || ""; const isi = card.getAttribute('data-isi') || ""; const url = card.getAttribute('data-url') || ""; let fullContent = `📌 SUBJUDUL:\n${subjudul || '(Tidak ada)'}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📄 ISI FOLDER:\n${isi || '(Tidak ada konten)'}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🌐 URL WEBSITE:\n${url || '(Tidak ada URL)'}`; openModal(judul, fullContent); }); });
+} catch(err) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat JADWAL TOGEL</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'JADWALPASARAN' ada dengan kolom A, B, C, D.</p></div>`; }
 }
 
 // ======================= FUNGSI RENDER BONUS (TIDAK DIUBAH) =======================
-async function renderBonusLainLainWithFilter(filter = "") { let data = bonusLainLainData; if (data.length === 0) { try { data = await fetchSheetData('BONUS LAIN-LAIN'); bonusLainLainData = data; } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS LAIN-LAIN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori LAIN-LAIN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-tags"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; dynamicArea.innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-async function renderBonusDoneBagiWithFilter(filter = "") { let data = bonusDoneBagiData; if (data.length === 0) { try { data = await fetchSheetData('DONEBAGI'); bonusDoneBagiData = data; } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat DONE BAGI</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori DONE BAGI</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; dynamicArea.innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-async function renderBonusMingguanWithFilter(filter = "") { let data = bonusMingguanData; if (data.length === 0) { try { data = await fetchSheetData('BONUS MINGGUAN'); bonusMingguanData = data; } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS MINGGUAN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori MINGGUAN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; dynamicArea.innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-async function renderBonusAllWithFilter(filter = "") { let data = bonusAllData; if (data.length === 0) { try { data = await fetchSheetData('BONUS ALL'); bonusAllData = data; } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>Gagal memuat BONUS ALL</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori BONUS ALL</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.slice(0, 8).forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3>${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; dynamicArea.innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
+async function renderBonusLainLainWithFilter(filter = "") { let data = bonusLainLainData; if (data.length === 0) { try { data = await fetchSheetData('BONUS LAIN-LAIN'); bonusLainLainData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS LAIN-LAIN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori LAIN-LAIN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-tags"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
+async function renderBonusDoneBagiWithFilter(filter = "") { let data = bonusDoneBagiData; if (data.length === 0) { try { data = await fetchSheetData('DONEBAGI'); bonusDoneBagiData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat DONE BAGI</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori DONE BAGI</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
+async function renderBonusMingguanWithFilter(filter = "") { let data = bonusMingguanData; if (data.length === 0) { try { data = await fetchSheetData('BONUS MINGGUAN'); bonusMingguanData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS MINGGUAN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori MINGGUAN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
+async function renderBonusAllWithFilter(filter = "") { let data = bonusAllData; if (data.length === 0) { try { data = await fetchSheetData('BONUS ALL'); bonusAllData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>Gagal memuat BONUS ALL</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori BONUS ALL</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.slice(0, 8).forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3>${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
 
 function attachBonusCardEvents() { document.querySelectorAll('.bonus-card').forEach(card => { card.removeEventListener('click', bonusCardHandler); card.addEventListener('click', bonusCardHandler); }); }
 function bonusCardHandler(e) { if(e.target.closest('.btn-salin-bonus') || e.target.closest('.btn-open-folder')) return; const title = this.getAttribute('data-bonus-title') || 'Detail Bonus'; const content = this.getAttribute('data-bonus-content') || 'Tidak ada deskripsi tambahan.'; openModal(title, content); }
@@ -1615,316 +1663,238 @@ function attachOpenFolderEvents() { document.querySelectorAll('.btn-open-folder'
 function openFolderHandler(e) { e.stopPropagation(); const card = this.closest('.bonus-card'); if(card) { const title = card.getAttribute('data-bonus-title') || 'Detail Bonus'; const content = card.getAttribute('data-bonus-content') || 'Tidak ada deskripsi tambahan.'; openModal(title, content); } }
 function attachBonusSalinEvents() { document.querySelectorAll('.btn-salin-bonus').forEach(btn => { btn.removeEventListener('click', bonusSalinHandler); btn.addEventListener('click', bonusSalinHandler); }); }
 function bonusSalinHandler(e) { e.stopPropagation(); const title = this.getAttribute('data-salin-title') || 'Folder'; const content = this.getAttribute('data-salin-content') || ''; copyContentOnly(content, title); }
-async function renderBonusPage() { mainHeading.innerHTML = "⚙️ BONUS ✨"; const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()}${filterInfo} | Tombol SEJAJAR dalam 1 BARIS`; bonusBadgeContainer.classList.add("visible"); galleryBadgeContainer.classList.remove("visible"); qrisBadgeContainer.style.display = "none"; if (currentBonusSubTab === 'all') { await renderBonusAllWithFilter(currentFilterText); } else if (currentBonusSubTab === 'mingguan') { await renderBonusMingguanWithFilter(currentFilterText); } else if (currentBonusSubTab === 'done') { await renderBonusDoneBagiWithFilter(currentFilterText); } else if (currentBonusSubTab === 'lain') { await renderBonusLainLainWithFilter(currentFilterText); } }
+async function renderBonusPage() { const mainHeading = document.getElementById("mainHeading"); const subHeading = document.getElementById("subHeading"); mainHeading.innerHTML = "⚙️ BONUS ✨"; const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()}${filterInfo} | Tombol SEJAJAR dalam 1 BARIS`; bonusBadgeContainer.classList.add("visible"); galleryBadgeContainer.classList.remove("visible"); qrisBadgeContainer.style.display = "none"; if (currentBonusSubTab === 'all') { await renderBonusAllWithFilter(currentFilterText); } else if (currentBonusSubTab === 'mingguan') { await renderBonusMingguanWithFilter(currentFilterText); } else if (currentBonusSubTab === 'done') { await renderBonusDoneBagiWithFilter(currentFilterText); } else if (currentBonusSubTab === 'lain') { await renderBonusLainLainWithFilter(currentFilterText); } }
 
-// ======================= FUNGSI RENDER RANDOM =======================
-async function renderRandomTabWithFilter(filter = "") { mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets"; subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN`; bonusBadgeContainer.classList.remove("visible"); galleryBadgeContainer.classList.remove("visible"); qrisBadgeContainer.style.display = "none"; dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat folder...</p></div>`; try { if(foldersData.length === 0) foldersData = await fetchSheetData('PK RANDOM'); let filtered = foldersData; if(filter.trim() !== "") { filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase())); } if(filtered.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada folder dengan kata kunci "${escapeHtml(filter)}" di kolom RANDOM</p></div>`; return; } let cardsHtml = ""; filtered.forEach((f) => { const short = f.content.length > 120 ? f.content.substring(0,120)+'...' : f.content; cardsHtml += `<div class="card random-folder" data-folder-title="${escapeHtml(f.title)}" data-folder-content="${escapeHtml(f.content)}"><button class="btn-salin-folder" data-salin-title="${escapeHtml(f.title)}" data-salin-content="${escapeHtml(f.content)}"><i class="fas fa-copy"></i> SALIN</button><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(short) || 'Klik untuk melihat isi lengkap folder ini'}</p><div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk membuka folder</div></div>`; }); dynamicArea.innerHTML = cardsHtml; document.querySelectorAll('.btn-salin-folder').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const title = btn.getAttribute('data-salin-title') || 'Folder'; const content = btn.getAttribute('data-salin-content') || ''; copyContentOnly(content, title); }); }); document.querySelectorAll('.card.random-folder').forEach(card => { card.addEventListener('click', (e) => { if(e.target.closest('.btn-salin-folder')) return; const title = card.getAttribute('data-folder-title') || 'Folder'; const content = card.getAttribute('data-folder-content') || ''; openModal(title, content); }); }); } catch(err) { dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.message}</p></div>`; } }
-
-// ======================= FUNGSI RENDER STATIC TAB =======================
-function renderStaticTabWithFilter(tabId, filter = "") { const data = staticTabsData[tabId]; if(!data) return false; mainHeading.innerHTML = data.title; const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : ""; subHeading.innerHTML = data.subtitle + filterInfo; bonusBadgeContainer.classList.remove("visible"); galleryBadgeContainer.classList.remove("visible"); qrisBadgeContainer.style.display = "none"; dynamicArea.classList.remove("gallery-fullwidth"); let filteredItems = data.items; if(filter.trim() !== "") { filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase())); } if(filteredItems.length === 0 && filter) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`; return true; } let cardsHTML = ""; filteredItems.forEach(item => { cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`; }); dynamicArea.innerHTML = cardsHTML; return true; }
-
-// ======================= RENDER GALLERY GAMBAR CS =======================
-async function renderGalleryCS() {
-let catTitle, catSub, itemsToShow = [];
-
-if (currentGalleryTab === 'rrn_qris') {
-if (rrnQrisData.length === 0) {
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data RRN QRIS dari Google Sheets...</p></div>`;
-try { rrnQrisData = await fetchRRNQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat RRN QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; }
-}
-catTitle = "📸 RRN QRIS - GALLERY GAMBAR";
-catSub = "Data dari sheet RRN QRIS ALL: kolom A = judul folder, B = subjudul, C = URL GAMBAR";
-itemsToShow = [...rrnQrisData];
+// ======================= FUNGSI RENDER RANDOM (TIDAK DIUBAH) =======================
+async function renderRandomTabWithFilter(filter = "") { 
+const mainHeading = document.getElementById("mainHeading"); 
+const subHeading = document.getElementById("subHeading"); 
+const dynamicArea = document.getElementById("dynamicContentArea"); 
+// Hapus class link-lain-grid jika ada
+dynamicArea.classList.remove("link-lain-grid");
+mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets"; 
+subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN`; 
+bonusBadgeContainer.classList.remove("visible"); 
+galleryBadgeContainer.classList.remove("visible"); 
+qrisBadgeContainer.style.display = "none"; 
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat folder...</p></div>`; 
+try { 
+if(foldersData.length === 0) foldersData = await fetchSheetData('PK RANDOM'); 
+let filtered = foldersData; 
+if(filter.trim() !== "") { 
+filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase())); 
 } 
-else if (currentGalleryTab === 'profile_ewallet') {
-if (ewalletBankData.length === 0) {
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data PROFIL E-WALLET / BANK dari Google Sheets...</p></div>`;
-try { ewalletBankData = await fetchEwalletBankData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat PROFIL E-WALLET / BANK</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet bernama 'SS EWALLET BANK' ada dengan kolom A (judul folder), B (subjudul), C (URL GAMBAR).</p></div>`; return; }
-}
-catTitle = "💳 PROFIL E-WALLET / BANK";
-catSub = "Data dari sheet 'SS EWALLET BANK': kolom A = Judul Folder, kolom B = Subjudul, kolom C = URL Gambar";
-itemsToShow = [...ewalletBankData];
+if(filtered.length === 0) { 
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada folder dengan kata kunci "${escapeHtml(filter)}" di kolom RANDOM</p></div>`; 
+return; 
 } 
-else if (currentGalleryTab === 'cara_bermain') {
-if (caraBermainAllData.length === 0) {
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data CARA BERMAIN dari Google Sheets...</p></div>`;
-try { caraBermainAllData = await fetchCaraBermainAllData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat CARA BERMAIN</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet bernama 'CARA BERMAIN ALL' ada dengan kolom A (judul folder), B (subjudul), C (URL GAMBAR).</p></div>`; return; }
-}
-catTitle = "🎮 CARA BERMAIN";
-catSub = "Data dari sheet 'CARA BERMAIN ALL': kolom A = Judul Folder, kolom B = Subjudul, kolom C = URL Gambar";
-itemsToShow = [...caraBermainAllData];
+let cardsHtml = ""; 
+filtered.forEach((f) => { 
+const short = f.content.length > 120 ? f.content.substring(0,120)+'...' : f.content; 
+cardsHtml += `<div class="card random-folder" data-folder-title="${escapeHtml(f.title)}" data-folder-content="${escapeHtml(f.content)}"><button class="btn-salin-folder" data-salin-title="${escapeHtml(f.title)}" data-salin-content="${escapeHtml(f.content)}"><i class="fas fa-copy"></i> SALIN</button><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(short) || 'Klik untuk melihat isi lengkap folder ini'}</p><div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk membuka folder</div></div>`; 
+}); 
+dynamicArea.innerHTML = cardsHtml; 
+document.querySelectorAll('.btn-salin-folder').forEach(btn => { 
+btn.addEventListener('click', (e) => { 
+e.stopPropagation(); 
+const title = btn.getAttribute('data-salin-title') || 'Folder'; 
+const content = btn.getAttribute('data-salin-content') || ''; 
+copyContentOnly(content, title); 
+}); 
+}); 
+document.querySelectorAll('.card.random-folder').forEach(card => { 
+card.addEventListener('click', (e) => { 
+if(e.target.closest('.btn-salin-folder')) return; 
+const title = card.getAttribute('data-folder-title') || 'Folder'; 
+const content = card.getAttribute('data-folder-content') || ''; 
+openModal(title, content); 
+}); 
+}); 
+} catch(err) { 
+dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.message}</p></div>`; 
 } 
-else { return; }
-
-mainHeading.innerHTML = catTitle;
-const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : "";
-subHeading.innerHTML = `${catSub}${filterInfo} | Grid 4 kolom responsif | KIRI: Salin Subjudul | KANAN: Salin Gambar`;
-bonusBadgeContainer.classList.remove("visible");
-galleryBadgeContainer.classList.add("visible");
-qrisBadgeContainer.style.display = "none";
-dynamicArea.style.display = "block";
-dynamicArea.classList.add("gallery-fullwidth");
-
-let filtered = itemsToShow;
-if (currentFilterText.trim() !== "") {
-const keyword = currentFilterText.toLowerCase();
-filtered = itemsToShow.filter(item => 
-item.judul.toLowerCase().includes(keyword) || 
-item.deskripsi.toLowerCase().includes(keyword)
-);
 }
 
-if (filtered.length === 0) {
-dynamicArea.innerHTML = `<div class="empty-gallery"><i class="fas fa-search" style="font-size:3rem;opacity:0.5"></i><h3 style="margin-top:16px;">Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(currentFilterText)}" di kategori ini</p></div>`;
-return;
+function renderStaticTabWithFilter(tabId, filter = "") { 
+const data = staticTabsData[tabId]; 
+if(!data) return false; 
+const mainHeading = document.getElementById("mainHeading"); 
+const subHeading = document.getElementById("subHeading"); 
+const dynamicArea = document.getElementById("dynamicContentArea"); 
+dynamicArea.classList.remove("link-lain-grid");
+mainHeading.innerHTML = data.title; 
+const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : ""; 
+subHeading.innerHTML = data.subtitle + filterInfo; 
+bonusBadgeContainer.classList.remove("visible"); 
+galleryBadgeContainer.classList.remove("visible"); 
+qrisBadgeContainer.style.display = "none"; 
+dynamicArea.classList.remove("gallery-fullwidth"); 
+let filteredItems = data.items; 
+if(filter.trim() !== "") { 
+filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase())); 
+} 
+if(filteredItems.length === 0 && filter) { 
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`; 
+return true; 
+} 
+let cardsHTML = ""; 
+filteredItems.forEach(item => { 
+cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`; 
+}); 
+dynamicArea.innerHTML = cardsHTML; 
+return true; 
 }
 
-let html = `<div class="gallery-grid-container">`;
-filtered.forEach((item, idx) => {
-html += `
-<div class="gallery-card" data-gallery-imgurl="${escapeHtml(item.imageUrl)}" data-gallery-title="${escapeHtml(item.judul)} #${item.nomor}" data-gallery-desc="${escapeHtml(item.deskripsi)}">
-<h3>${escapeHtml(item.judul)} <span class="gallery-badge-number">#${item.nomor}</span></h3>
-<img class="gallery-image-preview" id="previewImg_${idx}" src="${escapeHtml(item.imageUrl)}" loading="lazy" crossorigin="anonymous" onerror="this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load'">
-<div class="gallery-desc">${escapeHtml(item.deskripsi.length > 80 ? item.deskripsi.substring(0,80)+'...' : item.deskripsi)}</div>
-<div class="gallery-buttons-row">
-<button class="btn-gallery-salin-subjudul" data-subjudul="${escapeHtml(item.deskripsi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button>
-<button class="btn-gallery-salin-gambar" data-imgurl="${escapeHtml(item.imageUrl)}" data-imgtitle="${escapeHtml(item.judul)}"><i class="fas fa-image"></i> Salin Gambar</button>
-</div>
-</div>
-`;
-});
-html += `</div>`;
-dynamicArea.innerHTML = html;
-
-document.querySelectorAll('.btn-gallery-salin-subjudul').forEach(btn => {
-btn.addEventListener('click', (e) => { e.stopPropagation(); const sub = btn.getAttribute('data-subjudul') || ''; copyContentOnly(sub, "Subjudul"); });
-});
-document.querySelectorAll('.btn-gallery-salin-gambar').forEach(btn => {
-btn.addEventListener('click', async (e) => { e.stopPropagation(); const url = btn.getAttribute('data-imgurl'); const title = btn.getAttribute('data-imgtitle'); await copyImageToClipboard(url, title); });
-});
-document.querySelectorAll('.gallery-card').forEach(card => {
-const imgUrl = card.getAttribute('data-gallery-imgurl');
-const title = card.getAttribute('data-gallery-title');
-const desc = card.getAttribute('data-gallery-desc');
-card.addEventListener('click', (e) => { if(e.target.closest('button')) return; openImageModal(title, imgUrl, desc); });
-const previewImg = card.querySelector('.gallery-image-preview');
-if(previewImg) previewImg.addEventListener('click', (e) => { e.stopPropagation(); openImageModal(title, imgUrl, desc); });
-});
-}
-
-async function copyImageToClipboard(imageUrl, imageTitle) {
-try {
-showToast(`⏳ Mengambil gambar "${imageTitle}"...`);
-const response = await fetch(imageUrl, { mode: 'cors' });
-if (!response.ok) throw new Error('Gagal mengambil gambar');
-const blob = await response.blob();
-if (!blob.type.startsWith('image/')) throw new Error('Format bukan gambar');
-try {
-await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
-showToast(`✅ Gambar "${imageTitle}" berhasil disalin! 📸`);
-} catch (clipboardError) {
-const img = new Image();
-const objectUrl = URL.createObjectURL(blob);
-img.onload = async () => {
-const canvas = document.createElement('canvas');
-canvas.width = img.width; canvas.height = img.height;
-const ctx = canvas.getContext('2d');
-ctx.drawImage(img, 0, 0);
-canvas.toBlob(async (canvasBlob) => {
-try {
-await navigator.clipboard.write([new ClipboardItem({ [canvasBlob.type]: canvasBlob })]);
-showToast(`✅ Gambar "${imageTitle}" berhasil disalin! 📸`);
-} catch (err) { showToast(`❌ Gagal menyalin gambar. Coba klik kanan pada gambar dan pilih "Salin gambar".`); }
-URL.revokeObjectURL(objectUrl);
-}, 'image/png');
-};
-img.onerror = () => { showToast(`❌ Gagal memuat gambar untuk disalin.`); URL.revokeObjectURL(objectUrl); };
-img.src = objectUrl;
-}
-} catch (error) { console.error('Error copying image:', error); showToast(`❌ Gagal menyalin gambar "${imageTitle}". Pastikan gambar dapat diakses.`); }
-}
-
-function openImageModal(title, imageUrl, description) {
-modalTitle.textContent = title;
-modalContentText.innerHTML = `
-<div style="text-align:center">
-<img src="${escapeHtml(imageUrl)}" class="modal-image-view" style="max-width:100%; max-height:60vh; border-radius:16px;" crossorigin="anonymous" onerror="this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load'">
-<p style="margin-top:16px;">${escapeHtml(description)}</p>
-<div style="margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-<button id="modalCopySubjudulBtn" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-copy"></i> Salin Subjudul</button>
-<button id="modalCopyImageBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-image"></i> Salin Gambar</button>
-</div>
-<small><i class="fas fa-link"></i> URL: ${escapeHtml(imageUrl)}</small>
-</div>
-`;
-modal.classList.add("active");
-document.body.style.overflow = "hidden";
-setTimeout(() => {
-const modalCopyImageBtn = document.getElementById('modalCopyImageBtn');
-const modalCopySubjudulBtn = document.getElementById('modalCopySubjudulBtn');
-if (modalCopyImageBtn) modalCopyImageBtn.addEventListener('click', async () => { await copyImageToClipboard(imageUrl, title); });
-if (modalCopySubjudulBtn) modalCopySubjudulBtn.addEventListener('click', () => { copyContentOnly(description, `Subjudul: ${title}`); });
-}, 100);
-}
-
-function bindGalleryBadges() { 
-document.querySelectorAll('.gallery-badge').forEach(b => { 
-b.removeEventListener('click', galleryClick); 
-b.addEventListener('click', galleryClick); 
+// ======================= RENDER GALLERY GAMBAR CS (TIDAK DIUBAH) =======================
+async function renderGalleryCS() { 
+const dynamicArea = document.getElementById("dynamicContentArea");
+dynamicArea.classList.remove("link-lain-grid");
+let catTitle, catSub, itemsToShow = []; 
+if (currentGalleryTab === 'rrn_qris') { 
+if (rrnQrisData.length === 0) { 
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data RRN QRIS dari Google Sheets...</p></div>`; 
+try { rrnQrisData = await fetchRRNQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat RRN QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; } 
+} 
+catTitle = "📸 RRN QRIS - GALLERY GAMBAR"; 
+catSub = "Data dari sheet RRN QRIS ALL: kolom A = judul folder, B = subjudul, C = URL GAMBAR"; 
+itemsToShow = [...rrnQrisData]; 
+} else if (currentGalleryTab === 'profile_ewallet') { 
+if (ewalletBankData.length === 0) { 
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data PROFIL E-WALLET / BANK dari Google Sheets...</p></div>`; 
+try { ewalletBankData = await fetchEwalletBankData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat PROFIL E-WALLET / BANK</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet bernama 'SS EWALLET BANK' ada dengan kolom A (judul folder), B (subjudul), C (URL GAMBAR).</p></div>`; return; } 
+} 
+catTitle = "💳 PROFIL E-WALLET / BANK"; 
+catSub = "Data dari sheet 'SS EWALLET BANK': kolom A = Judul Folder, kolom B = Subjudul, kolom C = URL Gambar"; 
+itemsToShow = [...ewalletBankData]; 
+} else if (currentGalleryTab === 'cara_bermain') { 
+if (caraBermainAllData.length === 0) { 
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data CARA BERMAIN dari Google Sheets...</p></div>`; 
+try { caraBermainAllData = await fetchCaraBermainAllData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat CARA BERMAIN</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet bernama 'CARA BERMAIN ALL' ada dengan kolom A (judul folder), B (subjudul), C (URL GAMBAR).</p></div>`; return; } 
+} 
+catTitle = "🎮 CARA BERMAIN"; 
+catSub = "Data dari sheet 'CARA BERMAIN ALL': kolom A = Judul Folder, kolom B = Subjudul, kolom C = URL Gambar"; 
+itemsToShow = [...caraBermainAllData]; 
+} else { return; } 
+const mainHeading = document.getElementById("mainHeading"); 
+const subHeading = document.getElementById("subHeading"); 
+mainHeading.innerHTML = catTitle; 
+const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; 
+subHeading.innerHTML = `${catSub}${filterInfo} | Grid 4 kolom responsif | KIRI: Salin Subjudul | KANAN: Salin Gambar`; 
+bonusBadgeContainer.classList.remove("visible"); 
+galleryBadgeContainer.classList.add("visible"); 
+qrisBadgeContainer.style.display = "none"; 
+dynamicArea.style.display = "block"; 
+dynamicArea.classList.add("gallery-fullwidth"); 
+let filtered = itemsToShow; 
+if (currentFilterText.trim() !== "") { 
+const keyword = currentFilterText.toLowerCase(); 
+filtered = itemsToShow.filter(item => item.judul.toLowerCase().includes(keyword) || item.deskripsi.toLowerCase().includes(keyword)); 
+} 
+if (filtered.length === 0) { 
+dynamicArea.innerHTML = `<div class="empty-gallery"><i class="fas fa-search" style="font-size:3rem;opacity:0.5"></i><h3 style="margin-top:16px;">Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(currentFilterText)}" di kategori ini</p></div>`; 
+return; 
+} 
+let html = `<div class="gallery-grid-container">`; 
+filtered.forEach((item, idx) => { 
+html += `<div class="gallery-card" data-gallery-imgurl="${escapeHtml(item.imageUrl)}" data-gallery-title="${escapeHtml(item.judul)} #${item.nomor}" data-gallery-desc="${escapeHtml(item.deskripsi)}"><h3>${escapeHtml(item.judul)} <span class="gallery-badge-number">#${item.nomor}</span></h3><img class="gallery-image-preview" id="previewImg_${idx}" src="${escapeHtml(item.imageUrl)}" loading="lazy" crossorigin="anonymous" onerror="this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load'"><div class="gallery-desc">${escapeHtml(item.deskripsi.length > 80 ? item.deskripsi.substring(0,80)+'...' : item.deskripsi)}</div><div class="gallery-buttons-row"><button class="btn-gallery-salin-subjudul" data-subjudul="${escapeHtml(item.deskripsi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button><button class="btn-gallery-salin-gambar" data-imgurl="${escapeHtml(item.imageUrl)}" data-imgtitle="${escapeHtml(item.judul)}"><i class="fas fa-image"></i> Salin Gambar</button></div></div>`; 
+}); 
+html += `</div>`; 
+dynamicArea.innerHTML = html; 
+document.querySelectorAll('.btn-gallery-salin-subjudul').forEach(btn => { 
+btn.addEventListener('click', (e) => { e.stopPropagation(); const sub = btn.getAttribute('data-subjudul') || ''; copyContentOnly(sub, "Subjudul"); }); 
+}); 
+document.querySelectorAll('.btn-gallery-salin-gambar').forEach(btn => { 
+btn.addEventListener('click', async (e) => { e.stopPropagation(); const url = btn.getAttribute('data-imgurl'); const title = btn.getAttribute('data-imgtitle'); await copyImageToClipboard(url, title); }); 
+}); 
+document.querySelectorAll('.gallery-card').forEach(card => { 
+const imgUrl = card.getAttribute('data-gallery-imgurl'); 
+const title = card.getAttribute('data-gallery-title'); 
+const desc = card.getAttribute('data-gallery-desc'); 
+card.addEventListener('click', (e) => { if(e.target.closest('button')) return; openImageModal(title, imgUrl, desc); }); 
+const previewImg = card.querySelector('.gallery-image-preview'); 
+if(previewImg) previewImg.addEventListener('click', (e) => { e.stopPropagation(); openImageModal(title, imgUrl, desc); }); 
 }); 
 }
+async function copyImageToClipboard(imageUrl, imageTitle) { try { showToast(`⏳ Mengambil gambar "${imageTitle}"...`); const response = await fetch(imageUrl, { mode: 'cors' }); if (!response.ok) throw new Error('Gagal mengambil gambar'); const blob = await response.blob(); if (!blob.type.startsWith('image/')) throw new Error('Format bukan gambar'); try { await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]); showToast(`✅ Gambar "${imageTitle}" berhasil disalin! 📸`); } catch (clipboardError) { const img = new Image(); const objectUrl = URL.createObjectURL(blob); img.onload = async () => { const canvas = document.createElement('canvas'); canvas.width = img.width; canvas.height = img.height; const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0); canvas.toBlob(async (canvasBlob) => { try { await navigator.clipboard.write([new ClipboardItem({ [canvasBlob.type]: canvasBlob })]); showToast(`✅ Gambar "${imageTitle}" berhasil disalin! 📸`); } catch (err) { showToast(`❌ Gagal menyalin gambar. Coba klik kanan pada gambar dan pilih "Salin gambar".`); } URL.revokeObjectURL(objectUrl); }, 'image/png'); }; img.onerror = () => { showToast(`❌ Gagal memuat gambar untuk disalin.`); URL.revokeObjectURL(objectUrl); }; img.src = objectUrl; } } catch (error) { console.error('Error copying image:', error); showToast(`❌ Gagal menyalin gambar "${imageTitle}". Pastikan gambar dapat diakses.`); } }
+function openImageModal(title, imageUrl, description) { const modal = document.getElementById("folderModal"); const modalTitle = document.getElementById("modalTitle"); const modalContentText = document.getElementById("modalContentText"); modalTitle.textContent = title; modalContentText.innerHTML = `<div style="text-align:center"><img src="${escapeHtml(imageUrl)}" class="modal-image-view" style="max-width:100%; max-height:60vh; border-radius:16px;" crossorigin="anonymous" onerror="this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load'"><p style="margin-top:16px;">${escapeHtml(description)}</p><div style="margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;"><button id="modalCopySubjudulBtn" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-copy"></i> Salin Subjudul</button><button id="modalCopyImageBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-image"></i> Salin Gambar</button></div><small><i class="fas fa-link"></i> URL: ${escapeHtml(imageUrl)}</small></div>`; modal.classList.add("active"); document.body.style.overflow = "hidden"; setTimeout(() => { const modalCopyImageBtn = document.getElementById('modalCopyImageBtn'); const modalCopySubjudulBtn = document.getElementById('modalCopySubjudulBtn'); if (modalCopyImageBtn) modalCopyImageBtn.addEventListener('click', async () => { await copyImageToClipboard(imageUrl, title); }); if (modalCopySubjudulBtn) modalCopySubjudulBtn.addEventListener('click', () => { copyContentOnly(description, `Subjudul: ${title}`); }); }, 100); }
+function bindGalleryBadges() { document.querySelectorAll('.gallery-badge').forEach(b => { b.removeEventListener('click', galleryClick); b.addEventListener('click', galleryClick); }); }
+async function galleryClick(e) { const val = this.getAttribute('data-gallery-tab'); if(val && (val === 'rrn_qris' || val === 'profile_ewallet' || val === 'cara_bermain')) { currentGalleryTab = val; document.querySelectorAll('.gallery-badge').forEach(b => b.classList.remove('active-gallery')); this.classList.add('active-gallery'); currentFilterText = ""; document.getElementById("liveSearchInput").value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); await renderGalleryCS(); } }
+function bindBonusBadgeEvents() { document.querySelectorAll('.bonus-badge').forEach(badge => { badge.removeEventListener('click', bonusClickHandler); badge.addEventListener('click', bonusClickHandler); }); }
+async function bonusClickHandler(e) { const tabValue = this.getAttribute('data-bonus-tab'); if(tabValue) { currentBonusSubTab = tabValue; document.querySelectorAll('.bonus-badge').forEach(b => b.classList.remove('active-bonus')); this.classList.add('active-bonus'); if(currentActiveTab === 'tab6') { currentFilterText = ""; const searchInput = document.getElementById("liveSearchInput"); if(searchInput) searchInput.value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); await renderBonusPage(); } } }
 
-async function galleryClick(e) { 
-const val = this.getAttribute('data-gallery-tab'); 
-if(val && (val === 'rrn_qris' || val === 'profile_ewallet' || val === 'cara_bermain')) { 
-currentGalleryTab = val; 
-document.querySelectorAll('.gallery-badge').forEach(b => b.classList.remove('active-gallery')); 
-this.classList.add('active-gallery'); 
-currentFilterText = ""; 
-document.getElementById("liveSearchInput").value = ""; 
-document.getElementById("clearSearchBtn").classList.remove('visible'); 
-await renderGalleryCS(); 
+// ======================= RENDER ALL ABOUT QRIS (TIDAK DIUBAH) =======================
+async function renderAllAboutQris() { 
+const dynamicArea = document.getElementById("dynamicContentArea");
+dynamicArea.classList.remove("link-lain-grid");
+const mainHeading = document.getElementById("mainHeading"); 
+const subHeading = document.getElementById("subHeading"); 
+mainHeading.innerHTML = "👥 ALL ABOUT QRIS"; 
+let filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; 
+let categoryName = ""; 
+let dataItems = []; 
+if (currentQrisTab === "bank_qris") { 
+categoryName = "BANK >>> QRIS"; 
+if (bankNaikQrisData.length === 0) { 
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data BANK NAIK QRIS dari Google Sheets...</p></div>`; 
+try { bankNaikQrisData = await fetchBankNaikQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BANK NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; } 
 } 
-}
-
-function bindBonusBadgeEvents() {
-document.querySelectorAll('.bonus-badge').forEach(badge => {
-badge.removeEventListener('click', bonusClickHandler);
-badge.addEventListener('click', bonusClickHandler);
-});
-}
-
-async function bonusClickHandler(e) {
-const tabValue = this.getAttribute('data-bonus-tab');
-if(tabValue) {
-currentBonusSubTab = tabValue;
-document.querySelectorAll('.bonus-badge').forEach(b => b.classList.remove('active-bonus'));
-this.classList.add('active-bonus');
-if(currentActiveTab === 'tab6') {
-currentFilterText = "";
-searchInput.value = "";
-clearSearchBtn.classList.remove('visible');
-await renderBonusPage();
-}
-}
-}
-
-// ======================= RENDER ALL ABOUT QRIS =======================
-async function renderAllAboutQris() {
-mainHeading.innerHTML = "👥 ALL ABOUT QRIS";
-let filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : "";
-let categoryName = "";
-let dataItems = [];
-
-if (currentQrisTab === "bank_qris") {
-categoryName = "BANK >>> QRIS";
-if (bankNaikQrisData.length === 0) {
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data BANK NAIK QRIS dari Google Sheets...</p></div>`;
-try { bankNaikQrisData = await fetchBankNaikQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BANK NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; }
-}
-dataItems = [...bankNaikQrisData];
+dataItems = [...bankNaikQrisData]; 
+} else if (currentQrisTab === "ewallet_qris") { 
+categoryName = "EWALLET >>> QRIS"; 
+if (ewalletNaikQrisData.length === 0) { 
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data EWALLET NAIK QRIS dari Google Sheets...</p></div>`; 
+try { ewalletNaikQrisData = await fetchEwalletNaikQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat EWALLET NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; } 
 } 
-else if (currentQrisTab === "ewallet_qris") {
-categoryName = "EWALLET >>> QRIS";
-if (ewalletNaikQrisData.length === 0) {
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data EWALLET NAIK QRIS dari Google Sheets...</p></div>`;
-try { ewalletNaikQrisData = await fetchEwalletNaikQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat EWALLET NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; }
-}
-dataItems = [...ewalletNaikQrisData];
+dataItems = [...ewalletNaikQrisData]; 
+} else if (currentQrisTab === "refund") { 
+categoryName = "REFUND"; 
+if (refundQrisData.length === 0) { 
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data REFUND QRIS dari Google Sheets...</p></div>`; 
+try { refundQrisData = await fetchRefundQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat REFUND QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; } 
 } 
-else if (currentQrisTab === "refund") {
-categoryName = "REFUND";
-if (refundQrisData.length === 0) {
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data REFUND QRIS dari Google Sheets...</p></div>`;
-try { refundQrisData = await fetchRefundQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat REFUND QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; }
-}
-dataItems = [...refundQrisData];
+dataItems = [...refundQrisData]; 
+} else { 
+categoryName = "LAIN-LAIN"; 
+if (qrisLainLainData.length === 0) { 
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data QRIS LAIN-LAIN dari Google Sheets...</p></div>`; 
+try { qrisLainLainData = await fetchQrisLainLainData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat QRIS LAIN-LAIN</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet 'QRIS LAIN-LAIN' ada dengan kolom A (judul) dan B (isi).</p></div>`; return; } 
 } 
-else {
-categoryName = "LAIN-LAIN";
-if (qrisLainLainData.length === 0) {
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data QRIS LAIN-LAIN dari Google Sheets...</p></div>`;
-try { qrisLainLainData = await fetchQrisLainLainData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat QRIS LAIN-LAIN</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet 'QRIS LAIN-LAIN' ada dengan kolom A (judul) dan B (isi).</p></div>`; return; }
+dataItems = [...qrisLainLainData]; 
+} 
+subHeading.innerHTML = `Kategori: ${categoryName}${filterInfo} | Data dari Google Sheets | Klik kartu untuk detail, tombol salin di pojok kanan bawah`; 
+bonusBadgeContainer.classList.remove("visible"); 
+galleryBadgeContainer.classList.remove("visible"); 
+qrisBadgeContainer.style.display = "block"; 
+dynamicArea.classList.remove("gallery-fullwidth"); 
+dynamicArea.style.display = "grid"; 
+dynamicArea.classList.remove("dashboard-grid"); 
+dynamicArea.classList.add("qris-grid-container"); 
+let filtered = dataItems; 
+if (currentFilterText.trim() !== "") { 
+const keyword = currentFilterText.toLowerCase(); 
+filtered = dataItems.filter(item => item.judul.toLowerCase().includes(keyword) || (item.deskripsi && item.deskripsi.toLowerCase().includes(keyword)) || (item.konten && item.konten.toLowerCase().includes(keyword))); 
+} 
+if (filtered.length === 0) { 
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(currentFilterText)}" di kategori ${categoryName}</p></div>`; 
+dynamicArea.classList.remove("qris-grid-container"); 
+return; 
+} 
+let html = ``; 
+filtered.forEach((item) => { 
+html += `<div class="qris-card" data-judul="${escapeHtml(item.judul)}" data-konten="${escapeHtml(item.konten || item.deskripsi || 'Tidak ada informasi')}"><h3><i class="fas fa-qrcode"></i> ${escapeHtml(item.judul)}</h3><div class="qris-desc">${escapeHtml(item.deskripsi && item.deskripsi.length > 120 ? item.deskripsi.substring(0,120)+'...' : (item.deskripsi || 'Klik untuk melihat detail'))}</div><button class="btn-qris-salin" data-salin="${escapeHtml(item.konten || item.deskripsi || '')}" data-label="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> SALIN</button></div>`; 
+}); 
+dynamicArea.innerHTML = html; 
+document.querySelectorAll('.btn-qris-salin').forEach(btn => { 
+btn.addEventListener('click', (e) => { e.stopPropagation(); const text = btn.getAttribute('data-salin') || ""; const label = btn.getAttribute('data-label') || "Konten"; copyContentOnly(text, label); }); 
+}); 
+document.querySelectorAll('.qris-card').forEach(card => { 
+card.addEventListener('click', (e) => { if (e.target.closest('.btn-qris-salin')) return; const judul = card.getAttribute('data-judul') || "Detail"; const konten = card.getAttribute('data-konten') || "Tidak ada informasi tambahan."; openModal(judul, konten); }); 
+}); 
 }
-dataItems = [...qrisLainLainData];
-}
+function bindQrisBadges() { document.querySelectorAll('.qris-badge').forEach(badge => { badge.removeEventListener('click', qrisBadgeHandler); badge.addEventListener('click', qrisBadgeHandler); }); }
+function qrisBadgeHandler(e) { const tabValue = this.getAttribute('data-qris-tab'); if (tabValue && (tabValue === 'bank_qris' || tabValue === 'ewallet_qris' || tabValue === 'refund' || tabValue === 'lain_lain')) { currentQrisTab = tabValue; document.querySelectorAll('.qris-badge').forEach(b => b.classList.remove('active-qris')); this.classList.add('active-qris'); currentFilterText = ""; const searchInput = document.getElementById("liveSearchInput"); if(searchInput) { searchInput.value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); } renderAllAboutQris(); } }
 
-subHeading.innerHTML = `Kategori: ${categoryName}${filterInfo} | Data dari Google Sheets | Klik kartu untuk detail, tombol salin di pojok kanan bawah`;
-
-bonusBadgeContainer.classList.remove("visible");
-galleryBadgeContainer.classList.remove("visible");
-qrisBadgeContainer.style.display = "block";
-dynamicArea.classList.remove("gallery-fullwidth");
-dynamicArea.style.display = "grid";
-dynamicArea.classList.remove("dashboard-grid");
-dynamicArea.classList.add("qris-grid-container");
-
-let filtered = dataItems;
-if (currentFilterText.trim() !== "") {
-const keyword = currentFilterText.toLowerCase();
-filtered = dataItems.filter(item => 
-item.judul.toLowerCase().includes(keyword) || 
-(item.deskripsi && item.deskripsi.toLowerCase().includes(keyword)) ||
-(item.konten && item.konten.toLowerCase().includes(keyword))
-);
-}
-
-if (filtered.length === 0) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(currentFilterText)}" di kategori ${categoryName}</p></div>`;
-dynamicArea.classList.remove("qris-grid-container");
-return;
-}
-
-let html = ``;
-filtered.forEach((item) => {
-html += `
-<div class="qris-card" data-judul="${escapeHtml(item.judul)}" data-konten="${escapeHtml(item.konten || item.deskripsi || 'Tidak ada informasi')}">
-<h3><i class="fas fa-qrcode"></i> ${escapeHtml(item.judul)}</h3>
-<div class="qris-desc">${escapeHtml(item.deskripsi && item.deskripsi.length > 120 ? item.deskripsi.substring(0,120)+'...' : (item.deskripsi || 'Klik untuk melihat detail'))}</div>
-<button class="btn-qris-salin" data-salin="${escapeHtml(item.konten || item.deskripsi || '')}" data-label="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> SALIN</button>
-</div>
-`;
-});
-dynamicArea.innerHTML = html;
-
-document.querySelectorAll('.btn-qris-salin').forEach(btn => {
-btn.addEventListener('click', (e) => {
-e.stopPropagation();
-const text = btn.getAttribute('data-salin') || "";
-const label = btn.getAttribute('data-label') || "Konten";
-copyContentOnly(text, label);
-});
-});
-
-document.querySelectorAll('.qris-card').forEach(card => {
-card.addEventListener('click', (e) => {
-if (e.target.closest('.btn-qris-salin')) return;
-const judul = card.getAttribute('data-judul') || "Detail";
-const konten = card.getAttribute('data-konten') || "Tidak ada informasi tambahan.";
-openModal(judul, konten);
-});
-});
-}
-
-function bindQrisBadges() {
-document.querySelectorAll('.qris-badge').forEach(badge => {
-badge.removeEventListener('click', qrisBadgeHandler);
-badge.addEventListener('click', qrisBadgeHandler);
-});
-}
-
-function qrisBadgeHandler(e) {
-const tabValue = this.getAttribute('data-qris-tab');
-if (tabValue && (tabValue === 'bank_qris' || tabValue === 'ewallet_qris' || tabValue === 'refund' || tabValue === 'lain_lain')) {
-currentQrisTab = tabValue;
-document.querySelectorAll('.qris-badge').forEach(b => b.classList.remove('active-qris'));
-this.classList.add('active-qris');
-currentFilterText = "";
-if (searchInput) { searchInput.value = ""; clearSearchBtn.classList.remove('visible'); }
-renderAllAboutQris();
-}
-}
-
+// ======================= FUNGSI NAVIGASI UTAMA =======================
 async function onTabClick(tabId) {
 currentActiveTab = tabId;
 document.querySelectorAll('.nav-item').forEach(item => {
@@ -1932,13 +1902,17 @@ if(item.getAttribute('data-tab') === tabId) item.classList.add('active');
 else item.classList.remove('active');
 });
 currentFilterText = "";
-searchInput.value = "";
-clearSearchBtn.classList.remove('visible');
+const searchInput = document.getElementById("liveSearchInput");
+const clearSearchBtn = document.getElementById("clearSearchBtn");
+if(searchInput) searchInput.value = "";
+if(clearSearchBtn) clearSearchBtn.classList.remove('visible');
+const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.style.display = "";
-dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container");
+dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container", "link-lain-grid");
 dynamicArea.classList.add("dashboard-grid");
 
 if(tabId === 'tab2') { await renderRandomTabWithFilter(currentFilterText); }
+else if(tabId === 'tab3') { await renderLinkLainWithFilter(currentFilterText); }
 else if(tabId === 'tab4') { await renderGalleryCS(); bindGalleryBadges(); }
 else if(tabId === 'tab5') { renderAllAboutQris(); bindQrisBadges(); }
 else if(tabId === 'tab6') { await renderBonusPage(); bindBonusBadgeEvents(); }
@@ -1958,6 +1932,7 @@ if(tid) onTabClick(tid);
 async function applyLiveSearch() {
 const filter = currentFilterText;
 if(currentActiveTab === 'tab2') { await renderRandomTabWithFilter(filter); }
+else if(currentActiveTab === 'tab3') { await renderLinkLainWithFilter(filter); }
 else if(currentActiveTab === 'tab4') { await renderGalleryCS(); }
 else if(currentActiveTab === 'tab5') { renderAllAboutQris(); }
 else if(currentActiveTab === 'tab6') { await renderBonusPage(); }
@@ -1966,6 +1941,8 @@ else { renderStaticTabWithFilter(currentActiveTab, filter); }
 }
 
 function handleSearchInput() {
+const searchInput = document.getElementById("liveSearchInput");
+const clearSearchBtn = document.getElementById("clearSearchBtn");
 currentFilterText = searchInput.value;
 if(currentFilterText.length > 0) clearSearchBtn.classList.add('visible');
 else clearSearchBtn.classList.remove('visible');
@@ -1973,42 +1950,37 @@ applyLiveSearch();
 }
 
 function clearSearch() {
-searchInput.value = '';
+const searchInput = document.getElementById("liveSearchInput");
+const clearSearchBtn = document.getElementById("clearSearchBtn");
+if(searchInput) searchInput.value = '';
 currentFilterText = '';
-clearSearchBtn.classList.remove('visible');
+if(clearSearchBtn) clearSearchBtn.classList.remove('visible');
 applyLiveSearch();
 }
 
 function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
-function showToast(message) { toast.innerHTML = `<i class="fas fa-copy"></i> ${message}`; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2500); }
+function showToast(message) { const toast = document.getElementById("copyToast"); toast.innerHTML = `<i class="fas fa-copy"></i> ${message}`; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2500); }
 async function copyContentOnly(textContent, folderTitle) { const finalText = textContent || "(Tidak ada konten)"; try { await navigator.clipboard.writeText(finalText); showToast(`"${folderTitle}" berhasil disalin 📝`); } catch { const textarea = document.createElement("textarea"); textarea.value = finalText; document.body.appendChild(textarea); textarea.select(); document.execCommand("copy"); document.body.removeChild(textarea); showToast(`"${folderTitle}" disalin 📝`); } }
-function openModal(title, content) { modalTitle.textContent = title; modalContentText.innerHTML = (content || "(Kosong)").replace(/\n/g, '<br>'); modal.classList.add("active"); document.body.style.overflow = "hidden"; }
-function closeModalFunc() { modal.classList.remove("active"); document.body.style.overflow = ""; }
+function openModal(title, content) { const modal = document.getElementById("folderModal"); const modalTitle = document.getElementById("modalTitle"); const modalContentText = document.getElementById("modalContentText"); modalTitle.textContent = title; modalContentText.innerHTML = (content || "(Kosong)").replace(/\n/g, '<br>'); modal.classList.add("active"); document.body.style.overflow = "hidden"; }
+function closeModalFunc() { const modal = document.getElementById("folderModal"); modal.classList.remove("active"); document.body.style.overflow = ""; }
 
-// DOM Elements
-const searchInput = document.getElementById("liveSearchInput");
-const clearSearchBtn = document.getElementById("clearSearchBtn");
-const dynamicArea = document.getElementById("dynamicContentArea");
-const mainHeading = document.getElementById("mainHeading");
-const subHeading = document.getElementById("subHeading");
+const searchInputElem = document.getElementById("liveSearchInput");
+const clearSearchBtnElem = document.getElementById("clearSearchBtn");
 const modal = document.getElementById("folderModal");
-const modalTitle = document.getElementById("modalTitle");
-const modalContentText = document.getElementById("modalContentText");
 const closeModalBtn = document.getElementById("closeModalBtn");
-const toast = document.getElementById("copyToast");
 const bonusBadgeContainer = document.getElementById("bonusBadgeContainer");
 const galleryBadgeContainer = document.getElementById("galleryBadgeContainer");
 const qrisBadgeContainer = document.getElementById("qrisBadgeContainer");
 
 closeModalBtn.onclick = closeModalFunc;
-modal.onclick = e => { if(e.target === modal) closeModalFunc(); };
-document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('active')) closeModalFunc(); });
-searchInput.addEventListener('input', handleSearchInput);
-clearSearchBtn.addEventListener('click', clearSearch);
+if(modal) modal.onclick = e => { if(e.target === modal) closeModalFunc(); };
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal && modal.classList.contains('active')) closeModalFunc(); });
+if(searchInputElem) searchInputElem.addEventListener('input', handleSearchInput);
+if(clearSearchBtnElem) clearSearchBtnElem.addEventListener('click', clearSearch);
 
 (async function init() { 
 bindNavEvents(); 
-await onTabClick('tab5');
+await onTabClick('tab3');
 })();
 </script>
 </body>
