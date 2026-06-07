@@ -277,15 +277,22 @@ gap: 24px;
 margin-top: 12px;
 }
 
-/* Grid khusus untuk LINK SCRIPT ALL - 2 kolom */
+/* Grid khusus untuk LINK LAIN-LAIN - 4 kolom */
 .dashboard-grid.link-lain-grid {
 display: grid;
-grid-template-columns: repeat(2, 1fr);
+grid-template-columns: repeat(4, 1fr);
 gap: 24px;
 margin-top: 12px;
 }
 
-/* Responsive untuk layar kecil */
+/* Responsive untuk layar tablet (2 kolom) */
+@media (max-width: 1200px) {
+.dashboard-grid.link-lain-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+
+/* Responsive untuk layar HP (1 kolom) */
 @media (max-width: 768px) {
 .dashboard-grid.link-lain-grid {
 grid-template-columns: 1fr;
@@ -1239,7 +1246,7 @@ box-shadow: none;
 <div class="nav-menu">
 <div class="nav-item" data-tab="tab1"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></div>
 <div class="nav-item" data-tab="tab2"><i class="fas fa-chart-line"></i><span>RANDOM</span></div>
-<div class="nav-item" data-tab="tab3"><i class="fas fa-envelope"></i><span>LINK SCRIPT ALL</span></div>
+<div class="nav-item" data-tab="tab3"><i class="fas fa-envelope"></i><span>LINK LAIN-LAIN</span></div>
 <div class="nav-item" data-tab="tab4"><i class="fas fa-tasks"></i><span>GALLERY GAMBAR CS</span></div>
 <div class="nav-item" data-tab="tab5"><i class="fas fa-users"></i><span>ALL ABOUT QRIS</span></div>
 <div class="nav-item" data-tab="tab6"><i class="fas fa-cog"></i><span>BONUS</span></div>
@@ -1538,18 +1545,18 @@ return row;
 });
 }
 
-// ======================= RENDER LINK SCRIPT ALL (2 KOLOM PER BARIS) =======================
+// ======================= RENDER LINK LAIN-LAIN (4 KOLOM PER BARIS) =======================
 async function renderLinkLainWithFilter(filter = "") {
 const mainHeading = document.getElementById("mainHeading");
 const subHeading = document.getElementById("subHeading");
 const dynamicArea = document.getElementById("dynamicContentArea");
 
-mainHeading.innerHTML = "📎 LINK SCRIPT ALL";
-subHeading.innerHTML = `Data dari Google Sheets → Sheet "LINK LAIN LAIN" (Kolom A=Judul, Kolom B=Deskripsi, Kolom C=URL)${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Klik tombol BUKA LINK untuk mengunjungi website | Tampilan 2 kolom`;
+mainHeading.innerHTML = "📎 LINK LAIN-LAIN";
+subHeading.innerHTML = `Data dari Google Sheets → Sheet "LINK LAIN LAIN" (Kolom A=Judul, Kolom B=Deskripsi, Kolom C=URL)${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Klik tombol BUKA LINK untuk mengunjungi website | Tampilan 4 kolom`;
 
-// Tambahkan class khusus untuk grid 2 kolom
+// Tambahkan class khusus untuk grid 4 kolom
 dynamicArea.classList.add("link-lain-grid");
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data LINK SCRIPT ALL...</p></div>`;
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data LINK LAIN-LAIN...</p></div>`;
 
 try {
 if(linkLainData.length === 0) {
@@ -1564,7 +1571,7 @@ item.title.toLowerCase().includes(filter.toLowerCase()) ||
 );
 }
 if(filtered.length === 0) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Link tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di LINK SCRIPT ALL</p></div>`;
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Link tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di LINK LAIN-LAIN</p></div>`;
 return;
 }
 
@@ -1609,7 +1616,7 @@ showToast(`Tidak ada URL untuk ${title}`);
 });
 
 } catch(err) {
-dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat LINK SCRIPT ALL</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'LINK LAIN LAIN' ada dengan kolom A (Judul), B (Deskripsi), C (URL).</p></div>`;
+dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat LINK LAIN-LAIN</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'LINK LAIN LAIN' ada dengan kolom A (Judul), B (Deskripsi), C (URL).</p></div>`;
 }
 }
 
