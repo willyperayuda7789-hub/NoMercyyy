@@ -495,7 +495,7 @@ body {
 .btn-gallery-salin-gambar { background: linear-gradient(135deg, #f59e0b, #d97706); }
 .qris-badge-container { margin-bottom: 24px; }
 .qris-badge-bar { display: flex; gap: 16px; flex-wrap: wrap; background: rgba(0,0,0,0.4); padding: 12px 20px; border-radius: 60px; justify-content: center; border: 1px solid rgba(255,255,255,0.2); }
-.qris-badge { background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 60px; padding: 8px 26px; font-weight: 800; font-size: 1rem; color: #cbd5e6; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(59,130,246,0.4); }
+.qris-badge { background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 60px; padding: 8px 26px; font-weight: 800; font-size: 1rem; color: #cbd5e6; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(59,130,246,0.4); }
 .qris-badge i { font-size: 1rem; color: #60a5fa; }
 .qris-badge.active-qris { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border-color: white; }
 .qris-grid-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 24px; }
@@ -601,9 +601,15 @@ async function fetchDashboardData() {
         const items = [];
         for (let i = 0; i < rows.length; i++) {
             if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+                // Ambil waktu dari kolom B, format "HH:MM WIB"
+                let rawTime = rows[i][1] ? rows[i][1].trim() : "";
+                // Extract jam:menit dari format "HH:MM WIB"
+                let timeOnly = rawTime.replace(" WIB", "").trim();
+                
                 items.push({
                     pasaran: rows[i][0].trim(),
-                    result_time: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "",
+                    result_time_raw: rawTime,
+                    result_time: timeOnly, // hanya "HH:MM"
                     jadwal: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : ""
                 });
             }
@@ -828,44 +834,65 @@ function parseCSV(csvText) {
     });
 }
 
-// ======================= FUNGSI COUNTDOWN =======================
+// ======================= FUNGSI COUNTDOWN YANG BENAR UNTUK FORMAT HH:MM =======================
 function parseTimeToDate(timeStr) {
     if (!timeStr) return null;
-    const now = new Date();
-    let [hour, minute] = timeStr.split(':').map(Number);
+    // timeStr format: "HH:MM"
+    const [hour, minute] = timeStr.split(':').map(Number);
     if (isNaN(hour) || isNaN(minute)) return null;
-    const targetDate = new Date(now);
+    
+    const now = new Date();
+    let targetDate = new Date(now);
     targetDate.setHours(hour, minute, 0, 0);
+    
+    // Jika waktu sudah lewat hari ini, target ke besok
     if (targetDate <= now) {
+        targetDate = new Date(now);
         targetDate.setDate(targetDate.getDate() + 1);
+        targetDate.setHours(hour, minute, 0, 0);
     }
+    
     return targetDate;
 }
 
-function calculateCountdown(targetTimeStr) {
-    const targetDate = parseTimeToDate(targetTimeStr);
-    if (!targetDate) return null;
+function calculateCountdown(timeStr) {
+    const targetDate = parseTimeToDate(timeStr);
+    if (!targetDate) return { formatted: "00:00:00", totalMs: Infinity, isLive: false };
+    
     const now = new Date();
     const diffMs = targetDate - now;
-    if (diffMs <= 0) return { hours: 0, minutes: 0, seconds: 0, formatted: "00:00:00", totalMs: 0 };
+    
+    if (diffMs <= 0) {
+        return { formatted: "00:00:00", totalMs: 0, isLive: true };
+    }
+    
     const hours = Math.floor(diffMs / (1000 * 60 * 60));
     const minutes = Math.floor((diffMs % (3600000)) / 60000);
     const seconds = Math.floor((diffMs % 60000) / 1000);
+    
     return {
-        hours, minutes, seconds,
         formatted: `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`,
-        totalMs: diffMs
+        totalMs: diffMs,
+        hours, minutes, seconds,
+        isLive: false
     };
 }
 
-function getStatusClassAndText(countdown) {
-    if (!countdown) return { class: "status-scheduled", text: "JADWAL" };
-    if (countdown.totalMs <= 0) return { class: "status-live", text: "LIVE" };
-    if (countdown.totalMs < 300000) return { class: "status-soon", text: "SEGERA" };
-    return { class: "status-scheduled", text: "JADWAL" };
+function getStatusText(countdown) {
+    if (!countdown) return "JADWAL";
+    if (countdown.totalMs <= 0) return "LIVE";
+    if (countdown.totalMs < 300000) return "SEGERA"; // kurang dari 5 menit
+    return "JADWAL";
 }
 
-// ======================= RENDER DASHBOARD (MAX 5 PASARAN TERDEKAT) =======================
+function getStatusClass(countdown) {
+    if (!countdown) return "status-scheduled";
+    if (countdown.totalMs <= 0) return "status-live";
+    if (countdown.totalMs < 300000) return "status-soon";
+    return "status-scheduled";
+}
+
+// ======================= RENDER DASHBOARD (5 PASARAN DENGAN JAM TERDEKAT) =======================
 async function renderDashboard() {
     const mainHeading = document.getElementById("mainHeading");
     const subHeading = document.getElementById("subHeading");
@@ -875,7 +902,7 @@ async function renderDashboard() {
     dynamicArea.classList.add("dashboard-grid");
     
     mainHeading.innerHTML = "🏠 DASHBOARD UTAMA";
-    subHeading.innerHTML = "Jadwal Result Terdekat - 5 Pasaran dengan waktu terdekat | Live Countdown Realtime";
+    subHeading.innerHTML = "Jadwal Result Terdekat - 5 Pasaran dengan jam terdekat dari sekarang | ⏱️ Live Countdown Realtime";
     
     dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat 5 jadwal result terdekat...</p></div>`;
     
@@ -885,38 +912,49 @@ async function renderDashboard() {
         }
         
         if (dashboardData.length === 0) {
-            dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-exclamation-triangle"></i><h3>Tidak ada data</h3><p>Tidak ditemukan data jadwal di sheet DASHBOARDDD. Pastikan sheet memiliki kolom A (Pasaran) dan B (Result Time dalam format HH:MM).</p></div>`;
+            dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-exclamation-triangle"></i><h3>Tidak ada data</h3><p>Tidak ditemukan data jadwal di sheet DASHBOARDDD. Pastikan sheet memiliki kolom A (Pasaran) dan kolom B (Result Time dalam format HH:MM WIB).</p></div>`;
             return;
         }
         
-        // Hitung countdown untuk setiap item
+        // Hitung countdown untuk setiap item dan urutkan berdasarkan sisa waktu terkecil
+        const now = new Date();
         const itemsWithCountdown = dashboardData.map(item => {
             const countdown = calculateCountdown(item.result_time);
             return { ...item, countdown };
         });
         
-        // Urutkan berdasarkan sisa waktu terkecil (terdekat)
-        itemsWithCountdown.sort((a, b) => {
-            const aTime = a.countdown ? a.countdown.totalMs : Infinity;
-            const bTime = b.countdown ? b.countdown.totalMs : Infinity;
-            return aTime - bTime;
-        });
+        // Filter hanya yang memiliki countdown valid dan urutkan berdasarkan totalMs (waktu terdekat)
+        const validItems = itemsWithCountdown.filter(item => item.countdown && item.countdown.totalMs !== Infinity);
+        validItems.sort((a, b) => a.countdown.totalMs - b.countdown.totalMs);
         
         // Hanya ambil 5 pasaran terdekat
-        const nearestSchedules = itemsWithCountdown.slice(0, 5);
+        const nearestSchedules = validItems.slice(0, 5);
+        
+        if (nearestSchedules.length === 0) {
+            dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-exclamation-triangle"></i><h3>Tidak ada jadwal terdekat</h3><p>Tidak ditemukan jadwal result yang valid.</p></div>`;
+            return;
+        }
+        
+        // Simpan data ke variable global untuk update countdown
+        window.nearestSchedulesData = nearestSchedules.map(item => ({
+            pasaran: item.pasaran,
+            result_time: item.result_time,
+            result_time_raw: item.result_time_raw
+        }));
         
         let tableRows = "";
         nearestSchedules.forEach((item, idx) => {
-            const status = getStatusClassAndText(item.countdown);
-            const countdownStr = item.countdown ? item.countdown.formatted : "00:00:00";
-            // Hanya menampilkan jam result saja (tanpa teks "WIB" tambahan)
-            const resultTimeDisplay = item.result_time;
+            const statusText = getStatusText(item.countdown);
+            const statusClass = getStatusClass(item.countdown);
+            const countdownStr = item.countdown.formatted;
+            const displayTime = item.result_time_raw || `${item.result_time} WIB`;
+            
             tableRows += `
-            <tr data-idx="${idx}">
+            <tr data-idx="${idx}" data-target-time="${escapeHtml(item.result_time)}">
                 <td class="pasaran-name"><i class="fas fa-chart-simple"></i> ${escapeHtml(item.pasaran)}</td>
-                <td class="result-time">${escapeHtml(resultTimeDisplay)} WIB</td>
-                <td class="countdown countdown-${idx}" data-target-time="${escapeHtml(item.result_time)}">${countdownStr}</td>
-                <td><span class="status-badge ${status.class}">${status.text}</span></td>
+                <td class="result-time">${escapeHtml(displayTime)}</td>
+                <td class="countdown countdown-${idx}">${countdownStr}</td>
+                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
             </tr>
             `;
         });
@@ -925,9 +963,9 @@ async function renderDashboard() {
         <div class="schedule-card-folder">
             <div class="folder-header">
                 <h2><i class="fas fa-calendar-alt"></i> JADWAL RESULT TERDEKAT</h2>
-                <p><i class="fas fa-clock"></i> Update setiap detik | Menampilkan 5 pasaran dengan jadwal terdekat</p>
+                <p><i class="fas fa-clock"></i> Update setiap detik | Menampilkan 5 pasaran dengan jadwal PALING DEKAT dari waktu sekarang</p>
             </div>
-            <table class="schedule-table">
+            <table class="schedule-table" id="scheduleTable">
                 <thead>
                     <tr><th>PASARAN</th><th>RESULT</th><th>SISA WAKTU</th><th>STATUS</th></tr>
                 </thead>
@@ -945,22 +983,25 @@ async function renderDashboard() {
         
         // Start countdown updater (realtime setiap detik)
         if (countdownInterval) clearInterval(countdownInterval);
+        
         countdownInterval = setInterval(() => {
-            nearestSchedules.forEach((item, idx) => {
+            if (!window.nearestSchedulesData) return;
+            
+            window.nearestSchedulesData.forEach((item, idx) => {
                 const countdownEl = document.querySelector(`.countdown-${idx}`);
-                if (countdownEl) {
-                    const targetTime = countdownEl.getAttribute('data-target-time');
-                    const newCountdown = calculateCountdown(targetTime);
+                const row = document.querySelector(`tr[data-idx="${idx}"]`);
+                
+                if (countdownEl && row) {
+                    const newCountdown = calculateCountdown(item.result_time);
                     if (newCountdown) {
                         countdownEl.textContent = newCountdown.formatted;
-                        const row = countdownEl.closest('tr');
-                        if (row) {
-                            const statusBadge = row.querySelector('.status-badge');
-                            if (statusBadge) {
-                                const newStatus = getStatusClassAndText(newCountdown);
-                                statusBadge.className = `status-badge ${newStatus.class}`;
-                                statusBadge.textContent = newStatus.text;
-                            }
+                        
+                        const statusBadge = row.querySelector('.status-badge');
+                        if (statusBadge) {
+                            const newStatusText = getStatusText(newCountdown);
+                            const newStatusClass = getStatusClass(newCountdown);
+                            statusBadge.textContent = newStatusText;
+                            statusBadge.className = `status-badge ${newStatusClass}`;
                         }
                     }
                 }
@@ -969,7 +1010,7 @@ async function renderDashboard() {
         
     } catch(err) {
         console.error(err);
-        dynamicArea.innerHTML = `<div class="error-message"><h3>❌ Gagal Memuat Dashboard</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'DASHBOARDDD' ada dengan kolom A (Pasaran), B (Result Time dalam format HH:MM), C (Jadwal - opsional).</p></div>`;
+        dynamicArea.innerHTML = `<div class="error-message"><h3>❌ Gagal Memuat Dashboard</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'DASHBOARDDD' ada dengan kolom A (Pasaran), kolom B (Result Time dalam format HH:MM WIB).</p></div>`;
     }
 }
 
@@ -1053,7 +1094,7 @@ async function renderRandomTabWithFilter(filter = "") {
             filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase()));
         }
         if(filtered.length === 0) {
-            dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kolom RANDOM</p></div>`;
+            dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada hasil para "${escapeHtml(filter)}" di kolom RANDOM</p></div>`;
             return;
         }
         let cardsHtml = "";
