@@ -463,7 +463,7 @@ body {
     color: white;
 }
 
-/* GALLERY, BONUS, QRIS, JADWAL TOGEL styles (tetap seperti sebelumnya) */
+/* GALLERY, BONUS, QRIS, JADWAL TOGEL styles */
 .bonus-badge-container { margin-bottom: 24px; display: none; }
 .bonus-badge-container.visible { display: block; }
 .bonus-badge-bar { display: flex; gap: 16px; flex-wrap: wrap; background: rgba(0, 0, 0, 0.4); padding: 12px 20px; border-radius: 60px; justify-content: center; border: 1px solid rgba(255,255,255,0.2); }
@@ -544,7 +544,7 @@ body {
 <div class="nav-item" data-tab="tab6"><i class="fas fa-cog"></i><span>BONUS</span></div>
 <div class="nav-item" data-tab="tab7"><i class="fas fa-calendar-alt"></i><span>JADWAL TOGEL</span></div>
 </div>
-<div class="sidebar-footer"><i class="fas fa-clock" style="color:#3b82f6"></i> Jadwal Result Terdekat - Live Countdown</div>
+<div class="sidebar-footer"><i class="fas fa-clock" style="color:#3b82f6"></i> Jadwal Result Terdekat - 5 Pasaran | Live Countdown</div>
 </aside>
 
 <main class="main-content">
@@ -865,7 +865,7 @@ function getStatusClassAndText(countdown) {
     return { class: "status-scheduled", text: "JADWAL" };
 }
 
-// ======================= RENDER DASHBOARD (JADWAL TERDEKAT) =======================
+// ======================= RENDER DASHBOARD (MAX 5 PASARAN TERDEKAT) =======================
 async function renderDashboard() {
     const mainHeading = document.getElementById("mainHeading");
     const subHeading = document.getElementById("subHeading");
@@ -875,9 +875,9 @@ async function renderDashboard() {
     dynamicArea.classList.add("dashboard-grid");
     
     mainHeading.innerHTML = "🏠 DASHBOARD UTAMA";
-    subHeading.innerHTML = "Jadwal Result Terdekat - Data dari Google Sheets (DASHBOARDDD) | Live Countdown";
+    subHeading.innerHTML = "Jadwal Result Terdekat - 5 Pasaran dengan waktu terdekat | Live Countdown Realtime";
     
-    dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat jadwal result terdekat...</p></div>`;
+    dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat 5 jadwal result terdekat...</p></div>`;
     
     try {
         if (dashboardData.length === 0) {
@@ -885,7 +885,7 @@ async function renderDashboard() {
         }
         
         if (dashboardData.length === 0) {
-            dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-exclamation-triangle"></i><h3>Tidak ada data</h3><p>Tidak ditemukan data jadwal di sheet DASHBOARDDD. Pastikan sheet memiliki kolom: Pasaran, Result Time, Jadwal.</p></div>`;
+            dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-exclamation-triangle"></i><h3>Tidak ada data</h3><p>Tidak ditemukan data jadwal di sheet DASHBOARDDD. Pastikan sheet memiliki kolom A (Pasaran) dan B (Result Time dalam format HH:MM).</p></div>`;
             return;
         }
         
@@ -895,23 +895,26 @@ async function renderDashboard() {
             return { ...item, countdown };
         });
         
-        // Urutkan berdasarkan sisa waktu terkecil (terdekat) dan ambil 5 teratas
+        // Urutkan berdasarkan sisa waktu terkecil (terdekat)
         itemsWithCountdown.sort((a, b) => {
             const aTime = a.countdown ? a.countdown.totalMs : Infinity;
             const bTime = b.countdown ? b.countdown.totalMs : Infinity;
             return aTime - bTime;
         });
         
-        const nearestSchedules = itemsWithCountdown.slice(0, 10);
+        // Hanya ambil 5 pasaran terdekat
+        const nearestSchedules = itemsWithCountdown.slice(0, 5);
         
         let tableRows = "";
         nearestSchedules.forEach((item, idx) => {
             const status = getStatusClassAndText(item.countdown);
             const countdownStr = item.countdown ? item.countdown.formatted : "00:00:00";
+            // Hanya menampilkan jam result saja (tanpa teks "WIB" tambahan)
+            const resultTimeDisplay = item.result_time;
             tableRows += `
             <tr data-idx="${idx}">
                 <td class="pasaran-name"><i class="fas fa-chart-simple"></i> ${escapeHtml(item.pasaran)}</td>
-                <td class="result-time">${escapeHtml(item.result_time)} WIB</td>
+                <td class="result-time">${escapeHtml(resultTimeDisplay)} WIB</td>
                 <td class="countdown countdown-${idx}" data-target-time="${escapeHtml(item.result_time)}">${countdownStr}</td>
                 <td><span class="status-badge ${status.class}">${status.text}</span></td>
             </tr>
@@ -922,7 +925,7 @@ async function renderDashboard() {
         <div class="schedule-card-folder">
             <div class="folder-header">
                 <h2><i class="fas fa-calendar-alt"></i> JADWAL RESULT TERDEKAT</h2>
-                <p><i class="fas fa-clock"></i> Update setiap detik | Urutan berdasarkan waktu terdekat</p>
+                <p><i class="fas fa-clock"></i> Update setiap detik | Menampilkan 5 pasaran dengan jadwal terdekat</p>
             </div>
             <table class="schedule-table">
                 <thead>
@@ -933,14 +936,14 @@ async function renderDashboard() {
                 </tbody>
             </table>
             <div class="folder-footer">
-                <i class="fas fa-database"></i> Data dari Google Sheets (DASHBOARDDD) | Waktu dalam WIB | <i class="fas fa-sync-alt"></i> Live Countdown
+                <i class="fas fa-database"></i> Data dari Google Sheets (DASHBOARDDD) | Waktu dalam WIB | <i class="fas fa-sync-alt"></i> Live Countdown Setiap Detik
             </div>
         </div>
         `;
         
         dynamicArea.innerHTML = html;
         
-        // Start countdown updater
+        // Start countdown updater (realtime setiap detik)
         if (countdownInterval) clearInterval(countdownInterval);
         countdownInterval = setInterval(() => {
             nearestSchedules.forEach((item, idx) => {
@@ -966,7 +969,7 @@ async function renderDashboard() {
         
     } catch(err) {
         console.error(err);
-        dynamicArea.innerHTML = `<div class="error-message"><h3>❌ Gagal Memuat Dashboard</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'DASHBOARDDD' ada dengan kolom A (Pasaran), B (Result Time dalam format HH:MM), C (Jadwal).</p></div>`;
+        dynamicArea.innerHTML = `<div class="error-message"><h3>❌ Gagal Memuat Dashboard</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'DASHBOARDDD' ada dengan kolom A (Pasaran), B (Result Time dalam format HH:MM), C (Jadwal - opsional).</p></div>`;
     }
 }
 
