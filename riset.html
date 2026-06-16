@@ -1391,185 +1391,203 @@ color: #60a5fa;
 margin-right: 6px;
 }
 
-/* ========= FOLDER BONUS HARI INI ========= */
+/* ========= FOLDER BONUS HARI INI - UKURAN KOMPAK SEPERTI GAMBAR ========= */
 .bonus-hari-ini-wrapper {
 background: rgba(18, 28, 45, 0.85);
-border-radius: 28px;
-border: 1px solid rgba(255, 255, 255, 0.2);
+border-radius: 20px;
+border: 1px solid rgba(255, 255, 255, 0.15);
 overflow: hidden;
 backdrop-filter: blur(4px);
-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-margin-bottom: 24px;
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+margin-bottom: 20px;
 }
 
 .bonus-hari-ini-header {
-background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(245, 158, 11, 0.2));
-padding: 18px 26px;
-border-bottom: 1px solid rgba(251, 191, 36, 0.4);
-}
-
-.bonus-hari-ini-header h2 {
-font-size: 1.5rem;
-font-weight: 800;
-color: #fcd34d;
+background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(245, 158, 11, 0.15));
+padding: 12px 20px;
+border-bottom: 1px solid rgba(251, 191, 36, 0.3);
 display: flex;
 align-items: center;
 gap: 12px;
+}
+
+.bonus-hari-ini-header h2 {
+font-size: 1.1rem;
+font-weight: 700;
+color: #fcd34d;
+margin: 0;
 }
 
 .bonus-hari-ini-header h2 i {
 color: #fbbf24;
-font-size: 1.6rem;
+margin-right: 8px;
 }
 
-.bonus-hari-ini-header p {
-font-size: 0.75rem;
+.bonus-hari-ini-header .header-date {
+font-size: 0.7rem;
 color: #fcd34d;
-margin-top: 4px;
-margin-left: 36px;
-opacity: 0.8;
+opacity: 0.7;
+margin-left: auto;
 }
 
 .bonus-hari-ini-content {
-padding: 20px 24px;
+padding: 12px 16px;
 }
 
+/* List bonus - grid 2 kolom untuk tampilan kompak */
 .bonus-hari-ini-list {
 display: grid;
-grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-gap: 16px;
+grid-template-columns: repeat(2, 1fr);
+gap: 10px;
 }
 
 .bonus-item-card {
 background: rgba(0, 0, 0, 0.3);
-border-radius: 16px;
-padding: 16px 20px;
-border: 1px solid rgba(255, 255, 255, 0.08);
+border-radius: 12px;
+padding: 12px 14px;
+border: 1px solid rgba(255, 255, 255, 0.06);
 transition: all 0.2s ease;
 display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 12px;
+flex-direction: column;
+gap: 8px;
 }
 
 .bonus-item-card:hover {
-background: rgba(59, 130, 246, 0.15);
-border-color: rgba(59, 130, 246, 0.3);
-transform: translateY(-2px);
+background: rgba(59, 130, 246, 0.12);
+border-color: rgba(59, 130, 246, 0.25);
 }
 
 .bonus-item-title {
-font-weight: 700;
+font-weight: 600;
 color: #f0f4fe;
-font-size: 0.95rem;
+font-size: 0.85rem;
 }
 
 .bonus-item-title i {
 color: #fbbf24;
-margin-right: 8px;
+margin-right: 6px;
+font-size: 0.8rem;
 }
 
 .bonus-item-desc {
-color: #cbd5e6;
-font-size: 0.8rem;
+color: #94a3b8;
+font-size: 0.7rem;
+line-height: 1.4;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
 flex: 1;
-margin-left: 8px;
 }
 
-.btn-salin-bonus-hari-ini {
+.bonus-item-actions {
+display: flex;
+gap: 8px;
+margin-top: 4px;
+}
+
+.btn-open-folder-small {
+flex: 1;
+background: transparent;
+border: 1px solid rgba(59, 130, 246, 0.4);
+border-radius: 20px;
+color: #60a5fa;
+font-size: 0.65rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s;
+padding: 5px 10px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 5px;
+}
+
+.btn-open-folder-small:hover {
+background: rgba(59, 130, 246, 0.2);
+color: #93c5fd;
+border-color: #60a5fa;
+}
+
+.btn-salin-bonus-small {
 background: linear-gradient(135deg, #10b981, #059669);
 border: none;
 color: white;
-padding: 6px 14px;
-border-radius: 30px;
-font-size: 0.7rem;
+padding: 5px 14px;
+border-radius: 20px;
+font-size: 0.65rem;
 font-weight: 700;
 cursor: pointer;
 transition: all 0.2s ease;
 display: inline-flex;
 align-items: center;
-gap: 6px;
+gap: 5px;
 font-family: 'Inter', monospace;
 white-space: nowrap;
 }
 
-.btn-salin-bonus-hari-ini:hover {
+.btn-salin-bonus-small:hover {
 background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
 }
 
+/* Bonus empty - saat tidak ada bonus */
 .bonus-empty {
 text-align: center;
-padding: 30px 20px;
+padding: 20px;
 color: #94a3b8;
-font-size: 0.95rem;
 }
 
 .bonus-empty i {
-font-size: 2.5rem;
+font-size: 1.8rem;
 color: #fbbf24;
 display: block;
-margin-bottom: 12px;
-opacity: 0.5;
+margin-bottom: 8px;
+opacity: 0.4;
 }
 
 .bonus-empty .empty-title {
-font-size: 1.1rem;
+font-size: 0.95rem;
 font-weight: 600;
 color: #e2e8f0;
-margin-bottom: 4px;
+}
+
+.bonus-empty .empty-sub {
+font-size: 0.75rem;
+color: #64748b;
+margin-top: 2px;
 }
 
 .bonus-hari-ini-footer {
 background: rgba(0, 0, 0, 0.2);
-padding: 10px 24px;
+padding: 8px 16px;
 text-align: center;
-font-size: 0.7rem;
-color: #94a3b8;
+font-size: 0.6rem;
+color: #64748b;
 border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .bonus-hari-ini-footer i {
 color: #fbbf24;
-margin-right: 6px;
+margin-right: 4px;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
-.schedule-table-dash th, .schedule-table-dash td {
-padding: 8px 12px;
-font-size: 0.7rem;
-}
-.schedule-table-dash .countdown-dash {
-font-size: 0.7rem;
-}
-.schedule-folder-header h2 {
-font-size: 1.1rem;
-}
-.schedule-folder-header h2 i {
-font-size: 1.2rem;
-}
-.schedule-folder-header p {
-font-size: 0.6rem;
-margin-left: 28px;
-}
-.schedule-table-dash .status-badge-dash {
-padding: 2px 8px;
-font-size: 0.55rem;
-}
-.bonus-hari-ini-header h2 {
-font-size: 1.1rem;
-}
-.bonus-hari-ini-header h2 i {
-font-size: 1.2rem;
-}
-.bonus-item-title {
-font-size: 0.8rem;
-}
-.bonus-item-desc {
-font-size: 0.7rem;
-}
 .bonus-hari-ini-list {
 grid-template-columns: 1fr;
+}
+.bonus-hari-ini-header h2 {
+font-size: 0.95rem;
+}
+.bonus-hari-ini-header .header-date {
+font-size: 0.6rem;
+}
+.bonus-item-title {
+font-size: 0.75rem;
+}
+.bonus-item-desc {
+font-size: 0.65rem;
 }
 }
 </style>
@@ -1999,47 +2017,31 @@ function isBonusMatchToday(content) {
     
     // === SEMUA FORMAT YANG AKAN DICEK ===
     const formats = [
-        // Nama hari Indonesia
         todayDay, todayDayShort,
-        // Nama hari Inggris
         todayDayEn, todayDayEnShort,
-        // Tanggal (angka)
         day.toString(), dayPad,
-        // Tanggal + Bulan
         `${day} ${monthName}`, `${day} ${monthNameShort}`,
         `${dayPad} ${monthName}`, `${dayPad} ${monthNameShort}`,
-        // Bulan + Tanggal
         `${monthName} ${day}`, `${monthNameShort} ${day}`,
-        // Tanggal + Bulan + Tahun
         `${day} ${monthName} ${year}`, `${day} ${monthNameShort} ${year}`,
         `${dayPad} ${monthName} ${year}`, `${dayPad} ${monthNameShort} ${year}`,
-        // Format DD/MM/YYYY
         `${dayPad}/${month}/${year}`,
-        // Format DD-MM-YYYY
         `${dayPad}-${month}-${year}`,
-        // Format YYYY-MM-DD
         `${year}-${month}-${dayPad}`,
-        // Format DD/MM
         `${dayPad}/${month}`,
-        // Format DD-MM
         `${dayPad}-${month}`,
-        // Hari + Tanggal
         `${todayDay} ${day}`, `${todayDay}, ${day}`,
         `${todayDay} ${dayPad}`, `${todayDay}, ${dayPad}`,
-        // Hari + Tanggal + Bulan
         `${todayDay} ${day} ${monthName}`, `${todayDay}, ${day} ${monthName}`,
-        // Hari + Tanggal + Bulan + Tahun
         `${todayDay} ${day} ${monthName} ${year}`, `${todayDay}, ${day} ${monthName} ${year}`,
     ];
     
-    // Cek semua format
     for (let format of formats) {
         if (lowerContent.includes(format.toLowerCase())) {
             return true;
         }
     }
     
-    // Kata kunci "hari ini" atau "today"
     if (lowerContent.includes('hari ini') || lowerContent.includes('today')) {
         return true;
     }
@@ -2063,12 +2065,10 @@ async function renderDashboard() {
     dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data dashboard...</p></div>`;
     
     try {
-        // ========== FETCH DATA ==========
         if (dashboardData.length === 0) {
             dashboardData = await fetchDashboardData();
         }
         
-        // Fetch bonus dari sheet BONUS TODAY
         if (bonusTodayData.length === 0) {
             try { 
                 bonusTodayData = await fetchBonusTodayData(); 
@@ -2142,12 +2142,11 @@ async function renderDashboard() {
             `;
         }
         
-        // ========== FILTER BONUS BERDASARKAN HARI DAN TANGGAL ==========
+        // ========== RENDER BONUS HARI INI (KOMPAK) ==========
         const today = new Date();
         const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
         const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
         
-        // Filter bonus yang mengandung hari atau tanggal hari ini
         const filteredBonus = bonusTodayData.filter(item => {
             const content = (item.title + ' ' + item.content);
             return isBonusMatchToday(content);
@@ -2157,14 +2156,17 @@ async function renderDashboard() {
         if (filteredBonus.length > 0) {
             let bonusItems = '';
             filteredBonus.slice(0, 10).forEach((item) => {
-                const desc = item.content || 'Klik untuk melihat detail';
-                const shortDesc = desc.length > 80 ? desc.substring(0, 80) + '...' : desc;
+                const desc = item.content || '';
+                const shortDesc = desc.length > 50 ? desc.substring(0, 50) + '...' : desc;
                 
                 bonusItems += `
                 <div class="bonus-item-card">
-                    <span class="bonus-item-title"><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</span>
-                    <span class="bonus-item-desc">${escapeHtml(shortDesc)}</span>
-                    <button class="btn-salin-bonus-hari-ini" data-salin="${escapeHtml(item.title + '\n' + item.content)}"><i class="fas fa-copy"></i> Salin</button>
+                    <div class="bonus-item-title"><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</div>
+                    <div class="bonus-item-desc">${escapeHtml(shortDesc)}</div>
+                    <div class="bonus-item-actions">
+                        <button class="btn-open-folder-small" onclick="openModal('${escapeHtml(item.title)}', '${escapeHtml(item.content)}')"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
+                        <button class="btn-salin-bonus-small" data-salin="${escapeHtml(item.title + '\n' + item.content)}"><i class="fas fa-copy"></i> SALIN</button>
+                    </div>
                 </div>
                 `;
             });
@@ -2179,7 +2181,7 @@ async function renderDashboard() {
             <div class="bonus-empty">
                 <i class="fas fa-gift"></i>
                 <div class="empty-title">Tidak ada bonus pada hari ini</div>
-                <p>Belum ada bonus yang dibagikan untuk ${dayName}, ${dateStr}</p>
+                <div class="empty-sub">Belum ada bonus yang dibagikan untuk ${dayName}, ${dateStr}</div>
             </div>
             `;
         }
@@ -2187,19 +2189,18 @@ async function renderDashboard() {
         const bonusHtml = `
         <div class="bonus-hari-ini-wrapper">
             <div class="bonus-hari-ini-header">
-                <h2><i class="fas fa-gift"></i> 🎉 BONUS HARI INI</h2>
-                <p><i class="fas fa-calendar-day"></i> ${dayName}, ${dateStr} ${filteredBonus.length > 0 ? `| ${filteredBonus.length} bonus tersedia` : '| Tidak ada bonus'}</p>
+                <h2><i class="fas fa-gift"></i> BONUS HARI INI</h2>
+                <span class="header-date">${dayName}, ${dateStr}</span>
             </div>
             <div class="bonus-hari-ini-content">
                 ${bonusContent}
             </div>
             <div class="bonus-hari-ini-footer">
-                <i class="fas fa-gift"></i> ${filteredBonus.length > 0 ? `Total ${filteredBonus.length} bonus untuk ${dayName}, ${dateStr} | Klik Salin untuk menyalin bonus` : `Tidak ada bonus untuk ${dayName}, ${dateStr}`}
+                <i class="fas fa-gift"></i> ${filteredBonus.length > 0 ? `Total ${filteredBonus.length} bonus untuk ${dayName}, ${dateStr}` : `Tidak ada bonus untuk ${dayName}, ${dateStr}`}
             </div>
         </div>
         `;
         
-        // ========== GABUNGKAN ==========
         dynamicArea.innerHTML = scheduleHtml + bonusHtml;
         
         // ========== START COUNTDOWN ==========
@@ -2228,7 +2229,7 @@ async function renderDashboard() {
         }, 1000);
         
         // ========== EVENT BONUS SALIN ==========
-        document.querySelectorAll('.btn-salin-bonus-hari-ini').forEach(btn => {
+        document.querySelectorAll('.btn-salin-bonus-small').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const text = btn.getAttribute('data-salin') || '';
