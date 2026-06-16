@@ -1631,10 +1631,7 @@ const SHEET_REFUND_QRIS = 'REFUND QRIS';
 const SHEET_QRIS_LAIN_LAIN = 'QRIS LAIN-LAIN';
 const SHEET_JADWAL_PASARAN = 'JADWALPASARAN';
 const SHEET_LINK_LAIN = 'LINK LAIN LAIN';
-const SHEET_BONUS_ALL = 'BONUS ALL';
-const SHEET_BONUS_MINGGUAN = 'BONUS MINGGUAN';
-const SHEET_DONEBAGI = 'DONEBAGI';
-const SHEET_BONUS_LAIN_LAIN = 'BONUS LAIN-LAIN';
+const SHEET_BONUS_TODAY = 'BONUS TODAY';
 
 // Data untuk DASHBOARD
 let dashboardData = [];
@@ -1645,6 +1642,7 @@ let bonusAllData = [];
 let bonusMingguanData = [];
 let bonusDoneBagiData = [];
 let bonusLainLainData = [];
+let bonusTodayData = [];
 let rrnQrisData = [];
 let ewalletBankData = [];
 let caraBermainAllData = [];
@@ -1705,6 +1703,29 @@ dataRows.push({ title: rows[i][0].trim(), content: rows[i][1] ? rows[i][1].trim(
 }
 return dataRows;
 } catch(e) { console.error(`Error fetch ${sheetName}:`, e); throw new Error(`Gagal ambil data dari sheet ${sheetName}`); }
+}
+
+async function fetchBonusTodayData() {
+    try {
+        const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_BONUS_TODAY)}`;
+        const response = await fetch(csvUrl, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const csvText = await response.text();
+        const rows = parseCSV(csvText);
+        const items = [];
+        for (let i = 0; i < rows.length; i++) {
+            if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+                items.push({
+                    title: rows[i][0].trim(),
+                    content: rows[i][1] ? rows[i][1].trim() : ""
+                });
+            }
+        }
+        return items;
+    } catch(e) {
+        console.error(e);
+        return [];
+    }
 }
 
 async function fetchJadwalPasaran() {
@@ -1948,26 +1969,26 @@ function getStatusClass(countdown) {
     return "status-scheduled-dash";
 }
 
-// ======================= FUNGSI CEK BONUS BERDASARKAN HARI DAN TANGGAL =======================
-function isBonusToday(content) {
+// ======================= FUNGSI FILTER BONUS BERDASARKAN HARI DAN TANGGAL =======================
+function isBonusMatchToday(content) {
     if (!content) return false;
     
     const today = new Date();
     const lowerContent = content.toLowerCase();
     
-    // Nama hari dalam bahasa Indonesia (Singkat & Lengkap)
+    // === NAMA HARI (Indonesia) ===
     const dayNames = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
     const dayNamesShort = ['min', 'sen', 'sel', 'rab', 'kam', 'jum', 'sab'];
-    const currentDay = dayNames[today.getDay()];
-    const currentDayShort = dayNamesShort[today.getDay()];
+    const todayDay = dayNames[today.getDay()];
+    const todayDayShort = dayNamesShort[today.getDay()];
     
-    // Nama hari dalam bahasa Inggris
+    // === NAMA HARI (Inggris) ===
     const dayNamesEn = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     const dayNamesEnShort = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-    const currentDayEn = dayNamesEn[today.getDay()];
-    const currentDayEnShort = dayNamesEnShort[today.getDay()];
+    const todayDayEn = dayNamesEn[today.getDay()];
+    const todayDayEnShort = dayNamesEnShort[today.getDay()];
     
-    // Format tanggal
+    // === TANGGAL ===
     const day = today.getDate();
     const dayPad = day.toString().padStart(2, '0');
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
@@ -1976,51 +1997,39 @@ function isBonusToday(content) {
     const monthName = monthNames[today.getMonth()];
     const monthNameShort = monthName.substring(0, 3);
     
-    // Kumpulan format yang akan dicek
+    // === SEMUA FORMAT YANG AKAN DICEK ===
     const formats = [
-        // Nama hari (Indonesia)
-        currentDay,
-        currentDayShort,
-        // Nama hari (Inggris)
-        currentDayEn,
-        currentDayEnShort,
-        // Tanggal
-        day.toString(),
-        dayPad,
+        // Nama hari Indonesia
+        todayDay, todayDayShort,
+        // Nama hari Inggris
+        todayDayEn, todayDayEnShort,
+        // Tanggal (angka)
+        day.toString(), dayPad,
         // Tanggal + Bulan
-        `${day} ${monthName}`,
-        `${day} ${monthNameShort}`,
-        `${dayPad} ${monthName}`,
-        `${day} ${monthNameShort}`,
+        `${day} ${monthName}`, `${day} ${monthNameShort}`,
+        `${dayPad} ${monthName}`, `${dayPad} ${monthNameShort}`,
         // Bulan + Tanggal
-        `${monthName} ${day}`,
-        `${monthNameShort} ${day}`,
+        `${monthName} ${day}`, `${monthNameShort} ${day}`,
         // Tanggal + Bulan + Tahun
-        `${day} ${monthName} ${year}`,
-        `${day} ${monthNameShort} ${year}`,
-        `${dayPad} ${monthName} ${year}`,
-        `${dayPad} ${monthNameShort} ${year}`,
-        // DD/MM/YYYY
+        `${day} ${monthName} ${year}`, `${day} ${monthNameShort} ${year}`,
+        `${dayPad} ${monthName} ${year}`, `${dayPad} ${monthNameShort} ${year}`,
+        // Format DD/MM/YYYY
         `${dayPad}/${month}/${year}`,
-        // DD-MM-YYYY
+        // Format DD-MM-YYYY
         `${dayPad}-${month}-${year}`,
-        // YYYY-MM-DD
+        // Format YYYY-MM-DD
         `${year}-${month}-${dayPad}`,
-        // DD/MM
+        // Format DD/MM
         `${dayPad}/${month}`,
-        // DD-MM
+        // Format DD-MM
         `${dayPad}-${month}`,
         // Hari + Tanggal
-        `${currentDay} ${day}`,
-        `${currentDay}, ${day}`,
-        `${currentDay} ${dayPad}`,
-        `${currentDay}, ${dayPad}`,
+        `${todayDay} ${day}`, `${todayDay}, ${day}`,
+        `${todayDay} ${dayPad}`, `${todayDay}, ${dayPad}`,
         // Hari + Tanggal + Bulan
-        `${currentDay} ${day} ${monthName}`,
-        `${currentDay}, ${day} ${monthName}`,
+        `${todayDay} ${day} ${monthName}`, `${todayDay}, ${day} ${monthName}`,
         // Hari + Tanggal + Bulan + Tahun
-        `${currentDay} ${day} ${monthName} ${year}`,
-        `${currentDay}, ${day} ${monthName} ${year}`,
+        `${todayDay} ${day} ${monthName} ${year}`, `${todayDay}, ${day} ${monthName} ${year}`,
     ];
     
     // Cek semua format
@@ -2030,7 +2039,7 @@ function isBonusToday(content) {
         }
     }
     
-    // Cek kata kunci "hari ini" atau "today"
+    // Kata kunci "hari ini" atau "today"
     if (lowerContent.includes('hari ini') || lowerContent.includes('today')) {
         return true;
     }
@@ -2059,28 +2068,15 @@ async function renderDashboard() {
             dashboardData = await fetchDashboardData();
         }
         
-        // Fetch bonus data
-        if (bonusAllData.length === 0) {
-            try { bonusAllData = await fetchSheetData(SHEET_BONUS_ALL); } catch(e) {}
+        // Fetch bonus dari sheet BONUS TODAY
+        if (bonusTodayData.length === 0) {
+            try { 
+                bonusTodayData = await fetchBonusTodayData(); 
+            } catch(e) {
+                console.error('Gagal fetch BONUS TODAY:', e);
+                bonusTodayData = [];
+            }
         }
-        if (bonusMingguanData.length === 0) {
-            try { bonusMingguanData = await fetchSheetData(SHEET_BONUS_MINGGUAN); } catch(e) {}
-        }
-        if (bonusDoneBagiData.length === 0) {
-            try { bonusDoneBagiData = await fetchSheetData(SHEET_DONEBAGI); } catch(e) {}
-        }
-        if (bonusLainLainData.length === 0) {
-            try { bonusLainLainData = await fetchSheetData(SHEET_BONUS_LAIN_LAIN); } catch(e) {}
-        }
-        
-        // Gabungkan semua bonus
-        const allBonus = [...bonusAllData, ...bonusMingguanData, ...bonusDoneBagiData, ...bonusLainLainData];
-        
-        // Filter bonus berdasarkan HARI dan TANGGAL hari ini
-        const bonusHariIni = allBonus.filter(item => {
-            const content = (item.title + ' ' + item.content);
-            return isBonusToday(content);
-        });
         
         // ========== RENDER JADWAL ==========
         let scheduleHtml = '';
@@ -2146,19 +2142,28 @@ async function renderDashboard() {
             `;
         }
         
-        // ========== RENDER BONUS HARI INI ==========
+        // ========== FILTER BONUS BERDASARKAN HARI DAN TANGGAL ==========
         const today = new Date();
         const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
         const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
         
+        // Filter bonus yang mengandung hari atau tanggal hari ini
+        const filteredBonus = bonusTodayData.filter(item => {
+            const content = (item.title + ' ' + item.content);
+            return isBonusMatchToday(content);
+        });
+        
         let bonusContent = '';
-        if (bonusHariIni.length > 0) {
+        if (filteredBonus.length > 0) {
             let bonusItems = '';
-            bonusHariIni.slice(0, 10).forEach((item) => {
+            filteredBonus.slice(0, 10).forEach((item) => {
+                const desc = item.content || 'Klik untuk melihat detail';
+                const shortDesc = desc.length > 80 ? desc.substring(0, 80) + '...' : desc;
+                
                 bonusItems += `
                 <div class="bonus-item-card">
                     <span class="bonus-item-title"><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</span>
-                    <span class="bonus-item-desc">${escapeHtml(item.content.length > 60 ? item.content.substring(0,60)+'...' : item.content)}</span>
+                    <span class="bonus-item-desc">${escapeHtml(shortDesc)}</span>
                     <button class="btn-salin-bonus-hari-ini" data-salin="${escapeHtml(item.title + '\n' + item.content)}"><i class="fas fa-copy"></i> Salin</button>
                 </div>
                 `;
@@ -2183,13 +2188,13 @@ async function renderDashboard() {
         <div class="bonus-hari-ini-wrapper">
             <div class="bonus-hari-ini-header">
                 <h2><i class="fas fa-gift"></i> 🎉 BONUS HARI INI</h2>
-                <p><i class="fas fa-calendar-day"></i> ${dayName}, ${dateStr} ${bonusHariIni.length > 0 ? `| ${bonusHariIni.length} bonus tersedia` : '| Tidak ada bonus'}</p>
+                <p><i class="fas fa-calendar-day"></i> ${dayName}, ${dateStr} ${filteredBonus.length > 0 ? `| ${filteredBonus.length} bonus tersedia` : '| Tidak ada bonus'}</p>
             </div>
             <div class="bonus-hari-ini-content">
                 ${bonusContent}
             </div>
             <div class="bonus-hari-ini-footer">
-                <i class="fas fa-gift"></i> ${bonusHariIni.length > 0 ? `Total ${bonusHariIni.length} bonus untuk ${dayName}, ${dateStr} | Klik Salin untuk menyalin bonus` : `Tidak ada bonus untuk ${dayName}, ${dateStr}`}
+                <i class="fas fa-gift"></i> ${filteredBonus.length > 0 ? `Total ${filteredBonus.length} bonus untuk ${dayName}, ${dateStr} | Klik Salin untuk menyalin bonus` : `Tidak ada bonus untuk ${dayName}, ${dateStr}`}
             </div>
         </div>
         `;
@@ -2348,10 +2353,10 @@ document.querySelectorAll('.schedule-card').forEach(card => { card.addEventListe
 }
 
 // ======================= FUNGSI RENDER BONUS (TIDAK DIUBAH) =======================
-async function renderBonusLainLainWithFilter(filter = "") { let data = bonusLainLainData; if (data.length === 0) { try { data = await fetchSheetData(SHEET_BONUS_LAIN_LAIN); bonusLainLainData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS LAIN-LAIN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori LAIN-LAIN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-tags"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-async function renderBonusDoneBagiWithFilter(filter = "") { let data = bonusDoneBagiData; if (data.length === 0) { try { data = await fetchSheetData(SHEET_DONEBAGI); bonusDoneBagiData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat DONE BAGI</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori DONE BAGI</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-async function renderBonusMingguanWithFilter(filter = "") { let data = bonusMingguanData; if (data.length === 0) { try { data = await fetchSheetData(SHEET_BONUS_MINGGUAN); bonusMingguanData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS MINGGUAN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori MINGGUAN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-async function renderBonusAllWithFilter(filter = "") { let data = bonusAllData; if (data.length === 0) { try { data = await fetchSheetData(SHEET_BONUS_ALL); bonusAllData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>Gagal memuat BONUS ALL</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori BONUS ALL</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.slice(0, 8).forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3>${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
+async function renderBonusLainLainWithFilter(filter = "") { let data = bonusLainLainData; if (data.length === 0) { try { data = await fetchSheetData('BONUS LAIN-LAIN'); bonusLainLainData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS LAIN-LAIN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori LAIN-LAIN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-tags"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
+async function renderBonusDoneBagiWithFilter(filter = "") { let data = bonusDoneBagiData; if (data.length === 0) { try { data = await fetchSheetData('DONEBAGI'); bonusDoneBagiData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat DONE BAGI</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori DONE BAGI</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
+async function renderBonusMingguanWithFilter(filter = "") { let data = bonusMingguanData; if (data.length === 0) { try { data = await fetchSheetData('BONUS MINGGUAN'); bonusMingguanData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS MINGGUAN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori MINGGUAN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
+async function renderBonusAllWithFilter(filter = "") { let data = bonusAllData; if (data.length === 0) { try { data = await fetchSheetData('BONUS ALL'); bonusAllData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>Gagal memuat BONUS ALL</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori BONUS ALL</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.slice(0, 8).forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3>${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
 
 function attachBonusCardEvents() { document.querySelectorAll('.bonus-card').forEach(card => { card.removeEventListener('click', bonusCardHandler); card.addEventListener('click', bonusCardHandler); }); }
 function bonusCardHandler(e) { if(e.target.closest('.btn-salin-bonus') || e.target.closest('.btn-open-folder')) return; const title = this.getAttribute('data-bonus-title') || 'Detail Bonus'; const content = this.getAttribute('data-bonus-content') || 'Tidak ada deskripsi tambahan.'; openModal(title, content); }
