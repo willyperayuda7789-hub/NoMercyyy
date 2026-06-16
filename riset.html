@@ -1391,15 +1391,15 @@ color: #60a5fa;
 margin-right: 6px;
 }
 
-/* ========= FOLDER BONUS HARI INI - SETENGAH / PARTSIAL ========= */
+/* ========= FOLDER BONUS HARI INI - SETENGAH / PARTSIAL SEPERTI GAMBAR ========= */
 .bonus-folder-container {
 position: relative;
-margin-bottom: 20px;
+margin-bottom: 24px;
 display: flex;
 flex-direction: column;
 }
 
-/* EFFECT FOLDER - SEPERTI GAMBAR */
+/* TAB FOLDER - SETENGAH (PARTSIAL) SEPERTI GAMBAR */
 .bonus-folder-tab {
 display: inline-flex;
 align-items: center;
@@ -1411,9 +1411,10 @@ color: #1e293b;
 font-weight: 700;
 font-size: 0.95rem;
 width: fit-content;
+max-width: 85%;
 position: relative;
 z-index: 2;
-box-shadow: 0 -4px 15px rgba(251, 191, 36, 0.2);
+box-shadow: 0 -4px 15px rgba(251, 191, 36, 0.15);
 border: 1px solid rgba(255, 255, 255, 0.15);
 border-bottom: none;
 }
@@ -1426,23 +1427,23 @@ color: #1e293b;
 .bonus-folder-tab .header-date-tab {
 font-size: 0.65rem;
 font-weight: 500;
-opacity: 0.7;
-margin-left: 4px;
+opacity: 0.6;
+margin-left: auto;
 }
 
-/* BAGIAN BAWAH FOLDER */
+/* BODY FOLDER - KOTAK PENUH */
 .bonus-folder-body {
 background: rgba(18, 28, 45, 0.9);
 border-radius: 0 16px 16px 16px;
 border: 1px solid rgba(255, 255, 255, 0.12);
-padding: 16px;
+padding: 16px 18px;
 backdrop-filter: blur(8px);
 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 position: relative;
 z-index: 1;
 }
 
-/* List bonus - grid 2 kolom */
+/* LIST BONUS - GRID 2 KOLOM */
 .bonus-folder-list {
 display: grid;
 grid-template-columns: repeat(2, 1fr);
@@ -1451,8 +1452,8 @@ gap: 10px;
 
 .bonus-folder-item {
 background: rgba(0, 0, 0, 0.3);
-border-radius: 10px;
-padding: 10px 12px;
+border-radius: 12px;
+padding: 12px 14px;
 border: 1px solid rgba(255, 255, 255, 0.06);
 transition: all 0.2s ease;
 display: flex;
@@ -1468,18 +1469,20 @@ border-color: rgba(59, 130, 246, 0.25);
 .bonus-item-title-folder {
 font-weight: 600;
 color: #f0f4fe;
-font-size: 0.8rem;
+font-size: 0.82rem;
+display: flex;
+align-items: center;
+gap: 6px;
 }
 
 .bonus-item-title-folder i {
 color: #fbbf24;
-margin-right: 6px;
 font-size: 0.75rem;
 }
 
 .bonus-item-desc-folder {
 color: #94a3b8;
-font-size: 0.65rem;
+font-size: 0.68rem;
 line-height: 1.4;
 display: -webkit-box;
 -webkit-line-clamp: 2;
@@ -1504,7 +1507,7 @@ font-size: 0.6rem;
 font-weight: 600;
 cursor: pointer;
 transition: all 0.2s;
-padding: 4px 8px;
+padding: 5px 8px;
 display: inline-flex;
 align-items: center;
 justify-content: center;
@@ -1521,7 +1524,7 @@ border-color: #60a5fa;
 background: linear-gradient(135deg, #10b981, #059669);
 border: none;
 color: white;
-padding: 4px 12px;
+padding: 5px 12px;
 border-radius: 16px;
 font-size: 0.6rem;
 font-weight: 700;
@@ -1539,38 +1542,39 @@ background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
 }
 
-/* Bonus empty */
+/* BONUS EMPTY */
 .bonus-empty-tab {
 text-align: center;
-padding: 16px;
+padding: 20px;
 color: #94a3b8;
 }
 
 .bonus-empty-tab i {
-font-size: 1.5rem;
+font-size: 1.8rem;
 color: #fbbf24;
 display: block;
-margin-bottom: 6px;
+margin-bottom: 8px;
 opacity: 0.4;
 }
 
 .bonus-empty-tab .empty-title-tab {
-font-size: 0.85rem;
+font-size: 0.9rem;
 font-weight: 600;
 color: #e2e8f0;
 }
 
 .bonus-empty-tab .empty-sub-tab {
-font-size: 0.65rem;
+font-size: 0.7rem;
 color: #64748b;
 margin-top: 2px;
 }
 
+/* FOOTER */
 .bonus-folder-footer-tab {
 background: rgba(0, 0, 0, 0.2);
-padding: 6px 14px;
+padding: 8px 14px;
 text-align: center;
-font-size: 0.55rem;
+font-size: 0.6rem;
 color: #64748b;
 border-top: 1px solid rgba(255, 255, 255, 0.05);
 border-radius: 0 0 16px 16px;
@@ -1589,9 +1593,13 @@ grid-template-columns: 1fr;
 .bonus-folder-tab {
 font-size: 0.8rem;
 padding: 8px 16px 8px 20px;
+max-width: 100%;
 }
 .bonus-folder-tab .header-date-tab {
 font-size: 0.55rem;
+}
+.bonus-folder-body {
+padding: 12px;
 }
 .bonus-item-title-folder {
 font-size: 0.7rem;
@@ -1997,7 +2005,7 @@ function getStatusClass(countdown) {
     return "status-scheduled-dash";
 }
 
-// ======================= FUNGSI FILTER BONUS BERDASARKAN HARI DAN TANGGAL =======================
+// ======================= FUNGSI FILTER BONUS =======================
 function isBonusMatchToday(content) {
     if (!content) return false;
     
@@ -2148,7 +2156,7 @@ async function renderDashboard() {
             `;
         }
         
-        // ========== RENDER BONUS HARI INI - SETENGAH / PARTSIAL ==========
+        // ========== RENDER BONUS HARI INI - SETENGAH SEPERTI GAMBAR ==========
         const today = new Date();
         const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
         const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
