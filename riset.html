@@ -1391,7 +1391,7 @@ color: #60a5fa;
 margin-right: 6px;
 }
 
-/* ========= FOLDER BONUS HARI INI - SETENGAH / PARTSIAL SEPERTI GAMBAR ========= */
+/* ========= FOLDER BONUS HARI INI - SETENGAH / PARTSIAL ========= */
 .bonus-folder-container {
 position: relative;
 margin-bottom: 24px;
@@ -1399,7 +1399,7 @@ display: flex;
 flex-direction: column;
 }
 
-/* TAB FOLDER - SETENGAH (PARTSIAL) SEPERTI GAMBAR */
+/* TAB FOLDER - SETENGAH (PARTSIAL) */
 .bonus-folder-tab {
 display: inline-flex;
 align-items: center;
@@ -1436,29 +1436,29 @@ margin-left: auto;
 background: rgba(18, 28, 45, 0.9);
 border-radius: 0 16px 16px 16px;
 border: 1px solid rgba(255, 255, 255, 0.12);
-padding: 16px 20px;
+padding: 15px 17px;
 backdrop-filter: blur(8px);
 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 position: relative;
 z-index: 1;
 }
 
-/* LIST BONUS - 1 KOLOM (seperti gambar) */
+/* LIST BONUS - 2 KOLOM */
 .bonus-folder-list {
-display: flex;
-flex-direction: column;
-gap: 12px;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 10px;
 }
 
 .bonus-folder-item {
 background: rgba(0, 0, 0, 0.3);
-border-radius: 12px;
-padding: 14px 16px;
+border-radius: 10px;
+padding: 10px 12px;
 border: 1px solid rgba(255, 255, 255, 0.06);
 transition: all 0.2s ease;
 display: flex;
 flex-direction: column;
-gap: 8px;
+gap: 4px;
 }
 
 .bonus-folder-item:hover {
@@ -1469,76 +1469,58 @@ border-color: rgba(59, 130, 246, 0.25);
 .bonus-item-title-folder {
 font-weight: 600;
 color: #f0f4fe;
-font-size: 0.9rem;
+font-size: 0.75rem;
 display: flex;
 align-items: center;
-gap: 8px;
+gap: 6px;
 }
 
 .bonus-item-title-folder i {
 color: #fbbf24;
-font-size: 0.85rem;
+font-size: 0.7rem;
 }
 
-/* DESKRIPSI FULL - TIDAK DIPOTONG */
+/* DESKRIPSI - DIPOTONG MAX 25 KARAKTER */
 .bonus-item-desc-folder {
-color: #cbd5e6;
-font-size: 0.78rem;
-line-height: 1.6;
-white-space: pre-wrap;
-word-break: break-word;
+color: #94a3b8;
+font-size: 0.50rem;
+line-height: 1.4;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
 flex: 1;
+word-break: break-word;
 }
 
+/* TOMBOL SALIN SAJA */
 .bonus-item-actions-folder {
 display: flex;
-gap: 10px;
-margin-top: 8px;
-padding-top: 10px;
-border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.btn-open-folder-tab {
-flex: 1;
-background: transparent;
-border: 1px solid rgba(59, 130, 246, 0.35);
-border-radius: 20px;
-color: #60a5fa;
-font-size: 0.7rem;
-font-weight: 600;
-cursor: pointer;
-transition: all 0.2s;
-padding: 6px 12px;
-display: inline-flex;
-align-items: center;
-justify-content: center;
 gap: 6px;
+margin-top: 6px;
+padding-top: 6px;
+border-top: 1px solid rgba(255, 255, 255, 0.05);
+justify-content: flex-end;
 }
 
-.btn-open-folder-tab:hover {
-background: rgba(59, 130, 246, 0.2);
-color: #93c5fd;
-border-color: #60a5fa;
-}
-
-.btn-salin-bonus-tab {
+.btn-salin-bonus-small {
 background: linear-gradient(135deg, #10b981, #059669);
 border: none;
 color: white;
-padding: 6px 16px;
-border-radius: 20px;
-font-size: 0.7rem;
+padding: 4px 12px;
+border-radius: 14px;
+font-size: 0.55rem;
 font-weight: 700;
 cursor: pointer;
 transition: all 0.2s ease;
 display: inline-flex;
 align-items: center;
-gap: 6px;
+gap: 4px;
 font-family: 'Inter', monospace;
 white-space: nowrap;
 }
 
-.btn-salin-bonus-tab:hover {
+.btn-salin-bonus-small:hover {
 background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
 }
@@ -1546,36 +1528,36 @@ transform: scale(1.02);
 /* BONUS EMPTY */
 .bonus-empty-tab {
 text-align: center;
-padding: 24px;
+padding: 20px;
 color: #94a3b8;
 }
 
 .bonus-empty-tab i {
-font-size: 2rem;
+font-size: 1.8rem;
 color: #fbbf24;
 display: block;
-margin-bottom: 8px;
+margin-bottom: 6px;
 opacity: 0.4;
 }
 
 .bonus-empty-tab .empty-title-tab {
-font-size: 0.95rem;
+font-size: 0.85rem;
 font-weight: 600;
 color: #e2e8f0;
 }
 
 .bonus-empty-tab .empty-sub-tab {
-font-size: 0.75rem;
+font-size: 0.65rem;
 color: #64748b;
-margin-top: 4px;
+margin-top: 2px;
 }
 
 /* FOOTER */
 .bonus-folder-footer-tab {
 background: rgba(0, 0, 0, 0.2);
-padding: 10px 16px;
+padding: 8px 14px;
 text-align: center;
-font-size: 0.7rem;
+font-size: 0.6rem;
 color: #94a3b8;
 border-top: 1px solid rgba(255, 255, 255, 0.05);
 border-radius: 0 0 16px 16px;
@@ -1583,11 +1565,14 @@ border-radius: 0 0 16px 16px;
 
 .bonus-folder-footer-tab i {
 color: #fbbf24;
-margin-right: 6px;
+margin-right: 4px;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+.bonus-folder-list {
+grid-template-columns: 1fr;
+}
 .bonus-folder-tab {
 font-size: 0.8rem;
 padding: 8px 16px 8px 20px;
@@ -1600,13 +1585,10 @@ font-size: 0.55rem;
 padding: 12px 14px;
 }
 .bonus-item-title-folder {
-font-size: 0.8rem;
+font-size: 0.65rem;
 }
 .bonus-item-desc-folder {
-font-size: 0.7rem;
-}
-.bonus-item-actions-folder {
-flex-direction: row;
+font-size: 0.45rem;
 }
 }
 </style>
@@ -2157,7 +2139,7 @@ async function renderDashboard() {
             `;
         }
         
-        // ========== RENDER BONUS HARI INI - SETENGAH SEPERTI GAMBAR ==========
+        // ========== RENDER BONUS HARI INI ==========
         const today = new Date();
         const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
         const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -2171,16 +2153,16 @@ async function renderDashboard() {
         if (filteredBonus.length > 0) {
             let bonusItems = '';
             filteredBonus.slice(0, 10).forEach((item) => {
-                // TAMPILKAN DESKRIPSI FULL, TIDAK DIPOTONG
+                // Potong deskripsi max 25 karakter
                 const desc = item.content || '';
+                const shortDesc = desc.length > 25 ? desc.substring(0, 25) + '...' : desc;
                 
                 bonusItems += `
                 <div class="bonus-folder-item">
                     <div class="bonus-item-title-folder"><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</div>
-                    <div class="bonus-item-desc-folder">${escapeHtml(desc)}</div>
+                    <div class="bonus-item-desc-folder">${escapeHtml(shortDesc)}</div>
                     <div class="bonus-item-actions-folder">
-                        <button class="btn-open-folder-tab" onclick="openModal('${escapeHtml(item.title)}', '${escapeHtml(item.content)}')"><i class="fas fa-folder-open"></i> Buka</button>
-                        <button class="btn-salin-bonus-tab" data-salin="${escapeHtml(item.title + '\n' + item.content)}"><i class="fas fa-copy"></i> SALIN</button>
+                        <button class="btn-salin-bonus-small" data-salin="${escapeHtml(item.title + '\n' + item.content)}"><i class="fas fa-copy"></i> SALIN</button>
                     </div>
                 </div>
                 `;
@@ -2244,7 +2226,7 @@ async function renderDashboard() {
         }, 1000);
         
         // ========== EVENT BONUS SALIN ==========
-        document.querySelectorAll('.btn-salin-bonus-tab').forEach(btn => {
+        document.querySelectorAll('.btn-salin-bonus-small').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const text = btn.getAttribute('data-salin') || '';
