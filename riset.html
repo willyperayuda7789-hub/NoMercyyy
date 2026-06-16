@@ -1948,63 +1948,83 @@ function getStatusClass(countdown) {
     return "status-scheduled-dash";
 }
 
-// ======================= FUNGSI CEK BONUS BERDASARKAN TANGGAL DAN HARI =======================
+// ======================= FUNGSI CEK BONUS BERDASARKAN HARI DAN TANGGAL =======================
 function isBonusToday(content) {
     if (!content) return false;
     
     const today = new Date();
     const lowerContent = content.toLowerCase();
     
-    // 1. Nama hari dalam bahasa Indonesia (Senin, Selasa, dst)
-    const days = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
-    const dayName = days[today.getDay()];
+    // Nama hari dalam bahasa Indonesia (Singkat & Lengkap)
+    const dayNames = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+    const dayNamesShort = ['min', 'sen', 'sel', 'rab', 'kam', 'jum', 'sab'];
+    const currentDay = dayNames[today.getDay()];
+    const currentDayShort = dayNamesShort[today.getDay()];
     
-    // 2. Nama hari dalam bahasa Inggris (Sunday, Monday, dst)
-    const daysEn = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    const dayNameEn = daysEn[today.getDay()];
+    // Nama hari dalam bahasa Inggris
+    const dayNamesEn = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const dayNamesEnShort = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    const currentDayEn = dayNamesEn[today.getDay()];
+    const currentDayEnShort = dayNamesEnShort[today.getDay()];
     
-    // 3. Format tanggal lengkap
-    const day = today.getDate().toString().padStart(2, '0');
+    // Format tanggal
+    const day = today.getDate();
+    const dayPad = day.toString().padStart(2, '0');
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
     const year = today.getFullYear();
-    
-    // Nama bulan dalam bahasa Indonesia
     const monthNames = ['januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember'];
     const monthName = monthNames[today.getMonth()];
+    const monthNameShort = monthName.substring(0, 3);
     
-    // Format tanggal yang mungkin muncul
-    const dateFormats = [
-        // DD/MM/YYYY
-        `${day}/${month}/${year}`,
-        // DD-MM-YYYY
-        `${day}-${month}-${year}`,
-        // YYYY-MM-DD
-        `${year}-${month}-${day}`,
-        // DD MMMM YYYY (contoh: 16 Juni 2026)
-        `${day} ${monthName} ${year}`,
-        // DD MMM YYYY (contoh: 16 Jun 2026)
-        `${day} ${monthName.substring(0,3)} ${year}`,
-        // DD MMMM
+    // Kumpulan format yang akan dicek
+    const formats = [
+        // Nama hari (Indonesia)
+        currentDay,
+        currentDayShort,
+        // Nama hari (Inggris)
+        currentDayEn,
+        currentDayEnShort,
+        // Tanggal
+        day.toString(),
+        dayPad,
+        // Tanggal + Bulan
         `${day} ${monthName}`,
+        `${day} ${monthNameShort}`,
+        `${dayPad} ${monthName}`,
+        `${day} ${monthNameShort}`,
+        // Bulan + Tanggal
+        `${monthName} ${day}`,
+        `${monthNameShort} ${day}`,
+        // Tanggal + Bulan + Tahun
+        `${day} ${monthName} ${year}`,
+        `${day} ${monthNameShort} ${year}`,
+        `${dayPad} ${monthName} ${year}`,
+        `${dayPad} ${monthNameShort} ${year}`,
+        // DD/MM/YYYY
+        `${dayPad}/${month}/${year}`,
+        // DD-MM-YYYY
+        `${dayPad}-${month}-${year}`,
+        // YYYY-MM-DD
+        `${year}-${month}-${dayPad}`,
         // DD/MM
-        `${day}/${month}`,
+        `${dayPad}/${month}`,
         // DD-MM
-        `${day}-${month}`,
-        // Hanya tanggal
-        `${day}`,
-        // Hari + Tanggal (contoh: Senin, 16)
-        `${dayName} ${day}`,
-        `${dayName}, ${day}`,
+        `${dayPad}-${month}`,
+        // Hari + Tanggal
+        `${currentDay} ${day}`,
+        `${currentDay}, ${day}`,
+        `${currentDay} ${dayPad}`,
+        `${currentDay}, ${dayPad}`,
         // Hari + Tanggal + Bulan
-        `${dayName} ${day} ${monthName}`,
-        `${dayName}, ${day} ${monthName}`,
+        `${currentDay} ${day} ${monthName}`,
+        `${currentDay}, ${day} ${monthName}`,
         // Hari + Tanggal + Bulan + Tahun
-        `${dayName} ${day} ${monthName} ${year}`,
-        `${dayName}, ${day} ${monthName} ${year}`
+        `${currentDay} ${day} ${monthName} ${year}`,
+        `${currentDay}, ${day} ${monthName} ${year}`,
     ];
     
     // Cek semua format
-    for (let format of dateFormats) {
+    for (let format of formats) {
         if (lowerContent.includes(format.toLowerCase())) {
             return true;
         }
@@ -2012,16 +2032,6 @@ function isBonusToday(content) {
     
     // Cek kata kunci "hari ini" atau "today"
     if (lowerContent.includes('hari ini') || lowerContent.includes('today')) {
-        return true;
-    }
-    
-    // Cek nama hari (Senin, Selasa, dst)
-    if (lowerContent.includes(dayName)) {
-        return true;
-    }
-    
-    // Cek nama hari dalam bahasa Inggris
-    if (lowerContent.includes(dayNameEn)) {
         return true;
     }
     
@@ -2066,7 +2076,7 @@ async function renderDashboard() {
         // Gabungkan semua bonus
         const allBonus = [...bonusAllData, ...bonusMingguanData, ...bonusDoneBagiData, ...bonusLainLainData];
         
-        // Filter bonus berdasarkan TANGGAL dan HARI ini
+        // Filter bonus berdasarkan HARI dan TANGGAL hari ini
         const bonusHariIni = allBonus.filter(item => {
             const content = (item.title + ' ' + item.content);
             return isBonusToday(content);
@@ -2136,7 +2146,7 @@ async function renderDashboard() {
             `;
         }
         
-        // ========== RENDER BONUS HARI INI (SELALU TAMPIL, DENGAN ISI ATAU PESAN KOSONG) ==========
+        // ========== RENDER BONUS HARI INI ==========
         const today = new Date();
         const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
         const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -2160,7 +2170,6 @@ async function renderDashboard() {
             </div>
             `;
         } else {
-            // Tampilkan pesan "Tidak ada bonus pada hari ini"
             bonusContent = `
             <div class="bonus-empty">
                 <i class="fas fa-gift"></i>
