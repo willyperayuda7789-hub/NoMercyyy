@@ -1436,24 +1436,24 @@ margin-left: auto;
 background: rgba(18, 28, 45, 0.9);
 border-radius: 0 16px 16px 16px;
 border: 1px solid rgba(255, 255, 255, 0.12);
-padding: 20px 17px;
+padding: 25px 17px;
 backdrop-filter: blur(8px);
 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 position: relative;
 z-index: 1;
 }
 
-/* LIST BONUS - 1 KOLOM */
+/* LIST BONUS - 3 KOLOM */
 .bonus-folder-list {
-display: flex;
-flex-direction: column;
-gap: 10px;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 12px;
 }
 
 .bonus-folder-item {
 background: rgba(0, 0, 0, 0.3);
 border-radius: 10px;
-padding: 10px 14px;
+padding: 10px 12px;
 border: 1px solid rgba(255, 255, 255, 0.06);
 transition: all 0.2s ease;
 display: flex;
@@ -1480,10 +1480,10 @@ color: #fbbf24;
 font-size: 0.7rem;
 }
 
-/* DESKRIPSI - DIPOTONG MAX 20 KARAKTER */
+/* DESKRIPSI - DIPOTONG MAX 20 KARAKTER + FONT 0.80rem */
 .bonus-item-desc-folder {
 color: #94a3b8;
-font-size: 0.65rem;
+font-size: 0.80rem;
 line-height: 1.4;
 display: -webkit-box;
 -webkit-line-clamp: 2;
@@ -1569,7 +1569,15 @@ margin-right: 4px;
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+.bonus-folder-list {
+grid-template-columns: repeat(2, 1fr);
+}
+}
 @media (max-width: 768px) {
+.bonus-folder-list {
+grid-template-columns: 1fr;
+}
 .bonus-folder-tab {
 font-size: 0.8rem;
 padding: 8px 16px 8px 20px;
@@ -1585,7 +1593,7 @@ padding: 15px 12px;
 font-size: 0.65rem;
 }
 .bonus-item-desc-folder {
-font-size: 0.55rem;
+font-size: 0.70rem;
 }
 }
 </style>
@@ -2149,7 +2157,7 @@ async function renderDashboard() {
         let bonusContent = '';
         if (filteredBonus.length > 0) {
             let bonusItems = '';
-            filteredBonus.slice(0, 10).forEach((item) => {
+            filteredBonus.slice(0, 12).forEach((item) => {
                 // Potong deskripsi max 20 karakter
                 const desc = item.content || '';
                 const shortDesc = desc.length > 20 ? desc.substring(0, 20) + '...' : desc;
