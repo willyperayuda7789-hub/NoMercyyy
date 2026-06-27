@@ -1238,363 +1238,100 @@ transform: none;
 box-shadow: none;
 }
 
-/* ========= KHUSUS DASHBOARD UTAMA - TABEL JADWAL TERDEKAT ========= */
-.dashboard-grid.dashboard-schedule {
-display: block;
-}
-
-.schedule-folder-wrapper {
+/* ========= CARD KHUSUS UNTUK DASHBOARD JADWAL ========= */
+.dashboard-schedule-card {
 background: rgba(18, 28, 45, 0.85);
 border-radius: 28px;
+padding: 22px 24px;
+transition: all 0.3s ease;
 border: 1px solid rgba(255, 255, 255, 0.2);
-overflow: hidden;
-backdrop-filter: blur(4px);
 box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-margin-bottom: 24px;
-}
-
-.schedule-folder-header {
-background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(37, 99, 235, 0.2));
-padding: 18px 26px;
-border-bottom: 1px solid rgba(59, 130, 246, 0.5);
-}
-
-.schedule-folder-header h2 {
-font-size: 1.5rem;
-font-weight: 800;
-color: #f0f4fe;
 display: flex;
-align-items: center;
-gap: 12px;
+flex-direction: column;
+position: relative;
 }
 
-.schedule-folder-header h2 i {
-color: #60a5fa;
-font-size: 1.6rem;
+.dashboard-schedule-card:hover {
+transform: translateY(-6px);
+background: rgba(30, 45, 70, 0.95);
+border-color: rgba(59, 130, 246, 0.6);
+box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.4);
 }
 
-.schedule-folder-header p {
-font-size: 0.75rem;
-color: #93c5fd;
-margin-top: 4px;
-margin-left: 36px;
-}
-
-.schedule-table-dash {
-width: 100%;
-border-collapse: collapse;
-color: #e2e8f0;
-}
-
-.schedule-table-dash thead tr {
-background: rgba(0, 0, 0, 0.35);
-}
-
-.schedule-table-dash th {
-padding: 14px 20px;
-text-align: left;
-font-weight: 700;
-font-size: 0.8rem;
-text-transform: uppercase;
-letter-spacing: 1.2px;
-color: #93c5fd;
-}
-
-.schedule-table-dash td {
-padding: 14px 20px;
-border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-font-weight: 500;
-vertical-align: middle;
-}
-
-.schedule-table-dash tr:hover td {
-background: rgba(59, 130, 246, 0.08);
-}
-
-.schedule-table-dash .pasaran-name {
+.dashboard-schedule-card .pasaran-name {
+font-size: 1.1rem;
 font-weight: 700;
 color: #f0f4fe;
-font-size: 0.95rem;
+margin-bottom: 4px;
+letter-spacing: -0.2px;
 }
 
-.schedule-table-dash .pasaran-name i {
-margin-right: 10px;
+.dashboard-schedule-card .result-time {
+font-size: 1.4rem;
+font-weight: 800;
 color: #60a5fa;
+margin: 6px 0;
 }
 
-.schedule-table-dash .result-time {
-font-family: 'Inter', monospace;
-font-weight: 600;
-color: #a5d8ff;
-font-size: 0.9rem;
+.dashboard-schedule-card .time-remaining {
+font-size: 0.85rem;
+color: #94a3b8;
+margin-bottom: 10px;
 }
 
-.schedule-table-dash .countdown-dash {
-font-family: 'Inter', monospace;
-font-weight: 700;
-color: #fbbf24;
-letter-spacing: 1px;
-font-size: 0.95rem;
-text-shadow: 0 0 5px rgba(251, 191, 36, 0.2);
-}
-
-.schedule-table-dash .status-badge-dash {
+.dashboard-schedule-card .status-badge {
 display: inline-block;
 padding: 4px 14px;
 border-radius: 30px;
-font-size: 0.65rem;
+font-size: 0.7rem;
 font-weight: 700;
+text-transform: uppercase;
 letter-spacing: 0.5px;
+background: rgba(59, 130, 246, 0.3);
+color: #93c5fd;
+border: 1px solid rgba(59, 130, 246, 0.4);
 }
 
-.status-scheduled-dash {
+.dashboard-schedule-card .status-badge.jadwal {
 background: rgba(59, 130, 246, 0.25);
 color: #93c5fd;
-border: 1px solid rgba(59, 130, 246, 0.5);
+border-color: rgba(59, 130, 246, 0.3);
 }
 
-.status-soon-dash {
-background: rgba(245, 158, 11, 0.3);
-color: #fcd34d;
-border: 1px solid rgba(245, 158, 11, 0.5);
-animation: pulse-soon-dash 1.5s infinite;
+.dashboard-schedule-card .status-badge.live {
+background: rgba(34, 197, 94, 0.25);
+color: #4ade80;
+border-color: rgba(34, 197, 94, 0.3);
 }
 
-.status-live-dash {
-background: rgba(34, 197, 94, 0.35);
-color: #86efac;
-border: 1px solid rgba(34, 197, 94, 0.6);
-animation: pulse-live-dash 1s infinite;
+.dashboard-schedule-card .status-badge.close {
+background: rgba(239, 68, 68, 0.25);
+color: #f87171;
+border-color: rgba(239, 68, 68, 0.3);
 }
 
-@keyframes pulse-soon-dash {
-0%, 100% { opacity: 1; }
-50% { opacity: 0.7; background: rgba(245, 158, 11, 0.5); }
-}
-
-@keyframes pulse-live-dash {
-0%, 100% { opacity: 1; }
-50% { opacity: 0.8; background: rgba(34, 197, 94, 0.6); }
-}
-
-.schedule-folder-footer {
-background: rgba(0, 0, 0, 0.25);
-padding: 10px 24px;
-text-align: center;
-font-size: 0.7rem;
-color: #94a3b8;
-border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.schedule-folder-footer i {
-color: #60a5fa;
-margin-right: 6px;
-}
-
-/* ========= FOLDER BONUS HARI INI - SETENGAH / PARTSIAL ========= */
-.bonus-folder-container {
-position: relative;
-margin-bottom: 24px;
-display: flex;
-flex-direction: column;
-}
-
-/* TAB FOLDER - SETENGAH (PARTSIAL) */
-.bonus-folder-tab {
-display: inline-flex;
-align-items: center;
-gap: 10px;
-background: linear-gradient(135deg, #fbbf24, #f59e0b);
-padding: 10px 24px 10px 28px;
-border-radius: 12px 12px 0 0;
-color: #1e293b;
-font-weight: 700;
-font-size: 0.95rem;
-width: fit-content;
-max-width: 90%;
-position: relative;
-z-index: 2;
-box-shadow: 0 -4px 15px rgba(251, 191, 36, 0.15);
-border: 1px solid rgba(255, 255, 255, 0.15);
-border-bottom: none;
-}
-
-.bonus-folder-tab i {
-font-size: 1rem;
-color: #1e293b;
-}
-
-.bonus-folder-tab .header-date-tab {
-font-size: 0.65rem;
-font-weight: 500;
-opacity: 0.6;
-margin-left: auto;
-}
-
-/* BODY FOLDER - KOTAK PENUH */
-.bonus-folder-body {
-background: rgba(18, 28, 45, 0.9);
-border-radius: 0 16px 16px 16px;
-border: 1px solid rgba(255, 255, 255, 0.12);
-padding: 25px 17px;
-backdrop-filter: blur(8px);
-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-position: relative;
-z-index: 1;
-}
-
-/* LIST BONUS - 3 KOLOM */
-.bonus-folder-list {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 12px;
-}
-
-.bonus-folder-item {
-background: rgba(0, 0, 0, 0.3);
-border-radius: 10px;
-padding: 10px 12px;
-border: 1px solid rgba(255, 255, 255, 0.06);
-transition: all 0.2s ease;
-display: flex;
-flex-direction: column;
-gap: 4px;
-}
-
-.bonus-folder-item:hover {
-background: rgba(59, 130, 246, 0.12);
-border-color: rgba(59, 130, 246, 0.25);
-}
-
-.bonus-item-title-folder {
-font-weight: 600;
-color: #f0f4fe;
-font-size: 0.75rem;
-display: flex;
-align-items: center;
-gap: 6px;
-}
-
-.bonus-item-title-folder i {
-color: #fbbf24;
-font-size: 0.7rem;
-}
-
-/* DESKRIPSI - DIPOTONG MAX 20 KARAKTER + FONT 0.80rem */
-.bonus-item-desc-folder {
-color: #94a3b8;
-font-size: 0.80rem;
-line-height: 1.4;
-display: -webkit-box;
--webkit-line-clamp: 2;
--webkit-box-orient: vertical;
-overflow: hidden;
-flex: 1;
-word-break: break-word;
-}
-
-/* TOMBOL SALIN SAJA */
-.bonus-item-actions-folder {
-display: flex;
-gap: 6px;
-margin-top: 6px;
-padding-top: 6px;
-border-top: 1px solid rgba(255, 255, 255, 0.05);
-justify-content: flex-end;
-}
-
-.btn-salin-bonus-small {
-background: linear-gradient(135deg, #10b981, #059669);
+.dashboard-schedule-card .schedule-divider {
 border: none;
-color: white;
-padding: 4px 12px;
-border-radius: 14px;
-font-size: 0.55rem;
-font-weight: 700;
-cursor: pointer;
-transition: all 0.2s ease;
-display: inline-flex;
+border-top: 1px solid rgba(255,255,255,0.08);
+margin: 12px 0 10px 0;
+}
+
+.dashboard-schedule-card .schedule-row {
+display: flex;
+justify-content: space-between;
 align-items: center;
-gap: 4px;
-font-family: 'Inter', monospace;
-white-space: nowrap;
+padding: 2px 0;
+font-size: 0.8rem;
+color: #cbd5e6;
 }
 
-.btn-salin-bonus-small:hover {
-background: linear-gradient(135deg, #059669, #047857);
-transform: scale(1.02);
-}
-
-/* BONUS EMPTY */
-.bonus-empty-tab {
-text-align: center;
-padding: 20px;
+.dashboard-schedule-card .schedule-row .label {
 color: #94a3b8;
 }
 
-.bonus-empty-tab i {
-font-size: 1.8rem;
-color: #fbbf24;
-display: block;
-margin-bottom: 6px;
-opacity: 0.4;
-}
-
-.bonus-empty-tab .empty-title-tab {
-font-size: 0.85rem;
+.dashboard-schedule-card .schedule-row .value {
 font-weight: 600;
 color: #e2e8f0;
-}
-
-.bonus-empty-tab .empty-sub-tab {
-font-size: 0.65rem;
-color: #64748b;
-margin-top: 2px;
-}
-
-/* FOOTER */
-.bonus-folder-footer-tab {
-background: rgba(0, 0, 0, 0.2);
-padding: 8px 14px;
-text-align: center;
-font-size: 0.6rem;
-color: #94a3b8;
-border-top: 1px solid rgba(255, 255, 255, 0.05);
-border-radius: 0 0 16px 16px;
-}
-
-.bonus-folder-footer-tab i {
-color: #fbbf24;
-margin-right: 4px;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-.bonus-folder-list {
-grid-template-columns: repeat(2, 1fr);
-}
-}
-@media (max-width: 768px) {
-.bonus-folder-list {
-grid-template-columns: 1fr;
-}
-.bonus-folder-tab {
-font-size: 0.8rem;
-padding: 8px 16px 8px 20px;
-max-width: 100%;
-}
-.bonus-folder-tab .header-date-tab {
-font-size: 0.55rem;
-}
-.bonus-folder-body {
-padding: 15px 12px;
-}
-.bonus-item-title-folder {
-font-size: 0.65rem;
-}
-.bonus-item-desc-folder {
-font-size: 0.70rem;
-}
 }
 </style>
 </head>
@@ -1655,18 +1392,12 @@ const SHEET_REFUND_QRIS = 'REFUND QRIS';
 const SHEET_QRIS_LAIN_LAIN = 'QRIS LAIN-LAIN';
 const SHEET_JADWAL_PASARAN = 'JADWALPASARAN';
 const SHEET_LINK_LAIN = 'LINK LAIN LAIN';
-const SHEET_BONUS_TODAY = 'BONUS TODAY';
 
-// Data untuk DASHBOARD
-let dashboardData = [];
-
-// Data untuk tab lain
 let foldersData = [];
 let bonusAllData = [];
 let bonusMingguanData = [];
 let bonusDoneBagiData = [];
 let bonusLainLainData = [];
-let bonusTodayData = [];
 let rrnQrisData = [];
 let ewalletBankData = [];
 let caraBermainAllData = [];
@@ -1682,36 +1413,26 @@ let currentActiveTab = "tab1";
 let currentBonusSubTab = "lain";
 let currentGalleryTab = "cara_bermain";
 let currentQrisTab = "lain_lain";
-let countdownInterval = null;
+
+// Data Jadwal Dashboard (5 pasaran terdekat)
+const dashboardScheduleData = [
+    { pasaran: "HOKIDRAW", waktu: "13:00 WIB", sisa: "00:18:57", status: "JADWAL" },
+    { pasaran: "OREGON 12", waktu: "13:00 WIB", sisa: "00:18:57", status: "JADWAL" },
+    { pasaran: "TOTOMACAU SIANG", waktu: "13:15 WIB", sisa: "00:33:57", status: "JADWAL" },
+    { pasaran: "SYDNEY", waktu: "14:05 WIB", sisa: "01:23:57", status: "JADWAL" },
+    { pasaran: "JAKARTA 1400", waktu: "14:10 WIB", sisa: "01:28:57", status: "JADWAL" }
+];
+
+const staticTabsData = {
+tab1: { title: "🏠 Dashboard Utama", subtitle: "Jadwal Result Terdekat — 5 Pasaran", items: dashboardScheduleData },
+tab3: { title: "✉️ EVENT LINETOGEL", subtitle: "Inbox & komunikasi tim — pesan terkini", items: [
+{ icon: "fas fa-inbox", title: "Pesan Masuk", desc: "Anda memiliki 12 pesan belum dibaca", badge: "12 baru" },
+{ icon: "fas fa-comment-dots", title: "Diskusi Tim", desc: "3 percakapan aktif di proyek utama", badge: "Balas" },
+{ icon: "fas fa-bell", title: "Notifikasi", desc: "Pengingat meeting jam 14:00 WIB", badge: "Segera" }
+] }
+};
 
 // ======================= FUNGSI FETCH DATA =======================
-async function fetchDashboardData() {
-    try {
-        const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=DASHBOARDDD`;
-        const response = await fetch(csvUrl, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const csvText = await response.text();
-        const rows = parseCSV(csvText);
-        const items = [];
-        for (let i = 0; i < rows.length; i++) {
-            if (rows[i] && rows[i][0] && rows[i][0].trim()) {
-                let rawTime = rows[i][1] ? rows[i][1].trim() : "";
-                let timeOnly = rawTime.replace(" WIB", "").trim();
-                items.push({
-                    pasaran: rows[i][0].trim(),
-                    result_time_raw: rawTime,
-                    result_time: timeOnly,
-                    keterangan: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : ""
-                });
-            }
-        }
-        return items;
-    } catch(e) {
-        console.error(e);
-        throw new Error(`Gagal ambil data dari sheet DASHBOARDDD`);
-    }
-}
-
 async function fetchSheetData(sheetName) {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
@@ -1727,29 +1448,6 @@ dataRows.push({ title: rows[i][0].trim(), content: rows[i][1] ? rows[i][1].trim(
 }
 return dataRows;
 } catch(e) { console.error(`Error fetch ${sheetName}:`, e); throw new Error(`Gagal ambil data dari sheet ${sheetName}`); }
-}
-
-async function fetchBonusTodayData() {
-    try {
-        const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_BONUS_TODAY)}`;
-        const response = await fetch(csvUrl, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const csvText = await response.text();
-        const rows = parseCSV(csvText);
-        const items = [];
-        for (let i = 0; i < rows.length; i++) {
-            if (rows[i] && rows[i][0] && rows[i][0].trim()) {
-                items.push({
-                    title: rows[i][0].trim(),
-                    content: rows[i][1] ? rows[i][1].trim() : ""
-                });
-            }
-        }
-        return items;
-    } catch(e) {
-        console.error(e);
-        return [];
-    }
 }
 
 async function fetchJadwalPasaran() {
@@ -1948,304 +1646,61 @@ return row;
 });
 }
 
-// ======================= FUNGSI COUNTDOWN =======================
-function parseTimeToDate(timeStr) {
-    if (!timeStr) return null;
-    const [hour, minute] = timeStr.split(':').map(Number);
-    if (isNaN(hour) || isNaN(minute)) return null;
-    const now = new Date();
-    let targetDate = new Date(now);
-    targetDate.setHours(hour, minute, 0, 0);
-    if (targetDate <= now) {
-        targetDate = new Date(now);
-        targetDate.setDate(targetDate.getDate() + 1);
-        targetDate.setHours(hour, minute, 0, 0);
-    }
-    return targetDate;
+// ======================= RENDER DASHBOARD (TAB1) =======================
+function renderDashboardWithFilter(filter = "") {
+const mainHeading = document.getElementById("mainHeading");
+const subHeading = document.getElementById("subHeading");
+const dynamicArea = document.getElementById("dynamicContentArea");
+dynamicArea.classList.remove("link-lain-grid", "gallery-fullwidth", "qris-grid-container");
+dynamicArea.classList.add("dashboard-grid");
+
+mainHeading.innerHTML = "🏠 DASHBOARD UTAMA";
+const filterInfo = filter ? ` | 🔍 Mencari: "${filter}"` : "";
+subHeading.innerHTML = `Jadwal Result Terdekat — 5 Pasaran${filterInfo}`;
+
+bonusBadgeContainer.classList.remove("visible");
+galleryBadgeContainer.classList.remove("visible");
+qrisBadgeContainer.style.display = "none";
+
+let filteredData = dashboardScheduleData;
+if (filter.trim() !== "") {
+const keyword = filter.toLowerCase();
+filteredData = dashboardScheduleData.filter(item => 
+item.pasaran.toLowerCase().includes(keyword) || 
+item.waktu.toLowerCase().includes(keyword) ||
+item.sisa.includes(filter.trim())
+);
 }
 
-function calculateCountdown(timeStr) {
-    const targetDate = parseTimeToDate(timeStr);
-    if (!targetDate) return { formatted: "00:00:00", totalMs: Infinity };
-    const now = new Date();
-    const diffMs = targetDate - now;
-    if (diffMs <= 0) return { formatted: "00:00:00", totalMs: 0 };
-    const hours = Math.floor(diffMs / (1000 * 60 * 60));
-    const minutes = Math.floor((diffMs % (3600000)) / 60000);
-    const seconds = Math.floor((diffMs % 60000) / 1000);
-    return {
-        formatted: `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`,
-        totalMs: diffMs
-    };
+if (filteredData.length === 0) {
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di Dashboard</p></div>`;
+return;
 }
 
-function getStatusText(countdown) {
-    if (!countdown) return "JADWAL";
-    if (countdown.totalMs <= 0) return "LIVE";
-    if (countdown.totalMs < 300000) return "SEGERA";
-    return "JADWAL";
+let cardsHtml = "";
+filteredData.forEach((item) => {
+cardsHtml += `
+<div class="dashboard-schedule-card">
+    <div class="pasaran-name">${escapeHtml(item.pasaran)}</div>
+    <div class="result-time">${escapeHtml(item.waktu)}</div>
+    <div class="time-remaining"><i class="fas fa-clock"></i> Sisa waktu: ${escapeHtml(item.sisa)}</div>
+    <hr class="schedule-divider">
+    <div class="schedule-row">
+        <span class="label">STATUS</span>
+        <span class="status-badge jadwal">${escapeHtml(item.status)}</span>
+    </div>
+    <div class="schedule-row">
+        <span class="label">PASARAN</span>
+        <span class="value">${escapeHtml(item.pasaran)}</span>
+    </div>
+</div>
+`;
+});
+
+dynamicArea.innerHTML = cardsHtml;
 }
 
-function getStatusClass(countdown) {
-    if (!countdown) return "status-scheduled-dash";
-    if (countdown.totalMs <= 0) return "status-live-dash";
-    if (countdown.totalMs < 300000) return "status-soon-dash";
-    return "status-scheduled-dash";
-}
-
-// ======================= FUNGSI FILTER BONUS =======================
-function isBonusMatchToday(content) {
-    if (!content) return false;
-    
-    const today = new Date();
-    const lowerContent = content.toLowerCase();
-    
-    const dayNames = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
-    const dayNamesShort = ['min', 'sen', 'sel', 'rab', 'kam', 'jum', 'sab'];
-    const todayDay = dayNames[today.getDay()];
-    const todayDayShort = dayNamesShort[today.getDay()];
-    
-    const dayNamesEn = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    const dayNamesEnShort = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-    const todayDayEn = dayNamesEn[today.getDay()];
-    const todayDayEnShort = dayNamesEnShort[today.getDay()];
-    
-    const day = today.getDate();
-    const dayPad = day.toString().padStart(2, '0');
-    const month = (today.getMonth() + 1).toString().padStart(2, '0');
-    const year = today.getFullYear();
-    const monthNames = ['januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember'];
-    const monthName = monthNames[today.getMonth()];
-    const monthNameShort = monthName.substring(0, 3);
-    
-    const formats = [
-        todayDay, todayDayShort,
-        todayDayEn, todayDayEnShort,
-        day.toString(), dayPad,
-        `${day} ${monthName}`, `${day} ${monthNameShort}`,
-        `${dayPad} ${monthName}`, `${dayPad} ${monthNameShort}`,
-        `${monthName} ${day}`, `${monthNameShort} ${day}`,
-        `${day} ${monthName} ${year}`, `${day} ${monthNameShort} ${year}`,
-        `${dayPad} ${monthName} ${year}`, `${dayPad} ${monthNameShort} ${year}`,
-        `${dayPad}/${month}/${year}`,
-        `${dayPad}-${month}-${year}`,
-        `${year}-${month}-${dayPad}`,
-        `${dayPad}/${month}`,
-        `${dayPad}-${month}`,
-        `${todayDay} ${day}`, `${todayDay}, ${day}`,
-        `${todayDay} ${dayPad}`, `${todayDay}, ${dayPad}`,
-        `${todayDay} ${day} ${monthName}`, `${todayDay}, ${day} ${monthName}`,
-        `${todayDay} ${day} ${monthName} ${year}`, `${todayDay}, ${day} ${monthName} ${year}`,
-    ];
-    
-    for (let format of formats) {
-        if (lowerContent.includes(format.toLowerCase())) {
-            return true;
-        }
-    }
-    
-    if (lowerContent.includes('hari ini') || lowerContent.includes('today')) {
-        return true;
-    }
-    
-    return false;
-}
-
-// ======================= RENDER DASHBOARD =======================
-async function renderDashboard() {
-    const mainHeading = document.getElementById("mainHeading");
-    const subHeading = document.getElementById("subHeading");
-    const dynamicArea = document.getElementById("dynamicContentArea");
-    
-    dynamicArea.classList.remove("link-lain-grid", "gallery-fullwidth", "qris-grid-container");
-    dynamicArea.classList.add("dashboard-schedule");
-    dynamicArea.style.display = "block";
-    
-    mainHeading.innerHTML = "🏠 DASHBOARD UTAMA";
-    subHeading.innerHTML = "Jadwal Result Terdekat + Bonus Hari Ini | ⏱️ Live Countdown Realtime";
-    
-    dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data dashboard...</p></div>`;
-    
-    try {
-        if (dashboardData.length === 0) {
-            dashboardData = await fetchDashboardData();
-        }
-        
-        if (bonusTodayData.length === 0) {
-            try { 
-                bonusTodayData = await fetchBonusTodayData(); 
-            } catch(e) {
-                console.error('Gagal fetch BONUS TODAY:', e);
-                bonusTodayData = [];
-            }
-        }
-        
-        // ========== RENDER JADWAL ==========
-        let scheduleHtml = '';
-        const validItems = dashboardData.filter(item => item.result_time && item.result_time.trim() !== "");
-        
-        if (validItems.length > 0) {
-            const itemsWithCountdown = validItems.map(item => {
-                const countdown = calculateCountdown(item.result_time);
-                return { ...item, countdown };
-            });
-            
-            itemsWithCountdown.sort((a, b) => a.countdown.totalMs - b.countdown.totalMs);
-            const nearestSchedules = itemsWithCountdown.slice(0, 5);
-            
-            window.nearestSchedulesData = nearestSchedules.map(item => ({
-                pasaran: item.pasaran,
-                result_time: item.result_time,
-                result_time_raw: item.result_time_raw
-            }));
-            
-            let tableRows = "";
-            nearestSchedules.forEach((item, idx) => {
-                const statusText = getStatusText(item.countdown);
-                const statusClass = getStatusClass(item.countdown);
-                const countdownStr = item.countdown.formatted;
-                const displayTime = item.result_time_raw || `${item.result_time} WIB`;
-                
-                tableRows += `
-                <tr data-idx="${idx}" data-target-time="${escapeHtml(item.result_time)}">
-                    <td class="pasaran-name"><i class="fas fa-chart-simple"></i> ${escapeHtml(item.pasaran)}</td>
-                    <td class="result-time">${escapeHtml(displayTime)}</td>
-                    <td class="countdown-dash countdown-${idx}">${countdownStr}</td>
-                    <td><span class="status-badge-dash ${statusClass}">${statusText}</span></td>
-                </tr>
-                `;
-            });
-            
-            scheduleHtml = `
-            <div class="schedule-folder-wrapper">
-                <div class="schedule-folder-header">
-                    <h2><i class="fas fa-calendar-alt"></i> JADWAL RESULT TERDEKAT</h2>
-                    <p><i class="fas fa-clock"></i> Update setiap detik | 5 Pasaran dengan jadwal PALING DEKAT dari sekarang</p>
-                </div>
-                <table class="schedule-table-dash">
-                    <thead>
-                        <tr><th>PASARAN</th><th>RESULT</th><th>SISA WAKTU</th><th>STATUS</th></tr>
-                    </thead>
-                    <tbody>${tableRows}</tbody>
-                </table>
-                <div class="schedule-folder-footer">
-                    <i class="fas fa-database"></i> Data dari Google Sheets (DASHBOARDDD) | Waktu dalam WIB | <i class="fas fa-sync-alt"></i> Live Countdown
-                </div>
-            </div>
-            `;
-        } else {
-            scheduleHtml = `
-            <div class="schedule-folder-wrapper">
-                <div class="schedule-folder-header">
-                    <h2><i class="fas fa-calendar-alt"></i> JADWAL RESULT TERDEKAT</h2>
-                    <p><i class="fas fa-exclamation-triangle"></i> Belum ada data jadwal. Silakan isi kolom B (Waktu Result) di sheet DASHBOARDDD.</p>
-                </div>
-            </div>
-            `;
-        }
-        
-        // ========== RENDER BONUS HARI INI ==========
-        const today = new Date();
-        const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
-        const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
-        
-        const filteredBonus = bonusTodayData.filter(item => {
-            const content = (item.title + ' ' + item.content);
-            return isBonusMatchToday(content);
-        });
-        
-        let bonusContent = '';
-        if (filteredBonus.length > 0) {
-            let bonusItems = '';
-            filteredBonus.slice(0, 12).forEach((item) => {
-                // Potong deskripsi max 20 karakter
-                const desc = item.content || '';
-                const shortDesc = desc.length > 20 ? desc.substring(0, 20) + '...' : desc;
-                
-                bonusItems += `
-                <div class="bonus-folder-item">
-                    <div class="bonus-item-title-folder"><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</div>
-                    <div class="bonus-item-desc-folder">${escapeHtml(shortDesc)}</div>
-                    <div class="bonus-item-actions-folder">
-                        <button class="btn-salin-bonus-small" data-salin="${escapeHtml(item.title + '\n' + item.content)}"><i class="fas fa-copy"></i> SALIN</button>
-                    </div>
-                </div>
-                `;
-            });
-            
-            bonusContent = `
-            <div class="bonus-folder-list">
-                ${bonusItems}
-            </div>
-            `;
-        } else {
-            bonusContent = `
-            <div class="bonus-empty-tab">
-                <i class="fas fa-gift"></i>
-                <div class="empty-title-tab">Tidak ada bonus pada hari ini</div>
-                <div class="empty-sub-tab">Belum ada bonus yang dibagikan untuk ${dayName}, ${dateStr}</div>
-            </div>
-            `;
-        }
-        
-        const bonusHtml = `
-        <div class="bonus-folder-container">
-            <div class="bonus-folder-tab">
-                <i class="fas fa-gift"></i> BONUS HARI INI
-                <span class="header-date-tab">${dayName}, ${dateStr}</span>
-            </div>
-            <div class="bonus-folder-body">
-                ${bonusContent}
-                <div class="bonus-folder-footer-tab">
-                    <i class="fas fa-gift"></i> Total ${filteredBonus.length} bonus untuk ${dayName}, ${dateStr}
-                </div>
-            </div>
-        </div>
-        `;
-        
-        dynamicArea.innerHTML = scheduleHtml + bonusHtml;
-        
-        // ========== START COUNTDOWN ==========
-        if (countdownInterval) clearInterval(countdownInterval);
-        
-        countdownInterval = setInterval(() => {
-            if (!window.nearestSchedulesData) return;
-            
-            window.nearestSchedulesData.forEach((item, idx) => {
-                const countdownEl = document.querySelector(`.countdown-${idx}`);
-                const row = document.querySelector(`tr[data-idx="${idx}"]`);
-                
-                if (countdownEl && row) {
-                    const newCountdown = calculateCountdown(item.result_time);
-                    if (newCountdown) {
-                        countdownEl.textContent = newCountdown.formatted;
-                        
-                        const statusBadge = row.querySelector('.status-badge-dash');
-                        if (statusBadge) {
-                            statusBadge.textContent = getStatusText(newCountdown);
-                            statusBadge.className = `status-badge-dash ${getStatusClass(newCountdown)}`;
-                        }
-                    }
-                }
-            });
-        }, 1000);
-        
-        // ========== EVENT BONUS SALIN ==========
-        document.querySelectorAll('.btn-salin-bonus-small').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const text = btn.getAttribute('data-salin') || '';
-                copyContentOnly(text, 'Bonus');
-            });
-        });
-        
-    } catch(err) {
-        console.error(err);
-        dynamicArea.innerHTML = `<div class="error-message"><h3>❌ Gagal Memuat Dashboard</h3><p>${escapeHtml(err.message)}</p></div>`;
-    }
-}
-
-// ======================= RENDER LINK SCRIPTS (TIDAK DIUBAH) =======================
+// ======================= RENDER LINK SCRIPTS (4 KOLOM PER BARIS) =======================
 async function renderLinkLainWithFilter(filter = "") {
 const mainHeading = document.getElementById("mainHeading");
 const subHeading = document.getElementById("subHeading");
@@ -2318,7 +1773,7 @@ dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat LI
 }
 }
 
-// ======================= RENDER JADWAL TOGEL (TIDAK DIUBAH) =======================
+// ======================= RENDER JADWAL TOGEL =======================
 async function renderJadwalTogelWithFilter(filter = "") {
 const mainHeading = document.getElementById("mainHeading");
 const subHeading = document.getElementById("subHeading");
@@ -2326,9 +1781,9 @@ const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.classList.remove("link-lain-grid");
 mainHeading.innerHTML = "📅 JADWAL TOGEL | Data Pasaran";
 subHeading.innerHTML = `Sheet: JADWALPASARAN (Kolom A=Judul, B=Subjudul, C=Isi Folder, D=URL Website)${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol KUNJUNGI WEBSITE mengambil URL dari Kolom D`;
-document.getElementById("bonusBadgeContainer").classList.remove("visible");
-document.getElementById("galleryBadgeContainer").classList.remove("visible");
-document.getElementById("qrisBadgeContainer").style.display = "none";
+bonusBadgeContainer.classList.remove("visible");
+galleryBadgeContainer.classList.remove("visible");
+qrisBadgeContainer.style.display = "none";
 dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container");
 dynamicArea.classList.add("dashboard-grid");
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat jadwal pasaran...</p></div>`;
@@ -2345,7 +1800,7 @@ filtered.forEach((item) => {
 const preview = item.isi.length > 120 ? item.isi.substring(0,120)+'...' : (item.isi || '(Tidak ada konten)');
 const websiteUrl = cleanUrl(item.url);
 const hasUrl = item.url && item.url.trim() !== "";
-cardsHtml += `<div class="schedule-card" data-judul="${escapeHtml(item.judul)}" data-subjudul="${escapeHtml(item.subjudul)}" data-isi="${escapeHtml(item.isi)}" data-url="${escapeHtml(websiteUrl)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.judul)}</h3><div class="schedule-subjudul"><i class="fas fa-tag"></i> ${escapeHtml(item.subjudul) || '(Tidak ada subjudul)'}</div><div class="schedule-preview">${escapeHtml(preview)}</div><div class="schedule-buttons-row"><button class="btn-salin-subjudul-jadwal" data-subjudul="${escapeHtml(item.subjudul)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button><button class="btn-salin-isi-jadwal" data-isi="${escapeHtml(item.isi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Isi</button></div>${hasUrl ? `<button class="btn-kunjungi-website" data-url="${escapeHtml(websiteUrl)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-external-link-alt"></i> KUNJUNGI WEBSITE</button>` : `<button class="btn-kunjungi-website" disabled><i class="fas fa-external-link-alt"></i> TIDAK ADA URL</button>`}</div>`;
+cardsHtml += `<div class="schedule-card" data-judul="${escapeHtml(item.judul)}" data-subjudul="${escapeHtml(item.subjudul)}" data-isi="${escapeHtml(item.isi)}" data-url="${escapeHtml(websiteUrl)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.judul)}</h3><div class="schedule-subjudul"><i class="fas fa-tag"></i> ${escapeHtml(item.subjudul) || '(Tidak ada subjudul)'}</div><div class="schedule-preview">${escapeHtml(preview)}</div><div class="schedule-buttons-row"><button class="btn-salin-subjudul-jadwal" data-subjudul="${escapeHtml(item.subjudul)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button><button class="btn-salin-isi-jadwal" data-isi="${escapeHtml(item.isi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Isi</button></div>${hasUrl ? `<button class="btn-kunjungi-website" data-url="${escapeHtml(websiteUrl)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-external-link-alt"></i> BUKA WEBSITE</button>` : `<button class="btn-kunjungi-website" disabled><i class="fas fa-external-link-alt"></i> TIDAK ADA URL</button>`}</div>`;
 });
 dynamicArea.innerHTML = cardsHtml;
 document.querySelectorAll('.btn-salin-subjudul-jadwal').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const subjudul = btn.getAttribute('data-subjudul') || ""; const judul = btn.getAttribute('data-judul') || "Folder"; copyContentOnly(subjudul, `Subjudul: ${judul}`); }); });
@@ -2367,7 +1822,7 @@ function attachOpenFolderEvents() { document.querySelectorAll('.btn-open-folder'
 function openFolderHandler(e) { e.stopPropagation(); const card = this.closest('.bonus-card'); if(card) { const title = card.getAttribute('data-bonus-title') || 'Detail Bonus'; const content = card.getAttribute('data-bonus-content') || 'Tidak ada deskripsi tambahan.'; openModal(title, content); } }
 function attachBonusSalinEvents() { document.querySelectorAll('.btn-salin-bonus').forEach(btn => { btn.removeEventListener('click', bonusSalinHandler); btn.addEventListener('click', bonusSalinHandler); }); }
 function bonusSalinHandler(e) { e.stopPropagation(); const title = this.getAttribute('data-salin-title') || 'Folder'; const content = this.getAttribute('data-salin-content') || ''; copyContentOnly(content, title); }
-async function renderBonusPage() { const mainHeading = document.getElementById("mainHeading"); const subHeading = document.getElementById("subHeading"); mainHeading.innerHTML = "⚙️ BONUS ✨"; const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()}${filterInfo} | Tombol SEJAJAR dalam 1 BARIS`; document.getElementById("bonusBadgeContainer").classList.add("visible"); document.getElementById("galleryBadgeContainer").classList.remove("visible"); document.getElementById("qrisBadgeContainer").style.display = "none"; if (currentBonusSubTab === 'all') { await renderBonusAllWithFilter(currentFilterText); } else if (currentBonusSubTab === 'mingguan') { await renderBonusMingguanWithFilter(currentFilterText); } else if (currentBonusSubTab === 'done') { await renderBonusDoneBagiWithFilter(currentFilterText); } else if (currentBonusSubTab === 'lain') { await renderBonusLainLainWithFilter(currentFilterText); } }
+async function renderBonusPage() { const mainHeading = document.getElementById("mainHeading"); const subHeading = document.getElementById("subHeading"); mainHeading.innerHTML = "⚙️ BONUS ✨"; const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()}${filterInfo} | Tombol SEJAJAR dalam 1 BARIS`; bonusBadgeContainer.classList.add("visible"); galleryBadgeContainer.classList.remove("visible"); qrisBadgeContainer.style.display = "none"; if (currentBonusSubTab === 'all') { await renderBonusAllWithFilter(currentFilterText); } else if (currentBonusSubTab === 'mingguan') { await renderBonusMingguanWithFilter(currentFilterText); } else if (currentBonusSubTab === 'done') { await renderBonusDoneBagiWithFilter(currentFilterText); } else if (currentBonusSubTab === 'lain') { await renderBonusLainLainWithFilter(currentFilterText); } }
 
 // ======================= FUNGSI RENDER RANDOM (TIDAK DIUBAH) =======================
 async function renderRandomTabWithFilter(filter = "") { 
@@ -2377,9 +1832,9 @@ const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.classList.remove("link-lain-grid");
 mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets"; 
 subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN`; 
-document.getElementById("bonusBadgeContainer").classList.remove("visible"); 
-document.getElementById("galleryBadgeContainer").classList.remove("visible"); 
-document.getElementById("qrisBadgeContainer").style.display = "none"; 
+bonusBadgeContainer.classList.remove("visible"); 
+galleryBadgeContainer.classList.remove("visible"); 
+qrisBadgeContainer.style.display = "none"; 
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat folder...</p></div>`; 
 try { 
 if(foldersData.length === 0) foldersData = await fetchSheetData('PK RANDOM'); 
@@ -2418,7 +1873,44 @@ dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.
 } 
 }
 
-// ======================= FUNGSI RENDER GALLERY GAMBAR CS (TIDAK DIUBAH) =======================
+function renderStaticTabWithFilter(tabId, filter = "") { 
+const data = staticTabsData[tabId]; 
+if(!data) return false; 
+const mainHeading = document.getElementById("mainHeading"); 
+const subHeading = document.getElementById("subHeading"); 
+const dynamicArea = document.getElementById("dynamicContentArea"); 
+dynamicArea.classList.remove("link-lain-grid");
+mainHeading.innerHTML = data.title; 
+const filterInfo = filter ? ` | 🔍 Hasil pencarian: "${filter}"` : ""; 
+subHeading.innerHTML = data.subtitle + filterInfo; 
+bonusBadgeContainer.classList.remove("visible"); 
+galleryBadgeContainer.classList.remove("visible"); 
+qrisBadgeContainer.style.display = "none"; 
+dynamicArea.classList.remove("gallery-fullwidth"); 
+
+// Khusus untuk tab1 (Dashboard) gunakan render terpisah
+if (tabId === 'tab1') {
+renderDashboardWithFilter(filter);
+return true;
+}
+
+let filteredItems = data.items; 
+if(filter.trim() !== "") { 
+filteredItems = data.items.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.desc.toLowerCase().includes(filter.toLowerCase())); 
+} 
+if(filteredItems.length === 0 && filter) { 
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada konten yang cocok dengan "${escapeHtml(filter)}" di kolom ${data.title}</p></div>`; 
+return true; 
+} 
+let cardsHTML = ""; 
+filteredItems.forEach(item => { 
+cardsHTML += `<div class="card" style="cursor:default;"><div class="card-icon"><i class="${item.icon}"></i></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><div class="stat-badge"><i class="fas fa-tag"></i> ${escapeHtml(item.badge)}</div></div>`; 
+}); 
+dynamicArea.innerHTML = cardsHTML; 
+return true; 
+}
+
+// ======================= RENDER GALLERY GAMBAR CS (TIDAK DIUBAH) =======================
 async function renderGalleryCS() { 
 const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.classList.remove("link-lain-grid");
@@ -2453,9 +1945,9 @@ const subHeading = document.getElementById("subHeading");
 mainHeading.innerHTML = catTitle; 
 const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; 
 subHeading.innerHTML = `${catSub}${filterInfo} | Grid 4 kolom responsif | KIRI: Salin Subjudul | KANAN: Salin Gambar`; 
-document.getElementById("bonusBadgeContainer").classList.remove("visible"); 
-document.getElementById("galleryBadgeContainer").classList.add("visible"); 
-document.getElementById("qrisBadgeContainer").style.display = "none"; 
+bonusBadgeContainer.classList.remove("visible"); 
+galleryBadgeContainer.classList.add("visible"); 
+qrisBadgeContainer.style.display = "none"; 
 dynamicArea.style.display = "block"; 
 dynamicArea.classList.add("gallery-fullwidth"); 
 let filtered = itemsToShow; 
@@ -2535,9 +2027,9 @@ try { qrisLainLainData = await fetchQrisLainLainData(); } catch(e) { dynamicArea
 dataItems = [...qrisLainLainData]; 
 } 
 subHeading.innerHTML = `Kategori: ${categoryName}${filterInfo} | Data dari Google Sheets | Klik kartu untuk detail, tombol salin di pojok kanan bawah`; 
-document.getElementById("bonusBadgeContainer").classList.remove("visible"); 
-document.getElementById("galleryBadgeContainer").classList.remove("visible"); 
-document.getElementById("qrisBadgeContainer").style.display = "block"; 
+bonusBadgeContainer.classList.remove("visible"); 
+galleryBadgeContainer.classList.remove("visible"); 
+qrisBadgeContainer.style.display = "block"; 
 dynamicArea.classList.remove("gallery-fullwidth"); 
 dynamicArea.style.display = "grid"; 
 dynamicArea.classList.remove("dashboard-grid"); 
@@ -2581,23 +2073,17 @@ if(searchInput) searchInput.value = "";
 if(clearSearchBtn) clearSearchBtn.classList.remove('visible');
 const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.style.display = "";
-dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container", "link-lain-grid", "dashboard-schedule");
+dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container", "link-lain-grid");
 dynamicArea.classList.add("dashboard-grid");
 
-document.getElementById("bonusBadgeContainer").classList.remove("visible");
-document.getElementById("galleryBadgeContainer").classList.remove("visible");
-document.getElementById("qrisBadgeContainer").style.display = "none";
-
-if (tabId === 'tab1') { 
-    if (countdownInterval) clearInterval(countdownInterval);
-    await renderDashboard(); 
-}
-else if(tabId === 'tab2') { if (countdownInterval) clearInterval(countdownInterval); await renderRandomTabWithFilter(currentFilterText); }
-else if(tabId === 'tab3') { if (countdownInterval) clearInterval(countdownInterval); await renderLinkLainWithFilter(currentFilterText); }
-else if(tabId === 'tab4') { if (countdownInterval) clearInterval(countdownInterval); await renderGalleryCS(); bindGalleryBadges(); }
-else if(tabId === 'tab5') { if (countdownInterval) clearInterval(countdownInterval); renderAllAboutQris(); bindQrisBadges(); }
-else if(tabId === 'tab6') { if (countdownInterval) clearInterval(countdownInterval); await renderBonusPage(); bindBonusBadgeEvents(); }
-else if(tabId === 'tab7') { if (countdownInterval) clearInterval(countdownInterval); await renderJadwalTogelWithFilter(currentFilterText); }
+if(tabId === 'tab1') { renderDashboardWithFilter(currentFilterText); }
+else if(tabId === 'tab2') { await renderRandomTabWithFilter(currentFilterText); }
+else if(tabId === 'tab3') { await renderLinkLainWithFilter(currentFilterText); }
+else if(tabId === 'tab4') { await renderGalleryCS(); bindGalleryBadges(); }
+else if(tabId === 'tab5') { renderAllAboutQris(); bindQrisBadges(); }
+else if(tabId === 'tab6') { await renderBonusPage(); bindBonusBadgeEvents(); }
+else if(tabId === 'tab7') { await renderJadwalTogelWithFilter(currentFilterText); }
+else { renderStaticTabWithFilter(currentActiveTab, currentFilterText); }
 }
 
 function bindNavEvents() {
@@ -2611,13 +2097,14 @@ if(tid) onTabClick(tid);
 
 async function applyLiveSearch() {
 const filter = currentFilterText;
-if(currentActiveTab === 'tab1') { await renderDashboard(); }
+if(currentActiveTab === 'tab1') { renderDashboardWithFilter(filter); }
 else if(currentActiveTab === 'tab2') { await renderRandomTabWithFilter(filter); }
 else if(currentActiveTab === 'tab3') { await renderLinkLainWithFilter(filter); }
 else if(currentActiveTab === 'tab4') { await renderGalleryCS(); }
 else if(currentActiveTab === 'tab5') { renderAllAboutQris(); }
 else if(currentActiveTab === 'tab6') { await renderBonusPage(); }
 else if(currentActiveTab === 'tab7') { await renderJadwalTogelWithFilter(filter); }
+else { renderStaticTabWithFilter(currentActiveTab, filter); }
 }
 
 function handleSearchInput() {
@@ -2648,6 +2135,9 @@ const searchInputElem = document.getElementById("liveSearchInput");
 const clearSearchBtnElem = document.getElementById("clearSearchBtn");
 const modal = document.getElementById("folderModal");
 const closeModalBtn = document.getElementById("closeModalBtn");
+const bonusBadgeContainer = document.getElementById("bonusBadgeContainer");
+const galleryBadgeContainer = document.getElementById("galleryBadgeContainer");
+const qrisBadgeContainer = document.getElementById("qrisBadgeContainer");
 
 closeModalBtn.onclick = closeModalFunc;
 if(modal) modal.onclick = e => { if(e.target === modal) closeModalFunc(); };
@@ -2657,6 +2147,7 @@ if(clearSearchBtnElem) clearSearchBtnElem.addEventListener('click', clearSearch)
 
 (async function init() { 
 bindNavEvents(); 
+// Default ke tab1 (Dashboard)
 await onTabClick('tab1');
 })();
 </script>
