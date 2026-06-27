@@ -1391,7 +1391,7 @@ color: #60a5fa;
 margin-right: 6px;
 }
 
-/* ========= FOLDER BONUS HARI INI - SETENGAH LEBAR + TINGGI LEBIH BESAR ========= */
+/* ========= FOLDER BONUS HARI INI - SEPERTI CONTOH GAMBAR ========= */
 .bonus-folder-container {
 position: relative;
 margin-bottom: 24px;
@@ -1400,7 +1400,7 @@ flex-direction: column;
 max-width: 50%;
 }
 
-/* TAB FOLDER - SETENGAH (PARTSIAL) */
+/* TAB FOLDER */
 .bonus-folder-tab {
 display: inline-flex;
 align-items: center;
@@ -1432,35 +1432,36 @@ opacity: 0.6;
 margin-left: auto;
 }
 
-/* BODY FOLDER - KOTAK PENUH DENGAN PADDING VERTIKAL LEBIH BESAR */
+/* BODY FOLDER */
 .bonus-folder-body {
 background: rgba(18, 28, 45, 0.9);
 border-radius: 0 16px 16px 16px;
 border: 1px solid rgba(255, 255, 255, 0.12);
-padding: 32px 20px 36px 20px;
+padding: 28px 24px 32px 24px;
 backdrop-filter: blur(8px);
 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 position: relative;
 z-index: 1;
 }
 
-/* LIST BONUS - 3 KOLOM */
+/* LIST BONUS - Satu kolom untuk tampilan seperti contoh */
 .bonus-folder-list {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 16px;
+display: flex;
+flex-direction: column;
+gap: 14px;
 }
 
+/* ITEM BONUS - SEPERTI CONTOH GAMBAR */
 .bonus-folder-item {
-background: rgba(0, 0, 0, 0.3);
-border-radius: 12px;
-padding: 14px 16px 14px 16px;
-border: 1px solid rgba(255, 255, 255, 0.06);
+background: rgba(0, 0, 0, 0.35);
+border-radius: 14px;
+padding: 18px 20px;
+border: 1px solid rgba(255, 255, 255, 0.08);
 transition: all 0.2s ease;
 display: flex;
 flex-direction: column;
-gap: 6px;
-min-height: 80px;
+gap: 8px;
+cursor: pointer;
 }
 
 .bonus-folder-item:hover {
@@ -1468,90 +1469,122 @@ background: rgba(59, 130, 246, 0.12);
 border-color: rgba(59, 130, 246, 0.25);
 }
 
-.bonus-item-title-folder {
-font-weight: 600;
+.bonus-folder-item .bonus-item-title-folder {
+font-weight: 700;
 color: #f0f4fe;
-font-size: 0.85rem;
+font-size: 0.95rem;
 display: flex;
 align-items: center;
-gap: 6px;
+gap: 10px;
+letter-spacing: -0.2px;
 }
 
-.bonus-item-title-folder i {
+.bonus-folder-item .bonus-item-title-folder i {
 color: #fbbf24;
-font-size: 0.7rem;
+font-size: 0.85rem;
 }
 
-/* DESKRIPSI - DIPOTONG MAX 30 KARAKTER + FONT LEBIH BESAR */
-.bonus-item-desc-folder {
-color: #94a3b8;
+.bonus-folder-item .bonus-item-desc-folder {
+color: #cbd5e6;
 font-size: 0.90rem;
-line-height: 1.5;
+line-height: 1.6;
 display: -webkit-box;
--webkit-line-clamp: 2;
+-webkit-line-clamp: 3;
 -webkit-box-orient: vertical;
 overflow: hidden;
-flex: 1;
 word-break: break-word;
+padding-left: 28px;
 }
 
-/* TOMBOL SALIN SAJA */
+/* TOMBOL DI BAWAH - SEPERTI CONTOH */
 .bonus-item-actions-folder {
 display: flex;
-gap: 6px;
-margin-top: 6px;
-padding-top: 8px;
-border-top: 1px solid rgba(255, 255, 255, 0.05);
-justify-content: flex-end;
+flex-direction: row;
+align-items: center;
+gap: 12px;
+margin-top: 10px;
+padding-top: 12px;
+border-top: 1px solid rgba(255, 255, 255, 0.06);
+justify-content: flex-start;
+padding-left: 28px;
 }
 
-.btn-salin-bonus-small {
+.btn-open-folder-small {
+background: transparent;
+border: 1px solid rgba(59, 130, 246, 0.5);
+border-radius: 30px;
+color: #60a5fa;
+font-size: 0.75rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+padding: 8px 18px;
+font-family: 'Inter', monospace;
+}
+
+.btn-open-folder-small:hover {
+background: rgba(59, 130, 246, 0.2);
+color: #93c5fd;
+border-color: #60a5fa;
+}
+
+.btn-open-folder-small i {
+font-size: 0.75rem;
+}
+
+.btn-salin-bonus-small-v2 {
 background: linear-gradient(135deg, #10b981, #059669);
 border: none;
 color: white;
-padding: 6px 14px;
-border-radius: 18px;
-font-size: 0.6rem;
+padding: 8px 20px;
+border-radius: 30px;
+font-size: 0.75rem;
 font-weight: 700;
 cursor: pointer;
 transition: all 0.2s ease;
 display: inline-flex;
 align-items: center;
-gap: 4px;
+gap: 8px;
 font-family: 'Inter', monospace;
-white-space: nowrap;
 }
 
-.btn-salin-bonus-small:hover {
+.btn-salin-bonus-small-v2:hover {
 background: linear-gradient(135deg, #059669, #047857);
 transform: scale(1.02);
+}
+
+.btn-salin-bonus-small-v2 i {
+font-size: 0.75rem;
 }
 
 /* BONUS EMPTY */
 .bonus-empty-tab {
 text-align: center;
-padding: 28px 20px;
+padding: 30px 20px;
 color: #94a3b8;
 }
 
 .bonus-empty-tab i {
-font-size: 2rem;
+font-size: 2.2rem;
 color: #fbbf24;
 display: block;
-margin-bottom: 8px;
+margin-bottom: 10px;
 opacity: 0.4;
 }
 
 .bonus-empty-tab .empty-title-tab {
-font-size: 0.9rem;
+font-size: 0.95rem;
 font-weight: 600;
 color: #e2e8f0;
 }
 
 .bonus-empty-tab .empty-sub-tab {
-font-size: 0.7rem;
+font-size: 0.75rem;
 color: #64748b;
-margin-top: 2px;
+margin-top: 4px;
 }
 
 /* FOOTER */
@@ -1570,34 +1603,26 @@ color: #fbbf24;
 margin-right: 4px;
 }
 
-/* Responsive - Tablet: max-width 70%, item list 2 kolom */
+/* Responsive */
 @media (max-width: 1024px) {
 .bonus-folder-container {
 max-width: 70%;
 }
-.bonus-folder-list {
-grid-template-columns: repeat(2, 1fr);
-gap: 14px;
+.bonus-folder-item .bonus-item-title-folder {
+font-size: 0.90rem;
 }
-.bonus-folder-body {
-padding: 28px 16px 32px 16px;
-}
-.bonus-item-title-folder {
-font-size: 0.80rem;
-}
-.bonus-item-desc-folder {
+.bonus-folder-item .bonus-item-desc-folder {
 font-size: 0.85rem;
+padding-left: 26px;
+}
+.bonus-item-actions-folder {
+padding-left: 26px;
 }
 }
 
-/* Responsive - HP: lebar penuh (100%) biar tetap terbaca */
 @media (max-width: 768px) {
 .bonus-folder-container {
 max-width: 100%;
-}
-.bonus-folder-list {
-grid-template-columns: 1fr;
-gap: 12px;
 }
 .bonus-folder-tab {
 font-size: 0.8rem;
@@ -1608,17 +1633,29 @@ max-width: 100%;
 font-size: 0.55rem;
 }
 .bonus-folder-body {
-padding: 24px 14px 28px 14px;
-}
-.bonus-item-title-folder {
-font-size: 0.75rem;
-}
-.bonus-item-desc-folder {
-font-size: 0.80rem;
+padding: 20px 16px 24px 16px;
 }
 .bonus-folder-item {
-min-height: 70px;
-padding: 12px 14px;
+padding: 14px 16px;
+}
+.bonus-folder-item .bonus-item-title-folder {
+font-size: 0.85rem;
+}
+.bonus-folder-item .bonus-item-desc-folder {
+font-size: 0.80rem;
+padding-left: 0;
+}
+.bonus-item-actions-folder {
+padding-left: 0;
+flex-wrap: wrap;
+}
+.btn-open-folder-small {
+font-size: 0.65rem;
+padding: 6px 14px;
+}
+.btn-salin-bonus-small-v2 {
+font-size: 0.65rem;
+padding: 6px 16px;
 }
 }
 </style>
@@ -2169,7 +2206,7 @@ scheduleHtml = `
 `;
 }
 
-// ========== RENDER BONUS HARI INI ==========
+// ========== RENDER BONUS HARI INI - SEPERTI CONTOH GAMBAR ==========
 const today = new Date();
 const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
 const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -2182,17 +2219,17 @@ return isBonusMatchToday(content);
 let bonusContent = '';
 if (filteredBonus.length > 0) {
 let bonusItems = '';
-filteredBonus.slice(0, 12).forEach((item) => {
-// Potong deskripsi max 30 karakter
+filteredBonus.slice(0, 6).forEach((item) => {
+// Ambil konten lengkap untuk deskripsi
 const desc = item.content || '';
-const shortDesc = desc.length > 30 ? desc.substring(0, 30) + '...' : desc;
 
 bonusItems += `
-<div class="bonus-folder-item">
+<div class="bonus-folder-item" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
 <div class="bonus-item-title-folder"><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</div>
-<div class="bonus-item-desc-folder">${escapeHtml(shortDesc)}</div>
+<div class="bonus-item-desc-folder">${escapeHtml(desc)}</div>
 <div class="bonus-item-actions-folder">
-<button class="btn-salin-bonus-small" data-salin="${escapeHtml(item.title + '\n' + item.content)}"><i class="fas fa-copy"></i> SALIN</button>
+<button class="btn-open-folder-small"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
+<button class="btn-salin-bonus-small-v2" data-salin="${escapeHtml(item.title + '\n' + item.content)}"><i class="fas fa-copy"></i> SALIN</button>
 </div>
 </div>
 `;
@@ -2230,6 +2267,38 @@ ${bonusContent}
 
 dynamicArea.innerHTML = scheduleHtml + bonusHtml;
 
+// ========== EVENT UNTUK BONUS ITEM (Klik folder) ==========
+document.querySelectorAll('.bonus-folder-item').forEach(item => {
+item.addEventListener('click', (e) => {
+if (e.target.closest('button')) return;
+const title = item.getAttribute('data-bonus-title') || 'Bonus';
+const content = item.getAttribute('data-bonus-content') || 'Tidak ada deskripsi';
+openModal(title, content);
+});
+});
+
+// ========== EVENT BONUS SALIN ==========
+document.querySelectorAll('.btn-salin-bonus-small-v2').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+const text = btn.getAttribute('data-salin') || '';
+copyContentOnly(text, 'Bonus');
+});
+});
+
+// ========== EVENT BUKA FOLDER ==========
+document.querySelectorAll('.btn-open-folder-small').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+const parent = btn.closest('.bonus-folder-item');
+if (parent) {
+const title = parent.getAttribute('data-bonus-title') || 'Bonus';
+const content = parent.getAttribute('data-bonus-content') || 'Tidak ada deskripsi';
+openModal(title, content);
+}
+});
+});
+
 // ========== START COUNTDOWN ==========
 if (countdownInterval) clearInterval(countdownInterval);
 
@@ -2254,15 +2323,6 @@ statusBadge.className = `status-badge-dash ${getStatusClass(newCountdown)}`;
 }
 });
 }, 1000);
-
-// ========== EVENT BONUS SALIN ==========
-document.querySelectorAll('.btn-salin-bonus-small').forEach(btn => {
-btn.addEventListener('click', (e) => {
-e.stopPropagation();
-const text = btn.getAttribute('data-salin') || '';
-copyContentOnly(text, 'Bonus');
-});
-});
 
 } catch(err) {
 console.error(err);
