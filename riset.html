@@ -1391,13 +1391,12 @@ color: #60a5fa;
 margin-right: 6px;
 }
 
-/* ========= FOLDER BONUS HARI INI - SETENGAH LEBAR (PARTSIAL) ========= */
+/* ========= FOLDER BONUS HARI INI - SETENGAH LEBAR + TINGGI LEBIH BESAR ========= */
 .bonus-folder-container {
 position: relative;
 margin-bottom: 24px;
 display: flex;
 flex-direction: column;
-/* BATASI LEBAR HANYA 50% DARI PARENT (main-content) */
 max-width: 50%;
 }
 
@@ -1433,12 +1432,12 @@ opacity: 0.6;
 margin-left: auto;
 }
 
-/* BODY FOLDER - KOTAK PENUH */
+/* BODY FOLDER - KOTAK PENUH DENGAN PADDING VERTIKAL LEBIH BESAR */
 .bonus-folder-body {
 background: rgba(18, 28, 45, 0.9);
 border-radius: 0 16px 16px 16px;
 border: 1px solid rgba(255, 255, 255, 0.12);
-padding: 25px 17px;
+padding: 32px 20px 36px 20px;
 backdrop-filter: blur(8px);
 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 position: relative;
@@ -1449,18 +1448,19 @@ z-index: 1;
 .bonus-folder-list {
 display: grid;
 grid-template-columns: repeat(3, 1fr);
-gap: 12px;
+gap: 16px;
 }
 
 .bonus-folder-item {
 background: rgba(0, 0, 0, 0.3);
-border-radius: 10px;
-padding: 10px 12px;
+border-radius: 12px;
+padding: 14px 16px 14px 16px;
 border: 1px solid rgba(255, 255, 255, 0.06);
 transition: all 0.2s ease;
 display: flex;
 flex-direction: column;
-gap: 4px;
+gap: 6px;
+min-height: 80px;
 }
 
 .bonus-folder-item:hover {
@@ -1471,7 +1471,7 @@ border-color: rgba(59, 130, 246, 0.25);
 .bonus-item-title-folder {
 font-weight: 600;
 color: #f0f4fe;
-font-size: 0.75rem;
+font-size: 0.85rem;
 display: flex;
 align-items: center;
 gap: 6px;
@@ -1482,11 +1482,11 @@ color: #fbbf24;
 font-size: 0.7rem;
 }
 
-/* DESKRIPSI - DIPOTONG MAX 20 KARAKTER + FONT 0.80rem */
+/* DESKRIPSI - DIPOTONG MAX 30 KARAKTER + FONT LEBIH BESAR */
 .bonus-item-desc-folder {
 color: #94a3b8;
-font-size: 0.80rem;
-line-height: 1.4;
+font-size: 0.90rem;
+line-height: 1.5;
 display: -webkit-box;
 -webkit-line-clamp: 2;
 -webkit-box-orient: vertical;
@@ -1500,7 +1500,7 @@ word-break: break-word;
 display: flex;
 gap: 6px;
 margin-top: 6px;
-padding-top: 6px;
+padding-top: 8px;
 border-top: 1px solid rgba(255, 255, 255, 0.05);
 justify-content: flex-end;
 }
@@ -1509,9 +1509,9 @@ justify-content: flex-end;
 background: linear-gradient(135deg, #10b981, #059669);
 border: none;
 color: white;
-padding: 4px 12px;
-border-radius: 14px;
-font-size: 0.55rem;
+padding: 6px 14px;
+border-radius: 18px;
+font-size: 0.6rem;
 font-weight: 700;
 cursor: pointer;
 transition: all 0.2s ease;
@@ -1530,26 +1530,26 @@ transform: scale(1.02);
 /* BONUS EMPTY */
 .bonus-empty-tab {
 text-align: center;
-padding: 20px;
+padding: 28px 20px;
 color: #94a3b8;
 }
 
 .bonus-empty-tab i {
-font-size: 1.8rem;
+font-size: 2rem;
 color: #fbbf24;
 display: block;
-margin-bottom: 6px;
+margin-bottom: 8px;
 opacity: 0.4;
 }
 
 .bonus-empty-tab .empty-title-tab {
-font-size: 0.85rem;
+font-size: 0.9rem;
 font-weight: 600;
 color: #e2e8f0;
 }
 
 .bonus-empty-tab .empty-sub-tab {
-font-size: 0.65rem;
+font-size: 0.7rem;
 color: #64748b;
 margin-top: 2px;
 }
@@ -1557,9 +1557,9 @@ margin-top: 2px;
 /* FOOTER */
 .bonus-folder-footer-tab {
 background: rgba(0, 0, 0, 0.2);
-padding: 8px 14px;
+padding: 10px 16px;
 text-align: center;
-font-size: 0.6rem;
+font-size: 0.65rem;
 color: #94a3b8;
 border-top: 1px solid rgba(255, 255, 255, 0.05);
 border-radius: 0 0 16px 16px;
@@ -1570,13 +1570,23 @@ color: #fbbf24;
 margin-right: 4px;
 }
 
-/* Responsive - Tablet: max-width 50% tetap, tapi item list 2 kolom */
+/* Responsive - Tablet: max-width 70%, item list 2 kolom */
 @media (max-width: 1024px) {
 .bonus-folder-container {
 max-width: 70%;
 }
 .bonus-folder-list {
 grid-template-columns: repeat(2, 1fr);
+gap: 14px;
+}
+.bonus-folder-body {
+padding: 28px 16px 32px 16px;
+}
+.bonus-item-title-folder {
+font-size: 0.80rem;
+}
+.bonus-item-desc-folder {
+font-size: 0.85rem;
 }
 }
 
@@ -1587,6 +1597,7 @@ max-width: 100%;
 }
 .bonus-folder-list {
 grid-template-columns: 1fr;
+gap: 12px;
 }
 .bonus-folder-tab {
 font-size: 0.8rem;
@@ -1597,13 +1608,17 @@ max-width: 100%;
 font-size: 0.55rem;
 }
 .bonus-folder-body {
-padding: 15px 12px;
+padding: 24px 14px 28px 14px;
 }
 .bonus-item-title-folder {
-font-size: 0.65rem;
+font-size: 0.75rem;
 }
 .bonus-item-desc-folder {
-font-size: 0.70rem;
+font-size: 0.80rem;
+}
+.bonus-folder-item {
+min-height: 70px;
+padding: 12px 14px;
 }
 }
 </style>
@@ -2154,7 +2169,7 @@ scheduleHtml = `
 `;
 }
 
-// ========== RENDER BONUS HARI INI - DENGAN LEBAR SETENGAH ==========
+// ========== RENDER BONUS HARI INI ==========
 const today = new Date();
 const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
 const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -2168,9 +2183,9 @@ let bonusContent = '';
 if (filteredBonus.length > 0) {
 let bonusItems = '';
 filteredBonus.slice(0, 12).forEach((item) => {
-// Potong deskripsi max 20 karakter
+// Potong deskripsi max 30 karakter
 const desc = item.content || '';
-const shortDesc = desc.length > 20 ? desc.substring(0, 20) + '...' : desc;
+const shortDesc = desc.length > 30 ? desc.substring(0, 30) + '...' : desc;
 
 bonusItems += `
 <div class="bonus-folder-item">
@@ -2213,7 +2228,6 @@ ${bonusContent}
 </div>
 `;
 
-// Gabungkan: schedule full width + bonus setengah lebar
 dynamicArea.innerHTML = scheduleHtml + bonusHtml;
 
 // ========== START COUNTDOWN ==========
