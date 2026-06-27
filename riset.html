@@ -1489,7 +1489,7 @@ color: #cbd5e6;
 font-size: 0.90rem;
 line-height: 1.6;
 display: -webkit-box;
--webkit-line-clamp: 3;
+-webkit-line-clamp: 4;
 -webkit-box-orient: vertical;
 overflow: hidden;
 word-break: break-word;
@@ -2219,9 +2219,9 @@ return isBonusMatchToday(content);
 let bonusContent = '';
 if (filteredBonus.length > 0) {
 let bonusItems = '';
-// Tampilkan semua bonus yang cocok, tidak dibatasi 6
+// Tampilkan SEMUA bonus yang cocok (tidak dibatasi)
 filteredBonus.forEach((item) => {
-// Ambil konten lengkap untuk deskripsi
+// Gunakan konten lengkap sebagai deskripsi
 const desc = item.content || '';
 
 bonusItems += `
