@@ -2219,7 +2219,8 @@ return isBonusMatchToday(content);
 let bonusContent = '';
 if (filteredBonus.length > 0) {
 let bonusItems = '';
-filteredBonus.slice(0, 6).forEach((item) => {
+// Tampilkan semua bonus yang cocok, tidak dibatasi 6
+filteredBonus.forEach((item) => {
 // Ambil konten lengkap untuk deskripsi
 const desc = item.content || '';
 
