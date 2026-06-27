@@ -1391,12 +1391,14 @@ color: #60a5fa;
 margin-right: 6px;
 }
 
-/* ========= FOLDER BONUS HARI INI - SETENGAH / PARTSIAL ========= */
+/* ========= FOLDER BONUS HARI INI - SETENGAH LEBAR (PARTSIAL) ========= */
 .bonus-folder-container {
 position: relative;
 margin-bottom: 24px;
 display: flex;
 flex-direction: column;
+/* BATASI LEBAR HANYA 50% DARI PARENT (main-content) */
+max-width: 50%;
 }
 
 /* TAB FOLDER - SETENGAH (PARTSIAL) */
@@ -1568,13 +1570,21 @@ color: #fbbf24;
 margin-right: 4px;
 }
 
-/* Responsive */
+/* Responsive - Tablet: max-width 50% tetap, tapi item list 2 kolom */
 @media (max-width: 1024px) {
+.bonus-folder-container {
+max-width: 70%;
+}
 .bonus-folder-list {
 grid-template-columns: repeat(2, 1fr);
 }
 }
+
+/* Responsive - HP: lebar penuh (100%) biar tetap terbaca */
 @media (max-width: 768px) {
+.bonus-folder-container {
+max-width: 100%;
+}
 .bonus-folder-list {
 grid-template-columns: 1fr;
 }
@@ -2144,7 +2154,7 @@ scheduleHtml = `
 `;
 }
 
-// ========== RENDER BONUS HARI INI ==========
+// ========== RENDER BONUS HARI INI - DENGAN LEBAR SETENGAH ==========
 const today = new Date();
 const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
 const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -2203,6 +2213,7 @@ ${bonusContent}
 </div>
 `;
 
+// Gabungkan: schedule full width + bonus setengah lebar
 dynamicArea.innerHTML = scheduleHtml + bonusHtml;
 
 // ========== START COUNTDOWN ==========
