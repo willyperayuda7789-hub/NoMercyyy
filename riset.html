@@ -1391,7 +1391,7 @@ color: #60a5fa;
 margin-right: 6px;
 }
 
-/* ========= FOLDER BONUS HARI INI - KOSONGKAN SAAT TIDAK ADA BONUS ========= */
+/* ========= FOLDER BONUS HARI INI ========= */
 .bonus-folder-container {
 position: relative;
 margin-bottom: 24px;
@@ -1400,7 +1400,6 @@ flex-direction: column;
 max-width: 50%;
 }
 
-/* TAB FOLDER */
 .bonus-folder-tab {
 display: inline-flex;
 align-items: center;
@@ -1432,7 +1431,6 @@ opacity: 0.6;
 margin-left: auto;
 }
 
-/* BODY FOLDER - KOSONGKAN SAAT TIDAK ADA BONUS */
 .bonus-folder-body {
 background: rgba(18, 28, 45, 0.9);
 border-radius: 0 16px 16px 16px;
@@ -1445,14 +1443,12 @@ z-index: 1;
 min-height: 60px;
 }
 
-/* LIST BONUS - Satu kolom untuk tampilan seperti contoh */
 .bonus-folder-list {
 display: flex;
 flex-direction: column;
 gap: 14px;
 }
 
-/* ITEM BONUS - SEPERTI CONTOH GAMBAR */
 .bonus-folder-item {
 background: rgba(0, 0, 0, 0.35);
 border-radius: 14px;
@@ -1494,7 +1490,6 @@ padding-left: 28px;
 white-space: pre-wrap;
 }
 
-/* TOMBOL DI BAWAH - SEPERTI CONTOH */
 .bonus-item-actions-folder {
 display: flex;
 flex-direction: row;
@@ -1558,12 +1553,10 @@ transform: scale(1.02);
 font-size: 0.75rem;
 }
 
-/* BONUS EMPTY - HIDE (tidak ditampilkan) */
 .bonus-empty-tab {
 display: none;
 }
 
-/* FOOTER - HIDE SAAT TIDAK ADA BONUS */
 .bonus-folder-footer-tab {
 background: rgba(0, 0, 0, 0.2);
 padding: 10px 16px;
@@ -1781,7 +1774,6 @@ const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
 for (let i = 0; i < rows.length; i++) {
-// Ambil semua baris yang memiliki title (kolom A)
 if (rows[i] && rows[i][0] && rows[i][0].trim()) {
 const content = (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "";
 items.push({
@@ -2040,140 +2032,139 @@ return "status-scheduled-dash";
 
 // ======================= FUNGSI FILTER BONUS - LIVE DAY & LIVE DATE =======================
 function isBonusMatchToday(content) {
-    if (!content) return false;
+if (!content) return false;
 
-    const today = new Date();
-    const lowerContent = content.toLowerCase();
+const today = new Date();
+const lowerContent = content.toLowerCase();
 
-    // === LIVE DAY (HARI INI) ===
-    const dayNamesId = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
-    const dayNamesIdCapital = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-    const dayNamesIdShort = ['min', 'sen', 'sel', 'rab', 'kam', 'jum', 'sab'];
-    const dayNamesIdShortCapital = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+// === LIVE DAY (HARI INI) ===
+const dayNamesId = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+const dayNamesIdCapital = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+const dayNamesIdShort = ['min', 'sen', 'sel', 'rab', 'kam', 'jum', 'sab'];
+const dayNamesIdShortCapital = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
 
-    const dayNamesEn = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    const dayNamesEnCapital = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const dayNamesEn = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+const dayNamesEnCapital = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-    const todayIndex = today.getDay();
-    const todayDayId = dayNamesId[todayIndex];
-    const todayDayIdCapital = dayNamesIdCapital[todayIndex];
-    const todayDayIdShort = dayNamesIdShort[todayIndex];
-    const todayDayIdShortCapital = dayNamesIdShortCapital[todayIndex];
-    const todayDayEn = dayNamesEn[todayIndex];
-    const todayDayEnCapital = dayNamesEnCapital[todayIndex];
+const todayIndex = today.getDay();
+const todayDayId = dayNamesId[todayIndex];
+const todayDayIdCapital = dayNamesIdCapital[todayIndex];
+const todayDayIdShort = dayNamesIdShort[todayIndex];
+const todayDayIdShortCapital = dayNamesIdShortCapital[todayIndex];
+const todayDayEn = dayNamesEn[todayIndex];
+const todayDayEnCapital = dayNamesEnCapital[todayIndex];
 
-    // === LIVE DATE (TANGGAL HARI INI) ===
-    const day = today.getDate();
-    const dayPad = day.toString().padStart(2, '0');
-    const month = (today.getMonth() + 1).toString().padStart(2, '0');
-    const year = today.getFullYear();
-    const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-    const monthName = monthNames[today.getMonth()];
-    const monthNameShort = monthName.substring(0, 3);
-    const monthNamesEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const monthNameEn = monthNamesEn[today.getMonth()];
-    const monthNameEnShort = monthNameEn.substring(0, 3);
+// === LIVE DATE (TANGGAL HARI INI) ===
+const day = today.getDate();
+const dayPad = day.toString().padStart(2, '0');
+const month = (today.getMonth() + 1).toString().padStart(2, '0');
+const year = today.getFullYear();
+const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+const monthName = monthNames[today.getMonth()];
+const monthNameShort = monthName.substring(0, 3);
+const monthNamesEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const monthNameEn = monthNamesEn[today.getMonth()];
+const monthNameEnShort = monthNameEn.substring(0, 3);
 
-    // Buat array keyword - GABUNGAN LIVE DAY + LIVE DATE
-    const keywords = [];
+// Buat array keyword - GABUNGAN LIVE DAY + LIVE DATE
+const keywords = [];
 
-    // ==== 1. LIVE DAY (HARI INI) ====
-    keywords.push(todayDayId);
-    keywords.push(todayDayIdCapital);
-    keywords.push(todayDayIdShort);
-    keywords.push(todayDayIdShortCapital);
-    keywords.push(todayDayEn);
-    keywords.push(todayDayEnCapital);
+// ==== 1. LIVE DAY (HARI INI) ====
+keywords.push(todayDayId);
+keywords.push(todayDayIdCapital);
+keywords.push(todayDayIdShort);
+keywords.push(todayDayIdShortCapital);
+keywords.push(todayDayEn);
+keywords.push(todayDayEnCapital);
 
-    keywords.push(`hari ${todayDayId}`);
-    keywords.push(`hari ${todayDayIdCapital}`);
-    keywords.push(`hari ${todayDayIdShort}`);
-    keywords.push(`hari ${todayDayIdShortCapital}`);
-    keywords.push(`hari ${todayDayEn}`);
-    keywords.push(`hari ${todayDayEnCapital}`);
+keywords.push(`hari ${todayDayId}`);
+keywords.push(`hari ${todayDayIdCapital}`);
+keywords.push(`hari ${todayDayIdShort}`);
+keywords.push(`hari ${todayDayIdShortCapital}`);
+keywords.push(`hari ${todayDayEn}`);
+keywords.push(`hari ${todayDayEnCapital}`);
 
-    keywords.push(`setiap ${todayDayId}`);
-    keywords.push(`setiap ${todayDayIdCapital}`);
-    keywords.push(`setiap hari ${todayDayId}`);
-    keywords.push(`setiap hari ${todayDayIdCapital}`);
+keywords.push(`setiap ${todayDayId}`);
+keywords.push(`setiap ${todayDayIdCapital}`);
+keywords.push(`setiap hari ${todayDayId}`);
+keywords.push(`setiap hari ${todayDayIdCapital}`);
 
-    keywords.push(`tiap ${todayDayId}`);
-    keywords.push(`tiap ${todayDayIdCapital}`);
-    keywords.push(`tiap hari ${todayDayId}`);
-    keywords.push(`tiap hari ${todayDayIdCapital}`);
+keywords.push(`tiap ${todayDayId}`);
+keywords.push(`tiap ${todayDayIdCapital}`);
+keywords.push(`tiap hari ${todayDayId}`);
+keywords.push(`tiap hari ${todayDayIdCapital}`);
 
-    // ==== 2. LIVE DATE (TANGGAL HARI INI) ====
-    // Format: 28, 28 Jun, 28 Juni, 28 June, 28 Jun 2026, dll
-    keywords.push(day.toString());
-    keywords.push(dayPad);
-    keywords.push(`tanggal ${day}`);
-    keywords.push(`tanggal ${dayPad}`);
-    keywords.push(`tgl ${day}`);
-    keywords.push(`tgl ${dayPad}`);
+// ==== 2. LIVE DATE (TANGGAL HARI INI) ====
+keywords.push(day.toString());
+keywords.push(dayPad);
+keywords.push(`tanggal ${day}`);
+keywords.push(`tanggal ${dayPad}`);
+keywords.push(`tgl ${day}`);
+keywords.push(`tgl ${dayPad}`);
 
-    keywords.push(`${day} ${monthName}`);
-    keywords.push(`${day} ${monthNameShort}`);
-    keywords.push(`${day} ${monthNameEn}`);
-    keywords.push(`${day} ${monthNameEnShort}`);
-    keywords.push(`${dayPad} ${monthName}`);
-    keywords.push(`${dayPad} ${monthNameShort}`);
-    keywords.push(`${dayPad} ${monthNameEn}`);
-    keywords.push(`${dayPad} ${monthNameEnShort}`);
+keywords.push(`${day} ${monthName}`);
+keywords.push(`${day} ${monthNameShort}`);
+keywords.push(`${day} ${monthNameEn}`);
+keywords.push(`${day} ${monthNameEnShort}`);
+keywords.push(`${dayPad} ${monthName}`);
+keywords.push(`${dayPad} ${monthNameShort}`);
+keywords.push(`${dayPad} ${monthNameEn}`);
+keywords.push(`${dayPad} ${monthNameEnShort}`);
 
-    keywords.push(`${day} ${monthName} ${year}`);
-    keywords.push(`${day} ${monthNameShort} ${year}`);
-    keywords.push(`${day} ${monthNameEn} ${year}`);
-    keywords.push(`${day} ${monthNameEnShort} ${year}`);
-    keywords.push(`${dayPad} ${monthName} ${year}`);
-    keywords.push(`${dayPad} ${monthNameShort} ${year}`);
-    keywords.push(`${dayPad} ${monthNameEn} ${year}`);
-    keywords.push(`${dayPad} ${monthNameEnShort} ${year}`);
+keywords.push(`${day} ${monthName} ${year}`);
+keywords.push(`${day} ${monthNameShort} ${year}`);
+keywords.push(`${day} ${monthNameEn} ${year}`);
+keywords.push(`${day} ${monthNameEnShort} ${year}`);
+keywords.push(`${dayPad} ${monthName} ${year}`);
+keywords.push(`${dayPad} ${monthNameShort} ${year}`);
+keywords.push(`${dayPad} ${monthNameEn} ${year}`);
+keywords.push(`${dayPad} ${monthNameEnShort} ${year}`);
 
-    keywords.push(`${day}/${month}/${year}`);
-    keywords.push(`${day}-${month}-${year}`);
-    keywords.push(`${year}-${month}-${dayPad}`);
-    keywords.push(`${dayPad}/${month}/${year}`);
-    keywords.push(`${dayPad}-${month}-${year}`);
+keywords.push(`${day}/${month}/${year}`);
+keywords.push(`${day}-${month}-${year}`);
+keywords.push(`${year}-${month}-${dayPad}`);
+keywords.push(`${dayPad}/${month}/${year}`);
+keywords.push(`${dayPad}-${month}-${year}`);
 
-    keywords.push(`${day}/${month}`);
-    keywords.push(`${day}-${month}`);
-    keywords.push(`${dayPad}/${month}`);
-    keywords.push(`${dayPad}-${month}`);
+keywords.push(`${day}/${month}`);
+keywords.push(`${day}-${month}`);
+keywords.push(`${dayPad}/${month}`);
+keywords.push(`${dayPad}-${month}`);
 
-    // ==== 3. KOMBINASI LIVE DAY + LIVE DATE ====
-    keywords.push(`${todayDayId} ${day}`);
-    keywords.push(`${todayDayIdCapital} ${day}`);
-    keywords.push(`${todayDayId} ${dayPad}`);
-    keywords.push(`${todayDayIdCapital} ${dayPad}`);
-    keywords.push(`${todayDayEn} ${day}`);
-    keywords.push(`${todayDayEnCapital} ${day}`);
+// ==== 3. KOMBINASI LIVE DAY + LIVE DATE ====
+keywords.push(`${todayDayId} ${day}`);
+keywords.push(`${todayDayIdCapital} ${day}`);
+keywords.push(`${todayDayId} ${dayPad}`);
+keywords.push(`${todayDayIdCapital} ${dayPad}`);
+keywords.push(`${todayDayEn} ${day}`);
+keywords.push(`${todayDayEnCapital} ${day}`);
 
-    keywords.push(`${todayDayId} ${day} ${monthName}`);
-    keywords.push(`${todayDayIdCapital} ${day} ${monthName}`);
-    keywords.push(`${todayDayId} ${dayPad} ${monthName}`);
-    keywords.push(`${todayDayIdCapital} ${dayPad} ${monthName}`);
-    keywords.push(`${todayDayEn} ${day} ${monthNameEn}`);
-    keywords.push(`${todayDayEnCapital} ${day} ${monthNameEn}`);
+keywords.push(`${todayDayId} ${day} ${monthName}`);
+keywords.push(`${todayDayIdCapital} ${day} ${monthName}`);
+keywords.push(`${todayDayId} ${dayPad} ${monthName}`);
+keywords.push(`${todayDayIdCapital} ${dayPad} ${monthName}`);
+keywords.push(`${todayDayEn} ${day} ${monthNameEn}`);
+keywords.push(`${todayDayEnCapital} ${day} ${monthNameEn}`);
 
-    keywords.push(`${todayDayId} ${day} ${monthName} ${year}`);
-    keywords.push(`${todayDayIdCapital} ${day} ${monthName} ${year}`);
-    keywords.push(`${todayDayId} ${dayPad} ${monthName} ${year}`);
-    keywords.push(`${todayDayIdCapital} ${dayPad} ${monthName} ${year}`);
+keywords.push(`${todayDayId} ${day} ${monthName} ${year}`);
+keywords.push(`${todayDayIdCapital} ${day} ${monthName} ${year}`);
+keywords.push(`${todayDayId} ${dayPad} ${monthName} ${year}`);
+keywords.push(`${todayDayIdCapital} ${dayPad} ${monthName} ${year}`);
 
-    // ==== 4. KATA KUNCI UMUM ====
-    keywords.push('hari ini');
-    keywords.push('today');
-    keywords.push('sekarang');
-    keywords.push('now');
+// ==== 4. KATA KUNCI UMUM ====
+keywords.push('hari ini');
+keywords.push('today');
+keywords.push('sekarang');
+keywords.push('now');
 
-    // Cek semua keyword
-    for (let keyword of keywords) {
-        if (keyword && lowerContent.includes(keyword.toLowerCase())) {
-            return true;
-        }
-    }
+// Cek semua keyword
+for (let keyword of keywords) {
+if (keyword && lowerContent.includes(keyword.toLowerCase())) {
+return true;
+}
+}
 
-    return false;
+return false;
 }
 
 // ======================= RENDER DASHBOARD =======================
@@ -2269,16 +2260,19 @@ scheduleHtml = `
 `;
 }
 
-// ========== RENDER BONUS HARI INI ==========
+// ========== RENDER BONUS HARI INI - LIVE DAY & LIVE DATE ==========
 const today = new Date();
 const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
 const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
 
-// Filter bonus yang match hari ini
+// Filter bonus dengan LIVE DAY + LIVE DATE
 const filteredBonus = bonusTodayData.filter(item => {
 const content = (item.title + ' ' + item.content);
 return isBonusMatchToday(content);
 });
+
+console.log('Total data dari sheet BONUS TODAY:', bonusTodayData.length);
+console.log('Bonus yang match hari ini:', filteredBonus.length);
 
 let bonusContent = '';
 let showFooter = false;
@@ -2307,11 +2301,9 @@ ${bonusItems}
 </div>
 `;
 } else {
-// KOSONGKAN - tidak menampilkan apapun
 bonusContent = '';
 }
 
-// Footer hanya ditampilkan jika ada bonus
 const footerHtml = showFooter ? `
 <div class="bonus-folder-footer-tab">
 <i class="fas fa-gift"></i> Total ${filteredBonus.length} bonus untuk ${dayName}, ${dateStr}
@@ -2333,7 +2325,7 @@ ${footerHtml}
 
 dynamicArea.innerHTML = scheduleHtml + bonusHtml;
 
-// ========== EVENT UNTUK BONUS ITEM (Klik folder) ==========
+// ========== EVENT UNTUK BONUS ITEM ==========
 document.querySelectorAll('.bonus-folder-item').forEach(item => {
 item.addEventListener('click', (e) => {
 if (e.target.closest('button')) return;
@@ -2343,7 +2335,6 @@ openModal(title, content);
 });
 });
 
-// ========== EVENT BONUS SALIN ==========
 document.querySelectorAll('.btn-salin-bonus-small-v2').forEach(btn => {
 btn.addEventListener('click', (e) => {
 e.stopPropagation();
@@ -2352,7 +2343,6 @@ copyContentOnly(text, 'Bonus');
 });
 });
 
-// ========== EVENT BUKA FOLDER ==========
 document.querySelectorAll('.btn-open-folder-small').forEach(btn => {
 btn.addEventListener('click', (e) => {
 e.stopPropagation();
@@ -2396,7 +2386,87 @@ dynamicArea.innerHTML = `<div class="error-message"><h3>❌ Gagal Memuat Dashboa
 }
 }
 
-// ======================= RENDER LINK SCRIPTS (TIDAK DIUBAH) =======================
+// ======================= FUNGSI NAVIGASI UTAMA =======================
+async function onTabClick(tabId) {
+currentActiveTab = tabId;
+document.querySelectorAll('.nav-item').forEach(item => {
+if(item.getAttribute('data-tab') === tabId) item.classList.add('active');
+else item.classList.remove('active');
+});
+currentFilterText = "";
+const searchInput = document.getElementById("liveSearchInput");
+const clearSearchBtn = document.getElementById("clearSearchBtn");
+if(searchInput) searchInput.value = "";
+if(clearSearchBtn) clearSearchBtn.classList.remove('visible');
+const dynamicArea = document.getElementById("dynamicContentArea");
+dynamicArea.style.display = "";
+dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container", "link-lain-grid", "dashboard-schedule");
+dynamicArea.classList.add("dashboard-grid");
+
+document.getElementById("bonusBadgeContainer").classList.remove("visible");
+document.getElementById("galleryBadgeContainer").classList.remove("visible");
+document.getElementById("qrisBadgeContainer").style.display = "none";
+
+if (tabId === 'tab1') {
+if (countdownInterval) clearInterval(countdownInterval);
+await renderDashboard();
+}
+else if(tabId === 'tab2') { if (countdownInterval) clearInterval(countdownInterval); await renderRandomTabWithFilter(currentFilterText); }
+else if(tabId === 'tab3') { if (countdownInterval) clearInterval(countdownInterval); await renderLinkLainWithFilter(currentFilterText); }
+else if(tabId === 'tab4') { if (countdownInterval) clearInterval(countdownInterval); await renderGalleryCS(); bindGalleryBadges(); }
+else if(tabId === 'tab5') { if (countdownInterval) clearInterval(countdownInterval); renderAllAboutQris(); bindQrisBadges(); }
+else if(tabId === 'tab6') { if (countdownInterval) clearInterval(countdownInterval); await renderBonusPage(); bindBonusBadgeEvents(); }
+else if(tabId === 'tab7') { if (countdownInterval) clearInterval(countdownInterval); await renderJadwalTogelWithFilter(currentFilterText); }
+}
+
+async function renderRandomTabWithFilter(filter = "") {
+const mainHeading = document.getElementById("mainHeading");
+const subHeading = document.getElementById("subHeading");
+const dynamicArea = document.getElementById("dynamicContentArea");
+dynamicArea.classList.remove("link-lain-grid");
+mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
+subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN`;
+document.getElementById("bonusBadgeContainer").classList.remove("visible");
+document.getElementById("galleryBadgeContainer").classList.remove("visible");
+document.getElementById("qrisBadgeContainer").style.display = "none";
+dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat folder...</p></div>`;
+try {
+if(foldersData.length === 0) foldersData = await fetchSheetData('PK RANDOM');
+let filtered = foldersData;
+if(filter.trim() !== "") {
+filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase()));
+}
+if(filtered.length === 0) {
+dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada folder dengan kata kunci "${escapeHtml(filter)}" di kolom RANDOM</p></div>`;
+return;
+}
+let cardsHtml = "";
+filtered.forEach((f) => {
+const short = f.content.length > 120 ? f.content.substring(0,120)+'...' : f.content;
+cardsHtml += `<div class="card random-folder" data-folder-title="${escapeHtml(f.title)}" data-folder-content="${escapeHtml(f.content)}"><button class="btn-salin-folder" data-salin-title="${escapeHtml(f.title)}" data-salin-content="${escapeHtml(f.content)}"><i class="fas fa-copy"></i> SALIN</button><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(short) || 'Klik untuk melihat isi lengkap folder ini'}</p><div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk membuka folder</div></div>`;
+});
+dynamicArea.innerHTML = cardsHtml;
+document.querySelectorAll('.btn-salin-folder').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+const title = btn.getAttribute('data-salin-title') || 'Folder';
+const content = btn.getAttribute('data-salin-content') || '';
+copyContentOnly(content, title);
+});
+});
+document.querySelectorAll('.card.random-folder').forEach(card => {
+card.addEventListener('click', (e) => {
+if(e.target.closest('.btn-salin-folder')) return;
+const title = card.getAttribute('data-folder-title') || 'Folder';
+const content = card.getAttribute('data-folder-content') || '';
+openModal(title, content);
+});
+});
+} catch(err) {
+dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.message}</p></div>`;
+}
+}
+
 async function renderLinkLainWithFilter(filter = "") {
 const mainHeading = document.getElementById("mainHeading");
 const subHeading = document.getElementById("subHeading");
@@ -2469,7 +2539,6 @@ dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat LI
 }
 }
 
-// ======================= RENDER JADWAL TOGEL (TIDAK DIUBAH) =======================
 async function renderJadwalTogelWithFilter(filter = "") {
 const mainHeading = document.getElementById("mainHeading");
 const subHeading = document.getElementById("subHeading");
@@ -2506,7 +2575,6 @@ document.querySelectorAll('.schedule-card').forEach(card => { card.addEventListe
 } catch(err) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat JADWAL TOGEL</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'JADWALPASARAN' ada dengan kolom A, B, C, D.</p></div>`; }
 }
 
-// ======================= FUNGSI RENDER BONUS (TIDAK DIUBAH) =======================
 async function renderBonusLainLainWithFilter(filter = "") { let data = bonusLainLainData; if (data.length === 0) { try { data = await fetchSheetData('BONUS LAIN-LAIN'); bonusLainLainData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS LAIN-LAIN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori LAIN-LAIN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-tags"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
 async function renderBonusDoneBagiWithFilter(filter = "") { let data = bonusDoneBagiData; if (data.length === 0) { try { data = await fetchSheetData('DONEBAGI'); bonusDoneBagiData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat DONE BAGI</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori DONE BAGI</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
 async function renderBonusMingguanWithFilter(filter = "") { let data = bonusMingguanData; if (data.length === 0) { try { data = await fetchSheetData('BONUS MINGGUAN'); bonusMingguanData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS MINGGUAN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori MINGGUAN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
@@ -2520,56 +2588,6 @@ function attachBonusSalinEvents() { document.querySelectorAll('.btn-salin-bonus'
 function bonusSalinHandler(e) { e.stopPropagation(); const title = this.getAttribute('data-salin-title') || 'Folder'; const content = this.getAttribute('data-salin-content') || ''; copyContentOnly(content, title); }
 async function renderBonusPage() { const mainHeading = document.getElementById("mainHeading"); const subHeading = document.getElementById("subHeading"); mainHeading.innerHTML = "⚙️ BONUS ✨"; const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()}${filterInfo} | Tombol SEJAJAR dalam 1 BARIS`; document.getElementById("bonusBadgeContainer").classList.add("visible"); document.getElementById("galleryBadgeContainer").classList.remove("visible"); document.getElementById("qrisBadgeContainer").style.display = "none"; if (currentBonusSubTab === 'all') { await renderBonusAllWithFilter(currentFilterText); } else if (currentBonusSubTab === 'mingguan') { await renderBonusMingguanWithFilter(currentFilterText); } else if (currentBonusSubTab === 'done') { await renderBonusDoneBagiWithFilter(currentFilterText); } else if (currentBonusSubTab === 'lain') { await renderBonusLainLainWithFilter(currentFilterText); } }
 
-// ======================= FUNGSI RENDER RANDOM (TIDAK DIUBAH) =======================
-async function renderRandomTabWithFilter(filter = "") {
-const mainHeading = document.getElementById("mainHeading");
-const subHeading = document.getElementById("subHeading");
-const dynamicArea = document.getElementById("dynamicContentArea");
-dynamicArea.classList.remove("link-lain-grid");
-mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
-subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN`;
-document.getElementById("bonusBadgeContainer").classList.remove("visible");
-document.getElementById("galleryBadgeContainer").classList.remove("visible");
-document.getElementById("qrisBadgeContainer").style.display = "none";
-dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat folder...</p></div>`;
-try {
-if(foldersData.length === 0) foldersData = await fetchSheetData('PK RANDOM');
-let filtered = foldersData;
-if(filter.trim() !== "") {
-filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase()));
-}
-if(filtered.length === 0) {
-dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada folder dengan kata kunci "${escapeHtml(filter)}" di kolom RANDOM</p></div>`;
-return;
-}
-let cardsHtml = "";
-filtered.forEach((f) => {
-const short = f.content.length > 120 ? f.content.substring(0,120)+'...' : f.content;
-cardsHtml += `<div class="card random-folder" data-folder-title="${escapeHtml(f.title)}" data-folder-content="${escapeHtml(f.content)}"><button class="btn-salin-folder" data-salin-title="${escapeHtml(f.title)}" data-salin-content="${escapeHtml(f.content)}"><i class="fas fa-copy"></i> SALIN</button><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(short) || 'Klik untuk melihat isi lengkap folder ini'}</p><div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk membuka folder</div></div>`;
-});
-dynamicArea.innerHTML = cardsHtml;
-document.querySelectorAll('.btn-salin-folder').forEach(btn => {
-btn.addEventListener('click', (e) => {
-e.stopPropagation();
-const title = btn.getAttribute('data-salin-title') || 'Folder';
-const content = btn.getAttribute('data-salin-content') || '';
-copyContentOnly(content, title);
-});
-});
-document.querySelectorAll('.card.random-folder').forEach(card => {
-card.addEventListener('click', (e) => {
-if(e.target.closest('.btn-salin-folder')) return;
-const title = card.getAttribute('data-folder-title') || 'Folder';
-const content = card.getAttribute('data-folder-content') || '';
-openModal(title, content);
-});
-});
-} catch(err) {
-dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.message}</p></div>`;
-}
-}
-
-// ======================= FUNGSI RENDER GALLERY GAMBAR CS (TIDAK DIUBAH) =======================
 async function renderGalleryCS() {
 const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.classList.remove("link-lain-grid");
@@ -2639,14 +2657,17 @@ const previewImg = card.querySelector('.gallery-image-preview');
 if(previewImg) previewImg.addEventListener('click', (e) => { e.stopPropagation(); openImageModal(title, imgUrl, desc); });
 });
 }
+
 async function copyImageToClipboard(imageUrl, imageTitle) { try { showToast(`⏳ Mengambil gambar "${imageTitle}"...`); const response = await fetch(imageUrl, { mode: 'cors' }); if (!response.ok) throw new Error('Gagal mengambil gambar'); const blob = await response.blob(); if (!blob.type.startsWith('image/')) throw new Error('Format bukan gambar'); try { await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]); showToast(`✅ Gambar "${imageTitle}" berhasil disalin! 📸`); } catch (clipboardError) { const img = new Image(); const objectUrl = URL.createObjectURL(blob); img.onload = async () => { const canvas = document.createElement('canvas'); canvas.width = img.width; canvas.height = img.height; const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0); canvas.toBlob(async (canvasBlob) => { try { await navigator.clipboard.write([new ClipboardItem({ [canvasBlob.type]: canvasBlob })]); showToast(`✅ Gambar "${imageTitle}" berhasil disalin! 📸`); } catch (err) { showToast(`❌ Gagal menyalin gambar. Coba klik kanan pada gambar dan pilih "Salin gambar".`); } URL.revokeObjectURL(objectUrl); }, 'image/png'); }; img.onerror = () => { showToast(`❌ Gagal memuat gambar untuk disalin.`); URL.revokeObjectURL(objectUrl); }; img.src = objectUrl; } } catch (error) { console.error('Error copying image:', error); showToast(`❌ Gagal menyalin gambar "${imageTitle}". Pastikan gambar dapat diakses.`); } }
+
 function openImageModal(title, imageUrl, description) { const modal = document.getElementById("folderModal"); const modalTitle = document.getElementById("modalTitle"); const modalContentText = document.getElementById("modalContentText"); modalTitle.textContent = title; modalContentText.innerHTML = `<div style="text-align:center"><img src="${escapeHtml(imageUrl)}" class="modal-image-view" style="max-width:100%; max-height:60vh; border-radius:16px;" crossorigin="anonymous" onerror="this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load'"><p style="margin-top:16px;">${escapeHtml(description)}</p><div style="margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;"><button id="modalCopySubjudulBtn" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-copy"></i> Salin Subjudul</button><button id="modalCopyImageBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-image"></i> Salin Gambar</button></div><small><i class="fas fa-link"></i> URL: ${escapeHtml(imageUrl)}</small></div>`; modal.classList.add("active"); document.body.style.overflow = "hidden"; setTimeout(() => { const modalCopyImageBtn = document.getElementById('modalCopyImageBtn'); const modalCopySubjudulBtn = document.getElementById('modalCopySubjudulBtn'); if (modalCopyImageBtn) modalCopyImageBtn.addEventListener('click', async () => { await copyImageToClipboard(imageUrl, title); }); if (modalCopySubjudulBtn) modalCopySubjudulBtn.addEventListener('click', () => { copyContentOnly(description, `Subjudul: ${title}`); }); }, 100); }
+
 function bindGalleryBadges() { document.querySelectorAll('.gallery-badge').forEach(b => { b.removeEventListener('click', galleryClick); b.addEventListener('click', galleryClick); }); }
 async function galleryClick(e) { const val = this.getAttribute('data-gallery-tab'); if(val && (val === 'rrn_qris' || val === 'profile_ewallet' || val === 'cara_bermain')) { currentGalleryTab = val; document.querySelectorAll('.gallery-badge').forEach(b => b.classList.remove('active-gallery')); this.classList.add('active-gallery'); currentFilterText = ""; document.getElementById("liveSearchInput").value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); await renderGalleryCS(); } }
+
 function bindBonusBadgeEvents() { document.querySelectorAll('.bonus-badge').forEach(badge => { badge.removeEventListener('click', bonusClickHandler); badge.addEventListener('click', bonusClickHandler); }); }
 async function bonusClickHandler(e) { const tabValue = this.getAttribute('data-bonus-tab'); if(tabValue) { currentBonusSubTab = tabValue; document.querySelectorAll('.bonus-badge').forEach(b => b.classList.remove('active-bonus')); this.classList.add('active-bonus'); if(currentActiveTab === 'tab6') { currentFilterText = ""; const searchInput = document.getElementById("liveSearchInput"); if(searchInput) searchInput.value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); await renderBonusPage(); } } }
 
-// ======================= RENDER ALL ABOUT QRIS (TIDAK DIUBAH) =======================
 async function renderAllAboutQris() {
 const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.classList.remove("link-lain-grid");
@@ -2715,41 +2736,9 @@ document.querySelectorAll('.qris-card').forEach(card => {
 card.addEventListener('click', (e) => { if (e.target.closest('.btn-qris-salin')) return; const judul = card.getAttribute('data-judul') || "Detail"; const konten = card.getAttribute('data-konten') || "Tidak ada informasi tambahan."; openModal(judul, konten); });
 });
 }
+
 function bindQrisBadges() { document.querySelectorAll('.qris-badge').forEach(badge => { badge.removeEventListener('click', qrisBadgeHandler); badge.addEventListener('click', qrisBadgeHandler); }); }
 function qrisBadgeHandler(e) { const tabValue = this.getAttribute('data-qris-tab'); if (tabValue && (tabValue === 'bank_qris' || tabValue === 'ewallet_qris' || tabValue === 'refund' || tabValue === 'lain_lain')) { currentQrisTab = tabValue; document.querySelectorAll('.qris-badge').forEach(b => b.classList.remove('active-qris')); this.classList.add('active-qris'); currentFilterText = ""; const searchInput = document.getElementById("liveSearchInput"); if(searchInput) { searchInput.value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); } renderAllAboutQris(); } }
-
-// ======================= FUNGSI NAVIGASI UTAMA =======================
-async function onTabClick(tabId) {
-currentActiveTab = tabId;
-document.querySelectorAll('.nav-item').forEach(item => {
-if(item.getAttribute('data-tab') === tabId) item.classList.add('active');
-else item.classList.remove('active');
-});
-currentFilterText = "";
-const searchInput = document.getElementById("liveSearchInput");
-const clearSearchBtn = document.getElementById("clearSearchBtn");
-if(searchInput) searchInput.value = "";
-if(clearSearchBtn) clearSearchBtn.classList.remove('visible');
-const dynamicArea = document.getElementById("dynamicContentArea");
-dynamicArea.style.display = "";
-dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container", "link-lain-grid", "dashboard-schedule");
-dynamicArea.classList.add("dashboard-grid");
-
-document.getElementById("bonusBadgeContainer").classList.remove("visible");
-document.getElementById("galleryBadgeContainer").classList.remove("visible");
-document.getElementById("qrisBadgeContainer").style.display = "none";
-
-if (tabId === 'tab1') {
-if (countdownInterval) clearInterval(countdownInterval);
-await renderDashboard();
-}
-else if(tabId === 'tab2') { if (countdownInterval) clearInterval(countdownInterval); await renderRandomTabWithFilter(currentFilterText); }
-else if(tabId === 'tab3') { if (countdownInterval) clearInterval(countdownInterval); await renderLinkLainWithFilter(currentFilterText); }
-else if(tabId === 'tab4') { if (countdownInterval) clearInterval(countdownInterval); await renderGalleryCS(); bindGalleryBadges(); }
-else if(tabId === 'tab5') { if (countdownInterval) clearInterval(countdownInterval); renderAllAboutQris(); bindQrisBadges(); }
-else if(tabId === 'tab6') { if (countdownInterval) clearInterval(countdownInterval); await renderBonusPage(); bindBonusBadgeEvents(); }
-else if(tabId === 'tab7') { if (countdownInterval) clearInterval(countdownInterval); await renderJadwalTogelWithFilter(currentFilterText); }
-}
 
 function bindNavEvents() {
 document.querySelectorAll('.nav-item').forEach(item => {
@@ -2758,35 +2747,6 @@ const tid = item.getAttribute('data-tab');
 if(tid) onTabClick(tid);
 });
 });
-}
-
-async function applyLiveSearch() {
-const filter = currentFilterText;
-if(currentActiveTab === 'tab1') { await renderDashboard(); }
-else if(currentActiveTab === 'tab2') { await renderRandomTabWithFilter(filter); }
-else if(currentActiveTab === 'tab3') { await renderLinkLainWithFilter(filter); }
-else if(currentActiveTab === 'tab4') { await renderGalleryCS(); }
-else if(currentActiveTab === 'tab5') { renderAllAboutQris(); }
-else if(currentActiveTab === 'tab6') { await renderBonusPage(); }
-else if(currentActiveTab === 'tab7') { await renderJadwalTogelWithFilter(filter); }
-}
-
-function handleSearchInput() {
-const searchInput = document.getElementById("liveSearchInput");
-const clearSearchBtn = document.getElementById("clearSearchBtn");
-currentFilterText = searchInput.value;
-if(currentFilterText.length > 0) clearSearchBtn.classList.add('visible');
-else clearSearchBtn.classList.remove('visible');
-applyLiveSearch();
-}
-
-function clearSearch() {
-const searchInput = document.getElementById("liveSearchInput");
-const clearSearchBtn = document.getElementById("clearSearchBtn");
-if(searchInput) searchInput.value = '';
-currentFilterText = '';
-if(clearSearchBtn) clearSearchBtn.classList.remove('visible');
-applyLiveSearch();
 }
 
 function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
@@ -2803,8 +2763,30 @@ const closeModalBtn = document.getElementById("closeModalBtn");
 closeModalBtn.onclick = closeModalFunc;
 if(modal) modal.onclick = e => { if(e.target === modal) closeModalFunc(); };
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal && modal.classList.contains('active')) closeModalFunc(); });
-if(searchInputElem) searchInputElem.addEventListener('input', handleSearchInput);
-if(clearSearchBtnElem) clearSearchBtnElem.addEventListener('click', clearSearch);
+if(searchInputElem) searchInputElem.addEventListener('input', function() {
+currentFilterText = searchInputElem.value;
+if(currentFilterText.length > 0) clearSearchBtnElem.classList.add('visible');
+else clearSearchBtnElem.classList.remove('visible');
+if(currentActiveTab === 'tab1') { renderDashboard(); }
+else if(currentActiveTab === 'tab2') { renderRandomTabWithFilter(currentFilterText); }
+else if(currentActiveTab === 'tab3') { renderLinkLainWithFilter(currentFilterText); }
+else if(currentActiveTab === 'tab4') { renderGalleryCS(); }
+else if(currentActiveTab === 'tab5') { renderAllAboutQris(); }
+else if(currentActiveTab === 'tab6') { renderBonusPage(); }
+else if(currentActiveTab === 'tab7') { renderJadwalTogelWithFilter(currentFilterText); }
+});
+if(clearSearchBtnElem) clearSearchBtnElem.addEventListener('click', function() {
+searchInputElem.value = '';
+currentFilterText = '';
+clearSearchBtnElem.classList.remove('visible');
+if(currentActiveTab === 'tab1') { renderDashboard(); }
+else if(currentActiveTab === 'tab2') { renderRandomTabWithFilter(''); }
+else if(currentActiveTab === 'tab3') { renderLinkLainWithFilter(''); }
+else if(currentActiveTab === 'tab4') { renderGalleryCS(); }
+else if(currentActiveTab === 'tab5') { renderAllAboutQris(); }
+else if(currentActiveTab === 'tab6') { renderBonusPage(); }
+else if(currentActiveTab === 'tab7') { renderJadwalTogelWithFilter(''); }
+});
 
 (async function init() {
 bindNavEvents();
