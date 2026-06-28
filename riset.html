@@ -2030,141 +2030,86 @@ if (countdown.totalMs < 300000) return "status-soon-dash";
 return "status-scheduled-dash";
 }
 
-// ======================= FUNGSI FILTER BONUS - LIVE DAY & LIVE DATE =======================
+// ======================= FUNGSI FILTER BONUS - HANYA HARI INI =======================
 function isBonusMatchToday(content) {
-if (!content) return false;
+    if (!content) return false;
 
-const today = new Date();
-const lowerContent = content.toLowerCase();
+    const today = new Date();
+    const lowerContent = content.toLowerCase();
 
-// === LIVE DAY (HARI INI) ===
-const dayNamesId = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
-const dayNamesIdCapital = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-const dayNamesIdShort = ['min', 'sen', 'sel', 'rab', 'kam', 'jum', 'sab'];
-const dayNamesIdShortCapital = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+    // Nama hari dalam bahasa Indonesia
+    const dayNamesId = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+    const dayNamesIdCapital = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
-const dayNamesEn = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-const dayNamesEnCapital = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    // Ambil HANYA hari ini
+    const todayIndex = today.getDay();
+    const todayDayId = dayNamesId[todayIndex];
+    const todayDayIdCapital = dayNamesIdCapital[todayIndex];
 
-const todayIndex = today.getDay();
-const todayDayId = dayNamesId[todayIndex];
-const todayDayIdCapital = dayNamesIdCapital[todayIndex];
-const todayDayIdShort = dayNamesIdShort[todayIndex];
-const todayDayIdShortCapital = dayNamesIdShortCapital[todayIndex];
-const todayDayEn = dayNamesEn[todayIndex];
-const todayDayEnCapital = dayNamesEnCapital[todayIndex];
+    // Format tanggal hari ini
+    const day = today.getDate();
+    const dayPad = day.toString().padStart(2, '0');
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const year = today.getFullYear();
+    const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    const monthName = monthNames[today.getMonth()];
+    const monthNameShort = monthName.substring(0, 3);
 
-// === LIVE DATE (TANGGAL HARI INI) ===
-const day = today.getDate();
-const dayPad = day.toString().padStart(2, '0');
-const month = (today.getMonth() + 1).toString().padStart(2, '0');
-const year = today.getFullYear();
-const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-const monthName = monthNames[today.getMonth()];
-const monthNameShort = monthName.substring(0, 3);
-const monthNamesEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const monthNameEn = monthNamesEn[today.getMonth()];
-const monthNameEnShort = monthNameEn.substring(0, 3);
+    // === BUAT KEYWORD HANYA UNTUK HARI INI ===
+    const keywords = [];
 
-// Buat array keyword - GABUNGAN LIVE DAY + LIVE DATE
-const keywords = [];
+    // 1. Nama hari ini (HANYA hari ini)
+    keywords.push(todayDayId);
+    keywords.push(todayDayIdCapital);
 
-// ==== 1. LIVE DAY (HARI INI) ====
-keywords.push(todayDayId);
-keywords.push(todayDayIdCapital);
-keywords.push(todayDayIdShort);
-keywords.push(todayDayIdShortCapital);
-keywords.push(todayDayEn);
-keywords.push(todayDayEnCapital);
+    // 2. Kombinasi "hari" + nama hari ini
+    keywords.push(`hari ${todayDayId}`);
+    keywords.push(`hari ${todayDayIdCapital}`);
 
-keywords.push(`hari ${todayDayId}`);
-keywords.push(`hari ${todayDayIdCapital}`);
-keywords.push(`hari ${todayDayIdShort}`);
-keywords.push(`hari ${todayDayIdShortCapital}`);
-keywords.push(`hari ${todayDayEn}`);
-keywords.push(`hari ${todayDayEnCapital}`);
+    // 3. Kombinasi "setiap" + nama hari ini
+    keywords.push(`setiap ${todayDayId}`);
+    keywords.push(`setiap ${todayDayIdCapital}`);
+    keywords.push(`setiap hari ${todayDayId}`);
+    keywords.push(`setiap hari ${todayDayIdCapital}`);
 
-keywords.push(`setiap ${todayDayId}`);
-keywords.push(`setiap ${todayDayIdCapital}`);
-keywords.push(`setiap hari ${todayDayId}`);
-keywords.push(`setiap hari ${todayDayIdCapital}`);
+    // 4. Kombinasi "tiap" + nama hari ini
+    keywords.push(`tiap ${todayDayId}`);
+    keywords.push(`tiap ${todayDayIdCapital}`);
+    keywords.push(`tiap hari ${todayDayId}`);
+    keywords.push(`tiap hari ${todayDayIdCapital}`);
 
-keywords.push(`tiap ${todayDayId}`);
-keywords.push(`tiap ${todayDayIdCapital}`);
-keywords.push(`tiap hari ${todayDayId}`);
-keywords.push(`tiap hari ${todayDayIdCapital}`);
+    // 5. Format tanggal hari ini
+    keywords.push(day.toString());
+    keywords.push(dayPad);
+    keywords.push(`tanggal ${day}`);
+    keywords.push(`tanggal ${dayPad}`);
+    keywords.push(`tgl ${day}`);
+    keywords.push(`tgl ${dayPad}`);
 
-// ==== 2. LIVE DATE (TANGGAL HARI INI) ====
-keywords.push(day.toString());
-keywords.push(dayPad);
-keywords.push(`tanggal ${day}`);
-keywords.push(`tanggal ${dayPad}`);
-keywords.push(`tgl ${day}`);
-keywords.push(`tgl ${dayPad}`);
+    // 6. Format tanggal dengan bulan
+    keywords.push(`${day} ${monthName}`);
+    keywords.push(`${day} ${monthNameShort}`);
+    keywords.push(`${dayPad} ${monthName}`);
+    keywords.push(`${dayPad} ${monthNameShort}`);
 
-keywords.push(`${day} ${monthName}`);
-keywords.push(`${day} ${monthNameShort}`);
-keywords.push(`${day} ${monthNameEn}`);
-keywords.push(`${day} ${monthNameEnShort}`);
-keywords.push(`${dayPad} ${monthName}`);
-keywords.push(`${dayPad} ${monthNameShort}`);
-keywords.push(`${dayPad} ${monthNameEn}`);
-keywords.push(`${dayPad} ${monthNameEnShort}`);
+    // 7. Kombinasi hari + tanggal (HANYA hari ini)
+    keywords.push(`${todayDayId} ${day}`);
+    keywords.push(`${todayDayIdCapital} ${day}`);
+    keywords.push(`${todayDayId} ${dayPad}`);
+    keywords.push(`${todayDayIdCapital} ${dayPad}`);
 
-keywords.push(`${day} ${monthName} ${year}`);
-keywords.push(`${day} ${monthNameShort} ${year}`);
-keywords.push(`${day} ${monthNameEn} ${year}`);
-keywords.push(`${day} ${monthNameEnShort} ${year}`);
-keywords.push(`${dayPad} ${monthName} ${year}`);
-keywords.push(`${dayPad} ${monthNameShort} ${year}`);
-keywords.push(`${dayPad} ${monthNameEn} ${year}`);
-keywords.push(`${dayPad} ${monthNameEnShort} ${year}`);
+    // 8. "hari ini" dan "today"
+    keywords.push('hari ini');
+    keywords.push('today');
 
-keywords.push(`${day}/${month}/${year}`);
-keywords.push(`${day}-${month}-${year}`);
-keywords.push(`${year}-${month}-${dayPad}`);
-keywords.push(`${dayPad}/${month}/${year}`);
-keywords.push(`${dayPad}-${month}-${year}`);
+    // Cek semua keyword - HANYA yang match dengan hari ini
+    for (let keyword of keywords) {
+        if (keyword && lowerContent.includes(keyword.toLowerCase())) {
+            return true;
+        }
+    }
 
-keywords.push(`${day}/${month}`);
-keywords.push(`${day}-${month}`);
-keywords.push(`${dayPad}/${month}`);
-keywords.push(`${dayPad}-${month}`);
-
-// ==== 3. KOMBINASI LIVE DAY + LIVE DATE ====
-keywords.push(`${todayDayId} ${day}`);
-keywords.push(`${todayDayIdCapital} ${day}`);
-keywords.push(`${todayDayId} ${dayPad}`);
-keywords.push(`${todayDayIdCapital} ${dayPad}`);
-keywords.push(`${todayDayEn} ${day}`);
-keywords.push(`${todayDayEnCapital} ${day}`);
-
-keywords.push(`${todayDayId} ${day} ${monthName}`);
-keywords.push(`${todayDayIdCapital} ${day} ${monthName}`);
-keywords.push(`${todayDayId} ${dayPad} ${monthName}`);
-keywords.push(`${todayDayIdCapital} ${dayPad} ${monthName}`);
-keywords.push(`${todayDayEn} ${day} ${monthNameEn}`);
-keywords.push(`${todayDayEnCapital} ${day} ${monthNameEn}`);
-
-keywords.push(`${todayDayId} ${day} ${monthName} ${year}`);
-keywords.push(`${todayDayIdCapital} ${day} ${monthName} ${year}`);
-keywords.push(`${todayDayId} ${dayPad} ${monthName} ${year}`);
-keywords.push(`${todayDayIdCapital} ${dayPad} ${monthName} ${year}`);
-
-// ==== 4. KATA KUNCI UMUM ====
-keywords.push('hari ini');
-keywords.push('today');
-keywords.push('sekarang');
-keywords.push('now');
-
-// Cek semua keyword
-for (let keyword of keywords) {
-if (keyword && lowerContent.includes(keyword.toLowerCase())) {
-return true;
-}
-}
-
-return false;
+    return false;
 }
 
 // ======================= RENDER DASHBOARD =======================
