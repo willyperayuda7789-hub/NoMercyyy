@@ -1391,7 +1391,7 @@ color: #60a5fa;
 margin-right: 6px;
 }
 
-/* ========= FOLDER BONUS HARI INI - SEPERTI CONTOH GAMBAR ========= */
+/* ========= FOLDER BONUS HARI INI - KOSONGKAN SAAT TIDAK ADA BONUS ========= */
 .bonus-folder-container {
 position: relative;
 margin-bottom: 24px;
@@ -1432,7 +1432,7 @@ opacity: 0.6;
 margin-left: auto;
 }
 
-/* BODY FOLDER */
+/* BODY FOLDER - KOSONGKAN SAAT TIDAK ADA BONUS */
 .bonus-folder-body {
 background: rgba(18, 28, 45, 0.9);
 border-radius: 0 16px 16px 16px;
@@ -1442,6 +1442,7 @@ backdrop-filter: blur(8px);
 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 position: relative;
 z-index: 1;
+min-height: 60px;
 }
 
 /* LIST BONUS - Satu kolom untuk tampilan seperti contoh */
@@ -1557,34 +1558,12 @@ transform: scale(1.02);
 font-size: 0.75rem;
 }
 
-/* BONUS EMPTY */
+/* BONUS EMPTY - HIDE (tidak ditampilkan) */
 .bonus-empty-tab {
-text-align: center;
-padding: 30px 20px;
-color: #94a3b8;
+display: none;
 }
 
-.bonus-empty-tab i {
-font-size: 2.2rem;
-color: #fbbf24;
-display: block;
-margin-bottom: 10px;
-opacity: 0.4;
-}
-
-.bonus-empty-tab .empty-title-tab {
-font-size: 0.95rem;
-font-weight: 600;
-color: #e2e8f0;
-}
-
-.bonus-empty-tab .empty-sub-tab {
-font-size: 0.75rem;
-color: #64748b;
-margin-top: 4px;
-}
-
-/* FOOTER */
+/* FOOTER - HIDE SAAT TIDAK ADA BONUS */
 .bonus-folder-footer-tab {
 background: rgba(0, 0, 0, 0.2);
 padding: 10px 16px;
@@ -1598,6 +1577,10 @@ border-radius: 0 0 16px 16px;
 .bonus-folder-footer-tab i {
 color: #fbbf24;
 margin-right: 4px;
+}
+
+.bonus-folder-footer-tab.hidden {
+display: none;
 }
 
 /* Responsive */
@@ -1631,6 +1614,7 @@ font-size: 0.55rem;
 }
 .bonus-folder-body {
 padding: 20px 16px 24px 16px;
+min-height: 40px;
 }
 .bonus-folder-item {
 padding: 14px 16px;
@@ -2179,10 +2163,6 @@ bonusTodayData = [];
 }
 }
 
-// DEBUG: Lihat data yang masuk
-console.log('Total data dari sheet BONUS TODAY:', bonusTodayData.length);
-console.log('Data bonus:', bonusTodayData);
-
 // ========== RENDER JADWAL ==========
 let scheduleHtml = '';
 const validItems = dashboardData.filter(item => item.result_time && item.result_time.trim() !== "");
@@ -2255,18 +2235,14 @@ const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'shor
 // Filter bonus yang match hari ini
 const filteredBonus = bonusTodayData.filter(item => {
 const content = (item.title + ' ' + item.content);
-const match = isBonusMatchToday(content);
-if (match) {
-console.log('MATCH:', item.title);
-}
-return match;
+return isBonusMatchToday(content);
 });
 
-console.log('Bonus yang match hari ini:', filteredBonus.length);
-console.log('Detail match:', filteredBonus);
-
 let bonusContent = '';
+let showFooter = false;
+
 if (filteredBonus.length > 0) {
+showFooter = true;
 let bonusItems = '';
 filteredBonus.forEach((item) => {
 const desc = item.content || '';
@@ -2289,14 +2265,16 @@ ${bonusItems}
 </div>
 `;
 } else {
-bonusContent = `
-<div class="bonus-empty-tab">
-<i class="fas fa-gift"></i>
-<div class="empty-title-tab">Tidak ada bonus pada hari ini</div>
-<div class="empty-sub-tab">Belum ada bonus yang dibagikan untuk ${dayName}, ${dateStr}</div>
-</div>
-`;
+// KOSONGKAN - tidak menampilkan apapun
+bonusContent = '';
 }
+
+// Footer hanya ditampilkan jika ada bonus
+const footerHtml = showFooter ? `
+<div class="bonus-folder-footer-tab">
+<i class="fas fa-gift"></i> Total ${filteredBonus.length} bonus untuk ${dayName}, ${dateStr}
+</div>
+` : '';
 
 const bonusHtml = `
 <div class="bonus-folder-container">
@@ -2306,9 +2284,7 @@ const bonusHtml = `
 </div>
 <div class="bonus-folder-body">
 ${bonusContent}
-<div class="bonus-folder-footer-tab">
-<i class="fas fa-gift"></i> Total ${filteredBonus.length} bonus untuk ${dayName}, ${dateStr}
-</div>
+${footerHtml}
 </div>
 </div>
 `;
