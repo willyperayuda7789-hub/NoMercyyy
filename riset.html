@@ -1797,11 +1797,13 @@ const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
 for (let i = 0; i < rows.length; i++) {
-// Hanya ambil baris yang memiliki konten (kolom B tidak kosong)
-if (rows[i] && rows[i][0] && rows[i][0].trim() && rows[i][1] && rows[i][1].trim()) {
+// Ambil semua baris yang memiliki title (kolom A)
+if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+// Jika kolom B kosong, gunakan string kosong
+const content = (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "";
 items.push({
 title: rows[i][0].trim(),
-content: rows[i][1].trim()
+content: content
 });
 }
 }
@@ -2053,98 +2055,63 @@ if (countdown.totalMs < 300000) return "status-soon-dash";
 return "status-scheduled-dash";
 }
 
-// ======================= FUNGSI FILTER BONUS - DIPERBAIKI =======================
+// ======================= FUNGSI FILTER BONUS - DIPERBAIKI TOTAL =======================
 function isBonusMatchToday(content) {
 if (!content) return false;
 
 const today = new Date();
 const lowerContent = content.toLowerCase();
 
-// Nama hari dalam bahasa Indonesia (lengkap dan singkat)
+// Nama hari dalam bahasa Indonesia (lengkap)
 const dayNamesId = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
-const dayNamesIdShort = ['ming', 'sen', 'sel', 'rab', 'kam', 'jum', 'sab'];
-
-// Nama hari dalam bahasa Inggris
-const dayNamesEn = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-const dayNamesEnShort = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-
-// Nama hari dalam bahasa Indonesia yang lebih formal
-const dayNamesFormal = ['ahad', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+const dayNamesIdCapital = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
 const todayDayId = dayNamesId[today.getDay()];
-const todayDayIdShort = dayNamesIdShort[today.getDay()];
-const todayDayEn = dayNamesEn[today.getDay()];
-const todayDayEnShort = dayNamesEnShort[today.getDay()];
-const todayDayFormal = dayNamesFormal[today.getDay()];
+const todayDayIdCapital = dayNamesIdCapital[today.getDay()];
 
 // Format tanggal
 const day = today.getDate();
-const dayPad = day.toString().padStart(2, '0');
-const month = (today.getMonth() + 1).toString().padStart(2, '0');
+const month = (today.getMonth() + 1);
 const year = today.getFullYear();
-const monthNames = ['januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember'];
+const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 const monthName = monthNames[today.getMonth()];
-const monthNameShort = monthName.substring(0, 3);
 
-// Semua variasi kata kunci yang mungkin muncul
-const keywords = [
-// Kata kunci umum
-'hari ini', 'today',
-'sekarang', 'today',
+// Buat array semua keyword yang mungkin
+const keywords = [];
 
-// Nama hari (lengkap)
-todayDayId, todayDayEn, todayDayFormal,
+// 1. Nama hari (lowercase dan capital)
+keywords.push(todayDayId);
+keywords.push(todayDayIdCapital);
 
-// Nama hari (singkat)
-todayDayIdShort, todayDayEnShort,
+// 2. Kombinasi "hari" + nama hari
+keywords.push(`hari ${todayDayId}`);
+keywords.push(`hari ${todayDayIdCapital}`);
 
-// Kombinasi hari + tanggal
-`${todayDayId} ${day}`, `${todayDayId}, ${day}`,
-`${todayDayId} ${dayPad}`, `${todayDayId}, ${dayPad}`,
-`${todayDayEn} ${day}`, `${todayDayEn}, ${day}`,
+// 3. Kombinasi "setiap" + nama hari
+keywords.push(`setiap ${todayDayId}`);
+keywords.push(`setiap ${todayDayIdCapital}`);
+keywords.push(`setiap hari ${todayDayId}`);
+keywords.push(`setiap hari ${todayDayIdCapital}`);
 
-// Kombinasi hari + bulan
-`${todayDayId} ${monthName}`, `${todayDayId}, ${monthName}`,
-`${todayDayId} ${monthNameShort}`, `${todayDayId}, ${monthNameShort}`,
+// 4. Format tanggal: 28 Jun 2026, 28 Juni 2026, dll
+keywords.push(`${day} ${monthName} ${year}`);
+keywords.push(`${day} ${monthName.substring(0,3)} ${year}`);
+keywords.push(`${day.toString().padStart(2,'0')} ${monthName} ${year}`);
+keywords.push(`${day}/${month}/${year}`);
+keywords.push(`${day}-${month}-${year}`);
 
-// Kombinasi hari + tanggal + bulan
-`${todayDayId} ${day} ${monthName}`, `${todayDayId}, ${day} ${monthName}`,
-`${todayDayId} ${dayPad} ${monthName}`, `${todayDayId}, ${dayPad} ${monthName}`,
+// 5. Format tanpa tahun
+keywords.push(`${day} ${monthName}`);
+keywords.push(`${day} ${monthName.substring(0,3)}`);
 
-// Format tanggal saja
-day.toString(), dayPad,
-`${day} ${monthName}`, `${day} ${monthNameShort}`,
-`${dayPad} ${monthName}`, `${dayPad} ${monthNameShort}`,
-`${monthName} ${day}`, `${monthNameShort} ${day}`,
-
-// Format tanggal lengkap
-`${day} ${monthName} ${year}`, `${day} ${monthNameShort} ${year}`,
-`${dayPad} ${monthName} ${year}`, `${dayPad} ${monthNameShort} ${year}`,
-`${dayPad}/${month}/${year}`, `${dayPad}-${month}-${year}`,
-`${year}-${month}-${dayPad}`,
-
-// Format tanpa tahun
-`${dayPad}/${month}`, `${dayPad}-${month}`,
-];
+// 6. "hari ini" dan "today"
+keywords.push('hari ini');
+keywords.push('today');
 
 // Cek semua keyword
 for (let keyword of keywords) {
 if (keyword && lowerContent.includes(keyword.toLowerCase())) {
 return true;
-}
-}
-
-// Cek pola "setiap hari [nama hari]" atau "setiap [nama hari]"
-const polaHari = ['setiap hari', 'setiap', 'hari'];
-for (let pola of polaHari) {
-for (let dayName of dayNamesId) {
-const pattern = `${pola} ${dayName}`;
-if (lowerContent.includes(pattern)) {
-// Cek apakah hari ini match dengan dayName
-if (dayName === todayDayId) {
-return true;
-}
-}
 }
 }
 
@@ -2179,6 +2146,10 @@ console.error('Gagal fetch BONUS TODAY:', e);
 bonusTodayData = [];
 }
 }
+
+// DEBUG: Lihat data yang masuk
+console.log('Total data dari sheet BONUS TODAY:', bonusTodayData.length);
+console.log('Data bonus:', bonusTodayData);
 
 // ========== RENDER JADWAL ==========
 let scheduleHtml = '';
@@ -2249,14 +2220,20 @@ const today = new Date();
 const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
 const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
 
-// Filter bonus yang match hari ini - menggunakan fungsi yang diperbaiki
+// Filter bonus yang match hari ini - GUNAKAN SEMUA DATA (jangan difilter)
+// Karena kita sudah ambil semua data dari sheet BONUS TODAY,
+// dan fungsi isBonusMatchToday akan menentukan mana yang cocok dengan hari ini
 const filteredBonus = bonusTodayData.filter(item => {
 const content = (item.title + ' ' + item.content);
-return isBonusMatchToday(content);
+const match = isBonusMatchToday(content);
+if (match) {
+console.log('MATCH:', item.title);
+}
+return match;
 });
 
-console.log('Total bonus di sheet:', bonusTodayData.length);
 console.log('Bonus yang match hari ini:', filteredBonus.length);
+console.log('Detail match:', filteredBonus);
 
 let bonusContent = '';
 if (filteredBonus.length > 0) {
