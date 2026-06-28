@@ -1488,12 +1488,9 @@ font-size: 0.85rem;
 color: #cbd5e6;
 font-size: 0.90rem;
 line-height: 1.6;
-display: -webkit-box;
--webkit-line-clamp: 4;
--webkit-box-orient: vertical;
-overflow: hidden;
 word-break: break-word;
 padding-left: 28px;
+white-space: pre-wrap;
 }
 
 /* TOMBOL DI BAWAH - SEPERTI CONTOH */
@@ -1800,10 +1797,11 @@ const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
 for (let i = 0; i < rows.length; i++) {
-if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+// Hanya ambil baris yang memiliki konten (kolom B tidak kosong)
+if (rows[i] && rows[i][0] && rows[i][0].trim() && rows[i][1] && rows[i][1].trim()) {
 items.push({
 title: rows[i][0].trim(),
-content: rows[i][1] ? rows[i][1].trim() : ""
+content: rows[i][1].trim()
 });
 }
 }
@@ -2211,6 +2209,7 @@ const today = new Date();
 const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
 const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
 
+// Filter bonus yang match hari ini
 const filteredBonus = bonusTodayData.filter(item => {
 const content = (item.title + ' ' + item.content);
 return isBonusMatchToday(content);
@@ -2219,9 +2218,8 @@ return isBonusMatchToday(content);
 let bonusContent = '';
 if (filteredBonus.length > 0) {
 let bonusItems = '';
-// Tampilkan SEMUA bonus yang cocok (tidak dibatasi)
+// Tampilkan SEMUA bonus yang cocok
 filteredBonus.forEach((item) => {
-// Gunakan konten lengkap sebagai deskripsi
 const desc = item.content || '';
 
 bonusItems += `
