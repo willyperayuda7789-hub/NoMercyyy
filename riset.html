@@ -1576,58 +1576,234 @@ margin-right: 4px;
 display: none;
 }
 
+/* ========= FOLDER NAWALA ========= */
+.nawala-folder-container {
+position: relative;
+margin-bottom: 24px;
+display: flex;
+flex-direction: column;
+max-width: 50%;
+}
+
+.nawala-folder-tab {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+padding: 10px 24px 10px 28px;
+border-radius: 12px 12px 0 0;
+color: #ffffff;
+font-weight: 700;
+font-size: 0.95rem;
+width: fit-content;
+max-width: 90%;
+position: relative;
+z-index: 2;
+box-shadow: 0 -4px 15px rgba(139, 92, 246, 0.25);
+border: 1px solid rgba(255, 255, 255, 0.15);
+border-bottom: none;
+}
+
+.nawala-folder-tab i {
+font-size: 1rem;
+color: #ffffff;
+}
+
+.nawala-folder-tab .header-date-tab {
+font-size: 0.65rem;
+font-weight: 500;
+opacity: 0.6;
+margin-left: auto;
+}
+
+.nawala-folder-body {
+background: rgba(18, 28, 45, 0.9);
+border-radius: 0 16px 16px 16px;
+border: 1px solid rgba(255, 255, 255, 0.12);
+padding: 28px 24px 32px 24px;
+backdrop-filter: blur(8px);
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+position: relative;
+z-index: 1;
+min-height: 60px;
+}
+
+.nawala-folder-list {
+display: flex;
+flex-direction: column;
+gap: 14px;
+}
+
+.nawala-folder-item {
+background: rgba(0, 0, 0, 0.35);
+border-radius: 14px;
+padding: 18px 20px;
+border: 1px solid rgba(255, 255, 255, 0.08);
+transition: all 0.2s ease;
+display: flex;
+flex-direction: column;
+gap: 8px;
+cursor: pointer;
+}
+
+.nawala-folder-item:hover {
+background: rgba(139, 92, 246, 0.12);
+border-color: rgba(139, 92, 246, 0.25);
+}
+
+.nawala-folder-item .nawala-item-title-folder {
+font-weight: 700;
+color: #f0f4fe;
+font-size: 0.95rem;
+display: flex;
+align-items: center;
+gap: 10px;
+letter-spacing: -0.2px;
+}
+
+.nawala-folder-item .nawala-item-title-folder i {
+color: #8b5cf6;
+font-size: 0.85rem;
+}
+
+.nawala-folder-item .nawala-item-desc-folder {
+color: #cbd5e6;
+font-size: 0.90rem;
+line-height: 1.6;
+word-break: break-word;
+padding-left: 28px;
+white-space: pre-wrap;
+}
+
+.nawala-item-actions-folder {
+display: flex;
+flex-direction: row;
+align-items: center;
+gap: 12px;
+margin-top: 10px;
+padding-top: 12px;
+border-top: 1px solid rgba(255, 255, 255, 0.06);
+justify-content: flex-start;
+padding-left: 28px;
+}
+
+.btn-nawala-open-folder {
+background: transparent;
+border: 1px solid rgba(139, 92, 246, 0.5);
+border-radius: 30px;
+color: #8b5cf6;
+font-size: 0.75rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+padding: 8px 18px;
+font-family: 'Inter', monospace;
+}
+
+.btn-nawala-open-folder:hover {
+background: rgba(139, 92, 246, 0.2);
+color: #a78bfa;
+border-color: #8b5cf6;
+}
+
+.btn-nawala-open-folder i {
+font-size: 0.75rem;
+}
+
+.btn-salin-nawala {
+background: linear-gradient(135deg, #10b981, #059669);
+border: none;
+color: white;
+padding: 8px 20px;
+border-radius: 30px;
+font-size: 0.75rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s ease;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+font-family: 'Inter', monospace;
+}
+
+.btn-salin-nawala:hover {
+background: linear-gradient(135deg, #059669, #047857);
+transform: scale(1.02);
+}
+
+.btn-salin-nawala i {
+font-size: 0.75rem;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
-.bonus-folder-container {
+.bonus-folder-container,
+.nawala-folder-container {
 max-width: 70%;
 }
-.bonus-folder-item .bonus-item-title-folder {
+.bonus-folder-item .bonus-item-title-folder,
+.nawala-folder-item .nawala-item-title-folder {
 font-size: 0.90rem;
 }
-.bonus-folder-item .bonus-item-desc-folder {
+.bonus-folder-item .bonus-item-desc-folder,
+.nawala-folder-item .nawala-item-desc-folder {
 font-size: 0.85rem;
 padding-left: 26px;
 }
-.bonus-item-actions-folder {
+.bonus-item-actions-folder,
+.nawala-item-actions-folder {
 padding-left: 26px;
 }
 }
 
 @media (max-width: 768px) {
-.bonus-folder-container {
+.bonus-folder-container,
+.nawala-folder-container {
 max-width: 100%;
 }
-.bonus-folder-tab {
+.bonus-folder-tab,
+.nawala-folder-tab {
 font-size: 0.8rem;
 padding: 8px 16px 8px 20px;
 max-width: 100%;
 }
-.bonus-folder-tab .header-date-tab {
+.bonus-folder-tab .header-date-tab,
+.nawala-folder-tab .header-date-tab {
 font-size: 0.55rem;
 }
-.bonus-folder-body {
+.bonus-folder-body,
+.nawala-folder-body {
 padding: 20px 16px 24px 16px;
 min-height: 40px;
 }
-.bonus-folder-item {
+.bonus-folder-item,
+.nawala-folder-item {
 padding: 14px 16px;
 }
-.bonus-folder-item .bonus-item-title-folder {
+.bonus-folder-item .bonus-item-title-folder,
+.nawala-folder-item .nawala-item-title-folder {
 font-size: 0.85rem;
 }
-.bonus-folder-item .bonus-item-desc-folder {
+.bonus-folder-item .bonus-item-desc-folder,
+.nawala-folder-item .nawala-item-desc-folder {
 font-size: 0.80rem;
 padding-left: 0;
 }
-.bonus-item-actions-folder {
+.bonus-item-actions-folder,
+.nawala-item-actions-folder {
 padding-left: 0;
 flex-wrap: wrap;
 }
-.btn-open-folder-small {
+.btn-open-folder-small,
+.btn-nawala-open-folder {
 font-size: 0.65rem;
 padding: 6px 14px;
 }
-.btn-salin-bonus-small-v2 {
+.btn-salin-bonus-small-v2,
+.btn-salin-nawala {
 font-size: 0.65rem;
 padding: 6px 16px;
 }
@@ -1692,6 +1868,7 @@ const SHEET_QRIS_LAIN_LAIN = 'QRIS LAIN-LAIN';
 const SHEET_JADWAL_PASARAN = 'JADWALPASARAN';
 const SHEET_LINK_LAIN = 'LINK LAIN LAIN';
 const SHEET_BONUS_TODAY = 'BONUS TODAY';
+const SHEET_NAWALA = 'NAWALA'; // Sheet baru untuk folder NAWALA
 
 // Data untuk DASHBOARD
 let dashboardData = [];
@@ -1703,6 +1880,7 @@ let bonusMingguanData = [];
 let bonusDoneBagiData = [];
 let bonusLainLainData = [];
 let bonusTodayData = [];
+let nawalaData = []; // Data untuk folder NAWALA
 let rrnQrisData = [];
 let ewalletBankData = [];
 let caraBermainAllData = [];
@@ -1763,6 +1941,31 @@ dataRows.push({ title: rows[i][0].trim(), content: rows[i][1] ? rows[i][1].trim(
 }
 return dataRows;
 } catch(e) { console.error(`Error fetch ${sheetName}:`, e); throw new Error(`Gagal ambil data dari sheet ${sheetName}`); }
+}
+
+async function fetchNawalaData() {
+try {
+const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAWALA)}`;
+const response = await fetch(csvUrl, { cache: 'no-store' });
+if (!response.ok) throw new Error(`HTTP ${response.status}`);
+const csvText = await response.text();
+const rows = parseCSV(csvText);
+const items = [];
+for (let i = 0; i < rows.length; i++) {
+if (rows[i] && rows[i][0] && rows[i][0].trim()) {
+items.push({
+judul: rows[i][0].trim(),
+deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "",
+konten: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "",
+url: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : ""
+});
+}
+}
+return items;
+} catch(e) {
+console.error(e);
+return [];
+}
 }
 
 async function fetchBonusTodayData() {
@@ -2032,84 +2235,84 @@ return "status-scheduled-dash";
 
 // ======================= FUNGSI FILTER BONUS - HANYA HARI INI =======================
 function isBonusMatchToday(content) {
-    if (!content) return false;
+if (!content) return false;
 
-    const today = new Date();
-    const lowerContent = content.toLowerCase();
+const today = new Date();
+const lowerContent = content.toLowerCase();
 
-    // Nama hari dalam bahasa Indonesia
-    const dayNamesId = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
-    const dayNamesIdCapital = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+// Nama hari dalam bahasa Indonesia
+const dayNamesId = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+const dayNamesIdCapital = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
-    // Ambil HANYA hari ini
-    const todayIndex = today.getDay();
-    const todayDayId = dayNamesId[todayIndex];
-    const todayDayIdCapital = dayNamesIdCapital[todayIndex];
+// Ambil HANYA hari ini
+const todayIndex = today.getDay();
+const todayDayId = dayNamesId[todayIndex];
+const todayDayIdCapital = dayNamesIdCapital[todayIndex];
 
-    // Format tanggal hari ini
-    const day = today.getDate();
-    const dayPad = day.toString().padStart(2, '0');
-    const month = (today.getMonth() + 1).toString().padStart(2, '0');
-    const year = today.getFullYear();
-    const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-    const monthName = monthNames[today.getMonth()];
-    const monthNameShort = monthName.substring(0, 3);
+// Format tanggal hari ini
+const day = today.getDate();
+const dayPad = day.toString().padStart(2, '0');
+const month = (today.getMonth() + 1).toString().padStart(2, '0');
+const year = today.getFullYear();
+const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+const monthName = monthNames[today.getMonth()];
+const monthNameShort = monthName.substring(0, 3);
 
-    // === BUAT KEYWORD HANYA UNTUK HARI INI ===
-    const keywords = [];
+// === BUAT KEYWORD HANYA UNTUK HARI INI ===
+const keywords = [];
 
-    // 1. Nama hari ini (HANYA hari ini)
-    keywords.push(todayDayId);
-    keywords.push(todayDayIdCapital);
+// 1. Nama hari ini (HANYA hari ini)
+keywords.push(todayDayId);
+keywords.push(todayDayIdCapital);
 
-    // 2. Kombinasi "hari" + nama hari ini
-    keywords.push(`hari ${todayDayId}`);
-    keywords.push(`hari ${todayDayIdCapital}`);
+// 2. Kombinasi "hari" + nama hari ini
+keywords.push(`hari ${todayDayId}`);
+keywords.push(`hari ${todayDayIdCapital}`);
 
-    // 3. Kombinasi "setiap" + nama hari ini
-    keywords.push(`setiap ${todayDayId}`);
-    keywords.push(`setiap ${todayDayIdCapital}`);
-    keywords.push(`setiap hari ${todayDayId}`);
-    keywords.push(`setiap hari ${todayDayIdCapital}`);
+// 3. Kombinasi "setiap" + nama hari ini
+keywords.push(`setiap ${todayDayId}`);
+keywords.push(`setiap ${todayDayIdCapital}`);
+keywords.push(`setiap hari ${todayDayId}`);
+keywords.push(`setiap hari ${todayDayIdCapital}`);
 
-    // 4. Kombinasi "tiap" + nama hari ini
-    keywords.push(`tiap ${todayDayId}`);
-    keywords.push(`tiap ${todayDayIdCapital}`);
-    keywords.push(`tiap hari ${todayDayId}`);
-    keywords.push(`tiap hari ${todayDayIdCapital}`);
+// 4. Kombinasi "tiap" + nama hari ini
+keywords.push(`tiap ${todayDayId}`);
+keywords.push(`tiap ${todayDayIdCapital}`);
+keywords.push(`tiap hari ${todayDayId}`);
+keywords.push(`tiap hari ${todayDayIdCapital}`);
 
-    // 5. Format tanggal hari ini
-    keywords.push(day.toString());
-    keywords.push(dayPad);
-    keywords.push(`tanggal ${day}`);
-    keywords.push(`tanggal ${dayPad}`);
-    keywords.push(`tgl ${day}`);
-    keywords.push(`tgl ${dayPad}`);
+// 5. Format tanggal hari ini
+keywords.push(day.toString());
+keywords.push(dayPad);
+keywords.push(`tanggal ${day}`);
+keywords.push(`tanggal ${dayPad}`);
+keywords.push(`tgl ${day}`);
+keywords.push(`tgl ${dayPad}`);
 
-    // 6. Format tanggal dengan bulan
-    keywords.push(`${day} ${monthName}`);
-    keywords.push(`${day} ${monthNameShort}`);
-    keywords.push(`${dayPad} ${monthName}`);
-    keywords.push(`${dayPad} ${monthNameShort}`);
+// 6. Format tanggal dengan bulan
+keywords.push(`${day} ${monthName}`);
+keywords.push(`${day} ${monthNameShort}`);
+keywords.push(`${dayPad} ${monthName}`);
+keywords.push(`${dayPad} ${monthNameShort}`);
 
-    // 7. Kombinasi hari + tanggal (HANYA hari ini)
-    keywords.push(`${todayDayId} ${day}`);
-    keywords.push(`${todayDayIdCapital} ${day}`);
-    keywords.push(`${todayDayId} ${dayPad}`);
-    keywords.push(`${todayDayIdCapital} ${dayPad}`);
+// 7. Kombinasi hari + tanggal (HANYA hari ini)
+keywords.push(`${todayDayId} ${day}`);
+keywords.push(`${todayDayIdCapital} ${day}`);
+keywords.push(`${todayDayId} ${dayPad}`);
+keywords.push(`${todayDayIdCapital} ${dayPad}`);
 
-    // 8. "hari ini" dan "today"
-    keywords.push('hari ini');
-    keywords.push('today');
+// 8. "hari ini" dan "today"
+keywords.push('hari ini');
+keywords.push('today');
 
-    // Cek semua keyword - HANYA yang match dengan hari ini
-    for (let keyword of keywords) {
-        if (keyword && lowerContent.includes(keyword.toLowerCase())) {
-            return true;
-        }
-    }
+// Cek semua keyword - HANYA yang match dengan hari ini
+for (let keyword of keywords) {
+if (keyword && lowerContent.includes(keyword.toLowerCase())) {
+return true;
+}
+}
 
-    return false;
+return false;
 }
 
 // ======================= RENDER DASHBOARD =======================
@@ -2138,6 +2341,15 @@ bonusTodayData = await fetchBonusTodayData();
 } catch(e) {
 console.error('Gagal fetch BONUS TODAY:', e);
 bonusTodayData = [];
+}
+}
+
+if (nawalaData.length === 0) {
+try {
+nawalaData = await fetchNawalaData();
+} catch(e) {
+console.error('Gagal fetch NAWALA:', e);
+nawalaData = [];
 }
 }
 
@@ -2205,25 +2417,22 @@ scheduleHtml = `
 `;
 }
 
-// ========== RENDER BONUS HARI INI - LIVE DAY & LIVE DATE ==========
+// ========== RENDER BONUS HARI INI ==========
 const today = new Date();
 const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
 const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
 
-// Filter bonus dengan LIVE DAY + LIVE DATE
+// Filter bonus dengan HANYA hari ini
 const filteredBonus = bonusTodayData.filter(item => {
 const content = (item.title + ' ' + item.content);
 return isBonusMatchToday(content);
 });
 
-console.log('Total data dari sheet BONUS TODAY:', bonusTodayData.length);
-console.log('Bonus yang match hari ini:', filteredBonus.length);
-
 let bonusContent = '';
-let showFooter = false;
+let showBonusFooter = false;
 
 if (filteredBonus.length > 0) {
-showFooter = true;
+showBonusFooter = true;
 let bonusItems = '';
 filteredBonus.forEach((item) => {
 const desc = item.content || '';
@@ -2249,7 +2458,7 @@ ${bonusItems}
 bonusContent = '';
 }
 
-const footerHtml = showFooter ? `
+const bonusFooterHtml = showBonusFooter ? `
 <div class="bonus-folder-footer-tab">
 <i class="fas fa-gift"></i> Total ${filteredBonus.length} bonus untuk ${dayName}, ${dateStr}
 </div>
@@ -2263,12 +2472,61 @@ const bonusHtml = `
 </div>
 <div class="bonus-folder-body">
 ${bonusContent}
-${footerHtml}
+${bonusFooterHtml}
 </div>
 </div>
 `;
 
-dynamicArea.innerHTML = scheduleHtml + bonusHtml;
+// ========== RENDER FOLDER NAWALA ==========
+let nawalaContent = '';
+let showNawalaFooter = false;
+
+if (nawalaData.length > 0) {
+showNawalaFooter = true;
+let nawalaItems = '';
+nawalaData.forEach((item) => {
+const desc = item.deskripsi || '';
+
+nawalaItems += `
+<div class="nawala-folder-item" data-nawala-title="${escapeHtml(item.judul)}" data-nawala-content="${escapeHtml(item.konten)}" data-nawala-url="${escapeHtml(item.url)}">
+<div class="nawala-item-title-folder"><i class="fas fa-folder-open"></i> ${escapeHtml(item.judul)}</div>
+<div class="nawala-item-desc-folder">${escapeHtml(desc)}</div>
+<div class="nawala-item-actions-folder">
+<button class="btn-nawala-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button>
+<button class="btn-salin-nawala" data-salin="${escapeHtml(item.judul + '\n' + item.deskripsi)}"><i class="fas fa-copy"></i> SALIN</button>
+</div>
+</div>
+`;
+});
+
+nawalaContent = `
+<div class="nawala-folder-list">
+${nawalaItems}
+</div>
+`;
+} else {
+nawalaContent = '';
+}
+
+const nawalaFooterHtml = showNawalaFooter ? `
+<div class="bonus-folder-footer-tab">
+<i class="fas fa-folder-open"></i> Total ${nawalaData.length} folder
+</div>
+` : '';
+
+const nawalaHtml = `
+<div class="nawala-folder-container">
+<div class="nawala-folder-tab">
+<i class="fas fa-folder-open"></i> CEK LINK NAWALA
+</div>
+<div class="nawala-folder-body">
+${nawalaContent}
+${nawalaFooterHtml}
+</div>
+</div>
+`;
+
+dynamicArea.innerHTML = scheduleHtml + bonusHtml + nawalaHtml;
 
 // ========== EVENT UNTUK BONUS ITEM ==========
 document.querySelectorAll('.bonus-folder-item').forEach(item => {
@@ -2295,6 +2553,36 @@ const parent = btn.closest('.bonus-folder-item');
 if (parent) {
 const title = parent.getAttribute('data-bonus-title') || 'Bonus';
 const content = parent.getAttribute('data-bonus-content') || 'Tidak ada deskripsi';
+openModal(title, content);
+}
+});
+});
+
+// ========== EVENT UNTUK NAWALA ITEM ==========
+document.querySelectorAll('.nawala-folder-item').forEach(item => {
+item.addEventListener('click', (e) => {
+if (e.target.closest('button')) return;
+const title = item.getAttribute('data-nawala-title') || 'Folder';
+const content = item.getAttribute('data-nawala-content') || 'Tidak ada deskripsi';
+openModal(title, content);
+});
+});
+
+document.querySelectorAll('.btn-salin-nawala').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+const text = btn.getAttribute('data-salin') || '';
+copyContentOnly(text, 'NAWALA');
+});
+});
+
+document.querySelectorAll('.btn-nawala-open-folder').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+const parent = btn.closest('.nawala-folder-item');
+if (parent) {
+const title = parent.getAttribute('data-nawala-title') || 'Folder';
+const content = parent.getAttribute('data-nawala-content') || 'Tidak ada deskripsi';
 openModal(title, content);
 }
 });
