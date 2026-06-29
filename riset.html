@@ -1576,7 +1576,7 @@ margin-right: 4px;
 display: none;
 }
 
-/* ========= FOLDER NAWALA - SEPERTI GAMBAR ========= */
+/* ========= FOLDER NAWALA - SEDERHANA ========= */
 .nawala-folder-container {
 position: relative;
 margin-bottom: 24px;
@@ -1668,64 +1668,6 @@ padding-left: 28px;
 white-space: pre-wrap;
 }
 
-.nawala-item-actions-folder {
-display: flex;
-flex-direction: row;
-align-items: center;
-gap: 12px;
-margin-top: 10px;
-padding-top: 12px;
-border-top: 1px solid rgba(255, 255, 255, 0.06);
-justify-content: flex-start;
-padding-left: 28px;
-}
-
-.btn-nawala-salin-subjudul {
-flex: 1;
-background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-border: none;
-color: white;
-padding: 8px 12px;
-border-radius: 30px;
-font-size: 0.65rem;
-font-weight: 700;
-cursor: pointer;
-transition: all 0.2s ease;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 6px;
-font-family: 'Inter', monospace;
-}
-
-.btn-nawala-salin-subjudul:hover {
-background: linear-gradient(135deg, #7c3aed, #6d28d9);
-transform: scale(1.02);
-}
-
-.btn-nawala-salin-isi {
-flex: 1;
-background: linear-gradient(135deg, #f59e0b, #d97706);
-border: none;
-color: white;
-padding: 8px 12px;
-border-radius: 30px;
-font-size: 0.65rem;
-font-weight: 700;
-cursor: pointer;
-transition: all 0.2s ease;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 6px;
-font-family: 'Inter', monospace;
-}
-
-.btn-nawala-salin-isi:hover {
-background: linear-gradient(135deg, #d97706, #b45309);
-transform: scale(1.02);
-}
-
 /* TOMBOL BUKA WEBSITE - FULL WIDTH */
 .btn-nawala-buka-website {
 width: 100%;
@@ -1780,15 +1722,6 @@ font-size: 0.90rem;
 font-size: 0.85rem;
 padding-left: 26px;
 }
-.bonus-item-actions-folder,
-.nawala-item-actions-folder {
-padding-left: 26px;
-}
-.btn-nawala-salin-subjudul,
-.btn-nawala-salin-isi {
-font-size: 0.6rem;
-padding: 6px 10px;
-}
 }
 
 @media (max-width: 768px) {
@@ -1823,24 +1756,6 @@ font-size: 0.85rem;
 .nawala-folder-item .nawala-item-desc-folder {
 font-size: 0.80rem;
 padding-left: 0;
-}
-.bonus-item-actions-folder,
-.nawala-item-actions-folder {
-padding-left: 0;
-flex-wrap: wrap;
-}
-.btn-open-folder-small {
-font-size: 0.65rem;
-padding: 6px 14px;
-}
-.btn-salin-bonus-small-v2 {
-font-size: 0.65rem;
-padding: 6px 16px;
-}
-.btn-nawala-salin-subjudul,
-.btn-nawala-salin-isi {
-font-size: 0.55rem;
-padding: 5px 8px;
 }
 .btn-nawala-buka-website {
 font-size: 0.75rem;
@@ -1993,7 +1908,6 @@ const items = [];
 for (let i = 0; i < rows.length; i++) {
 if (rows[i] && rows[i][0] && rows[i][0].trim()) {
 const url = (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "";
-// Format URL jika belum ada http
 let cleanUrl = url;
 if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
 cleanUrl = 'https://' + url;
@@ -2508,7 +2422,7 @@ ${bonusFooterHtml}
 </div>
 `;
 
-// ========== RENDER FOLDER NAWALA - SEPERTI GAMBAR ==========
+// ========== RENDER FOLDER NAWALA - SEDERHANA ==========
 let nawalaContent = '';
 let showNawalaFooter = false;
 
@@ -2523,10 +2437,6 @@ nawalaItems += `
 <div class="nawala-folder-item" data-nawala-title="${escapeHtml(item.judul)}" data-nawala-desc="${escapeHtml(item.deskripsi)}" data-nawala-url="${escapeHtml(item.url)}">
 <div class="nawala-item-title-folder"><i class="fas fa-link"></i> ${escapeHtml(item.judul)}</div>
 <div class="nawala-item-desc-folder">${escapeHtml(desc)}</div>
-<div class="nawala-item-actions-folder">
-<button class="btn-nawala-salin-subjudul" data-subjudul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button>
-<button class="btn-nawala-salin-isi" data-isi="${escapeHtml(item.deskripsi)}"><i class="fas fa-copy"></i> Salin Isi</button>
-</div>
 ${hasUrl ? `<button class="btn-nawala-buka-website" data-url="${escapeHtml(item.url)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-external-link-alt"></i> BUKA WEBSITE</button>` : `<button class="btn-nawala-buka-website" disabled><i class="fas fa-external-link-alt"></i> TIDAK ADA URL</button>`}
 </div>
 `;
@@ -2598,22 +2508,6 @@ if (e.target.closest('button')) return;
 const title = item.getAttribute('data-nawala-title') || 'Folder';
 const desc = item.getAttribute('data-nawala-desc') || 'Tidak ada deskripsi';
 openModal(title, desc);
-});
-});
-
-document.querySelectorAll('.btn-nawala-salin-subjudul').forEach(btn => {
-btn.addEventListener('click', (e) => {
-e.stopPropagation();
-const text = btn.getAttribute('data-subjudul') || '';
-copyContentOnly(text, 'Subjudul NAWALA');
-});
-});
-
-document.querySelectorAll('.btn-nawala-salin-isi').forEach(btn => {
-btn.addEventListener('click', (e) => {
-e.stopPropagation();
-const text = btn.getAttribute('data-isi') || '';
-copyContentOnly(text, 'Isi NAWALA');
 });
 });
 
