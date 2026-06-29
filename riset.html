@@ -1576,7 +1576,7 @@ margin-right: 4px;
 display: none;
 }
 
-/* ========= FOLDER NAWALA - SEDERHANA ========= */
+/* ========= FOLDER NAWALA - SEDERHANA (HANYA JUDUL + TOMBOL) ========= */
 .nawala-folder-container {
 position: relative;
 margin-bottom: 24px;
@@ -1659,15 +1659,6 @@ color: #8b5cf6;
 font-size: 0.85rem;
 }
 
-.nawala-folder-item .nawala-item-desc-folder {
-color: #cbd5e6;
-font-size: 0.90rem;
-line-height: 1.6;
-word-break: break-word;
-padding-left: 28px;
-white-space: pre-wrap;
-}
-
 /* TOMBOL BUKA WEBSITE - FULL WIDTH */
 .btn-nawala-buka-website {
 width: 100%;
@@ -1717,11 +1708,6 @@ max-width: 70%;
 .nawala-folder-item .nawala-item-title-folder {
 font-size: 0.90rem;
 }
-.bonus-folder-item .bonus-item-desc-folder,
-.nawala-folder-item .nawala-item-desc-folder {
-font-size: 0.85rem;
-padding-left: 26px;
-}
 }
 
 @media (max-width: 768px) {
@@ -1751,11 +1737,6 @@ padding: 14px 16px;
 .bonus-folder-item .bonus-item-title-folder,
 .nawala-folder-item .nawala-item-title-folder {
 font-size: 0.85rem;
-}
-.bonus-folder-item .bonus-item-desc-folder,
-.nawala-folder-item .nawala-item-desc-folder {
-font-size: 0.80rem;
-padding-left: 0;
 }
 .btn-nawala-buka-website {
 font-size: 0.75rem;
@@ -1914,7 +1895,6 @@ cleanUrl = 'https://' + url;
 }
 items.push({
 judul: rows[i][0].trim(),
-deskripsi: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "",
 url: cleanUrl,
 rawUrl: url
 });
@@ -2422,7 +2402,7 @@ ${bonusFooterHtml}
 </div>
 `;
 
-// ========== RENDER FOLDER NAWALA - SEDERHANA ==========
+// ========== RENDER FOLDER NAWALA - HANYA JUDUL + TOMBOL ==========
 let nawalaContent = '';
 let showNawalaFooter = false;
 
@@ -2430,13 +2410,11 @@ if (nawalaData.length > 0) {
 showNawalaFooter = true;
 let nawalaItems = '';
 nawalaData.forEach((item) => {
-const desc = item.deskripsi || '';
 const hasUrl = item.url && item.url.trim() !== '';
 
 nawalaItems += `
-<div class="nawala-folder-item" data-nawala-title="${escapeHtml(item.judul)}" data-nawala-desc="${escapeHtml(item.deskripsi)}" data-nawala-url="${escapeHtml(item.url)}">
+<div class="nawala-folder-item" data-nawala-title="${escapeHtml(item.judul)}" data-nawala-url="${escapeHtml(item.url)}">
 <div class="nawala-item-title-folder"><i class="fas fa-link"></i> ${escapeHtml(item.judul)}</div>
-<div class="nawala-item-desc-folder">${escapeHtml(desc)}</div>
 ${hasUrl ? `<button class="btn-nawala-buka-website" data-url="${escapeHtml(item.url)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-external-link-alt"></i> BUKA WEBSITE</button>` : `<button class="btn-nawala-buka-website" disabled><i class="fas fa-external-link-alt"></i> TIDAK ADA URL</button>`}
 </div>
 `;
@@ -2506,8 +2484,7 @@ document.querySelectorAll('.nawala-folder-item').forEach(item => {
 item.addEventListener('click', (e) => {
 if (e.target.closest('button')) return;
 const title = item.getAttribute('data-nawala-title') || 'Folder';
-const desc = item.getAttribute('data-nawala-desc') || 'Tidak ada deskripsi';
-openModal(title, desc);
+openModal(title, 'Klik tombol BUKA WEBSITE untuk membuka link');
 });
 });
 
