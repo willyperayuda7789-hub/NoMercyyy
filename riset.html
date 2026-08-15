@@ -2177,20 +2177,22 @@ const today = new Date();
 const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
 const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
 
+// Filter bonus yang cocok dengan hari ini
 const filteredBonus = bonusTodayData.filter(item => {
 const content = (item.title + ' ' + item.content);
 return isBonusMatchToday(content);
 });
 
-let bonusContent = '';
-let showBonusFooter = false;
+// CEK APAKAH ADA BONUS UNTUK HARI INI
+const hasBonusToday = filteredBonus.length > 0;
 
-if (filteredBonus.length > 0) {
-showBonusFooter = true;
+let bonusHtml = '';
+
+if (hasBonusToday) {
+// Jika ada bonus hari ini, tampilkan folder bonus
 let bonusItems = '';
 filteredBonus.forEach((item) => {
 const desc = item.content || '';
-
 bonusItems += `
 <div class="bonus-folder-item" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}">
 <div class="bonus-item-title-folder"><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</div>
@@ -2203,37 +2205,32 @@ bonusItems += `
 `;
 });
 
-bonusContent = `
-<div class="bonus-folder-list">
-${bonusItems}
-</div>
-`;
-} else {
-bonusContent = '';
-}
-
-const bonusFooterHtml = showBonusFooter ? `
-<div class="bonus-folder-footer-tab">
-<i class="fas fa-gift"></i> Total ${filteredBonus.length} bonus untuk ${dayName}, ${dateStr}
-</div>
-` : '';
-
-const bonusHtml = `
+bonusHtml = `
 <div class="bonus-folder-container">
 <div class="bonus-folder-tab">
 <i class="fas fa-gift"></i> BONUS HARI INI
 <span class="header-date-tab">${dayName}, ${dateStr}</span>
 </div>
 <div class="bonus-folder-body">
-${bonusContent}
-${bonusFooterHtml}
+<div class="bonus-folder-list">
+${bonusItems}
+</div>
+<div class="bonus-folder-footer-tab">
+<i class="fas fa-gift"></i> Total ${filteredBonus.length} bonus untuk ${dayName}, ${dateStr}
+</div>
 </div>
 </div>
 `;
+} else {
+// Jika tidak ada bonus hari ini, folder bonus tidak ditampilkan
+bonusHtml = '';
+}
 
+// Gabungkan HTML
 dynamicArea.innerHTML = scheduleHtml + bonusHtml;
 
-// ========== EVENT UNTUK BONUS ITEM ==========
+// ========== EVENT UNTUK BONUS ITEM (jika ada) ==========
+if (hasBonusToday) {
 document.querySelectorAll('.bonus-folder-item').forEach(item => {
 item.addEventListener('click', (e) => {
 if (e.target.closest('button')) return;
@@ -2262,6 +2259,7 @@ openModal(title, content);
 }
 });
 });
+}
 
 // ========== START COUNTDOWN ==========
 if (countdownInterval) clearInterval(countdownInterval);
