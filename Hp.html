@@ -597,14 +597,23 @@ let currentGalleryTab = "cara_bermain";
 let currentQrisTab = "lain_lain";
 let countdownInterval = null;
 
-// ======================= FUNGSI PROXY GAMBAR =======================
-// Fungsi ini akan "membungkus" URL gambar dari Postimages agar bisa diakses
+// ======================= FUNGSI PROXY GAMBAR (SUPER KUAT) =======================
+// Fungsi ini akan mencoba beberapa proxy jika yang pertama gagal
 function getProxiedImageUrl(url) {
   if (!url || !url.startsWith('http')) return url;
+  
   // Jika sudah menggunakan proxy, kembalikan apa adanya
   if (url.includes('wsrv.nl') || url.includes('weserv.nl')) return url;
-  // Gunakan wsrv.nl sebagai proxy gambar (gratis, cepat, dan mendukung CORS)
-  return `https://wsrv.nl/?url=${encodeURIComponent(url)}`;
+  
+  // Proxy utama: wsrv.nl (paling andal untuk gambar dari berbagai hosting)
+  return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=800&output=png`;
+}
+
+// Fungsi alternatif jika proxy utama gagal
+function getAlternativeImageUrl(url) {
+  if (!url || !url.startsWith('http')) return url;
+  // Proxy cadangan: images.weserv.nl
+  return `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
 }
 
 // ======================= FUNGSI FETCH DATA =======================
@@ -1171,9 +1180,9 @@ if (currentFilterText.trim() !== "") { const keyword = currentFilterText.toLower
 if (filtered.length === 0) { dynamicArea.innerHTML = `<div class="empty-gallery"><i class="fas fa-search" style="font-size:3rem;opacity:0.5"></i><h3 style="margin-top:16px;">Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(currentFilterText)}" di kategori ini</p></div>`; return; }
 let html = `<div class="gallery-grid-container">`;
 filtered.forEach((item, idx) => {
-// ============ PERBAIKAN UTAMA: GUNAKAN PROXY UNTUK GAMBAR ============
+// ============ PERBAIKAN: GUNAKAN PROXY GAMBAR ============
 const proxiedUrl = getProxiedImageUrl(item.imageUrl);
-html += `<div class="gallery-card" data-gallery-imgurl="${escapeHtml(item.imageUrl)}" data-gallery-title="${escapeHtml(item.judul)} #${item.nomor}" data-gallery-desc="${escapeHtml(item.deskripsi)}"><h3>${escapeHtml(item.judul)} <span class="gallery-badge-number">#${item.nomor}</span></h3><img class="gallery-image-preview" id="previewImg_${idx}" src="${escapeHtml(proxiedUrl)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load';"><div class="gallery-desc">${escapeHtml(item.deskripsi.length > 80 ? item.deskripsi.substring(0,80)+'...' : item.deskripsi)}</div><div class="gallery-buttons-row"><button class="btn-gallery-salin-subjudul" data-subjudul="${escapeHtml(item.deskripsi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button><button class="btn-gallery-salin-gambar" data-imgurl="${escapeHtml(item.imageUrl)}" data-imgtitle="${escapeHtml(item.judul)}"><i class="fas fa-image"></i> Salin Gambar</button></div></div>`;
+html += `<div class="gallery-card" data-gallery-imgurl="${escapeHtml(item.imageUrl)}" data-gallery-title="${escapeHtml(item.judul)} #${item.nomor}" data-gallery-desc="${escapeHtml(item.deskripsi)}"><h3>${escapeHtml(item.judul)} <span class="gallery-badge-number">#${item.nomor}</span></h3><img class="gallery-image-preview" id="previewImg_${idx}" src="${escapeHtml(proxiedUrl)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='${escapeHtml(getAlternativeImageUrl(item.imageUrl))}'; this.onerror=function(){this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load';};"><div class="gallery-desc">${escapeHtml(item.deskripsi.length > 80 ? item.deskripsi.substring(0,80)+'...' : item.deskripsi)}</div><div class="gallery-buttons-row"><button class="btn-gallery-salin-subjudul" data-subjudul="${escapeHtml(item.deskripsi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button><button class="btn-gallery-salin-gambar" data-imgurl="${escapeHtml(item.imageUrl)}" data-imgtitle="${escapeHtml(item.judul)}"><i class="fas fa-image"></i> Salin Gambar</button></div></div>`;
 });
 html += `</div>`;
 dynamicArea.innerHTML = html;
@@ -1192,7 +1201,7 @@ if(previewImg) previewImg.addEventListener('click', (e) => { e.stopPropagation()
 async function copyImageToClipboard(imageUrl, imageTitle) { 
   try { 
     showToast(`⏳ Mengambil gambar "${imageTitle}"...`); 
-    // Gunakan proxy untuk fetch gambar agar tidak kena CORS
+    // Gunakan proxy untuk fetch gambar
     const proxiedUrl = getProxiedImageUrl(imageUrl);
     const response = await fetch(proxiedUrl, { mode: 'cors' }); 
     if (!response.ok) throw new Error('Gagal mengambil gambar'); 
@@ -1234,9 +1243,9 @@ function openImageModal(title, imageUrl, description) {
   const modalTitle = document.getElementById("modalTitle"); 
   const modalContentText = document.getElementById("modalContentText"); 
   modalTitle.textContent = title; 
-  // ============ PERBAIKAN: GUNAKAN PROXY UNTUK GAMBAR DI MODAL ============
+  // ============ PERBAIKAN: GUNAKAN PROXY GAMBAR ============
   const proxiedUrl = getProxiedImageUrl(imageUrl);
-  modalContentText.innerHTML = `<div style="text-align:center"><img src="${escapeHtml(proxiedUrl)}" class="modal-image-view" style="max-width:100%; max-height:60vh; border-radius:16px;" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load';"><p style="margin-top:16px;">${escapeHtml(description)}</p><div style="margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;"><button id="modalCopySubjudulBtn" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-copy"></i> Salin Subjudul</button><button id="modalCopyImageBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-image"></i> Salin Gambar</button></div><small><i class="fas fa-link"></i> URL: ${escapeHtml(imageUrl)}</small></div>`; 
+  modalContentText.innerHTML = `<div style="text-align:center"><img src="${escapeHtml(proxiedUrl)}" class="modal-image-view" style="max-width:100%; max-height:60vh; border-radius:16px;" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='${escapeHtml(getAlternativeImageUrl(imageUrl))}'; this.onerror=function(){this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load';};"><p style="margin-top:16px;">${escapeHtml(description)}</p><div style="margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;"><button id="modalCopySubjudulBtn" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-copy"></i> Salin Subjudul</button><button id="modalCopyImageBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-image"></i> Salin Gambar</button></div><small><i class="fas fa-link"></i> URL: ${escapeHtml(imageUrl)}</small></div>`; 
   modal.classList.add("active"); 
   document.body.style.overflow = "hidden"; 
   setTimeout(() => { 
