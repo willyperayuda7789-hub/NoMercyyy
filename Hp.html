@@ -35,7 +35,6 @@ box-shadow: 0 8px 20px -4px rgba(59,130,246,0.5);
 font-size: 1.45rem; font-weight: 800; letter-spacing: -0.3px;
 background: linear-gradient(135deg, #ffffff, #bfdbfe); background-clip: text; -webkit-background-clip: text; color: transparent;
 }
-.logo-text p { font-size: 0.7rem; opacity: 0.8; margin-top: 2px; }
 .nav-menu { flex: 1; padding: 8px 12px 20px 12px; display: flex; flex-direction: column; gap: 6px; }
 .nav-item {
 display: flex; align-items: center; gap: 14px; padding: 12px 16px; margin: 2px 0; border-radius: 14px;
@@ -90,18 +89,10 @@ background: rgba(18, 28, 45, 0.85); border-radius: 28px; padding: 22px; transiti
 border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 display: flex; flex-direction: column; position: relative;
 }
-.card:hover {
-transform: translateY(-6px); background: rgba(30, 45, 70, 0.95); border-color: rgba(59, 130, 246, 0.6);
-box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.4);
-}
 .card h3 {
 font-size: 1.35rem; font-weight: 700; margin-bottom: 16px; color: #f0f4fe; word-break: break-word;
 padding-right: 8px; position: relative; padding-bottom: 14px; border-bottom: 2px solid rgba(96, 165, 250, 0.7);
 display: inline-block; width: 100%; letter-spacing: -0.2px;
-}
-.card h3::after {
-content: ''; position: absolute; bottom: -2px; left: 0; width: 60px; height: 2px;
-background: linear-gradient(90deg, #60a5fa, #3b82f6, transparent); border-radius: 4px;
 }
 .card p {
 color: #cbd5e6; line-height: 1.5; font-size: 0.95rem; flex: 1; white-space: pre-wrap;
@@ -114,18 +105,13 @@ padding: 12px 8px; border-radius: 40px; font-size: 0.85rem; font-weight: 700; cu
 transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 10px;
 font-family: 'Inter', monospace; margin-top: 12px; box-shadow: 0 4px 12px rgba(59,130,246,0.3);
 }
-.btn-buka-link-full:hover { background: linear-gradient(135deg, #2563eb, #1e40af); transform: scale(1.02); box-shadow: 0 6px 16px rgba(59,130,246,0.4); }
-.btn-buka-link-full i { font-size: 0.9rem; }
-.btn-buka-link-full:disabled { background: linear-gradient(135deg, #6b7280, #4b5563); cursor: not-allowed; opacity: 0.6; transform: none; box-shadow: none; }
+.btn-buka-link-full:disabled { background: linear-gradient(135deg, #6b7280, #4b5563); cursor: not-allowed; opacity: 0.6; }
 .btn-salin-folder {
 position: absolute; bottom: 16px; right: 18px; background: linear-gradient(135deg, #10b981, #059669);
 border: none; color: white; padding: 7px 15px; border-radius: 40px; font-size: 0.9rem; font-weight: 700;
 letter-spacing: 0.3px; cursor: pointer; transition: all 0.2s ease; z-index: 6; backdrop-filter: blur(4px);
 box-shadow: 0 4px 12px rgba(0,0,0,0.25); display: flex; align-items: center; gap: 7px; font-family: 'Inter', monospace;
 }
-.btn-salin-folder i { font-size: 0.85rem; }
-.btn-salin-folder:hover { background: linear-gradient(135deg, #059669, #047857); transform: scale(1.02); }
-.btn-salin-folder:active { transform: scale(0.97); }
 .copy-toast-notif {
 position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
 background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); color: #bbf7d0; padding: 12px 28px;
@@ -134,7 +120,6 @@ transition: opacity 0.25s ease, transform 0.2s; pointer-events: none; border-lef
 box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
 }
 .copy-toast-notif.show { opacity: 1; transform: translateX(-50%) translateY(0px); }
-.card-icon { font-size: 2rem; margin-bottom: 16px; color: #60a5fa; }
 .stat-badge {
 display: inline-block; background: rgba(59, 130, 246, 0.4); padding: 6px 14px; border-radius: 40px;
 font-size: 0.7rem; font-weight: 600; color: #e0f2fe; margin-top: 16px; border: 1px solid rgba(255,255,255,0.15);
@@ -185,20 +170,16 @@ font-size: 1rem; color: #cbd5e6; cursor: pointer; transition: all 0.2s ease; let
 display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(59, 130, 246, 0.4);
 box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
-.bonus-badge i { font-size: 1rem; color: #60a5fa; }
-.bonus-badge.active-bonus { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border-color: white; box-shadow: 0 8px 20px -8px #1e40af; }
-.bonus-badge.active-bonus i { color: white; }
-.bonus-badge:hover { transform: translateY(-3px); background: linear-gradient(135deg, #2c3e66, #1e2a47); color: white; }
+.bonus-badge.active-bonus { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border-color: white; }
 .bonus-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 20px; }
 .bonus-card {
 background: rgba(18, 28, 45, 0.92); border-radius: 24px; padding: 24px; transition: all 0.3s ease;
 border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
 display: flex; flex-direction: column; cursor: pointer; min-height: 300px;
 }
-.bonus-card:hover { transform: translateY(-6px); background: rgba(30, 45, 70, 0.97); border-color: rgba(59, 130, 246, 0.6); box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.45); }
 .bonus-card h3 {
 font-size: 1.3rem; font-weight: 800; margin-bottom: 14px; color: #f0f4fe; word-break: break-word;
-letter-spacing: -0.3px; line-height: 1.4; border-bottom: 2px solid rgba(96, 165, 250, 0.5); padding-bottom: 12px;
+border-bottom: 2px solid rgba(96, 165, 250, 0.5); padding-bottom: 12px;
 }
 .bonus-desc-full {
 color: #cbd5e6; line-height: 1.55; font-size: 0.9rem; margin: 12px 0 20px 0; flex: 1;
@@ -212,17 +193,13 @@ margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0
 .btn-open-folder {
 flex: 1; background: transparent; border: 1px solid rgba(59, 130, 246, 0.5); border-radius: 30px;
 color: #60a5fa; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 10px; white-space: nowrap;
+display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 10px;
 }
-.btn-open-folder i { font-size: 0.7rem; }
-.btn-open-folder:hover { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border-color: #60a5fa; }
 .btn-salin-bonus {
 background: linear-gradient(135deg, #10b981, #059669); border: none; color: white; padding: 8px 16px;
 border-radius: 30px; font-size: 0.7rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease;
-display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-family: 'Inter', monospace; white-space: nowrap;
+display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-family: 'Inter', monospace;
 }
-.btn-salin-bonus i { font-size: 0.7rem; }
-.btn-salin-bonus:hover { background: linear-gradient(135deg, #059669, #047857); transform: scale(1.02); }
 .gallery-badge-container { margin-bottom: 24px; display: none; }
 .gallery-badge-container.visible { display: block; }
 .gallery-badge-bar {
@@ -235,10 +212,7 @@ font-size: 1rem; color: #cbd5e6; cursor: pointer; transition: all 0.2s ease; let
 display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(59, 130, 246, 0.4);
 box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
-.gallery-badge i { font-size: 1rem; color: #60a5fa; }
-.gallery-badge.active-gallery { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border-color: white; box-shadow: 0 8px 20px -8px #1e40af; }
-.gallery-badge.active-gallery i { color: white; }
-.gallery-badge:hover { transform: translateY(-3px); background: linear-gradient(135deg, #2c3e66, #1e2a47); color: white; }
+.gallery-badge.active-gallery { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border-color: white; }
 #dynamicContentArea.gallery-fullwidth { display: block !important; }
 .gallery-grid-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 12px; width: 100%; }
 .gallery-card {
@@ -246,7 +220,6 @@ background: rgba(20, 30, 50, 0.95); border-radius: 24px; padding: 20px; backdrop
 border: 1px solid rgba(255, 255, 255, 0.25); transition: all 0.3s ease; cursor: pointer;
 display: flex; flex-direction: column;
 }
-.gallery-card:hover { transform: translateY(-6px); background: rgba(30, 48, 74, 0.98); border-color: #3b82f6; box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5); }
 .gallery-card h3 {
 font-size: 1.1rem; font-weight: 800; margin-bottom: 12px; color: #f1f5f9; border-left: 4px solid #3b82f6;
 padding-left: 12px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
@@ -256,7 +229,6 @@ padding-left: 12px; display: flex; align-items: center; flex-wrap: wrap; gap: 8p
 width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 16px; margin: 12px 0;
 background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); cursor: pointer; display: block;
 }
-.gallery-image-preview:hover { transform: scale(1.02); transition: transform 0.2s; }
 .gallery-desc {
 color: #cbd5e6; line-height: 1.55; margin: 8px 0; font-size: 0.8rem; display: -webkit-box;
 -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
@@ -265,17 +237,13 @@ color: #cbd5e6; line-height: 1.55; margin: 8px 0; font-size: 0.8rem; display: -w
 .btn-gallery-salin-subjudul {
 flex: 1; background: linear-gradient(135deg, #8b5cf6, #7c3aed); border: none; color: white;
 padding: 10px 8px; border-radius: 40px; font-size: 0.75rem; font-weight: 700; cursor: pointer;
-transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center;
-gap: 8px; font-family: 'Inter', monospace;
+display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Inter', monospace;
 }
-.btn-gallery-salin-subjudul:hover { background: linear-gradient(135deg, #7c3aed, #6d28d9); transform: scale(1.02); }
 .btn-gallery-salin-gambar {
 flex: 1; background: linear-gradient(135deg, #f59e0b, #d97706); border: none; color: white;
 padding: 10px 8px; border-radius: 40px; font-size: 0.75rem; font-weight: 700; cursor: pointer;
-transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center;
-gap: 8px; font-family: 'Inter', monospace;
+display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Inter', monospace;
 }
-.btn-gallery-salin-gambar:hover { background: linear-gradient(135deg, #d97706, #b45309); transform: scale(1.02); }
 .empty-gallery { text-align: center; padding: 48px; background: rgba(0,0,0,0.5); border-radius: 40px; grid-column: 1 / -1; }
 .qris-badge-container { margin-bottom: 24px; }
 .qris-badge-bar {
@@ -288,22 +256,17 @@ font-size: 1rem; color: #cbd5e6; cursor: pointer; transition: all 0.2s ease; let
 display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(59, 130, 246, 0.4);
 box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
-.qris-badge i { font-size: 1rem; color: #60a5fa; }
-.qris-badge.active-qris { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border-color: white; box-shadow: 0 8px 20px -8px #1e40af; }
-.qris-badge.active-qris i { color: white; }
-.qris-badge:hover { transform: translateY(-3px); background: linear-gradient(135deg, #2c3e66, #1e2a47); color: white; }
+.qris-badge.active-qris { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border-color: white; }
 .qris-grid-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 24px; }
 .qris-card {
 background: rgba(18, 28, 45, 0.92); border-radius: 28px; padding: 28px 32px 70px 32px; transition: all 0.3s ease;
 border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 display: flex; flex-direction: column; cursor: pointer; position: relative;
 }
-.qris-card:hover { transform: translateY(-6px); background: rgba(30, 48, 74, 0.97); border-color: #3b82f6; box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4); }
 .qris-card h3 {
 font-size: 1.4rem; font-weight: 800; margin-bottom: 16px; color: #f0f4fe; border-left: 5px solid #3b82f6;
 padding-left: 16px; display: flex; align-items: center; gap: 12px; padding-right: 20px;
 }
-.qris-card h3 i { font-size: 1.3rem; color: #60a5fa; }
 .qris-desc {
 color: #cbd5e6; line-height: 1.6; font-size: 1rem; margin: 12px 0 0 0; display: -webkit-box;
 -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; padding-right: 20px;
@@ -311,11 +274,8 @@ color: #cbd5e6; line-height: 1.6; font-size: 1rem; margin: 12px 0 0 0; display: 
 .btn-qris-salin {
 background: linear-gradient(135deg, #10b981, #059669); border: none; color: white; padding: 8px 18px;
 border-radius: 32px; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: flex;
-align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease; position: absolute;
-bottom: 20px; right: 24px; z-index: 2;
+align-items: center; justify-content: center; gap: 8px; position: absolute; bottom: 20px; right: 24px; z-index: 2;
 }
-.btn-qris-salin i { font-size: 0.85rem; }
-.btn-qris-salin:hover { background: linear-gradient(135deg, #059669, #047857); transform: scale(1.02); }
 @media (max-width: 1200px) { .qris-grid-container { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
 @media (max-width: 700px) { .qris-grid-container { grid-template-columns: 1fr; } }
 .schedule-card {
@@ -323,7 +283,6 @@ background: rgba(18, 28, 45, 0.85); border-radius: 28px; padding: 22px; transiti
 border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 display: flex; flex-direction: column; cursor: pointer; position: relative;
 }
-.schedule-card:hover { transform: translateY(-6px); background: rgba(30, 45, 70, 0.95); border-color: rgba(59, 130, 246, 0.6); box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.4); }
 .schedule-card h3 {
 font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; color: #f0f4fe; word-break: break-word;
 border-left: 4px solid #3b82f6; padding-left: 14px;
@@ -341,27 +300,21 @@ margin-bottom: 16px; margin-top: 8px;
 .btn-salin-subjudul-jadwal {
 flex: 1; background: linear-gradient(135deg, #8b5cf6, #7c3aed); border: none; color: white;
 padding: 10px 8px; border-radius: 40px; font-size: 0.75rem; font-weight: 700; cursor: pointer;
-transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center;
-gap: 8px; font-family: 'Inter', monospace;
+display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Inter', monospace;
 }
-.btn-salin-subjudul-jadwal:hover { background: linear-gradient(135deg, #7c3aed, #6d28d9); transform: scale(1.02); }
 .btn-salin-isi-jadwal {
 flex: 1; background: linear-gradient(135deg, #f59e0b, #d97706); border: none; color: white;
 padding: 10px 8px; border-radius: 40px; font-size: 0.75rem; font-weight: 700; cursor: pointer;
-transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center;
-gap: 8px; font-family: 'Inter', monospace;
+display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Inter', monospace;
 }
-.btn-salin-isi-jadwal:hover { background: linear-gradient(135deg, #d97706, #b45309); transform: scale(1.02); }
 .btn-kunjungi-website {
 width: 100%; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border: none; color: white;
 padding: 12px 8px; border-radius: 40px; font-size: 0.85rem; font-weight: 700; cursor: pointer;
-transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 10px;
+display: flex; align-items: center; justify-content: center; gap: 10px;
 font-family: 'Inter', monospace; margin-top: 12px; box-shadow: 0 4px 12px rgba(59,130,246,0.3);
 z-index: 10; position: relative;
 }
-.btn-kunjungi-website:hover { background: linear-gradient(135deg, #2563eb, #1e40af); transform: scale(1.02); box-shadow: 0 6px 16px rgba(59,130,246,0.4); }
-.btn-kunjungi-website i { font-size: 0.9rem; }
-.btn-kunjungi-website:disabled { background: linear-gradient(135deg, #6b7280, #4b5563); cursor: not-allowed; opacity: 0.6; transform: none; box-shadow: none; }
+.btn-kunjungi-website:disabled { background: linear-gradient(135deg, #6b7280, #4b5563); cursor: not-allowed; opacity: 0.6; }
 .dashboard-grid.dashboard-schedule { display: block; }
 .schedule-folder-wrapper {
 background: rgba(18, 28, 45, 0.85); border-radius: 28px; border: 1px solid rgba(255, 255, 255, 0.2);
@@ -372,7 +325,6 @@ background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(37, 99, 235, 0
 padding: 18px 26px; border-bottom: 1px solid rgba(59, 130, 246, 0.5);
 }
 .schedule-folder-header h2 { font-size: 1.5rem; font-weight: 800; color: #f0f4fe; display: flex; align-items: center; gap: 12px; }
-.schedule-folder-header h2 i { color: #60a5fa; font-size: 1.6rem; }
 .schedule-folder-header p { font-size: 0.75rem; color: #93c5fd; margin-top: 4px; margin-left: 36px; }
 .schedule-table-dash { width: 100%; border-collapse: collapse; color: #e2e8f0; }
 .schedule-table-dash thead tr { background: rgba(0, 0, 0, 0.35); }
@@ -381,72 +333,54 @@ padding: 14px 20px; text-align: left; font-weight: 700; font-size: 0.8rem; text-
 letter-spacing: 1.2px; color: #93c5fd;
 }
 .schedule-table-dash td { padding: 14px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); font-weight: 500; vertical-align: middle; }
-.schedule-table-dash tr:hover td { background: rgba(59, 130, 246, 0.08); }
 .schedule-table-dash .pasaran-name { font-weight: 700; color: #f0f4fe; font-size: 0.95rem; }
-.schedule-table-dash .pasaran-name i { margin-right: 10px; color: #60a5fa; }
 .schedule-table-dash .result-time { font-family: 'Inter', monospace; font-weight: 600; color: #a5d8ff; font-size: 0.9rem; }
-.schedule-table-dash .countdown-dash { font-family: 'Inter', monospace; font-weight: 700; color: #fbbf24; letter-spacing: 1px; font-size: 0.95rem; text-shadow: 0 0 5px rgba(251, 191, 36, 0.2); }
-.schedule-table-dash .status-badge-dash { display: inline-block; padding: 4px 14px; border-radius: 30px; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.5px; }
+.schedule-table-dash .countdown-dash { font-family: 'Inter', monospace; font-weight: 700; color: #fbbf24; letter-spacing: 1px; font-size: 0.95rem; }
+.schedule-table-dash .status-badge-dash { display: inline-block; padding: 4px 14px; border-radius: 30px; font-size: 0.65rem; font-weight: 700; }
 .status-scheduled-dash { background: rgba(59, 130, 246, 0.25); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.5); }
-.status-soon-dash { background: rgba(245, 158, 11, 0.3); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.5); animation: pulse-soon-dash 1.5s infinite; }
-.status-live-dash { background: rgba(34, 197, 94, 0.35); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.6); animation: pulse-live-dash 1s infinite; }
-@keyframes pulse-soon-dash { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; background: rgba(245, 158, 11, 0.5); } }
-@keyframes pulse-live-dash { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; background: rgba(34, 197, 94, 0.6); } }
+.status-soon-dash { background: rgba(245, 158, 11, 0.3); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.5); }
+.status-live-dash { background: rgba(34, 197, 94, 0.35); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.6); }
 .schedule-folder-footer {
 background: rgba(0, 0, 0, 0.25); padding: 10px 24px; text-align: center; font-size: 0.7rem;
 color: #94a3b8; border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
-.schedule-folder-footer i { color: #60a5fa; margin-right: 6px; }
 .bonus-folder-container { position: relative; margin-bottom: 24px; display: flex; flex-direction: column; max-width: 50%; }
 .bonus-folder-tab {
 display: flex; align-items: center; justify-content: center; gap: 10px;
 background: linear-gradient(135deg, #fbbf24, #f59e0b); padding: 10px 24px 10px 28px;
-border-radius: 12px 12px 0 0; color: #1e293b; font-weight: 700; font-size: 0.95rem; width: 100%;
-max-width: 100%; position: relative; z-index: 2; box-shadow: 0 -4px 15px rgba(251, 191, 36, 0.15);
-border: 1px solid rgba(255, 255, 255, 0.15); border-bottom: none; margin: 0 auto;
+border-radius: 12px 12px 0 0; color: #1e293b; font-weight: 700; font-size: 0.95rem;
+border: 1px solid rgba(255, 255, 255, 0.15); border-bottom: none;
 }
-.bonus-folder-tab i { font-size: 1rem; color: #1e293b; }
 .bonus-folder-tab .header-date-tab { font-size: 0.65rem; font-weight: 500; opacity: 0.6; margin-left: auto; }
 .bonus-folder-body {
 background: rgba(18, 28, 45, 0.9); border-radius: 0 16px 16px 16px; border: 1px solid rgba(255, 255, 255, 0.12);
 padding: 28px 24px 32px 24px; backdrop-filter: blur(8px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-position: relative; z-index: 1; min-height: 60px;
 }
 .bonus-folder-list { display: flex; flex-direction: column; gap: 14px; }
 .bonus-folder-item {
 background: rgba(0, 0, 0, 0.35); border-radius: 14px; padding: 18px 20px; border: 1px solid rgba(255, 255, 255, 0.08);
-transition: all 0.2s ease; display: flex; flex-direction: column; gap: 8px; cursor: pointer;
+display: flex; flex-direction: column; gap: 8px; cursor: pointer;
 }
-.bonus-folder-item:hover { background: rgba(59, 130, 246, 0.12); border-color: rgba(59, 130, 246, 0.25); }
-.bonus-folder-item .bonus-item-title-folder { font-weight: 700; color: #f0f4fe; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; letter-spacing: -0.2px; }
-.bonus-folder-item .bonus-item-title-folder i { color: #fbbf24; font-size: 0.85rem; }
+.bonus-folder-item .bonus-item-title-folder { font-weight: 700; color: #f0f4fe; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; }
 .bonus-folder-item .bonus-item-desc-folder { color: #cbd5e6; font-size: 0.90rem; line-height: 1.6; word-break: break-word; padding-left: 28px; white-space: pre-wrap; }
 .bonus-item-actions-folder {
 display: flex; flex-direction: row; align-items: center; gap: 12px; margin-top: 10px; padding-top: 12px;
-border-top: 1px solid rgba(255, 255, 255, 0.06); justify-content: flex-start; padding-left: 28px;
+border-top: 1px solid rgba(255, 255, 255, 0.06); padding-left: 28px;
 }
 .btn-open-folder-small {
 background: transparent; border: 1px solid rgba(59, 130, 246, 0.5); border-radius: 30px; color: #60a5fa;
-font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: inline-flex;
+font-size: 0.75rem; font-weight: 600; cursor: pointer; display: inline-flex;
 align-items: center; gap: 8px; padding: 8px 18px; font-family: 'Inter', monospace;
 }
-.btn-open-folder-small:hover { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border-color: #60a5fa; }
-.btn-open-folder-small i { font-size: 0.75rem; }
 .btn-salin-bonus-small-v2 {
 background: linear-gradient(135deg, #10b981, #059669); border: none; color: white; padding: 8px 20px;
-border-radius: 30px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease;
+border-radius: 30px; font-size: 0.75rem; font-weight: 700; cursor: pointer;
 display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', monospace;
 }
-.btn-salin-bonus-small-v2:hover { background: linear-gradient(135deg, #059669, #047857); transform: scale(1.02); }
-.btn-salin-bonus-small-v2 i { font-size: 0.75rem; }
-.bonus-empty-tab { display: none; }
 .bonus-folder-footer-tab {
 background: rgba(0, 0, 0, 0.2); padding: 10px 16px; text-align: center; font-size: 0.65rem;
 color: #94a3b8; border-top: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0 0 16px 16px;
 }
-.bonus-folder-footer-tab i { color: #fbbf24; margin-right: 4px; }
-.bonus-folder-footer-tab.hidden { display: none; }
-@media (max-width: 1024px) { .bonus-folder-container { max-width: 70%; } .bonus-folder-item .bonus-item-title-folder { font-size: 0.90rem; } }
 @media (max-width: 768px) {
   body { overflow: auto; height: auto; min-height: 100vh; background-attachment: fixed; }
   .app-container { flex-direction: column; height: auto; min-height: 100vh; }
@@ -455,14 +389,10 @@ color: #94a3b8; border-top: 1px solid rgba(255, 255, 255, 0.05); border-radius: 
     border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   }
   .sidebar-header { display: none; }
-  .nav-menu {
-    flex-direction: row; padding: 0; gap: 8px; width: 100%; overflow-x: auto; flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-  }
+  .nav-menu { flex-direction: row; padding: 0; gap: 8px; width: 100%; overflow-x: auto; flex-wrap: nowrap; }
   .nav-item { flex: 0 0 auto; padding: 10px 14px; font-size: 0.8rem; margin: 0; border-radius: 30px; white-space: nowrap; }
   .nav-item span { display: inline; font-size: 0.75rem; }
   .nav-item i { font-size: 1rem; width: auto; }
-  .nav-item:hover { transform: none; }
   .sidebar-footer { display: none; }
   .main-content { padding: 16px 12px; width: 100%; overflow: visible; }
   .content-header { flex-direction: column; padding: 14px 16px; border-radius: 20px; gap: 12px; align-items: stretch; }
@@ -471,47 +401,28 @@ color: #94a3b8; border-top: 1px solid rgba(255, 255, 255, 0.05); border-radius: 
   .action-buttons { width: 100%; justify-content: center; }
   .search-wrapper { width: 100%; }
   .search-input { width: 100% !important; font-size: 0.8rem; padding: 10px 16px 10px 40px; }
-  .search-input:focus { width: 100% !important; }
   .bonus-badge-bar, .gallery-badge-bar, .qris-badge-bar {
-    padding: 8px 12px; gap: 8px; border-radius: 20px; flex-wrap: nowrap; overflow-x: auto;
-    -webkit-overflow-scrolling: touch; justify-content: flex-start;
+    padding: 8px 12px; gap: 8px; border-radius: 20px; flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start;
   }
   .bonus-badge, .gallery-badge, .qris-badge { flex: 0 0 auto; padding: 6px 14px; font-size: 0.75rem; white-space: nowrap; }
-  .bonus-badge i, .gallery-badge i, .qris-badge i { font-size: 0.8rem; }
   .gallery-grid-container, .qris-grid-container, .dashboard-grid.link-lain-grid, .bonus-grid, .dashboard-grid {
     grid-template-columns: 1fr !important; gap: 16px !important;
   }
   .card, .gallery-card, .qris-card, .bonus-card, .schedule-card { padding: 16px; border-radius: 20px; }
-  .card h3, .gallery-card h3, .qris-card h3, .bonus-card h3 { font-size: 1rem; }
   .gallery-image-preview { height: auto; aspect-ratio: 16 / 9; max-height: 220px; }
   .gallery-buttons-row, .schedule-buttons-row, .bonus-actions-row { flex-direction: column; gap: 8px; }
   .btn-gallery-salin-subjudul, .btn-gallery-salin-gambar, .btn-salin-subjudul-jadwal, .btn-salin-isi-jadwal, .btn-open-folder, .btn-salin-bonus {
     width: 100%; font-size: 0.75rem; padding: 10px;
   }
-  .schedule-table-dash { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+  .schedule-table-dash { display: block; overflow-x: auto; white-space: nowrap; }
   .schedule-table-dash th, .schedule-table-dash td { padding: 10px 12px; font-size: 0.75rem; }
-  .schedule-table-dash .pasaran-name { font-size: 0.8rem; }
-  .schedule-folder-header h2 { font-size: 1.1rem; }
-  .schedule-folder-header p { font-size: 0.65rem; margin-left: 0; }
   .bonus-folder-container { max-width: 100%; }
-  .bonus-folder-tab { font-size: 0.8rem; padding: 8px 14px; }
-  .bonus-folder-body { padding: 16px 12px 20px 12px; }
   .bonus-item-actions-folder { flex-direction: column; padding-left: 0; align-items: stretch; }
   .btn-open-folder-small, .btn-salin-bonus-small-v2 { width: 100%; justify-content: center; font-size: 0.7rem; padding: 8px 12px; }
   .modal-container { width: 95%; max-height: 90vh; border-radius: 24px; }
-  .modal-header { padding: 16px 18px 12px 18px; }
-  .modal-header h2 { font-size: 1.2rem; }
   .modal-body { padding: 16px 18px 22px 18px; font-size: 0.9rem; }
-  .modal-image-view { max-width: 100%; height: auto; }
   .btn-qris-salin { position: static; margin-top: 12px; width: 100%; justify-content: center; }
   .qris-card { padding-bottom: 20px; }
-}
-@media (max-width: 400px) {
-  .page-title h1 { font-size: 1rem; }
-  .nav-item span { display: none; }
-  .nav-item { padding: 10px; }
-  .nav-item i { font-size: 1.1rem; }
-  .gallery-image-preview { max-height: 180px; }
 }
 </style>
 </head>
@@ -560,7 +471,7 @@ color: #94a3b8; border-top: 1px solid rgba(255, 255, 255, 0.05); border-radius: 
 <div id="copyToast" class="copy-toast-notif"><i class="fas fa-copy"></i> Berhasil disalin!</div>
 
 <script>
-// ======================= KONFIGURASI GOOGLE SHEETS =======================
+// ======================= KONFIGURASI =======================
 const SPREADSHEET_ID = '1r1rAqqC8yfnBprXk7PD6vnwnSPnNzSaAJBATXFxq574';
 const SHEET_RRN_QRIS_ALL = 'RRN QRIS ALL';
 const SHEET_EWALLET_BANK = 'SS EWALLET BANK';
@@ -573,47 +484,41 @@ const SHEET_JADWAL_PASARAN = 'JADWALPASARAN';
 const SHEET_LINK_LAIN = 'LINK LAIN LAIN';
 const SHEET_BONUS_TODAY = 'BONUS TODAY';
 
-let dashboardData = [];
-let foldersData = [];
-let bonusAllData = [];
-let bonusMingguanData = [];
-let bonusDoneBagiData = [];
-let bonusLainLainData = [];
-let bonusTodayData = [];
-let rrnQrisData = [];
-let ewalletBankData = [];
-let caraBermainAllData = [];
-let bankNaikQrisData = [];
-let ewalletNaikQrisData = [];
-let refundQrisData = [];
-let qrisLainLainData = [];
-let jadwalTogelData = [];
-let linkLainData = [];
-
-let currentFilterText = "";
-let currentActiveTab = "tab1";
-let currentBonusSubTab = "lain";
-let currentGalleryTab = "cara_bermain";
-let currentQrisTab = "lain_lain";
+let dashboardData = [], foldersData = [], bonusAllData = [], bonusMingguanData = [];
+let bonusDoneBagiData = [], bonusLainLainData = [], bonusTodayData = [];
+let rrnQrisData = [], ewalletBankData = [], caraBermainAllData = [];
+let bankNaikQrisData = [], ewalletNaikQrisData = [], refundQrisData = [], qrisLainLainData = [];
+let jadwalTogelData = [], linkLainData = [];
+let currentFilterText = "", currentActiveTab = "tab1", currentBonusSubTab = "lain";
+let currentGalleryTab = "cara_bermain", currentQrisTab = "lain_lain";
 let countdownInterval = null;
 
-// ======================= FUNGSI PROXY GAMBAR (SUPER KUAT) =======================
-// Fungsi ini akan mencoba beberapa proxy jika yang pertama gagal
-function getProxiedImageUrl(url) {
+// ======================= FUNGSI PROSES URL GAMBAR =======================
+// Fungsi ini mengubah link Google Drive biasa menjadi link gambar langsung
+function processImageUrl(url) {
   if (!url || !url.startsWith('http')) return url;
   
-  // Jika sudah menggunakan proxy, kembalikan apa adanya
-  if (url.includes('wsrv.nl') || url.includes('weserv.nl')) return url;
+  // Jika link Google Drive, ubah ke format thumbnail
+  if (url.includes('drive.google.com')) {
+    let fileId = '';
+    // Format: https://drive.google.com/file/d/FILE_ID/view
+    const match1 = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    // Format: https://drive.google.com/open?id=FILE_ID
+    const match2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    
+    if (match1) fileId = match1[1];
+    else if (match2) fileId = match2[1];
+    
+    if (fileId) {
+      return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+    }
+  }
   
-  // Proxy utama: wsrv.nl (paling andal untuk gambar dari berbagai hosting)
-  return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=800&output=png`;
-}
-
-// Fungsi alternatif jika proxy utama gagal
-function getAlternativeImageUrl(url) {
-  if (!url || !url.startsWith('http')) return url;
-  // Proxy cadangan: images.weserv.nl
-  return `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
+  // Jika link GitHub raw, biarkan apa adanya
+  if (url.includes('raw.githubusercontent.com')) return url;
+  
+  // Jika link lain, biarkan apa adanya (Imgur, postimages, dll)
+  return url;
 }
 
 // ======================= FUNGSI FETCH DATA =======================
@@ -629,16 +534,11 @@ for (let i = 0; i < rows.length; i++) {
 if (rows[i] && rows[i][0] && rows[i][0].trim()) {
 let rawTime = rows[i][1] ? rows[i][1].trim() : "";
 let timeOnly = rawTime.replace(" WIB", "").trim();
-items.push({
-pasaran: rows[i][0].trim(),
-result_time_raw: rawTime,
-result_time: timeOnly,
-keterangan: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : ""
-});
+items.push({ pasaran: rows[i][0].trim(), result_time_raw: rawTime, result_time: timeOnly, keterangan: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : "" });
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal ambil data dari sheet DASHBOARDDD`); }
+} catch(e) { throw new Error(`Gagal ambil data dari sheet DASHBOARDDD`); }
 }
 
 async function fetchSheetData(sheetName) {
@@ -655,7 +555,7 @@ dataRows.push({ title: rows[i][0].trim(), content: rows[i][1] ? rows[i][1].trim(
 }
 }
 return dataRows;
-} catch(e) { console.error(`Error fetch ${sheetName}:`, e); throw new Error(`Gagal ambil data dari sheet ${sheetName}`); }
+} catch(e) { throw new Error(`Gagal ambil data dari sheet ${sheetName}`); }
 }
 
 async function fetchBonusTodayData() {
@@ -668,12 +568,11 @@ const rows = parseCSV(csvText);
 const items = [];
 for (let i = 0; i < rows.length; i++) {
 if (rows[i] && rows[i][0] && rows[i][0].trim()) {
-const content = (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "";
-items.push({ title: rows[i][0].trim(), content: content });
+items.push({ title: rows[i][0].trim(), content: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "" });
 }
 }
 return items;
-} catch(e) { console.error(e); return []; }
+} catch(e) { return []; }
 }
 
 async function fetchJadwalPasaran() {
@@ -686,23 +585,17 @@ const rows = parseCSV(csvText);
 const items = [];
 for (let i = 0; i < rows.length; i++) {
 if (rows[i] && rows[i][0] && rows[i][0].trim()) {
-items.push({
-judul: rows[i][0].trim(),
-subjudul: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "",
-isi: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : "",
-url: (rows[i][3] && rows[i][3].trim()) ? rows[i][3].trim() : ""
-});
+items.push({ judul: rows[i][0].trim(), subjudul: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "", isi: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : "", url: (rows[i][3] && rows[i][3].trim()) ? rows[i][3].trim() : "" });
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_JADWAL_PASARAN}': ${e.message}`); }
+} catch(e) { throw new Error(`Gagal mengambil data dari sheet '${SHEET_JADWAL_PASARAN}'`); }
 }
 
 async function fetchBankNaikQrisData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_BANK_NAIK_QRIS)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
@@ -712,14 +605,13 @@ items.push({ judul: rows[i][0].trim(), deskripsi: (rows[i][1] && rows[i][1].trim
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_BANK_NAIK_QRIS}': ${e.message}`); }
+} catch(e) { throw new Error(`Gagal mengambil data dari sheet '${SHEET_BANK_NAIK_QRIS}'`); }
 }
 
 async function fetchEwalletNaikQrisData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_EWALLET_NAIK_QRIS)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
@@ -729,14 +621,13 @@ items.push({ judul: rows[i][0].trim(), deskripsi: (rows[i][1] && rows[i][1].trim
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_EWALLET_NAIK_QRIS}': ${e.message}`); }
+} catch(e) { throw new Error(`Gagal mengambil data dari sheet '${SHEET_EWALLET_NAIK_QRIS}'`); }
 }
 
 async function fetchRefundQrisData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_REFUND_QRIS)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
@@ -746,14 +637,13 @@ items.push({ judul: rows[i][0].trim(), deskripsi: (rows[i][1] && rows[i][1].trim
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_REFUND_QRIS}': ${e.message}`); }
+} catch(e) { throw new Error(`Gagal mengambil data dari sheet '${SHEET_REFUND_QRIS}'`); }
 }
 
 async function fetchQrisLainLainData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_QRIS_LAIN_LAIN)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
@@ -763,14 +653,13 @@ items.push({ judul: rows[i][0].trim(), deskripsi: (rows[i][1] && rows[i][1].trim
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_QRIS_LAIN_LAIN}': ${e.message}`); }
+} catch(e) { throw new Error(`Gagal mengambil data dari sheet '${SHEET_QRIS_LAIN_LAIN}'`); }
 }
 
 async function fetchRRNQrisData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_RRN_QRIS_ALL)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
@@ -779,19 +668,17 @@ if (rows[i] && rows[i][0] && rows[i][0].trim()) {
 const judul = rows[i][0].trim();
 const deskripsi = (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "";
 let imageUrl = (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : "https://placehold.co/600x400/1e293b/3b82f6?text=Gambar+Tidak+Tersedia";
-if (!imageUrl.startsWith("http")) imageUrl = "https://placehold.co/600x400/1e293b/ef4444?text=URL+Invalid";
-items.push({ judul: judul, nomor: (i+1).toString(), deskripsi: deskripsi || `Detail ${judul}`, imageUrl: imageUrl });
+items.push({ judul, nomor: (i+1).toString(), deskripsi: deskripsi || `Detail ${judul}`, imageUrl });
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet RRN QRIS ALL: ${e.message}`); }
+} catch(e) { throw new Error(`Gagal mengambil data dari sheet RRN QRIS ALL`); }
 }
 
 async function fetchEwalletBankData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_EWALLET_BANK)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
@@ -800,19 +687,17 @@ if (rows[i] && rows[i][0] && rows[i][0].trim()) {
 const judul = rows[i][0].trim();
 const subjudul = (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "";
 let imageUrl = (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : "https://placehold.co/600x400/1e293b/3b82f6?text=Gambar+Tidak+Tersedia";
-if (!imageUrl.startsWith("http")) imageUrl = "https://placehold.co/600x400/1e293b/ef4444?text=URL+Invalid";
-items.push({ judul: judul, nomor: (i+1).toString(), deskripsi: subjudul || `Informasi ${judul}`, imageUrl: imageUrl });
+items.push({ judul, nomor: (i+1).toString(), deskripsi: subjudul || `Informasi ${judul}`, imageUrl });
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_EWALLET_BANK}': ${e.message}`); }
+} catch(e) { throw new Error(`Gagal mengambil data dari sheet '${SHEET_EWALLET_BANK}'`); }
 }
 
 async function fetchCaraBermainAllData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_CARA_BERMAIN_ALL)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
@@ -821,33 +706,27 @@ if (rows[i] && rows[i][0] && rows[i][0].trim()) {
 const judul = rows[i][0].trim();
 const subjudul = (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "";
 let imageUrl = (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : "https://placehold.co/600x400/1e293b/3b82f6?text=Gambar+Tidak+Tersedia";
-if (!imageUrl.startsWith("http")) imageUrl = "https://placehold.co/600x400/1e293b/ef4444?text=URL+Invalid";
-items.push({ judul: judul, nomor: (i+1).toString(), deskripsi: subjudul || `Panduan ${judul}`, imageUrl: imageUrl });
+items.push({ judul, nomor: (i+1).toString(), deskripsi: subjudul || `Panduan ${judul}`, imageUrl });
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_CARA_BERMAIN_ALL}': ${e.message}`); }
+} catch(e) { throw new Error(`Gagal mengambil data dari sheet '${SHEET_CARA_BERMAIN_ALL}'`); }
 }
 
 async function fetchLinkLainData() {
 try {
 const csvUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_LINK_LAIN)}`;
 const response = await fetch(csvUrl, { cache: 'no-store' });
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
 const csvText = await response.text();
 const rows = parseCSV(csvText);
 const items = [];
 for (let i = 0; i < rows.length; i++) {
 if (rows[i] && rows[i][0] && rows[i][0].trim()) {
-items.push({
-title: rows[i][0].trim(),
-content: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "",
-url: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : ""
-});
+items.push({ title: rows[i][0].trim(), content: (rows[i][1] && rows[i][1].trim()) ? rows[i][1].trim() : "", url: (rows[i][2] && rows[i][2].trim()) ? rows[i][2].trim() : "" });
 }
 }
 return items;
-} catch(e) { console.error(e); throw new Error(`Gagal mengambil data dari sheet '${SHEET_LINK_LAIN}': ${e.message}`); }
+} catch(e) { throw new Error(`Gagal mengambil data dari sheet '${SHEET_LINK_LAIN}'`); }
 }
 
 function parseCSV(csvText) {
@@ -887,7 +766,6 @@ targetDate.setHours(hour, minute, 0, 0);
 }
 return targetDate;
 }
-
 function calculateCountdown(timeStr) {
 const targetDate = parseTimeToDate(timeStr);
 if (!targetDate) return { formatted: "00:00:00", totalMs: Infinity };
@@ -897,75 +775,53 @@ if (diffMs <= 0) return { formatted: "00:00:00", totalMs: 0 };
 const hours = Math.floor(diffMs / (1000 * 60 * 60));
 const minutes = Math.floor((diffMs % (3600000)) / 60000);
 const seconds = Math.floor((diffMs % 60000) / 1000);
-return {
-formatted: `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`,
-totalMs: diffMs
-};
+return { formatted: `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`, totalMs: diffMs };
 }
-
 function getStatusText(countdown) {
 if (!countdown) return "JADWAL";
 if (countdown.totalMs <= 0) return "LIVE";
 if (countdown.totalMs < 300000) return "SEGERA";
 return "JADWAL";
 }
-
 function getStatusClass(countdown) {
 if (!countdown) return "status-scheduled-dash";
 if (countdown.totalMs <= 0) return "status-live-dash";
 if (countdown.totalMs < 300000) return "status-soon-dash";
 return "status-scheduled-dash";
 }
-
 function isBonusMatchToday(content) {
 if (!content) return false;
 const today = new Date();
 const lowerContent = content.toLowerCase();
 const dayNamesId = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
-const dayNamesIdCapital = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 const todayIndex = today.getDay();
 const todayDayId = dayNamesId[todayIndex];
-const todayDayIdCapital = dayNamesIdCapital[todayIndex];
 const day = today.getDate();
 const dayPad = day.toString().padStart(2, '0');
-const month = (today.getMonth() + 1).toString().padStart(2, '0');
-const year = today.getFullYear();
-const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+const monthNames = ['januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember'];
 const monthName = monthNames[today.getMonth()];
 const monthNameShort = monthName.substring(0, 3);
-const keywords = [];
-keywords.push(todayDayId, todayDayIdCapital);
-keywords.push(`hari ${todayDayId}`, `hari ${todayDayIdCapital}`);
-keywords.push(`setiap ${todayDayId}`, `setiap ${todayDayIdCapital}`, `setiap hari ${todayDayId}`, `setiap hari ${todayDayIdCapital}`);
-keywords.push(`tiap ${todayDayId}`, `tiap ${todayDayIdCapital}`, `tiap hari ${todayDayId}`, `tiap hari ${todayDayIdCapital}`);
-keywords.push(day.toString(), dayPad, `tanggal ${day}`, `tanggal ${dayPad}`, `tgl ${day}`, `tgl ${dayPad}`);
-keywords.push(`${day} ${monthName}`, `${day} ${monthNameShort}`, `${dayPad} ${monthName}`, `${dayPad} ${monthNameShort}`);
-keywords.push(`${todayDayId} ${day}`, `${todayDayIdCapital} ${day}`, `${todayDayId} ${dayPad}`, `${todayDayIdCapital} ${dayPad}`);
-keywords.push('hari ini', 'today');
+const keywords = [todayDayId, `hari ${todayDayId}`, `setiap ${todayDayId}`, `tiap ${todayDayId}`, day.toString(), dayPad, `tanggal ${day}`, `tgl ${day}`, `${day} ${monthName}`, `${day} ${monthNameShort}`, 'hari ini', 'today'];
 for (let keyword of keywords) { if (keyword && lowerContent.includes(keyword.toLowerCase())) return true; }
 return false;
 }
 
 // ======================= RENDER DASHBOARD =======================
 async function renderDashboard() {
-const mainHeading = document.getElementById("mainHeading");
-const subHeading = document.getElementById("subHeading");
 const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.classList.remove("link-lain-grid", "gallery-fullwidth", "qris-grid-container");
 dynamicArea.classList.add("dashboard-schedule");
 dynamicArea.style.display = "block";
-mainHeading.innerHTML = "🏠 DASHBOARD UTAMA";
-subHeading.innerHTML = "Jadwal Result Terdekat + Bonus Hari Ini | ⏱️ Live Countdown Realtime";
+document.getElementById("mainHeading").innerHTML = "🏠 DASHBOARD UTAMA";
+document.getElementById("subHeading").innerHTML = "Jadwal Result Terdekat + Bonus Hari Ini | ⏱️ Live Countdown Realtime";
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data dashboard...</p></div>`;
 try {
 if (dashboardData.length === 0) dashboardData = await fetchDashboardData();
-if (bonusTodayData.length === 0) {
-try { bonusTodayData = await fetchBonusTodayData(); } catch(e) { console.error('Gagal fetch BONUS TODAY:', e); bonusTodayData = []; }
-}
+if (bonusTodayData.length === 0) { try { bonusTodayData = await fetchBonusTodayData(); } catch(e) { bonusTodayData = []; } }
 let scheduleHtml = '';
 const validItems = dashboardData.filter(item => item.result_time && item.result_time.trim() !== "");
 if (validItems.length > 0) {
-const itemsWithCountdown = validItems.map(item => { const countdown = calculateCountdown(item.result_time); return { ...item, countdown }; });
+const itemsWithCountdown = validItems.map(item => ({ ...item, countdown: calculateCountdown(item.result_time) }));
 itemsWithCountdown.sort((a, b) => a.countdown.totalMs - b.countdown.totalMs);
 const nearestSchedules = itemsWithCountdown.slice(0, 5);
 window.nearestSchedulesData = nearestSchedules.map(item => ({ pasaran: item.pasaran, result_time: item.result_time, result_time_raw: item.result_time_raw }));
@@ -973,33 +829,30 @@ let tableRows = "";
 nearestSchedules.forEach((item, idx) => {
 const statusText = getStatusText(item.countdown);
 const statusClass = getStatusClass(item.countdown);
-const countdownStr = item.countdown.formatted;
-const displayTime = item.result_time_raw || `${item.result_time} WIB`;
-tableRows += `<tr data-idx="${idx}" data-target-time="${escapeHtml(item.result_time)}"><td class="pasaran-name"><i class="fas fa-chart-simple"></i> ${escapeHtml(item.pasaran)}</td><td class="result-time">${escapeHtml(displayTime)}</td><td class="countdown-dash countdown-${idx}">${countdownStr}</td><td><span class="status-badge-dash ${statusClass}">${statusText}</span></td></tr>`;
+tableRows += `<tr data-idx="${idx}"><td class="pasaran-name"><i class="fas fa-chart-simple"></i> ${escapeHtml(item.pasaran)}</td><td class="result-time">${escapeHtml(item.result_time_raw || item.result_time + ' WIB')}</td><td class="countdown-dash countdown-${idx}">${item.countdown.formatted}</td><td><span class="status-badge-dash ${statusClass}">${statusText}</span></td></tr>`;
 });
-scheduleHtml = `<div class="schedule-folder-wrapper"><div class="schedule-folder-header"><h2><i class="fas fa-calendar-alt"></i> JADWAL RESULT TERDEKAT</h2><p><i class="fas fa-clock"></i> Update setiap detik | 5 Pasaran dengan jadwal PALING DEKAT dari sekarang</p></div><table class="schedule-table-dash"><thead><tr><th>PASARAN</th><th>RESULT</th><th>SISA WAKTU</th><th>STATUS</th></tr></thead><tbody>${tableRows}</tbody></table><div class="schedule-folder-footer"><i class="fas fa-database"></i> Data dari Google Sheets (DASHBOARDDD) | Waktu dalam WIB | <i class="fas fa-sync-alt"></i> Live Countdown</div></div>`;
+scheduleHtml = `<div class="schedule-folder-wrapper"><div class="schedule-folder-header"><h2><i class="fas fa-calendar-alt"></i> JADWAL RESULT TERDEKAT</h2><p><i class="fas fa-clock"></i> Update setiap detik | 5 Pasaran dengan jadwal PALING DEKAT dari sekarang</p></div><table class="schedule-table-dash"><thead><tr><th>PASARAN</th><th>RESULT</th><th>SISA WAKTU</th><th>STATUS</th></tr></thead><tbody>${tableRows}</tbody></table><div class="schedule-folder-footer"><i class="fas fa-database"></i> Data dari Google Sheets (DASHBOARDDD) | Waktu dalam WIB</div></div>`;
 } else {
-scheduleHtml = `<div class="schedule-folder-wrapper"><div class="schedule-folder-header"><h2><i class="fas fa-calendar-alt"></i> JADWAL RESULT TERDEKAT</h2><p><i class="fas fa-exclamation-triangle"></i> Belum ada data jadwal. Silakan isi kolom B (Waktu Result) di sheet DASHBOARDDD.</p></div></div>`;
+scheduleHtml = `<div class="schedule-folder-wrapper"><div class="schedule-folder-header"><h2><i class="fas fa-calendar-alt"></i> JADWAL RESULT TERDEKAT</h2><p><i class="fas fa-exclamation-triangle"></i> Belum ada data jadwal.</p></div></div>`;
 }
 const today = new Date();
 const dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][today.getDay()];
 const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
-const filteredBonus = bonusTodayData.filter(item => { const content = (item.title + ' ' + item.content); return isBonusMatchToday(content); });
+const filteredBonus = bonusTodayData.filter(item => isBonusMatchToday(item.title + ' ' + item.content));
 const hasBonusToday = filteredBonus.length > 0;
 let bonusHtml = '';
 if (hasBonusToday) {
 let bonusItems = '';
 filteredBonus.forEach((item) => {
-const desc = item.content || '';
-bonusItems += `<div class="bonus-folder-item" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><div class="bonus-item-title-folder"><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</div><div class="bonus-item-desc-folder">${escapeHtml(desc)}</div><div class="bonus-item-actions-folder"><button class="btn-open-folder-small"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus-small-v2" data-salin="${escapeHtml(item.title + '\n' + item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`;
+bonusItems += `<div class="bonus-folder-item" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><div class="bonus-item-title-folder"><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</div><div class="bonus-item-desc-folder">${escapeHtml(item.content || '')}</div><div class="bonus-item-actions-folder"><button class="btn-open-folder-small"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus-small-v2" data-salin="${escapeHtml(item.title + '\n' + item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`;
 });
 bonusHtml = `<div class="bonus-folder-container"><div class="bonus-folder-tab"><i class="fas fa-gift"></i> BONUS HARI INI<span class="header-date-tab">${dayName}, ${dateStr}</span></div><div class="bonus-folder-body"><div class="bonus-folder-list">${bonusItems}</div><div class="bonus-folder-footer-tab"><i class="fas fa-gift"></i> Total ${filteredBonus.length} bonus untuk ${dayName}, ${dateStr}</div></div></div>`;
-} else { bonusHtml = ''; }
+}
 dynamicArea.innerHTML = scheduleHtml + bonusHtml;
 if (hasBonusToday) {
-document.querySelectorAll('.bonus-folder-item').forEach(item => { item.addEventListener('click', (e) => { if (e.target.closest('button')) return; const title = item.getAttribute('data-bonus-title') || 'Bonus'; const content = item.getAttribute('data-bonus-content') || 'Tidak ada deskripsi'; openModal(title, content); }); });
-document.querySelectorAll('.btn-salin-bonus-small-v2').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const text = btn.getAttribute('data-salin') || ''; copyContentOnly(text, 'Bonus'); }); });
-document.querySelectorAll('.btn-open-folder-small').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const parent = btn.closest('.bonus-folder-item'); if (parent) { const title = parent.getAttribute('data-bonus-title') || 'Bonus'; const content = parent.getAttribute('data-bonus-content') || 'Tidak ada deskripsi'; openModal(title, content); } }); });
+document.querySelectorAll('.bonus-folder-item').forEach(item => { item.addEventListener('click', (e) => { if (e.target.closest('button')) return; openModal(item.getAttribute('data-bonus-title'), item.getAttribute('data-bonus-content')); }); });
+document.querySelectorAll('.btn-salin-bonus-small-v2').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); copyContentOnly(btn.getAttribute('data-salin'), 'Bonus'); }); });
+document.querySelectorAll('.btn-open-folder-small').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const p = btn.closest('.bonus-folder-item'); if (p) openModal(p.getAttribute('data-bonus-title'), p.getAttribute('data-bonus-content')); }); });
 }
 if (countdownInterval) clearInterval(countdownInterval);
 countdownInterval = setInterval(() => {
@@ -1018,23 +871,18 @@ if (statusBadge) { statusBadge.textContent = getStatusText(newCountdown); status
 });
 }, 1000);
 } catch(err) {
-console.error(err);
 dynamicArea.innerHTML = `<div class="error-message"><h3>❌ Gagal Memuat Dashboard</h3><p>${escapeHtml(err.message)}</p></div>`;
 }
 }
 
-// ======================= FUNGSI NAVIGASI UTAMA =======================
+// ======================= NAVIGASI =======================
 async function onTabClick(tabId) {
 currentActiveTab = tabId;
-document.querySelectorAll('.nav-item').forEach(item => {
-if(item.getAttribute('data-tab') === tabId) item.classList.add('active');
-else item.classList.remove('active');
-});
+document.querySelectorAll('.nav-item').forEach(item => { if(item.getAttribute('data-tab') === tabId) item.classList.add('active'); else item.classList.remove('active'); });
 currentFilterText = "";
 const searchInput = document.getElementById("liveSearchInput");
-const clearSearchBtn = document.getElementById("clearSearchBtn");
 if(searchInput) searchInput.value = "";
-if(clearSearchBtn) clearSearchBtn.classList.remove('visible');
+document.getElementById("clearSearchBtn").classList.remove('visible');
 const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.style.display = "";
 dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container", "link-lain-grid", "dashboard-schedule");
@@ -1043,21 +891,19 @@ document.getElementById("bonusBadgeContainer").classList.remove("visible");
 document.getElementById("galleryBadgeContainer").classList.remove("visible");
 document.getElementById("qrisBadgeContainer").style.display = "none";
 if (tabId === 'tab1') { if (countdownInterval) clearInterval(countdownInterval); await renderDashboard(); }
-else if(tabId === 'tab2') { if (countdownInterval) clearInterval(countdownInterval); await renderRandomTabWithFilter(currentFilterText); }
-else if(tabId === 'tab3') { if (countdownInterval) clearInterval(countdownInterval); await renderLinkLainWithFilter(currentFilterText); }
+else if(tabId === 'tab2') { if (countdownInterval) clearInterval(countdownInterval); await renderRandomTabWithFilter(''); }
+else if(tabId === 'tab3') { if (countdownInterval) clearInterval(countdownInterval); await renderLinkLainWithFilter(''); }
 else if(tabId === 'tab4') { if (countdownInterval) clearInterval(countdownInterval); await renderGalleryCS(); bindGalleryBadges(); }
 else if(tabId === 'tab5') { if (countdownInterval) clearInterval(countdownInterval); renderAllAboutQris(); bindQrisBadges(); }
 else if(tabId === 'tab6') { if (countdownInterval) clearInterval(countdownInterval); await renderBonusPage(); bindBonusBadgeEvents(); }
-else if(tabId === 'tab7') { if (countdownInterval) clearInterval(countdownInterval); await renderJadwalTogelWithFilter(currentFilterText); }
+else if(tabId === 'tab7') { if (countdownInterval) clearInterval(countdownInterval); await renderJadwalTogelWithFilter(''); }
 }
 
 async function renderRandomTabWithFilter(filter = "") {
-const mainHeading = document.getElementById("mainHeading");
-const subHeading = document.getElementById("subHeading");
 const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.classList.remove("link-lain-grid");
-mainHeading.innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
-subHeading.innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol SALIN`;
+document.getElementById("mainHeading").innerHTML = "🎲 KOLOM RANDOM | Folder dari Google Sheets";
+document.getElementById("subHeading").innerHTML = `Folder dinamis dari sheet PK RANDOM${filter ? ` | 🔍 Mencari: "${filter}"` : ''}`;
 document.getElementById("bonusBadgeContainer").classList.remove("visible");
 document.getElementById("galleryBadgeContainer").classList.remove("visible");
 document.getElementById("qrisBadgeContainer").style.display = "none";
@@ -1065,33 +911,31 @@ dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-p
 try {
 if(foldersData.length === 0) foldersData = await fetchSheetData('PK RANDOM');
 let filtered = foldersData;
-if(filter.trim() !== "") { filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase())); }
-if(filtered.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3><p>Tidak ada folder dengan kata kunci "${escapeHtml(filter)}" di kolom RANDOM</p></div>`; return; }
+if(filter.trim() !== "") filtered = foldersData.filter(f => f.title.toLowerCase().includes(filter.toLowerCase()) || f.content.toLowerCase().includes(filter.toLowerCase()));
+if(filtered.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Folder tidak ditemukan</h3></div>`; return; }
 let cardsHtml = "";
 filtered.forEach((f) => {
 const short = f.content.length > 120 ? f.content.substring(0,120)+'...' : f.content;
-cardsHtml += `<div class="card random-folder" data-folder-title="${escapeHtml(f.title)}" data-folder-content="${escapeHtml(f.content)}"><button class="btn-salin-folder" data-salin-title="${escapeHtml(f.title)}" data-salin-content="${escapeHtml(f.content)}"><i class="fas fa-copy"></i> SALIN</button><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(short) || 'Klik untuk melihat isi lengkap folder ini'}</p><div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk membuka folder</div></div>`;
+cardsHtml += `<div class="card random-folder" data-folder-title="${escapeHtml(f.title)}" data-folder-content="${escapeHtml(f.content)}"><button class="btn-salin-folder" data-salin-title="${escapeHtml(f.title)}" data-salin-content="${escapeHtml(f.content)}"><i class="fas fa-copy"></i> SALIN</button><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(short) || 'Klik untuk melihat isi lengkap'}</p><div class="stat-badge"><i class="fas fa-hand-pointer"></i> Klik untuk membuka folder</div></div>`;
 });
 dynamicArea.innerHTML = cardsHtml;
-document.querySelectorAll('.btn-salin-folder').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const title = btn.getAttribute('data-salin-title') || 'Folder'; const content = btn.getAttribute('data-salin-content') || ''; copyContentOnly(content, title); }); });
-document.querySelectorAll('.card.random-folder').forEach(card => { card.addEventListener('click', (e) => { if(e.target.closest('.btn-salin-folder')) return; const title = card.getAttribute('data-folder-title') || 'Folder'; const content = card.getAttribute('data-folder-content') || ''; openModal(title, content); }); });
+document.querySelectorAll('.btn-salin-folder').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); copyContentOnly(btn.getAttribute('data-salin-content'), btn.getAttribute('data-salin-title')); }); });
+document.querySelectorAll('.card.random-folder').forEach(card => { card.addEventListener('click', (e) => { if(e.target.closest('.btn-salin-folder')) return; openModal(card.getAttribute('data-folder-title'), card.getAttribute('data-folder-content')); }); });
 } catch(err) { dynamicArea.innerHTML = `<div class="error-message card"><h3>Error</h3><p>${err.message}</p></div>`; }
 }
 
 async function renderLinkLainWithFilter(filter = "") {
-const mainHeading = document.getElementById("mainHeading");
-const subHeading = document.getElementById("subHeading");
 const dynamicArea = document.getElementById("dynamicContentArea");
-mainHeading.innerHTML = "📎 LINK SCRIPTS";
-subHeading.innerHTML = `Data dari Google Sheets → Sheet "LINK LAIN LAIN" (Kolom A=Judul, Kolom B=Deskripsi, Kolom C=URL)${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Klik tombol BUKA LINK untuk mengunjungi website | Tampilan 4 kolom`;
+document.getElementById("mainHeading").innerHTML = "📎 LINK SCRIPTS";
+document.getElementById("subHeading").innerHTML = `Sheet "LINK LAIN LAIN"${filter ? ` | 🔍 Mencari: "${filter}"` : ''}`;
 dynamicArea.classList.add("link-lain-grid");
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data LINK SCRIPTS...</p></div>`;
 try {
-if(linkLainData.length === 0) { linkLainData = await fetchLinkLainData(); }
+if(linkLainData.length === 0) linkLainData = await fetchLinkLainData();
 let filtered = linkLainData;
-if(filter.trim() !== "") { filtered = linkLainData.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || (item.content && item.content.toLowerCase().includes(filter.toLowerCase())) || (item.url && item.url.toLowerCase().includes(filter.toLowerCase()))); }
-if(filtered.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Link tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di LINK SCRIPTS</p></div>`; return; }
-function cleanUrl(url) { if (!url) return ""; let clean = url.trim(); if (!clean.startsWith('http://') && !clean.startsWith('https://')) { clean = 'https://' + clean; } return clean; }
+if(filter.trim() !== "") filtered = linkLainData.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || (item.content && item.content.toLowerCase().includes(filter.toLowerCase())) || (item.url && item.url.toLowerCase().includes(filter.toLowerCase())));
+if(filtered.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Link tidak ditemukan</h3></div>`; return; }
+function cleanUrl(url) { if (!url) return ""; let clean = url.trim(); if (!clean.startsWith('http://') && !clean.startsWith('https://')) clean = 'https://' + clean; return clean; }
 let cardsHtml = "";
 filtered.forEach((item) => {
 const previewDesc = item.content && item.content.length > 100 ? item.content.substring(0,100)+'...' : (item.content || 'Tidak ada deskripsi');
@@ -1100,29 +944,26 @@ const hasUrl = item.url && item.url.trim() !== "";
 cardsHtml += `<div class="card link-folder-card"><h3><i class="fas fa-link"></i> ${escapeHtml(item.title)}</h3><p>${escapeHtml(previewDesc)}</p>${hasUrl ? `<button class="btn-buka-link-full" data-url="${escapeHtml(targetUrl)}" data-title="${escapeHtml(item.title)}"><i class="fas fa-external-link-alt"></i> BUKA LINK</button>` : `<button class="btn-buka-link-full" disabled><i class="fas fa-external-link-alt"></i> TIDAK ADA URL</button>`}</div>`;
 });
 dynamicArea.innerHTML = cardsHtml;
-document.querySelectorAll('.btn-buka-link-full:not([disabled])').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const url = btn.getAttribute('data-url') || ""; const title = btn.getAttribute('data-title') || "Link"; if(url && url.trim() !== "") { window.open(url, '_blank'); showToast(`Membuka ${title}...`); } else { showToast(`Tidak ada URL untuk ${title}`); } }); });
-} catch(err) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat LINK SCRIPTS</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'LINK LAIN LAIN' ada dengan kolom A (Judul), B (Deskripsi), C (URL).</p></div>`; }
+document.querySelectorAll('.btn-buka-link-full:not([disabled])').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); window.open(btn.getAttribute('data-url'), '_blank'); showToast(`Membuka ${btn.getAttribute('data-title')}...`); }); });
+} catch(err) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat LINK SCRIPTS</h3><p>${escapeHtml(err.message)}</p></div>`; }
 }
 
 async function renderJadwalTogelWithFilter(filter = "") {
-const mainHeading = document.getElementById("mainHeading");
-const subHeading = document.getElementById("subHeading");
 const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.classList.remove("link-lain-grid");
-mainHeading.innerHTML = "📅 JADWAL TOGEL | Data Pasaran";
-subHeading.innerHTML = `Sheet: JADWALPASARAN (Kolom A=Judul, B=Subjudul, C=Isi Folder, D=URL Website)${filter ? ` | 🔍 Mencari: "${filter}"` : ''} | Tombol KUNJUNGI WEBSITE mengambil URL dari Kolom D`;
+document.getElementById("mainHeading").innerHTML = "📅 JADWAL TOGEL | Data Pasaran";
+document.getElementById("subHeading").innerHTML = `Sheet: JADWALPASARAN${filter ? ` | 🔍 Mencari: "${filter}"` : ''}`;
 document.getElementById("bonusBadgeContainer").classList.remove("visible");
 document.getElementById("galleryBadgeContainer").classList.remove("visible");
 document.getElementById("qrisBadgeContainer").style.display = "none";
-dynamicArea.classList.remove("gallery-fullwidth", "qris-grid-container");
 dynamicArea.classList.add("dashboard-grid");
 dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat jadwal pasaran...</p></div>`;
 try {
-if(jadwalTogelData.length === 0) { jadwalTogelData = await fetchJadwalPasaran(); }
+if(jadwalTogelData.length === 0) jadwalTogelData = await fetchJadwalPasaran();
 let filtered = jadwalTogelData;
-if(filter.trim() !== "") { filtered = jadwalTogelData.filter(item => item.judul.toLowerCase().includes(filter.toLowerCase()) || item.subjudul.toLowerCase().includes(filter.toLowerCase()) || item.isi.toLowerCase().includes(filter.toLowerCase()) || item.url.toLowerCase().includes(filter.toLowerCase())); }
-if(filtered.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Jadwal tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di JADWAL TOGEL</p></div>`; return; }
-function cleanUrl(url) { if (!url) return ""; let clean = url.trim(); if (!clean.startsWith('http://') && !clean.startsWith('https://')) { clean = 'https://' + clean; } return clean; }
+if(filter.trim() !== "") filtered = jadwalTogelData.filter(item => item.judul.toLowerCase().includes(filter.toLowerCase()) || item.subjudul.toLowerCase().includes(filter.toLowerCase()) || item.isi.toLowerCase().includes(filter.toLowerCase()) || item.url.toLowerCase().includes(filter.toLowerCase()));
+if(filtered.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Jadwal tidak ditemukan</h3></div>`; return; }
+function cleanUrl(url) { if (!url) return ""; let clean = url.trim(); if (!clean.startsWith('http://') && !clean.startsWith('https://')) clean = 'https://' + clean; return clean; }
 let cardsHtml = "";
 filtered.forEach((item) => {
 const preview = item.isi.length > 120 ? item.isi.substring(0,120)+'...' : (item.isi || '(Tidak ada konten)');
@@ -1131,45 +972,40 @@ const hasUrl = item.url && item.url.trim() !== "";
 cardsHtml += `<div class="schedule-card" data-judul="${escapeHtml(item.judul)}" data-subjudul="${escapeHtml(item.subjudul)}" data-isi="${escapeHtml(item.isi)}" data-url="${escapeHtml(websiteUrl)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.judul)}</h3><div class="schedule-subjudul"><i class="fas fa-tag"></i> ${escapeHtml(item.subjudul) || '(Tidak ada subjudul)'}</div><div class="schedule-preview">${escapeHtml(preview)}</div><div class="schedule-buttons-row"><button class="btn-salin-subjudul-jadwal" data-subjudul="${escapeHtml(item.subjudul)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button><button class="btn-salin-isi-jadwal" data-isi="${escapeHtml(item.isi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Isi</button></div>${hasUrl ? `<button class="btn-kunjungi-website" data-url="${escapeHtml(websiteUrl)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-external-link-alt"></i> KUNJUNGI WEBSITE</button>` : `<button class="btn-kunjungi-website" disabled><i class="fas fa-external-link-alt"></i> TIDAK ADA URL</button>`}</div>`;
 });
 dynamicArea.innerHTML = cardsHtml;
-document.querySelectorAll('.btn-salin-subjudul-jadwal').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const subjudul = btn.getAttribute('data-subjudul') || ""; const judul = btn.getAttribute('data-judul') || "Folder"; copyContentOnly(subjudul, `Subjudul: ${judul}`); }); });
-document.querySelectorAll('.btn-salin-isi-jadwal').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const isi = btn.getAttribute('data-isi') || ""; const judul = btn.getAttribute('data-judul') || "Folder"; copyContentOnly(isi, `Isi: ${judul}`); }); });
-document.querySelectorAll('.btn-kunjungi-website:not([disabled])').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); e.preventDefault(); const url = btn.getAttribute('data-url') || ""; const judul = btn.getAttribute('data-judul') || "Website"; if(url && url.trim() !== "") { window.open(url, '_blank'); showToast(`Membuka ${judul}...`); } else { showToast(`Tidak ada URL untuk ${judul}`); } }); });
-document.querySelectorAll('.schedule-card').forEach(card => { card.addEventListener('click', (e) => { if(e.target.closest('.btn-salin-subjudul-jadwal') || e.target.closest('.btn-salin-isi-jadwal') || e.target.closest('.btn-kunjungi-website')) return; const judul = card.getAttribute('data-judul') || "Detail"; const subjudul = card.getAttribute('data-subjudul') || ""; const isi = card.getAttribute('data-isi') || ""; const url = card.getAttribute('data-url') || ""; let fullContent = `📌 SUBJUDUL:\n${subjudul || '(Tidak ada)'}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📄 ISI FOLDER:\n${isi || '(Tidak ada konten)'}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🌐 URL WEBSITE:\n${url || '(Tidak ada URL)'}`; openModal(judul, fullContent); }); });
-} catch(err) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat JADWAL TOGEL</h3><p>${escapeHtml(err.message)}</p><p>Pastikan sheet 'JADWALPASARAN' ada dengan kolom A, B, C, D.</p></div>`; }
+document.querySelectorAll('.btn-salin-subjudul-jadwal').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); copyContentOnly(btn.getAttribute('data-subjudul'), `Subjudul: ${btn.getAttribute('data-judul')}`); }); });
+document.querySelectorAll('.btn-salin-isi-jadwal').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); copyContentOnly(btn.getAttribute('data-isi'), `Isi: ${btn.getAttribute('data-judul')}`); }); });
+document.querySelectorAll('.btn-kunjungi-website:not([disabled])').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); e.preventDefault(); window.open(btn.getAttribute('data-url'), '_blank'); showToast(`Membuka ${btn.getAttribute('data-judul')}...`); }); });
+document.querySelectorAll('.schedule-card').forEach(card => { card.addEventListener('click', (e) => { if(e.target.closest('button')) return; const judul = card.getAttribute('data-judul'); const subjudul = card.getAttribute('data-subjudul'); const isi = card.getAttribute('data-isi'); const url = card.getAttribute('data-url'); openModal(judul, `📌 SUBJUDUL:\n${subjudul || '(Tidak ada)'}\n\n📄 ISI FOLDER:\n${isi || '(Tidak ada konten)'}\n\n🌐 URL WEBSITE:\n${url || '(Tidak ada URL)'}`); }); });
+} catch(err) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal Memuat JADWAL TOGEL</h3><p>${escapeHtml(err.message)}</p></div>`; }
 }
 
-async function renderBonusLainLainWithFilter(filter = "") { let data = bonusLainLainData; if (data.length === 0) { try { data = await fetchSheetData('BONUS LAIN-LAIN'); bonusLainLainData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS LAIN-LAIN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori LAIN-LAIN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-tags"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-async function renderBonusDoneBagiWithFilter(filter = "") { let data = bonusDoneBagiData; if (data.length === 0) { try { data = await fetchSheetData('DONEBAGI'); bonusDoneBagiData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat DONE BAGI</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori DONE BAGI</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-async function renderBonusMingguanWithFilter(filter = "") { let data = bonusMingguanData; if (data.length === 0) { try { data = await fetchSheetData('BONUS MINGGUAN'); bonusMingguanData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS MINGGUAN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori MINGGUAN</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
-async function renderBonusAllWithFilter(filter = "") { let data = bonusAllData; if (data.length === 0) { try { data = await fetchSheetData('BONUS ALL'); bonusAllData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>Gagal memuat BONUS ALL</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) { filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); } if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(filter)}" di kategori BONUS ALL</p></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.slice(0, 8).forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3>${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
+async function renderBonusLainLainWithFilter(filter = "") { let data = bonusLainLainData; if (data.length === 0) { try { data = await fetchSheetData('BONUS LAIN-LAIN'); bonusLainLainData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS LAIN-LAIN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-tags"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
+async function renderBonusDoneBagiWithFilter(filter = "") { let data = bonusDoneBagiData; if (data.length === 0) { try { data = await fetchSheetData('DONEBAGI'); bonusDoneBagiData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat DONE BAGI</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-gift"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
+async function renderBonusMingguanWithFilter(filter = "") { let data = bonusMingguanData; if (data.length === 0) { try { data = await fetchSheetData('BONUS MINGGUAN'); bonusMingguanData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BONUS MINGGUAN</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3><i class="fas fa-calendar-week"></i> ${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
+async function renderBonusAllWithFilter(filter = "") { let data = bonusAllData; if (data.length === 0) { try { data = await fetchSheetData('BONUS ALL'); bonusAllData = data; } catch(e) { document.getElementById("dynamicContentArea").innerHTML = `<div class="error-message card"><h3>Gagal memuat BONUS ALL</h3><p>${e.message}</p></div>`; return; } } let filteredData = data; if (filter.trim()) filteredData = data.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.content.toLowerCase().includes(filter.toLowerCase())); if (filteredData.length === 0) { document.getElementById("dynamicContentArea").innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3></div>`; return; } let columnsHtml = `<div class="bonus-grid">`; filteredData.slice(0, 8).forEach((item) => { const shortContent = item.content.length > 120 ? item.content.substring(0,120)+'...' : item.content; columnsHtml += `<div class="bonus-card" data-bonus-title="${escapeHtml(item.title)}" data-bonus-content="${escapeHtml(item.content)}"><h3>${escapeHtml(item.title)}</h3><div class="bonus-desc-full">${escapeHtml(shortContent)}</div><div class="bonus-actions-row"><button class="btn-open-folder"><i class="fas fa-folder-open"></i> Klik untuk membuka folder</button><button class="btn-salin-bonus" data-salin-title="${escapeHtml(item.title)}" data-salin-content="${escapeHtml(item.content)}"><i class="fas fa-copy"></i> SALIN</button></div></div>`; }); columnsHtml += `</div>`; document.getElementById("dynamicContentArea").innerHTML = columnsHtml; attachBonusCardEvents(); attachOpenFolderEvents(); attachBonusSalinEvents(); }
 
-function attachBonusCardEvents() { document.querySelectorAll('.bonus-card').forEach(card => { card.removeEventListener('click', bonusCardHandler); card.addEventListener('click', bonusCardHandler); }); }
-function bonusCardHandler(e) { if(e.target.closest('.btn-salin-bonus') || e.target.closest('.btn-open-folder')) return; const title = this.getAttribute('data-bonus-title') || 'Detail Bonus'; const content = this.getAttribute('data-bonus-content') || 'Tidak ada deskripsi tambahan.'; openModal(title, content); }
-function attachOpenFolderEvents() { document.querySelectorAll('.btn-open-folder').forEach(btn => { btn.removeEventListener('click', openFolderHandler); btn.addEventListener('click', openFolderHandler); }); }
-function openFolderHandler(e) { e.stopPropagation(); const card = this.closest('.bonus-card'); if(card) { const title = card.getAttribute('data-bonus-title') || 'Detail Bonus'; const content = card.getAttribute('data-bonus-content') || 'Tidak ada deskripsi tambahan.'; openModal(title, content); } }
-function attachBonusSalinEvents() { document.querySelectorAll('.btn-salin-bonus').forEach(btn => { btn.removeEventListener('click', bonusSalinHandler); btn.addEventListener('click', bonusSalinHandler); }); }
-function bonusSalinHandler(e) { e.stopPropagation(); const title = this.getAttribute('data-salin-title') || 'Folder'; const content = this.getAttribute('data-salin-content') || ''; copyContentOnly(content, title); }
-async function renderBonusPage() { const mainHeading = document.getElementById("mainHeading"); const subHeading = document.getElementById("subHeading"); mainHeading.innerHTML = "⚙️ BONUS ✨"; const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""; subHeading.innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()}${filterInfo} | Tombol SEJAJAR dalam 1 BARIS`; document.getElementById("bonusBadgeContainer").classList.add("visible"); document.getElementById("galleryBadgeContainer").classList.remove("visible"); document.getElementById("qrisBadgeContainer").style.display = "none"; if (currentBonusSubTab === 'all') { await renderBonusAllWithFilter(currentFilterText); } else if (currentBonusSubTab === 'mingguan') { await renderBonusMingguanWithFilter(currentFilterText); } else if (currentBonusSubTab === 'done') { await renderBonusDoneBagiWithFilter(currentFilterText); } else if (currentBonusSubTab === 'lain') { await renderBonusLainLainWithFilter(currentFilterText); } }
+function attachBonusCardEvents() { document.querySelectorAll('.bonus-card').forEach(card => { card.onclick = function(e) { if(e.target.closest('button')) return; openModal(this.getAttribute('data-bonus-title'), this.getAttribute('data-bonus-content')); }; }); }
+function attachOpenFolderEvents() { document.querySelectorAll('.btn-open-folder').forEach(btn => { btn.onclick = function(e) { e.stopPropagation(); const card = this.closest('.bonus-card'); if(card) openModal(card.getAttribute('data-bonus-title'), card.getAttribute('data-bonus-content')); }; }); }
+function attachBonusSalinEvents() { document.querySelectorAll('.btn-salin-bonus').forEach(btn => { btn.onclick = function(e) { e.stopPropagation(); copyContentOnly(this.getAttribute('data-salin-content'), this.getAttribute('data-salin-title')); }; }); }
+async function renderBonusPage() { document.getElementById("mainHeading").innerHTML = "⚙️ BONUS ✨"; document.getElementById("subHeading").innerHTML = `Kategori: ${currentBonusSubTab.toUpperCase()}${currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""}`; document.getElementById("bonusBadgeContainer").classList.add("visible"); document.getElementById("galleryBadgeContainer").classList.remove("visible"); document.getElementById("qrisBadgeContainer").style.display = "none"; if (currentBonusSubTab === 'all') await renderBonusAllWithFilter(currentFilterText); else if (currentBonusSubTab === 'mingguan') await renderBonusMingguanWithFilter(currentFilterText); else if (currentBonusSubTab === 'done') await renderBonusDoneBagiWithFilter(currentFilterText); else if (currentBonusSubTab === 'lain') await renderBonusLainLainWithFilter(currentFilterText); }
 
+// ======================= RENDER GALLERY (DENGAN processImageUrl) =======================
 async function renderGalleryCS() {
 const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.classList.remove("link-lain-grid");
 let catTitle, catSub, itemsToShow = [];
 if (currentGalleryTab === 'rrn_qris') {
-if (rrnQrisData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data RRN QRIS dari Google Sheets...</p></div>`; try { rrnQrisData = await fetchRRNQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat RRN QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; } }
-catTitle = "📸 RRN QRIS - GALLERY GAMBAR"; catSub = "Data dari sheet RRN QRIS ALL: kolom A = judul folder, B = subjudul, C = URL GAMBAR"; itemsToShow = [...rrnQrisData];
+if (rrnQrisData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data RRN QRIS...</p></div>`; try { rrnQrisData = await fetchRRNQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat RRN QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; } }
+catTitle = "📸 RRN QRIS - GALLERY GAMBAR"; catSub = "Data dari sheet RRN QRIS ALL"; itemsToShow = [...rrnQrisData];
 } else if (currentGalleryTab === 'profile_ewallet') {
-if (ewalletBankData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data PROFIL E-WALLET / BANK dari Google Sheets...</p></div>`; try { ewalletBankData = await fetchEwalletBankData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat PROFIL E-WALLET / BANK</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet bernama 'SS EWALLET BANK' ada dengan kolom A (judul folder), B (subjudul), C (URL GAMBAR).</p></div>`; return; } }
-catTitle = "💳 PROFIL E-WALLET / BANK"; catSub = "Data dari sheet 'SS EWALLET BANK': kolom A = Judul Folder, kolom B = Subjudul, kolom C = URL Gambar"; itemsToShow = [...ewalletBankData];
+if (ewalletBankData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data PROFIL E-WALLET / BANK...</p></div>`; try { ewalletBankData = await fetchEwalletBankData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat PROFIL E-WALLET / BANK</h3><p>${escapeHtml(e.message)}</p></div>`; return; } }
+catTitle = "💳 PROFIL E-WALLET / BANK"; catSub = "Data dari sheet 'SS EWALLET BANK'"; itemsToShow = [...ewalletBankData];
 } else if (currentGalleryTab === 'cara_bermain') {
-if (caraBermainAllData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data CARA BERMAIN dari Google Sheets...</p></div>`; try { caraBermainAllData = await fetchCaraBermainAllData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat CARA BERMAIN</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet bernama 'CARA BERMAIN ALL' ada dengan kolom A (judul folder), B (subjudul), C (URL GAMBAR).</p></div>`; return; } }
-catTitle = "🎮 CARA BERMAIN"; catSub = "Data dari sheet 'CARA BERMAIN ALL': kolom A = Judul Folder, kolom B = Subjudul, kolom C = URL Gambar"; itemsToShow = [...caraBermainAllData];
+if (caraBermainAllData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data CARA BERMAIN...</p></div>`; try { caraBermainAllData = await fetchCaraBermainAllData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat CARA BERMAIN</h3><p>${escapeHtml(e.message)}</p></div>`; return; } }
+catTitle = "🎮 CARA BERMAIN"; catSub = "Data dari sheet 'CARA BERMAIN ALL'"; itemsToShow = [...caraBermainAllData];
 } else { return; }
-const mainHeading = document.getElementById("mainHeading");
-const subHeading = document.getElementById("subHeading");
-mainHeading.innerHTML = catTitle;
-const filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : "";
-subHeading.innerHTML = `${catSub}${filterInfo} | Grid 4 kolom responsif | KIRI: Salin Subjudul | KANAN: Salin Gambar`;
+document.getElementById("mainHeading").innerHTML = catTitle;
+document.getElementById("subHeading").innerHTML = `${catSub}${currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""}`;
 document.getElementById("bonusBadgeContainer").classList.remove("visible");
 document.getElementById("galleryBadgeContainer").classList.add("visible");
 document.getElementById("qrisBadgeContainer").style.display = "none";
@@ -1177,17 +1013,17 @@ dynamicArea.style.display = "block";
 dynamicArea.classList.add("gallery-fullwidth");
 let filtered = itemsToShow;
 if (currentFilterText.trim() !== "") { const keyword = currentFilterText.toLowerCase(); filtered = itemsToShow.filter(item => item.judul.toLowerCase().includes(keyword) || item.deskripsi.toLowerCase().includes(keyword)); }
-if (filtered.length === 0) { dynamicArea.innerHTML = `<div class="empty-gallery"><i class="fas fa-search" style="font-size:3rem;opacity:0.5"></i><h3 style="margin-top:16px;">Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(currentFilterText)}" di kategori ini</p></div>`; return; }
+if (filtered.length === 0) { dynamicArea.innerHTML = `<div class="empty-gallery"><i class="fas fa-search" style="font-size:3rem;opacity:0.5"></i><h3 style="margin-top:16px;">Tidak ditemukan</h3></div>`; return; }
 let html = `<div class="gallery-grid-container">`;
 filtered.forEach((item, idx) => {
-// ============ PERBAIKAN: GUNAKAN PROXY GAMBAR ============
-const proxiedUrl = getProxiedImageUrl(item.imageUrl);
-html += `<div class="gallery-card" data-gallery-imgurl="${escapeHtml(item.imageUrl)}" data-gallery-title="${escapeHtml(item.judul)} #${item.nomor}" data-gallery-desc="${escapeHtml(item.deskripsi)}"><h3>${escapeHtml(item.judul)} <span class="gallery-badge-number">#${item.nomor}</span></h3><img class="gallery-image-preview" id="previewImg_${idx}" src="${escapeHtml(proxiedUrl)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='${escapeHtml(getAlternativeImageUrl(item.imageUrl))}'; this.onerror=function(){this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load';};"><div class="gallery-desc">${escapeHtml(item.deskripsi.length > 80 ? item.deskripsi.substring(0,80)+'...' : item.deskripsi)}</div><div class="gallery-buttons-row"><button class="btn-gallery-salin-subjudul" data-subjudul="${escapeHtml(item.deskripsi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button><button class="btn-gallery-salin-gambar" data-imgurl="${escapeHtml(item.imageUrl)}" data-imgtitle="${escapeHtml(item.judul)}"><i class="fas fa-image"></i> Salin Gambar</button></div></div>`;
+// ============ PROSES URL GAMBAR ============
+const processedUrl = processImageUrl(item.imageUrl);
+html += `<div class="gallery-card" data-gallery-imgurl="${escapeHtml(item.imageUrl)}" data-gallery-title="${escapeHtml(item.judul)} #${item.nomor}" data-gallery-desc="${escapeHtml(item.deskripsi)}"><h3>${escapeHtml(item.judul)} <span class="gallery-badge-number">#${item.nomor}</span></h3><img class="gallery-image-preview" id="previewImg_${idx}" src="${escapeHtml(processedUrl)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load';"><div class="gallery-desc">${escapeHtml(item.deskripsi.length > 80 ? item.deskripsi.substring(0,80)+'...' : item.deskripsi)}</div><div class="gallery-buttons-row"><button class="btn-gallery-salin-subjudul" data-subjudul="${escapeHtml(item.deskripsi)}" data-judul="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> Salin Subjudul</button><button class="btn-gallery-salin-gambar" data-imgurl="${escapeHtml(item.imageUrl)}" data-imgtitle="${escapeHtml(item.judul)}"><i class="fas fa-image"></i> Salin Gambar</button></div></div>`;
 });
 html += `</div>`;
 dynamicArea.innerHTML = html;
-document.querySelectorAll('.btn-gallery-salin-subjudul').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const sub = btn.getAttribute('data-subjudul') || ''; copyContentOnly(sub, "Subjudul"); }); });
-document.querySelectorAll('.btn-gallery-salin-gambar').forEach(btn => { btn.addEventListener('click', async (e) => { e.stopPropagation(); const url = btn.getAttribute('data-imgurl'); const title = btn.getAttribute('data-imgtitle'); await copyImageToClipboard(url, title); }); });
+document.querySelectorAll('.btn-gallery-salin-subjudul').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); copyContentOnly(btn.getAttribute('data-subjudul'), "Subjudul"); }); });
+document.querySelectorAll('.btn-gallery-salin-gambar').forEach(btn => { btn.addEventListener('click', async (e) => { e.stopPropagation(); await copyImageToClipboard(btn.getAttribute('data-imgurl'), btn.getAttribute('data-imgtitle')); }); });
 document.querySelectorAll('.gallery-card').forEach(card => {
 const imgUrl = card.getAttribute('data-gallery-imgurl');
 const title = card.getAttribute('data-gallery-title');
@@ -1201,9 +1037,8 @@ if(previewImg) previewImg.addEventListener('click', (e) => { e.stopPropagation()
 async function copyImageToClipboard(imageUrl, imageTitle) { 
   try { 
     showToast(`⏳ Mengambil gambar "${imageTitle}"...`); 
-    // Gunakan proxy untuk fetch gambar
-    const proxiedUrl = getProxiedImageUrl(imageUrl);
-    const response = await fetch(proxiedUrl, { mode: 'cors' }); 
+    const processedUrl = processImageUrl(imageUrl);
+    const response = await fetch(processedUrl, { mode: 'cors' }); 
     if (!response.ok) throw new Error('Gagal mengambil gambar'); 
     const blob = await response.blob(); 
     if (!blob.type.startsWith('image/')) throw new Error('Format bukan gambar'); 
@@ -1215,8 +1050,7 @@ async function copyImageToClipboard(imageUrl, imageTitle) {
       const objectUrl = URL.createObjectURL(blob); 
       img.onload = async () => { 
         const canvas = document.createElement('canvas'); 
-        canvas.width = img.width; 
-        canvas.height = img.height; 
+        canvas.width = img.width; canvas.height = img.height; 
         const ctx = canvas.getContext('2d'); 
         ctx.drawImage(img, 0, 0); 
         canvas.toBlob(async (canvasBlob) => { 
@@ -1224,17 +1058,16 @@ async function copyImageToClipboard(imageUrl, imageTitle) {
             await navigator.clipboard.write([new ClipboardItem({ [canvasBlob.type]: canvasBlob })]); 
             showToast(`✅ Gambar "${imageTitle}" berhasil disalin! 📸`); 
           } catch (err) { 
-            showToast(`❌ Gagal menyalin gambar. Coba klik kanan pada gambar dan pilih "Salin gambar".`); 
+            showToast(`❌ Gagal menyalin gambar.`); 
           } 
           URL.revokeObjectURL(objectUrl); 
         }, 'image/png'); 
       }; 
-      img.onerror = () => { showToast(`❌ Gagal memuat gambar untuk disalin.`); URL.revokeObjectURL(objectUrl); }; 
+      img.onerror = () => { showToast(`❌ Gagal memuat gambar.`); URL.revokeObjectURL(objectUrl); }; 
       img.src = objectUrl; 
     } 
   } catch (error) { 
-    console.error('Error copying image:', error); 
-    showToast(`❌ Gagal menyalin gambar "${imageTitle}". Pastikan gambar dapat diakses.`); 
+    showToast(`❌ Gagal menyalin gambar "${imageTitle}".`); 
   } 
 }
 
@@ -1243,9 +1076,8 @@ function openImageModal(title, imageUrl, description) {
   const modalTitle = document.getElementById("modalTitle"); 
   const modalContentText = document.getElementById("modalContentText"); 
   modalTitle.textContent = title; 
-  // ============ PERBAIKAN: GUNAKAN PROXY GAMBAR ============
-  const proxiedUrl = getProxiedImageUrl(imageUrl);
-  modalContentText.innerHTML = `<div style="text-align:center"><img src="${escapeHtml(proxiedUrl)}" class="modal-image-view" style="max-width:100%; max-height:60vh; border-radius:16px;" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='${escapeHtml(getAlternativeImageUrl(imageUrl))}'; this.onerror=function(){this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load';};"><p style="margin-top:16px;">${escapeHtml(description)}</p><div style="margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;"><button id="modalCopySubjudulBtn" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-copy"></i> Salin Subjudul</button><button id="modalCopyImageBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-image"></i> Salin Gambar</button></div><small><i class="fas fa-link"></i> URL: ${escapeHtml(imageUrl)}</small></div>`; 
+  const processedUrl = processImageUrl(imageUrl);
+  modalContentText.innerHTML = `<div style="text-align:center"><img src="${escapeHtml(processedUrl)}" class="modal-image-view" style="max-width:100%; max-height:60vh; border-radius:16px;" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/ef4444?text=Gambar+Gagal+Load';"><p style="margin-top:16px;">${escapeHtml(description)}</p><div style="margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;"><button id="modalCopySubjudulBtn" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-copy"></i> Salin Subjudul</button><button id="modalCopyImageBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; color:white; padding:8px 20px; border-radius:40px; cursor:pointer; font-weight:bold;"><i class="fas fa-image"></i> Salin Gambar</button></div></div>`; 
   modal.classList.add("active"); 
   document.body.style.overflow = "hidden"; 
   setTimeout(() => { 
@@ -1256,39 +1088,32 @@ function openImageModal(title, imageUrl, description) {
   }, 100); 
 }
 
-function bindGalleryBadges() { document.querySelectorAll('.gallery-badge').forEach(b => { b.removeEventListener('click', galleryClick); b.addEventListener('click', galleryClick); }); }
-async function galleryClick(e) { const val = this.getAttribute('data-gallery-tab'); if(val && (val === 'rrn_qris' || val === 'profile_ewallet' || val === 'cara_bermain')) { currentGalleryTab = val; document.querySelectorAll('.gallery-badge').forEach(b => b.classList.remove('active-gallery')); this.classList.add('active-gallery'); currentFilterText = ""; document.getElementById("liveSearchInput").value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); await renderGalleryCS(); } }
-
-function bindBonusBadgeEvents() { document.querySelectorAll('.bonus-badge').forEach(badge => { badge.removeEventListener('click', bonusClickHandler); badge.addEventListener('click', bonusClickHandler); }); }
-async function bonusClickHandler(e) { const tabValue = this.getAttribute('data-bonus-tab'); if(tabValue) { currentBonusSubTab = tabValue; document.querySelectorAll('.bonus-badge').forEach(b => b.classList.remove('active-bonus')); this.classList.add('active-bonus'); if(currentActiveTab === 'tab6') { currentFilterText = ""; const searchInput = document.getElementById("liveSearchInput"); if(searchInput) searchInput.value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); await renderBonusPage(); } } }
+function bindGalleryBadges() { document.querySelectorAll('.gallery-badge').forEach(b => { b.onclick = async function() { const val = this.getAttribute('data-gallery-tab'); if(val) { currentGalleryTab = val; document.querySelectorAll('.gallery-badge').forEach(x => x.classList.remove('active-gallery')); this.classList.add('active-gallery'); currentFilterText = ""; document.getElementById("liveSearchInput").value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); await renderGalleryCS(); } }; }); }
+function bindBonusBadgeEvents() { document.querySelectorAll('.bonus-badge').forEach(badge => { badge.onclick = async function() { const tabValue = this.getAttribute('data-bonus-tab'); if(tabValue) { currentBonusSubTab = tabValue; document.querySelectorAll('.bonus-badge').forEach(b => b.classList.remove('active-bonus')); this.classList.add('active-bonus'); if(currentActiveTab === 'tab6') { currentFilterText = ""; document.getElementById("liveSearchInput").value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); await renderBonusPage(); } } }; }); }
 
 async function renderAllAboutQris() {
 const dynamicArea = document.getElementById("dynamicContentArea");
 dynamicArea.classList.remove("link-lain-grid");
-const mainHeading = document.getElementById("mainHeading");
-const subHeading = document.getElementById("subHeading");
-mainHeading.innerHTML = "👥 ALL ABOUT QRIS";
-let filterInfo = currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : "";
-let categoryName = "";
-let dataItems = [];
+document.getElementById("mainHeading").innerHTML = "👥 ALL ABOUT QRIS";
+let categoryName = "", dataItems = [];
 if (currentQrisTab === "bank_qris") {
 categoryName = "BANK >>> QRIS";
-if (bankNaikQrisData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data BANK NAIK QRIS dari Google Sheets...</p></div>`; try { bankNaikQrisData = await fetchBankNaikQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BANK NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; } }
+if (bankNaikQrisData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data BANK NAIK QRIS...</p></div>`; try { bankNaikQrisData = await fetchBankNaikQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat BANK NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; } }
 dataItems = [...bankNaikQrisData];
 } else if (currentQrisTab === "ewallet_qris") {
 categoryName = "EWALLET >>> QRIS";
-if (ewalletNaikQrisData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data EWALLET NAIK QRIS dari Google Sheets...</p></div>`; try { ewalletNaikQrisData = await fetchEwalletNaikQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat EWALLET NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; } }
+if (ewalletNaikQrisData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data EWALLET NAIK QRIS...</p></div>`; try { ewalletNaikQrisData = await fetchEwalletNaikQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat EWALLET NAIK QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; } }
 dataItems = [...ewalletNaikQrisData];
 } else if (currentQrisTab === "refund") {
 categoryName = "REFUND";
-if (refundQrisData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data REFUND QRIS dari Google Sheets...</p></div>`; try { refundQrisData = await fetchRefundQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat REFUND QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; } }
+if (refundQrisData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data REFUND QRIS...</p></div>`; try { refundQrisData = await fetchRefundQrisData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat REFUND QRIS</h3><p>${escapeHtml(e.message)}</p></div>`; return; } }
 dataItems = [...refundQrisData];
 } else {
 categoryName = "LAIN-LAIN";
-if (qrisLainLainData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data QRIS LAIN-LAIN dari Google Sheets...</p></div>`; try { qrisLainLainData = await fetchQrisLainLainData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat QRIS LAIN-LAIN</h3><p>${escapeHtml(e.message)}</p><p>Pastikan sheet 'QRIS LAIN-LAIN' ada dengan kolom A (judul) dan B (isi).</p></div>`; return; } }
+if (qrisLainLainData.length === 0) { dynamicArea.innerHTML = `<div class="loading-card"><i class="fas fa-spinner fa-pulse"></i><p>Memuat data QRIS LAIN-LAIN...</p></div>`; try { qrisLainLainData = await fetchQrisLainLainData(); } catch(e) { dynamicArea.innerHTML = `<div class="error-message card"><h3>❌ Gagal memuat QRIS LAIN-LAIN</h3><p>${escapeHtml(e.message)}</p></div>`; return; } }
 dataItems = [...qrisLainLainData];
 }
-subHeading.innerHTML = `Kategori: ${categoryName}${filterInfo} | Data dari Google Sheets | Klik kartu untuk detail, tombol salin di pojok kanan bawah`;
+document.getElementById("subHeading").innerHTML = `Kategori: ${categoryName}${currentFilterText ? ` | 🔍 Mencari: "${currentFilterText}"` : ""}`;
 document.getElementById("bonusBadgeContainer").classList.remove("visible");
 document.getElementById("galleryBadgeContainer").classList.remove("visible");
 document.getElementById("qrisBadgeContainer").style.display = "block";
@@ -1298,71 +1123,53 @@ dynamicArea.classList.remove("dashboard-grid");
 dynamicArea.classList.add("qris-grid-container");
 let filtered = dataItems;
 if (currentFilterText.trim() !== "") { const keyword = currentFilterText.toLowerCase(); filtered = dataItems.filter(item => item.judul.toLowerCase().includes(keyword) || (item.deskripsi && item.deskripsi.toLowerCase().includes(keyword)) || (item.konten && item.konten.toLowerCase().includes(keyword))); }
-if (filtered.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3><p>Tidak ada hasil untuk "${escapeHtml(currentFilterText)}" di kategori ${categoryName}</p></div>`; dynamicArea.classList.remove("qris-grid-container"); return; }
+if (filtered.length === 0) { dynamicArea.innerHTML = `<div class="no-result-card"><i class="fas fa-search"></i><h3>Tidak ditemukan</h3></div>`; dynamicArea.classList.remove("qris-grid-container"); return; }
 let html = ``;
 filtered.forEach((item) => {
 html += `<div class="qris-card" data-judul="${escapeHtml(item.judul)}" data-konten="${escapeHtml(item.konten || item.deskripsi || 'Tidak ada informasi')}"><h3><i class="fas fa-qrcode"></i> ${escapeHtml(item.judul)}</h3><div class="qris-desc">${escapeHtml(item.deskripsi && item.deskripsi.length > 120 ? item.deskripsi.substring(0,120)+'...' : (item.deskripsi || 'Klik untuk melihat detail'))}</div><button class="btn-qris-salin" data-salin="${escapeHtml(item.konten || item.deskripsi || '')}" data-label="${escapeHtml(item.judul)}"><i class="fas fa-copy"></i> SALIN</button></div>`;
 });
 dynamicArea.innerHTML = html;
-document.querySelectorAll('.btn-qris-salin').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const text = btn.getAttribute('data-salin') || ""; const label = btn.getAttribute('data-label') || "Konten"; copyContentOnly(text, label); }); });
-document.querySelectorAll('.qris-card').forEach(card => { card.addEventListener('click', (e) => { if (e.target.closest('.btn-qris-salin')) return; const judul = card.getAttribute('data-judul') || "Detail"; const konten = card.getAttribute('data-konten') || "Tidak ada informasi tambahan."; openModal(judul, konten); }); });
+document.querySelectorAll('.btn-qris-salin').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); copyContentOnly(btn.getAttribute('data-salin'), btn.getAttribute('data-label')); }); });
+document.querySelectorAll('.qris-card').forEach(card => { card.addEventListener('click', (e) => { if (e.target.closest('.btn-qris-salin')) return; openModal(card.getAttribute('data-judul'), card.getAttribute('data-konten')); }); });
 }
+function bindQrisBadges() { document.querySelectorAll('.qris-badge').forEach(badge => { badge.onclick = function() { const tabValue = this.getAttribute('data-qris-tab'); if (tabValue) { currentQrisTab = tabValue; document.querySelectorAll('.qris-badge').forEach(b => b.classList.remove('active-qris')); this.classList.add('active-qris'); currentFilterText = ""; document.getElementById("liveSearchInput").value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); renderAllAboutQris(); } }; }); }
 
-function bindQrisBadges() { document.querySelectorAll('.qris-badge').forEach(badge => { badge.removeEventListener('click', qrisBadgeHandler); badge.addEventListener('click', qrisBadgeHandler); }); }
-function qrisBadgeHandler(e) { const tabValue = this.getAttribute('data-qris-tab'); if (tabValue && (tabValue === 'bank_qris' || tabValue === 'ewallet_qris' || tabValue === 'refund' || tabValue === 'lain_lain')) { currentQrisTab = tabValue; document.querySelectorAll('.qris-badge').forEach(b => b.classList.remove('active-qris')); this.classList.add('active-qris'); currentFilterText = ""; const searchInput = document.getElementById("liveSearchInput"); if(searchInput) { searchInput.value = ""; document.getElementById("clearSearchBtn").classList.remove('visible'); } renderAllAboutQris(); } }
-
-function bindNavEvents() {
-document.querySelectorAll('.nav-item').forEach(item => {
-item.addEventListener('click', () => {
-const tid = item.getAttribute('data-tab');
-if(tid) onTabClick(tid);
-});
-});
-}
-
+function bindNavEvents() { document.querySelectorAll('.nav-item').forEach(item => { item.onclick = () => { const tid = item.getAttribute('data-tab'); if(tid) onTabClick(tid); }; }); }
 function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
 function showToast(message) { const toast = document.getElementById("copyToast"); toast.innerHTML = `<i class="fas fa-copy"></i> ${message}`; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2500); }
 async function copyContentOnly(textContent, folderTitle) { const finalText = textContent || "(Tidak ada konten)"; try { await navigator.clipboard.writeText(finalText); showToast(`"${folderTitle}" berhasil disalin 📝`); } catch { const textarea = document.createElement("textarea"); textarea.value = finalText; document.body.appendChild(textarea); textarea.select(); document.execCommand("copy"); document.body.removeChild(textarea); showToast(`"${folderTitle}" disalin 📝`); } }
-function openModal(title, content) { const modal = document.getElementById("folderModal"); const modalTitle = document.getElementById("modalTitle"); const modalContentText = document.getElementById("modalContentText"); modalTitle.textContent = title; modalContentText.innerHTML = (content || "(Kosong)").replace(/\n/g, '<br>'); modal.classList.add("active"); document.body.style.overflow = "hidden"; }
-function closeModalFunc() { const modal = document.getElementById("folderModal"); modal.classList.remove("active"); document.body.style.overflow = ""; }
+function openModal(title, content) { const modal = document.getElementById("folderModal"); document.getElementById("modalTitle").textContent = title; document.getElementById("modalContentText").innerHTML = (content || "(Kosong)").replace(/\n/g, '<br>'); modal.classList.add("active"); document.body.style.overflow = "hidden"; }
+function closeModalFunc() { document.getElementById("folderModal").classList.remove("active"); document.body.style.overflow = ""; }
 
-const searchInputElem = document.getElementById("liveSearchInput");
-const clearSearchBtnElem = document.getElementById("clearSearchBtn");
-const modal = document.getElementById("folderModal");
-const closeModalBtn = document.getElementById("closeModalBtn");
-
-closeModalBtn.onclick = closeModalFunc;
-if(modal) modal.onclick = e => { if(e.target === modal) closeModalFunc(); };
-document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal && modal.classList.contains('active')) closeModalFunc(); });
-if(searchInputElem) searchInputElem.addEventListener('input', function() {
-currentFilterText = searchInputElem.value;
-if(currentFilterText.length > 0) clearSearchBtnElem.classList.add('visible');
-else clearSearchBtnElem.classList.remove('visible');
-if(currentActiveTab === 'tab1') { renderDashboard(); }
-else if(currentActiveTab === 'tab2') { renderRandomTabWithFilter(currentFilterText); }
-else if(currentActiveTab === 'tab3') { renderLinkLainWithFilter(currentFilterText); }
-else if(currentActiveTab === 'tab4') { renderGalleryCS(); }
-else if(currentActiveTab === 'tab5') { renderAllAboutQris(); }
-else if(currentActiveTab === 'tab6') { renderBonusPage(); }
-else if(currentActiveTab === 'tab7') { renderJadwalTogelWithFilter(currentFilterText); }
+document.getElementById("closeModalBtn").onclick = closeModalFunc;
+document.getElementById("folderModal").onclick = e => { if(e.target.id === "folderModal") closeModalFunc(); };
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFunc(); });
+document.getElementById("liveSearchInput").addEventListener('input', function() {
+currentFilterText = this.value;
+if(currentFilterText.length > 0) document.getElementById("clearSearchBtn").classList.add('visible');
+else document.getElementById("clearSearchBtn").classList.remove('visible');
+if(currentActiveTab === 'tab1') renderDashboard();
+else if(currentActiveTab === 'tab2') renderRandomTabWithFilter(currentFilterText);
+else if(currentActiveTab === 'tab3') renderLinkLainWithFilter(currentFilterText);
+else if(currentActiveTab === 'tab4') renderGalleryCS();
+else if(currentActiveTab === 'tab5') renderAllAboutQris();
+else if(currentActiveTab === 'tab6') renderBonusPage();
+else if(currentActiveTab === 'tab7') renderJadwalTogelWithFilter(currentFilterText);
 });
-if(clearSearchBtnElem) clearSearchBtnElem.addEventListener('click', function() {
-searchInputElem.value = '';
+document.getElementById("clearSearchBtn").addEventListener('click', function() {
+document.getElementById("liveSearchInput").value = '';
 currentFilterText = '';
-clearSearchBtnElem.classList.remove('visible');
-if(currentActiveTab === 'tab1') { renderDashboard(); }
-else if(currentActiveTab === 'tab2') { renderRandomTabWithFilter(''); }
-else if(currentActiveTab === 'tab3') { renderLinkLainWithFilter(''); }
-else if(currentActiveTab === 'tab4') { renderGalleryCS(); }
-else if(currentActiveTab === 'tab5') { renderAllAboutQris(); }
-else if(currentActiveTab === 'tab6') { renderBonusPage(); }
-else if(currentActiveTab === 'tab7') { renderJadwalTogelWithFilter(''); }
+this.classList.remove('visible');
+if(currentActiveTab === 'tab1') renderDashboard();
+else if(currentActiveTab === 'tab2') renderRandomTabWithFilter('');
+else if(currentActiveTab === 'tab3') renderLinkLainWithFilter('');
+else if(currentActiveTab === 'tab4') renderGalleryCS();
+else if(currentActiveTab === 'tab5') renderAllAboutQris();
+else if(currentActiveTab === 'tab6') renderBonusPage();
+else if(currentActiveTab === 'tab7') renderJadwalTogelWithFilter('');
 });
 
-(async function init() {
-bindNavEvents();
-await onTabClick('tab1');
-})();
+(async function init() { bindNavEvents(); await onTabClick('tab1'); })();
 </script>
 </body>
-  </html>
+</html>
